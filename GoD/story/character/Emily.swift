@@ -91,8 +91,6 @@ class Emily:Character {
             return SoulStone()
         case 4:
             return Shield()
-        case 5:
-            return EarRing()
         case 6:
             return Bow()
         case 7:

@@ -10,6 +10,7 @@ import SpriteKit
 class MyStage: SKSpriteNode {
     static let UI_LAYER_Z:CGFloat = 200
     static let UI_PANEL_Z:CGFloat = 300
+    static let UI_SUB_PANEL_Z:CGFloat = 400
     static let UI_TOPEST_Z:CGFloat = 1000
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -34,7 +35,7 @@ class MyStage: SKSpriteNode {
             return
         } else if _spellButton.contains(touchPoint!) && !_spellButton.isHidden {
             let sp = SpellPanel()
-            sp.create(role: Game.instance._char)
+            sp.create(role: Game.instance.char)
             showPanel(sp)
             return
         } else if _charButton.contains(touchPoint!) && !_charButton.isHidden {

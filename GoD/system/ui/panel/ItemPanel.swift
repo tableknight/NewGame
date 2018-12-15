@@ -31,140 +31,54 @@ class ItemPanel: UIPanel {
             }
             return
         }
-//        for os in _outfitSlots {
-//            if os.contains(touchPoint!) {
-//                if nil != os.outfit {
-//                    if os.selected {
-//                        let of = os.outfit!
-//                        of.off()
-//                        _char.addProp(p: of)
-//                        if of is Amulet {
-//                            _char._amulet = Amulet()
-//                        } else if of is Weapon {
-//                            _char._weapon = Weapon()
-//                        } else if of is Shield {
-//                            _char._shield = Shield()
-//                        } else if of is Ring {
-//                            _char._weapon = Weapon()
-//                        } else if of is Weapon {
-//                            _char._weapon = Weapon()
-//                        } else if of is Weapon {
-//                            _char._weapon = Weapon()
-//                        }
-//                        os.outfit = nil
-//                        pageReload()
-//                    } else {
-//                        displayInfos(icon: os)
-//                        os.selected = true
-//                    }
-//                }
-//            } else {
-//                os.selected = false
-//            }
-//        }
-        
         if _lastSelectedIcon.contains(touchPoint!) {
-            if _char.hasWeapon && _lastSelectedIcon._displayItemType is Weapon {
-//                if _char._weapon.hasInitialized {
-//                    _char._weapon!.off()
-//                    _char.addProp(p: _char._weapon!)
-//                }
-//                let weapon = _lastSelectedIcon._displayItemType as! Weapon
-//                _char.removeProp(p: weapon)
-//                weapon.on()
-//                _weapon.outfit = weapon
-//                _char._weapon = weapon
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = Icon(quality: 1)
-//                return
-            }
-            if _lastSelectedIcon._displayItemType is Amulet {
-                if _char._amulet != nil {
-                    _char._amulet!.off()
-                    _char.addProp(p: _char._amulet!)
+            if _lastSelectedIcon._displayItemType is SpellBook {
+                let spellBook = _lastSelectedIcon._displayItemType as! SpellBook
+                if !_char.hasSpell(spell: spellBook.spell) {
+                    _char._spells.append(spellBook.spell)
+                    _char.removeProp(p: spellBook)
+//                    showMsg(text: "你学会了技能[\(spellBook._name)]！")
+                    debug("你学会了技能[\(spellBook._name)]！")
+                    _lastSelectedIcon = Icon()
+                    pageReload()
+                    return
                 }
-                let amulet = _lastSelectedIcon._displayItemType as! Amulet
-                _char.removeProp(p: amulet)
-                amulet.on()
-                _amulet.outfit = amulet
-                _char._amulet = amulet
-                pageReload()
-                _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+            }
+            let item = _lastSelectedIcon._displayItemType as! Item
+            if !item.usable {
                 return
             }
-            if _char.hasShield && _lastSelectedIcon._displayItemType is Shield {
-                if _char._shield != nil {
-                    _char._shield!.off()
-                    _char.addProp(p: _char._shield!)
+            if item is Potion {
+                let rl = RoleList()
+                let ml = [_char] + _char._minions
+                rl._parentNode = self
+                self.isHidden = true
+                rl.create(list: ml)
+                rl.selectAction = {
+                    if item._count > 0 {
+                        let unit = rl._lastSelected!._unit
+                        item.use(target: unit!)
+                        rl._lastSelected!.reload()
+                        item.reduce()
+                    }
                 }
-                let shield = _lastSelectedIcon._displayItemType as! Shield
-                _char.removeProp(p: shield)
-                shield.on()
-                _shield.outfit = shield
-                _char._shield = shield
-                pageReload()
-                _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                let this = self
+                rl.closeAction = {
+                    this.pageReload()
+                    this.isHidden = false
+                }
+                Game.instance.curStage.showPanel(rl)
                 return
             }
-            if _lastSelectedIcon._displayItemType is Ring {
-//                if _char._leftRing.hasInitialized && _char._rightRing.hasInitialized {
-//                    _char._leftRing.off()
-//                    _char.addProp(p: _char._leftRing)
-//                    _char._leftRing = Ring()
-//                }
-//
-//                let ring = _lastSelectedIcon._displayItemType as! Ring
-//                _char.removeProp(p: ring)
-//                ring.on()
-//
-//                if !_char._leftRing.hasInitialized {
-//                    _char._leftRing = ring
-//                    _leftRing.outfit = ring
-//                } else if !_char._rightRing.hasInitialized {
-//                    _char._rightRing = ring
-//                    _rightRing.outfit = ring
-//                } else {
-//                    debug("ring on error in itempanel")
-//                }
-//
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = Icon(quality: 1)
-//                return
-            }
-            if _char.hasMark && _lastSelectedIcon._displayItemType is MagicMark {
-//                if _char._magicMark.hasInitialized {
-//                    _char._magicMark.off()
-//                    _char.addProp(p: _char._magicMark)
-//                }
-//                let mark = _lastSelectedIcon._displayItemType as! MagicMark
-//                _char.removeProp(p: mark)
-//                mark.on()
-//                _magicMark.outfit = mark
-//                _char._magicMark = mark
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = Icon(quality: 1)
-//                return
-            }
-            if _lastSelectedIcon._displayItemType is SoulStone {
-//                if _char._soulStone.hasInitialized {
-//                    _char._soulStone.off()
-//                    _char.addProp(p: _char._soulStone)
-//                }
-//                let soulStone = _lastSelectedIcon._displayItemType as! SoulStone
-//                _char.removeProp(p: soulStone)
-//                soulStone.on()
-//                _soulStone.outfit = soulStone
-//                _char._soulStone = soulStone
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = Icon(quality: 1)
-//                return
-            }
+//            if item is SpellBook {
+//                let book = item as! SpellBook
+//                
+//            }
+            //else
+            item.use(target: _char)
+            _lastSelectedIcon = Icon()
+            pageReload()
+            return
         }
         let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
         if !rlt {
@@ -174,125 +88,55 @@ class ItemPanel: UIPanel {
 
     }
     override func create() {
-        _label.text = "卸下\\装备\\使用：再次点击已选中的物品。"
-        _pageSize = 24
+        _label.text = "使用：再次点击已选中的物品。"
+        _pageSize = 30
         createCloseButton()
         createPageButtons()
-        createOutfitList()
         addChild(_propBox)
         createPropList()
     }
     func createPropList() {
-        let props = _char._props
-        let startX = -cellSize - 6
-        let startY:CGFloat = cellSize * 2
-        let gap = cellSize + Game.ICON_GAP
+        let props = getPropsCountBeyond1()
+        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startY = _standardHeight * 0.5 - _standardGap * 2
         if props.count > 0 {
             let end = getPageEnd(props.count)
+            let start = getPageStart(end)
             
-            for i in (_curPage - 1) * _pageSize...end - 1 {
+            for i in start...end - 1 {
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6
-                let icon = Icon(quality: props[i]._quality)
+                let icon = Icon()
                 icon._displayItemType = props[i]
-                icon.position.y = startY - gap * y.toFloat()
-                icon.position.x = startX + gap * x.toFloat()
+                icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
+                icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
                 _propBox.addChild(icon)
             }
         }
     }
-    override func createPanelbackground() {
-        let outfitPanel = createBackground(width: cellSize * 3.75, height: _standardHeight)
-        outfitPanel.position.x = -cellSize * 4
-        outfitPanel.zPosition = self.zPosition + 2
-        addChild(outfitPanel)
-        let listPanel = createBackground(width: cellSize * 8, height: _standardHeight)
-        listPanel.position.x = cellSize * 2
-        listPanel.zPosition = self.zPosition + 2
-        addChild(listPanel)
+    
+    private func getPropsCountBeyond1() -> Array<Prop> {
+        var ps = Array<Prop>()
+        for p in _char._props {
+            if p._count > 0 {
+                ps.append(p)
+            }
+        }
+        
+        return ps
     }
     
-    func createOutfitList() {
-//        let startX:CGFloat = -cellSize * 4.75
-//        let gap = cellSize * 1.25
-//        let line2 = startX + cellSize * 1.5
-//        let startY:CGFloat = cellSize * 2
-//        _amulet = createSlot(x: startX + cellSize * 0.75, y: startY)
-//        if _char._amulet.hasInitialized {
-//            _amulet.outfit = _char._amulet
-//        }
-//        _char.hasWeapon = true
-//        _char.hasShield = true
-//        _char.hasMark = true
-//        addChild(_amulet)
-//        _outfitSlots.append(_amulet)
-//        if _char.hasWeapon {
-//            _weapon = createSlot(x: startX, y: _amulet.position.y - gap)
-//            if _char._weapon.hasInitialized {
-//                _weapon.outfit = _char._weapon
-//            }
-//            addChild(_weapon)
-//            _outfitSlots.append(_weapon)
-//        }
-//        if _char.hasShield {
-//            _shield = createSlot(x: line2, y: _weapon.position.y)
-//            if _char._shield.hasInitialized {
-//                _shield.outfit = _char._shield
-//            }
-//            addChild(_shield)
-//            _outfitSlots.append(_shield)
-//        }
-//        _leftRing = createSlot(x: startX, y: _amulet.position.y - gap * 2)
-//        if _char._leftRing.hasInitialized {
-//            _leftRing.outfit = _char._leftRing
-//        }
-//        addChild(_leftRing)
-//        _outfitSlots.append(_leftRing)
-//        _rightRing = createSlot(x: line2, y: _amulet.position.y - gap * 2)
-//        if _char._rightRing.hasInitialized {
-//            _rightRing.outfit = _char._rightRing
-//        }
-//        addChild(_rightRing)
-//        _outfitSlots.append(_rightRing)
-//        if _char.hasMark {
-//            _magicMark = createSlot(x: startX, y: _leftRing.position.y - gap)
-//            if _char._magicMark.hasInitialized {
-//                _magicMark.outfit = _char._magicMark
-//            }
-//            addChild(_magicMark)
-//            _outfitSlots.append(_magicMark)
-//        }
-//        _soulStone = createSlot(x: line2, y: _leftRing.position.y - gap)
-//        if _char._soulStone.hasInitialized {
-//            _soulStone.outfit = _char._soulStone
-//        }
-//        addChild(_soulStone)
-//        _outfitSlots.append(_soulStone)
-    }
     
-    func createSlot(x:CGFloat, y:CGFloat) -> OutfitSlot {
-        let slot = OutfitSlot(quality: 1)
-        slot.position = CGPoint(x: x, y: y)
-        slot.zPosition = self.zPosition + 3
-        return slot
-    }
     override func pageReload() {
         _propBox.removeAllChildren()
         createPropList()
     }
-    private var _weapon:OutfitSlot!
-    private var _amulet:OutfitSlot!
-    private var _leftRing:OutfitSlot!
-    private var _rightRing:OutfitSlot!
-    private var _magicMark:OutfitSlot!
-    private var _shield:OutfitSlot!
-    private var _soulStone:OutfitSlot!
-    private var _outfitSlots = Array<OutfitSlot>()
-    private var _propBox:SKSpriteNode = SKSpriteNode()
+    private var _propBox = SKSpriteNode()
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
+        self.zPosition = MyStage.UI_PANEL_Z
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

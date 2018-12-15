@@ -63,7 +63,7 @@ class SelectMinion:UIPanel {
                 let x = i / 1
                 
                 let cc = RoleComponent()
-                cc.unit = _chars[i]
+//                cc.unit = _chars[i]
                 cc.position.x = startX + width * x.toFloat()
                 cc.position.y = startY - height * y.toFloat()
                 cc.zPosition = self.zPosition + 2

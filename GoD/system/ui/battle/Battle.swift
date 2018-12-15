@@ -1778,7 +1778,7 @@ class Battle: SKSpriteNode {
     }
     
     internal func showMinionsList() {
-        let clp = CharListPanel()
+        let clp = RoleList()
         var summonableMinions = Array<Creature>()
         for m in _char._minions {
             if m._seat == BUnit.STAND_BY {
@@ -1790,9 +1790,9 @@ class Battle: SKSpriteNode {
             this.waitingForSelectSummonSeat = true
             this.showSummonableSeats()
             clp.removeFromParent()
-            this._selectedMinion = clp._lastSelected.unit
+//            this._selectedMinion = clp._lastSelected.unit
         }
-        clp.create(list: summonableMinions)
+//        clp.create(list: summonableMinions)
         
         addChild(clp)
     }

@@ -471,9 +471,9 @@ class MyScene: SKSpriteNode {
         let e = Emily()
         Game.instance.char = e
         e.create(level: 1)
-        e._level = 100
+        e._level = 20
         e._leftPoint = 5
-        e._dungeonLevel = 100
+        e._dungeonLevel = 20
         let char = BUnit()
         char.setUnit(unit: e)
         char.createForStage()

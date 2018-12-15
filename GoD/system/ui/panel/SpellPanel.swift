@@ -55,13 +55,14 @@ class SpellPanel:UIPanel {
                     let index = _char._spells.index(of: spell)
                     if nil != index {
                         _char._spells.remove(at: index!)
+                        _role._spellsInuse.append(spell)
                     } else {
                         debug("_char._spells.remove failed! spellpanel")
                     }
-                    _role._spellsInuse.append(spell)
                     pageReload()
                 }
             }
+            _lastSelectedIcon = Icon()
             return
         }
         let _ = showInfosAction(node: _spellBoxInuse, touchPoint: touchPoint!)
@@ -145,7 +146,7 @@ class SpellPanel:UIPanel {
     }
     private func showSpellsInuse() {
         let spells = _role._spellsInuse
-        let startX = -_standardWidth * 0.5 + _standardGap
+        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
         let startY = _standardHeight * 0.5 - _standardGap
         if spells.count > 0 {
             for i in 0...spells.count - 1 {
@@ -165,13 +166,18 @@ class SpellPanel:UIPanel {
     
     private func showSpellsUnused() {
         let spells = Game.instance.char._spells
-        let startX = -_standardWidth * 0.5 + _standardGap
+        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
         let startY = _standardHeight * 0.5 - _standardGap - cellSize * 1.75
 //        _curPageSpells = Array<SpellComponent>()
         if spells.count > 0 {
             let end = getPageEnd()
+            var start = (_curPage - 1) * _pageSize
+            if start >= end {
+                _curPage -= 1
+                start = (_curPage - 1) * _pageSize
+            }
             
-            for i in (_curPage - 1) * _pageSize...end - 1 {
+            for i in start...end - 1 {
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6

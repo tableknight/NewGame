@@ -72,7 +72,7 @@ class Icon:SKSpriteNode {
     }
     
     internal var _selected:Bool = false
-    internal var _background:SKShapeNode = SKShapeNode()
+    internal var _background = SKShapeNode()
     internal var _text:Label = Label()
     internal var _displayInfos = SKSpriteNode()
     internal var _prop:Prop?

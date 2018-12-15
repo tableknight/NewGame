@@ -194,7 +194,7 @@
 		090FEC0221BB9B2B004276BB /* IUsingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFE21BB9B2A004276BB /* IUsingItem.swift */; };
 		090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFF21BB9B2A004276BB /* LootPanel.swift */; };
 		090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0021BB9B2A004276BB /* ItemInfo.swift */; };
-		090FEC0521BB9B2B004276BB /* CharListPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0121BB9B2A004276BB /* CharListPanel.swift */; };
+		090FEC0521BB9B2B004276BB /* RoleList1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0121BB9B2A004276BB /* RoleList1.swift */; };
 		090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0221BB9B2A004276BB /* MinionPanel.swift */; };
 		090FEC0721BB9B2B004276BB /* DealingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0321BB9B2A004276BB /* DealingPanel.swift */; };
 		090FEC0821BB9B2B004276BB /* ArmorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0421BB9B2A004276BB /* ArmorInfo.swift */; };
@@ -268,6 +268,8 @@
 		090FEC5021BCF0E3004276BB /* CellMonster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC4F21BCF0E3004276BB /* CellMonster.swift */; };
 		090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC5121BE9A38004276BB /* RolePanel.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
+		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
+		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -481,7 +483,7 @@
 		090FEAFE21BB9B2A004276BB /* IUsingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUsingItem.swift; sourceTree = "<group>"; };
 		090FEAFF21BB9B2A004276BB /* LootPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LootPanel.swift; sourceTree = "<group>"; };
 		090FEB0021BB9B2A004276BB /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
-		090FEB0121BB9B2A004276BB /* CharListPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharListPanel.swift; sourceTree = "<group>"; };
+		090FEB0121BB9B2A004276BB /* RoleList1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleList1.swift; sourceTree = "<group>"; };
 		090FEB0221BB9B2A004276BB /* MinionPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinionPanel.swift; sourceTree = "<group>"; };
 		090FEB0321BB9B2A004276BB /* DealingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealingPanel.swift; sourceTree = "<group>"; };
 		090FEB0421BB9B2A004276BB /* ArmorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmorInfo.swift; sourceTree = "<group>"; };
@@ -555,6 +557,8 @@
 		090FEC4F21BCF0E3004276BB /* CellMonster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMonster.swift; sourceTree = "<group>"; };
 		090FEC5121BE9A38004276BB /* RolePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePanel.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
+		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
+		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1051,7 +1055,7 @@
 				090FEAFE21BB9B2A004276BB /* IUsingItem.swift */,
 				090FEAFF21BB9B2A004276BB /* LootPanel.swift */,
 				090FEB0021BB9B2A004276BB /* ItemInfo.swift */,
-				090FEB0121BB9B2A004276BB /* CharListPanel.swift */,
+				090FEB0121BB9B2A004276BB /* RoleList1.swift */,
 				090FEB0221BB9B2A004276BB /* MinionPanel.swift */,
 				090FEB0321BB9B2A004276BB /* DealingPanel.swift */,
 				090FEB0421BB9B2A004276BB /* ArmorInfo.swift */,
@@ -1060,6 +1064,8 @@
 				090FEB0721BB9B2A004276BB /* MinionsList.swift */,
 				090FEC5121BE9A38004276BB /* RolePanel.swift */,
 				09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */,
+				09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */,
+				09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1375,6 +1381,7 @@
 				090FEB8021BB9B2B004276BB /* FirePower.swift in Sources */,
 				090FEB6B21BB9B2B004276BB /* EarRing.swift in Sources */,
 				090FEB7221BB9B2B004276BB /* Break.swift in Sources */,
+				09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */,
 				090FEC2921BB9B2B004276BB /* UIRandomScene.swift in Sources */,
 				090FEBEF21BB9B2B004276BB /* PowerlordBattle.swift in Sources */,
 				090FEBE321BB9B2B004276BB /* Passive.swift in Sources */,
@@ -1417,6 +1424,7 @@
 				090FEB6E21BB9B2B004276BB /* Agility.swift in Sources */,
 				090FEBB521BB9B2B004276BB /* SwapHealth.swift in Sources */,
 				090FEB8821BB9B2B004276BB /* Outfit.swift in Sources */,
+				09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */,
 				090FEBF221BB9B2B004276BB /* BItem.swift in Sources */,
 				090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */,
 				09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */,
@@ -1466,7 +1474,7 @@
 				090FEB9521BB9B2B004276BB /* Race.swift in Sources */,
 				090FEBC021BB9B2B004276BB /* ProtectionFromIce.swift in Sources */,
 				090FEC1521BB9B2B004276BB /* UICell.swift in Sources */,
-				090FEC0521BB9B2B004276BB /* CharListPanel.swift in Sources */,
+				090FEC0521BB9B2B004276BB /* RoleList1.swift in Sources */,
 				090FEC0F21BB9B2B004276BB /* UIPanel.swift in Sources */,
 				090FEC3921BB9B2B004276BB /* MinionsHouseInside.swift in Sources */,
 				090FEBB221BB9B2B004276BB /* MagicConvert.swift in Sources */,

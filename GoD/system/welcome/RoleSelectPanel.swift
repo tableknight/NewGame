@@ -21,7 +21,7 @@ class RoleSelectPanel:UIPanel {
                 
                 if _lastSelectedComponent == rc {
                     removeFromParent()
-                    loadStage(char: rc.unit as! Character)
+//                    loadStage(char: rc.unit as! Character)
                     return
                 }
                 _lastSelectedComponent.selected = false
@@ -61,7 +61,7 @@ class RoleSelectPanel:UIPanel {
                 let x = i / 3
                 
                 let cc = RoleComponent()
-                cc.unit = _chars[i]
+//                cc.unit = _chars[i]
                 cc.position.x = startX + width * x.toFloat()
                 cc.position.y = startY - height * y.toFloat()
                 cc.zPosition = self.zPosition + 2
@@ -92,13 +92,4 @@ class RoleSelectPanel:UIPanel {
     var _chars = Array<Creature>()
     var _lastSelectedComponent = RoleComponent()
 }
-class RoleComponent:MinionsHouseComponent {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
-}
+

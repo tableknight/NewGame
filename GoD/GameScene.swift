@@ -48,7 +48,21 @@ class GameScene: SKScene {
         o.zPosition = 1200
         addChild(o)
         
-        addOutfit()
+//        addOutfit()
+        
+        let potion = Potion()
+        potion._count = 1
+        Game.instance.char.addProp(p: potion)
+        
+//        let ii = ItemInfo()
+//        ii.create(item: potion)
+//        addChild(ii)
+//        
+//        Game.instance.char._extensions.hp = 1
+        
+//        let rl = RoleList()
+//        rl.create(list: Game.instance.char._minions + [Game.instance.char] + [Game.instance.char])
+//        addChild(rl)
         
 //        let ai = ArmorInfo()
 //        ai.create(armor: Game.instance.char._props[0] as! Outfit)

@@ -17,7 +17,7 @@ class Item:Prop {
     }
     
     var _cooldown = 0
-    var useable = false
+    var usable = false
     var useInBattle = false
     var _timeleft = 0
     var targetSelf = false
@@ -42,6 +42,9 @@ class Item:Prop {
     override func getInfosDisplay() -> IPanelSize {
         return ItemInfo()
     }
+    func reduce() {
+        _count -= 1
+    }
     
 }
 
@@ -61,14 +64,14 @@ class TheWitchsTear:Item {
 class Potion:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         useInBattle = true
-        _cooldown = 3
+        _cooldown = 4
         _name = "治疗药水"
         targetSelf = true
         _price = 5
         _sellingPrice = 20
-        _description = "恢复50%最大生命值，战斗中冷却时间2回合"
+        _description = "恢复50%最大生命值，战斗中冷却时间3回合"
     }
     
     internal var _rate:CGFloat = 0.5
@@ -78,7 +81,7 @@ class Potion:Item {
         if target._extensions.hp >= target._extensions.health {
             target._extensions.hp = target._extensions.health
         }
-        Game.instance._char.removeProp(p: self)
+//        Game.instance._char.removeProp(p: self)
     }
     
     override func use(unit: BUnit, completion: @escaping () -> Void) {
@@ -116,7 +119,7 @@ class LittlePotion:Potion {
 class SealScroll:Item {
     override init() {
         super.init()
-        useable = false
+        usable = false
         useInBattle = true
         _cooldown = 0
         _name = "封印卷轴"
@@ -160,7 +163,7 @@ class SealScroll:Item {
 class TownScroll:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         useInBattle = true
         _name = "传送卷轴"
         _price = 6
@@ -178,7 +181,7 @@ class TownScroll:Item {
 class BlastScroll:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         useInBattle = false
         _name = "爆破卷轴"
         _price = 6
@@ -193,7 +196,7 @@ class BlastScroll:Item {
 class BagIncreaseContract:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         _name = "背包扩充协议"
         _price = 25
         _sellingPrice = 100
@@ -204,7 +207,7 @@ class BagIncreaseContract:Item {
 class StorageIncreaseContract:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         _name = "仓库扩充协议"
         _price = 25
         _sellingPrice = 100
@@ -215,7 +218,7 @@ class StorageIncreaseContract:Item {
 class MinionIncreaseContract:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         _name = "寄存扩充协议"
         _price = 25
         _sellingPrice = 100
@@ -226,7 +229,7 @@ class MinionIncreaseContract:Item {
 class RebornScroll:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         _name = "重生卷轴"
         _price = 100
         _sellingPrice = 400
@@ -237,7 +240,7 @@ class RebornScroll:Item {
 class SmallGoldBag:Item {
     override init() {
         super.init()
-        useable = true
+        usable = true
         _name = "小钱袋子"
         _price = 100
         _sellingPrice = 400

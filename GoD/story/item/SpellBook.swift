@@ -24,4 +24,14 @@ class SpellBook:Item {
             return _spell
         }
     }
+    
+    override func use(target: Creature) {
+        let char = Game.instance.char!
+        if !char.hasSpell(spell: _spell) {
+            char._spells.append(_spell)
+            char.removeProp(p: self)
+        } else {
+            debug("spell exist")
+        }
+    }
 }

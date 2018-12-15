@@ -83,6 +83,14 @@ class UIPanel:SKSpriteNode {
         }
         return count
     }
+    func getPageStart(_ end:Int) -> Int {
+        var start = (_curPage - 1) * _pageSize
+        if start >= end {
+            _curPage -= 1
+            start = (_curPage - 1) * _pageSize
+        }
+        return start
+    }
     func pageReload() {
         
     }
@@ -117,14 +125,14 @@ class UIPanel:SKSpriteNode {
             let item = icon._displayItemType as! Item
             let node = ItemInfo()
             node.create(item: item)
-            node.position.x = icon.position.x + cellSize * 0.5 + 5
+            node.position.x = icon.position.x
             if icon.position.y < 0 {
-                node.position.y = icon.position.y + node.getDisplayHeight() - cellSize * 0.5
+                node.position.y = icon.position.y + node.getDisplayHeight() + 5
             } else {
-                node.position.y = icon.position.y + cellSize * 0.5
+                node.position.y = icon.position.y - cellSize - 5
             }
-            if icon.position.x > cellSize * 4 {
-                node.position.x = icon.position.x - node.getDisplayWidth()
+            if icon.position.x > 0 {
+                node.position.x = icon.position.x - node.getDisplayWidth() + cellSize
             }
             addChild(node)
             _infosDisplay = node
@@ -163,7 +171,7 @@ class UIPanel:SKSpriteNode {
     
     internal var _bg:SKShapeNode!
     internal var _infosDisplay = SKSpriteNode()
-    internal var _lastSelectedIcon = Icon(quality: 1)
+    internal var _lastSelectedIcon = Icon()
     internal var _label:Label!
     internal var _closeButton = Button()
     internal var _prevButton = Button()

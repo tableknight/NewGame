@@ -57,7 +57,7 @@ class CreationFlow:SKSpriteNode {
         let char = Character()
         char.create(level: 1)
         char._img = _selectImage._lastSelectedComponent.image
-        char._minions = [_selectMinion._lastSelectedComponent.unit]
+//        char._minions = [_selectMinion._lastSelectedComponent.unit]
         char._spellsInuse = [_selectSpell._lastSelectedComponent.spell]
         for c in _selectItems.getSelectedItems() {
             char.addProp(p: c.item)

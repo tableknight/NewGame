@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class CharListPanel:SKSpriteNode {
+class RoleLis1t:SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         _lastSelected.selected = false
