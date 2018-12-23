@@ -436,13 +436,14 @@ func showMsg(text:String) {
     node.addChild(border)
     
     let l = Label()
-    l.fontSize = 18
+    l.fontSize = 24
+    l.align = "center"
     l.fontColor = UIColor.white
     l.text = text
     node.addChild(l)
     
     node.zPosition = 1200
-    let stage = Game.instance.stage!
+    let stage = Game.instance.curStage!
     stage._messageNode.removeFromParent()
     stage._messageNode = node
 //    node.isUserInteractionEnabled = true

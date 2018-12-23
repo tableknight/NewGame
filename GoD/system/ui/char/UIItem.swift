@@ -130,49 +130,79 @@ class Gate:UIItem {
         super.init(coder: aDecoder)
     }
     
+//    override func triggerEvent() {
+//        let stage = Game.instance.curStage!
+////        let next = stage.getSceneById(id: seed(max: stage._sceneSize))
+////        next._level = stage._curScene._level + 1
+////        stage._scenes = [next]
+////        stage.switchScene(next: next)
+//        let sc = stage._curScene
+//
+//        let b = Battle()
+//
+//        var evs = Array<Creature>()
+//        var max = 6
+//        if Game.instance.char._dungeonLevel < 10 {
+//            max = 4
+//        }
+//        for _ in 1...max {
+//            let e = sc.getEvilById(seed(min: 0, max: 4))
+//            e.create(level: sc._level.toFloat())
+//            evs.append(e)
+//        }
+//        b.setEvils(evils: evs)
+//        let char = Game.instance.char!
+//        let roles = [char] + char.getReadyMinions()
+//
+//        b.setRoles(roles: roles)
+//        b.zPosition = UIStage.LAYER6
+//        b.battleStart()
+//        b.defeatAction = {
+//            let nextLevel = sc._level + 1
+//            let nextScene = stage.getSceneById(id: nextLevel)
+//            nextScene._level = nextLevel
+//            stage._scenes = [nextScene]
+//            stage.switchScene(next: nextScene)
+//            showMsg(text: "进入地下城第\(nextLevel)层。。")
+//            if char._dungeonLevel < nextLevel {
+//                char._dungeonLevel = nextLevel
+//            }
+//        }
+//        Game.instance.stage.addChild(b)
+//
+//        Game.instance.stage.hideUI()
+//        Game.instance.stage.hideScene()
+//    }
     override func triggerEvent() {
-        let stage = Game.instance.stage!
-//        let next = stage.getSceneById(id: seed(max: stage._sceneSize))
-//        next._level = stage._curScene._level + 1
-//        stage._scenes = [next]
-//        stage.switchScene(next: next)
-        let sc = stage._curScene
+        
+        let sc = Game.instance.curStage._curScene!
+        let char = Game.instance.char!
+        var enimies = Array<Creature>()
+        
+        let enimyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
+        for _ in 0...enimyCount {
+            enimies.append(sc.getMonsterByIndex(index: sc._monsterEnum.one()))
+        }
         
         let b = Battle()
-        
-        var evs = Array<Creature>()
-        var max = 6
-        if Game.instance._char._dungeonLevel < 10 {
-            max = 4
-        }
-        for _ in 1...max {
-            let e = sc.getEvilById(seed(min: 0, max: 4))
-            e.create(level: sc._level.toFloat())
-            evs.append(e)
-        }
-        b.setEvils(evils: evs)
-        let char = Game.instance._char!
         let roles = [char] + char.getReadyMinions()
-        
-        b.setRoles(roles: roles)
-        b.zPosition = UIStage.LAYER6
+        b.setEnimyPart(minions: enimies)
+        b.setPlayerPart(roles: roles)
+        b.zPosition = MyStage.UI_TOPEST_Z
         b.battleStart()
-        b.afterBatteAction = {
-            if b.victory {
-                let nextLevel = sc._level + 1
-                let nextScene = stage.getSceneById(id: nextLevel)
-                nextScene._level = nextLevel
-                stage._scenes = [nextScene]
-                stage.switchScene(next: nextScene)
-                showMsg(text: "进入地下城第\(nextLevel)层。。")
-                if char._dungeonLevel < nextLevel {
-                    char._dungeonLevel = nextLevel
-                }
-            }
+        Game.instance.curStage.addBattle(b)
+//        b.defeatedAction = defeatedAction
+//        b.defeatAction = defeatAction
+        b.defeatAction = {
+//            let nextLevel = sc._level + 1
+//            let nextScene = stage.getSceneById(id: nextLevel)
+//            nextScene._level = nextLevel
+//            stage._scenes = [nextScene]
+//            stage.switchScene(next: nextScene)
+//            showMsg(text: "进入地下城第\(nextLevel)层。。")
+//            if char._dungeonLevel < nextLevel {
+//                char._dungeonLevel = nextLevel
+//            }
         }
-        Game.instance.stage.addChild(b)
-        
-        Game.instance.stage.hideUI()
-        Game.instance.stage.hideScene()
     }
 }

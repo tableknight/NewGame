@@ -18,7 +18,7 @@ class PriceOfBlood: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         _damageValue = physicalDamage(t)
         let damage = _damageValue
         let this = self

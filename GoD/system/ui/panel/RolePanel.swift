@@ -318,8 +318,8 @@ class RolePanel:UIPanel {
         let label = AttrLabel()
         label.position.x = x
         label.position.y = y
-        label.text = text + " \(value.toInt())/\(value2.toInt())"
-        label.value = -1
+        label.text = text + " \(value.toInt()) /"
+        label.value = value2.toInt()
         _propertyLayer.addChild(label)
         return label
     }
@@ -343,9 +343,8 @@ class RolePanel:UIPanel {
         _attrCritical.value = bChar.getCriticalForShow(t: to).toInt()
         _attrAvoid.value = bChar.getAvoid(t: to).toInt()
         _attrAccuracy.value = bChar.getAccuracy(t: to).toInt()
-        _attrMind.value = bChar.getMind(target: to).toInt()
-        _attrBreak.value = bChar.getBreak().toInt()
-        _attrRevenge.value = bChar.getRevenge().toInt()
+//        _attrMind.value = bChar.getMind(target: to).toInt()
+//        _attrBreak.value = bChar.getBreak().toInt()
         _attrLeftPoint.value = _unit._leftPoint
     }
     

@@ -46,7 +46,7 @@ class RoleList:UIPanel {
         _bg = createBackground(width: _standardWidth * 0.75, height: cellSize * 5)
         _bg.position = CGPoint(x: 0, y: 0)
         _bg.strokeColor = UIColor.white
-        _bg.zPosition = self.zPosition
+        _bg.zPosition = self.zPosition + 1
         addChild(_bg)
     }
     private func showList() {

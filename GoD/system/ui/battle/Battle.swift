@@ -8,88 +8,350 @@
 
 import SpriteKit
 class Battle: SKSpriteNode {
+    internal func touchAction(s:CGPoint) {
+        
+        //        if _roundLabel.contains(s) {
+        //            Game.instance.stage.removeBattle(b: self)
+        //            let tp = TownScroll()
+        //            tp.use(target: Creature())
+        //            return
+        //        }
+        
+        if _orderCancel.contains(s) && _orderCancel.visible {
+            cancelButtonClicked()
+            return
+        }
+        
+        if waitingForSelectItemTarget {
+            let this = self
+            for u in _itemTargets {
+                if u.contains(s) {
+                    waitingForSelectItemTarget = false
+                    this.hideCancel()
+                    this.setUnitDefault(all: true)
+                    let item = _selectedItem.prop as! Item
+                    item._battle = self
+                    item.use(unit: u) {
+                        this.moveEnd()
+                    }
+                    _char.removeProp(p: item)
+                    break
+                }
+            }
+            return
+        }
+        
+        if waitingForSelectRecallTarget {
+            for u in _playerPart {
+                if u.contains(s) {
+                    _playerUnit.showText(text: "召回")
+                    u._unit._seat = BUnit.STAND_BY
+                    
+                    waitingForSelectRecallTarget = false
+                    setUnitDefault(all: true)
+                    hideCancel()
+                    
+                    let this = self
+                    u.actionRecall {
+                        u.removeFromParent()
+                        u.removeFromBattle()
+                        this.moveEnd()
+                    }
+                }
+            }
+            return
+        }
+        
+        if waitingForSelectSummonSeat {
+            for u in _summonUnits.values {
+                if u.contains(s) {
+                    let seat = u._unit._seat
+                    if _selectedSpell is Interchange {
+                        waitingForSelectSummonSeat = false
+                        _selectedTarget = u
+                        let this = self
+                        speakSpellName()
+                        _selectedSpell.cast {
+                            this.moveEnd()
+                            this.cdSpell(spell: this._selectedSpell)
+                        }
+                        cleanSummonSeats()
+                        setUnitDefault(all: true)
+                        hideCancel()
+                        return
+                    }
+                    if _selectedSpell is SummonFlower {
+                        let flower = FlowerOfHeal()
+                        if _curRole._unit is Character {
+                            flower._growth.strength = 1
+                            flower._growth.stamina = 1
+                            flower._growth.agility = 1
+                            flower._growth.intellect = 1
+                        } else {
+                            flower._growth.strength = _curRole._unit._growth.strength * 0.5
+                            flower._growth.stamina = _curRole._unit._growth.stamina * 0.5
+                            flower._growth.agility = _curRole._unit._growth.agility * 0.5
+                            flower._growth.intellect = _curRole._unit._growth.intellect * 0.5
+                        }
+                        flower.create(level: _curRole._unit._level)
+                        
+                        //                        _mainChar.showText(text: _selectedSpell._name)
+                        //                        _curRole.speak(text: "")
+                        speakSpellName()
+                        let this = self
+                        _curRole.actionCast {
+                            u.removeFromParent()
+                            this.waitingForSelectSummonSeat = false
+                            flower._seat = seat
+                            let flowerBUnit = this.createPlayerPartUnit(c: flower)
+                            this.cdSpell(spell: this._selectedSpell)
+                            flowerBUnit.actionSummon {
+                                this.moveEnd()
+                            }
+                        }
+                        setUnitDefault(all: true)
+                        cleanSummonSeats()
+                        hideCancel()
+                        return
+                    }
+                    if u.isEmpty {
+                        if _char._minionsCount <= (_playerPart.count - 1) {
+                            showMsg(text: "战场随从已达上限！")
+                            return
+                        }
+                        
+                        _playerUnit.showText(text: "召唤")
+                        u.removeFromParent()
+                        waitingForSelectSummonSeat = false
+                        _selectedMinion._seat = seat
+                        let unit = createPlayerPartUnit(c: _selectedMinion)
+                        cleanSummonSeats()
+                        setUnitDefault(all: true)
+                        hideCancel()
+                        
+                        let this = self
+                        unit.actionSummon {
+                            this.moveEnd()
+                        }
+                        
+                    } else {
+                        _playerUnit.showText(text: "召唤")
+//                        let unit = findUnitBySeat(part: _playerPart, seat: u._unit._seat)
+//                        u.removeFromBattle()
+//                        u.removeFromParent()
+                        u._unit._seat = BUnit.STAND_BY
+                        
+                        waitingForSelectSummonSeat = false
+                        _selectedMinion._seat = seat
+                        cleanSummonSeats()
+                        setUnitDefault(all: true)
+                        hideCancel()
+                        
+                        let this = self
+                        u.actionRecall {
+                            let bUnit = this.createPlayerPartUnit(c: this._selectedMinion)
+                            u.removeFromParent()
+                            u.removeFromBattle()
+                            bUnit.actionSummon {
+                                this.moveEnd()
+                            }
+                        }
+                    }
+                    
+                    return
+                }
+            }
+            return
+        }
+        
+        
+        
+        if _orderItem.contains(s) && !_orderItem.isHidden {
+            showItemPanel()
+            hideOrder()
+            showCancel()
+            _waitingForSelectTarget = false
+            return
+        }
+        
+        if _orderSummon.contains(s) && !_orderSummon.isHidden {
+            hideOrder()
+            showCancel()
+            showMinionsList()
+            //            showSummonableSeats()
+            return
+        }
+        
+        if _orderRecall.contains(s) && !_orderRecall.isHidden {
+            hideOrder()
+            showCancel()
+            setUnitDefault(all: true)
+            showRecallMinions()
+            waitingForSelectRecallTarget = true
+            return
+        }
+        
+        //点击攻击选项
+        if _orderAttack.contains(s) && !_orderAttack.isHidden {
+            hideOrder()
+            showCancel()
+            //            _orderCancel.isHidden = false
+            _waitingForSelectTarget = true
+            _selectedSpell = Attack()
+            _selectedSpell._battle = self
+            showAvailableUnits()
+            return
+        } else if _orderDefend.contains(s) && !_orderDefend.isHidden {
+            _selectedSpell = Defend()
+            _selectedSpell._battle = self
+            _curRole.isDefend = true
+            setUnitDefault(all: true)
+            hideOrder()
+            hideCancel()
+            moveEnd()
+            return
+        } else if _orderSpell.contains(s) && !_orderSpell.isHidden {
+            showSpellCards()
+            hideOrder()
+            showCancel()
+            _waitingForSelectTarget = false
+            return
+        }
+        
+        if _waitingForSelectTarget {
+            _selectedTarget = nil
+            for unit in _playerPart {
+                if unit.contains(s) && unit.selectable {
+                    _selectedTarget = unit
+                }
+                
+            }
+            for unit in _enimyPart {
+                if unit.contains(s) && unit.selectable {
+                    _selectedTarget = unit
+                }
+            }
+            if _selectedTarget != nil {
+                _waitingForSelectTarget = false
+                setUnitDefault(all: true)
+                _selectedTarget!.setSelectedMode()
+                hideCancel()
+                hideOrder()
+                execOrder()
+            } else {
+                print("has no selected target!")
+            }
+            return
+        }
+        
+//        for card in _spellCards {
+//            if card.contains(s) {
+//                if card.coolDown > 0 {
+//                    return
+//                }
+//                _selectedSpell = card.spell
+//                hideOrder()
+//                showCancel()
+//                removeSpellCards()
+//                if _selectedSpell.isAutoSelectTarget {
+//                    _waitingForSelectTarget = false
+//                    _selectedSpell.findTarget()
+//                    setUnitDefault(all: true)
+//                    execOrder()
+//                    hideCancel()
+//                } else {
+//                    if _selectedSpell is SummonFlower {
+//                        waitingForSelectSummonSeat = true
+//                        setUnitDefault()
+//                        showSummonableSeats(selectAll: false)
+//                        return
+//                    }
+//
+//                    if _selectedSpell is Interchange {
+//                        waitingForSelectSummonSeat = true
+//                        setUnitDefault()
+//                        showSummonableSeats()
+//                        return
+//                    }
+//
+//                    _waitingForSelectTarget = true
+//                    showAvailableUnits()
+//                }
+//            }
+//        }
+    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-//        addChild(BUnit())
-//        createBG()
         self.name = "battle"
-        self.size = CGSize(width: Game.instance.screenWidth, height: Game.instance.screenHeight)
-        s = cellSize * 1.5
-        xd = cellSize * 2
-        yd = cellSize * 1.6
-//        ttl = [-s, s * 2]
-//        ttm = [0, s * 2]
-//        ttr = [s, s * 2]
-//        tbl = [-s, s]
-//        tbm = [0, s]
-//        tbr = [s, s]
-//        btl = [-s, -s]
-//        btm = [0, -s]
-//        btr = [s, -s]
-//        bbl = [-s, -s * 2]
-//        bbm = [0, -s * 2]
-//        bbr = [s, -s * 2]
+        let c = cellSize
+        let x1 = -c * 2
+        let x2:CGFloat = 0
+        let x3 = c * 2
+        let y1 = c * 3.5
+        let y2 = c * 2
+        let y3 = -c * 2
+        let y4 = -c * 4
         
-        llt = [-s * 2 - xd, s + yd]
-        llm = [-s * 2 - xd, 0 + yd]
-        llb = [-s * 2 - xd, -s + yd]
+        let s:CGFloat = cellSize * 0.5
         
-        lrt = [-s - xd, s + yd]
-        lrm = [-s - xd, 0 + yd]
-        lrb = [-s - xd, -s + yd]
+        ttl.x = x1 + s
+        ttl.y = y1
         
-        rlt = [s + xd, s + yd]
-        rlm = [s + xd, 0 + yd]
-        rlb = [s + xd, -s + yd]
+        ttm.x = x2
+        ttm.y = y1
         
-        rrt = [s * 2 + xd, s + yd]
-        rrm = [s * 2 + xd, 0 + yd]
-        rrb = [s * 2 + xd, -s + yd]
+        ttr.x = x3 - s
+        ttr.y = y1
         
-//        var es = Array<Creature>();
-//        for _ in 0...3 {
-//            let e = GiantWasp()
-//            e.create(level: 10)
-//            es.append(e)
-//        }
-//        setEvils(evils: es)
-//        var es1 = Array<Creature>();
-//        for _ in 0...2 {
-//            let e = GiantWasp()
-//            e.create(level: 10)
-//            es1.append(e)
-//        }
-//        setRoles(roles: es1)
-//        let t = Timer(timeInterval: 3000, target: self, selector: #selector(later), userInfo: self, repeats: false)
-//        t.fire()
-//        let t = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(later), userInfo: nil, repeats: true)
-//        t.fire()
-//        _curRole.actionAttack {
-//            print("123")
-//        }
-//        _curRole.actionCast {
-//        }
-//        _curRole.setOrderMode()
+        tbl.x = x1 + s
+        tbl.y = y2
+        
+        tbm.x = x2
+        tbm.y = y2
+        
+        tbr.x = x3 - s
+        tbr.y = y2
+        
+        btl.x = x1
+        btl.y = y3
+        
+        btm.x = x2
+        btm.y = y3
+        
+        btr.x = x3
+        btr.y = y3
+        
+        bbl.x = x1
+        bbl.y = y4
+        
+        bbm.x = x2
+        bbm.y = y4
+        
+        bbr.x = x3
+        bbr.y = y4
+        
+        _enimySeats[BUnit.TTL] = ttl
+        _enimySeats[BUnit.TTM] = ttm
+        _enimySeats[BUnit.TTR] = ttr
+        _enimySeats[BUnit.TBL] = tbl
+        _enimySeats[BUnit.TBM] = tbm
+        _enimySeats[BUnit.TBR] = tbr
+        
+        _playerSeats[BUnit.BTL] = btl
+        _playerSeats[BUnit.BTM] = btm
+        _playerSeats[BUnit.BTR] = btr
+        _playerSeats[BUnit.BBL] = bbl
+        _playerSeats[BUnit.BBM] = bbm
+        _playerSeats[BUnit.BBR] = bbr
+        
+        _char = Game.instance.char!
         createBG()
         createOrder()
-        _char = Game.instance._char!
         isUserInteractionEnabled = true;
     }
     internal var _isCharDead = false;
     internal var _isAllEvilDead = false;
     func battleStart() {
-//        for unit in _left.values {
-//            for s in unit._unit._spellsInuse {
-//                s.beforeBattle(t: unit)
-//            }
-//        }
-//        for unit in _right.values {
-//            for s in unit._unit._spellsInuse {
-//                s.beforeBattle(t: unit)
-//            }
-//        }
-//        _roundLabel.isHidden = true
-        
         for p in _char._props {
             if p is Item {
                 let item = p as! Item
@@ -107,11 +369,11 @@ class Battle: SKSpriteNode {
             }
         }
         
-        _roundLabel.fontSize = 18
-        _roundLabel.align = "left"
-        _roundLabel.position.x = -cellSize * 7.5
-        _roundLabel.position.y = cellSize * 4 - 10
-        addChild(_roundLabel)
+//        _roundLabel.fontSize = 18
+//        _roundLabel.align = "left"
+//        _roundLabel.position.x = -cellSize * 7.5
+//        _roundLabel.position.y = cellSize * 4 - 10
+//        addChild(_roundLabel)
         roundStart()
     }
     internal var _roundLabel = Label()
@@ -124,14 +386,14 @@ class Battle: SKSpriteNode {
         }
     }
     func reduceCooldown() {
-        for u in _leftRoles {
+        for u in _enimyPart {
             for s in u._unit._spellsInuse {
                 if s._timeleft > 0 {
                     s._timeleft -= 1
                 }
             }
         }
-        for u in _rightRoles {
+        for u in _playerPart {
             for s in u._unit._spellsInuse {
                 if s._timeleft > 0 {
                     s._timeleft -= 1
@@ -139,7 +401,7 @@ class Battle: SKSpriteNode {
             }
         }
         
-        for p in Game.instance._char._props {
+        for p in _char._props {
             if p is Item {
                 let item = p as! Item
                 if item._timeleft > 0 {
@@ -149,23 +411,33 @@ class Battle: SKSpriteNode {
         }
         
     }
+    internal func findUnitBySeat(part:Array<BUnit>, seat:String) -> BUnit? {
+        var i = 0
+        for u in part {
+            if u._unit._seat == seat {
+                return u
+            }
+            i += 1
+        }
+        return nil
+    }
     internal func stillInBattle(unit:BUnit) -> Bool {
-        if _leftRoles.contains(unit) {
+        if _enimyPart.contains(unit) {
             return true
         }
-        if _rightRoles.contains(unit) {
+        if _playerPart.contains(unit) {
             return true
         }
         
         return false
     }
     func roundEnd() {
-        for u in _leftRoles {
+        for u in _playerPart {
             for s in u._status.values {
                 s.inEndOfRound()
             }
         }
-        for u in _rightRoles {
+        for u in _enimyPart {
             for s in u._status.values {
                 s.inEndOfRound()
             }
@@ -225,17 +497,18 @@ class Battle: SKSpriteNode {
             this._selectedSpell = Attack()
             this._selectedSpell._battle = self
             let s = _curRole.getStatus(type: Status.TAUNTED)
-            if nil != s {
-                let source = s!._source
-                if !source.isDead() {
-                    _selectedTarget = source
-                    execOrder()
-                    return
-                }
+            let source = s!._source
+            if nil == s {
+                debug("taunt error")
+            }
+            if !source.isDead() {
+                _selectedTarget = source
+                execOrder()
+                return
             }
         }
         
-        if !_curRole.inleft {
+        if !_curRole.playerPart {
             this.createAI()
         } else {
             if this._curRole.hasSpell(spell: Crazy()) {
@@ -247,27 +520,16 @@ class Battle: SKSpriteNode {
                 this._curRole.setOrderMode()
                 this.defaultOrderAttack()
                 this.showOrder()
+                this.hideCancel()
             }
         }
     }
     internal func cleanUnitStatus() {
-        for unit in _left.values {
-//            for s in unit._status.values {
-//                if s.timeleft > 0 {
-//                    s.timeleft -= 1
-//                }
-//            }
+        for unit in _enimyPart {
             unit._speed = 0
-//            unit.isDefend = false
         }
-        for unit in _right.values {
-//            for s in unit._status.values {
-//                if s.timeleft > 0 {
-//                    s.timeleft -= 1
-//                }
-//            }
+        for unit in _playerPart {
             unit._speed = 0
-//            unit.isDefend = false
         }
     }
     
@@ -304,14 +566,17 @@ class Battle: SKSpriteNode {
     }
     var victory = false
     internal func defeat() {
+        if victory {
+            return
+        }
         print("defeat")
         let l = Loot()
-        let ms = Game.instance._char.getReadyMinions()
+        let ms = _char.getReadyMinions()
         for u in _evilsOrg {
             l.loot(role: u._unit)
             let exp = l.getExp(level: u._unit._level)
-            Game.instance._char.expUp(up: exp)
-            debug("\(Game.instance._char._name)获得了\(exp.toInt())点经验。")
+            _char.expUp(up: exp)
+            debug("\(_char._name)获得了\(exp.toInt())点经验。")
             for m in ms {
                 if m._extensions.hp > 0 {
                     let ep = l.getExp(level: u._unit._level)
@@ -322,36 +587,40 @@ class Battle: SKSpriteNode {
         }
         victory = true
         let list = l.getList()
+        fadeOutBattle()
+        
         if list.count > 0 {
             let p = LootPanel()
             p.create(props: list)
-            p._battle = self
-            addChild(p)
-        } else {
-            fadeOutBattle()
+            Game.instance.curStage.showPanel(p)
         }
     }
     internal func defeated() {
 //        print("defeated")
+        victory = false
         showMsg(text: "战斗失败！")
         fadeOutBattle()
     }
     func fadeOutBattle() {
-        let this = self
-        run(SKAction.fadeOut(withDuration: TimeInterval(1))) {
-            //            let c = Data.instance._char!
-            //            c._extensions.hp = c._extensions.health
-            Game.instance.stage.removeBattle(b: self)
-            this.afterBatteAction()
+//        let this = self
+//        run(SKAction.fadeOut(withDuration: TimeInterval(1))) {}
+        if victory {
+            defeatAction()
+        } else {
+            defeatedAction()
         }
+        Game.instance.curStage.removeBattle(self)
     }
-    var afterBatteAction = {}
+//    var afterBatteAction = func(victory:Bool){}
+//    var afterBatteAction = {}
+    var defeatAction = {}
+    var defeatedAction = {}
     func hasFinished() -> Bool {
-        if _rightRoles.count < 1 {
+        if _enimyPart.count < 1 {
             defeat()
             return true
         }
-        if Game.instance._char._extensions.hp < 1 {
+        if _char._extensions.hp < 1 {
             defeated()
             return true
         }
@@ -360,14 +629,14 @@ class Battle: SKSpriteNode {
     }
     internal func calcSpeedLine() {
         _speedLine = 0
-        for unit in _left.values {
+        for unit in _enimyPart {
             if nil != unit._unit._weapon {
                 _speedLine += unit.getSpeed() * unit._unit._weapon!._attackSpeed
             } else {
                 _speedLine += unit.getSpeed()
             }
         }
-        for unit in _right.values {
+        for unit in _playerPart {
             if nil != unit._unit._weapon {
                 _speedLine += unit.getSpeed() * unit._unit._weapon!._attackSpeed
             } else {
@@ -378,22 +647,18 @@ class Battle: SKSpriteNode {
     internal func roundStart(){
         _round += 1
         _roundLabel.text = "第\(_round)回合"
-//        _roundLabel.isHidden = false
         cleanUnitStatus()
-//        _roleAll = _leftRoles + _rightRoles
         reduceCooldown()
         calcSpeedLine()
         orderUnits()
         let this = self
-//        this._roundLabel.isHidden = true
         setTimeout(delay: 0.5, completion: {
             this.moveStart()
         })
     }
     internal func orderUnits() {
-        var all = _leftRoles + _rightRoles
+        var all = _enimyPart + _playerPart
         _roleAll = []
-//        calcSpeedLine()
         while all.count > 0 {
             for unit in all {
                 if nil != unit._unit._weapon {
@@ -424,7 +689,7 @@ class Battle: SKSpriteNode {
             return
         }
         let sd = seed()
-        if sd < 25 - _mainChar.getChaos().toInt() {
+        if sd < 25 - _playerUnit.getChaos().toInt() {
             let index = seed(max: _roleAll.count)
             let unit = _roleAll[index]
             _curRole = unit
@@ -459,12 +724,13 @@ class Battle: SKSpriteNode {
             _roleAll.remove(at: index!)
         }
     }
+    //unused
     internal func createBG() {
-        let di = Game.instance
-        let bg = SKShapeNode(rect: CGRect(x: -di.screenWidth * 0.6, y: -di.screenHeight * 0.6, width: di.screenWidth * 1.2, height: di.screenHeight * 1.2))
-//        bg.fillColor = UIColor.black
-//        bg.alpha = 0.10
-        addChild(bg)
+//        let di = Game.instance
+//        let bg = SKShapeNode(rect: CGRect(x: -di.screenWidth * 0.6, y: -di.screenHeight * 0.6, width: di.screenWidth * 1.2, height: di.screenHeight * 1.2))
+////        bg.fillColor = UIColor.black
+////        bg.alpha = 0.10
+//        addChild(bg)
     }
 
     internal var _orderAttack = RoundButton()
@@ -475,94 +741,44 @@ class Battle: SKSpriteNode {
     internal var _orderSummon = RoundButton()
     internal var _orderRecall = RoundButton()
     internal func createOrder() {
-        let hw = -Game.instance.screenWidth * 0.5
-        let hh = -Game.instance.screenHeight * 0.5
-        _orderAttack = createMenuButton(x: hw + 30, y: hh + 30, size: 30, text: "攻击")
-        _orderDefend = createMenuButton(x: hw + 20, y: hh + 90, size: 20, text: "防御")
-        _orderSpell = createMenuButton(x: hw + 90, y: hh + 20, size: 20, text: "法术")
-        _orderItem = createMenuButton(x: hw + 75, y: hh + 75, size: 20, text: "物品")
-        _orderSummon = createMenuButton(x: hw + 140, y: hh + 20, size: 20, text: "召唤")
-        _orderRecall = createMenuButton(x: hw + 190, y: hh + 20, size: 20, text: "召回")
-        _orderCancel = createMenuButton(x: -hw - 30, y: hh + 30, size: 30, text: "取消")
-//        addChild(_orderAttack)
-//        addChild(_orderDefend)
-//        addChild(_orderSpell)
-//        addChild(_orderItem)
-//        addChild(_orderSummon)
-//        addChild(_orderRecall)
-//        addChild(_orderCancel)
+//        let hw = -Game.instance.screenWidth * 0.5
+//        let hh = -Game.instance.screenHeight * 0.5
+//        _orderAttack = createMenuButton(x: hw + 30, y: hh + 30, size: 30, text: "攻击")
+//        _orderDefend = createMenuButton(x: hw + 20, y: hh + 90, size: 20, text: "防御")
+//        _orderSpell = createMenuButton(x: hw + 90, y: hh + 20, size: 20, text: "法术")
+//        _orderItem = createMenuButton(x: hw + 75, y: hh + 75, size: 20, text: "物品")
+//        _orderSummon = createMenuButton(x: hw + 140, y: hh + 20, size: 20, text: "召唤")
+//        _orderRecall = createMenuButton(x: hw + 190, y: hh + 20, size: 20, text: "召回")
+//        _orderCancel = createMenuButton(x: -hw - 30, y: hh + 30, size: 30, text: "取消")
+        
+        let y = -cellSize * 6.5
+        let size:CGFloat = cellSize * 0.45
+        let x = -cellSize * 3.5
+        let gap = size + cellSize * 0.5
+        _orderAttack = createMenuButtons(x: x, y: y, size: size, text: "攻击")
+        _orderDefend = createMenuButtons(x: x + gap, y: y, size: size, text: "防御")
+        _orderSpell = createMenuButtons(x: x + gap * 2 , y: y, size: size, text: "法术")
+        _orderItem = createMenuButtons(x: x + gap * 3, y: y, size: size, text: "物品")
+        _orderSummon = createMenuButtons(x: x + gap * 4, y: y, size: size, text: "召唤")
+        _orderRecall = createMenuButtons(x: x + gap * 5, y: y, size: size, text: "召回")
+        _orderCancel = createMenuButtons(x: -x, y: y, size: size, text: "取消")
+        
         _orders.append(_orderAttack)
         _orders.append(_orderDefend)
         _orders.append(_orderSpell)
         _orders.append(_orderItem)
         _orders.append(_orderSummon)
         _orders.append(_orderRecall)
-//        let orderY = -cellSize * 3.5
-//        let startX = -cellSize * 2
-//        let orderSize = cellSize
-//
-//        _orderAttack.create(label: "攻击")
-//        _orderAttack.position.x = startX
-//        _orderAttack.position.y = orderY
-//        _orderAttack.isHidden = true
-//        addChild(_orderAttack)
-//        _orders.append(_orderAttack)
-////        if _curRole._unit._weapon is Instrument {
-////            _orderAttack.isHidden = true
-////        }
-//
-//
-//        _orderDefend.create(label: "防御")
-//        _orderDefend.position.x = startX + orderSize
-//        _orderDefend.position.y = orderY
-//        _orderDefend.isHidden = true
-//        addChild(_orderDefend)
-//        _orders.append(_orderDefend)
-//
-//        _orderSpell.create(label: "技能")
-//        _orderSpell.position.x = startX + orderSize * 2
-//        _orderSpell.position.y = orderY
-//        _orderSpell.isHidden = true
-//        addChild(_orderSpell)
-//        _orders.append(_orderSpell)
-//
-//        _orderItem.create(label: "物品")
-//        _orderItem.position.x = startX + orderSize * 3
-//        _orderItem.position.y = orderY
-//        _orderItem.isHidden = true
-//        addChild(_orderItem)
-//        _orders.append(_orderItem)
-//
-//        _orderSummon.create(label: "召唤")
-//        _orderSummon.position.x = startX + orderSize * 4
-//        _orderSummon.position.y = orderY
-//        _orderSummon.isHidden = true
-//        addChild(_orderSummon)
-//        _orders.append(_orderSummon)
-//
-//        _orderRecall.create(label: "召回")
-//        _orderRecall.position.x = startX + orderSize * 5
-//        _orderRecall.position.y = orderY
-//        _orderRecall.isHidden = true
-//        addChild(_orderRecall)
-//        _orders.append(_orderRecall)
-//
-//        _orderCancel.create(label: "取消")
-//        _orderCancel.position.x = cellSize * 5
-//        _orderCancel.position.y = orderY
-//        _orderCancel.isHidden = true
-//        addChild(_orderCancel)
-//        showOrder()
     }
-    private func createMenuButton(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
+    private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
         s.create(text: text, size: size)
         s.position.x = x
         s.position.y = y
-        s.zPosition = UIStage.UILAYER
-        s.isHidden = true
+        s.zPosition = MyStage.UI_LAYER_Z
+        s.hide()
         addChild(s)
-//        _uis.append(s)
+        _orders.append(s)
         return s
     }
     var _selectedSpell = Spell()
@@ -571,7 +787,7 @@ class Battle: SKSpriteNode {
     internal var waitingForSelectSummonSeat = false
     internal var waitingForSelectRecallTarget = false
     internal var _itemTargets = Array<BUnit>()
-    var _selectedTarget = BUnit()
+    var _selectedTarget:BUnit?
     var _selectedTargets = Array<BUnit>()
     internal var _char:Character!
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -580,334 +796,53 @@ class Battle: SKSpriteNode {
         let s = first?.location(in: self)
         touchAction(s: s!)
     }
-    internal func touchAction(s:CGPoint) {
-        
-        if _roundLabel.contains(s) {
-            Game.instance.stage.removeBattle(b: self)
-            let tp = TownScroll()
-            tp.use(target: Creature())
-            return
-        }
-        
-        if _orderCancel.contains(s) && !_orderCancel.isHidden {
-            cancelButtonClicked()
-            return
-        }
-        
-        if waitingForSelectItemTarget {
-            let this = self
-            for u in _itemTargets {
-                if u.contains(s) {
-                    waitingForSelectItemTarget = false
-                    this.hideCancel()
-                    this.setUnitDefault(all: true)
-                    let item = _selectedItem.prop as! Item
-                    item._battle = self
-                    item.use(unit: u) {
-                        this.moveEnd()
-                    }
-                    _char.removeProp(p: item)
-                    break
-                }
-            }
-            return
-        }
-        
-        if waitingForSelectRecallTarget {
-            for u in _leftRoles {
-                if u.contains(s) && !u._unit.isMainChar {
-                    _mainChar.showText(text: "召回")
-                    _left.removeValue(forKey: u._seat)
-                    _leftRoles.remove(at: _leftRoles.index(of: u)!)
-                    let index = _roleAll.index(of: u)
-                    if nil != index {
-                        _roleAll.remove(at: index!)
-                    }
-                    u._unit._seat = BUnit.STAND_BY
-                    
-                    waitingForSelectRecallTarget = false
-                    setUnitDefault(all: true)
-                    hideCancel()
-                    
-                    let this = self
-                    u.actionRecall {
-                        u.removeFromParent()
-                        this.moveEnd()
-                    }
-                }
-            }
-            return
-        }
-        
-        if waitingForSelectSummonSeat {
-            for u in _summonUnits.values {
-                if u.contains(s) {
-                    let seat = u._seat
-                    if _selectedSpell is Interchange {
-                        waitingForSelectSummonSeat = false
-                        _selectedTarget = u
-                        let this = self
-                        speakSpellName()
-                        _selectedSpell.cast {
-                            this.moveEnd()
-                            this.cdSpell(spell: this._selectedSpell)
-                        }
-                        cleanSummonSeats()
-                        setUnitDefault(all: true)
-                        hideCancel()
-                        return
-                    }
-                    if _selectedSpell is SummonFlower {
-                        let flower = FlowerOfHeal()
-                        if _curRole._unit.isMainChar {
-                            flower._growth.strength = 1
-                            flower._growth.stamina = 1
-                            flower._growth.agility = 1
-                            flower._growth.intellect = 1
-                        } else {
-                            flower._growth.strength = _curRole._unit._growth.strength * 0.5
-                            flower._growth.stamina = _curRole._unit._growth.stamina * 0.5
-                            flower._growth.agility = _curRole._unit._growth.agility * 0.5
-                            flower._growth.intellect = _curRole._unit._growth.intellect * 0.5
-                        }
-                        flower.create(level: _curRole._unit._level)
-                        
-                        //                        _mainChar.showText(text: _selectedSpell._name)
-                        //                        _curRole.speak(text: "")
-                        speakSpellName()
-                        let this = self
-                        _curRole.actionCast {
-                            u.removeFromParent()
-                            this.waitingForSelectSummonSeat = false
-                            flower._seat = seat
-                            this.createLeftUnit(c: flower)
-                            this.cdSpell(spell: this._selectedSpell)
-                            this._left[seat]?.actionSummon {
-                                this.moveEnd()
-                            }
-                        }
-                        setUnitDefault(all: true)
-                        cleanSummonSeats()
-                        hideCancel()
-                        return
-                    }
-                    if u.isEmpey {
-                        if _char._minionsCount <= (_leftRoles.count - 1) {
-                            showMsg(text: "战场随从已达上限！")
-                            return
-                        }
-                        
-                        _mainChar.showText(text: "召唤")
-                        u.removeFromParent()
-                        waitingForSelectSummonSeat = false
-                        _selectedMinion._seat = seat
-                        createLeftUnit(c: _selectedMinion)
-                        cleanSummonSeats()
-                        setUnitDefault(all: true)
-                        hideCancel()
-                        
-                        let this = self
-                        _left[seat]?.actionSummon {
-                            this.moveEnd()
-                        }
-                        
-                    } else {
-                        _mainChar.showText(text: "召唤")
-                        _left.removeValue(forKey: u._seat)
-                        _leftRoles.remove(at: _leftRoles.index(of: u)!)
-                        let index = _roleAll.index(of: u)
-                        if nil != index {
-                            _roleAll.remove(at: index!)
-                        }
-                        u._unit._seat = BUnit.STAND_BY
-                        
-                        waitingForSelectSummonSeat = false
-                        _selectedMinion._seat = seat
-                        cleanSummonSeats()
-                        setUnitDefault(all: true)
-                        hideCancel()
-                        
-                        let this = self
-                        u.actionRecall {
-                            this.createLeftUnit(c: this._selectedMinion)
-                            u.removeFromParent()
-                            this._left[seat]?.actionSummon {
-                                this.moveEnd()
-                            }
-                        }
-                    }
-                    
-                    return
-                }
-            }
-            return
-        }
-        
-        
-        
-        if _orderItem.contains(s) && !_orderItem.isHidden {
-            hideOrder()
-            //            showCancel()
-            var itms = Array<Item>()
-            for p in Game.instance._char._props {
-                if p is Item {
-                    let itm = p as! Item
-                    if itm.useInBattle {
-                        if itm is SealScroll && self is PowerlordBattle {
-                            continue
-                        } else {
-                            itms.append(itm)
-                        }
-                    }
-                }
-            }
-            let bip = BItemPanel()
-            bip._battle = self
-            bip.create(items: itms)
-            addChild(bip)
-            return
-        }
-        
-        if _orderSummon.contains(s) && !_orderSummon.isHidden {
-            hideOrder()
-            showCancel()
-            showMinionsList()
-            //            showSummonableSeats()
-            return
-        }
-        
-        if _orderRecall.contains(s) && !_orderRecall.isHidden {
-            hideOrder()
-            showCancel()
-            showRecallMinions()
-            waitingForSelectRecallTarget = true
-            return
-        }
-        
-        //点击攻击选项
-        if _orderAttack.contains(s) && !_orderAttack.isHidden && !(_curRole._unit._weapon is Instrument) {
-            hideOrder()
-            showCancel()
-            //            _orderCancel.isHidden = false
-            _waitingForSelectTarget = true
-            _selectedSpell = Attack()
-            _selectedSpell._battle = self
-            showAvailableUnits()
-        } else if _orderDefend.contains(s) && !_orderDefend.isHidden {
-            _selectedSpell = Defend()
-            _selectedSpell._battle = self
-            _curRole.isDefend = true
-            setUnitDefault(all: true)
-            hideOrder()
-            hideCancel()
-            moveEnd()
-        } else if _orderSpell.contains(s) && !_orderSpell.isHidden {
-            showSpellCards()
-            hideOrder()
-            _waitingForSelectTarget = false
-        } else if _waitingForSelectTarget {
-            for unit in _left.values {
-                if unit.contains(s) && unit.selectable {
-                    _selectedTarget = unit
-                }
-                
-            }
-            for unit in _right.values {
-                if unit.contains(s) && unit.selectable {
-                    _selectedTarget = unit
-                }
-            }
-            if _selectedTarget.hasInitialized {
-                _waitingForSelectTarget = false
-                setUnitDefault(all: true)
-                _selectedTarget.setSelectedMode()
-                hideCancel()
-                hideOrder()
-                execOrder()
-            } else {
-                print("has no selected target!")
-            }
-            
-        } else {
-            for card in _spellCards {
-                if card.contains(s) {
-                    if card.coolDown > 0 {
-                        return
-                    }
-                    _selectedSpell = card.spell
-                    hideOrder()
-                    showCancel()
-                    removeSpellCards()
-                    if _selectedSpell.isAutoSelectTarget {
-                        _waitingForSelectTarget = false
-                        _selectedSpell.findTarget()
-                        setUnitDefault(all: true)
-                        execOrder()
-                        hideCancel()
-                    } else {
-                        if _selectedSpell is SummonFlower {
-                            waitingForSelectSummonSeat = true
-                            setUnitDefault()
-                            showSummonableSeats(selectAll: false)
-                            return
-                        }
-                        
-                        if _selectedSpell is Interchange {
-                            waitingForSelectSummonSeat = true
-                            setUnitDefault()
-                            showSummonableSeats()
-                            return
-                        }
-                        
-                        _waitingForSelectTarget = true
-                        showAvailableUnits()
-                    }
-                }
-            }
-        }
-    }
+    
     func moveBack(unit:BUnit, completion:@escaping () -> Void) {
         if unit.isDead() {
             completion()
             return
         }
-        let oPos = getPosByStr(unit._seat)
-        var dy = unit.position.y - oPos[1]
-        if abs(dy) < 1 {
-            dy = 0
-        }
-        let dx = round(unit.position.x - oPos[0])
-        let v = CGVector(dx: -dx, dy: -dy)
-//        debug("move back \(dx)")
-        var time:CGFloat = Game.instance.frameSize * 4
-        if abs(v.dx) > 360 {
-            time = Game.instance.frameSize * 5
-        }
-        let move = SKAction.move(by: v, duration: TimeInterval(time))
+//        let oPos = getPosByStr(unit._seat)
+//        var dy = unit.position.y - oPos[1]
+//        if abs(dy) < 1 {
+//            dy = 0
+//        }
+//        let dx = round(unit.position.x - oPos[0])
+//        let v = CGVector(dx: -dx, dy: -dy)
+////        debug("move back \(dx)")
+//        var time:CGFloat = Game.instance.frameSize * 4
+//        if abs(v.dx) > 360 {
+//            time = Game.instance.frameSize * 5
+//        }
+//        let move = SKAction.move(by: v, duration: TimeInterval(time))
         let wait = SKAction.wait(forDuration: TimeInterval(0.5))
-//        let move = SKAction.sequence([go, wait])
-        if oPos[0] < unit.position.x {
-            unit.faceWest()
-            unit.moveWest4frame()
-        } else {
-            unit.faceEast()
-            unit.moveEast4frame()
-        }
-//        let this = self
-        unit.run(move, completion: {
-            if unit.inleft {
-                unit.faceEast()
-            } else {
+////        let move = SKAction.sequence([go, wait])
+//        if oPos[0] < unit.position.x {
+//            unit.faceWest()
+//            unit.moveWest4frame()
+//        } else {
+//            unit.faceEast()
+//            unit.moveEast4frame()
+//        }
+////        let this = self
+//        unit.run(move, completion: {
+//            if unit.inleft {
 //                unit.faceEast()
-                unit.faceWest()
-            }
-            unit.run(wait) {
-                completion()
-            }
-        })
+//            } else {
+////                unit.faceEast()
+//                unit.faceWest()
+//            }
+//            unit.run(wait) {
+//                completion()
+//            }
+//        })
+        unit.run(wait) {
+            completion()
+        }
     }
+    //unused
     internal func checkRoleDead() {
-        for u in _leftRoles {
+        for u in _playerPart {
             if u.isDead() {
                 u.actionDead {
                     u.removeFromBattle()
@@ -915,7 +850,7 @@ class Battle: SKSpriteNode {
                 }
             }
         }
-        for u in _rightRoles {
+        for u in _enimyPart {
             if u.isDead() {
                 u.actionDead {
                     u.removeFromBattle()
@@ -951,7 +886,7 @@ class Battle: SKSpriteNode {
                 s._battle = self
                 _curRole.showText(text: s._name)
                 s.afterMove {
-                    this._selectedTarget = BUnit()
+                    this._selectedTarget = nil
                     this._waitingForSelectTarget = false
                     this.moveStart()
                 }
@@ -960,7 +895,7 @@ class Battle: SKSpriteNode {
             }
         }
         if !hasAfterMoveAction {
-            if _curRole._unit.isMainChar && Game.instance._char._shield is Faceless && _round % 3 == 1 {
+            if _curRole._unit is Character && Game.instance.char._shield is Faceless && _round % 3 == 1 {
 //                let c = _curRole
                 _curRole.showText(text: "无面者") {
                     this._curRole.actionBuff {
@@ -971,13 +906,13 @@ class Battle: SKSpriteNode {
                         status._timeleft = 2
                         this._curRole.addStatus(status: status)
                         
-                        this._selectedTarget = BUnit()
+                        this._selectedTarget = nil
                         this._waitingForSelectTarget = false
                         this.moveStart()
                     }
                 }
             } else {
-                _selectedTarget = BUnit()
+                _selectedTarget = nil
                 _waitingForSelectTarget = false
                 moveStart()
             }
@@ -1048,7 +983,7 @@ class Battle: SKSpriteNode {
             return
         }
         if spell._cooldown > 0 {
-            if Game.instance.stage.hasTowerStatus(status: TimeReduce()) {
+            if Game.instance.curStage.hasTowerStatus(status: TimeReduce()) {
                 spell._timeleft = spell._cooldown
             } else {
                 spell._timeleft = spell._cooldown + 1
@@ -1085,31 +1020,31 @@ class Battle: SKSpriteNode {
     
     }
     func roleMove(from:BUnit, to:BUnit, completion:@escaping () -> Void) {
-        let fromPos = getPosByStr(from._seat)
-        let toPos = getPosByStr(to._seat)
-        if fromPos == toPos {
-            debug("moving bug!")
-        }
-        var dPos = from._charSize
-        if from.position.x < to.position.x {
-            from.moveEast4frame()
-        } else {
-            from.moveWest4frame()
-            dPos = -from._charSize
-        }
-        let v = CGVector(dx: -(fromPos[0] - toPos[0] + dPos), dy: -(fromPos[1] - toPos[1]))
-//        debug("\(from.inleft ? "left" : "right") role move 移动距离 ： \(v.dx)")
-//        print(v)
-        var time:CGFloat = Game.instance.frameSize * 4
-        if abs(v.dx) > 360 {
-            time = Game.instance.frameSize * 5
-        }
-        let move = SKAction.move(by: v, duration: TimeInterval(time))
-//        print(move)
-        let wait = SKAction.wait(forDuration: TimeInterval(0.5))
-        let go = SKAction.sequence([move, wait])
+//        let fromPos = getPosByStr(from._seat)
+//        let toPos = getPosByStr(to._seat)
+//        if fromPos == toPos {
+//            debug("moving bug!")
+//        }
+//        var dPos = from._charSize
+//        if from.position.x < to.position.x {
+//            from.moveEast4frame()
+//        } else {
+//            from.moveWest4frame()
+//            dPos = -from._charSize
+//        }
+//        let v = CGVector(dx: -(fromPos[0] - toPos[0] + dPos), dy: -(fromPos[1] - toPos[1]))
+////        debug("\(from.inleft ? "left" : "right") role move 移动距离 ： \(v.dx)")
+////        print(v)
+//        var time:CGFloat = Game.instance.frameSize * 4
+//        if abs(v.dx) > 360 {
+//            time = Game.instance.frameSize * 5
+//        }
+//        let move = SKAction.move(by: v, duration: TimeInterval(time))
+////        print(move)
+//        let wait = SKAction.wait(forDuration: TimeInterval(0.5))
+//        let go = SKAction.sequence([move, wait])
+        let go = SKAction.wait(forDuration: TimeInterval(0.5))
         from.run(go) {
-//            debug("not here!")
             completion()
         }
     }
@@ -1132,7 +1067,7 @@ class Battle: SKSpriteNode {
         _orderCancel.isHidden = false
     }
     internal func setUnitDefault(all:Bool = false) {
-        for unit in _left.values {
+        for unit in _playerPart {
             if all {
                 unit.setDefaultMode()
             } else {
@@ -1143,15 +1078,15 @@ class Battle: SKSpriteNode {
             }
             
         }
-        for unit in _right.values {
+        for unit in _enimyPart {
             unit.setDefaultMode()
         }
     }
     internal func showUnitInfo(hidden:Bool = false) {
-        for u in _left.values {
+        for u in _playerPart {
             u._levelLabel.isHidden = hidden
         }
-        for u in _right.values {
+        for u in _enimyPart {
             u._levelLabel.isHidden = hidden
         }
     }
@@ -1160,14 +1095,14 @@ class Battle: SKSpriteNode {
         setUnitDefault()
         _availableEvils = Array<BUnit>()
         if _selectedSpell.isTargetAll {
-            _availableEvils = _leftRoles + _rightRoles
+            _availableEvils = _enimyPart + _playerPart
             if !_selectedSpell.canBeTargetSelf {
-                let index = _availableEvils.index(of: _mainChar)
+                let index = _availableEvils.index(of: _playerUnit)
                 if nil != index {
-                    _availableEvils.remove(at: index!)
                 } else {
                     debug("showAvailableUnits 找不到主角")
                 }
+                _availableEvils.remove(at: index!)
             }
             for unit in _availableEvils {
                 unit.setSelectableMode()
@@ -1175,84 +1110,90 @@ class Battle: SKSpriteNode {
             return
         }
         if _selectedSpell.isTargetEmemy{
-            if _selectedSpell.isClose && (_curRole._unit.isMainChar && _curRole._unit.isClose()) {
-                if isLeftUnitBlocked(unit: _curRole) {
-                    for unit in _right.values {
-                        if !isRightUnitBlocked(unit: unit) {
+            if _selectedSpell.isClose && _curRole._unit.isClose() {
+                if isPlayerPartUnitBlocked(unit: _curRole) {
+                    for unit in _enimyPart {
+                        if !isEnimyPartUnitBlocked(unit: unit) {
                             _availableEvils.append(unit)
                         }
                     }
                 } else {
-                    for unit in _right.values {
+                    for unit in _enimyPart {
                         _availableEvils.append(unit)
                     }
                 }
             } else {
-                for unit in _right.values {
+                for unit in _enimyPart {
                     _availableEvils.append(unit)
                 }
             }
             
         } else {
-            _availableEvils = _leftRoles
+            _availableEvils = _playerPart
         }
         for unit in _availableEvils {
             unit.setSelectableMode()
         }
     }
     
-    func isRightUnitBlocked(unit:BUnit) -> Bool{
-        let s = unit._seat
-        if "rrt" == s {
-            if nil == _right.index(forKey: "rlt") {
-                return false
-            } else {
-                return true
+    func isEnimyPartUnitBlocked(unit:BUnit) -> Bool{
+        let s = unit._unit._seat
+        var target = ""
+        if s == BUnit.TTL {
+            target = BUnit.TBL
+        } else
+            if s == BUnit.TTM {
+                target = BUnit.TBM
+            } else
+                if s == BUnit.TTR {
+                    target = BUnit.TBR
+        }
+        if !target.isEmpty {
+            for u in _enimyPart {
+                if u._unit._seat == target {
+                    return true
+                }
             }
         }
-        if "rrm" == s {
-            if nil == _right.index(forKey: "rlm") {
-                return false
-            } else {
-                return true
-            }
-        }
-        if "rrb" == s {
-            if nil == _right.index(forKey: "rlb") {
-                return false
-            } else {
-                return true
-            }
-        }
-        return false;
+        return false
     }
     
-    func isLeftUnitBlocked(unit:BUnit) -> Bool {
-        let s = unit._seat
-        if "llt" == s {
-            if nil == _left.index(forKey: "lrt") {
-                return false
-            } else {
-                return true
+    func isPlayerPartUnitBlocked(unit:BUnit) -> Bool {
+        let s = unit._unit._seat
+        var target = ""
+        if s == BUnit.BBL {
+            target = BUnit.BTL
+        } else
+        if s == BUnit.BBM {
+            target = BUnit.BTM
+        } else
+        if s == BUnit.BBR {
+            target = BUnit.BTR
+        }
+        if !target.isEmpty {
+            for u in _playerPart {
+                if u._unit._seat == target {
+                    return true
+                }
             }
         }
-        if "llm" == s {
-            if nil == _left.index(forKey: "lrm") {
-                return false
-            } else {
-                return true
-            }
-        }
-        if "llb" == s {
-            if nil == _left.index(forKey: "lrb") {
-                return false
-            } else {
-                return true
-            }
-        }
-        return false;
+        return false
     }
-    
+    internal func selectItem(_ i:Item) {
+        debug("asdasdasd \(i._name)")
+    }
+    internal func showItemPanel() {
+        let bip = BattleItemPanel()
+        bip.create()
+        let this = self
+        bip.closeAction = {
+            this.cancelButtonClicked()
+        }
+        bip.selectAction = {
+            let item = bip.selectedItem
+        }
+        addChild(bip)
+    }
     internal var _spellCards = Array<BattleSpellIcon>()
     internal func showSpellCards() {
         var spells = Array<Spell>()
@@ -1262,31 +1203,42 @@ class Battle: SKSpriteNode {
             }
         }
         if spells.count > 0 {
-            let startX = -cellSize * 5.5
-            let x = cellSize * 1.6
-            var i = 0
-            for s in spells {
-                s._battle = self
-                if s.selectable() {
-                    let card = BattleSpellIcon()
-                    card.spell = s
-                    if wandFireMaster(spell: s) {
-                        card.coolDown = s._timeleft - 1
-                    } else if wandWitch(spell: s) {
-                        card.coolDown = 0
-                    } else {
-                        card.coolDown = s._timeleft
+            let cardPanel = BattleSpellCard()
+            cardPanel.create(spells: spells)
+            let this = self
+            cardPanel.closeAction = {
+                this.showOrder()
+                this.hideCancel()
+                this.setUnitDefault()
+            }
+            cardPanel.selectAction = {
+                this._selectedSpell = cardPanel.selectedSpell!
+                this._selectedSpell._battle = this
+                this.hideOrder()
+                this.showCancel()
+                if this._selectedSpell.isAutoSelectTarget {
+                    this._waitingForSelectTarget = false
+                    this._selectedSpell.findTarget()
+                    this.setUnitDefault(all: true)
+                    this.execOrder()
+                    this.hideCancel()
+                } else {
+                    if this._selectedSpell is SummonFlower {
+                        this.waitingForSelectSummonSeat = true
+                        this.setUnitDefault()
+                        this.showSummonableSeats(selectAll: false)
+                    } else
+                    if this._selectedSpell is Interchange {
+                        this.waitingForSelectSummonSeat = true
+                        this.setUnitDefault()
+                        this.showSummonableSeats()
                     }
-                    //                card.setSize(which: spells.count)
-                    card.position.y = cellSize * -2.5
-                    card.position.x = startX + x * i.toFloat()
-                    card.zPosition = 70
-                    addChild(card)
-                    _spellCards.append(card)
-                    i += 1
+                    
+                    this._waitingForSelectTarget = true
+                    this.showAvailableUnits()
                 }
             }
-        } else {
+            addChild(cardPanel)
         }
         showCancel()
 //        let ta = FrozenShoot()
@@ -1331,10 +1283,11 @@ class Battle: SKSpriteNode {
             o.isHidden = false
 //            addChild(o)
         }
+//        hideOrder()
         if _curRole._unit._weapon is Instrument {
             _orderAttack.isHidden = true
         }
-        if !_curRole._unit.isMainChar {
+        if !(_curRole._unit is Character) {
             _orderItem.isHidden = true
             _orderRecall.isHidden = true
             _orderSummon.isHidden = true
@@ -1351,298 +1304,299 @@ class Battle: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    func setEvilsBySeat(evils:Array<Creature>) {
-        //        var ps = [BUnit.RLT,BUnit.RLM,BUnit.RLB,BUnit.RRT,BUnit.RRM,BUnit.RRB]
-        var es = evils
-//        let c = 6 - evils.count
-//        for _ in 0...c - 1 {
-//            let c = Creature()
-//            c._seat = "empty"
-//            es.append(c)
+//    func setEvilsBySeat(evils:Array<Creature>) {
+//        //        var ps = [BUnit.RLT,BUnit.RLM,BUnit.RLB,BUnit.RRT,BUnit.RRM,BUnit.RRB]
+//        var es = evils
+////        let c = 6 - evils.count
+////        for _ in 0...c - 1 {
+////            let c = Creature()
+////            c._seat = "empty"
+////            es.append(c)
+////        }
+//        for i in 0...es.count - 1 {
+//            let evil = BUnit()
+//            evil.specialUnit = es[i].specialUnit
+//            if es[i]._seat == "empty" {
+//                evil.createEmpty()
+//            } else {
+//                evil.setUnit(unit: es[i])
+//                evil.create()
+//                evil.faceWest()
+//                _rightRoles.append(evil)
+//                _evilsOrg.append(evil)
+//            }
+////            evil.unitPos = "right"
+//            evil.inleft = false
+//            evil._battle = self
+//            setEvilPosBySeat(unit: evil)
+//            addChild(evil)
 //        }
-        for i in 0...es.count - 1 {
-            let evil = BUnit()
-            evil.specialUnit = es[i].specialUnit
-            if es[i]._seat == "empty" {
-                evil.createEmpty()
-            } else {
-                evil.setUnit(unit: es[i])
-                evil.create()
-                evil.faceWest()
-                _rightRoles.append(evil)
-                _evilsOrg.append(evil)
-            }
-            evil.unitPos = "right"
-            evil.inleft = false
-            evil._battle = self
-            setEvilPosBySeat(unit: evil)
-            addChild(evil)
-        }
-    }
-    internal func setEvilPosBySeat(unit:BUnit) {
-        let pos = unit._unit._seat
-        switch pos {
-        case "rlt":
-            unit.position.x = rlt[0]
-            unit.position.y = rlt[1]
-            unit._seat = "rlt"
-            if !unit.isEmpey {
-                _right["rlt"] = unit
-            }
-            break;
-        case "rlm":
-            unit.position.x = rlm[0]
-            unit.position.y = rlm[1]
-            unit._seat = "rlm"
-            if !unit.isEmpey {
-                _right["rlm"] = unit
-            }
-            break;
-        case "rlb":
-            unit.position.x = rlb[0]
-            unit.position.y = rlb[1]
-            unit._seat = "rlb"
-            if !unit.isEmpey {
-                _right["rlb"] = unit
-            }
-            break;
-        case "rrt":
-            unit.position.x = rrt[0]
-            unit.position.y = rrt[1]
-            unit._seat = "rrt"
-            if !unit.isEmpey {
-                _right["rrt"] = unit
-            }
-            break;
-        case "rrm":
-            unit.position.x = rrm[0]
-            unit.position.y = rrm[1]
-            unit._seat = "rrm"
-            if !unit.isEmpey {
-                _right["rrm"] = unit
-            }
-            break;
-        case "rrb":
-            unit.position.x = rrb[0]
-            unit.position.y = rrb[1]
-            unit._seat = "rrb"
-            if !unit.isEmpey {
-                _right["rrb"] = unit
-            }
-            break;
-        default:
-            debug("set evil pos error")
-            break
-        }
-    }
+//    }
+//    internal func setEvilPosBySeat(unit:BUnit) {
+//        let pos = unit._unit._seat
+//        switch pos {
+//        case "rlt":
+//            unit.position.x = rlt[0]
+//            unit.position.y = rlt[1]
+////            unit._seat = "rlt"
+//            if !unit.isEmpty {
+//                _right["rlt"] = unit
+//            }
+//            break;
+//        case "rlm":
+//            unit.position.x = rlm[0]
+//            unit.position.y = rlm[1]
+//            unit._seat = "rlm"
+//            if !unit.isEmpty {
+//                _right["rlm"] = unit
+//            }
+//            break;
+//        case "rlb":
+//            unit.position.x = rlb[0]
+//            unit.position.y = rlb[1]
+//            unit._seat = "rlb"
+//            if !unit.isEmpty {
+//                _right["rlb"] = unit
+//            }
+//            break;
+//        case "rrt":
+//            unit.position.x = rrt[0]
+//            unit.position.y = rrt[1]
+//            unit._seat = "rrt"
+//            if !unit.isEmpty {
+//                _right["rrt"] = unit
+//            }
+//            break;
+//        case "rrm":
+//            unit.position.x = rrm[0]
+//            unit.position.y = rrm[1]
+//            unit._seat = "rrm"
+//            if !unit.isEmpty {
+//                _right["rrm"] = unit
+//            }
+//            break;
+//        case "rrb":
+//            unit.position.x = rrb[0]
+//            unit.position.y = rrb[1]
+//            unit._seat = "rrb"
+//            if !unit.isEmpty {
+//                _right["rrb"] = unit
+//            }
+//            break;
+//        default:
+//            debug("set evil pos error")
+//            break
+//        }
+//    }
     internal var _evilsOrg = Array<BUnit>()
-    func setEvils(evils:Array<Creature>) {
-//        var ps = [BUnit.RLT,BUnit.RLM,BUnit.RLB,BUnit.RRT,BUnit.RRM,BUnit.RRB]
-        var es = evils
-//        let c = 6 - evils.count
-//        for _ in 0...c - 1 {
-//            let c = Creature()
-//            c._seat = "empty"
-//            es.append(c)
+//    func setEvils(evils:Array<Creature>) {
+////        var ps = [BUnit.RLT,BUnit.RLM,BUnit.RLB,BUnit.RRT,BUnit.RRM,BUnit.RRB]
+//        var es = evils
+////        let c = 6 - evils.count
+////        for _ in 0...c - 1 {
+////            let c = Creature()
+////            c._seat = "empty"
+////            es.append(c)
+////        }
+//        for i in 0...es.count - 1 {
+//            let evil = BUnit()
+//            evil.specialUnit = es[i].specialUnit
+//            if es[i]._seat == "empty" {
+//                evil.createEmpty()
+//            } else {
+//                evil.setUnit(unit: es[i])
+//                evil.create()
+//                evil.faceWest()
+//                _rightRoles.append(evil)
+//                _evilsOrg.append(evil)
+//            }
+////            evil.unitPos = "right"
+//            evil.inleft = false
+//            evil._battle = self
+//            setEvilPos(unit: evil)
+//            addChild(evil)
 //        }
-        for i in 0...es.count - 1 {
-            let evil = BUnit()
-            evil.specialUnit = es[i].specialUnit
-            if es[i]._seat == "empty" {
-                evil.createEmpty()
-            } else {
-                evil.setUnit(unit: es[i])
-                evil.create()
-                evil.faceWest()
-                _rightRoles.append(evil)
-                _evilsOrg.append(evil)
+//    }
+    internal var _enimySeatsArray = [BUnit.TTL, BUnit.TTM, BUnit.TTR, BUnit.TBL, BUnit.TBM, BUnit.TBR]
+    internal var _enimySeats = Dictionary<String, CGPoint>()
+    internal var _playerSeats = Dictionary<String, CGPoint>()
+    func setEnimyPart(minions:Array<Creature>) {
+        for m in minions {
+            let bUnit = BUnit()
+            bUnit.setUnit(unit: m)
+            bUnit._battle = self
+            bUnit.playerPart = false
+            bUnit.create()
+            bUnit.faceSouth()
+            let index = seed(max: _enimySeatsArray.count)
+            bUnit.position = _enimySeats[_enimySeatsArray[index]]!
+            m._seat = _enimySeatsArray[index]
+            _enimySeatsArray.remove(at: index)
+            _enimyPart.append(bUnit)
+            _evilsOrg.append(bUnit)
+            addChild(bUnit)
+        }
+    }
+    func setPlayerPart(roles:Array<Creature>) {
+        for r in roles {
+            let bUnit = BUnit()
+            bUnit.setUnit(unit: r)
+            bUnit._battle = self
+            bUnit.playerPart = true
+            bUnit.create()
+            bUnit.faceNorth()
+            bUnit.position = _playerSeats[r._seat]!
+            _playerPart.append(bUnit)
+            addChild(bUnit)
+            if r is Character {
+                _playerUnit = bUnit
             }
-            evil.unitPos = "right"
-            evil.inleft = false
-            evil._battle = self
-            setEvilPos(unit: evil)
-            addChild(evil)
         }
     }
     internal var _emptyPos = [0,1,2,3,4,5]
-    func setEvilPos(unit:BUnit) {
-        let index = seed(max: _emptyPos.count)
-        let pos = _emptyPos[index]
-        _emptyPos.remove(at: index)
-        switch pos {
-        case 0:
-            unit.position.x = rlt[0]
-            unit.position.y = rlt[1]
-            unit._seat = "rlt"
-            if !unit.isEmpey {
-                _right["rlt"] = unit
-            }
-            break;
-        case 1:
-            unit.position.x = rlm[0]
-            unit.position.y = rlm[1]
-            unit._seat = "rlm"
-            if !unit.isEmpey {
-                
-                _right["rlm"] = unit
-            }
-            break;
-        case 2:
-            unit.position.x = rlb[0]
-            unit.position.y = rlb[1]
-            unit._seat = "rlb"
-            if !unit.isEmpey {
-                
-                _right["rlb"] = unit
-            }
-            break;
-        case 3:
-            unit.position.x = rrt[0]
-            unit.position.y = rrt[1]
-            unit._seat = "rrt"
-            if !unit.isEmpey {
-                
-                _right["rrt"] = unit
-            }
-            break;
-        case 4:
-            unit.position.x = rrm[0]
-            unit.position.y = rrm[1]
-            unit._seat = "rrm"
-            if !unit.isEmpey {
-                
-                _right["rrm"] = unit
-            }
-            break;
-        case 5:
-            unit.position.x = rrb[0]
-            unit.position.y = rrb[1]
-            unit._seat = "rrb"
-            if !unit.isEmpey {
-                
-                _right["rrb"] = unit
-            }
-            break;
-        default:
-            debug("set evil pos error")
-            break
-        }
-    }
+//    func setEvilPos(unit:BUnit) {
+//        let index = seed(max: _emptyPos.count)
+//        let pos = _emptyPos[index]
+//        _emptyPos.remove(at: index)
+//        switch pos {
+//        case 0:
+//            unit.position.x = rlt[0]
+//            unit.position.y = rlt[1]
+//            unit._seat = "rlt"
+//            if !unit.isEmpty {
+//                _right["rlt"] = unit
+//            }
+//            break;
+//        case 1:
+//            unit.position.x = rlm[0]
+//            unit.position.y = rlm[1]
+//            unit._seat = "rlm"
+//            if !unit.isEmpty {
+//                
+//                _right["rlm"] = unit
+//            }
+//            break;
+//        case 2:
+//            unit.position.x = rlb[0]
+//            unit.position.y = rlb[1]
+//            unit._seat = "rlb"
+//            if !unit.isEmpty {
+//                
+//                _right["rlb"] = unit
+//            }
+//            break;
+//        case 3:
+//            unit.position.x = rrt[0]
+//            unit.position.y = rrt[1]
+//            unit._seat = "rrt"
+//            if !unit.isEmpty {
+//                
+//                _right["rrt"] = unit
+//            }
+//            break;
+//        case 4:
+//            unit.position.x = rrm[0]
+//            unit.position.y = rrm[1]
+//            unit._seat = "rrm"
+//            if !unit.isEmpty {
+//                
+//                _right["rrm"] = unit
+//            }
+//            break;
+//        case 5:
+//            unit.position.x = rrb[0]
+//            unit.position.y = rrb[1]
+//            unit._seat = "rrb"
+//            if !unit.isEmpty {
+//                
+//                _right["rrb"] = unit
+//            }
+//            break;
+//        default:
+//            debug("set evil pos error")
+//            break
+//        }
+//    }
     
-    internal func createLeftUnit(c:Creature) {
+    internal func createPlayerPartUnit(c:Creature) -> BUnit {
         let role = BUnit()
         role.specialUnit = c.specialUnit
-        role.create()
+        role.playerPart = true
         role.setUnit(unit: c)
-        role.unitPos = "left"
-        role.inleft = true
+        role.create()
         role._battle = self
-        _leftRoles.append(role)
-        role.faceEast()
+        _playerPart.append(role)
+        role.faceNorth()
         setRolePos(unit: role)
         addChild(role)
-        
+        return role
     }
     
     internal var _roles = Array<BUnit>()
-    func setRoles(roles:Array<Creature>) {
-        var ps = [BUnit.LLT,BUnit.LLM,BUnit.LLB,BUnit.LRT,BUnit.LRM,BUnit.LRB]
-        for i in 0...roles.count - 1 {
-            ps.remove(at: ps.index(of: roles[i]._seat)!)
-            let role = BUnit()
-            if roles[i].isMainChar {
-                _mainChar = role
-            }
-            role.specialUnit = roles[i].specialUnit
-            role.setUnit(unit: roles[i])
-            role.create()
+    //need replace
+//    func setRoles(roles:Array<Creature>) {
+//        var ps = [BUnit.LLT,BUnit.LLM,BUnit.LLB,BUnit.LRT,BUnit.LRM,BUnit.LRB]
+//        for i in 0...roles.count - 1 {
+//            ps.remove(at: ps.index(of: roles[i]._seat)!)
+//            let role = BUnit()
+//            if roles[i].isMainChar {
+//                _mainChar = role
+//            }
+//            role.specialUnit = roles[i].specialUnit
+//            role.setUnit(unit: roles[i])
+//            role.create()
+////            role.faceEast()
+////            role.unitPos = "left"
+//            role.inleft = true
+//            role._battle = self
+//            _leftRoles.append(role)
+////            let e = roles[i]
+////            print("\(e._name): 攻击：\(e._extensions.attack)，防御：\(e._extensions.defence)， 速度\(e._extensions.speed)")
 //            role.faceEast()
-            role.unitPos = "left"
-            role.inleft = true
-            role._battle = self
-            _leftRoles.append(role)
-//            let e = roles[i]
-//            print("\(e._name): 攻击：\(e._extensions.attack)，防御：\(e._extensions.defence)， 速度\(e._extensions.speed)")
-            role.faceEast()
-            setRolePos(unit: role)
-            addChild(role)
-        }
-        
-//        for s in ps {
-//            let emptyBUnit = BUnit()
-//            emptyBUnit.createEmpty()
-//            let c = Creature()
-//            c._seat = s
-//            emptyBUnit._unit = c
-//            setRolePos(unit: emptyBUnit)
-//            addChild(emptyBUnit)
+//            setRolePos(unit: role)
+//            addChild(role)
 //        }
-    }
+//        
+////        for s in ps {
+////            let emptyBUnit = BUnit()
+////            emptyBUnit.createEmpty()
+////            let c = Creature()
+////            c._seat = s
+////            emptyBUnit._unit = c
+////            setRolePos(unit: emptyBUnit)
+////            addChild(emptyBUnit)
+////        }
+//    }
 //    internal var _rolePos = [0,1,2,3,4,5]
     func setRolePos(unit:BUnit) {
 //        let index = seed(max: _rolePos.count)
         let pos = unit._unit._seat
 //        _rolePos.remove(at: index)
         switch pos {
-        case "llt":
-            unit.position.x = llt[0]
-            unit.position.y = llt[1]
-            unit._seat = "llt"
-            if !unit.isEmpey {
-                
-                _left["llt"] = unit
-            }
-            break;
-        case "llm":
-            unit.position.x = llm[0]
-            unit.position.y = llm[1]
-            unit._seat = "llm"
-            if !unit.isEmpey {
-                
-                _left["llm"] = unit
-            }
-            break;
-        case "llb":
-            unit.position.x = llb[0]
-            unit.position.y = llb[1]
-            unit._seat = "llb"
-            if !unit.isEmpey {
-                
-                _left["llb"] = unit
-            }
-            break;
-        case "lrt":
-            unit.position.x = lrt[0]
-            unit.position.y = lrt[1]
-            unit._seat = "lrt"
-            if !unit.isEmpey {
-                
-                _left["lrt"] = unit
-            }
-            break;
-        case "lrm":
-            unit.position.x = lrm[0]
-            unit.position.y = lrm[1]
-            unit._seat = "lrm"
-            if !unit.isEmpey {
-                
-                _left["lrm"] = unit
-            }
-            break;
-        case "lrb":
-            unit.position.x = lrb[0]
-            unit.position.y = lrb[1]
-            unit._seat = "lrb"
-            if !unit.isEmpey {
-                
-                _left["lrb"] = unit
-            }
-            break;
+        case BUnit.BBL:
+            unit.position = bbl
+            break
+        case BUnit.BBM:
+            unit.position = bbm
+            break
+        case BUnit.BBR:
+            unit.position = bbr
+            break
+        case BUnit.BTL:
+            unit.position = btl
+            break
+        case BUnit.BTM:
+            unit.position = btm
+            break
+        case BUnit.BTR:
+            unit.position = btr
+            break
         default:
             debug("set evil pos error")
             break
         }
     }
+    //unused
     func getPosByStr(_ str:String) -> Array<CGFloat> {
         switch str {
         case "llt":
@@ -1674,56 +1628,50 @@ class Battle: SKSpriteNode {
         }
     }
     
-    internal func removeFromLeft(unit:BUnit) {
-        _left.removeValue(forKey: unit._seat)
-        let index = _leftRoles.index(of: unit)
-        if nil != index {
-            _leftRoles.remove(at: index!)
-        }
-    }
-    
-    internal func removeFromRight(unit:BUnit) {
-        _right.removeValue(forKey: unit._seat)
-        let index = _rightRoles.index(of: unit)
-        if nil != index {
-            _rightRoles.remove(at: index!)
-        }
-    }
-    
     func removeFromPart(unit:BUnit) {
-        if unit.inleft {
-            removeFromLeft(unit: unit)
+        if unit.playerPart {
+            let index = _playerPart.index(of: unit)
+            if nil != index {
+                _playerPart.remove(at: index!)
+            } else {
+                debug("removeFromPart index nil")
+            }
         } else {
-            removeFromRight(unit: unit)
+            let index = _enimyPart.index(of: unit)
+            if nil != index {
+                _enimyPart.remove(at: index!)
+                debug("removeFromPart index nil")
+            }
         }
         let index = _roleAll.index(of: unit)
         if nil != index {
             _roleAll.remove(at: index!)
+            debug("removeFromPart index nil")
         }
     }
     
     func showItemTargets() {
         let item = _selectedItem.prop as! Item
         if item is TownScroll {
-            Game.instance.stage.removeBattle(b: self)
-            item.use(target: Creature())
-            return
+//            Game.instance.stage.removeBattle(b: self)
+//            item.use(target: Creature())
+//            return
         }
         _waitingForSelectTarget = false
         
         if item.targetSelf {
-            for u in _leftRoles {
+            for u in _playerPart {
                 u.setSelectableMode()
             }
-            for u in _rightRoles {
+            for u in _enimyPart {
                 u.setDefaultMode()
             }
-            _itemTargets = _leftRoles
+            _itemTargets = _playerPart
         } else {
-            for u in _rightRoles {
+            for u in _enimyPart {
                 u.setSelectableMode()
             }
-            _itemTargets = _rightRoles
+            _itemTargets = _enimyPart
         }
         waitingForSelectItemTarget = true
         showCancel()
@@ -1738,20 +1686,28 @@ class Battle: SKSpriteNode {
     
     internal func showSummonableSeats(selectAll:Bool = true) {
         cleanSummonSeats()
-        var ps = [BUnit.LLT,BUnit.LLM,BUnit.LLB,BUnit.LRT,BUnit.LRM,BUnit.LRB]
+        var ps = [BUnit.BTL,BUnit.BTM,BUnit.BTR,BUnit.BBL,BUnit.BBM,BUnit.BBR]
         let index = ps.index(of: _char._seat)
-        if nil != index {
-            ps.remove(at: index!)
+        if nil == index {
+            debug("error showSummonableSeats")
+        }
+        ps.remove(at: index!)
+        
+        var existUnitSeats = Array<String>()
+        for u in _playerPart {
+            existUnitSeats.append(u._unit._seat)
         }
         
         for s in ps {
-            if _left.index(forKey: s) != nil {
+            if existUnitSeats.index(of: s) != nil {
                 if selectAll {
-                    _left[s]?.setSelectableMode()
-                    _summonUnits[s] = _left[s]
+                    let unit = findUnitBySeat(part: _playerPart, seat: s)
+                    unit?.setSelectableMode()
+                    _summonUnits[s] = unit!
                 }
             } else {
                 let emptyBUnit = BUnit()
+                emptyBUnit.playerPart = true
                 emptyBUnit.createEmpty()
                 emptyBUnit.setSelectableMode()
                 emptyBUnit._battle = self
@@ -1767,7 +1723,7 @@ class Battle: SKSpriteNode {
     
     internal func cleanSummonSeats() {
         for u in _summonUnits.values {
-            if u.isEmpey {
+            if u.isEmpty {
 //                _summonUnits.removeValue(forKey: u._seat)
                 u.removeFromParent()
             } else {
@@ -1785,12 +1741,16 @@ class Battle: SKSpriteNode {
                 summonableMinions.append(m)
             }
         }
+        clp.create(list: summonableMinions)
         let this = self
         clp.selectAction = {
             this.waitingForSelectSummonSeat = true
-            this.showSummonableSeats()
+            this.showSummonableSeats(selectAll: true)
             clp.removeFromParent()
-//            this._selectedMinion = clp._lastSelected.unit
+            this._selectedMinion = clp._lastSelected!._unit
+        }
+        clp.closeAction = {
+            
         }
 //        clp.create(list: summonableMinions)
         
@@ -1798,8 +1758,8 @@ class Battle: SKSpriteNode {
     }
     
     internal func showRecallMinions() {
-        for u in _leftRoles {
-            if !u._unit.isMainChar {
+        for u in _playerPart {
+            if !(u._unit is Character) {
                 u.setSelectableMode()
             }
         }
@@ -1813,18 +1773,18 @@ class Battle: SKSpriteNode {
     internal var xd:CGFloat = 0
     internal var yd:CGFloat = 0
     
-    internal var ttl = Array<CGFloat>()
-    internal var ttm = Array<CGFloat>()
-    internal var ttr = Array<CGFloat>()
-    internal var tbl = Array<CGFloat>()
-    internal var tbm = Array<CGFloat>()
-    internal var tbr = Array<CGFloat>()
-    internal var btl = Array<CGFloat>()
-    internal var btm = Array<CGFloat>()
-    internal var btr = Array<CGFloat>()
-    internal var bbl = Array<CGFloat>()
-    internal var bbm = Array<CGFloat>()
-    internal var bbr = Array<CGFloat>()
+    internal var ttl = CGPoint()
+    internal var ttm = CGPoint()
+    internal var ttr = CGPoint()
+    internal var tbl = CGPoint()
+    internal var tbm = CGPoint()
+    internal var tbr = CGPoint()
+    internal var btl = CGPoint()
+    internal var btm = CGPoint()
+    internal var btr = CGPoint()
+    internal var bbl = CGPoint()
+    internal var bbm = CGPoint()
+    internal var bbr = CGPoint()
     
     internal var llt = Array<CGFloat>()
     internal var llm = Array<CGFloat>()
@@ -1839,20 +1799,25 @@ class Battle: SKSpriteNode {
     internal var rrm = Array<CGFloat>()
     internal var rrb = Array<CGFloat>()
     
+//    internal var ttl = Array<CGFloat>()
+    
     var _left = Dictionary<String, BUnit>()
     var _right = Dictionary<String, BUnit>()
+    
+    var _playerPart = Array<BUnit>()
+    var _enimyPart = Array<BUnit>()
     
     var _leftRoles = Array<BUnit>()
     var _rightRoles = Array<BUnit>()
     
     var _curRole:BUnit = BUnit()
-    var _mainChar:BUnit = BUnit()
+    var _playerUnit:BUnit = BUnit()
     var _selectedItem = BItemComponent()
     var _specialEvents = Array<String>()
     var isFinalChallenge = false
 }
 
-class BattleSpellIcon:SKSpriteNode {
+class BattleSpellIcon1:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let rect = CGRect(x: -cellSize * 0.75, y: -cellSize * 0.75, width: cellSize * 1.5, height: cellSize * 1.5)

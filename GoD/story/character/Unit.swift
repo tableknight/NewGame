@@ -16,7 +16,7 @@ class Unit:Core {
         attack: 0,
         defence: 0,
         speed: 0,
-        accuracy: 85,
+        accuracy: 100,
         critical: 15,
         avoid: 15,
         spirit: 0,
@@ -32,6 +32,7 @@ class Unit:Core {
     var _leftPoint:Int = 0
     var _spells:Array<Spell> = Array<Spell>()
     var _spellsInuse:Array<Spell> = Array<Spell>()
+    var _spellsHidden:Array<Spell> = Array<Spell>()
     var _slot:Int = 0
     var _lucky:CGFloat = 5
     var _break:CGFloat = 0
@@ -102,7 +103,7 @@ class Unit:Core {
         _extensions.defence += value * 0.3
         _extensions.speed += value * 2
         _extensions.accuracy += value * 0.4
-        _extensions.avoid += value * 0.4
+        _extensions.avoid += value * 0.3
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 1

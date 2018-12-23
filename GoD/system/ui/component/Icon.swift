@@ -95,7 +95,7 @@ class SpellIcon: Icon {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    private var _spell:Spell?
+    internal var _spell:Spell?
     var spell:Spell? {
         set {
             _spell = newValue
@@ -105,4 +105,78 @@ class SpellIcon: Icon {
             return _spell ?? nil
         }
     }
+}
+
+class PropIcon: Icon {
+    override init(quality: Int) {
+        super.init(quality: quality)
+    }
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        _label.position.x = 3
+        _label.fontSize = 20
+        _label.position.y = -cellSize + _label.fontSize
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    var count:Int {
+        set {
+            if newValue > 1 {
+                _label.removeFromParent()
+                addChild(_label)
+                _label.text = "\(newValue)"
+            } else {
+                _label.removeFromParent()
+            }
+            _count = newValue
+//            quality = newValue!._quality
+        }
+        get {
+            return _count
+        }
+    }
+    private var _count:Int = 0
+    private var _label = Label()
+}
+class BattlePropIcon: PropIcon {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        _mask = createBackground(width: cellSize, height: cellSize)
+        _mask.alpha = 0.65
+        _mask.lineWidth = 0
+        
+        _label.text = "12"
+        _label.fontSize = cellSize * 0.5
+        _label.align = "center"
+        _label.position.y = -cellSize * 0.5 + _label.fontSize * 0.5
+        _label.position.x = cellSize * 0.5
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override init(quality: Int) {
+        super.init(quality: quality)
+    }
+    
+    var timeleft:Int {
+        set {
+            if newValue > 0 {
+                addChild(_mask)
+                addChild(_label)
+                _label.text = "-\(newValue)"
+                _timeleft = newValue
+            } else {
+                _mask.removeFromParent()
+                _label.removeFromParent()
+            }
+        }
+        get {
+            return _timeleft
+        }
+    }
+    private var _timeleft:Int = 0
+    private var _mask:SKShapeNode!
+    private var _label = Label()
 }

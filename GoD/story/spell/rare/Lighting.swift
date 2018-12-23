@@ -25,30 +25,30 @@ class Lighting: Passive {
             _rate = 1
         }
         let this = self
-        _battle._curRole.showText(text: _name) {
-            this.findTarget()
-            let t = this._battle._selectedTarget
-            this._damageValue = this.thunderDamage(t)
-            let damage = this._damageValue
-            if this.hadSpecialAction(t:t, completion: completion) {
-                
-            } else {
-                
-                t.actionAttacked {
+//        _battle._curRole.showText(text: _name) {
+        this.findTarget()
+        let t = this._battle._selectedTarget!
+        this._damageValue = this.thunderDamage(t)
+        let damage = this._damageValue
+        if this.hadSpecialAction(t:t, completion: completion) {
+            
+        } else {
+            
+            t.actionAttacked {
 //                    t.hpChange(value: damage)
-                    t.showValue(value: damage) {
-                        completion()
-                    }
-                    //                this.setFrozen(target: t, completion: completion)
+                t.showValue(value: damage) {
+                    completion()
                 }
+                //                this.setFrozen(target: t, completion: completion)
             }
         }
+//        }
         
         
     }
     
-    override func findTarget(inleft:Bool = false) {
-        findSingleTargetNotBlocked(inleft: _battle._curRole.inleft)
+    override func findTarget() {
+        findSingleTargetNotBlocked()
     }
 }
 

@@ -27,9 +27,11 @@ class Reborn: Passive {
         }
         let h = c.getHealth() * _rate
 //        c.hpChange(value: h)
-        c.showValue(value: h) {
-            completion()
-        }
+        setTimeout(delay: 1, completion: {
+            c.showValue(value: h) {
+                completion()
+            }
+        })
     
     }
 }

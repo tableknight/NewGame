@@ -13,6 +13,7 @@ class FireRain: Magical {
         isFire = true
         _name = "火雨"
         isAutoSelectTarget = true
+        isTargetEmemy = true
         _description = "对所有敌方目标造成精神35%的火焰伤害"
         _quality = Quality.RARE
         _rate = 0.35
@@ -65,12 +66,12 @@ class FireRain: Magical {
         }
     }
     
-    override func findTarget(inleft:Bool = false) {
-        let c = _battle._curRole
-        if c.inleft {
-            _battle._selectedTargets = _battle._rightRoles
+    override func findTarget() {
+        if _battle._curRole.playerPart {
+            _battle._selectedTargets = _battle._enimyPart
         } else {
-            _battle._selectedTargets = _battle._leftRoles
+            _battle._selectedTargets = _battle._playerPart
         }
     }
+    
 }

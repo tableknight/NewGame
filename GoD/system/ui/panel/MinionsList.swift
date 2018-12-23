@@ -69,37 +69,6 @@ class MinionsList:UIPanel {
             }
         }
         
-//        for c in _minionLayer.children {
-//            let mc = c as! MinionComponent
-//            for sn in mc._seats {
-//                if sn.contains(touchPoint!) {
-//                    if sn._seat == Game.instance.char._seat {
-//                        return
-//                    }
-//                    sn.selected = true
-//                    mc._minion._seat = sn._seat
-//                    unselectAll(seat: sn._seat)
-//                    return
-//                }
-//            }
-//            if c.contains(touchPoint!) {
-//                mc.selected = true
-//                _lastSelectedComponent.selected = false
-//                _lastSelectedComponent = mc
-//            }
-//        }
-        
-//        for mc in _minionComponents {
-//            if mc.contains(touchPoint!) {
-//                if mc.selected {
-//
-//                } else {
-//                    mc.selected = true
-//                    _lastSelectedComponent.selected = false
-//                    _lastSelectedComponent = mc
-//                }
-//            }
-//        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -156,15 +125,6 @@ class MinionsList:UIPanel {
         }
         self.recount()
     }
-    
-//    override func createPanelbackground() {
-//        let b = CGRect(x: -cellSize * 6.5, y: -cellSize * 3, width: cellSize * 13, height: cellSize * 6)
-//        let bg = SKShapeNode(rect: b, cornerRadius: 4)
-//        bg.fillColor = UIColor.black
-//        bg.zPosition = self.zPosition + 2
-//        addChild(bg)
-//        _bg = bg
-//    }
     
     var _minionComponents = Array<MinionComponent>()
     var _lastSelectedComponent = MinionComponent()

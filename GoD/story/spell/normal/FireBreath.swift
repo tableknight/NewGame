@@ -15,7 +15,7 @@ class FireBreath: Magical {
         _description = "对目标造成精神80%的火焰伤害"
         _rate = 0.8
         _quality = Quality.NORMAL
-//        _cooldown = 1
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -28,7 +28,7 @@ class FireBreath: Magical {
     }
     
     func attack(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         _damageValue = fireDamage(t)
         let damage = _damageValue
         if hadSpecialAction(t:t, completion: completion) {
@@ -42,8 +42,5 @@ class FireBreath: Magical {
                 }
             }
         }
-    }
-    override func findTarget(inleft: Bool = false) {
-        findSingleTargetNotBlocked(inleft: _battle._curRole.inleft)
     }
 }

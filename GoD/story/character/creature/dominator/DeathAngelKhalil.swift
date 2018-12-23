@@ -34,7 +34,7 @@ class KhalilsGaze:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         let this = self
         c.actionCast {
@@ -48,18 +48,18 @@ class KhalilsGaze:Magical {
             }
         }
     }
-    override func findTarget(inleft: Bool = false) {
+    override func findTarget() {
         let b = _battle!
-        if b._leftRoles.count > 1 {
+        if b._playerPart.count > 1 {
             var ar = Array<BUnit>()
-            for u in b._leftRoles {
-                if !u._unit.isMainChar {
+            for u in b._playerPart {
+                if !(u._unit is Character) {
                     ar.append(u)
                 }
             }
             b._selectedTarget = ar.one()
-        } else if b._leftRoles.count == 1 {
-            b._selectedTarget = b._leftRoles[0]
+        } else if b._playerPart.count == 1 {
+            b._selectedTarget = b._playerPart[0]
         } else {
             debug("gase has no target!")
         }
@@ -75,7 +75,7 @@ class KhalilsSong:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         let this = self
         c.actionCast {
@@ -84,9 +84,9 @@ class KhalilsSong:Magical {
             }
         }
     }
-    override func findTarget(inleft: Bool = false) {
+    override func findTarget() {
         let b = _battle!
-        b._selectedTarget = b._leftRoles.one()
+        b._selectedTarget = b._playerPart.one()
     }
 }
 
@@ -117,8 +117,8 @@ class KhalilsSob:Magical {
         }
         
     }
-    override func findTarget(inleft: Bool = false) {
-        _battle._selectedTargets = getTargetsBySeats(seats: getUnitsInRowOf(seat: _battle._leftRoles.one()._seat))
+    override func findTarget() {
+        _battle._selectedTargets = getTargetsBySeats(seats: getUnitsInRowOf(seat: _battle._playerPart.one()._unit._seat))
     }
 }
 
@@ -157,7 +157,7 @@ class DeathScream:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let damage = magicalDamage(t)
         c.actionCast {
             t.actionAttacked {
@@ -168,8 +168,8 @@ class DeathScream:Magical {
             }
         }
     }
-    override func findTarget(inleft: Bool) {
-        _battle._selectedTarget = _battle._leftRoles.one()
+    override func findTarget() {
+        _battle._selectedTarget = _battle._playerPart.one()
     }
 }
 class Addict:Magical {
@@ -179,7 +179,7 @@ class Addict:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let this = self
         c.actionCast {
             if !this.statusMissed(baseline: 50, target: t, completion: completion) {
@@ -197,7 +197,7 @@ class Addict:Magical {
             }
         }
     }
-    override func findTarget(inleft: Bool) {
-        _battle._selectedTarget = _battle._leftRoles.one()
+    override func findTarget() {
+        _battle._selectedTarget = _battle._playerPart.one()
     }
 }

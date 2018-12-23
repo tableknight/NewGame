@@ -28,7 +28,7 @@ class LifeDraw: Magical {
     }
     
     func attack(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         _damageValue = magicalDamage(t)
         let damage = _damageValue

@@ -36,7 +36,7 @@ class BUnit: SKSpriteNode {
     static var BBM = "bbm"
     static var BBR = "bbr"
     
-    
+    var playerPart = false
     var inleft = true
     var _battle:Battle!
     var _stage:MyStage!
@@ -51,11 +51,15 @@ class BUnit: SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         _stage = Game.instance.curStage
     }
-    var isEmpey = false
+    var isEmpty = false
     func createEmpty() {
-        self.size = CGSize(width: cellSize * 1.2, height: cellSize * 1.2)
-        circleY = -0.26 * cellSize
-        _select.size = CGSize(width: cellSize, height: cellSize)
+        _charSize = cellSize
+        if playerPart {
+            _charSize = cellSize * 1.25
+        }
+        self.size = CGSize(width: _charSize, height: _charSize)
+        circleY = -_charSize * 0.25
+        _select.size = CGSize(width: _charSize, height: _charSize)
         _select.texture = _selectTexture.getCell(3, 0)
         _select.position.y = circleY
         _select.zPosition = 40
@@ -63,45 +67,32 @@ class BUnit: SKSpriteNode {
         _select.alpha = 0.5
         //        faceEast()
         addChild(_select)
-        isEmpey = true
+        isEmpty = true
     }
-    func create(isChief:Bool = false) {
-        hasInitialized = true
-        self.size = CGSize(width: cellSize * 1.2, height: cellSize * 1.2)
+    func create() {
         _charSize = cellSize
+        if playerPart {
+            _charSize = cellSize * 1.25
+        }
+//        self.size = CGSize(width: _charSize, height: _charSize)
         _charNode.size = CGSize(width: _charSize, height: _charSize)
-        circleY = -0.26 * cellSize
-        _select.size = CGSize(width: cellSize, height: cellSize)
+        circleY = -_charSize * 0.25
+        _select.size = CGSize(width: _charSize, height: _charSize)
         _select.texture = _selectTexture.getCell(3, 0)
         _select.position.y = circleY
         _select.zPosition = 40
         _charNode.zPosition = 50
+        _levelLabel.position.y = -_charSize + 10
+        _levelLabel.position.x = 0
 //        faceEast()
         addChild(_select)
         addChild(_charNode)
         
         createLabel()
-        var hpbarHeight = _charSize * 0.05
-        var width = _charSize * 0.8
-        var x = -_charSize * 0.4
-        if _unit is PowerLord {
-            width = _charSize
-            hpbarHeight = _charSize * 0.08
-            x = -_charSize * 0.5
-        }
-//        let hpbarHeight = _charSize * 0.05
-        let bar = SKShapeNode(rect: CGRect(x: x, y: 0, width: width, height: hpbarHeight))
-        bar.fillColor = UIColor.black
-        bar.zPosition = 50
-        bar.position.y = -_charSize * 0.70
-        addChild(bar)
-        
         createHPBar()
-        
     }
     func createForStage() {
         hasInitialized = true
-        self.size = CGSize(width: cellSize * 1.2, height: cellSize * 1.2)
         _charSize = cellSize
         _charNode.size = CGSize(width: _charSize, height: _charSize)
         circleY = -0.26 * cellSize
@@ -118,34 +109,46 @@ class BUnit: SKSpriteNode {
         _battle.removeFromPart(unit: self)
     }
     private func createLabel() {
-        let label = Label.init("12", 0, cellSize * 0.5, UIColor.red)
-        label.fontSize = 13
+        let label = Label()
+        label.fontColor = UIColor.red
+        label.text = "23"
+        label.fontSize = 18
         label.zPosition = 100
+//        label.position.y = _charSize
         addChild(label)
         label.isHidden = true
         _valueText = label
     }
     private func addLabel() -> Label {
-        let label = Label.init("12", 0, cellSize * 0.5, UIColor.red)
-        label.fontSize = 13
-        label.zPosition = 100
+        let label = Label()
+        label.fontColor = UIColor.red
+        label.fontSize = 18
+//        label.zPosition = 100
+        label.align = "center"
         addChild(label)
         return label
     }
     private func createHPBar(value:CGFloat = 1) {
-        var hpbarHeight = _charSize * 0.05
+        var hpbarHeight = _charSize * 0.06
         var width = _charSize * 0.8 * value
         var x = -_charSize * 0.4
-        if _unit is PowerLord {
+//        if _unit._quality == Quality.SACRED || _unit is Character {
+        if _unit is Character {
             width = _charSize * value
             hpbarHeight = _charSize * 0.08
             x = -_charSize * 0.5
         }
-        _hpbar = SKShapeNode(rect: CGRect(x: x, y: 0, width: width, height: hpbarHeight))
-        _hpbar.fillColor = UIColor.red
-        _hpbar.zPosition = 50
-        _hpbar.position.y = -_charSize * 0.70
+        _hpbar.create(width: width, height: hpbarHeight, value: _unit._extensions.hp / _unit._extensions.health, color: UIColor.red)
+        _hpbar.position.y = -_charSize * 0.75
+        _hpbar.position.x = x
+        _hpbar.zPosition = _charNode.zPosition
         addChild(_hpbar)
+        
+//        _hpbar = SKShapeNode(rect: CGRect(x: x, y: 0, width: width, height: hpbarHeight))
+//        _hpbar.fillColor = UIColor.red
+//        _hpbar.zPosition = 50
+//        _hpbar.position.y = -_charSize * 0.75
+//        addChild(_hpbar)
     }
     private var _valueText = Label()
     required init?(coder aDecoder: NSCoder) {
@@ -158,14 +161,12 @@ class BUnit: SKSpriteNode {
 //        _speed = unit._extensions.speed
         _levelLabel = Label("lv.\(unit._level.toInt())\(unit._name)", 0, -_charSize, QualityColor.getColor(unit._quality))
         _levelLabel.zPosition = 71
-        _levelLabel.fontSize = 10
+        _levelLabel.fontSize = 14
         _levelLabel.isHidden = true
-        _levelLabel.position.y = -cellSize * 0.7 - 11
+        _levelLabel.align = "center"
         addChild(_levelLabel)
-        let per = _unit._extensions.hp / _unit._extensions.health
-        _hpbar.removeFromParent()
-        createHPBar(value: per)
         _charTexture = unit._img
+        
     }
     var _charTexture = SKTexture()
     private var _charNode = SKSpriteNode()
@@ -249,20 +250,22 @@ class BUnit: SKSpriteNode {
     }
     
     func actionAttack(completion:@escaping () -> Void) {
-        var v = CGVector(dx: cellSize * 0.5, dy: 0)
-        var v2 = CGVector(dx: -cellSize * 0.5, dy: 0)
-        if "right" == unitPos {
-            v = CGVector(dx: -cellSize * 0.5, dy: 0)
-            v2 = CGVector(dx: cellSize * 0.5, dy: 0)
+        let range = _charSize * 0.5
+        var v = CGVector(dx: 0, dy: range)
+        var v2 = CGVector(dx: 0, dy: -range)
+        if !playerPart {
+            v = CGVector(dx: 0, dy: -range)
+            v2 = CGVector(dx: 0, dy: range)
         }
         let move1 = SKAction.move(by: v, duration: 0)
         let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(0.15))
         let go = SKAction.sequence([move1, wait, move2])
         let this = self
+        _select.run(go)
         _charNode.run(go, completion: {
             completion()
-            if this._battle._selectedTarget.hasStatus(type: Status.ICE_GUARD) {
+            if this._battle._selectedTarget!.hasStatus(type: Status.ICE_GUARD) {
                 if this.seed() < 15 {
                     this._extensions.speed -= 10
                     this.showText(text: "SPEED -10")
@@ -309,12 +312,12 @@ class BUnit: SKSpriteNode {
             return
         }
         _acting = true
-        let d = cellSize * 0.12
-        var v = CGVector(dx: -d, dy: 0)
-        var v2 = CGVector(dx: d, dy: 0)
-        if "right" == unitPos {
-            v = CGVector(dx: d, dy: 0)
-            v2 = CGVector(dx: -d, dy: 0)
+        let d = _charSize * 0.12
+        var v = CGVector(dx: 0, dy: -d)
+        var v2 = CGVector(dx: 0, dy: d)
+        if !playerPart {
+            v = CGVector(dx: 0, dy: d)
+            v2 = CGVector(dx: 0, dy: -d)
         }
 //        let w = SKAction.wait(forDuration: TimeInterval(2))
         let move1 = SKAction.move(by: v, duration: 0)
@@ -322,8 +325,8 @@ class BUnit: SKSpriteNode {
         let wait = SKAction.wait(forDuration: TimeInterval(0.8))
         let go = SKAction.sequence([move1, wait, move2])
         let this = self
-        _charNode.run(go) {
-        }
+        _charNode.run(go)
+        _select.run(go)
         let fadeOut = SKAction.fadeOut(withDuration: TimeInterval(0))
         let fadeIn = SKAction.fadeIn(withDuration: TimeInterval(0))
         let fadeWait = SKAction.wait(forDuration: TimeInterval(0.2))
@@ -334,12 +337,12 @@ class BUnit: SKSpriteNode {
         }
     }
     func actionDefead(completion:@escaping () -> Void) {
-        let size = cellSize * 0.05
-        var v = CGVector(dx: -size, dy: 0)
-        var v2 = CGVector(dx: size, dy: 0)
-        if !inleft {
-            v = CGVector(dx: size, dy: 0)
-            v2 = CGVector(dx: -size, dy: 0)
+        let d = _charSize * 0.05
+        var v = CGVector(dx: 0, dy: -d)
+        var v2 = CGVector(dx: 0, dy: d)
+        if !playerPart {
+            v = CGVector(dx: 0, dy: d)
+            v2 = CGVector(dx: 0, dy: -d)
         }
 //        let w = SKAction.wait(forDuration: TimeInterval(2))
         let move1 = SKAction.move(by: v, duration: 0)
@@ -355,9 +358,9 @@ class BUnit: SKSpriteNode {
         let w = SKAction.setTexture(_charTexture.getCell(0, 1))
         let s = SKAction.setTexture(_charTexture.getCell(0, 0))
         let e = SKAction.setTexture(_charTexture.getCell(0, 2))
-        var go = SKAction.sequence([wt1, wt, s, wt, w, wt, n, wt, e, wt, s, wt, w, wt, n, wt, e, wt1])
-        if !inleft {
-            go = SKAction.sequence([wt1, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt1])
+        var go = SKAction.sequence([wt1, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
+        if !playerPart {
+            go = SKAction.sequence([wt1, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
         }
         _charNode.run(go) {
             completion()
@@ -365,11 +368,11 @@ class BUnit: SKSpriteNode {
     }
     func actionAvoid(completion:@escaping () -> Void) {
         let d = cellSize * 0.3
-        var v = CGVector(dx: -d, dy: 0)
-        var v2 = CGVector(dx: d, dy: 0)
-        if !inleft {
-            v = CGVector(dx: d, dy: 0)
-            v2 = CGVector(dx: -d, dy: 0)
+        var v = CGVector(dx: 0, dy: -d)
+        var v2 = CGVector(dx: 0, dy: d)
+        if !playerPart {
+            v = CGVector(dx: 0, dy: d)
+            v2 = CGVector(dx: 0, dy: -d)
         }
         //        let w = SKAction.wait(forDuration: TimeInterval(2))
         let move1 = SKAction.move(by: v, duration: 0)
@@ -377,7 +380,7 @@ class BUnit: SKSpriteNode {
         let wait = SKAction.wait(forDuration: TimeInterval(0.8))
         let go = SKAction.sequence([move1, wait, move2])
         _charNode.run(go, completion: completion)
-        
+        _select.run(go)
     }
     //被选择的单位效果
     func setSelectedMode() {
@@ -388,10 +391,10 @@ class BUnit: SKSpriteNode {
         _select.run(go)
     }
     var _charSize:CGFloat = 0
-    private var _hpbar = SKShapeNode()
+    private var _hpbar = HBar()
     private var circleY:CGFloat = 0
-    var _seat:String = ""
-    var unitPos = "left"
+//    var _seat:String = ""
+//    var unitPos = "left"
     var selectable = false
     func setOrderMode() {
         _select.texture = _selectTexture.getCell(0, 0)
@@ -401,12 +404,8 @@ class BUnit: SKSpriteNode {
         _select.texture = _selectTexture.getCell(3, 0)
         selectable = false
     }
-    func setSelectableMode(which:String = "left") {
-        var x:CGFloat = 2
-        if "left" != which {
-            x = 1
-        }
-        _select.texture = _selectTexture.getCell(x, 0)
+    func setSelectableMode() {
+        _select.texture = _selectTexture.getCell(2, 0)
         selectable = true
     }
     func markDeathGod() -> Bool {
@@ -519,7 +518,7 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel()
 //        valueText.isHidden = false
-        valueText.position.y = cellSize * 0.3
+        valueText.position.y = _charSize * 0.3
         var color = textColor
         var text = "\(value.toInt())";
         if value > 0 {
@@ -542,7 +541,7 @@ class BUnit: SKSpriteNode {
         }
         valueText.text = text
         valueText.fontColor = color
-        let v = CGVector(dx: 0, dy: cellSize * 0.25)
+        let v = CGVector(dx: 0, dy: _charSize * 0.5)
         let move = SKAction.move(by: v, duration: TimeInterval(0.25))
         let wait = SKAction.wait(forDuration: TimeInterval(1))
         let go = SKAction.sequence([move, wait])
@@ -586,10 +585,10 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel()
 //        _valueText.isHidden = false
-        valueText.position.y = cellSize * 0.3
+        valueText.position.y = _charSize * 0.3
         valueText.text = text
         valueText.fontColor = color
-        let v = CGVector(dx: 0, dy: cellSize * 0.2)
+        let v = CGVector(dx: 0, dy: _charSize * 0.5)
         let move = SKAction.move(by: v, duration: TimeInterval(0.25))
         let wait = SKAction.wait(forDuration: TimeInterval(1))
         let go = SKAction.sequence([move, wait])
@@ -686,8 +685,9 @@ class BUnit: SKSpriteNode {
             _unit._extensions.hp = 0
         }
         let per = _unit._extensions.hp / _unit._extensions.health
-        _hpbar.removeFromParent()
-        createHPBar(value: per)
+        _hpbar.setBar(value: per)
+//        _hpbar.removeFromParent()
+//        createHPBar(value: per)
 //        let this = self
 //        if isDead() {
 //            actionDead {
@@ -791,9 +791,9 @@ class BUnit: SKSpriteNode {
     }
     func isBlocked() -> Bool {
         if inleft {
-            return _battle.isLeftUnitBlocked(unit: self)
+            return _battle.isPlayerPartUnitBlocked(unit: self)
         } else {
-            return _battle.isRightUnitBlocked(unit: self)
+            return _battle.isEnimyPartUnitBlocked(unit: self)
         }
     }
     func getActiveSpell() -> Array<Spell> {
@@ -865,7 +865,11 @@ class BUnit: SKSpriteNode {
         var spirit = _unit._extensions.spirit - t._level
         
         if hasSpell(spell: Energetic()) {
-            spirit *= 1.2
+            if spirit > 0 {
+                spirit *= 1.2
+            } else {
+                spirit *= 0.8
+            }
         }
         
         for s in _status.values {
@@ -1008,7 +1012,7 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: Bellicose()) {
             atk *= 1.2
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: AttackPower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             atk += 50
         }
         if _unit is Character {

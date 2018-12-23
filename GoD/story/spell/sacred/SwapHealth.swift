@@ -18,7 +18,7 @@ class SwapHealth: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         c.actionCast {
             let thp = t.getHp()
             t._unit._extensions.hp = 0

@@ -15,9 +15,10 @@ class DeathStrike: Magical {
         _cooldown = 2
         _rate = 0.8
         _description = "对目标造成精神80%的魔法伤害，每次偷取目标10点精神"
+        isTargetEmemy = true
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         _damageValue = magicalDamage(t)
         let damage = _damageValue
@@ -39,13 +40,6 @@ class DeathStrike: Magical {
                     t.addStatus(status: down)
                 }
             }
-        }
-    }
-    override func findTarget(inleft: Bool = false) {
-        if _battle._curRole.inleft {
-            _battle._selectedTarget = _battle._rightRoles[seed(max: _battle._rightRoles.count)]
-        } else {
-            _battle._selectedTarget = _battle._leftRoles[seed(max: _battle._leftRoles.count)]
         }
     }
 }

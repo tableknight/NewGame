@@ -22,81 +22,90 @@ class GameScene: SKScene {
         }
     }
     
-    override func didMove(to view: SKView) {
+    func battle() {
+        let b = Battle()
+        var es = Array<Creature>()
+        
+        for _ in 0...3 {
+            let c = GiantWasp()
+            c.create(level: 20)
+            es.append(c)
+        }
+        //        b.setEvils(evils: es)
+        b.setEnimyPart(minions: es)
+        b.setPlayerPart(roles: [Game.instance.char] + Game.instance.char.getReadyMinions())
+        //        b.setRoles(roles: [Game.instance.char] + Game.instance.char._minions)
+        
+        let potion = Potion()
+        potion._count = 1
+        Game.instance.char.addProp(p: potion)
+        addChild(b)
+        b.battleStart()
+    }
+    
+    func realScene() {
         let bs = SceneMeadow()
         bs.create()
         let stage = MyStage()
-//        stage.loadScene(scene: bs)
+        stage.loadScene(scene: bs)
         stage.createMenu()
+        //        stage.hideUI()
         addChild(stage)
-//        let panel = RolePanel()
-//        panel.create(unit: Game.instance.char)
-//        stage.showPanel(panel)
-//        let panel = SpellPanel()
-//        panel.create(role: Game.instance.char)
-//        stage.addChild(panel)
-//        let panel = MinionsList()
-//        panel.create(minions: Game.instance.char._minions)
-//        stage.showPanel(panel)
+        //        let panel = RolePanel()
+        //        panel.create(unit: Game.instance.char)
+        //        stage.showPanel(panel)
+        //        let panel = SpellPanel()
+        //        panel.create(role: Game.instance.char)
+        //        stage.addChild(panel)
+        //        let panel = MinionsList()
+        //        panel.create(minions: Game.instance.char._minions)
+        //        stage.showPanel(panel)
         
-//        let mc = MinionComponent()
-//        mc.create(minion: Game.instance.char._minions[0])
-//        addChild(mc)
-        
+        //        let mc = MinionComponent()
+        //        mc.create(minion: Game.instance.char._minions[0])
+        //        addChild(mc)
+        let bc = BlastScroll()
+        bc._count = 5
+        Game.instance.char.addProp(p: bc)
         let o = SKShapeNode(rectOf: CGSize(width: 18, height: 18))
         o.lineWidth = 4
         o.zPosition = 1200
         addChild(o)
         
-//        addOutfit()
+        var props = Array<Prop>()
+        props.append(bc)
+        let swd = Sword()
+        swd.create(level: 20)
+        props.append(swd)
         
-        let potion = Potion()
-        potion._count = 1
-        Game.instance.char.addProp(p: potion)
         
-//        let ii = ItemInfo()
-//        ii.create(item: potion)
-//        addChild(ii)
-//        
-//        Game.instance.char._extensions.hp = 1
+        let ss = SealScroll()
+        ss._count = 5
+        Game.instance.char.addProp(p: ss)
         
-//        let rl = RoleList()
-//        rl.create(list: Game.instance.char._minions + [Game.instance.char] + [Game.instance.char])
-//        addChild(rl)
+        let ts = TownScroll()
+        ts._count = 5
+        Game.instance.char.addProp(p: ts)
         
-//        let ai = ArmorInfo()
-//        ai.create(armor: Game.instance.char._props[0] as! Outfit)
-//        addChild(ai)
-        
-//        let op = OutfitPanel()
-//        op.create()
-//        addChild(op)
-//        let spell = AttackReturnBack()
-//        let p = SpellInfo()
-//        p.zPosition = 100
-//        p.create(spell: spell)
-//        addChild(p)
-//        addChild(spell.getInfosDisplay() as! SKSpriteNode)
-        
-//        // Get label node from scene and store it for use later
-//        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
-//
-//        // Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-//
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                              SKAction.fadeOut(withDuration: 0.5),
-//                                              SKAction.removeFromParent()]))
-//        }
+    }
+    
+    override func didMove(to view: SKView) {
+//        let sp = SelecProfession()
+//        sp.create()
+//        addChild(sp)
+//        let rsp = RoleSelectPanel()
+//        rsp.create()
+//        addChild(rsp)
+//        let si = SelectMinion()
+//        si.create()
+////        let ic = ImageComponent()
+////        let p = Game.instance.pictureActor1
+////        ic.create(image: p)
+//        addChild(si)
+//        let cf = CreationFlow()
+//        cf.create()
+//        addChild(cf)
+        realScene()
     }
     
     

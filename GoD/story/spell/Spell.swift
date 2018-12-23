@@ -73,6 +73,11 @@ class Spell:Core, IDisplay {
         if to.hasSpell(spell: OnePunch()) || to.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
+        
+        debug("def = \(def)")
+        if def > 0.7 {
+            def = 0.7
+        }
         return def
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
@@ -80,8 +85,8 @@ class Spell:Core, IDisplay {
         
         let def = getDefRate(from: from, to:to)
         
-        let msg = "p atk:\(atk.toInt()), def:\(to.getDefence(t: from._unit).toInt()) "
-        debug(msg)
+//        let msg = "p atk:\(atk.toInt()), def:\(to.getDefence(t: from._unit).toInt()) "
+//        debug(msg)
         
         var  damage = atk * (1 - def) * (from._unit._level / to._unit._level)
         if damage < 5 {
@@ -93,7 +98,7 @@ class Spell:Core, IDisplay {
         
         damage *= 1 + (from.getPhysicalDamage() - to.getPhysicalResistance()) * 0.01
         
-        if _battle._curRole._unit.isMainChar && Game.instance.stage.hasTowerStatus(status: PhysicalPower()) {
+        if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: PhysicalPower()) {
             damage *= 1.5
         }
         damage = specialDamage(damage: damage, to: to, from: from)
@@ -122,7 +127,7 @@ class Spell:Core, IDisplay {
         }
         damage *= 1 + (from.getMagicalDamage() - to.getMagicalResistance()) * 0.01
         
-        if _battle._curRole._unit.isMainChar && Game.instance.stage.hasTowerStatus(status: MagicalPower()) {
+        if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: MagicalPower()) {
             damage *= 1.5
         }
         damage = specialDamage(damage: damage, to: to, from: from)
@@ -200,7 +205,7 @@ class Spell:Core, IDisplay {
         var damage = d * _rate
         damage = seed(min: (damage * 0.8).toInt(), max: (damage * 1.2).toInt()).toFloat()
         if damage < 5 {
-            damage = seed(min:1, max: 5).toFloat()
+            damage = seed(min:1, max: 6).toFloat()
         }
         return damage
     }
@@ -252,38 +257,38 @@ class Spell:Core, IDisplay {
         
         return damage
     }
-    //默认近战 查找被阻挡的单位
-    func findTarget(inleft:Bool = false) {
+    //默认近战 
+    func findTarget() {
         var ts = Array<BUnit>()
         let c = _battle._curRole
         if c.isBlocked() {
-            if c.inleft {
-                for u in _battle._rightRoles {
+            if c.playerPart {
+                for u in _battle._enimyPart {
                     if !u.isBlocked() {
                         ts.append(u)
                     }
                 }
             } else {
-                for u in _battle._leftRoles {
+                for u in _battle._playerPart {
                     if !u.isBlocked() {
                         ts.append(u)
                     }
                 }
             }
         } else {
-            if c.inleft {
-                ts = _battle._rightRoles
+            if c.playerPart {
+                ts = _battle._enimyPart
             } else {
-                ts = _battle._leftRoles
+                ts = _battle._playerPart
             }
         }
-        _battle._selectedTarget = ts[seed(max: ts.count)]
+        _battle._selectedTarget = ts.one()
     }
     var _damageValue:CGFloat = 0
     func isAttackReturnBack(t:BUnit, completion:@escaping () -> Void) -> Bool {
 //        let t = _battle._selectedTarget
         let c = _battle._curRole
-        if isClose && isPhysical && c._unit._weapon!.isClose {
+        if isClose && isPhysical && c._unit.isClose() {
             let damage = _damageValue
             if t.hasStatus(type: Status.ATTACK_RETURN_BACK) {
                 t.removeStatus(type: Status.ATTACK_RETURN_BACK)
@@ -460,17 +465,17 @@ class Spell:Core, IDisplay {
     func getUnitsInRowOf(seat:String) -> Array<String> {
         var seats = Array<String>()
         switch seat {
-        case BUnit.LLT, BUnit.LLM, BUnit.LLB:
-            seats = [BUnit.LLT, BUnit.LLM, BUnit.LLB]
+        case BUnit.BTL, BUnit.BTM, BUnit.BTR:
+            seats = [BUnit.BTL, BUnit.BTM, BUnit.BTR]
             break
-        case BUnit.LRT, BUnit.LRM, BUnit.LRB:
-            seats = [BUnit.LRT, BUnit.LRM, BUnit.LRB]
+        case BUnit.BBL, BUnit.BBM, BUnit.BBR:
+            seats = [BUnit.BBL, BUnit.BBM, BUnit.BBR]
             break
-        case BUnit.RLT, BUnit.RLM, BUnit.RLB:
-            seats = [BUnit.RLT, BUnit.RLM, BUnit.RLB]
+        case BUnit.TTL, BUnit.TTM, BUnit.TTR:
+            seats = [BUnit.TTL, BUnit.TTM, BUnit.TTR]
             break
-        case BUnit.RRT, BUnit.RRM, BUnit.RRB:
-            seats = [BUnit.RRT, BUnit.RRM, BUnit.RRB]
+        case BUnit.TBL, BUnit.TBM, BUnit.TBR:
+            seats = [BUnit.TBL, BUnit.TBM, BUnit.TBR]
             break
         default:
             debug("error of unit seat in getUnitsInRowOf")
@@ -516,16 +521,12 @@ class Spell:Core, IDisplay {
     }
     func getTargetsBySeats(seats:Array<String>) -> Array<BUnit> {
         var ts = Array<BUnit>()
-        let l = _battle._left
-        let r = _battle._right
+        let all = _battle._playerPart + _battle._enimyPart
         for seat in seats {
-            if "" == seat {
-                continue
-            }
-            if l.index(forKey: seat) != nil {
-                ts.append(l[seat]!)
-            } else if r.index(forKey: seat) != nil {
-                ts.append(r[seat]!)
+            for u in all {
+                if seat == u._unit._seat {
+                    ts.append(u)
+                }
             }
         }
         
@@ -534,10 +535,10 @@ class Spell:Core, IDisplay {
     func getAdajcentUnits(from:BUnit) -> Array<BUnit> {
 //        var ts = Array<BUnit>()
         var seats = Array<String>()
-        seats.append(getUnitBeyondTarget(seat: from._seat))
-        seats.append(getUnitUnderTarget(seat: from._seat))
-        seats.append(getUnitInTheLeftOfTarget(seat: from._seat))
-        seats.append(getUnitInTheRightOfTarget(seat: from._seat))
+        seats.append(getUnitBeyondTarget(seat: from._unit._seat))
+        seats.append(getUnitUnderTarget(seat: from._unit._seat))
+        seats.append(getUnitInTheLeftOfTarget(seat: from._unit._seat))
+        seats.append(getUnitInTheRightOfTarget(seat: from._unit._seat))
         return getTargetsBySeats(seats: seats)
     }
     func setFrozen(target:BUnit, completion:@escaping () -> Void) {
@@ -554,7 +555,7 @@ class Spell:Core, IDisplay {
                 status._timeleft = 1
                 target.addStatus(status: status)
                 target.isDefend = false
-                target.actionFrozen {}
+                target.actionFrozen(){}
             }
         }
     }
@@ -585,11 +586,19 @@ class Spell:Core, IDisplay {
         return true
     }
     //单体无遮挡 目标查找
-    internal func findSingleTargetNotBlocked(inleft:Bool = false) {
-        if !inleft {
-            _battle._selectedTarget = getRandomLeftUnit()
+    internal func findSingleTargetNotBlocked() {
+        if isTargetEmemy {
+            if _battle._curRole.playerPart {
+                _battle._selectedTarget = _battle._enimyPart.one()
+            } else {
+                _battle._selectedTarget = _battle._playerPart.one()
+            }
         } else {
-            _battle._selectedTarget = getRandomRightUnit()
+            if _battle._curRole.playerPart {
+                _battle._selectedTarget = _battle._playerPart.one()
+            } else {
+                _battle._selectedTarget = _battle._enimyPart.one()
+            }
         }
     }
     internal func getRandomLeftUnit() -> BUnit {
@@ -598,17 +607,17 @@ class Spell:Core, IDisplay {
     internal func getRandomRightUnit() -> BUnit {
         return _battle._rightRoles[seed(max: _battle._rightRoles.count)]
     }
-    internal func findHpLowestUnit(inleft:Bool = false) {
-        if inleft {
-            _battle._selectedTarget = findLowesHpUnit(_battle._left)
+    internal func findHpLowestUnit() {
+        if _battle._curRole.playerPart {
+            _battle._selectedTarget = findLowesHpUnit(_battle._playerPart)
         } else {
-            _battle._selectedTarget = findLowesHpUnit(_battle._right)
+            _battle._selectedTarget = findLowesHpUnit(_battle._enimyPart)
         }
     }
-    private func findLowesHpUnit(_ bs:Dictionary<String, BUnit>) -> BUnit {
+    private func findLowesHpUnit(_ bs: Array<BUnit>) -> BUnit {
         var bu = BUnit()
         var lhp:CGFloat = 0
-        for unit in bs.values {
+        for unit in bs {
             if lhp == 0 {
                 bu = unit
                 lhp = unit.getHp()

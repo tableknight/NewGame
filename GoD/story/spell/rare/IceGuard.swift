@@ -18,7 +18,7 @@ class IceGuard: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         //        let r = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         //        removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.ICE_GUARD
@@ -37,14 +37,5 @@ class IceGuard: Magical {
             }
         }
         
-    }
-    override func findTarget(inleft: Bool = false) {
-        let b = _battle!
-        if b._curRole.inleft {
-            b._selectedTarget = b._leftRoles[seed(max: b._leftRoles.count)]
-        } else {
-            b._selectedTarget = b._rightRoles[seed(max: b._rightRoles.count)]
-        }
-        //        b._selectedTarget = b._curRole
     }
 }

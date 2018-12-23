@@ -18,7 +18,7 @@ class FrozenShoot: Magical {
         _description = "对目标造成精神60%的冰冷伤害，有一定几率冻结目标"
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         _damageValue = waterDamage(t)
         let damage = _damageValue
@@ -36,13 +36,6 @@ class FrozenShoot: Magical {
                     //                completion()
                 }
             }
-        }
-    }
-    override func findTarget(inleft: Bool = false) {
-        if _battle._curRole.inleft {
-            _battle._selectedTarget = _battle._rightRoles[seed(max: _battle._rightRoles.count)]
-        } else {
-            _battle._selectedTarget = _battle._leftRoles[seed(max: _battle._leftRoles.count)]
         }
     }
 }

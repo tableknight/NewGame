@@ -29,7 +29,7 @@ class DeathGaze: Magical {
     }
     
     func attack(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
 //        let b = _battle
         //        let c = _battle._curRole
         _damageValue = magicalDamage(t)

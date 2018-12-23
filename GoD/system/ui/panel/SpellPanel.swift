@@ -207,8 +207,8 @@ class SpellPanel:UIPanel {
         showSpellsUnused()
         showSpellsInuse()
     }
-    private func close() {
-        Game.instance.stage.closeSpellPanel(panel: self)
+    override func close() {
+        Game.instance.curStage.removePanel(self)
     }
 //    func displayInfos(icon:Icon) {
 //        let spell = icon._displayItemType as! Spell

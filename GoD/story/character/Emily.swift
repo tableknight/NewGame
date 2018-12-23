@@ -15,12 +15,12 @@ class Emily:Character {
         _seat = BUnit.BBM
 //        _name = "艾米丽"
 //        _minionsCount = 2
-//        staminaChange(value: 45)
-//        strengthChange(value: 10)
-//        agilityChange(value: 65)
-//        intellectChange(value: 140)
-        _level = 1
-        _spellsInuse = [AttackReturnBack()]
+        staminaChange(value: 50)
+        strengthChange(value: 30)
+        agilityChange(value: 20)
+        intellectChange(value: 5)
+//        _level = 20
+        _spellsInuse = [AttackReturnBack(), FrozenShoot()]
         _spells = [
             Firelord(),
             Firelord(),
@@ -33,27 +33,28 @@ class Emily:Character {
             Firelord(),Firelord(),Firelord(),Firelord(),Firelord(),Firelord(),
         ]
         _spellCount = 4
+        _minionsCount = 3
         let blackCat = BlackCat()
         blackCat._seat = BUnit.STAND_BY
-        blackCat.create(level: 1)
+        blackCat.create(level: 20)
         blackCat._spellCount = 1
         blackCat._spellsInuse = []
         _minions.append(blackCat)
         let darkCrow = DarkCrow()
-        darkCrow.create(level: 1)
-        darkCrow._seat = BUnit.STAND_BY
+        darkCrow.create(level: 20)
+        darkCrow._seat = BUnit.BTM
 //        darkCrow.levelup()
         darkCrow._spellCount = 4
 //        darkCrow._spellsInuse = [Crazy()]
         _minions.append(darkCrow)
         
         let w = GiantWasp()
-        w.create(level: 10)
+        w.create(level: 20)
         w._spellCount = 1
         _minions.append(w)
         
         let bq = BloodQueen()
-        bq.create(level: 1)
+        bq.create(level: 20)
         bq._seat = BUnit.STAND_BY
 //        bq.levelup()
         bq._spellsInuse = [FireBreath()]

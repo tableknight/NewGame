@@ -18,6 +18,7 @@ class MyScene: SKSpriteNode {
     let CELL_MONSTER = 102
     let CELL_ITEM = 103
     let CELL_PORTAL = 104
+    let CELL_BOX = 105
     let TOWER_FIRE_ENERGE = 200
     let TOWER_WATER_ENERGE = 201
     let TOWER_THUNDER_ENERGE = 202
@@ -39,6 +40,7 @@ class MyScene: SKSpriteNode {
         _roleLayer.zPosition = MyScene.ROLE_LAYER_Z
         _itemLayer.zPosition = MyScene.ITEM_LAYER_Z
         _maskLayer.zPosition = MyScene.MASK_LAYER_Z
+        _direction = SOUTH
         addChild(_mapLayer)
         addChild(_roleLayer)
         addChild(_itemLayer)
@@ -73,31 +75,61 @@ class MyScene: SKSpriteNode {
         let nextX = nextPoint.x.toInt()
         if nextX < 0 || nextX > 8 || nextY < 0 || nextY > 7 {
             debug("out of matrix")
+            _isMoving = false
             return
         }
         let nextCell = _mapMatrix[nextY][nextX]
+        
         if CELL_EMPTY != nextCell && CELL_PORTAL != nextCell {
             switch _direction {
-                case NORTH:
-                    _role.faceNorth()
-                    break
-                case SOUTH:
-                    _role.faceSouth()
-                    break
-                case WEST:
-                    _role.faceWest()
-                    break
-                case EAST:
-                    _role.faceEast()
-                    break
-                default:
-                    debug("no face direction in func move")
+            case NORTH:
+                _role.faceNorth()
+                break
+            case SOUTH:
+                _role.faceSouth()
+                break
+            case WEST:
+                _role.faceWest()
+                break
+            case EAST:
+                _role.faceEast()
+                break
+            default:
+                debug("no face direction in func move")
             }
-            let cell = getNextCellItem(x:nextX, y:nextY)
-//            cell.triggerEvent()
-            
+        }
+        
+        if nextCell == CELL_TOWER {
+            let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
+            tower._triggered = true
+            tower.triggerEvent()
+            _isMoving = false
+            return
+        } else
+        if nextCell == CELL_MONSTER {
+            let mon = getNextCellItem(x: nextX, y: nextY) as! UIEvil
+            mon.triggerEvent()
+            let this = self
+            mon.defeatedAction = {
+                
+            }
+            mon.defeatAction = {
+                this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
+                mon.removeFromParent()
+                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
+                mon.run(wait) {
+                    mon.removeFromParent()
+                }
+            }
+            _isMoving = false
             return
         }
+        
+        if nextCell == CELL_ITEM {
+            _isMoving = false
+            return
+        }
+        
         
         var point:CGPoint = CGPoint(x: cellSize, y: cellSize)
         switch _direction {
@@ -140,7 +172,7 @@ class MyScene: SKSpriteNode {
         })
     }
     func getNextCellItem(x:Int, y:Int) -> UIItem {
-        return _itemLayer.childNode(withName: "cell\(x)\(y)") as! UIItem
+        return _itemLayer.childNode(withName: getItemName(CGPoint(x: x, y: y))) as! UIItem
     }
     func convertPixelToIndex(x:CGFloat, y:CGFloat) -> CGPoint {
         return CGPoint(x: round(x / cellSize) + 4, y: 4 - round(y / cellSize))
@@ -283,23 +315,12 @@ class MyScene: SKSpriteNode {
         }
         
     }
-//    internal func createItems() {
-//        let ob = Game.instance.outside_b
-//        addItem(x: 0, y: 0, item: ob.getNode(4, 12))
-//        addItem(x: 1, y: 0, item: ob.getNode(4, 12))
-//        addItem(x: 0, y: 1, item: ob.getNode(4, 12))
-//        for i in 3...8 {
-//
-////            addItem(x: i.toFloat(), y: 7, item: ob.getNode(4, 12))
-//            addItem(x: i.toFloat(), y: 6, item: ob.getNode(5, 12, 1, 2))
-//        }
-//    }
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
         item.position.x = (startX + x) * cellSize
         item.position.y = (3.5 - y) * cellSize
         item.zPosition = MyScene.ITEM_LAYER_Z
-        item.name = "cell\(x.toInt())\(y.toInt())"
+        item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)
     }
     internal func addMask(x:CGFloat, y:CGFloat) {
@@ -315,6 +336,8 @@ class MyScene: SKSpriteNode {
     }
     internal func createMapMatrix() {
         _mapMatrix = []
+        let towerCountTotal = seed(max: 3)
+        var towerCount = 0
         for y in 0...7 {
             var row:Array<Int> = []
             for x in 0...8 {
@@ -322,18 +345,26 @@ class MyScene: SKSpriteNode {
                     row.append(CELL_EMPTY)
                     continue
                 }
-                let cell = _cellEnum.one()
+                var cell = _cellEnum.one()
                 row.append(cell)
+                
+                if cell == CELL_TOWER {
+                    if towerCount < towerCountTotal {
+                        let tower = getRandomTower()
+                        addItem(x: x.toFloat(), y: y.toFloat(), item: tower)
+                        tower.zPosition = MyScene.ITEM_LAYER_Z + y.toFloat()
+                        towerCount += 1
+                    } else {
+                        cell = CELL_ITEM
+                    }
+                    
+                }
+                
                 if cell == CELL_EMPTY {
                     
                 } else
                 if cell == CELL_MONSTER {
                     addItem(x: x.toFloat(), y: y.toFloat(), item: getRandomMonterCellItem())
-                } else
-                if cell == CELL_TOWER {
-                    let tower = getRandomTower()
-                    addItem(x: x.toFloat(), y: y.toFloat(), item: tower)
-                    tower.zPosition = MyScene.ITEM_LAYER_Z + y.toFloat()
                 } else
                 if cell == CELL_ITEM {
                     let item = getRandomItem()
@@ -457,23 +488,30 @@ class MyScene: SKSpriteNode {
         let point = getNextPoint()
         if isPointValid(point: point) {
             let item = _itemLayer.childNode(withName: getItemName(point))
-            if nil != item {
+            if nil != item && removable(point) {
                 item!.removeFromParent()
+                _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_EMPTY
                 return true
             }
         }
         return false
     }
+    private func removable(_ point:CGPoint) -> Bool {
+        let cell = _mapMatrix[point.y.toInt()][point.x.toInt()]
+        
+        return cell == CELL_ITEM || cell == CELL_TOWER
+    }
     func getItemName(_ point:CGPoint) -> String {
-        return "item\(point.x)\(point.y)"
+        return "item\(point.x.toInt())\(point.y.toInt())"
     }
     func setRole() {
         let e = Emily()
         Game.instance.char = e
-        e.create(level: 1)
+        e.create()
         e._level = 20
-        e._leftPoint = 5
-        e._dungeonLevel = 20
+//        for _ in 0...19 {
+//            e.levelup()
+//        }
         let char = BUnit()
         char.setUnit(unit: e)
         char.createForStage()
@@ -485,7 +523,7 @@ class MyScene: SKSpriteNode {
         char.zPosition = MyScene.ROLE_LAYER_Z
         _role = char
 //        Game.instance.role = _role
-        Game.instance.role = _role
+//        Game.instance.role = _role
     }
     internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
     internal var _mapSet:GroundSets!
@@ -508,5 +546,6 @@ class MyScene: SKSpriteNode {
     var _cellEnum:Array<Int> = []
     var _specialPoints:Array<CGPoint> = []
     var _status = Array<Status>()
+    var _level:CGFloat = 20
 }
 

@@ -270,6 +270,12 @@
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
+		09C6BF8021C8BB440003C7F1 /* BattleSpellCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7F21C8BB440003C7F1 /* BattleSpellCard.swift */; };
+		09C6BF8221CA5F220003C7F1 /* BattleItemPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8121CA5F220003C7F1 /* BattleItemPanel.swift */; };
+		09C6BF8421CB59550003C7F1 /* BattleMinionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */; };
+		09C6BF8621CBE06F0003C7F1 /* SelectProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */; };
+		09C6BF8821CF314E0003C7F1 /* IAcientRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8721CF314E0003C7F1 /* IAcientRoad.swift */; };
+		09C6BF8C21CF34A40003C7F1 /* StandScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8B21CF34A40003C7F1 /* StandScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -559,6 +565,12 @@
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
+		09C6BF7F21C8BB440003C7F1 /* BattleSpellCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleSpellCard.swift; sourceTree = "<group>"; };
+		09C6BF8121CA5F220003C7F1 /* BattleItemPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleItemPanel.swift; sourceTree = "<group>"; };
+		09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMinionList.swift; sourceTree = "<group>"; };
+		09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfession.swift; sourceTree = "<group>"; };
+		09C6BF8721CF314E0003C7F1 /* IAcientRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAcientRoad.swift; sourceTree = "<group>"; };
+		09C6BF8B21CF34A40003C7F1 /* StandScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -664,6 +676,7 @@
 				090FEA5221BB9B2A004276BB /* attribute */,
 				090FEA6D21BB9B2A004276BB /* Outfit.swift */,
 				090FEA6E21BB9B2A004276BB /* Prop.swift */,
+				090FEAE921BB9B2A004276BB /* Loot.swift */,
 				090FEA6F21BB9B2A004276BB /* Attribute.swift */,
 			);
 			path = prop;
@@ -765,13 +778,13 @@
 		090FEA7021BB9B2A004276BB /* character */ = {
 			isa = PBXGroup;
 			children = (
+				090FEA7A21BB9B2A004276BB /* creature */,
 				090FEA7121BB9B2A004276BB /* IEvil.swift */,
 				090FEA7221BB9B2A004276BB /* IChar.swift */,
 				090FEA7621BB9B2A004276BB /* Character.swift */,
 				090FEA7721BB9B2A004276BB /* IUnit.swift */,
 				090FEA7821BB9B2A004276BB /* PowerLord.swift */,
 				090FEA7921BB9B2A004276BB /* Unit.swift */,
-				090FEA7A21BB9B2A004276BB /* creature */,
 				090FEA8D21BB9B2A004276BB /* Emily.swift */,
 				090FEA8E21BB9B2A004276BB /* Creature.swift */,
 			);
@@ -1004,10 +1017,11 @@
 			children = (
 				090FEAE721BB9B2A004276BB /* PowerlordBattle.swift */,
 				090FEAE821BB9B2A004276BB /* BUnit.swift */,
-				090FEAE921BB9B2A004276BB /* Loot.swift */,
 				090FEAEA21BB9B2A004276BB /* BItem.swift */,
 				090FEAEB21BB9B2A004276BB /* Battle.swift */,
 				090FEAEC21BB9B2A004276BB /* UIOrder.swift */,
+				09C6BF7F21C8BB440003C7F1 /* BattleSpellCard.swift */,
+				09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */,
 			);
 			path = battle;
 			sourceTree = "<group>";
@@ -1066,6 +1080,7 @@
 				09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */,
 				09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */,
 				09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */,
+				09C6BF8121CA5F220003C7F1 /* BattleItemPanel.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1110,11 +1125,11 @@
 		090FEB1B21BB9B2B004276BB /* stage */ = {
 			isa = PBXGroup;
 			children = (
+				090FEB2121BB9B2B004276BB /* scenery */,
 				090FEB1C21BB9B2B004276BB /* sceneSets */,
 				090FEB1E21BB9B2B004276BB /* BaseStage.swift */,
 				090FEB1F21BB9B2B004276BB /* Village.swift */,
 				090FEB2021BB9B2B004276BB /* IScenery.swift */,
-				090FEB2121BB9B2B004276BB /* scenery */,
 				090FEB2421BB9B2B004276BB /* Scenery.swift */,
 				090FEB2521BB9B2B004276BB /* UIStage.swift */,
 				090FEB2621BB9B2B004276BB /* BaseScene.swift */,
@@ -1200,6 +1215,7 @@
 				090FEB4B21BB9B2B004276BB /* RoleSelectPanel.swift */,
 				090FEB4C21BB9B2B004276BB /* SelectSpell.swift */,
 				090FEB4D21BB9B2B004276BB /* CreationFlow.swift */,
+				09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */,
 			);
 			path = welcome;
 			sourceTree = "<group>";
@@ -1216,9 +1232,27 @@
 		090FEC4A21BCC36C004276BB /* gamescene */ = {
 			isa = PBXGroup;
 			children = (
-				090FEC4B21BCC418004276BB /* SceneMeadow.swift */,
+				09C6BF8A21CF345A0003C7F1 /* acientroad */,
+				09C6BF8921CF32180003C7F1 /* normal */,
 			);
 			path = gamescene;
+			sourceTree = "<group>";
+		};
+		09C6BF8921CF32180003C7F1 /* normal */ = {
+			isa = PBXGroup;
+			children = (
+				09C6BF8B21CF34A40003C7F1 /* StandScene.swift */,
+			);
+			path = normal;
+			sourceTree = "<group>";
+		};
+		09C6BF8A21CF345A0003C7F1 /* acientroad */ = {
+			isa = PBXGroup;
+			children = (
+				090FEC4B21BCC418004276BB /* SceneMeadow.swift */,
+				09C6BF8721CF314E0003C7F1 /* IAcientRoad.swift */,
+			);
+			path = acientroad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1389,6 +1423,7 @@
 				090FEC2D21BB9B2B004276BB /* Meadow.swift in Sources */,
 				090FEB5421BB9B2B004276BB /* Sword.swift in Sources */,
 				090FEC2021BB9B2B004276BB /* SmallRoom.swift in Sources */,
+				09C6BF8221CA5F220003C7F1 /* BattleItemPanel.swift in Sources */,
 				090FEB7421BB9B2B004276BB /* Health.swift in Sources */,
 				090FEC0C21BB9B2B004276BB /* Icon.swift in Sources */,
 				090FEC1821BB9B2B004276BB /* Bed.swift in Sources */,
@@ -1428,6 +1463,7 @@
 				090FEBF221BB9B2B004276BB /* BItem.swift in Sources */,
 				090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */,
 				09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */,
+				09C6BF8421CB59550003C7F1 /* BattleMinionList.swift in Sources */,
 				090FEB7521BB9B2B004276BB /* WaterResistance.swift in Sources */,
 				090FEBBC21BB9B2B004276BB /* IceGuard.swift in Sources */,
 				090FEB6321BB9B2B004276BB /* NewSword.swift in Sources */,
@@ -1497,6 +1533,7 @@
 				090FEC4C21BCC418004276BB /* SceneMeadow.swift in Sources */,
 				090FEB8C21BB9B2B004276BB /* IChar.swift in Sources */,
 				090FEB5921BB9B2B004276BB /* SacredAmulet.swift in Sources */,
+				09C6BF8621CBE06F0003C7F1 /* SelectProfession.swift in Sources */,
 				090FEC0A21BB9B2B004276BB /* RoleInfoPanel.swift in Sources */,
 				090FEBAF21BB9B2B004276BB /* DeathGaze.swift in Sources */,
 				090FEBAC21BB9B2B004276BB /* SummonFlower.swift in Sources */,
@@ -1534,6 +1571,7 @@
 				090FEBC121BB9B2B004276BB /* Dominate.swift in Sources */,
 				090FEB8B21BB9B2B004276BB /* IEvil.swift in Sources */,
 				090FEC3821BB9B2B004276BB /* WitheredLane.swift in Sources */,
+				09C6BF8821CF314E0003C7F1 /* IAcientRoad.swift in Sources */,
 				090FEC2221BB9B2B004276BB /* Scenery.swift in Sources */,
 				090FEB5E21BB9B2B004276BB /* SacredBow.swift in Sources */,
 				090FEC2B21BB9B2B004276BB /* FrozenLand.swift in Sources */,
@@ -1583,6 +1621,7 @@
 				090FEB8F21BB9B2B004276BB /* Character.swift in Sources */,
 				090FEB9D21BB9B2B004276BB /* TreeSpirit.swift in Sources */,
 				090FEBA421BB9B2B004276BB /* SpiritIntervene.swift in Sources */,
+				09C6BF8C21CF34A40003C7F1 /* StandScene.swift in Sources */,
 				090FEB9E21BB9B2B004276BB /* Mummy.swift in Sources */,
 				090FEB9221BB9B2B004276BB /* Unit.swift in Sources */,
 				090FEBAD21BB9B2B004276BB /* LifeDraw.swift in Sources */,
@@ -1599,6 +1638,7 @@
 				090FEB5721BB9B2B004276BB /* Dagger.swift in Sources */,
 				090FEB8321BB9B2B004276BB /* Lucky.swift in Sources */,
 				090FEC2821BB9B2B004276BB /* TestSeven.swift in Sources */,
+				09C6BF8021C8BB440003C7F1 /* BattleSpellCard.swift in Sources */,
 				090FEBEC21BB9B2B004276BB /* SpellBook.swift in Sources */,
 				090FEBF621BB9B2B004276BB /* MyScene.swift in Sources */,
 				090FEC3521BB9B2B004276BB /* CenterVillage.swift in Sources */,

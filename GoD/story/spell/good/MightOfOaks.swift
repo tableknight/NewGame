@@ -18,7 +18,7 @@ class MightOfOaks: Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         c.actionCast {
             t.actionBuff {
                 let s = Status()
@@ -26,13 +26,6 @@ class MightOfOaks: Magical {
                 s._timeleft = 5
                 t.addStatus(status: s)
             }
-        }
-    }
-    override func findTarget(inleft: Bool) {
-        if inleft {
-            _battle._selectedTarget = _battle._leftRoles.one()
-        } else {
-            _battle._selectedTarget = _battle._rightRoles.one()
         }
     }
 }

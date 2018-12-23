@@ -123,11 +123,15 @@ class Creature: Unit {
         }
         return true
     }
+    func getLoots() -> Array<Prop> {
+        return Array<Prop>()
+    }
     var _sensitive = 33
     var _weapon:Weapon?
     var _seat = BUnit.STAND_BY
     var isMainChar = false
     //矩阵图第三行和第四行特殊
     var specialUnit = false
+    //非行动单位
     var hasAction = true
 }

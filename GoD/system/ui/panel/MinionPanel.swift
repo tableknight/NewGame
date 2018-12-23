@@ -102,57 +102,6 @@ class MinionPanel:SKSpriteNode {
         //        _expbar.anchorPoint = apc
         addChild(_expbar)
         
-//        let gap:CGFloat = 10
-//        let colorLight = QualityColor.RARE
-        
-//        let llt = getSeatNode()
-//        llt.position.y = startY - 2
-//        llt.position.x = (_expbar.position.x + _expbar.size.width) + gap
-//        if char._seat == BUnit.LLT {
-//            llt.color = colorLight
-//        }
-//        addChild(llt)
-//
-//        let lrt = getSeatNode()
-//        lrt.position.y = startY - 3
-//        lrt.position.x = llt.position.x + llt.size.width + gap
-//        if char._seat == BUnit.LRT {
-//            lrt.color = colorLight
-//        }
-//        addChild(lrt)
-//
-//        let llm = getSeatNode()
-//        llm.position.y = llt.position.y - llt.size.height - gap
-//        llm.position.x = llt.position.x
-//        if char._seat == BUnit.LLM {
-//            llm.color = colorLight
-//        }
-//        addChild(llm)
-//
-//        let lrm = getSeatNode()
-//        lrm.position.y = llm.position.y
-//        lrm.position.x = lrt.position.x
-//        if char._seat == BUnit.LRM {
-//            lrm.color = colorLight
-//        }
-//        addChild(lrm)
-//
-//        let llb = getSeatNode()
-//        llb.position.y = llm.position.y - llm.size.height - gap
-//        llb.position.x = llt.position.x
-//        if char._seat == BUnit.LLB {
-//            llb.color = colorLight
-//        }
-//        addChild(llb)
-//
-//        let lrb = getSeatNode()
-//        lrb.position.y = llb.position.y
-//        lrb.position.x = lrt.position.x
-//        if char._seat == BUnit.LRB {
-//            lrb.color = colorLight
-//        }
-//        addChild(lrb)
-        
         let firstRowX = startX
         let firstLineY = actor.position.y - actor.size.height - cellSize * 0.4
         //        let pGapX:CGFloat = 12

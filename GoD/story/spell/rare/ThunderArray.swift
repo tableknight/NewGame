@@ -79,12 +79,11 @@ class ThunderArray:Magical {
             }
         }
     }
-    
-    override func findTarget(inleft:Bool = false) {
+    override func findTarget() {
         let c = _battle._curRole
-        var ts = _battle._leftRoles
-        if c.inleft {
-            ts = _battle._rightRoles
+        var ts = _battle._playerPart
+        if c.playerPart {
+            ts = _battle._enimyPart
         }
         _battle._selectedTargets = ts
     }

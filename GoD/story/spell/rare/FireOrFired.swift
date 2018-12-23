@@ -28,7 +28,7 @@ class FireOrFired: Magical {
     }
     
     func attack(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         _damageValue = fireDamage(t)
         var damage = _damageValue

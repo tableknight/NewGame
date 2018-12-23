@@ -17,23 +17,36 @@ class UIEvil: UIUnit {
     }
     
     override func triggerEvent() {
+        let stage = Game.instance.curStage!
+        let sc = stage._curScene!
+        let char = Game.instance.char!
+        var enimies = Array<Creature>()
         
-        let sc = Game.instance.stage._curScene
-        
+        let enimyCount = seed(min: 1, max: 4)
+        for _ in 0...enimyCount {
+            let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
+            e.create(level: sc._level)
+            enimies.append(e)
+        }
+        stage.hideScene()
         let b = Battle()
-        b.setEvils(evils: sc.getEvil(id: _thisType)._evils)
-        let char = Game.instance._char!
         let roles = [char] + char.getReadyMinions()
-        
-        b.setRoles(roles: roles)
-        b.zPosition = UIStage.LAYER6
+        b.setEnimyPart(minions: enimies)
+        b.setPlayerPart(roles: roles)
+        b.zPosition = MyStage.UI_TOPEST_Z
+        let this = self
+        b.defeatedAction = {
+            this.defeatedAction()
+        }
+        b.defeatAction = {
+            this.defeatAction()
+        }
+        stage.addBattle(b)
         b.battleStart()
-        Game.instance.stage.addBattle(b: b)
-        
-//        Data.instance.stage.hideUI()
-//        Data.instance.stage.hideScene()
     }
     var _evils = Array<Creature>()
     var _thisType = -1
+    var defeatAction = {}
+    var defeatedAction = {}
 }
 

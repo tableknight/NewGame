@@ -35,7 +35,7 @@ class FireEnergeTower:Tower {
             _triggered = true
             let s = FireEnerge()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -55,7 +55,7 @@ class WaterEnergeTower:Tower {
             _triggered = true
             let s = WaterEnerge()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -75,7 +75,7 @@ class ThunderEnergeTower:Tower {
             _triggered = true
             let s = ThunderEnerge()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -95,7 +95,7 @@ class TimeReduceTower:Tower {
             _triggered = true
             let s = TimeReduce()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -115,7 +115,7 @@ class PhysicalPowerTower:Tower {
             _triggered = true
             let s = PhysicalPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -135,7 +135,7 @@ class MagicalPowerTower:Tower {
             _triggered = true
             let s = MagicalPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -155,7 +155,7 @@ class AttackPowerTower:Tower {
             _triggered = true
             let s = AttackPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -175,7 +175,7 @@ class DefencePowerTower:Tower {
             _triggered = true
             let s = DefencePower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -195,7 +195,7 @@ class MindPowerTower:Tower {
             _triggered = true
             let s = MindPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -215,7 +215,7 @@ class LuckyPowerTower:Tower {
             _triggered = true
             let s = LuckyPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }
@@ -235,7 +235,7 @@ class SpeedPowerTower:Tower {
             _triggered = true
             let s = SpeedPower()
             showMsg(text: "[\(s._name)] \(s._description)")
-            Game.instance.stage.addStatus(status: s)
+            Game.instance.curStage.addStatus(status: s)
         }
     }
 }

@@ -15,7 +15,7 @@ class Attack: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         let role = c._unit
         let this = self
@@ -43,7 +43,7 @@ class Attack: Physical {
     
     private func attack(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
 //        let role = c._unit
         
@@ -116,7 +116,7 @@ class Attack: Physical {
     
     func attackMore(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         
         if !(c._unit._weapon is IdyllssHand) {
@@ -143,11 +143,11 @@ class Attack: Physical {
         completion()
     }
     
-    override func findTarget(inleft:Bool = false) {
+    override func findTarget() {
         if _battle._curRole._unit.isClose() {
-            super.findTarget(inleft: inleft)
+            super.findTarget()
         } else {
-            findSingleTargetNotBlocked(inleft: inleft)
+            findSingleTargetNotBlocked()
         }
     }
 

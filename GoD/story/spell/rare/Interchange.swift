@@ -16,29 +16,26 @@ class Interchange: Magical {
         _description = "移动到或者和目标交换位置"
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         let b = _battle
 //        let this = self
 //        c.showText(text: _name)
         c.actionCast {
-            let seat = t._seat
-            if !t.isEmpey {
-                t._seat = c._seat
-                t._unit._seat = c._seat
+            let seat = t._unit._seat
+            if !t.isEmpty {
+                t._unit._seat = c._unit._seat
+                t._unit._seat = c._unit._seat
                 b?.setRolePos(unit: t)
             } else {
                 t.removeFromBattle()
                 t.removeFromParent()
-                b?._left[c._seat] = nil
+                b?._left[c._unit._seat] = nil
             }
-            c._seat = seat
+            c._unit._seat = seat
             c._unit._seat = seat
             b?.setRolePos(unit: c)
             completion()
         }
-    }
-    override func findTarget(inleft: Bool = false) {
-//        findSingleTargetNotBlocked()
     }
 }

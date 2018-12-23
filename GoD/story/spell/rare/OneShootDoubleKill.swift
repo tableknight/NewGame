@@ -20,11 +20,11 @@ class OneShootDoubleKill: Physical {
     
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         //        let role = c._unit
         let this = self
-        let seat = getUnitInTheRightOfTarget(seat: t._seat)
+        let seat = getUnitInTheRightOfTarget(seat: t._unit._seat)
         let ts = getTargetsBySeats(seats: [seat])
         c.actionShoot {
             this.attack(t:t) {

@@ -31,15 +31,15 @@ class SelectSpell:UIPanel {
             }
         }
         
-        if _prevButton.contains(touchPoint!) {
-            (parent as! CreationFlow).showItems()
-        }
-        if _nextButton.contains(touchPoint!) {
-            if !hasSelected() {
-                return
-            }
-            (parent as! CreationFlow).createChar()
-        }
+//        if _prevButton.contains(touchPoint!) {
+//            (parent as! CreationFlow).showItems()
+//        }
+//        if _nextButton.contains(touchPoint!) {
+//            if !hasSelected() {
+//                return
+//            }
+//            (parent as! CreationFlow).createChar()
+//        }
     }
     override func create() {
         createCloseButton()

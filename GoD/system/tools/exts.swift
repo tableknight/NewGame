@@ -60,6 +60,17 @@ extension SKSpriteNode {
         let view = SKView()
         return view.texture(from: self)!
     }
+    func show() {
+        self.isHidden = false
+    }
+    func hide() {
+        self.isHidden = true
+    }
+    var visible: Bool {
+        get {
+            return !self.isHidden
+        }
+    }
 }
 
 extension SKTexture {

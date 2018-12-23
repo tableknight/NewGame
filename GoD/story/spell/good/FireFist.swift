@@ -20,7 +20,7 @@ class FireFist: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
 //        let role = c._unit
         let this = self
@@ -37,7 +37,7 @@ class FireFist: Physical {
     
     private func attack(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget
+        let t = b._selectedTarget!
         let c = b._curRole
         //        let role = c._unit
         let fireRate = (c.getFirePower() - t.getFireResistance()) * 0.01 + 1

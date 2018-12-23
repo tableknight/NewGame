@@ -7,131 +7,107 @@
 //
 
 import SpriteKit
-class LootPanel:SKSpriteNode {
+class LootPanel:UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
-//        _infoPanel.removeFromParent()
-//        _lastSelectProp.selected = false
-        if _selectButton.contains(touchPoint!) {
-            addProps()
-        } else {
-            if _lastSelectProp.contains(touchPoint!) {
-                removeProp(p: _lastSelectProp)
-                _lastSelectProp = PropComponent()
-            } else {
-                for p in _propComponents {
-                    if p.contains(touchPoint!) {
-                        _lastSelectProp.selected = false
-                        p.selected = true
-                        _lastSelectProp = p
-                        showInfo(pc:p)
-                        return
-                    }
+        _infosDisplay.removeFromParent()
+        if _closeButton.contains(touchPoint!) {
+            Game.instance.curStage.removePanel(self)
+            confirmAction()
+            for u in _propBox.children {
+                let icon = u as! PropIcon
+                if icon.selected {
+                    _char.addProp(p: icon._displayItemType as! Prop)
                 }
-                _lastSelectProp.selected = false
-                _lastSelectProp = PropComponent()
+            }
+            return
+        }
+        for u in _propBox.children {
+            if u.contains(touchPoint!) {
+                let icon = u as! PropIcon
+                icon.selected = !icon.selected
+                displayInfos(icon: icon)
             }
         }
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        zPosition = UIStage.PANEL_LAYER
-        isUserInteractionEnabled = true
+        addChild(_propBox)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    private func createBg() {
-        let rect = CGRect(x: -cellSize * 3.5, y: -cellSize * 2, width: cellSize * 7, height: cellSize * 4)
-        _bg = SKShapeNode(rect: rect, cornerRadius: 4)
-        _bg.fillColor = UIColor.black
+    override func createPanelbackground() {
+        _bg = createBackground(width: _standardWidth * 0.75, height: _standardHeight * 0.5)
+        _bg.position = CGPoint(x: 0, y: 0)
+        _bg.zPosition = self.zPosition + 1
         addChild(_bg)
-        addChild(_propBox)
+        
     }
     
     func create(props:Array<Prop>) {
         _props = props
-        createBg()
+        createCloseButton()
         listProps()
-        createButtons()
     }
     
-    private func createButtons() {
-        _selectButton.text = "拾取"
-        _selectButton.position.x = cellSize * 2.5
-        _selectButton.position.y = cellSize * 2.5
-        addChild(_selectButton)
-        
-        let lb = Label()
-        lb.align = "left"
-        lb.text = "丢弃：再次点击已选中的物品。"
-        lb.position.x = -cellSize * 3.5
-        lb.position.y = cellSize * 2.1
-        lb.fontSize = 16
-        addChild(lb)
+    override func createCloseButton() {
+        _closeButton.text = "确定"
+        _closeButton.position.y = _standardHeight * 0.25 + cellSize * 0.5
+        _closeButton.position.x = _standardWidth * 0.25 - cellSize * 0.5
+        _closeButton.zPosition = self.zPosition + 2
+        addChild(_closeButton)
+//        _selectButton.text = "确定"
+//        _selectButton.position.x = _closeButton.xAxis
+//        _selectButton.position.y = -_closeButton.yAxis + cellSize * 0.5
+//        _selectButton.zPosition = _closeButton.zPosition
+//        addChild(_selectButton)
     }
     
     private func listProps() {
         let startX = -cellSize * 2.5
         let startY = cellSize * 1.25
+        let gap = cellSize * 1.25
         var i = 0
         for p in _props {
-            let lc = PropComponent()
-            let y = i / 5
-            let mod = i % 5
-            lc.prop = p
-            lc.position.x = startX + mod.toFloat() * cellSize * 1.25
-            lc.position.y = startY - y.toFloat() * cellSize * 1.25
+            let lc = PropIcon()
+            let y = i / 4
+            let mod = i % 4
+            lc.count = p._count
+            lc.selected = true
+            lc._displayItemType = p
+            lc.position.x = startX + mod.toFloat() * gap
+            lc.position.y = startY - y.toFloat() * gap
+            lc.zPosition = self.zPosition + 3
             _propBox.addChild(lc)
-            _propComponents.append(lc)
             i += 1
         }
     }
     
     private func removeProp(p:PropComponent) {
-        let index = _propComponents.index(of: p)
-        if nil != index {
-            _propComponents.remove(at: index!)
-//            _props.remove(at: index!)
-            p.removeFromParent()
-        }
+//        let index = _propComponents.index(of: p)
+//        if nil != index {
+//            _propComponents.remove(at: index!)
+////            _props.remove(at: index!)
+//            p.removeFromParent()
+//        }
         
     }
     
     private func addProps() {
-        let c = Game.instance._char!
-        for pc in _propComponents {
-            c.addProp(p: pc.prop)
-        }
-        removeFromParent()
-        _battle.fadeOutBattle()
+//        let c = Game.instance.char!
+//        for pc in _propComponents {
+//            c.addProp(p: pc.prop)
+//        }
+//        removeFromParent()
+//        _battle.fadeOutBattle()
     }
     
-    private func showInfo(pc:PropComponent) {
-        let prop = pc.prop
-        _infoPanel.removeFromParent()
-        if prop is Item {
-            let ii = ItemInfo()
-            ii.create(item: prop as! Item)
-            addChild(ii)
-            _infoPanel = ii
-        } else if prop is Outfit {
-            let ai = ArmorInfo()
-            ai.create(armor: prop as! Outfit)
-            addChild(ai)
-            _infoPanel = ai
-        }
-        _infoPanel.position.x = pc.position.x + cellSize * 0.5 + 5
-        _infoPanel.position.y = pc.position.y + cellSize * 0.5
-    }
-    private var _lastSelectProp = PropComponent()
     private var _propBox = SKSpriteNode()
-    private var _bg = SKShapeNode()
     private var _props = Array<Prop>()
-    private var _propComponents = Array<PropComponent>()
     private var _selectButton = Button()
     private var _infoPanel = SKSpriteNode()
-    var _battle:Battle!
+    var confirmAction = {}
 //    private var _
 }

@@ -18,7 +18,7 @@ class Immune: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let status = Status()
         status._type = Status.IMMUNE
         status._timeleft = 2

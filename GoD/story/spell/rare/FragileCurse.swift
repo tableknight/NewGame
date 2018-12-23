@@ -16,7 +16,7 @@ class FragileCurse: Magical {
         _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let c = _battle._curRole
         let this = self
         c.actionCast {
@@ -32,7 +32,7 @@ class FragileCurse: Magical {
         }
     }
     
-    override func findTarget(inleft:Bool = false) {
-        findSingleTargetNotBlocked(inleft: _battle._curRole.inleft)
+    override func findTarget() {
+        findSingleTargetNotBlocked()
     }
 }

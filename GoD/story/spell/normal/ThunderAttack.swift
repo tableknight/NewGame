@@ -29,7 +29,7 @@ class ThunderAttack: Magical {
     }
     
     func attack(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         _damageValue = thunderDamage(t)
         let damage = _damageValue
         if hadSpecialAction(t:t, completion: completion) {
@@ -45,9 +45,6 @@ class ThunderAttack: Magical {
                 }
             }
         }
-    }
-    override func findTarget(inleft: Bool = false) {
-        findSingleTargetNotBlocked(inleft: _battle._curRole.inleft)
     }
 }
 

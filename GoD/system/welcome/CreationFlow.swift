@@ -10,59 +10,59 @@ import SpriteKit
 class CreationFlow:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _selectImage.create()
-        _selectItems.create()
-        _selectSpell.create()
-        _selectMinion.create()
-        addChild(_selectSpell)
-        addChild(_selectMinion)
-        addChild(_selectItems)
-        addChild(_selectImage)
         
-        showImages()
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func showImages() {
-        _selectMinion.isHidden = true
-        _selectItems.isHidden = true
-        _selectSpell.isHidden = true
-        _selectImage.isHidden = false
-    }
-    
-    func showMinions() {
-        _selectMinion.isHidden = false
-        _selectItems.isHidden = true
-        _selectSpell.isHidden = true
-        _selectImage.isHidden = true
-    }
-    
-    func showItems() {
-        _selectMinion.isHidden = true
-        _selectItems.isHidden = false
-        _selectSpell.isHidden = true
-        _selectImage.isHidden = true
-    }
-    
-    func showSpells() {
-        _selectMinion.isHidden = true
-        _selectItems.isHidden = true
-        _selectSpell.isHidden = false
-        _selectImage.isHidden = true
-    }
-    
-    func createChar() {
-        let char = Character()
-        char.create(level: 1)
-        char._img = _selectImage._lastSelectedComponent.image
-//        char._minions = [_selectMinion._lastSelectedComponent.unit]
-        char._spellsInuse = [_selectSpell._lastSelectedComponent.spell]
-        for c in _selectItems.getSelectedItems() {
-            char.addProp(p: c.item)
+    func create() {
+        let this = self
+        let selectImage = SelectImage()
+        selectImage.create()
+        addChild(selectImage)
+        
+        let selectPro = SelecProfession()
+        selectPro.create()
+        selectPro.hide()
+        addChild(selectPro)
+        
+        let selectItems = SelectItems()
+        selectItems.create()
+        selectItems.hide()
+        addChild(selectItems)
+        
+        let selectMinion = SelectMinion()
+        selectMinion.create()
+        selectMinion.hide()
+        addChild(selectMinion)
+        
+        selectImage.nextAction = {
+            this.showPanel(1)
         }
-        loadStage(char: char)
+        selectPro.nextAction = {
+            this.showPanel(2)
+        }
+        selectPro.prevAction = {
+            this.showPanel(0)
+        }
+        selectItems.nextAction = {
+            this.showPanel(3)
+        }
+        selectItems.prevAction = {
+            this.showPanel(1)
+        }
+        selectMinion.prevAction = {
+            this.showPanel(2)
+        }
+        selectMinion.nextAction = {
+            
+        }
+        
+        _panels.append(selectImage)
+        _panels.append(selectPro)
+        _panels.append(selectItems)
+        _panels.append(selectMinion)
     }
     
     private func loadStage(char:Character) {
@@ -81,8 +81,12 @@ class CreationFlow:SKSpriteNode {
         }
     }
     
-    private var _selectImage = SelectImage()
-    private var _selectItems = SelectItems()
-    private var _selectSpell = SelectSpell()
-    private var _selectMinion = SelectMinion()
+    func showPanel(_ i:Int) {
+        for u in _panels {
+            u.hide()
+        }
+        _panels[i].show()
+    }
+    
+    private var _panels = Array<UIPanel>()
 }

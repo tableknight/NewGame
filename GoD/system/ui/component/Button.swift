@@ -12,6 +12,7 @@ class Button:SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         zPosition = UIStage.UILAYER
         _bg = createBackground(width: cellSize * 1.5, height: cellSize * 0.5)
+        _width = cellSize * 1.5
         addChild(_bg)
         _label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         _label.fontColor = UIColor.white
@@ -57,11 +58,14 @@ class Button:SKSpriteNode {
             _bg.removeFromParent()
             _bg = createBackground(width: newValue, height: cellSize * 0.75)
             addChild(_bg)
+            _width = newValue
         }
         get {
-            return 0
+            return _width
         }
     }
+    
+    private var _width:CGFloat = 0
 
 }
 

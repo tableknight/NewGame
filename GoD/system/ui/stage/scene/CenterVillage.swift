@@ -129,10 +129,10 @@ class CenterVillage: UIScene {
         
         
         let b = Battle()
-        b.setEvilsBySeat(evils: es)
+//        b.setEvilsBySeat(evils: es)
         let roles = [e] + e.getReadyMinions()
         
-        b.setRoles(roles: roles)
+//        b.setRoles(roles: roles)
         b.zPosition = UIStage.LAYER6
         b.battleStart()
         Game.instance.stage.addBattle(b: b)
@@ -184,10 +184,10 @@ class CenterVillage: UIScene {
         
         
         let b = Battle()
-        b.setEvilsBySeat(evils: es)
+//        b.setEvilsBySeat(evils: es)
         let roles = [e] + e.getReadyMinions()
         
-        b.setRoles(roles: roles)
+//        b.setRoles(roles: roles)
         b.zPosition = UIStage.LAYER6
         b.battleStart()
         Game.instance.stage.addBattle(b: b)

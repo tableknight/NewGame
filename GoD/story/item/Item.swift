@@ -36,7 +36,7 @@ class Item:Prop {
     }
     
     func removeFromChar() {
-        Game.instance._char.removeProp(p: self)
+        Game.instance.char.removeProp(p: self)
     }
     
     override func getInfosDisplay() -> IPanelSize {
@@ -189,6 +189,18 @@ class BlastScroll:Item {
         _description = "移除面前的一个障碍物"
     }
     override func use(target: Creature) {
+        let stage = Game.instance.curStage!
+        let scene = Game.instance.curStage._curScene!
+        let bChar = scene._role!
+        let this = self
+        if stage._curPanel != nil {
+            stage.removePanel(stage._curPanel!)
+        }
+        bChar.actionBuff {
+            if scene.blastItem() {
+                this.removeFromChar()
+            }
+        }
         
     }
 }

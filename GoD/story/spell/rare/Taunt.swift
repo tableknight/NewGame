@@ -37,11 +37,11 @@ class Taunt: Magical {
             setTimeout(delay: 1.5, completion: completion)
         }
     }
-    override func findTarget(inleft: Bool = false) {
-        if _battle._curRole.inleft {
-            _battle._selectedTargets = _battle._rightRoles
+    override func findTarget() {
+        if _battle._curRole.playerPart {
+            _battle._selectedTargets = _battle._enimyPart
         } else {
-            _battle._selectedTargets = _battle._leftRoles
+            _battle._selectedTargets = _battle._playerPart
         }
     }
 }

@@ -700,11 +700,12 @@ class AttrLabel:SKSpriteNode {
     var value:Int {
         set {
             _value = newValue
-            if(_value < 0) {
-                _label.text = self._text
-            } else {
-                _label.text = self._text + " \(self._value)"
-            }
+//            if(_value < 0) {
+//                _label.text = self._text
+//            } else {
+//            }
+            
+            _label.text = self._text + " \(self._value)"
         }
         get {
             return _value

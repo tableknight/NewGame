@@ -13,11 +13,11 @@ class ItemInfo:SKSpriteNode, IPanelSize {
 //    }
     
     func getDisplayHeight() -> CGFloat {
-        return 0
+        return _displayHeight
     }
     
     func getDisplayWidth() -> CGFloat {
-        return 0
+        return _displayWidth
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

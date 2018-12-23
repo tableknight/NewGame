@@ -18,7 +18,7 @@ class SpiritIntervene: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let this = self
         c.actionCast {
             let ro = Creature()
@@ -29,8 +29,8 @@ class SpiritIntervene: Magical {
         }
     }
     
-    override func findTarget(inleft: Bool) {
-        let all = _battle._leftRoles + _battle._rightRoles
+    override func findTarget() {
+        let all = _battle._playerPart + _battle._enimyPart
         _battle._selectedTarget = all.one()
     }
     

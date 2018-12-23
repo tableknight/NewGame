@@ -60,7 +60,7 @@ class MyStage: SKSpriteNode {
     func loadScene(scene:MyScene) {
         addChild(scene)
         _curScene = scene
-        _scenes.append(scene)
+//        _scenes.append(scene)
     }
     func createMenu() {
         let y = -cellSize * 6.5
@@ -71,8 +71,6 @@ class MyStage: SKSpriteNode {
         _itemButton = createMenuButtons(x: -cellSize * 0.5 + x , y: y, size: size, text: "物品")
         _spellButton = createMenuButtons(x: cellSize * 0.5 + x, y: y, size: size, text: "法术")
         _minionButton = createMenuButtons(x: cellSize * 1.5 + x, y: y, size: size, text: "随从")
-        
-        
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -84,11 +82,23 @@ class MyStage: SKSpriteNode {
         _uiComponentList.append(s)
         return s
     }
+    func hideUI() {
+        for ui in _uiComponentList {
+            ui.hide()
+        }
+    }
+    func showUI() {
+        for ui in _uiComponentList {
+            ui.show()
+        }
+    }
     func showPanel(_ panel:UIPanel) {
         panel.zPosition = MyStage.UI_PANEL_Z
+        _curPanel = panel
         addChild(panel)
     }
     func removePanel(_ panel:UIPanel) {
+        _curPanel = nil
         panel.removeFromParent()
     }
     func hasTowerStatus(status:Status) -> Bool {
@@ -101,6 +111,30 @@ class MyStage: SKSpriteNode {
         }
         return false
     }
+    func addStatus(status:Status) {
+        _curScene._status.append(status)
+    }
+    
+    func addBattle(_ b:Battle) {
+        if nil != childNode(withName: "battle") {
+            debug("battle exist! error")
+            return
+        }
+        hideUI()
+        hideScene()
+        addChild(b)
+    }
+    func removeBattle(_ b:Battle) {
+        b.removeFromParent()
+        showUI()
+        showScene()
+    }
+    func hideScene() {
+        _curScene.isHidden = true
+    }
+    func showScene() {
+        _curScene.isHidden = false
+    }
     var _curScene:MyScene!
     var _charButton:RoundButton!
     var _itemButton:RoundButton!
@@ -109,5 +143,7 @@ class MyStage: SKSpriteNode {
     var _minionButton:RoundButton!
     var _uiComponentList:Array<SKSpriteNode> = []
     var _scenes = Array<MyScene>()
+    var _curPanel:UIPanel?
+    var _messageNode = SKSpriteNode()
 //    var _
 }

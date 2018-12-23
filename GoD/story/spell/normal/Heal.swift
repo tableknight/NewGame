@@ -17,7 +17,7 @@ class Heal: Magical {
         _description = "恢复己方目标最大生命50%的生命值"
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let h = _battle._curRole.getHealth() * 0.5
         let c = _battle._curRole
 //        _timeleft = _cooldown
@@ -31,8 +31,8 @@ class Heal: Magical {
         }
     }
     
-    override func findTarget(inleft:Bool = false) {
-        findHpLowestUnit(inleft: _battle._curRole.inleft)
+    override func findTarget() {
+        findHpLowestUnit()
     }
     
 }

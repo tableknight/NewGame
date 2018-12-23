@@ -18,13 +18,13 @@ class FeignAttack: Physical {
         _description = "对目标相邻随机单位造成攻击200%的物理伤害"
     }
     override func cast(completion:@escaping () -> Void) {
-        var t = _battle._selectedTarget
+        var t = _battle._selectedTarget!
         let c = _battle._curRole
         let b = _battle!
         let this = self
         b.roleMove(from: c, to: t, completion: {
             c.actionAttack {
-                let seat = t._seat
+                let seat = t._unit._seat
                 let seats = [this.getUnitBeyondTarget(seat: seat), this.getUnitUnderTarget(seat: seat), this.getUnitInTheLeftOfTarget(seat: seat), this.getUnitInTheRightOfTarget(seat: seat)]
                 let ts = this.getTargetsBySeats(seats: seats)
                 if ts.count > 0 {

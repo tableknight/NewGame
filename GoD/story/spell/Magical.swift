@@ -13,8 +13,8 @@ class Magical: Spell {
         super.init()
         isMagical = true
     }
-    override func findTarget(inleft: Bool = false) {
-        findSingleTargetNotBlocked(inleft: _battle._curRole.inleft)
+    override func findTarget() {
+        findSingleTargetNotBlocked()
     }
 }
 

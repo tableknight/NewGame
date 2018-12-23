@@ -7,7 +7,131 @@
 //
 
 import SpriteKit
-class SelectItems:UIPanel {
+class SelectItems: UIPanel {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        _infosDisplay.removeFromParent()
+        let touchPoint = touches.first?.location(in: self)
+        //        if _closeButton.contains(touchPoint!) {
+        //            Data.instance.stage.removeItemPanel(panel: self)
+        //            return
+        //        }
+        if _nextButton.contains(touchPoint!) {
+            nextAction()
+            return
+        }
+        if _prevButton.contains(touchPoint!) {
+            prevAction()
+            return
+        }
+        
+        if _closeButton.contains(touchPoint!) {
+            closeAction()
+            return
+        }
+        
+        for u in _propBox.children {
+            if u.contains(touchPoint!) {
+                let pi = u as! PropIcon
+                if pi.selected {
+                    pi.selected = false
+                    let prop = pi._displayItemType as! Prop
+                    let index = _selectedItems.index(of: prop)
+                    _selectedItems.remove(at: index!)
+                } else {
+                    if _selectedItems.count < 3 {
+                        let prop = pi._displayItemType as! Prop
+                        _selectedItems.append(prop)
+                        pi.selected = true
+                    }
+                }
+                displayInfos(icon: pi)
+            }
+        }
+        
+        
+    }
+    override func create() {
+        _label.text = "使用：最多可以选择三件物品。"
+        _pageSize = 30
+        createCloseButton()
+        createPageButtons()
+        _prevButton.text = "上一步"
+        _nextButton.text = "下一步"
+        addChild(_propBox)
+        createPropList()
+    }
+    func createPropList() {
+        let props = getPropsCountMoreThan1()
+        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startY = _standardHeight * 0.5 - _standardGap * 2
+        if props.count > 0 {
+            let end = getPageEnd(props.count)
+            let start = getPageStart(end)
+            
+            for i in start...end - 1 {
+                let base = i - (_curPage - 1) * _pageSize
+                let y = base / 6
+                let x = base % 6
+                let icon = PropIcon()
+                icon.count = props[i]._count
+                icon._displayItemType = props[i]
+                icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
+                icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
+                icon.zPosition = self.zPosition + 3
+                _propBox.addChild(icon)
+            }
+        }
+    }
+    
+    private func getPropsCountMoreThan1() -> Array<Prop> {
+        var ps = Array<Prop>()
+        let ts = TownScroll()
+        ts._count = 5
+        ps.append(ts)
+        
+        let potion = Potion()
+        potion._count = 5
+        ps.append(potion)
+        
+        let st = SealScroll()
+        st._count = 5
+        ps.append(st)
+        
+        let tear = TheWitchsTear()
+        tear._count = 5
+        ps.append(tear)
+        
+        let bs = BlastScroll()
+        bs._count = 5
+        ps.append(bs)
+        
+        let bag = SmallGoldBag()
+        ps.append(bag)
+        
+        return ps
+    }
+    
+    
+    override func pageReload() {
+        _propBox.removeAllChildren()
+        createPropList()
+    }
+    private var _propBox = SKSpriteNode()
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        self.zPosition = MyStage.UI_PANEL_Z
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    private var _selectedItems = Array<Prop>()
+    var nextAction = {}
+    var prevAction = {}
+    var closeAction = {}
+}
+
+class SelectItems1:UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         
@@ -35,13 +159,13 @@ class SelectItems:UIPanel {
         }
         
         if _prevButton.contains(touchPoint!) {
-            (parent as! CreationFlow).showMinions()
+//            (parent as! CreationFlow).showMinions()
         }
         if _nextButton.contains(touchPoint!) {
             if getSelectedItems().count < 1 {
                 return
             }
-            (parent as! CreationFlow).showSpells()
+//            (parent as! CreationFlow).showSpells()
         }
     }
     override func create() {
@@ -49,9 +173,7 @@ class SelectItems:UIPanel {
         createPageButtons()
         _label.text = "选择携带物品(最多可以选择3个)"
         _closeButton.text = "返回"
-        //        _closeButton.isHidden = true
         _prevButton.text = "上一步"
-//        _prevButton.isHidden = true
         _nextButton.text = "下一步"
         
         addChild(_listBox)

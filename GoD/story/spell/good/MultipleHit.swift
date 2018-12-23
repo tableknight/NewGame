@@ -20,7 +20,7 @@ class MultipleHit: Physical {
         let times = seed(min: 2, max: 5)
         _rate = 0.45
         let c = _battle._curRole
-        let t = _battle._selectedTarget
+        let t = _battle._selectedTarget!
         let this = self
         _battle.roleMove(from: c, to: t, completion: {
             this.atrack(times: times, completion: {
@@ -31,7 +31,7 @@ class MultipleHit: Physical {
     }
     
     private func atrack(times:Int, completion:@escaping () -> Void) {
-        var t = _battle._selectedTarget
+        var t = _battle._selectedTarget!
         let c = _battle._curRole
         if t.isDead() {
             var roles = _battle._leftRoles
@@ -43,7 +43,7 @@ class MultipleHit: Physical {
                 return
             }
             findTarget()
-            t = _battle._selectedTarget
+            t = _battle._selectedTarget!
         }
         if times < 1 {
             completion()
