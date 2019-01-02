@@ -85,11 +85,8 @@ class Attack: Physical {
                         isGiantFang = true
                     }
                     
-                    if c.hasStatus(type: Status.VAMPIRE_BLOOD) || isGiantFang {
-                        var recoveryFactor:CGFloat = 0.2
-                        if isGiantFang {
-                            recoveryFactor = 1
-                        }
+                    if c.hasSpell(spell: VampireBlood()) || isGiantFang {
+                        var recoveryFactor:CGFloat = isGiantFang ? 0.2 : 0.3
                         if c._unit.isMainChar {
                             let char = c._unit as! Character
                             if char._amulet is FangOfVampire {
@@ -97,7 +94,9 @@ class Attack: Physical {
                             }
                         }
                         let d = abs(damage * recoveryFactor)
-                        c.showValue(value: d)
+                        setTimeout(delay: 0.5, completion: {
+                            c.showValue(value: d)
+                        })
 //                        c.hpChange(value: d)
                     }
                     

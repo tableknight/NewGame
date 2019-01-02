@@ -43,11 +43,12 @@ class DeathGaze: Magical {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {
                     if this.seed() < 15 {
-                        t.showText(text: "SLASHED")
-                        t.actionDead {
-                            completion()
-                            t.removeFromBattle()
-                            t.removeFromParent()
+                        t.showText(text: "SLASHED") {
+                            t.actionDead {
+                                completion()
+                                t.removeFromBattle()
+                                t.removeFromParent()
+                            }
                         }
                     } else {
                         completion()

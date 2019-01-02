@@ -118,7 +118,6 @@
 		090FEBB521BB9B2B004276BB /* SwapHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAA321BB9B2A004276BB /* SwapHealth.swift */; };
 		090FEBB621BB9B2B004276BB /* MagicReflect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAA421BB9B2A004276BB /* MagicReflect.swift */; };
 		090FEBB721BB9B2B004276BB /* Auro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAA521BB9B2A004276BB /* Auro.swift */; };
-		090FEBB821BB9B2B004276BB /* ArmaturePuppet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAA721BB9B2A004276BB /* ArmaturePuppet.swift */; };
 		090FEBB921BB9B2B004276BB /* Firelord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAA921BB9B2A004276BB /* Firelord.swift */; };
 		090FEBBA21BB9B2B004276BB /* ShootAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAAA21BB9B2A004276BB /* ShootAll.swift */; };
 		090FEBBB21BB9B2B004276BB /* DeathStrike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAAB21BB9B2A004276BB /* DeathStrike.swift */; };
@@ -424,7 +423,6 @@
 		090FEAA321BB9B2A004276BB /* SwapHealth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwapHealth.swift; sourceTree = "<group>"; };
 		090FEAA421BB9B2A004276BB /* MagicReflect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicReflect.swift; sourceTree = "<group>"; };
 		090FEAA521BB9B2A004276BB /* Auro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auro.swift; sourceTree = "<group>"; };
-		090FEAA721BB9B2A004276BB /* ArmaturePuppet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmaturePuppet.swift; sourceTree = "<group>"; };
 		090FEAA921BB9B2A004276BB /* Firelord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firelord.swift; sourceTree = "<group>"; };
 		090FEAAA21BB9B2A004276BB /* ShootAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootAll.swift; sourceTree = "<group>"; };
 		090FEAAB21BB9B2A004276BB /* DeathStrike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathStrike.swift; sourceTree = "<group>"; };
@@ -869,17 +867,17 @@
 		090FEA8F21BB9B2A004276BB /* spell */ = {
 			isa = PBXGroup;
 			children = (
-				090FEA9021BB9B2A004276BB /* Physical.swift */,
 				090FEA9121BB9B2A004276BB /* sacred */,
-				090FEAA521BB9B2A004276BB /* Auro.swift */,
-				090FEAA621BB9B2A004276BB /* passive */,
 				090FEAA821BB9B2A004276BB /* rare */,
 				090FEABA21BB9B2A004276BB /* good */,
 				090FEAC721BB9B2A004276BB /* normal */,
 				090FEAD221BB9B2A004276BB /* Magical.swift */,
-				090FEAD321BB9B2A004276BB /* active */,
+				090FEAA521BB9B2A004276BB /* Auro.swift */,
 				090FEAD621BB9B2A004276BB /* Passive.swift */,
+				090FEAD521BB9B2A004276BB /* Attack.swift */,
+				090FEAD421BB9B2A004276BB /* Defend.swift */,
 				090FEAD721BB9B2A004276BB /* Spell.swift */,
+				090FEA9021BB9B2A004276BB /* Physical.swift */,
 				090FEAD821BB9B2A004276BB /* active.swift */,
 			);
 			path = spell;
@@ -909,14 +907,6 @@
 				090FEAA421BB9B2A004276BB /* MagicReflect.swift */,
 			);
 			path = sacred;
-			sourceTree = "<group>";
-		};
-		090FEAA621BB9B2A004276BB /* passive */ = {
-			isa = PBXGroup;
-			children = (
-				090FEAA721BB9B2A004276BB /* ArmaturePuppet.swift */,
-			);
-			path = passive;
 			sourceTree = "<group>";
 		};
 		090FEAA821BB9B2A004276BB /* rare */ = {
@@ -977,15 +967,6 @@
 				090FEAD121BB9B2A004276BB /* Bellicose.swift */,
 			);
 			path = normal;
-			sourceTree = "<group>";
-		};
-		090FEAD321BB9B2A004276BB /* active */ = {
-			isa = PBXGroup;
-			children = (
-				090FEAD421BB9B2A004276BB /* Defend.swift */,
-				090FEAD521BB9B2A004276BB /* Attack.swift */,
-			);
-			path = active;
 			sourceTree = "<group>";
 		};
 		090FEADB21BB9B2A004276BB /* status */ = {
@@ -1506,7 +1487,6 @@
 				090FEBED21BB9B2B004276BB /* Core.swift in Sources */,
 				090FEB5C21BB9B2B004276BB /* SacredWand.swift in Sources */,
 				090FEB6921BB9B2B004276BB /* Ring.swift in Sources */,
-				090FEBB821BB9B2B004276BB /* ArmaturePuppet.swift in Sources */,
 				090FEC1B21BB9B2B004276BB /* SmallHouse.swift in Sources */,
 				090FEBDC21BB9B2B004276BB /* Heal.swift in Sources */,
 				090FEB6021BB9B2B004276BB /* SacredInstrument.swift in Sources */,

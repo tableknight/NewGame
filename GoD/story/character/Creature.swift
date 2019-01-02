@@ -118,10 +118,10 @@ class Creature: Unit {
         }
     }
     func isClose() -> Bool {
-        if nil != _weapon && !_weapon!.isClose {
-            return false
+        if nil == _weapon {
+            return true
         }
-        return true
+        return _weapon!.isClose
     }
     func getLoots() -> Array<Prop> {
         return Array<Prop>()

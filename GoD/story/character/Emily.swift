@@ -19,20 +19,38 @@ class Emily:Character {
 //        strengthChange(value: 30)
 //        agilityChange(value: 20)
 //        intellectChange(value: 5)
-//        _level = 20
+//        staminaChange(value: 150)
+//        strengthChange(value: 100)
+//        agilityChange(value: 50)
+//        intellectChange(value: 25)
+        _level = 40
+        let c = Core()
+        for _ in 0..._level.toInt() {
+            let seed = c.seed()
+            if seed < 25 {
+                strengthChange(value: 5)
+            } else if seed < 50 {
+                staminaChange(value: 5)
+            } else if seed < 75 {
+                agilityChange(value: 5)
+            } else {
+                intellectChange(value: 5)
+            }
+        }
         _spellsInuse = []
         _spells = [
         ]
+        let _minionlevel:CGFloat = _level
         _spellCount = 4
         _minionsCount = 3
         let blackCat = BlackCat()
         blackCat._seat = BUnit.BTL
-        blackCat.create(level: 1)
+        blackCat.create(level: _minionlevel)
         blackCat._spellCount = 1
         blackCat._spellsInuse = []
         _minions.append(blackCat)
         let darkCrow = DarkCrow()
-        darkCrow.create(level: 1)
+        darkCrow.create(level: _minionlevel)
         darkCrow._seat = BUnit.BTM
 //        darkCrow.levelup()
         darkCrow._spellCount = 4
@@ -40,12 +58,12 @@ class Emily:Character {
         _minions.append(darkCrow)
         
         let w = GiantWasp()
-        w.create(level: 1)
+        w.create(level: _minionlevel)
         w._spellCount = 1
         _minions.append(w)
         
         let bq = BloodQueen()
-        bq.create(level: 1)
+        bq.create(level: _minionlevel)
         bq._seat = BUnit.BBR
 //        bq.levelup()
         bq._spellsInuse = [FireBreath()]

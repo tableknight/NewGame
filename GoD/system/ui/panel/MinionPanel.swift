@@ -225,14 +225,14 @@ class MinionPanel:SKSpriteNode {
         avoid.position.x = critical.position.x + xWidth
         avoid.position.y = thirdLineY
         avoid.text = "闪避"
-        avoid.value = bChar.getAvoid(t: char).toInt()
+        avoid.value = bChar.getAvoid().toInt()
         addChild(avoid)
         
         let accuracy = AttrLabel()
         accuracy.position.x = avoid.position.x + xWidth
         accuracy.position.y = thirdLineY
         accuracy.text = "命中"
-        accuracy.value = bChar.getAccuracy(t: char).toInt()
+        accuracy.value = bChar.getAccuracy().toInt()
         addChild(accuracy)
         
         

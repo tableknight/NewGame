@@ -287,7 +287,7 @@ class Battle: SKSpriteNode {
         let x1 = -c * 2
         let x2:CGFloat = 0
         let x3 = c * 2
-        let y1 = c * 3.5
+        let y1 = c * 4
         let y2 = c * 2
         let y3 = -c * 2
         let y4 = -c * 4
@@ -884,7 +884,7 @@ class Battle: SKSpriteNode {
         for s in _curRole._unit._spellsInuse {
             if s.hasAfterMoveAction {
                 s._battle = self
-                _curRole.showText(text: s._name)
+//                _curRole.showText(text: s._name)
                 s.afterMove {
                     this._selectedTarget = nil
                     this._waitingForSelectTarget = false
@@ -1200,7 +1200,8 @@ class Battle: SKSpriteNode {
     internal func showSpellCards() {
         var spells = Array<Spell>()
         for s in _curRole._unit._spellsInuse {
-            if !s.isAuro && !s.isPassive {
+            s._battle = self
+            if !s.isAuro && !s.isPassive && s.selectable() {
                 spells.append(s)
             }
         }

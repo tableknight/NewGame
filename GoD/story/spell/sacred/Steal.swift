@@ -22,23 +22,23 @@ class Steal: Magical {
         _damageValue = physicalDamage(t)
         let damage = _damageValue
         let this = self
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            if !hasMissed(target: t, completion: completion) {
-                if this.yon() {
+        c.actionAttack {
+            if !this.hasMissed(target: t, completion: completion) {
+                if this.d2() {
                     t.actionAttacked(defend: t.isDefend, completion: {
-//                        t.hpChange(value: damage)
-                        t.showValue(value: damage) {
-                            completion()
-                        }
-//                        c.hpChange(value: damage)
-                        c.showValue(value: damage)
+                        t.showValue(value: damage)
+                        setTimeout(delay: 0.5, completion: {
+                            c.showValue(value: damage) {
+                                completion()
+                            }
+                        })
                     })
                 } else {
-                    t.showText(text: "stolen") {
-                        completion()
-                    }
+                    setTimeout(delay: 1, completion: {
+                        t.showText(text: "stolen") {
+                            completion()
+                        }
+                    })
                     t.strengthChange(value: -1)
                     t.staminaChange(value: -1)
                     t.agilityChange(value: -1)

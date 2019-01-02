@@ -16,10 +16,4 @@ class DancingOnIce: Passive {
         _quality = Quality.SACRED
         
     }
-    override func beforeBattle(t:BUnit) {
-        let status = Status()
-        status._type = Status.DANCING_ON_ICE
-        status._timeleft = 9999
-        t.addStatus(status: status)
-    }
 }

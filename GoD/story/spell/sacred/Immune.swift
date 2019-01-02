@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+//unchecked
 class Immune: Magical {
     override init() {
         super.init()

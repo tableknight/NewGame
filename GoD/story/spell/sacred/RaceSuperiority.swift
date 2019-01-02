@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+//unchecked
 class RaceSuperiority: Passive {
     
     override init() {

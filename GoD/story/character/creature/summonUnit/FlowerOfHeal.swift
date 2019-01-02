@@ -47,7 +47,7 @@ class HealOfFlower: Passive {
         let c = _battle._curRole
         let this = self
         var rate:CGFloat = 0.15
-        if Game.instance._char._magicMark is MarkOfVitality {
+        if Game.instance.char._magicMark is MarkOfVitality {
             rate = 0.3
         }
         c.actionCast {

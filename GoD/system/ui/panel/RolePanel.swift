@@ -361,8 +361,8 @@ class RolePanel:UIPanel {
         _attrSpirit.value = bChar.getSpirit().toInt()
         _attrHealth.value = bChar.getHealth().toInt()
         _attrCritical.value = bChar.getCriticalForShow().toInt()
-        _attrAvoid.value = bChar.getAvoid(t: to).toInt()
-        _attrAccuracy.value = bChar.getAccuracy(t: to).toInt()
+        _attrAvoid.value = bChar.getAvoid().toInt()
+        _attrAccuracy.value = bChar.getAccuracy().toInt()
 //        _attrMind.value = bChar.getMind(target: to).toInt()
 //        _attrBreak.value = bChar.getBreak().toInt()
         _attrLeftPoint.value = _unit._leftPoint

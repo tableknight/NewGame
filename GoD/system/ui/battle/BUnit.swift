@@ -123,10 +123,10 @@ class BUnit: SKSpriteNode {
         label.isHidden = true
         _valueText = label
     }
-    private func addLabel() -> Label {
+    private func addLabel(fontSize: CGFloat = 24) -> Label {
         let label = Label()
         label.fontColor = UIColor.red
-        label.fontSize = 18
+        label.fontSize = fontSize
 //        label.zPosition = 100
         label.align = "center"
         addChild(label)
@@ -522,7 +522,7 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel()
 //        valueText.isHidden = false
-        valueText.position.y = _charSize * 0.3
+        valueText.position.y = _charSize * (playerPart ? 0.25 : 0.5)
         var color = textColor
         var text = "\(value.toInt())";
         if value > 0 {
@@ -587,9 +587,9 @@ class BUnit: SKSpriteNode {
         if "" == text {
             return
         }
-        let valueText = addLabel()
+        let valueText = addLabel(fontSize: 20)
 //        _valueText.isHidden = false
-        valueText.position.y = _charSize * 0.3
+        valueText.position.y = _charSize * (playerPart ? 0.25 : 0.5)
         valueText.text = text
         valueText.fontColor = color
         let v = CGVector(dx: 0, dy: _charSize * 0.5)
@@ -840,13 +840,16 @@ class BUnit: SKSpriteNode {
         return false
     }
     func hasAuro(auro:Spell) -> Bool {
+        if nil == _battle {
+            return false
+        }
         var spells = Array<Spell>()
-        if inleft {
-            for u in _battle._leftRoles {
+        if playerPart {
+            for u in _battle._playerPart {
                 spells += u._unit._spellsInuse
             }
         } else {
-            for u in _battle._rightRoles {
+            for u in _battle._enimyPart {
                 spells += u._unit._spellsInuse
             }
         }
@@ -890,11 +893,11 @@ class BUnit: SKSpriteNode {
 //        if hasStatus(type: Status.FIRE_LORD) {
 //            val += 20
 //        }
-        if hasSpell(spell: Firelord()) {
+        if hasAuro(auro: Firelord()) {
             val += 20
         }
         
-        if _unit.isMainChar && _stage.hasTowerStatus(status: FireEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: FireEnerge()) {
             val += 50
         }
         
@@ -902,14 +905,14 @@ class BUnit: SKSpriteNode {
     }
     func getWaterPower() -> CGFloat {
         var val = _unit._ElementalPower.water
-        if _unit.isMainChar && _stage.hasTowerStatus(status: WaterEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
         return val + _ElementalPower.water + _elemental.damage
     }
     func getThunderPower() -> CGFloat {
         var val = _unit._ElementalPower.thunder
-        if _unit.isMainChar && _stage.hasTowerStatus(status: ThunderEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
         return val + _ElementalPower.thunder + _elemental.damage
@@ -919,11 +922,11 @@ class BUnit: SKSpriteNode {
 //        if hasStatus(type: Status.FIRE_LORD) {
 //            val += 20
 //        }
-        if hasSpell(spell: Firelord()) {
+        if hasAuro(auro: Firelord()) {
             val += 20
         }
         
-        if _unit.isMainChar && _stage.hasTowerStatus(status: FireEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: FireEnerge()) {
             val += 50
         }
         
@@ -931,14 +934,14 @@ class BUnit: SKSpriteNode {
     }
     func getWaterResistance() -> CGFloat {
         var val = _unit._ElementalResistance.water
-        if _unit.isMainChar && _stage.hasTowerStatus(status: WaterEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
         return val + _ElementalResistance.water + _elemental.resistance
     }
     func getThunderResistance() -> CGFloat {
         var val = _unit._ElementalResistance.thunder
-        if _unit.isMainChar && _stage.hasTowerStatus(status: ThunderEnerge()) {
+        if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
         return val + _ElementalResistance.thunder + _elemental.resistance
@@ -968,8 +971,8 @@ class BUnit: SKSpriteNode {
         return val + _physical.resistance
     }
     
-    func getAccuracy(t:Creature = Creature()) -> CGFloat {
-        var acc = _unit._extensions.accuracy - t._level
+    func getAccuracy() -> CGFloat {
+        var acc = _unit._extensions.accuracy + _extensions.accuracy
         if hasSpell(spell: BargeAbout()) {
             acc -= 100
         }
@@ -979,14 +982,14 @@ class BUnit: SKSpriteNode {
         if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
             acc += 25
         }
-        return acc + _extensions.accuracy
+        return acc
     }
-    func getAvoid(t:Creature = Creature()) -> CGFloat {
-        var avd = _unit._extensions.avoid - t._level
+    func getAvoid() -> CGFloat {
+        var avd = _unit._extensions.avoid + _extensions.avoid
         if hasSpell(spell: DancingOnIce()) {
             avd += 100
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: DefencePower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
             avd += 25
         }
         
@@ -994,21 +997,21 @@ class BUnit: SKSpriteNode {
             avd += 50
         }
         
-        return avd + _extensions.avoid
+        return avd
     }
     func getSpeed() -> CGFloat {
-        var speed = _unit._extensions.speed
+        var speed = _unit._extensions.speed + _extensions.speed
         if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
             speed += 50
         }
-        return speed + _extensions.speed
+        return speed
     }
     func getAttack() -> CGFloat {
 //        let atk = sqrt(_unit._extensions.attack) * 12
         if hasSpell(spell: MagicSword()) {
             return getSpirit()
         }
-        var atk = _unit._extensions.attack
+        var atk = _unit._extensions.attack + _extensions.attack
         if hasSpell(spell: OnePunch()) {
             atk += getDefence()
         }
@@ -1027,10 +1030,10 @@ class BUnit: SKSpriteNode {
                 atk += plus
             }
         }
-        return atk + _extensions.attack
+        return atk
     }
     func getDefence() -> CGFloat {
-        var def = _unit._extensions.defence
+        var def = _unit._extensions.defence + _extensions.defence
         if hasSpell(spell: DancingOnIce()) {
             return 0
         }
@@ -1041,13 +1044,13 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: Strong()) {
             def *= 1.2
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: DefencePower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
             def += 50
         }
-        return def + _extensions.defence
+        return def
     }
     func getCritical(t:BUnit) -> CGFloat {
-        var ctl = _unit._extensions.critical - t._unit._level
+        var ctl = _unit._extensions.critical + _extensions.critical
         if hasSpell(spell: BloodThirsty()) {
             ctl += _unit._level
         }
@@ -1059,10 +1062,10 @@ class BUnit: SKSpriteNode {
                 ctl = ctl * 2
             }
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: AttackPower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             ctl += 25
         }
-        return ctl + _extensions.critical
+        return ctl
     }
     
     func getCriticalForShow() -> CGFloat {
@@ -1073,7 +1076,7 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: BargeAbout()) {
             ctl += 100
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: AttackPower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             ctl += 25
         }
         return ctl
@@ -1097,19 +1100,14 @@ class BUnit: SKSpriteNode {
     }
     
     func getMind() -> CGFloat {
-        var mind = _unit._extensions.mind
-        if _unit.isMainChar && _stage.hasTowerStatus(status: MindPower()) {
+        var mind = _unit._extensions.mind + _extensions.mind
+        if _unit is Character && _stage.hasTowerStatus(status: MindPower()) {
             mind += 25
         }
-        return mind + _extensions.mind
+        return mind
     }
     
-    func getRevenge(target:Creature = Creature()) -> CGFloat {
-        let val = _unit._revenge
-        return val + _revenge
-    }
-    
-    func getBreak(target:Creature = Creature()) -> CGFloat {
+    func getBreak() -> CGFloat {
         let val = _unit._break
         return val + _break
     }

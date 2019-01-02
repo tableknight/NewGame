@@ -17,10 +17,4 @@ class SummonFlower: Magical {
         _quality = Quality.SACRED
         _cooldown = 5
     }
-    override func cast(completion:@escaping () -> Void) {
-        
-    }
-    
-    
-    
 }

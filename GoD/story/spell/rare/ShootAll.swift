@@ -22,27 +22,20 @@ class ShootAll: Physical {
     override func cast(completion: @escaping () -> Void) {
         let this = self
         _battle._curRole.actionShoot {
-            var i = 0
-            
             for t in this._battle._selectedTargets {
-                if i == 0 {
-                    this.attack(t: t, completion: completion)
-                } else {
-                    this.attack(t: t)
-                }
-                i += 1
+                this.attack(t: t)
             }
+            setTimeout(delay: 1.5, completion: completion)
         }
     }
     
-    private func attack(t:BUnit, completion:@escaping () -> Void = {}) {
+    private func attack(t:BUnit) {
         let damage = physicalDamage(t)
         
-        if !hadSpecialAction(t: t, completion: completion) {
-            if !hasMissed(target: t, completion: completion) {
+        if !hadSpecialAction(t: t) {
+            if !hasMissed(target: t) {
                 t.actionAttacked {
-//                    t.hpChange(value: damage)
-                    t.showValue(value: damage, completion: completion)
+                    t.showValue(value: damage)
                 }
             }
         }
@@ -54,8 +47,12 @@ class ShootAll: Physical {
     }
     
     override func selectable() -> Bool {
-        let w = _battle._curRole._unit._weapon
-        return w != nil && !w!.isClose
+        let c = _battle._curRole
+        if c._unit.isClose() {
+            return false
+        }
+        
+        return true
     }
     
 }

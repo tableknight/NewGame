@@ -26,7 +26,7 @@ class SpiritIntervene: Magical {
             ro.intellectChange(value: t._unit._level * 3)
             let max = ro._extensions.spirit.toInt()
             let change = this.seed(min: 0, max: max).toFloat()
-            t._unit._extensions.spirit = change - t._unit._extensions.spirit
+            t._extensions.spirit = change - t._unit._extensions.spirit
             t.showText(text: "SPIRIT \(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
         }
     }

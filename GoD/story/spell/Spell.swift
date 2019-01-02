@@ -64,20 +64,24 @@ class Spell:Core, IDisplay {
         return physicalDamage(from: from, to: to)
     }
     func getDefRate(from: BUnit, to:BUnit) -> CGFloat {
-        let level = to._unit._level + 6
+        let level = to._unit._level
         let brk = from.getBreak()
         let odef = to.getDefence() * (1 - brk * 0.01)
 //        let base =
-        var def = (odef / atan(odef / level)) / (level * 4)
-        
+        let r = atan(level * 0.1)
+        var def = (odef / atan(odef / level / 2)) / (level * 8) * r
+        if def > 0.75 {
+            def = 0.75
+        }
+        if def < 0.25 {
+            def = 0.25
+        }
+        debug("\(to._unit._name) odef = \(odef)")
+        debug("def = \(def)")
         if to.hasSpell(spell: OnePunch()) || to.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
         
-        debug("def = \(def)")
-        if def > 0.7 {
-            def = 0.7
-        }
         return def
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
@@ -344,7 +348,7 @@ class Spell:Core, IDisplay {
         }
         return false
     }
-    func hasMissed(target:BUnit, completion:@escaping () -> Void) -> Bool {
+    func hasMissed(target:BUnit, completion:@escaping () -> Void = {}) -> Bool {
         if target.isDefend {
             return false
         }
@@ -355,22 +359,21 @@ class Spell:Core, IDisplay {
                 return false
             }
         }
-        let acc = c.getAccuracy(t:target._unit)
-        let avd = target.getAvoid(t:_battle._curRole._unit)
+        let acc = c.getAccuracy()
+        let avd = target.getAvoid()
         let sed = seed().toFloat()
         let this = self
         if sed > (acc - avd) {
             target.showText(text: "Miss") {
+                //发动复仇
                 if this.isClose && target._unit.isClose() && this.seed() < target.getRevenge().toInt() {
                     let damage = this.physicalDamage(from: target, to: c)
-                    target.actionAttack {
-                        c.actionAttacked {
-//                            c.hpChange(value: damage)
-                            c.showValue(value: damage) {
-//                                if !this._battle.hasFinished() {
-//                                    completion()
-//                                }
-                                completion()
+                    target.showText(text: "复仇") {
+                        target.actionAttack {
+                            c.actionAttacked {
+                                c.showValue(value: damage) {
+                                    completion()
+                                }
                             }
                         }
                     }
@@ -393,7 +396,7 @@ class Spell:Core, IDisplay {
         beCritical = false
     }
     
-    func hadSpecialAction(t:BUnit, completion:@escaping () -> Void) -> Bool {
+    func hadSpecialAction(t:BUnit, completion:@escaping () -> Void = {}) -> Bool {
         if isAttackReturnBack(t:t, completion: completion) {
             return true
         } else if isAttackTurned(t:t, completion: completion) {
@@ -420,44 +423,36 @@ class Spell:Core, IDisplay {
     
     func getUnitBeyondTarget(seat:String) -> String {
         switch seat {
-        case "llm":
-            return "llt"
-        case "llb":
-            return "llm"
-        case "lrm":
-            return "lrt"
-        case "lrb":
-            return "lrm"
-        case "rlm":
-            return "rlt"
-        case "rlb":
-            return "rlm"
-        case "rrm":
-            return "rrt"
-        case "rrb":
-            return "rrm"
+        case BUnit.TBL:
+            return BUnit.TTL
+        case "tbm":
+            return "ttm"
+        case "tbr":
+            return "ttr"
+        case "bbl":
+            return "btl"
+        case "bbm":
+            return "btm"
+        case "bbr":
+            return "btr"
         default:
             return ""
         }
     }
     func getUnitUnderTarget(seat:String) -> String {
         switch seat {
-        case "llm":
-            return "llb"
-        case "llt":
-            return "llm"
-        case "lrm":
-            return "lrb"
-        case "lrt":
-            return "lrm"
-        case "rlm":
-            return "rlb"
-        case "rlt":
-            return "rlm"
-        case "rrm":
-            return "rrb"
-        case "rrt":
-            return "rrm"
+        case "ttl":
+            return "tbl"
+        case "ttm":
+            return "tbm"
+        case "ttr":
+            return "tbr"
+        case "btl":
+            return "bbm"
+        case "btm":
+            return "bbm"
+        case "btr":
+            return "bbr"
         default:
             return ""
         }
@@ -485,36 +480,44 @@ class Spell:Core, IDisplay {
     }
     func getUnitInTheLeftOfTarget(seat:String) -> String {
         switch seat {
-        case "lrt":
-            return "llt"
-        case "lrm":
-            return "llm"
-        case "lrb":
-            return "llb"
-        case "rrt":
-            return "rlt"
-        case "rrm":
-            return "rlm"
-        case "rrb":
-            return "rlb"
+        case "ttm":
+            return "ttl"
+        case "ttr":
+            return "ttm"
+        case "tbm":
+            return "tbl"
+        case "tbr":
+            return "tbm"
+        case "btm":
+            return "btl"
+        case "btr":
+            return "btm"
+        case "bbm":
+            return "bbl"
+        case "bbr":
+            return "bbm"
         default:
             return ""
         }
     }
     func getUnitInTheRightOfTarget(seat:String) -> String {
         switch seat {
-        case "llt":
-            return "lrt"
-        case "llm":
-            return "lrm"
-        case "llb":
-            return "lrb"
-        case "rlt":
-            return "rrt"
-        case "rlm":
-            return "rrm"
-        case "rlb":
-            return "rrb"
+        case "ttl":
+            return "ttm"
+        case "ttm":
+            return "ttr"
+        case "tbl":
+            return "tbm"
+        case "tbm":
+            return "tbr"
+        case "btl":
+            return "btm"
+        case "btm":
+            return "btr"
+        case "bbl":
+            return "bbm"
+        case "bbm":
+            return "bbr"
         default:
             return ""
         }

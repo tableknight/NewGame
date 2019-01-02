@@ -16,10 +16,4 @@ class OnePunch: Passive {
         _quality = Quality.SACRED
         
     }
-    override func beforeBattle(t:BUnit) {
-        let status = Status()
-        status._type = Status.ONE_PUNCH
-        status._timeleft = 9999
-        t.addStatus(status: status)
-    }
 }

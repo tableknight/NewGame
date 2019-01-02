@@ -46,16 +46,20 @@ class GameScene: SKScene {
     func realScene() {
         let stage = MyStage()
         let bs = SecretMeadow()
+        bs._level = 40
         bs.create()
         let e = Emily()
         e.create()
-        e._spellsInuse = [SpiritIntervene(), SoulLash()]
-        for m in e._minions {
-            m._spellsInuse = [SpiritIntervene(), SoulLash()]
+//        e._spellsInuse = [SpiritIntervene(), SoulLash()]
+        for m in e._minions + [e] {
+            m._spellsInuse = [Firelord(), ShootAll()]
         }
         bs.setRole(x: 5, y: 7, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
+        let bow = Bow()
+        bow.create(level: 1)
+        e.addProp(p: bow)
         addChild(stage)
         let bc = BlastScroll()
         bc._count = 5

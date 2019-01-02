@@ -16,10 +16,5 @@ class Firelord: Passive {
         _quality = Quality.RARE
         
     }
-    override func beforeBattle(t:BUnit) {
-        let status = Status()
-        status._type = Status.FIRE_LORD
-        status._timeleft = 9999
-        t.addStatus(status: status)
-    }
+    
 }

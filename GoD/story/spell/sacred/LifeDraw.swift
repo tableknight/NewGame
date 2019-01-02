@@ -10,7 +10,6 @@ import SpriteKit
 class LifeDraw: Magical {
     override init() {
         super.init()
-        isWater = true
         _name = "生命吸取"
         _description = "对目标造成精神80%的魔法伤害，回复造成伤害的50%"
         _rate = 0.8
@@ -42,17 +41,21 @@ class LifeDraw: Magical {
                     completion()
                 }
                 var recoveryFactor:CGFloat = 0.5
-                if c._unit.isMainChar {
+                if c._unit is Character {
                     let char = c._unit as! Character
                     if char._amulet is FangOfVampire {
                         recoveryFactor = 1
                     }
                 }
 //                c.hpChange(value: -damage * recoveryFactor)
-                c.showValue(value: -damage * recoveryFactor)
+                setTimeout(delay: 0.5, completion: {
+                    c.showValue(value: -damage * recoveryFactor)
+                })
             }
         }
     }
-    
+    override func findTarget() {
+        findSingleTargetNotBlocked()
+    }
 }
 
