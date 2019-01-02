@@ -10,6 +10,7 @@ import SpriteKit
 class CenterCamping: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
+        _name = "贝拉姆村·南"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,6 +82,7 @@ class CenterCamping: StandScene {
             Game.instance.curStage.switchScene(next: ec, afterCreation: {
                 ec.setRole(x: 0, y: 5, char: char)
             }, completion: {})
+            self.removeFromParent()
         } else 
         if pos.x == 11 && pos.y == 2 {
             let ec = SelfHome()
@@ -90,6 +92,7 @@ class CenterCamping: StandScene {
             Game.instance.curStage.switchScene(next: ec, afterCreation: {
                 ec.setRole(x: 6, y: 7, char: char)
             }, completion: {})
+            self.removeFromParent()
         }
     }
     

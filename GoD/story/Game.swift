@@ -242,6 +242,8 @@ class Game {
     var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
     var dungeon_b = SKTexture(imageNamed: "Dungeon_B.png")
     var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png")
+    var door2 = SKTexture(imageNamed: "Door2.png")
+    var crystal = SKTexture(imageNamed: "Crystal.png")
     var sf_outside_c:SKTexture = SKTexture(imageNamed: "SF_Outside_C.png")
     var sf_outside_a4:SKTexture = SKTexture(imageNamed: "SF_Outside_A4.png")
     var sf_outside_a3:SKTexture = SKTexture(imageNamed: "SF_Outside_A3.png")
@@ -250,7 +252,7 @@ class Game {
     var tilee_outsidetown:SKTexture = SKTexture(imageNamed: "TileE-OutsideTown.png")
     let sha = SKTexture(imageNamed: "sha3.png")
     var tile_innerTown = SKTexture(imageNamed: "TileE-InnerTown.png")
-    var pictureMonster = SKTexture(imageNamed: "monster.png")
+    var pictureMonster = SKTexture(imageNamed: "Monster.png")
     var pictureNature = SKTexture(imageNamed: "Nature.png")
     var pictureEvil = SKTexture(imageNamed: "Evil.png")
     var pictureBaldo = SKTexture(imageNamed: "BALDO.png")
@@ -444,6 +446,7 @@ func showMsg(text:String) {
     l.align = "center"
     l.fontColor = UIColor.white
     l.text = text
+    l.position.y = 12
     node.addChild(l)
     
     node.zPosition = 1200

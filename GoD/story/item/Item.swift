@@ -136,7 +136,7 @@ class SealScroll:Item {
             unit.actionSealed {
                 let chance = this.seed(max: unit.getHealth().toInt())
                 if Mode.debug || chance > unit.getHp().toInt() {
-                    if char._minions.count >= 5 {
+                    if char._minions.count >= 6 {
                         showMsg(text: "随从位已满！")
                         completion()
                     } else {
@@ -168,13 +168,28 @@ class TownScroll:Item {
         _name = "传送卷轴"
         _price = 6
         _sellingPrice = 24
-        _description = "传送到\(CenterVillage.VILLAGE_NAME)"
+        _description = "传送中"
     }
     override func use(target: Creature) {
         removeFromChar()
         showMsg(text: _description)
-        let cv = CenterVillage()
-        Game.instance.stage.switchScene(next: cv)
+        let c = CenterCamping()
+        let char = Game.instance.curStage._curScene._role!
+//        let stage = Game.instance.
+        Game.instance.curStage.switchScene(next: c, afterCreation: {
+            c.setRole(x: 5, y: 7, char: char)
+        })
+    }
+    override func use(unit: BUnit, completion: @escaping () -> Void) {
+        Game.instance.stage.removeBattle(b: _battle)
+        removeFromChar()
+        showMsg(text: _description)
+        let c = CenterCamping()
+        let char = Game.instance.curStage._curScene._role!
+        //        let stage = Game.instance.
+        Game.instance.curStage.switchScene(next: c, afterCreation: {
+            c.setRole(x: 5, y: 7, char: char)
+        })
     }
 }
 
@@ -186,7 +201,7 @@ class BlastScroll:Item {
         _name = "爆破卷轴"
         _price = 6
         _sellingPrice = 24
-        _description = "移除面前的一个障碍物"
+        _description = "移除面前的一个障碍物(只能在远古迷径中使用)"
     }
     override func use(target: Creature) {
         let stage = Game.instance.curStage!
@@ -197,7 +212,7 @@ class BlastScroll:Item {
             stage.removePanel(stage._curPanel!)
         }
         bChar.actionBuff {
-            if scene.blastItem() {
+            if (scene as! AcientRoad).blastItem() {
                 this.removeFromChar()
             }
         }

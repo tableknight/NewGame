@@ -8,20 +8,20 @@
 
 import SpriteKit
 class FrozenLand: UIRandomScene {
-    override func getEvilById(_ id: Int) -> Creature {
-        switch id {
-        case 0:
-            return SnowLady()
-        case 1:
-            return SnowGod()
-        case 2:
-            return IceBeast()
-        case 3:
-            return SnowSpirit()
-        default:
-            return SnowSpirit()
-        }
-    }
+//    override func getEvilById(_ id: Int) -> Creature {
+//        switch id {
+//        case 0:
+//            return SnowLady()
+//        case 1:
+//            return SnowGod()
+//        case 2:
+//            return IceBeast()
+//        case 3:
+//            return SnowSpirit()
+//        default:
+//            return SnowSpirit()
+//        }
+//    }
     override func getItem() -> UIItem {
         let n = seed(max:90)
         if n < 25 {
@@ -56,76 +56,7 @@ class FrozenLand: UIRandomScene {
         super.init(coder: aDecoder)
     }
 }
-class SnowLady: Man {
-    override init() {
-        super.init()
-        _stars.strength = 1.3
-        _stars.stamina = 1.8
-        _stars.agility = 2.0
-        _stars.intellect = 0.5
-        _name = "寒冰女妖"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureBaldo.getCell(3, 3, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [Disappear()]
-        }
-    }
-}
 
-class SnowGod: Rizen {
-    override init() {
-        super.init()
-        _stars.strength = 1.1
-        _stars.stamina = 1.4
-        _stars.agility = 2.5
-        _stars.intellect = 0.6
-        _name = "雪仙"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureBaldo.getCell(6, 7, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [BargeAbout()]
-        }
-    }
-}
-
-class IceBeast: Natrue {
-    override init() {
-        super.init()
-        _stars.strength = 1.5
-        _stars.stamina = 1.5
-        _stars.agility = 1.5
-        _stars.intellect = 1.5
-        _name = "冰兽"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureMonster.getCell(3, 3, 3, 4)
-    }
-    
-}
-
-class SnowSpirit: Natrue {
-    override init() {
-        super.init()
-        _stars.strength = 1.1
-        _stars.stamina = 0.8
-        _stars.agility = 2.5
-        _stars.intellect = 1.9
-        _name = "雪精"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureCollabo8_1.getCell(6, 7, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [FrozenShoot()]
-        }
-    }
-}
 
 class FrozenItem2:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

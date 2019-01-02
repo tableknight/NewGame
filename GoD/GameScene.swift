@@ -44,12 +44,12 @@ class GameScene: SKScene {
     }
     
     func realScene() {
+        let stage = MyStage()
         let bs = SelfHome()
         bs.create()
         let e = Emily()
         e.create()
         bs.setRole(x: 5, y: 5, role: e)
-        let stage = MyStage()
         stage.loadScene(scene: bs)
         stage.createMenu()
         //        stage.hideUI()

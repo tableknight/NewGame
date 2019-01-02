@@ -8,20 +8,20 @@
 
 import SpriteKit
 class BloodSquare: UIRandomScene {
-    override func getEvilById(_ id: Int) -> Creature {
-        switch id {
-        case 0:
-            return BloodyBat()
-        case 1:
-            return Kodagu()
-        case 2:
-            return EvilSpirit()
-        case 3:
-            return HellBaron()
-        default:
-            return BloodyBat()
-        }
-    }
+//    override func getEvilById(_ id: Int) -> Creature {
+//        switch id {
+//        case 0:
+//            return BloodyBat()
+//        case 1:
+//            return Kodagu()
+//        case 2:
+//            return EvilSpirit()
+//        case 3:
+//            return HellBaron()
+//        default:
+//            return BloodyBat()
+//        }
+//    }
     override func getItem() -> UIItem {
         let n = seed(max:90)
         if n < 25 {
@@ -56,104 +56,9 @@ class BloodSquare: UIRandomScene {
         super.init(coder: aDecoder)
     }
 }
-class BloodyBat: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 1.1
-        _stars.stamina = 2.2
-        _stars.agility = 1.4
-        _stars.intellect = 0.9
-        _name = "血色蝙蝠"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureMonster.getCell(0, 3, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [VampireBlood()]
-        }
-    }
-}
 
-class Kodagu: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 2.2
-        _stars.stamina = 2.2
-        _stars.agility = 0.6
-        _stars.intellect = 0.6
-        _name = "达古"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = SKTexture(imageNamed: "Kodagu.png")
-        specialUnit = true
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [BargeAbout()]
-        }
-    }
-}
 
-class EvilSpirit: Natrue {
-    override init() {
-        super.init()
-        _stars.strength = 0.5
-        _stars.stamina = 1.5
-        _stars.agility = 0.8
-        _stars.intellect = 2.5
-        _name = "邪灵"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureEvil.getCell(9, 3, 3, 4)
-    }
-    
-}
 
-class HellBaron: Natrue {
-    override init() {
-        super.init()
-        _stars.strength = 0.6
-        _stars.stamina = 0.6
-        _stars.agility = 2.1
-        _stars.intellect = 2.4
-        _name = "地狱男爵"
-        _spellSlot = SpellSlot(max: 3, min: 0)
-        _img = SKTexture(imageNamed: "HellBaron.png")
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [LifeDraw()]
-        }
-    }
-}
-
-class BloodItem2:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        let tree = Game.instance.dungeon_b.getCell(6, 9, 1, 2)
-        setTexture(tree)
-        _xSize = 1
-        _ySize = 2
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class BloodItem1:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        let tree = Game.instance.dungeon_b.getCell(6, 7)
-        setTexture(tree)
-        _xSize = 1
-        _ySize = 1
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
 class BloodPillar:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)

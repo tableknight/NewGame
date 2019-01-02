@@ -41,16 +41,16 @@ class MagicMark: Armor {
     }
     private var _spellAppended = false
     override func on() {
-        let char = Game.instance._char
-        if !(char?.hasSpell(spell: _spell))! {
-            char?._spells.append(_spell)
+        let char = Game.instance.char!
+        if !(char.hasSpell(spell: _spell)) {
+            char._spells.append(_spell)
             _spellAppended = true
         }
     }
     override func off() {
         if _spellAppended {
-            let char = Game.instance._char
-            char?.removeSpell(spell: _spell)
+            let char = Game.instance.char!
+            char.removeSpell(spell: _spell)
             _spellAppended = false
         }
     }

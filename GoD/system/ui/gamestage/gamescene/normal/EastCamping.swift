@@ -11,6 +11,7 @@ import SpriteKit
 class EastCamping: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
+        _name = "贝拉姆村·东"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,6 +77,7 @@ class EastCamping: StandScene {
                 cc.setRole(x: 12, y: 3, char: char)
 //                cc._role.faceWest()
             }, completion: {})
+            self.removeFromParent()
         }
     }
     override func create() {

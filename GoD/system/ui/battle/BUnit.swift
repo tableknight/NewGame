@@ -1126,7 +1126,7 @@ class BUnit: SKSpriteNode {
     }
     func getLucky() -> CGFloat {
         var val = _unit._lucky
-        if _unit.isMainChar && _stage.hasTowerStatus(status: LuckyPower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: LuckyPower()) {
             val += 25
         }
         

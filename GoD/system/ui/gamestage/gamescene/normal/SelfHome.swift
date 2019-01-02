@@ -12,6 +12,7 @@ class SelfHome: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.halfSize = 4
+        _name = "自宅"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,6 +45,7 @@ class SelfHome: InnerHouse {
             Game.instance.curStage.switchScene(next: cc, afterCreation: {
                 cc.setRole(x: 11, y: 2, char: char)
             }, completion: {})
+            self.removeFromParent()
         }
     }
     override func create() {

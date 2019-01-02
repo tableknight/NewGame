@@ -75,6 +75,9 @@ class ItemPanel: UIPanel {
 //                
 //            }
             //else
+            if item is TownScroll {
+                Game.instance.curStage.removePanel(self)
+            }
             item.use(target: _char)
             _lastSelectedIcon = Icon()
             pageReload()

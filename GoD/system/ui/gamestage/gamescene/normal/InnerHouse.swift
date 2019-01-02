@@ -18,6 +18,7 @@ class InnerHouse: StandScene {
     internal var _wallTexture = Game.instance.outside_a3.getCell(2, 7, 2, 2)
     internal var _doorX = 6
     override func create() {
+        _nameLabel.text = self._name
         createMapMatrix()
         createInnerGround()
         createWall(wallTexture: _wallTexture)

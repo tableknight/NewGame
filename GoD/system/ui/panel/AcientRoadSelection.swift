@@ -34,18 +34,25 @@ class AcientRoadSelection:UIPanel {
             if c.contains(touchPoint!) {
                 let rc = c as! RoadComponent
                 if rc.selected {
-                    let floor = rc._floor
+                    let floorLevel = rc._floor
                     let stage = Game.instance.curStage!
                     let char = stage._curScene._role!
                     stage.removePanel(self)
-                    if 1 == floor {
-                        let sc = SecretMeadow()
-                        char.removeFromParent()
-                        stage.switchScene(next: sc, afterCreation: {
-                            sc.setRole(x: sc._portalPrev.x, y: sc._portalPrev.y, char: char)
-                            char.faceSouth()
-                        })
+                    stage.clearScene()
+                    let ar = AcientRoad()
+                    var scene = ar.getSceneById(id: floorLevel)
+                    if floorLevel > ar.sceneList.count {
+                        scene = ar.getSceneById(id: ar.sceneList.one())
                     }
+                    
+                    char.removeFromParent()
+                    stage.switchScene(next: scene, afterCreation: {
+                        scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
+                        char.faceSouth()
+                    })
+                    stage._curScene.removeFromParent()
+                    scene._level = floorLevel.toFloat()
+                    stage.saveScene(scene: scene)
                 } else {
                     rc.selected = true
                     _selectedRoad?.selected = false

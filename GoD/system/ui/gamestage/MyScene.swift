@@ -44,6 +44,10 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
+        _nameLabel.position.x = -halfSize * cellSize
+        _nameLabel.position.y = halfSize * cellSize + cellSize * 2.5 + 24
+        _nameLabel.fontSize = 24
+        addChild(_nameLabel)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
         _roleLayer.zPosition = MyScene.ROLE_LAYER_Z
         _itemLayer.zPosition = MyScene.ITEM_LAYER_Z
@@ -54,10 +58,10 @@ class MyScene: SKSpriteNode, IInitialize {
         addChild(_itemLayer)
         addChild(_maskLayer)
         isUserInteractionEnabled = true
-        for _ in 0...20 {
+        for _ in 0...25 {
             _cellEnum.append(CELL_EMPTY)
         }
-        for _ in 0...12 {
+        for _ in 0...10 {
             _cellEnum.append(CELL_ITEM)
         }
         for _ in 0...3 {
@@ -124,7 +128,6 @@ class MyScene: SKSpriteNode, IInitialize {
         if nextCell == CELL_BOX {
             let box = getNextCellItem(x: nextX, y: nextY) as! Chest
             if box.contains(touchPoint) {
-                box._triggered = true
                 box.triggerEvent()
             }
             _isMoving = false
@@ -133,7 +136,6 @@ class MyScene: SKSpriteNode, IInitialize {
         if nextCell == CELL_TOWER {
             let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
             if tower.contains(touchPoint) {
-                tower._triggered = true
                 tower.triggerEvent()
             }
             _isMoving = false
@@ -229,7 +231,7 @@ class MyScene: SKSpriteNode, IInitialize {
         }
     }
     func isPointValid(point:CGPoint) -> Bool {
-        if point.x < 0 || point.y < 0 || point.x > 8 || point.y > 7 {
+        if point.x < 0 || point.y < 0 || point.x > halfSize * 2 || point.y > halfSize * 2 - 1 {
             return false
         }
         return true
@@ -261,9 +263,9 @@ class MyScene: SKSpriteNode, IInitialize {
     func create() -> Void {
         createGround()
 //        createItems()
-        createPortalPoints()
+//        createPortalPoints()
         createMapMatrix()
-        addPortalItem()
+//        addPortalItem()
 //        setRole()
 //        createMask()
 //        let point = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
@@ -312,8 +314,6 @@ class MyScene: SKSpriteNode, IInitialize {
 //        map.size = CGSize(width: cellSize * 9, height: cellSize * 10)
 //        map.position.y = -cellSize * 0.5
 //        _mapLayer.addChild(map)
-        let oa4 = Game.instance.dungeon_a4
-        _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
         createMap()
     }
     internal func createMap() {
@@ -425,184 +425,7 @@ class MyScene: SKSpriteNode, IInitialize {
         item.name = "mask\(x.toInt())\(y.toInt())"
         _maskLayer.addChild(item)
     }
-    internal func createMapMatrix() {
-        _mapMatrix = []
-        let towerCountTotal = seed(max: 3)
-        var towerCount = 0
-        let chestCountTotal = seed(max: 3)
-        var chestCount = 0
-        for y in 0...halfSize.toInt() * 2 - 1 {
-            var row:Array<Int> = []
-            for x in 0...halfSize.toInt() * 2 {
-                if isSpecialPoint(x: x.toFloat(), y: y.toFloat()) {
-                    row.append(CELL_EMPTY)
-                    continue
-                }
-                var cell = _cellEnum.one()
-                row.append(cell)
-                
-                if cell == CELL_TOWER {
-                    if towerCount < towerCountTotal {
-                        let tower = getRandomTower()
-                        addItem(x: x.toFloat(), y: y.toFloat(), item: tower)
-                        tower.zPosition = MyScene.ITEM_LAYER_Z + y.toFloat()
-                        towerCount += 1
-                    } else {
-                        cell = CELL_ITEM
-                    }
-                }
-                
-                if cell == CELL_BOX {
-                    if chestCount < chestCountTotal {
-                        let item = Chest()
-                        addItem(x: x.toFloat(), y: y.toFloat(), item: item)
-                        chestCount += 1
-                    } else {
-                        cell = CELL_ITEM
-                    }
-                }
-                
-                if cell == CELL_EMPTY {
-                    
-                } else
-                if cell == CELL_MONSTER {
-                    addItem(x: x.toFloat(), y: y.toFloat(), item: getRandomMonterCellItem())
-                } else
-                if cell == CELL_ITEM {
-                    let item = getRandomItem()
-                    addItem(x: x.toFloat(), y: y.toFloat(), item: item)
-                    item.zPosition = MyScene.ITEM_LAYER_Z + y.toFloat()
-                }
-                
-            }
-            _mapMatrix.append(row)
-        }
-    }
-    func getTowerByIndex(index:Int) -> Tower {
-        switch index {
-        case TOWER_MIND_POWER:
-            return MindPowerTower()
-        case TOWER_FIRE_ENERGE:
-            return FireEnergeTower()
-        case TOWER_LUCKY_POWER:
-            return LuckyPowerTower()
-        case TOWER_SPEED_POWER:
-            return SpeedPowerTower()
-        case TOWER_TIME_REDUCE:
-            return TimeReduceTower()
-        case TOWER_ATTACK_POWER:
-            return AttackPowerTower()
-        case TOWER_WATER_ENERGE:
-            return WaterEnergeTower()
-        case TOWER_DEFENCE_POWER:
-            return DefencePowerTower()
-        case TOWER_MAGICAL_POWER:
-            return MagicalPowerTower()
-        case TOWER_PHYSICAL_POWER:
-            return PhysicalPowerTower()
-        case TOWER_THUNDER_ENERGE:
-            return ThunderEnergeTower()
-        default:
-            return FireEnergeTower()
-        }
-    }
-    func isSpecialPoint(x: CGFloat, y:CGFloat) -> Bool {
-        for p in _specialPoints {
-            if p.x == x && p.y == y {
-                return true
-            }
-        }
-        
-        return false
-    }
-    func createPortalPoints() {
-        let xs = [0,1,2,3,4,5,6,7,8]
-        let ys = [0,1,2,3,4,5,6,7]
-        _portalPrev = CGPoint(x: xs.one(), y: ys.one())
-        _portalNext = CGPoint(x: xs.one(), y: ys.one())
-//        let prevPortalPoint = CGPoint(x: xs.one(), y: ys.one())
-//        var currentPoint = prevPortalPoint
-//        var lastPoint = CGPoint(x: 0, y: 0)
-//        _portalPoints.append(prevPortalPoint)
-//        let steps = seed(min: 0, max: 16)
-//        for _ in 0...steps {
-//            let acentPoints = getAcentPoints(point: currentPoint)
-//            let nextPoint = acentPoints.one()
-//            if nextPoint.x != lastPoint.x || nextPoint.y != lastPoint.y {
-//                _portalPoints.append(nextPoint)
-//                lastPoint = currentPoint
-//                currentPoint = nextPoint
-//            }
-//        }
-//        _portalPrev = prevPortalPoint
-//        _portalNext = lastPoint
-        if _portalNext.x == _portalPrev.x && _portalNext.y == _portalPrev.y {
-            debug("same portal position")
-            createPortalPoints()
-        }
-        _specialPoints.append(_portalNext)
-        _specialPoints.append(_portalPrev)
-    }
-    func addPortalItem() {
-        _mapMatrix[_portalPrev.y.toInt()][_portalPrev.x.toInt()] = CELL_PORTAL
-        _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_PORTAL
-        let prev = PortalPrev()
-        let next = PortalNext()
-        addItem(x: _portalPrev.x, y: _portalPrev.y, item: prev)
-        addItem(x: _portalNext.x, y: _portalNext.y, item: next)
-        prev.zPosition = MyScene.ROLE_LAYER_Z - 1
-        next.zPosition = prev.zPosition
-    }
-    func getMonsterByIndex(index:Int) -> Creature {
-        return Creature()
-    }
-    func getItemByIndex(index:Int) -> UIItem {
-        return UIItem()
-    }
-    func getRandomMonterCellItem() -> UIEvil {
-        let ue = UIEvil()
-        let ranMon = getMonsterByIndex(index: _monsterEnum.one())
-        ue.setTexture(ranMon._img)
-        let face = [NORTH,SOUTH,EAST,WEST].one()
-        if face == NORTH {
-            ue.faceNorth()
-        } else
-        if face == SOUTH {
-            ue.faceSouth()
-        } else
-        if face == WEST {
-            ue.faceWest()
-        } else
-        if face == EAST {
-            ue.faceEast()
-        }
-        
-        return ue
-    }
-    func getRandomTower() -> Tower {
-        return getTowerByIndex(index: _towerEnum.one())
-    }
-    func getRandomItem() -> UIItem {
-        let ui = getItemByIndex(index: _itemEnum.one())
-        return ui
-    }
-    func blastItem() -> Bool {
-        let point = getNextPoint()
-        if isPointValid(point: point) {
-            let item = _itemLayer.childNode(withName: getItemName(point))
-            if nil != item && removable(point) {
-                item!.removeFromParent()
-                _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_EMPTY
-                return true
-            }
-        }
-        return false
-    }
-    private func removable(_ point:CGPoint) -> Bool {
-        let cell = _mapMatrix[point.y.toInt()][point.x.toInt()]
-        
-        return cell == CELL_ITEM || cell == CELL_TOWER
-    }
+    internal func createMapMatrix() {}
     func getItemName(_ point:CGPoint) -> String {
         return "item\(point.x.toInt())\(point.y.toInt())"
     }
@@ -668,7 +491,9 @@ class MyScene: SKSpriteNode, IInitialize {
     var _cellEnum:Array<Int> = []
     var _specialPoints:Array<CGPoint> = []
     var _status = Array<Status>()
-    var _level:CGFloat = 20
+    var _level:CGFloat = 1
+    var _name = ""
+    var _nameLabel = Label()
 }
 
 class Chest:UIItem {

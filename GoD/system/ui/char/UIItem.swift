@@ -103,6 +103,16 @@ class PortalNext:UIItem {
 //        stage.switchScene(next: nextScene)
     }
 }
+class PortalFinal:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.crystal.getCell(9, 1, 1, 2))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
 class PortalPrev:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
@@ -182,7 +192,7 @@ class Gate:UIItem {
         
         let enimyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
         for _ in 0...enimyCount {
-            enimies.append(sc.getMonsterByIndex(index: sc._monsterEnum.one()))
+//            enimies.append(sc.getMonsterByIndex(index: sc._monsterEnum.one()))
         }
         
         let b = Battle()

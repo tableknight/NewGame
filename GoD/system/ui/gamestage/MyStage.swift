@@ -114,7 +114,14 @@ class MyStage: SKSpriteNode {
     func addStatus(status:Status) {
         _curScene._status.append(status)
     }
-    
+    func getSceneByIndex(index:Int) -> AcientRoad? {
+        for sc in _scenes {
+            if sc._index == index {
+                return sc
+            }
+        }
+        return nil
+    }
     func addBattle(_ b:Battle) {
         if nil != childNode(withName: "battle") {
             debug("battle exist! error")
@@ -165,6 +172,8 @@ class MyStage: SKSpriteNode {
         }
         showSceneMask()
         loaded = false
+        _curScene.removeFromParent()
+        _curScene._role.removeFromParent()
         //        return
         let this = self
         setTimeout(delay: 1, completion: {
@@ -177,7 +186,6 @@ class MyStage: SKSpriteNode {
             }
             //        return
             //            let go = SKAction.sequence([wait, out])
-            this._curScene.removeFromParent()
             this.loadScene(scene: next)
             
             this._sceneChangeMask.run(out) {
@@ -197,6 +205,15 @@ class MyStage: SKSpriteNode {
         _sceneChangeMask.zPosition = MyScene.MASK_LAYER_Z
         addChild(_sceneChangeMask)
     }
+    func getSceneIndex() -> Int {
+        return _scenes.count + 1
+    }
+    func clearScene() {
+        _scenes = []
+    }
+    func saveScene(scene:AcientRoad) {
+        _scenes.append(scene)
+    }
     var _curDialog:Dialog?
     var _curScene:MyScene!
     var _charButton:RoundButton!
@@ -205,7 +222,7 @@ class MyStage: SKSpriteNode {
     var _spellButton:RoundButton!
     var _minionButton:RoundButton!
     var _uiComponentList:Array<SKSpriteNode> = []
-    var _scenes = Array<MyScene>()
+    var _scenes = Array<AcientRoad>()
     var _curPanel:UIPanel?
     var _messageNode = SKSpriteNode()
     private var loaded = true

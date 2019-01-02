@@ -8,16 +8,14 @@
 
 import SpriteKit
 class SecretMeadow: AcientRoad {
-    var MONSTER_BEE = 1001
-    var MONSTER_TREE_SPIRIT = 1002
-    var MONSTER_TOAD = 1003
-    var MONSTER_PYTHON = 1004
-    var ITEM_STUMP = 2001
-    var ITEM_TREE_TALL = 2002
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [ITEM_TREE_TALL, ITEM_TREE_TALL,ITEM_TREE_TALL,ITEM_TREE_TALL,ITEM_TREE_TALL,ITEM_TREE_TALL,ITEM_TREE_TALL,ITEM_TREE_TALL, ITEM_STUMP]
-        _monsterEnum = [MONSTER_BEE, MONSTER_TREE_SPIRIT, MONSTER_TOAD, MONSTER_PYTHON]
+        _itemEnum = [1,1,2,2,1,2,3,4]
+        _monsterEnum = [1,2,3,4]
+        let oa4 = Game.instance.dungeon_a4
+        _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
+        _name = "秘境沼泽"
+        _id = AcientRoad.SECRET_MEADOW
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,27 +24,92 @@ class SecretMeadow: AcientRoad {
     
     override func getItemByIndex(index: Int) -> UIItem {
         switch index {
-        case ITEM_STUMP:
-            return Stump()
-        case ITEM_TREE_TALL:
-            return TallTree()
+        case 1:
+            return MeadowItem1()
+        case 2:
+            return MeadowItem2()
+        case 3:
+            return MeadowItem3()
+        case 4:
+            return MeadowItem4()
         default:
-            return TallTree()
+            return MeadowItem2()
         }
     }
     
     override func getMonsterByIndex(index: Int) -> Creature {
         switch index {
-        case MONSTER_TOAD:
+        case 1:
             return VirulentToad()
-        case MONSTER_TREE_SPIRIT:
+        case 2:
             return TreeSpirit()
-        case MONSTER_PYTHON:
+        case 3:
             return Python()
-        case MONSTER_BEE:
+        case 4:
             return GiantWasp()
         default:
             return TreeSpirit()
         }
+    }
+}
+class MeadowItem2:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+//        let itemPoints:Array<Array<CGFloat>> = [
+//            [6, 3],
+//            [7, 2],
+//            [0, 5],
+//            [1, 5],
+//            [2, 5],
+//            [2, 7],
+//            [3, 7],
+//        ]
+//        let it = itemPoints.one()
+//        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1], 1, 2))
+        setTexture(Game.instance.dungeon_b.getCell(4, 9, 1, 2))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MeadowItem4:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.dungeon_b.getCell(3, 11, 1, 2))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MeadowItem1:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+//        let itemPoints:Array<Array<CGFloat>> = [
+//            [6, 1],
+//            [7, 0],
+//            [7, 3],
+//            [6, 5],
+//            [2, 5],
+//        ]
+//        let it = itemPoints.one()
+//        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1]))
+        setTexture(Game.instance.dungeon_b.getCell(4, 7))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+class MeadowItem3:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.dungeon_b.getCell(1, 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
