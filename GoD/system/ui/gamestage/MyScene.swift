@@ -8,17 +8,19 @@
 //
 import Foundation
 import SpriteKit
-class MyScene: SKSpriteNode {
+class MyScene: SKSpriteNode, IInitialize {
     static let MAP_LAYER_Z:CGFloat = 10
     static let ROLE_LAYER_Z:CGFloat = 50
     static let ITEM_LAYER_Z:CGFloat = 100
-    static let MASK_LAYER_Z:CGFloat = 150
+    static let MASK_LAYER_Z:CGFloat = 1150
+    static let CELL_ITEM = 103
     let CELL_EMPTY = 100
     let CELL_TOWER = 101
     let CELL_MONSTER = 102
     let CELL_ITEM = 103
     let CELL_PORTAL = 104
     let CELL_BOX = 105
+    let CELL_BLOCK = 106
     let TOWER_FIRE_ENERGE = 200
     let TOWER_WATER_ENERGE = 201
     let TOWER_THUNDER_ENERGE = 202
@@ -34,6 +36,12 @@ class MyScene: SKSpriteNode {
     let SOUTH = 2
     let WEST = 3
     let EAST = 4
+    internal var _initialized = false
+    var initialized:Bool {
+        get {
+            return _initialized
+        }
+    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
@@ -55,6 +63,7 @@ class MyScene: SKSpriteNode {
         for _ in 0...3 {
             _cellEnum.append(CELL_MONSTER)
         }
+        _cellEnum.append(CELL_BOX)
         _cellEnum.append(CELL_TOWER)
         _towerEnum = [TOWER_MIND_POWER, TOWER_FIRE_ENERGE, TOWER_LUCKY_POWER, TOWER_SPEED_POWER, TOWER_TIME_REDUCE, TOWER_ATTACK_POWER, TOWER_DEFENCE_POWER, TOWER_WATER_ENERGE, TOWER_MAGICAL_POWER, TOWER_PHYSICAL_POWER, TOWER_THUNDER_ENERGE]
     }
@@ -64,16 +73,23 @@ class MyScene: SKSpriteNode {
         
         if !_isMoving {
             _direction = calDirection(touchPoint: touchPoint!)
-            move()
+            move(touchPoint!)
         } else {
             _nextDirection = calDirection(touchPoint: touchPoint!)
         }
     }
-    func move() {
+    internal func hasAction(cell:Int, touchPoint:CGPoint) -> Bool {
+        
+        return false
+    }
+    internal func moveEndAction() {
+        
+    }
+    func move(_ touchPoint:CGPoint) {
         let nextPoint = getNextPoint()
         let nextY = nextPoint.y.toInt()
         let nextX = nextPoint.x.toInt()
-        if nextX < 0 || nextX > 8 || nextY < 0 || nextY > 7 {
+        if nextX < 0 || nextX > halfSize.toInt() * 2 || nextY < 0 || nextY > halfSize.toInt() * 2 - 1 {
             debug("out of matrix")
             _isMoving = false
             return
@@ -99,26 +115,45 @@ class MyScene: SKSpriteNode {
             }
         }
         
+        if hasAction(cell: nextCell, touchPoint: touchPoint) {
+            
+            _isMoving = false
+            return
+        }
+        
+        if nextCell == CELL_BOX {
+            let box = getNextCellItem(x: nextX, y: nextY) as! Chest
+            if box.contains(touchPoint) {
+                box._triggered = true
+                box.triggerEvent()
+            }
+            _isMoving = false
+            return
+        } else
         if nextCell == CELL_TOWER {
             let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
-            tower._triggered = true
-            tower.triggerEvent()
+            if tower.contains(touchPoint) {
+                tower._triggered = true
+                tower.triggerEvent()
+            }
             _isMoving = false
             return
         } else
         if nextCell == CELL_MONSTER {
             let mon = getNextCellItem(x: nextX, y: nextY) as! UIEvil
-            mon.triggerEvent()
-            let this = self
-            mon.defeatedAction = {
-                
-            }
-            mon.defeatAction = {
-                this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
-                mon.removeFromParent()
-                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
-                mon.run(wait) {
+            if mon.contains(touchPoint) {
+                mon.triggerEvent()
+                let this = self
+                mon.defeatedAction = {
+                    
+                }
+                mon.defeatAction = {
+                    this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
                     mon.removeFromParent()
+                    let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
+                    mon.run(wait) {
+                        mon.removeFromParent()
+                    }
                 }
             }
             _isMoving = false
@@ -164,18 +199,19 @@ class MyScene: SKSpriteNode {
             if this._nextDirection > 0 {
                 this._direction = this._nextDirection
                 this._nextDirection = 0
-                this.move()
+                this.move(touchPoint)
             } else {
                 this._isMoving = false
-                
             }
+            this.moveEndAction()
         })
     }
+    
     func getNextCellItem(x:Int, y:Int) -> UIItem {
         return _itemLayer.childNode(withName: getItemName(CGPoint(x: x, y: y))) as! UIItem
     }
     func convertPixelToIndex(x:CGFloat, y:CGFloat) -> CGPoint {
-        return CGPoint(x: round(x / cellSize) + 4, y: 4 - round(y / cellSize))
+        return CGPoint(x: round(x / cellSize) + halfSize, y: halfSize - round(y / cellSize))
     }
     func getNextPoint() -> CGPoint {
         let position = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
@@ -223,19 +259,12 @@ class MyScene: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     func create() -> Void {
-        let oa4 = Game.instance.outside_a4
-        _mapSet = GroundSets(ground: oa4.getCell(12, 2, 2, 2), wall: oa4.getCell(12, 4, 2, 2))
-//        createMap()
-//        let map = _mapLayer
-        let map = SKSpriteNode(imageNamed: "meadow")
-        map.size = CGSize(width: cellSize * 9, height: cellSize * 10)
-        map.position.y = -cellSize * 0.5
-        _mapLayer.addChild(map)
+        createGround()
 //        createItems()
         createPortalPoints()
         createMapMatrix()
         addPortalItem()
-        setRole()
+//        setRole()
 //        createMask()
 //        let point = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
 //        removeCellMask(x: point.x, y: point.y)
@@ -243,6 +272,7 @@ class MyScene: SKSpriteNode {
 //        for p in points {
 //            removeCellMask(x: p.x, y: p.y)
 //        }
+        _initialized = true
     }
     internal func createMask() {
         for y in 0...7 {
@@ -277,21 +307,38 @@ class MyScene: SKSpriteNode {
         }
         return points
     }
+    internal func createGround() {
+//        let map = SKSpriteNode(imageNamed: "meadow")
+//        map.size = CGSize(width: cellSize * 9, height: cellSize * 10)
+//        map.position.y = -cellSize * 0.5
+//        _mapLayer.addChild(map)
+        let oa4 = Game.instance.dungeon_a4
+        _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
+        createMap()
+    }
     internal func createMap() {
+        
+        _mapSet.groundHeight = halfSize
+        let start = -halfSize
+        let end = halfSize
+        
         let yOffset:CGFloat = cellSize
         let mapStart = _mapSet.getMapPart(part: "start")
-        mapStart.position.x = cellSize * startX
+        mapStart.position.x = cellSize * start
         mapStart.position.y = yOffset
         _mapLayer.addChild(mapStart)
         let mapEnd = _mapSet.getMapPart(part: "end")
-        mapEnd.position.x = cellSize * endX
+        mapEnd.position.x = cellSize * end
         mapEnd.position.y = yOffset
         _mapLayer.addChild(mapEnd)
         let wallStart = _mapSet.getWallPart(part: "start")
         wallStart.position.x = mapStart.position.x
-        wallStart.position.y = -cellSize * 5.5 + yOffset
+        wallStart.position.y = -cellSize * (halfSize + 1) + yOffset
         _mapLayer.addChild(wallStart)
-        for i in startX.toInt() + 1...endX.toInt() - 1 {
+        
+        
+        
+        for i in start.toInt() + 1...end.toInt() - 1 {
             let mapConnect = _mapSet.getMapPart(part: "connect")
             mapConnect.position.x = cellSize * i.toFloat()
             mapConnect.position.y = yOffset
@@ -306,25 +353,69 @@ class MyScene: SKSpriteNode {
         wallEnd.position.y = wallStart.position.y
         _mapLayer.addChild(wallEnd)
         
-        for i in startX.toInt()...endX.toInt() {
-            let wallDeep = SKSpriteNode(texture: wallShadow)
-            wallDeep.position.x = cellSize * i.toFloat()
-            wallDeep.position.y = wallStart.position.y
-            wallDeep.size = CGSize(width: cellSize, height: cellSize * 2)
-            _mapLayer.addChild(wallDeep)
-        }
-        
+//        for i in startX.toInt()...endX.toInt() {
+//            let wallDeep = SKSpriteNode(texture: wallShadow)
+//            wallDeep.position.x = cellSize * i.toFloat()
+//            wallDeep.position.y = wallStart.position.y
+//            wallDeep.size = CGSize(width: cellSize, height: cellSize * 2)
+//            _mapLayer.addChild(wallDeep)
+//        }
     }
+    
+    
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (startX + x) * cellSize
-        item.position.y = (3.5 - y) * cellSize
-        item.zPosition = MyScene.ITEM_LAYER_Z
+        item.position.x = (-halfSize + x) * cellSize
+        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.zPosition = MyScene.ITEM_LAYER_Z + y
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)
     }
+    internal func addGround(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
+        item.anchorPoint = CGPoint(x: 0.5, y: 0)
+        item.position.x = (-halfSize + x) * cellSize
+        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.zPosition = MyScene.MAP_LAYER_Z
+//        item.name = getItemName(CGPoint(x: x, y: y))
+        _mapLayer.addChild(item)
+    }
+    internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode, width: CGFloat = 0, height: CGFloat = 0, cell: Int = MyScene.CELL_ITEM, z:CGFloat = -1) {
+        item.anchorPoint = CGPoint(x: 0, y: 0)
+        item.position.x = (-halfSize - 0.5 + x) * cellSize
+        item.position.y = (halfSize - 0.5 - y) * cellSize
+        if z == -1 {
+            item.zPosition = MyScene.ITEM_LAYER_Z + y
+        } else {
+            item.zPosition = z
+        }
+        item.name = getItemName(CGPoint(x: x, y: y))
+        _itemLayer.addChild(item)
+        
+//        let ySize = (item.size.height / cellSize).toInt()
+//        let xSize = (item.size.width / cellSize).toInt()
+//        
+//        for _y in 0...ySize - 1 {
+//            for _x in 0...xSize - 1 {
+//                _mapMatrix[y.toInt() - _y][x.toInt() + _x] = cell
+//            }
+//        }
+    }
+    internal func createCoord() {
+        for y in 0...halfSize.toInt() * 2 - 1 {
+            for x in 0...halfSize.toInt() * 2 {
+                let l = Label()
+                l.fontSize = 18
+                l.text = "\(x),\(y)"
+                l.position.x = (-halfSize - 0.5 + x.toFloat()) * cellSize
+                l.position.y = (halfSize + 0.5 - y.toFloat()) * cellSize
+                l.align = "center"
+                l.zPosition = MyScene.ITEM_LAYER_Z
+                _itemLayer.addChild(l)
+            }
+        }
+    }
     internal func addMask(x:CGFloat, y:CGFloat) {
-        let item = SKShapeNode(rect: CGRect(x: (startX + x - 0.5) * cellSize, y: (4 - y - 0.5) * cellSize, width: cellSize, height: cellSize))
+        let item = SKShapeNode(rect: CGRect(x: (-halfSize + x - 0.5) * cellSize, y: (4 - y - 0.5) * cellSize, width: cellSize, height: cellSize))
 //        item.anchorPoint = CGPoint(x: 0.5, y: 0)
 //        item.position.x = (startX + x) * cellSize
 //        item.position.y = (3.5 - y) * cellSize
@@ -338,9 +429,11 @@ class MyScene: SKSpriteNode {
         _mapMatrix = []
         let towerCountTotal = seed(max: 3)
         var towerCount = 0
-        for y in 0...7 {
+        let chestCountTotal = seed(max: 3)
+        var chestCount = 0
+        for y in 0...halfSize.toInt() * 2 - 1 {
             var row:Array<Int> = []
-            for x in 0...8 {
+            for x in 0...halfSize.toInt() * 2 {
                 if isSpecialPoint(x: x.toFloat(), y: y.toFloat()) {
                     row.append(CELL_EMPTY)
                     continue
@@ -357,7 +450,16 @@ class MyScene: SKSpriteNode {
                     } else {
                         cell = CELL_ITEM
                     }
-                    
+                }
+                
+                if cell == CELL_BOX {
+                    if chestCount < chestCountTotal {
+                        let item = Chest()
+                        addItem(x: x.toFloat(), y: y.toFloat(), item: item)
+                        chestCount += 1
+                    } else {
+                        cell = CELL_ITEM
+                    }
                 }
                 
                 if cell == CELL_EMPTY {
@@ -504,26 +606,44 @@ class MyScene: SKSpriteNode {
     func getItemName(_ point:CGPoint) -> String {
         return "item\(point.x.toInt())\(point.y.toInt())"
     }
-    func setRole() {
-        let e = Emily()
-        Game.instance.char = e
-        e.create()
-        e._level = 20
+    func setRole(x:CGFloat, y:CGFloat, role:Character) {
+        
+        Game.instance.char = role
 //        for _ in 0...19 {
 //            e.levelup()
 //        }
         let char = BUnit()
-        char.setUnit(unit: e)
+        char._charSize = cellSize
+        char.setUnit(unit: role)
         char.createForStage()
         char.faceNorth()
         _roleLayer.addChild(char)
 //        char.anchorPoint = CGPoint(x: 0.5, y: 1)
-        char.position.x = (_portalPrev.x - 4) * cellSize
-        char.position.y = (4 - _portalPrev.y) * cellSize
+        char.position.x = (x - halfSize) * cellSize
+        char.position.y = (halfSize - y) * cellSize
         char.zPosition = MyScene.ROLE_LAYER_Z
         _role = char
 //        Game.instance.role = _role
 //        Game.instance.role = _role
+    }
+    
+    func setRole(x:CGFloat, y:CGFloat, char:BUnit) {
+        _roleLayer.addChild(char)
+        char.position.x = (x - halfSize) * cellSize
+        char.position.y = (halfSize - y) * cellSize
+        char.zPosition = MyScene.ROLE_LAYER_Z
+        _role = char
+    }
+    func getRoleNode(roleNode:SKSpriteNode) -> SKSpriteNode {
+        let shadow = SKSpriteNode(texture: _shadow)
+        shadow.yAxis = -cellSize * 0.25
+        shadow.anchorPoint = CGPoint(x: 0.5, y: 0)
+        roleNode.anchorPoint = CGPoint(x: 0.5, y: 0)
+        roleNode.zPosition = shadow.zPosition + 1
+        let node = SKSpriteNode()
+        node.addChild(shadow)
+        node.addChild(roleNode)
+        return node
     }
     internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
     internal var _mapSet:GroundSets!
@@ -531,13 +651,15 @@ class MyScene: SKSpriteNode {
     internal var _roleLayer = SKSpriteNode()
     internal var _itemLayer = SKSpriteNode()
     internal var _maskLayer = SKSpriteNode()
-    internal var startX:CGFloat = -4
-    internal var endX:CGFloat = 4
+    internal var halfSize:CGFloat = 6
     internal var _direction = 0
     internal var _isMoving = false
     internal var _nextDirection = 0
     internal var _portalPrev:CGPoint!
     internal var _portalNext:CGPoint!
+    internal var xSzie = 13
+    internal var ySzie = 12
+    internal var _shadow = SKTexture(imageNamed: "select.png").getCell(3, 0)
     var _role:BUnit!
     var _mapMatrix:Array<Array<Int>> = []
     var _itemEnum:Array<Int> = []
@@ -549,3 +671,42 @@ class MyScene: SKSpriteNode {
     var _level:CGFloat = 20
 }
 
+class Chest:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        _x = seed(max: 12)
+        let item = Game.instance.pictureChest.getCell(_x.toFloat(), 0)
+        setTexture(item)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    override func triggerEvent() {
+        let item = Game.instance.pictureChest.getCell(_x.toFloat(), 3)
+        setTexture(item)
+        _triggered = true
+    }
+    private var _x = 0
+    var _triggered = false
+    
+}
+class UIRole:UIItem {
+    internal var _shadow = SKTexture(imageNamed: "select.png").getCell(3, 0)
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+    }
+    func create(roleNode:SKSpriteNode) {
+        let shadow = SKSpriteNode(texture: _shadow)
+        shadow.yAxis = -cellSize * 0.25
+        shadow.anchorPoint = CGPoint(x: 0.5, y: 0)
+        roleNode.anchorPoint = CGPoint(x: 0.5, y: 0)
+        roleNode.zPosition = shadow.zPosition + 1
+        addChild(shadow)
+        addChild(roleNode)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}

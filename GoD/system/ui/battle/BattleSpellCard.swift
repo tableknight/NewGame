@@ -63,7 +63,7 @@ class BattleSpellCard:UIPanel {
     
     override func createCloseButton() {
         _roundCloseButton.create(text: "关闭", size: 28)
-        _roundCloseButton.yAxis = -cellSize * 3
+        _roundCloseButton.yAxis = -cellSize * 4
         _roundCloseButton.zPosition = self.zPosition + 2
         addChild(_roundCloseButton)
     }
@@ -76,7 +76,7 @@ class BattleSpellCard:UIPanel {
     }
     private func showSpells() {
         let spells = _spells
-        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startX = getStartX()
         let startY = -_standardHeight * 0.25 + cellSize * 0.5
         if spells.count > 0 {
             for i in 0...spells.count - 1 {

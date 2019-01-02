@@ -144,9 +144,11 @@ class SpellPanel:UIPanel {
         addChild(_spellBoxInuse)
         _label.text = "Lv.\(role._level.toInt()) [\(role._name)] 技能栏: \(role._spellCount)"
     }
+    
     private func showSpellsInuse() {
         let spells = _role._spellsInuse
-        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startX:CGFloat = getStartX()
+//        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
         let startY = _standardHeight * 0.5 - _standardGap
         if spells.count > 0 {
             for i in 0...spells.count - 1 {
@@ -166,7 +168,8 @@ class SpellPanel:UIPanel {
     
     private func showSpellsUnused() {
         let spells = Game.instance.char._spells
-        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+//        let startX:CGFloat = 0
+        let startX = -_standardWidth * 0.5 + cellSize * 0.375
         let startY = _standardHeight * 0.5 - _standardGap - cellSize * 1.75
 //        _curPageSpells = Array<SpellComponent>()
         if spells.count > 0 {
@@ -209,6 +212,7 @@ class SpellPanel:UIPanel {
     }
     override func close() {
         Game.instance.curStage.removePanel(self)
+        closeAction()
     }
 //    func displayInfos(icon:Icon) {
 //        let spell = icon._displayItemType as! Spell
@@ -230,6 +234,7 @@ class SpellPanel:UIPanel {
 //    private var _infosDisplay = SKSpriteNode()
     private var _spellBoxUnused = SKSpriteNode()
     private var _spellBoxInuse = SKSpriteNode()
+    var closeAction = {}
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -249,7 +254,6 @@ class SpellInfo:SKSpriteNode, IPanelSize {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
 //        zPosition = UIStage.PANEL_LAYER + 4
-        
     }
     private var _spell = Spell()
     func create(spell:Spell) {

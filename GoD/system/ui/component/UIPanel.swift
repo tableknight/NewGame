@@ -171,6 +171,10 @@ class UIPanel:SKSpriteNode {
         
         return false
     }
+    
+    func getStartX() -> CGFloat {
+        return -_standardWidth * 0.5 + cellSize * 0.375
+    }
 
     
     internal var _bg:SKShapeNode!

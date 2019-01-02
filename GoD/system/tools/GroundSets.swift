@@ -21,6 +21,11 @@ class GroundSets: Core {
         _ground = ground
         _wall = wall
 //        let cs = Game.instance.cellSize
+//        let w = SKSpriteNode()
+//        w.size = CGSize(width: cs, height: cs)
+//        w.addChild()
+//        SKSpriteNode(texture: wall.getCell(0, 0, 2, 0.5))
+//        let cs = Game.instance.cellSize
 //        var top = SKSpriteNode(texture: ground.getCell(0, 0))
 //        var middle = SKSpriteNode(texture: ground.getCell(0, 0.5))
 //        var bottom = SKSpriteNode(texture: ground.getCell(0, 1))
@@ -101,9 +106,9 @@ class GroundSets: Core {
             partPos = 1
         }
 //        let wall = _wall
-        return _wall.getNode(partPos, 1, 1, 2)
+        return _wall.getNode(partPos, 1)
     }
-    var groundHeight:CGFloat = 4
+    var groundHeight:CGFloat = 5
     var startTopPos: Int = 8
     func gStart() -> SKTexture {
         let cs = Game.instance.cellSize
@@ -248,3 +253,4 @@ class GroundSets: Core {
         return gs.toTexture()
     }
 }
+

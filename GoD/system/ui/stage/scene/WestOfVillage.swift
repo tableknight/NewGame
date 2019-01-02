@@ -150,9 +150,7 @@ class NormalHouse:UIItem {
         wr.position.y = -cellSize * 0.5
         house.addChild(wr)
         setTexture(house.toTexture())
-        _items = [0, 0, 0]
-        _xSize = 3
-        _ySize = 4
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -216,23 +214,18 @@ class MinionsHouse:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let t = Game.instance.tilee_outsidetown
-        let house = SKSpriteNode(texture: t.getCell(1, 4, 4, 4))
-        let l = SKSpriteNode(texture: t.getCell(0, 4, 1, 2))
-        l.anchorPoint = CGPoint(x: 0.5, y: 1)
-        l.position.x = -cellSize * 2.5
-        house.addChild(l)
-        let sha = SKSpriteNode(texture: Game.instance.sha)
-        sha.position.x = cellSize * 2
-        sha.position.y = -cellSize * 1.5
-        //        sha.anchorPoint = CGPoint(x: 0.5, y: 1)
-        house.addChild(sha)
-//        let road = SKSpriteNode(texture: Data.instance.outside_b.getCell(4, 9))
-//        road.position.x = -cellSize * 0.5
-//        road.position.y = -cellSize * 2.5
-//        house.addChild(road)
-        setTexture(house.toTexture())
-        _xSize = 5
-        _ySize = 4
+//        let house = SKSpriteNode(texture: t.getCell(1, 4, 4, 4))
+//        let l = SKSpriteNode(texture: t.getCell(0, 4, 1, 2))
+//        house.addChild(l)
+//        let sha = SKSpriteNode(texture: Game.instance.sha)
+//        sha.position.x = cellSize * 2
+//        sha.position.y = -cellSize * 1.5
+//        house.addChild(sha)
+//        print("cellsize \(cellSize)")
+        setTexture(t.getCell(1, 4, 4, 4))
+        self.size = CGSize(width: cellSize * 3, height: cellSize * 3)
+//        xAxis = cellSize * 0.5
+//        yAxis = -size.height * 0.5
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -244,9 +237,6 @@ class VillageTrees:UIItem {
         super.init(texture: texture, color: color, size: size)
         let t = Game.instance.tilee_outsidetown
         setTexture(t.getCell(7, 12, 3, 3))
-        _items = [0]
-        _xSize = 3
-        _ySize = 3
     }
     
     required init?(coder aDecoder: NSCoder) {

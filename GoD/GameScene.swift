@@ -44,8 +44,11 @@ class GameScene: SKScene {
     }
     
     func realScene() {
-        let bs = SceneMeadow()
+        let bs = SelfHome()
         bs.create()
+        let e = Emily()
+        e.create()
+        bs.setRole(x: 5, y: 5, role: e)
         let stage = MyStage()
         stage.loadScene(scene: bs)
         stage.createMenu()
@@ -67,10 +70,10 @@ class GameScene: SKScene {
         let bc = BlastScroll()
         bc._count = 5
         Game.instance.char.addProp(p: bc)
-        let o = SKShapeNode(rectOf: CGSize(width: 18, height: 18))
-        o.lineWidth = 4
-        o.zPosition = 1200
-        addChild(o)
+//        let o = SKShapeNode(rectOf: CGSize(width: 18, height: 18))
+//        o.lineWidth = 4
+//        o.zPosition = 1200
+//        addChild(o)
         
         var props = Array<Prop>()
         props.append(bc)
@@ -106,6 +109,12 @@ class GameScene: SKScene {
 //        cf.create()
 //        addChild(cf)
         realScene()
+//        let p = AcientRoadSelection()
+//        p.create()
+//        addChild(p)
+//        let _ = Game.instance.curStage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
+//                                                  text: "你好，这是远古石碑，是前往无尽深渊的唯一入口！触摸石碑的中心，与石碑产生共鸣。",
+//                                                  name: "神官苏维亚")
     }
     
     

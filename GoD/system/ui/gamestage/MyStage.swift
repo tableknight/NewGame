@@ -12,11 +12,11 @@ class MyStage: SKSpriteNode {
     static let UI_PANEL_Z:CGFloat = 300
     static let UI_SUB_PANEL_Z:CGFloat = 400
     static let UI_TOPEST_Z:CGFloat = 1000
-    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         isUserInteractionEnabled = true
         Game.instance.curStage = self
+        createSceneChangeMask()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -135,6 +135,69 @@ class MyStage: SKSpriteNode {
     func showScene() {
         _curScene.isHidden = false
     }
+    func showDialog(img:SKTexture, text:String, name:String) {
+        if nil != _curDialog {
+            return
+        }
+        hideUI()
+//        _char.removeSpeak()
+        let dlg = Dialog()
+        dlg._name = name
+        dlg.create(img: img)
+        dlg.text = text
+        addChild(dlg)
+        dlg.yAxis = -cellSize * 2
+        _curDialog = dlg
+    }
+    
+    func removeDialog(dlg:Dialog) {
+        dlg.removeFromParent()
+        showUI()
+        _curDialog = nil
+    }
+    func showSceneMask() {
+        _sceneChangeMask.isHidden = false
+        _sceneChangeMask.alpha = 1
+    }
+    func switchScene(next:MyScene, afterCreation:@escaping () -> Void = {},  completion:@escaping () -> Void = {}) {
+        if !loaded {
+            return
+        }
+        showSceneMask()
+        loaded = false
+        //        return
+        let this = self
+        setTimeout(delay: 1, completion: {
+            
+            //            let wait = SKAction.wait(forDuration: TimeInterval(1))
+            let out = SKAction.fadeOut(withDuration: TimeInterval(1))
+            if !next.initialized {
+                next.create()
+                afterCreation()
+            }
+            //        return
+            //            let go = SKAction.sequence([wait, out])
+            this._curScene.removeFromParent()
+            this.loadScene(scene: next)
+            
+            this._sceneChangeMask.run(out) {
+                completion()
+                this.loaded = true
+            }
+        })
+    }
+    private var _sceneChangeMask = SKSpriteNode()
+    private func createSceneChangeMask() {
+        let cover = createBackground(width: cellSize * 13, height: cellSize * 12)
+        cover.fillColor = UIColor.black
+        cover.position.x = 0
+        cover.position.y = 0
+        _sceneChangeMask.addChild(cover)
+        _sceneChangeMask.isHidden = true
+        _sceneChangeMask.zPosition = MyScene.MASK_LAYER_Z
+        addChild(_sceneChangeMask)
+    }
+    var _curDialog:Dialog?
     var _curScene:MyScene!
     var _charButton:RoundButton!
     var _itemButton:RoundButton!
@@ -145,5 +208,6 @@ class MyStage: SKSpriteNode {
     var _scenes = Array<MyScene>()
     var _curPanel:UIPanel?
     var _messageNode = SKSpriteNode()
+    private var loaded = true
 //    var _
 }

@@ -235,9 +235,11 @@ class Game {
     var outside_c:SKTexture = SKTexture(imageNamed: "Outside_C.png")
     var outside_a5:SKTexture = SKTexture(imageNamed: "Outside_A5.png")
     var outside_a2:SKTexture = SKTexture(imageNamed: "Outside_A2.png")
+    var outside_a1:SKTexture = SKTexture(imageNamed: "Outside_A1.png")
     var outside_a3:SKTexture = SKTexture(imageNamed: "Outside_A3.png")
     var outside_a4:SKTexture = SKTexture(imageNamed: "Outside_A4.png")
     var dungeon_a4:SKTexture = SKTexture(imageNamed: "Dungeon_A4.png")
+    var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
     var dungeon_b = SKTexture(imageNamed: "Dungeon_B.png")
     var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png")
     var sf_outside_c:SKTexture = SKTexture(imageNamed: "SF_Outside_C.png")
@@ -257,16 +259,18 @@ class Game {
     var pictureAll = SKTexture(imageNamed: "ALL.png")
     var pictureAll2 = SKTexture(imageNamed: "ALL2.png")
     var picturePeople2 = SKTexture(imageNamed: "People2.png")
+    var pictureVehicle = SKTexture(imageNamed: "Vehicle.png")
     var pictureActor1 = SKTexture(imageNamed: "Actor1.png")
     var pictureActor2 = SKTexture(imageNamed: "Actor2.png")
     var pictureActor3 = SKTexture(imageNamed: "Actor3.png")
     var picturePeople1 = SKTexture(imageNamed: "People1.png")
+    var pictureChest = SKTexture(imageNamed: "Chest.png")
     private init() {
 //        c += 1;
 //        print(c)
         _size = 48
         _fontSize = _size * 0.25
-        cellSize = 48 * 1.5
+        cellSize = 48
     }
     func sayHello() {
         print("hello!")
@@ -464,4 +468,11 @@ func createBackground(x: CGFloat = 0, y: CGFloat = 0, width: CGFloat, height: CG
     bg.position.y = -height * 0.5
 //    bg.zPosition = zPos
     return bg
+}
+func createBorder(width: CGFloat, height: CGFloat, color:UIColor = UIColor.white) -> SKSpriteNode {
+    let node = SKSpriteNode()
+    node.anchorPoint = CGPoint(x: 0, y: 1)
+    node.size = CGSize(width: width, height: height)
+    node.color = color
+    return node
 }

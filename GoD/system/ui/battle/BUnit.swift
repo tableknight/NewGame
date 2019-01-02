@@ -70,7 +70,9 @@ class BUnit: SKSpriteNode {
         isEmpty = true
     }
     func create() {
-        _charSize = cellSize
+        if 0 == _charSize {
+            _charSize = cellSize
+        }
         if playerPart {
             _charSize = cellSize * 1.25
         }
@@ -93,10 +95,12 @@ class BUnit: SKSpriteNode {
     }
     func createForStage() {
         hasInitialized = true
-        _charSize = cellSize
+        if 0 == _charSize {
+            _charSize = cellSize
+        }
         _charNode.size = CGSize(width: _charSize, height: _charSize)
-        circleY = -0.26 * cellSize
-        _select.size = CGSize(width: cellSize, height: cellSize)
+        circleY = -0.26 * _charSize
+        _select.size = CGSize(width: _charSize, height: _charSize)
         _select.texture = _selectTexture.getCell(3, 0)
         _select.position.y = circleY
         _select.zPosition = 40

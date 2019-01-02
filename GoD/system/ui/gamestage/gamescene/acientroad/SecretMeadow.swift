@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class SceneMeadow: MyScene {
+class SecretMeadow: AcientRoad {
     var MONSTER_BEE = 1001
     var MONSTER_TREE_SPIRIT = 1002
     var MONSTER_TOAD = 1003

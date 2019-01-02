@@ -20,7 +20,6 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
     func getDisplayHeight() -> CGFloat {
         return _displayHeight
     }
-    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         zPosition = MyStage.UI_TOPEST_Z

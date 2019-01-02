@@ -63,7 +63,8 @@ class SelectItems: UIPanel {
     }
     func createPropList() {
         let props = getPropsCountMoreThan1()
-        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startX = -_standardWidth * 0.5 + cellSize * 0.375
+//        let startX:CGFloat = 0
         let startY = _standardHeight * 0.5 - _standardGap * 2
         if props.count > 0 {
             let end = getPageEnd(props.count)

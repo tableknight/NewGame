@@ -25,6 +25,97 @@ extension Array {
     
     
 }
+extension UIPanel {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension Button {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension RectButton {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension AttrLabel {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension SeatNode {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension Icon {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension SelectableComponent {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension ItemInfo {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension SpellInfo {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension MyStage {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension MinionComponent {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension Battle {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
+extension BUnit {
+    override var cellSize:CGFloat {
+        get {
+            return Game.CELLSIZE
+        }
+    }
+}
 
 extension SKSpriteNode {
     var left:CGFloat {
@@ -44,10 +135,7 @@ extension SKSpriteNode {
             return position.y + cellSize * 4
         }
     }
-    var cellSize:CGFloat {
-        set {
-            print("set cell size")
-        }
+    @objc var cellSize:CGFloat {
         get {
             return Game.instance.cellSize
         }
@@ -86,6 +174,7 @@ extension SKTexture {
         let rect = CGRect(x: x * width, y: _y * height, width: width * wSize, height: height * hSize)
 //        let rect = CGRect(x: 1 / 3, y: 1 / 4, width: 1 / 3, height: 1 / 4)
         let node = SKSpriteNode(texture: SKTexture(rect: rect, in: self))
+//        node.size = CGSize(width: 48, height: 48)
 //        node.size.width = cellSize * 1.5
 //        node.size.height = cellSize * 1.5
         let view = SKView()
@@ -93,6 +182,7 @@ extension SKTexture {
     }
     func getNode(_ x:CGFloat, _ y:CGFloat, _ wSize:CGFloat = 1, _ hSize:CGFloat = 1) -> SKSpriteNode {
         let cellSize:CGFloat = 48
+//        let cellSize = Game.instance.cellSize
         let w = size().width
         let h = size().height
         let _y = h / cellSize - y - 1
@@ -102,8 +192,9 @@ extension SKTexture {
         let rect = CGRect(x: x * width, y: _y * height, width: width * wSize, height: height * hSize)
         //        let rect = CGRect(x: 1 / 3, y: 1 / 4, width: 1 / 3, height: 1 / 4)
         let node = SKSpriteNode(texture: SKTexture(rect: rect, in: self))
-        node.size.width = cellSize * 1.5 * wSize
-        node.size.height = cellSize * 1.5 * hSize
+//        node.size = CGSize(width: 48, height: 48)
+//        node.size.width = cellSize * 1.5 * wSize
+//        node.size.height = cellSize * 1.5 * hSize
 //        if hSize > 1 {
 //            node.anchorPoint = CGPoint(x: 0.5, y: 0)
 //        }

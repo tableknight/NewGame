@@ -1191,6 +1191,8 @@ class Battle: SKSpriteNode {
         }
         bip.selectAction = {
             let item = bip.selectedItem
+            item?._battle = self
+//            item?.useInBattle()
         }
         addChild(bip)
     }

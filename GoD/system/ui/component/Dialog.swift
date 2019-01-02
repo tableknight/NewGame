@@ -11,7 +11,7 @@ class Dialog: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         if _closeButton.contains(touchPoint!) {
-            Game.instance.stage.removeDialog(dlg: self)
+            Game.instance.curStage.removeDialog(dlg: self)
         } else if _nextButton.contains(touchPoint!) {
             _nextAction()
         } else if _confirmButton.contains(touchPoint!) {
@@ -20,11 +20,11 @@ class Dialog: SKSpriteNode {
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        let rect = CGRect(x: -cellSize * 7, y: -cellSize * 3, width: cellSize * 14, height: cellSize * 3)
-        _dialog = SKShapeNode(rect: rect, cornerRadius: 4)
+        self.zPosition = MyStage.UI_TOPEST_Z + 10
+        _dialog = createBackground(width: cellSize * 13, height: cellSize * 3.5)
         _dialog.fillColor = UIColor.black
-        _dialog.alpha = 0.65
-        _dialog.zPosition = UIStage.UILAYER
+        _dialog.alpha = 0.75
+        _dialog.position.x = 0
         addChild(_dialog)
         isUserInteractionEnabled = true
         
@@ -36,22 +36,21 @@ class Dialog: SKSpriteNode {
     func create(img:SKTexture) {
         let actor = SKSpriteNode(texture: img)
         actor.size = CGSize(width: -cellSize * 1, height: cellSize * 1)
-        actor.position.x = -cellSize * 6.5
+        actor.position.x = -cellSize * 5.5
         actor.position.y = cellSize * 0.5
         actor.zPosition = _dialog.zPosition + 1
         addChild(actor)
         
         let name = Label()
         name.position.x = actor.position.x + cellSize * 0.5
-        name.position.y = 5
+        name.position.y = 22
         name.zPosition = _dialog.zPosition + 1
-        name.align = "left"
         name.text = _name
-        name.fontSize = 16
+        name.fontSize = 20
         addChild(name)
         
-        _closeButton.position.x = cellSize * 6
-        _closeButton.position.y = cellSize * 0.5 - 3
+        _closeButton.position.x = cellSize * 4
+        _closeButton.position.y = cellSize * 0.75
         _closeButton.text = "关闭"
         addChild(_closeButton)
     }
@@ -78,11 +77,10 @@ class Dialog: SKSpriteNode {
             
             _textlabel = MultipleLabel()
             _textlabel._fontSize = 20
-            _textlabel._lineCharNumber = 30
+            _textlabel._lineCharNumber = 26
             _textlabel._lineHeight = 30
-            _textlabel.position.x = -cellSize * 6
+            _textlabel.position.x = -cellSize * 5.5
             _textlabel.position.y = -cellSize
-            _textlabel.zPosition = _dialog.zPosition + 1
             _textlabel.text = newValue
             addChild(_textlabel)
             
@@ -93,7 +91,7 @@ class Dialog: SKSpriteNode {
     }
     
     func remove() {
-        Game.instance.stage.removeDialog(dlg: self)
+        Game.instance.curStage.removeDialog(dlg: self)
     }
     
     private var _dialog = SKShapeNode()

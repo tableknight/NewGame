@@ -57,7 +57,8 @@ class BattleItemPanel: UIPanel {
     }
     func createPropList() {
         let props = getPropsInBattle()
-        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
+        let startX:CGFloat = 0
+//        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
         let startY = _standardHeight * 0.5 - _standardGap * 2
         if props.count > 0 {
             let end = getPageEnd(props.count)

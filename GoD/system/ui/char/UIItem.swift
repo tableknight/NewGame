@@ -18,7 +18,7 @@ class UIItem:SKSpriteNode {
     
     internal func setTexture(_ texture:SKTexture) {
         self.texture = texture
-        self.size = CGSize(width: texture.size().width * 1.5, height: texture.size().height * 1.5)
+        self.size = texture.size()
     }
     
     var _xSize:Int = 1
@@ -44,18 +44,19 @@ class UIItem:SKSpriteNode {
         node.addChild(bg)
         
         let border = SKShapeNode(rect: rect, cornerRadius: 4)
-        border.lineWidth = 2
+        border.lineWidth = 1
         node.addChild(border)
         
         let l = Label()
-        l.fontSize = 14
+        l.fontSize = 18
         l.fontColor = UIColor.white
-        l.position.y = -7
+        l.align = "center"
+        l.position.y = 9
         l.text = text
         node.addChild(l)
         
         node.zPosition = UIStage.LAYER2 + 3
-        node.position.y = cellSize * 0.5
+        node.position.y = cellSize * 1.5
         addChild(node)
         if autoRemove {
             setTimeout(delay: duration, completion: {

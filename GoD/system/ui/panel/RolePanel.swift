@@ -23,7 +23,17 @@ class RolePanel:UIPanel {
         for si in _listSpells {
             if si.contains(touchPoint!) {
                 if _lastSelectedSpellIcon == si {
-                    
+                    self.hide()
+                    let spellPanel = SpellPanel()
+                    spellPanel.create(role: _unit)
+                    let this = self
+                    spellPanel.closeAction = {
+                        this.show()
+                        this.loadSpells()
+                    }
+                    Game.instance.curStage.showPanel(spellPanel)
+                    _lastSelectedSpellIcon.selected = false
+                    _lastSelectedSpellIcon = SpellIcon()
                 } else {
                     _lastSelectedSpellIcon.selected = false
                     si.selected = true
@@ -290,16 +300,26 @@ class RolePanel:UIPanel {
             _attrLucky = addAttrLabel(x: x5, y: y3, text: "幸运", value: bUnitRole.getLucky())
             _attrRevenge = addAttrLabel(x: x5, y: y4, text: "复仇", value: bUnitRole.getRevenge())
         }
-        if unit._spellCount > 0 {
-            for i in 0...unit._spellCount - 1 {
+        _spellY = y6
+        loadSpells()
+    }
+    private var _spellY:CGFloat = 0
+    func loadSpells() {
+        for s in _listSpells {
+            s.removeFromParent()
+        }
+        _listSpells = []
+        if _unit._spellCount > 0 {
+            for i in 0..._unit._spellCount - 1 {
                 let spellIcon = SpellIcon()
-                spellIcon.position.x = startX + cellSize * 1.25 * i.toFloat()
-                spellIcon.position.y = y6
-//                spellIcon.anchorPoint = CGPoint(x: 0, y: 1)
+                spellIcon.position.x = _startX + cellSize * 0.25 + i.toFloat() * (cellSize * 1.25)
+                spellIcon.position.y = _spellY
+                //                spellIcon.anchorPoint = CGPoint(x: 0, y: 1)
                 _propertyLayer.addChild(spellIcon)
-                if unit._spellsInuse.count > i {
-                    spellIcon.spell = unit._spellsInuse[i]
-                    spellIcon._displayItemType = unit._spellsInuse[i]
+                if _unit._spellsInuse.count > i {
+                    spellIcon.spell = _unit._spellsInuse[i]
+                    spellIcon._displayItemType = _unit._spellsInuse[i]
+                    spellIcon.quality = _unit._spellsInuse[i]._quality
                 }
                 _listSpells.append(spellIcon)
             }
