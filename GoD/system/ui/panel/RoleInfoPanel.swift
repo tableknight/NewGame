@@ -269,10 +269,10 @@ class RoleInfoPanel:SKSpriteNode {
         attack.position.x = firstRowX + attack.size.width * 0.5
         attack.position.y = secondLineY
         attack.text = "攻击"
-        attack.value = bChar.getAttack(t: to).toInt()
+        attack.value = bChar.getAttack().toInt()
         addChild(attack)
         
-        var def = bChar.getDefence(t: to).toInt()
+        var def = bChar.getDefence().toInt()
         if bChar.hasSpell(spell: OnePunch()) || bChar.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
@@ -295,7 +295,7 @@ class RoleInfoPanel:SKSpriteNode {
         spirit.position.x = speed.position.x + xWidth
         spirit.position.y = secondLineY
         spirit.text = "精神"
-        spirit.value = bChar.getSpirit(t: to).toInt()
+        spirit.value = bChar.getSpirit().toInt()
         addChild(spirit)
         
         let health = AttrLabel()
@@ -333,21 +333,21 @@ class RoleInfoPanel:SKSpriteNode {
         critical.position.x = strength.position.x
         critical.position.y = thirdLineY
         critical.text = "必杀"
-        critical.value = bChar.getCriticalForShow(t: to).toInt()
+        critical.value = bChar.getCriticalForShow().toInt()
         addChild(critical)
         
         let avoid = AttrLabel()
         avoid.position.x = critical.position.x + xWidth
         avoid.position.y = thirdLineY
         avoid.text = "闪避"
-        avoid.value = bChar.getAvoid(t: to).toInt()
+        avoid.value = bChar.getAvoid().toInt()
         addChild(avoid)
         
         let accuracy = AttrLabel()
         accuracy.position.x = avoid.position.x + xWidth
         accuracy.position.y = thirdLineY
         accuracy.text = "命中"
-        accuracy.value = bChar.getAccuracy(t: to).toInt()
+        accuracy.value = bChar.getAccuracy().toInt()
         addChild(accuracy)
         
         
@@ -355,21 +355,21 @@ class RoleInfoPanel:SKSpriteNode {
         mind.position.x = accuracy.position.x + xWidth
         mind.position.y = thirdLineY
         mind.text = "念力"
-        mind.value = bChar.getMind(target: to).toInt()
+        mind.value = bChar.getMind().toInt()
         addChild(mind)
         
         let _break = AttrLabel()
         _break.position.x = mind.position.x + xWidth
         _break.position.y = thirdLineY
         _break.text = "破甲"
-        _break.value = bChar.getBreak(target: to).toInt()
+        _break.value = bChar.getBreak().toInt()
         addChild(_break)
         
         let revenge = AttrLabel()
         revenge.position.x = _break.position.x + xWidth
         revenge.position.y = thirdLineY
         revenge.text = "复仇"
-        revenge.value = bChar.getRevenge(target: to).toInt()
+        revenge.value = bChar.getRevenge().toInt()
         addChild(revenge)
         
         let rhythm = AttrLabel()
@@ -565,15 +565,15 @@ class RoleInfoPanel:SKSpriteNode {
         _attrStamina.value = bChar.getStamina().toInt()
         _attrAgility.value = bChar.getAgility().toInt()
         _attrIntellect.value = bChar.getIntellect().toInt()
-        _attrAttack.value = bChar.getAttack(t: to).toInt()
-        _attrDefence.value = bChar.getDefence(t: to).toInt()
+        _attrAttack.value = bChar.getAttack().toInt()
+        _attrDefence.value = bChar.getDefence().toInt()
         _attrSpeed.value = bChar.getSpeed().toInt()
-        _attrSpirit.value = bChar.getSpirit(t: to).toInt()
+        _attrSpirit.value = bChar.getSpirit().toInt()
         _attrHealth.value = bChar.getHealth().toInt()
-        _attrCritical.value = bChar.getCriticalForShow(t: to).toInt()
-        _attrAvoid.value = bChar.getAvoid(t: to).toInt()
-        _attrAccuracy.value = bChar.getAccuracy(t: to).toInt()
-        _attrMind.value = bChar.getMind(target: to).toInt()
+        _attrCritical.value = bChar.getCriticalForShow().toInt()
+        _attrAvoid.value = bChar.getAvoid().toInt()
+        _attrAccuracy.value = bChar.getAccuracy().toInt()
+        _attrMind.value = bChar.getMind().toInt()
         _attrBreak.value = bChar.getBreak().toInt()
         _attrRevenge.value = bChar.getRevenge().toInt()
         _attrLeftPoint.value = char._leftPoint

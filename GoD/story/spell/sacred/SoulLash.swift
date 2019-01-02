@@ -41,15 +41,21 @@ class SoulLash: Magical {
             t.actionAttacked {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {
-                    completion()
                     if this.seed() < 25 {
                         b?.silenceUnit(unit: t)
-                        t.showText(text: "SILENCED")
+                        t.showText(text: "SILENCED") {
+                            completion()
+                        }
+                    } else {
+                        completion()
                     }
                 }
                 
             }
         }
+    }
+    override func findTarget() {
+        findSingleTargetNotBlocked()
     }
     
 }

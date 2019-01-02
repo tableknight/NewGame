@@ -865,8 +865,8 @@ class BUnit: SKSpriteNode {
         _status[status._type] = status
     }
     
-    func getSpirit(t:Creature = Creature()) -> CGFloat {
-        var spirit = _unit._extensions.spirit - t._level
+    func getSpirit() -> CGFloat {
+        var spirit = _unit._extensions.spirit + _extensions.spirit
         
         if hasSpell(spell: Energetic()) {
             if spirit > 0 {
@@ -1003,14 +1003,14 @@ class BUnit: SKSpriteNode {
         }
         return speed + _extensions.speed
     }
-    func getAttack(t:Creature = Creature()) -> CGFloat {
+    func getAttack() -> CGFloat {
 //        let atk = sqrt(_unit._extensions.attack) * 12
         if hasSpell(spell: MagicSword()) {
-            return getSpirit(t:t)
+            return getSpirit()
         }
-        var atk = _unit._extensions.attack - t._level
+        var atk = _unit._extensions.attack
         if hasSpell(spell: OnePunch()) {
-            atk += getDefence(t: t)
+            atk += getDefence()
         }
         
         if hasSpell(spell: Bellicose()) {
@@ -1029,8 +1029,8 @@ class BUnit: SKSpriteNode {
         }
         return atk + _extensions.attack
     }
-    func getDefence(t:Creature = Creature()) -> CGFloat {
-        var def = _unit._extensions.defence - t._level
+    func getDefence() -> CGFloat {
+        var def = _unit._extensions.defence
         if hasSpell(spell: DancingOnIce()) {
             return 0
         }
@@ -1065,8 +1065,8 @@ class BUnit: SKSpriteNode {
         return ctl + _extensions.critical
     }
     
-    func getCriticalForShow(t:Creature = Creature()) -> CGFloat {
-        var ctl = _unit._extensions.critical - t._level
+    func getCriticalForShow() -> CGFloat {
+        var ctl = _unit._extensions.critical
         if hasSpell(spell: BloodThirsty()) {
             ctl += _unit._level
         }
@@ -1096,7 +1096,7 @@ class BUnit: SKSpriteNode {
         return val
     }
     
-    func getMind(target:Creature = Creature()) -> CGFloat {
+    func getMind() -> CGFloat {
         var mind = _unit._extensions.mind
         if _unit.isMainChar && _stage.hasTowerStatus(status: MindPower()) {
             mind += 25

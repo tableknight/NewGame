@@ -26,7 +26,7 @@ class Emily:Character {
         _spellCount = 4
         _minionsCount = 3
         let blackCat = BlackCat()
-        blackCat._seat = BUnit.STAND_BY
+        blackCat._seat = BUnit.BTL
         blackCat.create(level: 1)
         blackCat._spellCount = 1
         blackCat._spellsInuse = []
@@ -46,7 +46,7 @@ class Emily:Character {
         
         let bq = BloodQueen()
         bq.create(level: 1)
-        bq._seat = BUnit.STAND_BY
+        bq._seat = BUnit.BBR
 //        bq.levelup()
         bq._spellsInuse = [FireBreath()]
         _minions.append(bq)

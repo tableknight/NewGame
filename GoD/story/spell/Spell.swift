@@ -15,7 +15,7 @@ class Spell:Core, IDisplay {
 //    static var TARGET_EVIL = 0
     var isTargetEmemy = true
     var isTargetAll = false
-    var canBeTargetSelf = false
+    var canBeTargetPlayer = false
     var isPhysical = false
     var isMagical = false
     var isFire = false
@@ -66,7 +66,7 @@ class Spell:Core, IDisplay {
     func getDefRate(from: BUnit, to:BUnit) -> CGFloat {
         let level = to._unit._level + 6
         let brk = from.getBreak()
-        let odef = to.getDefence(t:from._unit) * (1 - brk * 0.01)
+        let odef = to.getDefence() * (1 - brk * 0.01)
 //        let base =
         var def = (odef / atan(odef / level)) / (level * 4)
         
@@ -81,7 +81,7 @@ class Spell:Core, IDisplay {
         return def
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
-        let atk = from.getAttack(t:to._unit)
+        let atk = from.getAttack()
         
         let def = getDefRate(from: from, to:to)
         
@@ -116,8 +116,8 @@ class Spell:Core, IDisplay {
     }
     func magicalDamage(_ to:BUnit) -> CGFloat {
         let from = _battle._curRole
-        let atk = from.getSpirit(t: to._unit)
-        let def = to.getSpirit(t: from._unit)
+        let atk = from.getSpirit()
+        let def = to.getSpirit()
         
         debug("m atk:\(atk.toInt()), def:\(def.toInt())")
         
@@ -135,9 +135,9 @@ class Spell:Core, IDisplay {
     }
     func fireDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
         let from = _battle._curRole
-        var damage = from.getSpirit(t:to._unit)
+        var damage = from.getSpirit()
         if isPhysical {
-            damage = from.getAttack(t: to._unit)
+            damage = from.getAttack()
         }
         if damage < 5 {
             return -seed(min: 0, max: 5).toFloat()
@@ -172,9 +172,9 @@ class Spell:Core, IDisplay {
     }
     func waterDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
         let from = _battle._curRole
-        var damage = from.getSpirit(t:to._unit)
+        var damage = from.getSpirit()
         if isPhysical {
-            damage = from.getAttack(t: to._unit)
+            damage = from.getAttack()
         }
         if damage < 5 {
             return -seed(min: 0, max: 5).toFloat()
@@ -187,9 +187,9 @@ class Spell:Core, IDisplay {
     }
     func thunderDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
         let from = _battle._curRole
-        var damage = from.getSpirit(t:to._unit)
+        var damage = from.getSpirit()
         if isPhysical {
-            damage = from.getAttack(t: to._unit)
+            damage = from.getAttack()
         }
         if damage < 5 {
             return -seed(min: 0, max: 5).toFloat()
@@ -544,8 +544,8 @@ class Spell:Core, IDisplay {
     func setFrozen(target:BUnit, completion:@escaping () -> Void) {
         let sed = seed().toFloat()
         let c = _battle._curRole
-        let fromMind = c.getMind(target: target._unit)
-        let toMind = target.getMind(target: c._unit)
+        let fromMind = c.getMind()
+        let toMind = target.getMind()
         let bound = 65 + fromMind - toMind
         if sed < bound {
             print("feeezing!")
@@ -573,8 +573,8 @@ class Spell:Core, IDisplay {
         }
         let sed = seed().toFloat()
         let c = _battle._curRole
-        let fromMind = c.getMind(target: target._unit)
-        let toMind = target.getMind(target: c._unit)
+        let fromMind = c.getMind()
+        let toMind = target.getMind()
         let rate:CGFloat = 1 + (fromMind - toMind) * 0.01
         let bound = baseline * rate
         if sed < bound {

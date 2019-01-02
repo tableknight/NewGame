@@ -15,6 +15,7 @@ class SpiritIntervene: Magical {
         _quality = Quality.SACRED
         _tear = 1
         isTargetAll = true
+        canBeTargetPlayer = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -23,8 +24,9 @@ class SpiritIntervene: Magical {
         c.actionCast {
             let ro = Creature()
             ro.intellectChange(value: t._unit._level * 3)
-            let change = this.seed(min: 0, max: ro._extensions.spirit.toInt()).toFloat()
-            t._unit._extensions.spirit = change - t.getSpirit(t: c._unit)
+            let max = ro._extensions.spirit.toInt()
+            let change = this.seed(min: 0, max: max).toFloat()
+            t._unit._extensions.spirit = change - t._unit._extensions.spirit
             t.showText(text: "SPIRIT \(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
         }
     }

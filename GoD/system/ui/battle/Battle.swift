@@ -1096,7 +1096,7 @@ class Battle: SKSpriteNode {
         _availableEvils = Array<BUnit>()
         if _selectedSpell.isTargetAll {
             _availableEvils = _enimyPart + _playerPart
-            if !_selectedSpell.canBeTargetSelf {
+            if !_selectedSpell.canBeTargetPlayer {
                 let index = _availableEvils.index(of: _playerUnit)
                 if nil != index {
                 } else {

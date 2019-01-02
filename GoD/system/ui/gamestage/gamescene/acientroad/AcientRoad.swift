@@ -152,7 +152,7 @@ class AcientRoad: MyScene {
             
         }
     }
-    internal var _index:Int = 0
+    internal var _index:Int = 1
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _floorSize = seed(min: 1, max: 7)

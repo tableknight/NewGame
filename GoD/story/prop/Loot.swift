@@ -93,20 +93,8 @@ class Loot: Core {
         chance = seed().toFloat()
         if chance < 30 * lucky {
             let item = getItem()
-//            _char.addProp(p: item)
-//            debug("获得物品：[\(item._name)]")
             _props.append(item)
         }
-//        chance = seed().toFloat()
-//        if chance < 5 * lucky {
-//            if role._spellsInuse.count > 0 {
-//                let book = SpellBook()
-//                book.spell = role._spellsInuse[seed(max: role._spellsInuse.count)]
-////                _char.addProp(p: book)
-////                debug("获得技能书：[\(book._name)]")
-//                _props.append(book)
-//            }
-//        }
         
         _props = _props + role.getLoots()
     }
@@ -283,23 +271,36 @@ class Loot: Core {
     }
     
     func getItem() -> Item {
-        let chance = seed()
-        if chance < 50 {
+        var list = [0,0,0,0,0,0]
+        list += [1,1,1,1,1,1]
+        list += [2,2,2]
+        list += [3,3]
+        list += [4]
+        list += [5,5,5,5,5,5,5]
+        return getItemByid(id: list.one())
+    }
+    func getItemByid(id: Int) -> Item {
+        if 0 == id {
             return TheWitchsTear()
         }
-        if chance < 75 {
+        if 1 == id {
             return LittlePotion()
         }
-        if chance < 90 {
+        if 2 == id {
             return Potion()
         }
-        if chance < 95 {
+        if 3 == id {
             return TownScroll()
         }
-        if chance < 98 {
+        if 4 == id {
             return SealScroll()
         }
-        
+        if 5 == id {
+            return BlastScroll()
+        }
+        if 6 == id {
+            
+        }
         return TheWitchsTear()
     }
     private var _props = Array<Prop>()

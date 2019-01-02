@@ -45,35 +45,21 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SelfHome()
+        let bs = SecretMeadow()
         bs.create()
         let e = Emily()
         e.create()
-        bs.setRole(x: 5, y: 5, role: e)
+        e._spellsInuse = [SpiritIntervene(), SoulLash()]
+        for m in e._minions {
+            m._spellsInuse = [SpiritIntervene(), SoulLash()]
+        }
+        bs.setRole(x: 5, y: 7, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
-        //        stage.hideUI()
         addChild(stage)
-        //        let panel = RolePanel()
-        //        panel.create(unit: Game.instance.char)
-        //        stage.showPanel(panel)
-        //        let panel = SpellPanel()
-        //        panel.create(role: Game.instance.char)
-        //        stage.addChild(panel)
-        //        let panel = MinionsList()
-        //        panel.create(minions: Game.instance.char._minions)
-        //        stage.showPanel(panel)
-        
-        //        let mc = MinionComponent()
-        //        mc.create(minion: Game.instance.char._minions[0])
-        //        addChild(mc)
         let bc = BlastScroll()
         bc._count = 5
         Game.instance.char.addProp(p: bc)
-//        let o = SKShapeNode(rectOf: CGSize(width: 18, height: 18))
-//        o.lineWidth = 4
-//        o.zPosition = 1200
-//        addChild(o)
         
         var props = Array<Prop>()
         props.append(bc)

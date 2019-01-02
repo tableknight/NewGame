@@ -16,10 +16,4 @@ class MagicSword: Passive {
         _quality = Quality.SACRED
         
     }
-    override func beforeBattle(t:BUnit) {
-        let status = Status()
-        status._type = Status.MAGIC_SWORD
-        status._timeleft = 9999
-        t.addStatus(status: status)
-    }
 }

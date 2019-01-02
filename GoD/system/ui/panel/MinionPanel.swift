@@ -173,10 +173,10 @@ class MinionPanel:SKSpriteNode {
         attack.position.x = firstRowX + attack.size.width * 0.5
         attack.position.y = secondLineY
         attack.text = "攻击"
-        attack.value = bChar.getAttack(t: char).toInt()
+        attack.value = bChar.getAttack().toInt()
         addChild(attack)
         
-        var def = bChar.getDefence(t: char).toInt()
+        var def = bChar.getDefence().toInt()
         if bChar.hasSpell(spell: OnePunch()) || bChar.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
@@ -199,7 +199,7 @@ class MinionPanel:SKSpriteNode {
         spirit.position.x = speed.position.x + xWidth
         spirit.position.y = secondLineY
         spirit.text = "精神"
-        spirit.value = bChar.getSpirit(t: char).toInt()
+        spirit.value = bChar.getSpirit().toInt()
         addChild(spirit)
         
         let health = AttrLabel()
@@ -218,7 +218,7 @@ class MinionPanel:SKSpriteNode {
         critical.position.x = strength.position.x
         critical.position.y = thirdLineY
         critical.text = "必杀"
-        critical.value = bChar.getCriticalForShow(t: char).toInt()
+        critical.value = bChar.getCriticalForShow().toInt()
         addChild(critical)
         
         let avoid = AttrLabel()
@@ -240,7 +240,7 @@ class MinionPanel:SKSpriteNode {
         mind.position.x = accuracy.position.x + xWidth
         mind.position.y = thirdLineY
         mind.text = "念力"
-        mind.value = bChar.getMind(target: char).toInt()
+        mind.value = bChar.getMind().toInt()
         addChild(mind)
         
         let forthLineY = critical.position.y - gapY

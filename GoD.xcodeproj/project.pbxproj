@@ -167,8 +167,6 @@
 		090FEBE721BB9B2B004276BB /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADA21BB9B2A004276BB /* Structure.swift */; };
 		090FEBE821BB9B2B004276BB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADC21BB9B2A004276BB /* Status.swift */; };
 		090FEBE921BB9B2B004276BB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADE21BB9B2A004276BB /* Item.swift */; };
-		090FEBEA21BB9B2B004276BB /* ArmorScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADF21BB9B2A004276BB /* ArmorScroll.swift */; };
-		090FEBEB21BB9B2B004276BB /* IBattleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAE021BB9B2A004276BB /* IBattleItem.swift */; };
 		090FEBEC21BB9B2B004276BB /* SpellBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAE121BB9B2A004276BB /* SpellBook.swift */; };
 		090FEBED21BB9B2B004276BB /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAE221BB9B2A004276BB /* Core.swift */; };
 		090FEBEE21BB9B2B004276BB /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAE321BB9B2A004276BB /* Game.swift */; };
@@ -475,8 +473,6 @@
 		090FEADA21BB9B2A004276BB /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structure.swift; sourceTree = "<group>"; };
 		090FEADC21BB9B2A004276BB /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		090FEADE21BB9B2A004276BB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		090FEADF21BB9B2A004276BB /* ArmorScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmorScroll.swift; sourceTree = "<group>"; };
-		090FEAE021BB9B2A004276BB /* IBattleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBattleItem.swift; sourceTree = "<group>"; };
 		090FEAE121BB9B2A004276BB /* SpellBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellBook.swift; sourceTree = "<group>"; };
 		090FEAE221BB9B2A004276BB /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		090FEAE321BB9B2A004276BB /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -1004,8 +1000,6 @@
 			isa = PBXGroup;
 			children = (
 				090FEADE21BB9B2A004276BB /* Item.swift */,
-				090FEADF21BB9B2A004276BB /* ArmorScroll.swift */,
-				090FEAE021BB9B2A004276BB /* IBattleItem.swift */,
 				090FEAE121BB9B2A004276BB /* SpellBook.swift */,
 			);
 			path = item;
@@ -1490,7 +1484,6 @@
 				090FEBCC21BB9B2B004276BB /* FrozenShoot.swift in Sources */,
 				090FEC3221BB9B2B004276BB /* EastOfVillage.swift in Sources */,
 				090FEB7821BB9B2B004276BB /* Spirit.swift in Sources */,
-				090FEBEB21BB9B2B004276BB /* IBattleItem.swift in Sources */,
 				090FEB7F21BB9B2B004276BB /* Accuracy.swift in Sources */,
 				090FEB7721BB9B2B004276BB /* ThunderResistance.swift in Sources */,
 				090FEB9021BB9B2B004276BB /* IUnit.swift in Sources */,
@@ -1595,7 +1588,6 @@
 				090FEBB121BB9B2B004276BB /* TurnAttack.swift in Sources */,
 				090FEBC721BB9B2B004276BB /* OneShootDoubleKill.swift in Sources */,
 				090FEBA821BB9B2B004276BB /* VampireBlood.swift in Sources */,
-				090FEBEA21BB9B2B004276BB /* ArmorScroll.swift in Sources */,
 				090FEC4321BB9B2B004276BB /* SelectItems.swift in Sources */,
 				090FEC2321BB9B2B004276BB /* UIStage.swift in Sources */,
 				090FEB7121BB9B2B004276BB /* Defence.swift in Sources */,
