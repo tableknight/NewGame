@@ -18,8 +18,16 @@ class MagicMark: Armor {
     override func create(level: CGFloat) {
         _level = level
         createQuality()
-        var spellAttay = Array<Int>()
+        createSpell()
+//        _description = _spell._description
+//        _level = _spell._level
+        
+        initialized = true
+        createPrice()
+    }
+    internal func createSpell() {
         let l = Loot()
+        var spellAttay = Array<Int>()
         if _quality == Quality.NORMAL {
             spellAttay = l._normalSpellArray
             _spell = l.getNormalSpell(id: spellAttay.one())
@@ -33,11 +41,6 @@ class MagicMark: Armor {
             spellAttay = l._sacredSpellArray
             _spell = l.getSacredSpell(id: spellAttay.one())
         }
-//        _description = _spell._description
-//        _level = _spell._level
-        
-        hasInitialized = true
-        createPrice()
     }
     private var _spellAppended = false
     override func on() {

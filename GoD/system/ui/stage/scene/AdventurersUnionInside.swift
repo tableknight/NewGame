@@ -303,7 +303,7 @@ class KnightMaster:CareerMaster {
             char._magicMark = MagicMark()
         }
         
-        if char._earRing.hasInitialized {
+        if char._earRing.initialized {
             char.addProp(p: char._earRing)
             char._earRing.off()
             char._earRing = EarRing()

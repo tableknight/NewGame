@@ -22,11 +22,11 @@ class IberisThignbone:Blunt {
     }
     override func on() {
         super.on()
-        Game.instance._char._extensions.critical += _critical
+        Game.instance.char._extensions.critical += _critical
     }
     override func off() {
         super.off()
-        Game.instance._char._extensions.critical -= _critical
+        Game.instance.char._extensions.critical -= _critical
     }
 }
 class GiantFang:Blunt {
@@ -46,7 +46,7 @@ class ThorsHammer:Blunt {
     override init() {
         super.init()
         _name = "雷神之锤"
-        _description = "提升闪电伤害100%"
+        _description = "提升落雷伤害100%"
         _level = 48
         _chance = 30
     }

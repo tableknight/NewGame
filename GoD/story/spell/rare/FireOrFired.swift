@@ -46,18 +46,13 @@ class FireOrFired: Magical {
             }
             damage = -damage
             c.actionAttacked {
-//                c.hpChange(value: damage)
                 c.showValue(value: damage) {
                     completion()
                 }
             }
         } else {
-            if hadSpecialAction(t:t, completion: completion) {
-                
-            } else {
-                
+            if !hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
-//                    t.hpChange(value: damage)
                     t.showValue(value: damage) {
                         completion()
                     }

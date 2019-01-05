@@ -22,11 +22,11 @@ class VerdasTear: EarRing {
     private var _value:Int = 0
     override func on() {
         super.on()
-        Game.instance._char._magical.resistance += _value.toFloat()
+        Game.instance.char._magical.resistance += _value.toFloat()
     }
     override func off() {
         super.off()
-        Game.instance._char._magical.resistance -= _value.toFloat()
+        Game.instance.char._magical.resistance -= _value.toFloat()
     }
 }
 
@@ -45,11 +45,11 @@ class DeepSeaPearl: EarRing {
     private var _value:Int = 0
     override func on() {
         super.on()
-        Game.instance._char._magical.damage += _value.toFloat()
+        Game.instance.char._magical.damage += _value.toFloat()
     }
     override func off() {
         super.off()
-        Game.instance._char._magical.damage -= _value.toFloat()
+        Game.instance.char._magical.damage -= _value.toFloat()
     }
 }
 
@@ -69,13 +69,13 @@ class EyeOfDius: EarRing {
     private var _plus:CGFloat = 0
     override func on() {
         super.on()
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         _plus = char._extensions.health * _value.toFloat() * 0.01
         char._extensions.health += _plus
     }
     override func off() {
         super.off()
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         char._extensions.health -= _plus
         if char._extensions.hp > char._extensions.health {
             char._extensions.hp = char._extensions.health

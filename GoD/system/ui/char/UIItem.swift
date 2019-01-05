@@ -190,14 +190,14 @@ class Gate:UIItem {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enimyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
-        for _ in 0...enimyCount {
+        let enemyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
+        for _ in 0...enemyCount {
 //            enimies.append(sc.getMonsterByIndex(index: sc._monsterEnum.one()))
         }
         
         let b = Battle()
         let roles = [char] + char.getReadyMinions()
-        b.setEnimyPart(minions: enimies)
+        b.setEnemyPart(minions: enimies)
         b.setPlayerPart(roles: roles)
         b.zPosition = MyStage.UI_TOPEST_Z
         b.battleStart()

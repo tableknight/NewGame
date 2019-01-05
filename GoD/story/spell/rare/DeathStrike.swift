@@ -15,7 +15,7 @@ class DeathStrike: Magical {
         _cooldown = 2
         _rate = 0.8
         _description = "对目标造成精神80%的魔法伤害，每次偷取目标10点精神"
-        isTargetEmemy = true
+        targetEnemy = true
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!
@@ -24,20 +24,15 @@ class DeathStrike: Magical {
         let damage = _damageValue
         let this = self
         c.actionCast {
-            if this.hadSpecialAction(t:t, completion: completion) {
-                
-            } else {
+            if !this.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
-//                    t.hpChange(value: damage)
                     t.showValue(value: damage) {
-                        completion()
+                        t.showText(text:"SPIRIT -10", color: Colors.STATUS_CHANGE)
+                        c.showText(text:"SPIRIT +10", color: Colors.STATUS_CHANGE, completion: completion)
                     }
-                    let up = Status()
-                    up._type = Status.DEATH_STRIKE_UP
-                    c.addStatus(status: up)
-                    let down = Status()
-                    down._type = Status.DEATH_STRIKE_DOWN
-                    t.addStatus(status: down)
+                    t._extensions.spirit -= 10
+                    c._extensions.spirit += 10
+                    
                 }
             }
         }

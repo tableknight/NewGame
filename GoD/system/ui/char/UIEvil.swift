@@ -22,8 +22,8 @@ class UIEvil: UIUnit {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enimyCount = seed(min: 1, max: 4)
-        for _ in 0...enimyCount {
+        let enemyCount = seed(min: 1, max: 4)
+        for _ in 0...enemyCount {
             let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
             e.create(level: sc._level)
             enimies.append(e)
@@ -31,7 +31,7 @@ class UIEvil: UIUnit {
         stage.hideScene()
         let b = Battle()
         let roles = [char] + char.getReadyMinions()
-        b.setEnimyPart(minions: enimies)
+        b.setEnemyPart(minions: enimies)
         b.setPlayerPart(roles: roles)
         b.zPosition = MyStage.UI_TOPEST_Z
         let this = self

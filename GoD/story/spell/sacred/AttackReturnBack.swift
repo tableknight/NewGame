@@ -13,7 +13,7 @@ class AttackReturnBack: Magical {
         _tear = 1
         _name = "以牙还牙"
         _description = "对己方单位释放护盾，将下一次近战物理伤害反弹攻击者"
-        isTargetEmemy = false
+        targetEnemy = false
         _quality = Quality.SACRED
     }
     override func cast(completion:@escaping () -> Void) {

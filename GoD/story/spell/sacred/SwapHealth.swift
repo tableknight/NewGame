@@ -14,7 +14,7 @@ class SwapHealth: Magical {
         _description = "和己方单位交换生命值"
         _quality = Quality.SACRED
         _tear = 1
-        isTargetEmemy = false
+        targetEnemy = false
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

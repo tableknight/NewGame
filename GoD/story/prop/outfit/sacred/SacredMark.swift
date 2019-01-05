@@ -14,12 +14,16 @@ class PuppetMark: MagicMark {
         _description = "减少一个技能栏，以便多携带一个傀儡参战"
         _level = 52
         _chance = 10
-    }
-    override func createQuality() {
         _quality = Quality.SACRED
+        _attrCount = 3
+    }
+    override func create() {
+        initialized = true
+        createSpell()
+        createPrice()
     }
     override func on() {
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         char._spellCount -= 1
         if char._spellsInuse.count > char._spellCount {
             let spell = char._spellsInuse.popLast()!
@@ -28,7 +32,7 @@ class PuppetMark: MagicMark {
         char._minionsCount += 1
     }
     override func off() {
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         char._minionsCount -= 1
         let minions = char.getReadyMinions()
         if minions.count > char._minionsCount {
@@ -44,11 +48,11 @@ class MarkOfOaks:MagicMark {
         _description = "受到物理伤害时有一定几率对自己释放橡树之力"
         _level = 25
         _chance = 75
-    }
-    override func create(level:CGFloat) {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
         _spell = MightOfOaks()
-        hasInitialized = true
         createPrice()
     }
 }
@@ -59,9 +63,12 @@ class MarkOfDeathGod:MagicMark {
         _description = "免疫即死和静默"
         _level = 43
         _chance = 25
-    }
-    override func createQuality() {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
+        createSpell()
+        createPrice()
     }
 }
 class MarkOfVitality:MagicMark {
@@ -71,11 +78,11 @@ class MarkOfVitality:MagicMark {
         _description = "提升生命之花的治疗效果"
         _level = 18
         _chance = 100
-    }
-    override func create(level:CGFloat) {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
         _spell = SummonFlower()
-        hasInitialized = true
         createPrice()
     }
 }
@@ -86,9 +93,12 @@ class MarkOfHeaven:MagicMark {
         _description = "降低来自恶魔的伤害"
         _level = 31
         _chance = 75
-    }
-    override func createQuality() {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
+        createSpell()
+        createPrice()
     }
 }
 class MoltenFire:MagicMark {
@@ -98,9 +108,12 @@ class MoltenFire:MagicMark {
         _description = "提升所有火元素伤害"
         _level = 48
         _chance = 30
-    }
-    override func createQuality() {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
+        createSpell()
+        createPrice()
     }
 }
 class TheEye:MagicMark {
@@ -110,17 +123,20 @@ class TheEye:MagicMark {
         _description = "增加法术栏1"
         _level = 68
         _chance = 5
-    }
-    override func createQuality() {
         _quality = Quality.SACRED
+    }
+    override func create() {
+        initialized = true
+        createSpell()
+        createPrice()
     }
     override func on() {
         super.on()
-        Game.instance._char._spellCount += 1
+        Game.instance.char._spellCount += 1
     }
     override func off() {
         super.off()
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         char._spellCount -= 1
         if char._spellsInuse.count > char._spellCount {
             let spell = char._spellsInuse.popLast()!

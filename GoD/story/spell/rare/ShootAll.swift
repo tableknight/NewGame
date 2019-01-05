@@ -43,7 +43,7 @@ class ShootAll: Physical {
     }
     
     override func findTarget() {
-        _battle._selectedTargets = _battle._enimyPart
+        _battle._selectedTargets = _battle._enemyPart
     }
     
     override func selectable() -> Bool {

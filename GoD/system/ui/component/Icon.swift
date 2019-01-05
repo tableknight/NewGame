@@ -163,13 +163,13 @@ class BattlePropIcon: PropIcon {
     var timeleft:Int {
         set {
             if newValue > 0 {
-                addChild(_mask)
-                addChild(_label)
-                _label.text = "-\(newValue)"
-                _timeleft = newValue
+//                addChild(_mask)
+//                addChild(_label)
+//                _label.text = "-\(newValue)"
+//                _timeleft = newValue
             } else {
-                _mask.removeFromParent()
-                _label.removeFromParent()
+//                _mask.removeFromParent()
+//                _label.removeFromParent()
             }
         }
         get {

@@ -19,31 +19,26 @@ class PriceOfBlood: Magical {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
-        _damageValue = physicalDamage(t)
-        let damage = _damageValue
+        let def = getDefRate(from: c, to: t)
+        let atk = -c.getHp() * 0.25
+        let damage = atk * (1 - def) * (c._unit._level / t._unit._level)
         let this = self
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            if !hasMissed(target: t, completion: completion) {
-                if this.yon() {
-                    t.actionAttacked(defend: t.isDefend, completion: {
-//                        t.hpChange(value: damage)
-                        t.showValue(value: damage) {
-                            completion()
+        setTimeout(delay: 1, completion: {
+            c.showValue(value: atk) {
+                c.actionAttack {
+                    if !this.hadSpecialAction(t:t, completion: completion) {
+                        if !this.hasMissed(target: t, completion: completion) {
+                            t.actionAttacked(defend: t.isDefend, completion: {
+                                t.showValue(value: damage) {
+                                    completion()
+                                }
+                            })
                         }
-//                        c.hpChange(value: damage)
-                        c.showValue(value: damage)
-                    })
-                } else {
-                    let heal = t.getHealth() * 0.75
-//                    t.hpChange(value: heal)
-                    t.showValue(value: heal) {
-                        completion()
                     }
+                    
                 }
             }
-        }
+        })
     }
     
     

@@ -10,6 +10,5 @@ import SpriteKit
 class Armor: Outfit {
     override init() {
         super.init()
-        _type = Prop.ARMOR
     }
 }

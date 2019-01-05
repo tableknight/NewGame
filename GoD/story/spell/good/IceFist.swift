@@ -13,7 +13,6 @@ class IceFist: Physical {
         isClose = true
         _name = "寒冰掌"
         _description = "对目标造成60%攻击力的伤害，附加当前生命15%的寒冰伤害，需要空手"
-//        isFire = true
         isWater = true
         _rate = 0.6
         _quality = Quality.GOOD
@@ -21,19 +20,13 @@ class IceFist: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget!
         let c = b._curRole
-        //        let role = c._unit
         let this = self
-        b.roleMove(from: c, to: t, completion: {
-            c.actionAttack {
-                this.attack {
-                    b.moveBack(unit: c) {
-                        completion()
-                    }
-                }
+        c.actionAttack {
+            this.attack {
+                completion()
             }
-        })
+        }
     }
     
     private func attack(completion:@escaping () -> Void) {
@@ -43,33 +36,23 @@ class IceFist: Physical {
         //        let role = c._unit
         _damageValue = physicalDamage(t)
         let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
+        if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
                 let attechment = c.getHp() * -0.15
                 t.actionAttacked(defend: t.isDefend) {
-//                    t.hpChange(value: damage)
-                    t.showValue(value: damage) {
-//                        completion()
-                    }
+                    t.showValue(value: damage)
                     let waterRate = (c.getWaterPower() - t.getWaterResistance()) * 0.01 + 1
                     let waterDamage:CGFloat = attechment * waterRate
                     setTimeout(delay: 0.5, completion: {
-//                        t.hpChange(value: waterDamage)
                         t.showValue(value: waterDamage, isCritical: false, textColor: ElementColor.getColor(Element.WATER), completion: completion)
                     })
                 }
-//                c.hpChange(value: attechment)
-                c.showValue(value: attechment)
-                
             }
         }
     }
     
     override func selectable() -> Bool {
-        let w = _battle._curRole._unit._weapon
-        return w != nil && !w!.isClose
+        return _battle._curRole._unit._weapon == nil
     }
 }
 

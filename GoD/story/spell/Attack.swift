@@ -142,12 +142,4 @@ class Attack: Physical {
         completion()
     }
     
-    override func findTarget() {
-        if _battle._curRole._unit.isClose() {
-            super.findTarget()
-        } else {
-            findSingleTargetNotBlocked()
-        }
-    }
-
 }

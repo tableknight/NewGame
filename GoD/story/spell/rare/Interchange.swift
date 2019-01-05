@@ -14,6 +14,8 @@ class Interchange: Magical {
         _name = "移行换位"
         _tear = 1
         _description = "移动到或者和目标交换位置"
+        targetEnemy = false
+        canBeTargetSelf = false
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!
@@ -35,7 +37,7 @@ class Interchange: Magical {
             c._unit._seat = seat
             c._unit._seat = seat
             b?.setRolePos(unit: c)
-            completion()
+            setTimeout(delay: 1, completion: completion)
         }
     }
 }

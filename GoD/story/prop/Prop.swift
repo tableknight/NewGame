@@ -21,17 +21,9 @@ class Prop:Core, IDisplay {
     var _type = ""
     var _count = 1
     var _quality = Quality.NORMAL
-    static var OUTFIT = "outfit"
-    static var ARMOR = "outfit"
-    static var WEAPON = "outfit"
-//    static var AMULET = "outfit"
-//    static var OUTFIT = "outfit"
-//    static var OUTFIT = "outfit"
-//    static var OUTFIT = "outfit"
-    var hasInitialized = false
-    func create() {
-        hasInitialized = true
-    }
+    var initialized = false
+    func create() {}
+    func create(level:CGFloat) {}
     var sellingPrice:Int {
         set {
             _sellingPrice = newValue

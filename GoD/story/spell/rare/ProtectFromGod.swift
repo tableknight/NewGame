@@ -15,10 +15,4 @@ class ProtectFromGod: Passive {
         _name = "神之庇护"
         _description = "免疫中毒和流血"
     }
-    override func beforeBattle(t:BUnit) {
-        let status = Status()
-        status._type = Status.PROTECT_FROM_GOD
-        status._timeleft = 9999
-        t.addStatus(status: status)
-    }
 }

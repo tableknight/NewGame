@@ -23,20 +23,20 @@ class Emily:Character {
 //        strengthChange(value: 100)
 //        agilityChange(value: 50)
 //        intellectChange(value: 25)
-        _level = 40
-        let c = Core()
-        for _ in 0..._level.toInt() {
-            let seed = c.seed()
-            if seed < 25 {
-                strengthChange(value: 5)
-            } else if seed < 50 {
-                staminaChange(value: 5)
-            } else if seed < 75 {
-                agilityChange(value: 5)
-            } else {
-                intellectChange(value: 5)
-            }
-        }
+        _level = 1
+//        let c = Core()
+//        for _ in 0..._level.toInt() {
+//            let seed = c.seed()
+//            if seed < 25 {
+//                strengthChange(value: 5)
+//            } else if seed < 50 {
+//                staminaChange(value: 5)
+//            } else if seed < 75 {
+//                agilityChange(value: 5)
+//            } else {
+//                intellectChange(value: 5)
+//            }
+//        }
         _spellsInuse = []
         _spells = [
         ]

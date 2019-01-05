@@ -17,9 +17,9 @@ class Instrument: Weapon {
     }
     override func create(level: CGFloat) {
         _level = level
+        initialized = true
         createQuality()
         createSelfAttrs()
-        hasInitialized = true
     
         _attrs[0]._value *= 2
         var spellAttay = Array<Int>()
@@ -46,6 +46,9 @@ class Instrument: Weapon {
         _sellingPrice *= 4
         
     }
+    override func create() {
+        create(level: _level)
+    }
     private func getName() -> String {
         let names = ["颌骨","水晶","灵珠","魔首"]
         return names.one()
@@ -53,16 +56,16 @@ class Instrument: Weapon {
     var _spellAppended = false
     var _spell = Spell()
     override func on() {
-        let char = Game.instance._char
-        if !(char?.hasSpell(spell: _spell))! {
-            char?._spells.append(_spell)
+        let char = Game.instance.char!
+        if !(char.hasSpell(spell: _spell)) {
+            char._spells.append(_spell)
             _spellAppended = true
         }
     }
     override func off() {
         if _spellAppended {
-            let char = Game.instance._char
-            char?.removeSpell(spell: _spell)
+            let char = Game.instance.char!
+            char.removeSpell(spell: _spell)
             _spellAppended = false
         }
     }

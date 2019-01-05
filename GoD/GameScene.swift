@@ -32,7 +32,7 @@ class GameScene: SKScene {
             es.append(c)
         }
         //        b.setEvils(evils: es)
-        b.setEnimyPart(minions: es)
+        b.setEnemyPart(minions: es)
         b.setPlayerPart(roles: [Game.instance.char] + Game.instance.char.getReadyMinions())
         //        b.setRoles(roles: [Game.instance.char] + Game.instance.char._minions)
         
@@ -46,20 +46,28 @@ class GameScene: SKScene {
     func realScene() {
         let stage = MyStage()
         let bs = SecretMeadow()
-        bs._level = 40
+        bs._level = 1
         bs.create()
         let e = Emily()
         e.create()
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
         for m in e._minions + [e] {
-            m._spellsInuse = [Firelord(), ShootAll()]
+            m._spellsInuse = [MultipleHit(), Bitslap(), FireFist()]
         }
+//        e._minions[0]._spellsInuse.append(Crazy())
+        let hm = ThorsHammer()
+        hm.create()
+        e.addProp(p: hm)
+        
         bs.setRole(x: 5, y: 7, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         let bow = Bow()
         bow.create(level: 1)
         e.addProp(p: bow)
+        let i = Instrument()
+        i.create(level: 1)
+        e.addProp(p: i)
         addChild(stage)
         let bc = BlastScroll()
         bc._count = 5
@@ -68,7 +76,7 @@ class GameScene: SKScene {
         var props = Array<Prop>()
         props.append(bc)
         let swd = Sword()
-        swd.create(level: 20)
+        swd.create(level: bs._level)
         props.append(swd)
         
         
@@ -80,6 +88,9 @@ class GameScene: SKScene {
         ts._count = 5
         Game.instance.char.addProp(p: ts)
         
+        let p = Potion()
+        p._count = 5
+        e.addProp(p: p)
     }
     
     override func didMove(to view: SKView) {

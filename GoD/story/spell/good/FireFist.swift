@@ -12,7 +12,7 @@ class FireFist: Physical {
         super.init()
         isClose = true
         _name = "火焰掌"
-        _description = "对目标造成120%攻击力的火焰伤害，需要空手"
+        _description = "对目标造成攻击力120%的火焰伤害，需要空手"
         isFire = true
         _rate = 1.2
         _quality = Quality.GOOD
@@ -20,19 +20,13 @@ class FireFist: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget!
         let c = b._curRole
-//        let role = c._unit
         let this = self
-        b.roleMove(from: c, to: t, completion: {
-            c.actionAttack {
-                this.attack {
-                    b.moveBack(unit: c) {
-                        completion()
-                    }
-                }
+        c.actionAttack {
+            this.attack {
+                completion()
             }
-        })
+        }
     }
     
     private func attack(completion:@escaping () -> Void) {
@@ -40,15 +34,12 @@ class FireFist: Physical {
         let t = b._selectedTarget!
         let c = b._curRole
         //        let role = c._unit
-        let fireRate = (c.getFirePower() - t.getFireResistance()) * 0.01 + 1
-        _damageValue = physicalDamage(t) * fireRate
+        let fireRate = fireFactor(from: c, to: t)
+        _damageValue = -c.getAttack() * fireRate * _rate
         let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
+        if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
                 t.actionAttacked(defend: t.isDefend) {
-//                    t.hpChange(value: damage)
                     t.showValue(value: damage) {
                         completion()
                     }
@@ -58,7 +49,7 @@ class FireFist: Physical {
     }
     
     override func selectable() -> Bool {
-        let w = _battle._curRole._unit._weapon
-        return w != nil && !w!.isClose
+        return nil == _battle._curRole._unit._weapon
+        
     }
 }

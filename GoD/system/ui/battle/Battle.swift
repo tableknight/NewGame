@@ -24,17 +24,17 @@ class Battle: SKSpriteNode {
         
         if waitingForSelectItemTarget {
             let this = self
-            for u in _itemTargets {
-                if u.contains(s) {
+            let parts = _playerPart + _enemyPart
+            for u in parts {
+                if u.contains(s) && u.selectable {
                     waitingForSelectItemTarget = false
                     this.hideCancel()
                     this.setUnitDefault(all: true)
-                    let item = _selectedItem.prop as! Item
+                    let item = _selectedItem!
                     item._battle = self
                     item.use(unit: u) {
                         this.moveEnd()
                     }
-                    _char.removeProp(p: item)
                     break
                 }
             }
@@ -199,7 +199,7 @@ class Battle: SKSpriteNode {
             _waitingForSelectTarget = true
             _selectedSpell = Attack()
             _selectedSpell._battle = self
-            showAvailableUnits()
+            showAvailableUnits(selectObject: _selectedSpell)
             return
         } else if _orderDefend.contains(s) && !_orderDefend.isHidden {
             _selectedSpell = Defend()
@@ -226,7 +226,7 @@ class Battle: SKSpriteNode {
                 }
                 
             }
-            for unit in _enimyPart {
+            for unit in _enemyPart {
                 if unit.contains(s) && unit.selectable {
                     _selectedTarget = unit
                 }
@@ -330,12 +330,12 @@ class Battle: SKSpriteNode {
         bbr.x = x3
         bbr.y = y4
         
-        _enimySeats[BUnit.TTL] = ttl
-        _enimySeats[BUnit.TTM] = ttm
-        _enimySeats[BUnit.TTR] = ttr
-        _enimySeats[BUnit.TBL] = tbl
-        _enimySeats[BUnit.TBM] = tbm
-        _enimySeats[BUnit.TBR] = tbr
+        _enemySeats[BUnit.TTL] = ttl
+        _enemySeats[BUnit.TTM] = ttm
+        _enemySeats[BUnit.TTR] = ttr
+        _enemySeats[BUnit.TBL] = tbl
+        _enemySeats[BUnit.TBM] = tbm
+        _enemySeats[BUnit.TBR] = tbr
         
         _playerSeats[BUnit.BTL] = btl
         _playerSeats[BUnit.BTM] = btm
@@ -382,14 +382,22 @@ class Battle: SKSpriteNode {
             _waitingForSelectTarget = true
             _selectedSpell = Attack()
             _selectedSpell._battle = self
-            showAvailableUnits()
+            showAvailableUnits(selectObject: _selectedSpell)
         }
     }
     func reduceCooldown() {
-        for u in _enimyPart {
+        for u in _enemyPart {
             for s in u._unit._spellsInuse {
                 if s._timeleft > 0 {
                     s._timeleft -= 1
+                }
+            }
+            for status in u._status.values {
+                if status._timeleft > 0 {
+                    status._timeleft -= 1
+                    if status._timeleft == 0 {
+                        status.timeupAction()
+                    }
                 }
             }
         }
@@ -399,16 +407,24 @@ class Battle: SKSpriteNode {
                     s._timeleft -= 1
                 }
             }
-        }
-        
-        for p in _char._props {
-            if p is Item {
-                let item = p as! Item
-                if item._timeleft > 0 {
-                    item._timeleft -= 1
+            for status in u._status.values {
+                if status._timeleft > 0 {
+                    status._timeleft -= 1
+                    if status._timeleft == 0 {
+                        status.timeupAction()
+                    }
                 }
             }
         }
+        
+//        for p in _char._props {
+//            if p is Item {
+//                let item = p as! Item
+//                if item._timeleft > 0 {
+//                    item._timeleft -= 1
+//                }
+//            }
+//        }
         
     }
     internal func findUnitBySeat(part:Array<BUnit>, seat:String) -> BUnit? {
@@ -422,7 +438,7 @@ class Battle: SKSpriteNode {
         return nil
     }
     internal func stillInBattle(unit:BUnit) -> Bool {
-        if _enimyPart.contains(unit) {
+        if _enemyPart.contains(unit) {
             return true
         }
         if _playerPart.contains(unit) {
@@ -437,21 +453,13 @@ class Battle: SKSpriteNode {
                 s.inEndOfRound()
             }
         }
-        for u in _enimyPart {
+        for u in _enemyPart {
             for s in u._status.values {
                 s.inEndOfRound()
             }
         }
     }
     func moveStart() {
-//        if _isCharDead {
-//            defeated()
-//            return
-//        }
-//        if _isAllEvilDead {
-//            defeat()
-//            return
-//        }
         if _roleAll.count <= 0 {
             debug("roleAll empty")
             roundEnd()
@@ -516,6 +524,8 @@ class Battle: SKSpriteNode {
                 this._selectedSpell._battle = self
                 this._selectedSpell.findTarget()
                 this.execOrder()
+//                this.hideOrder()
+//                this.hideCancel()
             } else {
                 this._curRole.setOrderMode()
                 this.defaultOrderAttack()
@@ -525,7 +535,7 @@ class Battle: SKSpriteNode {
         }
     }
     internal func cleanUnitStatus() {
-        for unit in _enimyPart {
+        for unit in _enemyPart {
             unit._speed = 0
         }
         for unit in _playerPart {
@@ -616,7 +626,7 @@ class Battle: SKSpriteNode {
     var defeatAction = {}
     var defeatedAction = {}
     func hasFinished() -> Bool {
-        if _enimyPart.count < 1 {
+        if _enemyPart.count < 1 {
             defeat()
             return true
         }
@@ -629,12 +639,8 @@ class Battle: SKSpriteNode {
     }
     internal func calcSpeedLine() {
         _speedLine = 0
-        for unit in _enimyPart {
-            if nil != unit._unit._weapon {
-                _speedLine += unit.getSpeed() * unit._unit._weapon!._attackSpeed
-            } else {
-                _speedLine += unit.getSpeed()
-            }
+        for unit in _enemyPart {
+            _speedLine += unit.getSpeed()
         }
         for unit in _playerPart {
             if nil != unit._unit._weapon {
@@ -657,7 +663,7 @@ class Battle: SKSpriteNode {
         })
     }
     internal func orderUnits() {
-        var all = _enimyPart + _playerPart
+        var all = _enemyPart + _playerPart
         _roleAll = []
         while all.count > 0 {
             for unit in all {
@@ -706,7 +712,6 @@ class Battle: SKSpriteNode {
     
     internal func createCurRole(completion:@escaping () -> Void) {
         _curRole = _roleAll[0]
-        //            let this = self
         if seed().toFloat() < _curRole.getRhythm() {
             completion()
             hasRhythm = true
@@ -850,7 +855,7 @@ class Battle: SKSpriteNode {
                 }
             }
         }
-        for u in _enimyPart {
+        for u in _enemyPart {
             if u.isDead() {
                 u.actionDead {
                     u.removeFromBattle()
@@ -861,62 +866,82 @@ class Battle: SKSpriteNode {
     }
     //行动结束后释放的法术或者道具只能存在一个
     internal func moveEnd() {
-//        checkRoleDead()
-        
-//        if _rightRoles.count < 1 {
-//            defeat()
-//            return
-//        }
-//        if Data.instance._char._extensions.hp < 1 {
-//            defeated()
-//            return
-//        }
-        for s in _curRole._status.values {
-            if s._timeleft > 0 {
-                s._timeleft -= 1
-                if s._timeleft == 0 {
-                    s.afterTimesUp()
-                }
-            }
-        }
-        var hasAfterMoveAction = false
-        let this = self
-        for s in _curRole._unit._spellsInuse {
-            if s.hasAfterMoveAction {
-                s._battle = self
-//                _curRole.showText(text: s._name)
-                s.afterMove {
-                    this._selectedTarget = nil
-                    this._waitingForSelectTarget = false
-                    this.moveStart()
-                }
-                hasAfterMoveAction = true
+        let spells = _curRole._unit._spellsInuse + _curRole._unit._spellsHidden
+        var selectedSpell:Spell? = nil
+        for spell in spells {
+            if spell.hasAfterMoveAction {
+                selectedSpell = spell
                 break
             }
         }
-        if !hasAfterMoveAction {
-            if _curRole._unit is Character && Game.instance.char._shield is Faceless && _round % 3 == 1 {
-//                let c = _curRole
-                _curRole.showText(text: "无面者") {
-                    this._curRole.actionBuff {
-                        let spell = MagicReflect()
-                        spell.removeSpecialStatus(t:this._curRole)
-                        let status = Status()
-                        status._type = Status.EYE_TO_EYE
-                        status._timeleft = 2
-                        this._curRole.addStatus(status: status)
-                        
-                        this._selectedTarget = nil
-                        this._waitingForSelectTarget = false
-                        this.moveStart()
-                    }
+        if nil != selectedSpell {
+            let this = self
+            _curRole.showText(text: selectedSpell!._name) {
+                selectedSpell!._battle = this
+                selectedSpell!.findTarget()
+                selectedSpell!.cast {
+                    this.moveStart()
                 }
-            } else {
-                _selectedTarget = nil
-                _waitingForSelectTarget = false
-                moveStart()
             }
+        } else {
+            moveStart()
         }
+////        checkRoleDead()
+//
+////        if _rightRoles.count < 1 {
+////            defeat()
+////            return
+////        }
+////        if Data.instance._char._extensions.hp < 1 {
+////            defeated()
+////            return
+////        }
+//        for s in _curRole._status.values {
+//            if s._timeleft > 0 {
+//                s._timeleft -= 1
+//                if s._timeleft == 0 {
+//                    s.afterTimesUp()
+//                }
+//            }
+//        }
+//        var hasAfterMoveAction = false
+//        let this = self
+//        for s in _curRole._unit._spellsInuse {
+//            if s.hasAfterMoveAction {
+//                s._battle = self
+////                _curRole.showText(text: s._name)
+//                s.afterMove {
+//                    this._selectedTarget = nil
+//                    this._waitingForSelectTarget = false
+//                    this.moveStart()
+//                }
+//                hasAfterMoveAction = true
+//                break
+//            }
+//        }
+//        if !hasAfterMoveAction {
+//            if _curRole._unit is Character && Game.instance.char._shield is Faceless && _round % 3 == 1 {
+////                let c = _curRole
+//                _curRole.showText(text: "无面者") {
+//                    this._curRole.actionBuff {
+//                        let spell = MagicReflect()
+//                        spell.removeSpecialStatus(t:this._curRole)
+//                        let status = Status()
+//                        status._type = Status.EYE_TO_EYE
+//                        status._timeleft = 2
+//                        this._curRole.addStatus(status: status)
+//
+//                        this._selectedTarget = nil
+//                        this._waitingForSelectTarget = false
+//                        this.moveStart()
+//                    }
+//                }
+//            } else {
+//                _selectedTarget = nil
+//                _waitingForSelectTarget = false
+//                moveStart()
+//            }
+//        }
     }
 //    internal func targetAttacked() {
 //        let this = self
@@ -1004,13 +1029,8 @@ class Battle: SKSpriteNode {
     }
     internal func execOrder() {
         let this = self
-//        speak()
         speakSpellName()
-        var delay:CGFloat = 0
-        if _selectedSpell.isPhysical && !(_selectedSpell is Attack) {
-            delay = 1
-        }
-//        debug("delay is \(delay)")
+        let delay:CGFloat = _selectedSpell.isPhysical && !(_selectedSpell is Attack) ? 1 : 0
         setTimeout(delay: delay, completion: {
             this._selectedSpell.cast {
                 this.cdSpell(spell: this._selectedSpell)
@@ -1078,7 +1098,7 @@ class Battle: SKSpriteNode {
             }
             
         }
-        for unit in _enimyPart {
+        for unit in _enemyPart {
             unit.setDefaultMode()
         }
     }
@@ -1086,22 +1106,18 @@ class Battle: SKSpriteNode {
         for u in _playerPart {
             u._levelLabel.isHidden = hidden
         }
-        for u in _enimyPart {
+        for u in _enemyPart {
             u._levelLabel.isHidden = hidden
         }
     }
     internal var _availableEvils = Array<BUnit>()
-    internal func showAvailableUnits() {
+    internal func showAvailableUnits(selectObject:ISelectTarget) {
         setUnitDefault()
         _availableEvils = Array<BUnit>()
-        if _selectedSpell.isTargetAll {
-            _availableEvils = _enimyPart + _playerPart
-            if !_selectedSpell.canBeTargetPlayer {
-                let index = _availableEvils.index(of: _playerUnit)
-                if nil != index {
-                } else {
-                    debug("showAvailableUnits 找不到主角")
-                }
+        if selectObject.targetAll {
+            _availableEvils = _enemyPart + _playerPart
+            if !selectObject.canBeTargetSelf {
+                let index = _availableEvils.index(of: _curRole)
                 _availableEvils.remove(at: index!)
             }
             for unit in _availableEvils {
@@ -1109,21 +1125,21 @@ class Battle: SKSpriteNode {
             }
             return
         }
-        if _selectedSpell.isTargetEmemy{
-            if _selectedSpell.isClose && _curRole._unit.isClose() {
+        if selectObject.targetEnemy{
+            if selectObject.isClose && _curRole._unit.isClose() {
                 if isPlayerPartUnitBlocked(unit: _curRole) {
-                    for unit in _enimyPart {
-                        if !isEnimyPartUnitBlocked(unit: unit) {
+                    for unit in _enemyPart {
+                        if !isEnemyPartUnitBlocked(unit: unit) {
                             _availableEvils.append(unit)
                         }
                     }
                 } else {
-                    for unit in _enimyPart {
+                    for unit in _enemyPart {
                         _availableEvils.append(unit)
                     }
                 }
             } else {
-                for unit in _enimyPart {
+                for unit in _enemyPart {
                     _availableEvils.append(unit)
                 }
             }
@@ -1136,20 +1152,18 @@ class Battle: SKSpriteNode {
         }
     }
     
-    func isEnimyPartUnitBlocked(unit:BUnit) -> Bool{
+    func isEnemyPartUnitBlocked(unit:BUnit) -> Bool{
         let s = unit._unit._seat
         var target = ""
         if s == BUnit.TTL {
             target = BUnit.TBL
-        } else
-            if s == BUnit.TTM {
-                target = BUnit.TBM
-            } else
-                if s == BUnit.TTR {
-                    target = BUnit.TBR
+        } else if s == BUnit.TTM {
+            target = BUnit.TBM
+        } else if s == BUnit.TTR {
+            target = BUnit.TBR
         }
         if !target.isEmpty {
-            for u in _enimyPart {
+            for u in _enemyPart {
                 if u._unit._seat == target {
                     return true
                 }
@@ -1190,8 +1204,15 @@ class Battle: SKSpriteNode {
             this.cancelButtonClicked()
         }
         bip.selectAction = {
-            let item = bip.selectedItem
-            item?._battle = self
+            let item = bip.selectedItem!
+            item._battle = self
+            if item is TownScroll {
+                item.use()
+            } else {
+                this.waitingForSelectItemTarget = true
+                this.showAvailableUnits(selectObject: item)
+            }
+            this._selectedItem = item
 //            item?.useInBattle()
         }
         addChild(bip)
@@ -1238,7 +1259,7 @@ class Battle: SKSpriteNode {
                     }
                     
                     this._waitingForSelectTarget = true
-                    this.showAvailableUnits()
+                    this.showAvailableUnits(selectObject: this._selectedSpell)
                 }
             }
             addChild(cardPanel)
@@ -1420,10 +1441,10 @@ class Battle: SKSpriteNode {
 //            addChild(evil)
 //        }
 //    }
-    internal var _enimySeatsArray = [BUnit.TTL, BUnit.TTM, BUnit.TTR, BUnit.TBL, BUnit.TBM, BUnit.TBR]
-    internal var _enimySeats = Dictionary<String, CGPoint>()
+    internal var _enemySeatsArray = [BUnit.TTL, BUnit.TTM, BUnit.TTR, BUnit.TBL, BUnit.TBM, BUnit.TBR]
+    internal var _enemySeats = Dictionary<String, CGPoint>()
     internal var _playerSeats = Dictionary<String, CGPoint>()
-    func setEnimyPart(minions:Array<Creature>) {
+    func setEnemyPart(minions:Array<Creature>) {
         for m in minions {
             let bUnit = BUnit()
             bUnit.setUnit(unit: m)
@@ -1431,11 +1452,11 @@ class Battle: SKSpriteNode {
             bUnit.playerPart = false
             bUnit.create()
             bUnit.faceSouth()
-            let index = seed(max: _enimySeatsArray.count)
-            bUnit.position = _enimySeats[_enimySeatsArray[index]]!
-            m._seat = _enimySeatsArray[index]
-            _enimySeatsArray.remove(at: index)
-            _enimyPart.append(bUnit)
+            let index = seed(max: _enemySeatsArray.count)
+            bUnit.position = _enemySeats[_enemySeatsArray[index]]!
+            m._seat = _enemySeatsArray[index]
+            _enemySeatsArray.remove(at: index)
+            _enemyPart.append(bUnit)
             _evilsOrg.append(bUnit)
             addChild(bUnit)
         }
@@ -1640,9 +1661,9 @@ class Battle: SKSpriteNode {
                 debug("removeFromPart index nil")
             }
         } else {
-            let index = _enimyPart.index(of: unit)
+            let index = _enemyPart.index(of: unit)
             if nil != index {
-                _enimyPart.remove(at: index!)
+                _enemyPart.remove(at: index!)
                 debug("removeFromPart index nil")
             }
         }
@@ -1653,39 +1674,39 @@ class Battle: SKSpriteNode {
         }
     }
     
-    func showItemTargets() {
-        let item = _selectedItem.prop as! Item
-        if item is TownScroll {
-//            Game.instance.stage.removeBattle(b: self)
-//            item.use(target: Creature())
-//            return
-        }
-        _waitingForSelectTarget = false
-        
-        if item.targetSelf {
-            for u in _playerPart {
-                u.setSelectableMode()
-            }
-            for u in _enimyPart {
-                u.setDefaultMode()
-            }
-            _itemTargets = _playerPart
-        } else {
-            for u in _enimyPart {
-                u.setSelectableMode()
-            }
-            _itemTargets = _enimyPart
-        }
-        waitingForSelectItemTarget = true
-        showCancel()
-    }
+//    func showItemTargets() {
+//        let item = _selectedItem.prop as! Item
+//        if item is TownScroll {
+////            Game.instance.stage.removeBattle(b: self)
+////            item.use(target: Creature())
+////            return
+//        }
+//        _waitingForSelectTarget = false
+//
+//        if item.targetSelf {
+//            for u in _playerPart {
+//                u.setSelectableMode()
+//            }
+//            for u in _enemyPart {
+//                u.setDefaultMode()
+//            }
+//            _itemTargets = _playerPart
+//        } else {
+//            for u in _enemyPart {
+//                u.setSelectableMode()
+//            }
+//            _itemTargets = _enemyPart
+//        }
+//        waitingForSelectItemTarget = true
+//        showCancel()
+//    }
     
-    func removeItemPanel(bip:BItemPanel) {
-        bip.removeFromParent()
-        waitingForSelectItemTarget = false
-        showOrder()
-        hideCancel()
-    }
+//    func removeItemPanel(bip:BItemPanel) {
+//        bip.removeFromParent()
+//        waitingForSelectItemTarget = false
+//        showOrder()
+//        hideCancel()
+//    }
     
     internal func showSummonableSeats(selectAll:Bool = true) {
         cleanSummonSeats()
@@ -1808,14 +1829,14 @@ class Battle: SKSpriteNode {
     var _right = Dictionary<String, BUnit>()
     
     var _playerPart = Array<BUnit>()
-    var _enimyPart = Array<BUnit>()
+    var _enemyPart = Array<BUnit>()
     
     var _leftRoles = Array<BUnit>()
     var _rightRoles = Array<BUnit>()
     
     var _curRole:BUnit = BUnit()
     var _playerUnit:BUnit = BUnit()
-    var _selectedItem = BItemComponent()
+    var _selectedItem:Item?
     var _specialEvents = Array<String>()
     var isFinalChallenge = false
 }

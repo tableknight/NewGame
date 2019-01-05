@@ -85,7 +85,7 @@ class BattleItemPanel: UIPanel {
         for p in _char._props {
             if p is Item {
                 let item = p as! Item
-                if item._count > 0 && item.useInBattle {
+                if item._count > 0 && item.usableInBattle {
                     ps.append(p)
                 }
             }

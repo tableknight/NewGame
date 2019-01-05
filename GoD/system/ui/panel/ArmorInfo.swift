@@ -52,7 +52,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         name.position.y = startY
         addChild(name)
         
-        var width:CGFloat = ((name.text?.count)! * 16).toFloat()
+        var width:CGFloat = 100 + (nameText.count * 24).toFloat()
         _displayHeight = cellSize
         if width < cellSize * 3 {
             width = cellSize * 3
@@ -88,12 +88,22 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         if armor is Weapon {
             let w = armor as! Weapon
             let spd = Label()
-            spd.text = "攻速 \(w._attackSpeed)"
+            
+            let speedText = "\(w._attackSpeed)"
+            var str = ""
+            var i = 0
+            for c in speedText {
+                if i < 4 {
+                    str.append(c)
+                }
+                i += 1
+            }
+            spd.text = "攻速 \(str)"
             
             spd.fontColor = UIColor.white
             spd.position.x = startX - 1
             spd.position.y = lastY - gap
-            spd.fontSize = name.fontSize * 0.6
+            spd.fontSize = 15
             addChild(spd)
             _displayHeight += name.fontSize + gap * 2
             lastY = spd.position.y - spd.fontSize - gap
@@ -129,14 +139,14 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         if !armor._description.isEmpty {
             let des = Label()
             des.text = armor._description
-            des.fontSize = name.fontSize * 0.6
-            if armor is Instrument {
-                des.fontSize = name.fontSize
-            }
+            des.fontSize = 18
+//            if armor is Instrument {
+//                des.fontSize = name.fontSize
+//            }
             des.fontColor = QualityColor.GOOD
             des.position.x = startX
             des.position.y = lastY - gap
-            lastY = lastY - gap
+            lastY = lastY - gap - 18
             _displayHeight += des.fontSize + gap
             addChild(des)
         }

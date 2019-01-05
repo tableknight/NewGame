@@ -19,7 +19,7 @@ class SoulStone: Armor {
         _quality = Quality.NORMAL
         _race = seed(min: 1, max: 6)
         _description = "将种族转换为\(EvilType.getTypeLabel(type: _race))。"
-        hasInitialized = true
+        initialized = true
         createPrice()
     }
     override func on() {

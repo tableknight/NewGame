@@ -427,10 +427,7 @@ func setTimeout(delay:CGFloat, completion: @escaping () -> Void) {
 func showMsg(text:String) {
     let cellSize = Game.instance.cellSize
     let node = SKSpriteNode()
-    var width = cellSize * 7
-    if text.count >= 15 {
-        width = width + ((text.count - 15) * 15).toFloat()
-    }
+    let width = (text.count * 24 + 100).toFloat()
     let rect = CGRect(x: -width * 0.5, y: -cellSize, width: width, height: cellSize * 2)
     let bg = SKShapeNode(rect: rect, cornerRadius: 4)
     bg.fillColor = UIColor.black

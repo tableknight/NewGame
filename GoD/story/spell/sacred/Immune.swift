@@ -14,7 +14,7 @@ class Immune: Magical {
         _tear = 1
         _name = "免疫"
         _description = "目标在本回合内，免疫所有控制和诅咒"
-        isTargetAll = true
+        targetAll = true
         _quality = Quality.SACRED
     }
     override func cast(completion:@escaping () -> Void) {

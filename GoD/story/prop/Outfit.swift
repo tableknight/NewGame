@@ -36,16 +36,23 @@ class Outfit:Prop {
                 REVENGE,
                 RHYTHM
         ]
-        _type = Prop.OUTFIT
     }
 
     internal var _attrCount:Int = 0
-    func create(level:CGFloat) {
+    override func create(level:CGFloat) {
         _level = level
+        initialized = true
         createQuality()
         createSelfAttrs()
         createAttrs()
-        hasInitialized = true
+        createPrice()
+    }
+    
+    override func create() {
+        initialized = true
+        createQuality()
+        createSelfAttrs()
+        createAttrs()
         createPrice()
     }
     

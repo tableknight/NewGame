@@ -36,23 +36,8 @@ class AcientRoadSelection:UIPanel {
                 if rc.selected {
                     let floorLevel = rc._floor
                     let stage = Game.instance.curStage!
-                    let char = stage._curScene._role!
                     stage.removePanel(self)
-                    stage.clearScene()
-                    let ar = AcientRoad()
-                    var scene = ar.getSceneById(id: floorLevel)
-                    if floorLevel > ar.sceneList.count {
-                        scene = ar.getSceneById(id: ar.sceneList.one())
-                    }
-                    
-                    char.removeFromParent()
-                    stage.switchScene(next: scene, afterCreation: {
-                        scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
-                        char.faceSouth()
-                    })
-                    stage._curScene.removeFromParent()
-                    scene._level = floorLevel.toFloat()
-                    stage.saveScene(scene: scene)
+                    stage.enterFloor(floor: floorLevel)
                 } else {
                     rc.selected = true
                     _selectedRoad?.selected = false

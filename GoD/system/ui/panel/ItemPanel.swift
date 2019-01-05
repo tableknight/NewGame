@@ -165,7 +165,7 @@ class PropComponent:SKSpriteNode {
             _outfit = newValue
             _armorImg = SKSpriteNode(texture: newValue._img)
             _bg.strokeColor = QualityColor.getColor(newValue._quality)
-            if newValue.hasInitialized {
+            if newValue.initialized {
                 _bg.lineWidth = 2
             } else {
                 _bg.lineWidth = 1

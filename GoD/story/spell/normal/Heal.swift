@@ -11,7 +11,7 @@ class Heal: Magical {
     override init() {
         super.init()
         _quality = Quality.NORMAL
-        isTargetEmemy = false
+        targetEnemy = false
         _name = "治疗"
         _cooldown = 2
         _description = "恢复己方目标最大生命50%的生命值"

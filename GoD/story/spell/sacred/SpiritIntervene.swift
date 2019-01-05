@@ -14,7 +14,7 @@ class SpiritIntervene: Magical {
         _description = "使目标的精神变为随机的数字"
         _quality = Quality.SACRED
         _tear = 1
-        isTargetAll = true
+        targetAll = true
         canBeTargetPlayer = true
     }
     override func cast(completion:@escaping () -> Void) {
@@ -32,7 +32,7 @@ class SpiritIntervene: Magical {
     }
     
     override func findTarget() {
-        let all = _battle._playerPart + _battle._enimyPart
+        let all = _battle._playerPart + _battle._enemyPart
         _battle._selectedTarget = all.one()
     }
     

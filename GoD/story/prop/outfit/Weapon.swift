@@ -10,7 +10,6 @@ import SpriteKit
 class Weapon:Outfit {
     override init() {
         super.init()
-        _type = Prop.WEAPON
     }
     var isClose = true
     var _attackSpeed:CGFloat = 1

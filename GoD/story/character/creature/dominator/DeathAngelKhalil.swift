@@ -188,7 +188,7 @@ class Addict:Magical {
                     t.addStatus(status: status)
                     status._timeleft = 5
                     t._extensions.accuracy -= 50
-                    status.afterTimesUp = {
+                    status.timeupAction = {
                         t._extensions.accuracy += 50
                         debug("魅惑命中已恢复")
                     }

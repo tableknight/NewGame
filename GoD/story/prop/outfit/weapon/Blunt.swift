@@ -21,4 +21,9 @@ class Blunt: Weapon {
         let attr = _attrs[0]
         attr._value = attr._value * 2
     }
+    override func create() {
+        super.create()
+        let attr = _attrs[0]
+        attr._value = attr._value * 2
+    }
 }

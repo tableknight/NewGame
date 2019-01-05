@@ -23,19 +23,21 @@ class FrozenShoot: Magical {
         _damageValue = waterDamage(t)
         let damage = _damageValue
         let this = self
-        c.actionCast {
-            if this.hadSpecialAction(t:t, completion: completion) {
-                
-            } else {
+        c.actionShoot {
+            if !this.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
-//                    t.hpChange(value: damage)
                     t.showValue(value: damage) {
                         completion()
                     }
                     this.setFrozen(target: t, completion: {})
-                    //                completion()
                 }
             }
         }
+    }
+    override func findTarget() {
+        findSingleTargetNotBlocked()
+    }
+    override func selectable() -> Bool {
+        return !_battle._curRole._unit.isClose()
     }
 }

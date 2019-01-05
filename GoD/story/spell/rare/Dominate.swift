@@ -11,7 +11,7 @@ class Dominate: Magical {
     override init() {
         super.init()
         _tear = 1
-        _name = "斗转星移"
+        _name = "战场主宰"
         _description = "使自己的种族属性始终处于优势，持续5回合"
         isAutoSelectTarget = true
         _quality = Quality.RARE

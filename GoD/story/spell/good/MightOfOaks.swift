@@ -14,7 +14,8 @@ class MightOfOaks: Magical {
         _description = "减少15%物理伤害，持续5回合"
         _tear = 1
         _quality = Quality.GOOD
-        isTargetEmemy = false
+        targetEnemy = false
+        canBeTargetSelf = true
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -25,7 +26,11 @@ class MightOfOaks: Magical {
                 s._type = Status.MIGHT_OF_OAKS
                 s._timeleft = 5
                 t.addStatus(status: s)
+                completion()
             }
         }
+    }
+    override func findTarget() {
+        findSingleTargetNotBlocked()
     }
 }

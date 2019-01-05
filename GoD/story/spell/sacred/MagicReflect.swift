@@ -13,7 +13,7 @@ class MagicReflect: Magical {
         _cooldown = 3
         _name = "法术反射"
         _description = "对己方单位释放护盾，将下一次魔法伤害反弹施法者"
-        isTargetEmemy = false
+        targetEnemy = false
         _quality = Quality.SACRED
     }
     override func cast(completion:@escaping () -> Void) {

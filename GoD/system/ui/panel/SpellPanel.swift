@@ -269,7 +269,7 @@ class SpellInfo:SKSpriteNode, IPanelSize {
         
         let name = Label()
         name.text = "[\(_spell._name)]"
-        name.fontSize = cellSize * 0.25
+        name.fontSize = 24
         name.fontColor = QualityColor.getColor(_spell._quality)
         name.position.x = startX
         name.position.y = startY

@@ -107,8 +107,6 @@ class SelectItems: UIPanel {
         bs._count = 5
         ps.append(bs)
         
-        let bag = SmallGoldBag()
-        ps.append(bag)
         
         return ps
     }
@@ -130,121 +128,6 @@ class SelectItems: UIPanel {
     var nextAction = {}
     var prevAction = {}
     var closeAction = {}
-}
-
-class SelectItems1:UIPanel {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = touches.first?.location(in: self)
-        
-        
-        for u in _listBox.children {
-            if u.contains(touchPoint!) {
-                let c = u as! SelectableItemComponent
-                let sis = getSelectedItems()
-                if sis.count >= 3 {
-                    if c.selected {
-                        c.selected = false
-                    }
-                    return
-                }
-                if c.selected {
-                    c.selected = false
-                } else {
-                    c.selected = true
-                }
-//                _lastSelectedComponent.selected = false
-//                _lastSelectedComponent = rc
-//                _lastSelectedComponent.selected = true
-                return
-            }
-        }
-        
-        if _prevButton.contains(touchPoint!) {
-//            (parent as! CreationFlow).showMinions()
-        }
-        if _nextButton.contains(touchPoint!) {
-            if getSelectedItems().count < 1 {
-                return
-            }
-//            (parent as! CreationFlow).showSpells()
-        }
-    }
-    override func create() {
-        createCloseButton()
-        createPageButtons()
-        _label.text = "选择携带物品(最多可以选择3个)"
-        _closeButton.text = "返回"
-        _prevButton.text = "上一步"
-        _nextButton.text = "下一步"
-        
-        addChild(_listBox)
-        let twt = TheWitchsTear()
-        twt._count = 10
-//        twt._description = "出售可获得6个金币"
-        let p = Potion()
-        p._count = 5
-        let ss = SealScroll()
-        ss._count = 5
-        let ts = TownScroll()
-        ts._count = 5
-        let sgb = SmallGoldBag()
-        sgb._count = 1
-        let bic = BagIncreaseContract()
-        bic._count = 1
-        let sic = StorageIncreaseContract()
-        sic._count = 1
-        let mic = MinionIncreaseContract()
-        mic._count = 1
-        _items = [twt,p,ss,ts,sgb,bic,sic,mic]
-        createCharList()
-    }
-    
-    private func createCharList() {
-        let startX = -cellSize * 5
-        let startY = cellSize * 2.75
-        let width = cellSize * 5.5
-        let height = cellSize * 1.4
-        if _items.count > 0 {
-            for i in 0..._items.count - 1 {
-                let y = i % 4
-                let x = i / 4
-                
-                let cc = SelectableItemComponent()
-                //                cc.unit = _chars[i]
-                cc.item = _items[i]
-                if _items[i] is TheWitchsTear {
-                    cc.des = "出售可获得6个金币"
-                } else if _items[i] is Potion {
-                    cc.des = "恢复50%最大生命值"
-                }
-                cc.position.x = startX + width * x.toFloat()
-                cc.position.y = startY - height * y.toFloat()
-                cc.zPosition = self.zPosition + 2
-                _listBox.addChild(cc)
-            }
-        }
-    }
-    
-    func getSelectedItems() -> Array<SelectableItemComponent> {
-        var sis = Array<SelectableItemComponent>()
-        for u in _listBox.children {
-            let c = u as! SelectableItemComponent
-            if c._selected {
-                sis.append(c)
-            }
-        }
-        return sis
-    }
-
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    var _listBox = SKSpriteNode()
-    var _items = Array<Item>()
-//    var _lastSelectedComponent = SelectableItemComponent()
 }
 
 class SelectableItemComponent:SKSpriteNode {

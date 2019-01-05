@@ -17,12 +17,11 @@ class HeartOfSwamp: SoulStone {
         _race = EvilType.NATURE
         _chance = 30
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-//        _race = EvilType.NATURE
         createSelfAttrs()
         _attrs[0]._value = 25
-        hasInitialized = true
+        initialized = true
         createPrice()
     }
 }
@@ -36,20 +35,20 @@ class PandoraHearts:SoulStone {
         _chance = 0
     }
     var _spell = Spell()
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-        hasInitialized = true
+        initialized = true
         let unSavedSpells = Array<Spell>()
         _spell = unSavedSpells.one()
         createPrice()
     }
     override func on() {
         super.on()
-        Game.instance._char._spells.append(_spell)
+        Game.instance.char._spells.append(_spell)
     }
     override func off() {
         super.off()
-        Game.instance._char.removeSpell(spell: _spell)
+        Game.instance.char.removeSpell(spell: _spell)
     }
 }
 class HeartOfTarrasque:SoulStone {
@@ -61,9 +60,9 @@ class HeartOfTarrasque:SoulStone {
         _race = EvilType.NATURE
         _chance = 40
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-        hasInitialized = true
+        initialized = true
         createPrice()
     }
 }

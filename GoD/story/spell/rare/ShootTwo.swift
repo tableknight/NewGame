@@ -1,39 +1,37 @@
 //
-//  OneShootDoubleKill.swift
-//  TheWitchNight
+//  ShootTwo.swift
+//  GoD
 //
-//  Created by kai chen on 2018/3/29.
-//  Copyright © 2018年 Chen. All rights reserved.
+//  Created by kai chen on 2019/1/5.
+//  Copyright © 2019年 Chen. All rights reserved.
 //
 
+
 import SpriteKit
-class OneShootDoubleKill: Physical {
+class ShootTwo: Physical {
     
     override init() {
         super.init()
-        _name = "穿刺设计"
-        _description = "对目标和身后单位造成攻击80%的物理伤害"
+        _name = "一箭双雕"
+        _description = "对随机两个目标造成攻击80%的物理伤害"
         _quality = Quality.RARE
         _rate = 0.8
         isClose = false
+        isAutoSelectTarget = true
     }
     
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget!
+        let ts = b._selectedTargets
+        let t = ts[0]
         let c = b._curRole
-        //        let role = c._unit
         let this = self
-        let seat = getUnitBeyondTarget(seat: t._unit._seat)
-        let ts = getTargetsBySeats(seats: [seat])
         c.actionShoot {
             this.attack(t:t) {
                 completion()
             }
-            if ts.count > 0 {
-                setTimeout(delay: 0.5, completion: {
-                    this.attack(t: ts[0])
-                })
+            if ts.count > 1 {
+                this.attack(t: ts[1])
             }
         }
     }
@@ -57,6 +55,6 @@ class OneShootDoubleKill: Physical {
         return w != nil && !w!.isClose
     }
     override func findTarget() {
-        findSingleTargetNotBlocked()
+        findTargetRandom2()
     }
 }

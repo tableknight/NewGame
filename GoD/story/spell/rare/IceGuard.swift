@@ -13,13 +13,12 @@ class IceGuard: Magical {
         _tear = 1
         _quality = Quality.RARE
         _name = "寒冰护盾"
-        _description = "对己方单位释放护盾，提升100%防御，有一定几率降低攻击者10点速度"
-        isTargetEmemy = false
+        _description = "对己方单位释放护盾，提升100%防御，持续5回合，有一定几率降低攻击者10点速度"
+        targetEnemy = false
+        canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {
-        //        let r = _battle._curRole
         let t = _battle._selectedTarget!
-        //        removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.ICE_GUARD
         status._timeleft = 5
@@ -29,11 +28,6 @@ class IceGuard: Magical {
         c.actionCast {
             t.actionBuff {
                 completion()
-                t._extensions.defence += t._unit._extensions.defence
-                status.afterTimesUp = {
-                    t._extensions.defence -= t._unit._extensions.defence
-                    
-                }
             }
         }
         

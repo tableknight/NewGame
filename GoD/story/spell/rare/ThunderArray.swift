@@ -31,60 +31,32 @@ class ThunderArray:Magical {
         c.actionCast {
             for i in 0...times {
 //                let wait = SKAction.wait(forDuration: TimeInterval(i.toFloat() * timeSpace))
-                c.actionWait(ti:i.toFloat() * timeSpace) {
-                    this.attack(completion: {
-//                        debug("闪电step = \(this._step)")
-//                        if this._step < 1 {
-//                            completion()
-//                        }
-//                        this._step -= 1
-                    })
-                    
+                c.actionWait(i.toFloat() * timeSpace) {
+                    this.attack()
                 }
             }
             let delay = times.toFloat() * timeSpace + 1.5
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time, execute: {
-//                completion()
-//            })
             setTimeout(delay: delay, completion: completion)
         }
-//        let wait = SKAction.wait(forDuration: )
-////        let node = SKSpriteNode()
-//        _battle.run(wait) {
-//            completion()
-//        }
         
     }
     
-    private func attack(completion: @escaping () -> Void) {
-        let ts = _battle._selectedTargets
-        debug("敌人数量 \(ts.count)")
-        if ts.count < 1 {
-            debug("雷电阵 失去目标")
-            completion()
+    private func attack() {
+        findTarget()
+        let t = _battle._selectedTarget
+        if nil == t {
+            debug("no target")
             return
         }
-        let t = ts[seed(max: ts.count)]
-        _damageValue = thunderDamage(t)
+        _damageValue = thunderDamage(t!)
         let damage = _damageValue
-//        let this = self
-        if hadSpecialAction(t: t, completion: completion) {
-            
-        } else {
-            t.actionAttacked {
-//                t.hpChange(value: damage)
-                t.showValue(value: damage) {
-                    completion()
-                }
+        if !hadSpecialAction(t: t!, completion: {}) {
+            t!.actionAttacked {
+                t!.showValue(value: damage)
             }
         }
     }
     override func findTarget() {
-        let c = _battle._curRole
-        var ts = _battle._playerPart
-        if c.playerPart {
-            ts = _battle._enimyPart
-        }
-        _battle._selectedTargets = ts
+        findSingleTargetNotBlocked()
     }
 }

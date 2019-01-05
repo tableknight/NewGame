@@ -19,32 +19,24 @@ class Lighting: Passive {
         _rate = 0.5
         hasAfterMoveAction = true
     }
-    override func afterMove(completion:@escaping () -> Void) {
+    override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         if c._unit._weapon is ThorsHammer {
             _rate = 1
         }
         let this = self
-//        _battle._curRole.showText(text: _name) {
-        this.findTarget()
         let t = this._battle._selectedTarget!
         this._damageValue = this.thunderDamage(t)
         let damage = this._damageValue
         if this.hadSpecialAction(t:t, completion: completion) {
             
         } else {
-            
             t.actionAttacked {
-//                    t.hpChange(value: damage)
                 t.showValue(value: damage) {
                     completion()
                 }
-                //                this.setFrozen(target: t, completion: completion)
             }
         }
-//        }
-        
-        
     }
     
     override func findTarget() {

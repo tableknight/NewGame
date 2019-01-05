@@ -60,10 +60,10 @@ class SoundOfWind:Bow {
     }
     override func on() {
         super.on()
-        Game.instance._char._extensions.avoid += 40
+        Game.instance.char._extensions.avoid += 40
     }
     override func off() {
         super.off()
-        Game.instance._char._extensions.avoid -= 40
+        Game.instance.char._extensions.avoid -= 40
     }
 }

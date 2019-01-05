@@ -13,7 +13,6 @@ class FragileCurse: Magical {
         _name = "虚弱诅咒"
         _description = "65%几率降低目标50%防御"
         _quality = Quality.RARE
-        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

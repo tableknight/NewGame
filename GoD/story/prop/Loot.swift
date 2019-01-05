@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Loot: Core {
+    var externalLootAction = {}
     override init() {
         super.init()
         _char = Game.instance.char!
@@ -71,23 +72,17 @@ class Loot: Core {
         let lucky = role._lucky * 0.01 + 1
         if chance < 20 * lucky  {
             let a = lootArmor(level: role._level)
-//            _char.addProp(p: a)
-//            debug("获得装备：Lv.\(a._level)\(a._name)")
             _props.append(a)
         }
         chance = seed().toFloat()
         if chance < 15 * lucky {
             let w = lootWeapon(level: role._level)
-//            _char.addProp(p: w)
-//            debug("获得武器：Lv.\(w._level)\(w._name)")
             _props.append(w)
         }
         chance = seed().toFloat()
         if chance < 2 * lucky {
             let book = SpellBook()
             book.spell = getSpellBook(role: role)
-//            _char.addProp(p: book)
-//            debug("获得技能书：[\(book._name)]")
             _props.append(book)
         }
         chance = seed().toFloat()
@@ -95,8 +90,14 @@ class Loot: Core {
             let item = getItem()
             _props.append(item)
         }
-        
-        _props = _props + role.getLoots()
+        chance = seed().toFloat()
+        if chance < 10 * lucky {
+            let sacred = getSacred()
+            if nil != sacred {
+                _props.append(sacred!)
+            }
+        }
+        externalLootAction()
     }
     
     func getExp(level:CGFloat) -> CGFloat {
@@ -538,9 +539,9 @@ class Loot: Core {
     
     func getSacred() -> Outfit? {
         let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
-        if outfit._level <= _char._level {
+        if outfit._level <= _char._level - 5 {
             if seed() < outfit._chance {
-                outfit.create(level: outfit._level)
+                outfit.create()
                 return outfit
             }
         }

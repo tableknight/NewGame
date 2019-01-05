@@ -13,15 +13,13 @@ class FireRain: Magical {
         isFire = true
         _name = "火雨"
         isAutoSelectTarget = true
-        isTargetEmemy = true
+        targetEnemy = true
         _description = "对所有敌方目标造成精神35%的火焰伤害"
         _quality = Quality.RARE
         _rate = 0.35
         _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        
-//        let t = _battle._selectedTarget
         let c = _battle._curRole
         let this = self
         c.actionCast {
@@ -33,42 +31,22 @@ class FireRain: Magical {
     
     func attack(completion:@escaping () -> Void) {
         let ts = _battle._selectedTargets
-        let t = ts[0]
-        _damageValue = fireDamage(t)
-        let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            
-            t.actionAttacked {
-//                t.hpChange(value: damage)
-                t.showValue(value: damage) {
-                    completion()
+        for i in 0...ts.count - 1 {
+            let t = ts[i]
+            _damageValue = fireDamage(t)
+            let damage = _damageValue
+            if !hadSpecialAction(t:t, completion: completion) {
+                t.actionAttacked {
+                    t.showValue(value: damage)
                 }
             }
         }
-        if ts.count > 1 {
-            for i in 1...ts.count - 1 {
-                let t = ts[i]
-                _damageValue = fireDamage(t)
-                let damage = _damageValue
-                if hadSpecialAction(t:t, completion: completion) {
-                    
-                } else {
-                    
-                    t.actionAttacked {
-//                        t.hpChange(value: damage)
-                        t.showValue(value: damage)
-                        //                        completion()
-                    }
-                }
-            }
-        }
+        setTimeout(delay: 2.5, completion: completion)
     }
     
     override func findTarget() {
         if _battle._curRole.playerPart {
-            _battle._selectedTargets = _battle._enimyPart
+            _battle._selectedTargets = _battle._enemyPart
         } else {
             _battle._selectedTargets = _battle._playerPart
         }

@@ -194,6 +194,26 @@ class MyStage: SKSpriteNode {
             }
         })
     }
+    func enterFloor(floor:Int) {
+        clearScene()
+        let ar = AcientRoad()
+        let char = _curScene._role!
+        let  scene = floor > ar.sceneList.count ? ar.getSceneById(id: ar.sceneList.one()) : ar.getSceneById(id: floor)
+        scene._level = floor.toFloat()
+        saveScene(scene: scene)
+        switchScene(next: scene, afterCreation: {
+            scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
+            char.faceSouth()
+        })
+    }
+    func gohome() {
+        let char = _curScene._role!
+        let scene = SelfHome()
+        switchScene(next: scene, afterCreation: {
+            scene.setRole(x: 2, y: 1, char: char)
+            char.faceSouth()
+        })
+    }
     private var _sceneChangeMask = SKSpriteNode()
     private func createSceneChangeMask() {
         let cover = createBackground(width: cellSize * 13, height: cellSize * 12)

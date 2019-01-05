@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class EarRing: Armor {
+class EarRing: Amulet {
     override init() {
         super.init()
         _name = "耳环"

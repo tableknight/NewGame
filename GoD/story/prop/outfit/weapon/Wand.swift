@@ -22,4 +22,9 @@ class Wand: Weapon {
         let attr = _attrs[1]
         attr._value = attr._value * 1.4
     }
+    override func create() {
+        super.create()
+        let attr = _attrs[1]
+        attr._value = attr._value * 1.4
+    }
 }

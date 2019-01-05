@@ -7,15 +7,59 @@
 //
 
 import SpriteKit
-class Spell:Core, IDisplay {
+class Spell:Core, IDisplay, ISelectTarget {
     func getInfosDisplay() -> IPanelSize {
         return ItemInfo()
     }
+    var targetAll: Bool {
+        set {
+            _targetAll = newValue
+        }
+        get {
+            return _targetAll
+        }
+    }
     
-//    static var TARGET_EVIL = 0
-    var isTargetEmemy = true
-    var isTargetAll = false
-    var canBeTargetPlayer = false
+    var targetEnemy: Bool {
+        set {
+            _targetEnemy = newValue
+        }
+        get {
+            return _targetEnemy
+        }
+    }
+    
+    var canBeTargetPlayer: Bool {
+        set {
+            _canBeTargetPlayer = newValue
+        }
+        get {
+            return _canBeTargetPlayer
+        }
+    }
+    var canBeTargetSelf: Bool {
+        set {
+            _canBeTargetSelf = newValue
+        }
+        get {
+            return _canBeTargetSelf
+        }
+    }
+    
+    var isClose: Bool {
+        set {
+            _isClose = newValue
+        }
+        get {
+            return _isClose
+        }
+    }
+    
+    var _canBeTargetPlayer = false
+    var _canBeTargetSelf = false
+    var _isClose = false
+    var _targetEnemy = true
+    var _targetAll = false
     var isPhysical = false
     var isMagical = false
     var isFire = false
@@ -27,15 +71,12 @@ class Spell:Core, IDisplay {
     var hasInitialized = false
     var isAutoSelectTarget = false
     var isMultiple = false
-    var isClose = false
     var hasAfterMoveAction = false
     var _cooldown = 0
     var _timeleft = 0
     var _battle:Battle!
     var _name:String = ""
     var _description = ""
-    var LEFT = "left"
-    var RIGHT = "right"
     var _rate:CGFloat = 1
     var _quality = Quality.NORMAL
     var _level:CGFloat = 1
@@ -61,14 +102,15 @@ class Spell:Core, IDisplay {
 //    func off(t:Creature) {}
     func physicalDamage(_ to:BUnit) -> CGFloat {
         let from = _battle._curRole
-        return physicalDamage(from: from, to: to)
+        _damageValue = physicalDamage(from: from, to: to)
+        return _damageValue
     }
     func getDefRate(from: BUnit, to:BUnit) -> CGFloat {
         let level = to._unit._level
         let brk = from.getBreak()
         let odef = to.getDefence() * (1 - brk * 0.01)
 //        let base =
-        let r = atan(level * 0.1)
+        let r = atan(level * 0.05) + 0.2
         var def = (odef / atan(odef / level / 2)) / (level * 8) * r
         if def > 0.75 {
             def = 0.75
@@ -76,8 +118,8 @@ class Spell:Core, IDisplay {
         if def < 0.25 {
             def = 0.25
         }
-        debug("\(to._unit._name) odef = \(odef)")
-        debug("def = \(def)")
+//        debug("\(to._unit._name) odef = \(odef)")
+//        debug("def = \(def)")
         if to.hasSpell(spell: OnePunch()) || to.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
@@ -267,7 +309,7 @@ class Spell:Core, IDisplay {
         let c = _battle._curRole
         if c.isBlocked() {
             if c.playerPart {
-                for u in _battle._enimyPart {
+                for u in _battle._enemyPart {
                     if !u.isBlocked() {
                         ts.append(u)
                     }
@@ -281,7 +323,7 @@ class Spell:Core, IDisplay {
             }
         } else {
             if c.playerPart {
-                ts = _battle._enimyPart
+                ts = _battle._enemyPart
             } else {
                 ts = _battle._playerPart
             }
@@ -524,7 +566,7 @@ class Spell:Core, IDisplay {
     }
     func getTargetsBySeats(seats:Array<String>) -> Array<BUnit> {
         var ts = Array<BUnit>()
-        let all = _battle._playerPart + _battle._enimyPart
+        let all = _battle._playerPart + _battle._enemyPart
         for seat in seats {
             for u in all {
                 if seat == u._unit._seat {
@@ -552,14 +594,12 @@ class Spell:Core, IDisplay {
         let bound = 65 + fromMind - toMind
         if sed < bound {
             print("feeezing!")
-            if !target.hasStatus(type: Status.FREEZING) {
-                let status = Status()
-                status._type = Status.FREEZING
-                status._timeleft = 1
-                target.addStatus(status: status)
-                target.isDefend = false
-                target.actionFrozen(){}
-            }
+            let status = Status()
+            status._type = Status.FREEZING
+            status._timeleft = 1
+            target.addStatus(status: status)
+            target.isDefend = false
+            target.actionFrozen(){}
         }
     }
     
@@ -590,9 +630,9 @@ class Spell:Core, IDisplay {
     }
     //单体无遮挡 目标查找
     internal func findSingleTargetNotBlocked() {
-        if isTargetEmemy {
+        if targetEnemy {
             if _battle._curRole.playerPart {
-                _battle._selectedTarget = _battle._enimyPart.one()
+                _battle._selectedTarget = _battle._enemyPart.one()
             } else {
                 _battle._selectedTarget = _battle._playerPart.one()
             }
@@ -600,8 +640,27 @@ class Spell:Core, IDisplay {
             if _battle._curRole.playerPart {
                 _battle._selectedTarget = _battle._playerPart.one()
             } else {
-                _battle._selectedTarget = _battle._enimyPart.one()
+                _battle._selectedTarget = _battle._enemyPart.one()
             }
+        }
+    }
+    internal func findTargetRandom2() {
+        let part = targetEnemy ? _battle._enemyPart : _battle._playerPart
+        let index = seed(max: part.count)
+        _battle._selectedTargets = [part[index]]
+        if part.count > 1 {
+            var secondIndex = index
+            while(secondIndex == index) {
+                secondIndex = seed(max: part.count)
+            }
+            _battle._selectedTargets.append(part[secondIndex])
+        }
+    }
+    internal func findTargetPartAll() {
+        if _battle._curRole.playerPart {
+            _battle._selectedTargets = _battle._enemyPart
+        } else {
+            _battle._selectedTargets = _battle._playerPart
         }
     }
     internal func getRandomLeftUnit() -> BUnit {
@@ -614,7 +673,7 @@ class Spell:Core, IDisplay {
         if _battle._curRole.playerPart {
             _battle._selectedTarget = findLowesHpUnit(_battle._playerPart)
         } else {
-            _battle._selectedTarget = findLowesHpUnit(_battle._enimyPart)
+            _battle._selectedTarget = findLowesHpUnit(_battle._enemyPart)
         }
     }
     private func findLowesHpUnit(_ bs: Array<BUnit>) -> BUnit {

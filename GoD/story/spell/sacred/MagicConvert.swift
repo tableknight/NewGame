@@ -14,7 +14,7 @@ class MagicConvert: Magical {
         _quality = Quality.SACRED
         _name = "法术吸收"
         _description = "对己方单位释放护盾，将下一次法术伤害转化为生命回复"
-        isTargetEmemy = false
+        targetEnemy = false
     }
     override func cast(completion:@escaping () -> Void) {
         //        let r = _battle._curRole

@@ -16,12 +16,12 @@ class NightBlade: Dagger {
         _chance = 100
     }
     
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
         _attrCount = 5
         createSelfAttrs()
         createAttrs()
-        hasInitialized = true
+        initialized = true
         let attr = _attrs[0]
         attr._value = attr._value * 0.5
         createPrice()
@@ -34,8 +34,12 @@ class LazesPedicureKnife:Dagger {
         _description = "普通攻击有几率获得一点敏捷"
         _level = 21
         _chance = 100
-    }
-    override func createQuality() {
         sacredAttrCount()
+    }
+    override func create() {
+        initialized = true
+        createSelfAttrs()
+        createAttrs()
+        createPrice()
     }
 }

@@ -22,7 +22,7 @@ class AcientRoad: MyScene {
         }
     }
     override func create() {
-        _nameLabel.text = "远古秘境第\(_level.toInt())层 —— \(_name)第\(_index)域"
+        _nameLabel.text = "远古秘径第\(_level.toInt())层 —— \(_name)第\(_index)域"
         createGround()
         createPortalPoints()
         createMapMatrix()
@@ -116,8 +116,8 @@ class AcientRoad: MyScene {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enimyCount = 5
-        for _ in 0...enimyCount {
+        let enemyCount = 5
+        for _ in 0...enemyCount {
             let e = getMonsterByIndex(index: _monsterEnum.one())
             e.create(level: _level)
             enimies.append(e)
@@ -125,7 +125,7 @@ class AcientRoad: MyScene {
         stage.hideScene()
         let b = Battle()
         let roles = [char] + char.getReadyMinions()
-        b.setEnimyPart(minions: enimies)
+        b.setEnemyPart(minions: enimies)
         b.setPlayerPart(roles: roles)
         b.zPosition = MyStage.UI_TOPEST_Z
         let this = self
@@ -139,18 +139,17 @@ class AcientRoad: MyScene {
         b.battleStart()
     }
     internal func defeatedAction() {
-        
+        let stage = Game.instance.curStage!
+        stage.gohome()
     }
     internal func defeatAction() {
         let nextLevel = _level.toInt() + 1
         let char = Game.instance.char!
+        let stage = Game.instance.curStage!
         if char._dungeonLevel < nextLevel {
             char._dungeonLevel = nextLevel
         }
-        if nextLevel > 10 {
-            //                    let nextIndex =
-            
-        }
+        stage.enterFloor(floor: nextLevel)
     }
     internal var _index:Int = 1
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

@@ -15,12 +15,12 @@ class Faceless:Shield {
         _level = 30
         _chance = 30
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
+        initialized = true
         _attrCount = 4
         createSelfAttrs()
         createAttrs()
-        hasInitialized = true
         createPrice()
     }
 }

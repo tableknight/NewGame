@@ -7,29 +7,64 @@
 //
 
 import SpriteKit
-class Item:Prop {
-    func use(unit: BUnit, completion:@escaping () -> Void) {
-        
+class Item:Prop, ISelectTarget {
+    var targetAll: Bool {
+        get {
+            return _isTargetAll
+        }
     }
+    
+    var targetEnemy: Bool {
+        set {
+            _isTargetEnemy = newValue
+        }
+        get {
+            return _isTargetEnemy
+        }
+    }
+    
+    var canBeTargetPlayer: Bool {
+        get {
+            return _canBeTargetPlayer
+        }
+    }
+    var canBeTargetSelf: Bool {
+        set {
+            _canBeTargetSelf = newValue
+        }
+        get {
+            return _canBeTargetSelf
+        }
+    }
+    
+    var isClose: Bool {
+        set {
+            _isClose = newValue
+        }
+        get {
+            return _isClose
+        }
+    }
+    
+    var _isTargetAll = false
+    var _isTargetEnemy = false
+    var _canBeTargetPlayer = true
+    var _canBeTargetSelf = true
+    var _isClose = false
+    
+    func use() {}
+    func use(target:Creature) {}
+    func use(unit: BUnit, completion:@escaping () -> Void) {}
     
     override init() {
         super.init()
     }
     
-    var _cooldown = 0
     var usable = false
-    var useInBattle = false
+    var usableInBattle = false
     var _timeleft = 0
-    var targetSelf = false
     var _battle:Battle!
-    
-    func use(target:Creature) {
-        
-    }
-    
-    func usableInBattle() -> Bool {
-        return useInBattle
-    }
+    var _cooldown = 0
     
     func timeleft() -> Int {
         return _timeleft
@@ -52,11 +87,10 @@ class TheWitchsTear:Item {
     static let NAME = "天使之泪"
     override init() {
         super.init()
+        price = 6
         _name = TheWitchsTear.NAME
         _level = 1
         _quality = Quality.NORMAL
-        _price = 6
-        _sellingPrice = 12
         _description = "一滴来自天使的眼泪，经过时间的沉淀，变成了一颗晶莹剔透的水晶，似乎拥有某种魔力"
     }
 }
@@ -65,18 +99,17 @@ class Potion:Item {
     override init() {
         super.init()
         usable = true
-        useInBattle = true
+        usableInBattle = true
+        price = 5
         _cooldown = 4
         _name = "治疗药水"
-        targetSelf = true
-        _price = 5
-        _sellingPrice = 20
-        _description = "恢复50%最大生命值，战斗中冷却时间3回合"
+        _description = "恢复50%最大生命值"
     }
     
     internal var _rate:CGFloat = 0.5
     
     override func use(target: Creature) {
+        removeFromChar()
         target._extensions.hp += target._extensions.health * _rate
         if target._extensions.hp >= target._extensions.health {
             target._extensions.hp = target._extensions.health
@@ -99,6 +132,7 @@ class Potion:Item {
                 }
             }
         }
+        removeFromChar()
 //        completion()
     }
 }
@@ -106,12 +140,10 @@ class Potion:Item {
 class LittlePotion:Potion {
     override init() {
         super.init()
+        price = 3
         _cooldown = 2
         _name = "小型治疗药水"
-        targetSelf = true
-        _price = 3
-        _sellingPrice = 12
-        _description = "恢复25%最大生命值，战斗中冷却时间1回合"
+        _description = "恢复25%最大生命值"
         _rate = 0.25
     }
 }
@@ -120,11 +152,11 @@ class SealScroll:Item {
     override init() {
         super.init()
         usable = false
-        useInBattle = true
+        usableInBattle = true
+        targetEnemy = true
+        price = 6
         _cooldown = 0
         _name = "封印卷轴"
-        _price = 6
-        _sellingPrice = 24
         _description = "对目标释放封印术"
     }
     
@@ -132,6 +164,7 @@ class SealScroll:Item {
         let this = self
         let char = Game.instance._char!
         let c = _battle._curRole
+        removeFromChar()
         c.showText(text: "封印") {
             unit.actionSealed {
                 let chance = this.seed(max: unit.getHealth().toInt())
@@ -164,29 +197,17 @@ class TownScroll:Item {
     override init() {
         super.init()
         usable = true
-        useInBattle = true
+        usableInBattle = true
+        price = 6
         _name = "传送卷轴"
-        _price = 6
-        _sellingPrice = 24
         _description = "传送中"
     }
-    override func use(target: Creature) {
+    override func use() {
         removeFromChar()
         showMsg(text: _description)
         let c = CenterCamping()
         let char = Game.instance.curStage._curScene._role!
 //        let stage = Game.instance.
-        Game.instance.curStage.switchScene(next: c, afterCreation: {
-            c.setRole(x: 5, y: 7, char: char)
-        })
-    }
-    override func use(unit: BUnit, completion: @escaping () -> Void) {
-        Game.instance.stage.removeBattle(b: _battle)
-        removeFromChar()
-        showMsg(text: _description)
-        let c = CenterCamping()
-        let char = Game.instance.curStage._curScene._role!
-        //        let stage = Game.instance.
         Game.instance.curStage.switchScene(next: c, afterCreation: {
             c.setRole(x: 5, y: 7, char: char)
         })
@@ -197,11 +218,10 @@ class BlastScroll:Item {
     override init() {
         super.init()
         usable = true
-        useInBattle = false
+        usableInBattle = false
+        price = 3
         _name = "爆破卷轴"
-        _price = 6
-        _sellingPrice = 24
-        _description = "移除面前的一个障碍物(只能在远古迷径中使用)"
+        _description = "移除面前的一个障碍物(只能在远古秘径中使用)"
     }
     override func use(target: Creature) {
         let stage = Game.instance.curStage!
@@ -220,74 +240,3 @@ class BlastScroll:Item {
     }
 }
 
-class BagIncreaseContract:Item {
-    override init() {
-        super.init()
-        usable = true
-        _name = "背包扩充协议"
-        _price = 25
-        _sellingPrice = 100
-        _description = "扩充6个背包格子"
-    }
-}
-
-class StorageIncreaseContract:Item {
-    override init() {
-        super.init()
-        usable = true
-        _name = "仓库扩充协议"
-        _price = 25
-        _sellingPrice = 100
-        _description = "扩充6个仓库格子"
-    }
-}
-
-class MinionIncreaseContract:Item {
-    override init() {
-        super.init()
-        usable = true
-        _name = "寄存扩充协议"
-        _price = 25
-        _sellingPrice = 100
-        _description = "扩充2个随从寄存位"
-    }
-}
-
-class RebornScroll:Item {
-    override init() {
-        super.init()
-        usable = true
-        _name = "重生卷轴"
-        _price = 100
-        _sellingPrice = 400
-        _description = "将一个随从重生到1级"
-    }
-}
-
-class SmallGoldBag:Item {
-    override init() {
-        super.init()
-        usable = true
-        _name = "小钱袋子"
-        _price = 100
-        _sellingPrice = 400
-        _description = "获得100金币"
-    }
-}
-
-//class SpellBook:Item {
-//    override init() {
-//        super.init()
-//        useable = true
-//    }
-//    private var _spell:Spell!
-//    func setSpell(spell:Spell) {
-//        _spell = spell
-//        _name = "技能书：\(spell._name)"
-//        _description = spell._description
-//    }
-//    
-//    override func use(target: Creature) {
-//        
-//    }
-//}

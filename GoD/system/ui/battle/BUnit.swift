@@ -280,8 +280,8 @@ class BUnit: SKSpriteNode {
             }
         })
     }
-    func actionWait(ti:CGFloat = 1, completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(ti))
+    func actionWait(_ time:CGFloat = 1, completion:@escaping () -> Void) {
+        let wait = SKAction.wait(forDuration: TimeInterval(time))
         _charNode.run(wait, completion: completion)
     }
     func actionBuff(completion:@escaping () -> Void) {
@@ -794,10 +794,10 @@ class BUnit: SKSpriteNode {
         return false
     }
     func isBlocked() -> Bool {
-        if inleft {
+        if playerPart {
             return _battle.isPlayerPartUnitBlocked(unit: self)
         } else {
-            return _battle.isEnimyPartUnitBlocked(unit: self)
+            return _battle.isEnemyPartUnitBlocked(unit: self)
         }
     }
     func getActiveSpell() -> Array<Spell> {
@@ -849,7 +849,7 @@ class BUnit: SKSpriteNode {
                 spells += u._unit._spellsInuse
             }
         } else {
-            for u in _battle._enimyPart {
+            for u in _battle._enemyPart {
                 spells += u._unit._spellsInuse
             }
         }
@@ -976,6 +976,9 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: BargeAbout()) {
             acc -= 100
         }
+        if hasSpell(spell: Sacrifice()) {
+            acc += 50
+        }
         if nil != _battle && hasAuro(auro: Focus()) {
             acc += 20
         }
@@ -1037,13 +1040,20 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: DancingOnIce()) {
             return 0
         }
-        
+        if hasSpell(spell: Sacrifice()) {
+            def *= 0.5
+        }
+        var rate:CGFloat = 1
         if hasStatus(type: Status.FRAGILE) {
-            def = def * 0.5
+            rate = 0.5
         }
         if hasSpell(spell: Strong()) {
-            def *= 1.2
+            rate += 0.2
         }
+        if hasStatus(type: Status.ICE_GUARD) {
+            rate += 1
+        }
+        def *= rate
         if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
             def += 50
         }

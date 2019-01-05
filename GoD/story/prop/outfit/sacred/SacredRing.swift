@@ -15,11 +15,11 @@ class RingOfDead:Ring {
         _level = 12
         _chance = 100
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
         _attrCount = seed(min: 3, max: 6)
         createAttrs()
-        hasInitialized = true
+        initialized = true
         createPrice()
     }
 //    private var _backup = 0
@@ -32,7 +32,7 @@ class RingOfDead:Ring {
     override func off() {
         super.off()
         if nil != Game.instance.char._soulStone {
-            Game.instance._char._race = Game.instance.char._soulStone!._race
+            Game.instance.char._race = Game.instance.char._soulStone!._race
         }
         
     }
@@ -51,16 +51,14 @@ class IdlirWeddingRing:Ring {
     var _originalImage = SKTexture()
     override func on() {
         super.on()
-        _originalImage = Game.instance._char._img
+        _originalImage = Game.instance.char._img
         let t = SKTexture(imageNamed: "idlir_bride.png")
-        Game.instance._char._img = t
-        Game.instance.stage._char._charTexture = t
-        Game.instance.stage._char.faceSouth()
+        Game.instance.char._img = t
+        Game.instance.curStage._curScene._role._charTexture = t
     }
     override func off() {
-        Game.instance._char._img = _originalImage
-        Game.instance.stage._char._charTexture = _originalImage
-        Game.instance.stage._char.faceSouth()
+        Game.instance.char._img = _originalImage
+        Game.instance.curStage._curScene._role._charTexture = _originalImage
     }
 }
 class ApprenticeRing:Ring {
@@ -84,20 +82,20 @@ class CopperRing:Ring {
         removeAttrId(id: FIRERESISTANCE)
         _chance = 100
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-        hasInitialized = true
+        initialized = true
         _attrCount = 3
         createAttrs()
         createPrice()
     }
     override func on() {
         super.on()
-        Game.instance._char._ElementalResistance.fire += 5
+        Game.instance.char._ElementalResistance.fire += 5
     }
     override func off() {
         super.off()
-        Game.instance._char._ElementalResistance.fire -= 5
+        Game.instance.char._ElementalResistance.fire -= 5
     }
 }
 class SilverRing:Ring {
@@ -109,20 +107,20 @@ class SilverRing:Ring {
         removeAttrId(id: FIRERESISTANCE)
         _chance = 100
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-        hasInitialized = true
+        initialized = true
         _attrCount = 3
         createAttrs()
         createPrice()
     }
     override func on() {
         super.on()
-        Game.instance._char._ElementalResistance.fire += 15
+        Game.instance.char._ElementalResistance.fire += 15
     }
     override func off() {
         super.off()
-        Game.instance._char._ElementalResistance.fire -= 15
+        Game.instance.char._ElementalResistance.fire -= 15
     }
 }
 class DellarsGoldenRing:Ring {
@@ -134,20 +132,20 @@ class DellarsGoldenRing:Ring {
         removeAttrId(id: FIRERESISTANCE)
         _chance = 60
     }
-    override func create(level:CGFloat) {
+    override func create() {
         _quality = Quality.SACRED
-        hasInitialized = true
+        initialized = true
         _attrCount = seed(min: 3, max: 6)
         createAttrs()
         createPrice()
     }
     override func on() {
         super.on()
-        Game.instance._char._ElementalResistance.fire += 35
+        Game.instance.char._ElementalResistance.fire += 35
     }
     override func off() {
         super.off()
-        Game.instance._char._ElementalResistance.fire -= 35
+        Game.instance.char._ElementalResistance.fire -= 35
     }
 }
 class LuckyRing:Ring {
@@ -170,13 +168,13 @@ class LuckyRing:Ring {
     }
     override func on() {
         super.on()
-        Game.instance._char._lucky += _lucky
-        Game.instance._char._extensions.avoid += _avoid
+        Game.instance.char._lucky += _lucky
+        Game.instance.char._extensions.avoid += _avoid
     }
     override func off() {
         super.off()
-        Game.instance._char._lucky -= _lucky
-        Game.instance._char._extensions.avoid -= _avoid
+        Game.instance.char._lucky -= _lucky
+        Game.instance.char._extensions.avoid -= _avoid
     }
 }
 

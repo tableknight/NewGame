@@ -13,8 +13,9 @@ class Disappear: Magical {
         _cooldown = 3
         _name = "消失"
         _description = "对自己释放消失，提升50点闪避，持续5回合"
-        isTargetEmemy = false
+        targetEnemy = false
         _quality = Quality.GOOD
+        isAutoSelectTarget = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -29,5 +30,7 @@ class Disappear: Magical {
             }
         }
     }
-
+    override func findTarget() {
+        _battle._selectedTarget = _battle._curRole
+    }
 }

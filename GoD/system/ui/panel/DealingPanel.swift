@@ -363,7 +363,7 @@ class DealingPanel:UIPanel {
     
     private func showArmorProperties(armor:PropComponent) {
         let outfit = armor.prop as! Outfit
-        if !armor.prop.hasInitialized && !outfit.isRandom {
+        if !armor.prop.initialized && !outfit.isRandom {
             return
         }
         let ai = ArmorInfo()

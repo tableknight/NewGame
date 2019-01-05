@@ -23,13 +23,13 @@ class LightingRod:Wand {
     }
     override func on() {
         super.on()
-        Game.instance._char._ElementalPower.thunder += 50
-        Game.instance._char._ElementalResistance.thunder -= 50
+        Game.instance.char._ElementalPower.thunder += 50
+        Game.instance.char._ElementalResistance.thunder -= 50
     }
     override func off() {
         super.off()
-        Game.instance._char._ElementalPower.thunder -= 50
-        Game.instance._char._ElementalResistance.thunder += 50
+        Game.instance.char._ElementalPower.thunder -= 50
+        Game.instance.char._ElementalResistance.thunder += 50
     }
 }
 class FireMaster:Wand {
@@ -73,7 +73,7 @@ class PuppetMaster:Wand {
     }
     override func off() {
         super.off()
-        let char =  Game.instance._char!
+        let char =  Game.instance.char!
         char._minionsCount -= 1
         let minions = char.getReadyMinions()
         if minions.count > char._minionsCount {

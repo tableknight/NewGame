@@ -11,10 +11,11 @@ class QuickHeal: Magical {
     override init() {
         super.init()
         _quality = Quality.GOOD
-        isTargetEmemy = false
+        targetEnemy = false
         _name = "快速治疗"
         _cooldown = 1
         _description = "恢复己方目标最大生命25%的生命值"
+        canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

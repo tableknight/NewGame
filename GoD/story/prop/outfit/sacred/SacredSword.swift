@@ -11,14 +11,13 @@ class NewSwordPlus: Sword {
     override init() {
         super.init()
         _attackSpeed = 1.1
-        _name = "冒险之剑(改)"
+        _name = "冒险者之剑(改)"
         _description = "冒险者最梦寐以求的武器。"
-        hasInitialized = true
         price = 10
-        
         _chance = 100
     }
-    override func create(level:CGFloat) {
+    override func create() {
+        initialized = true
         _quality = Quality.SACRED
         let atk = AttackAttribute()
         atk._value = 10
@@ -46,13 +45,13 @@ class NewSword: Sword {
     override init() {
         super.init()
         _attackSpeed = 1.1
-        _name = "冒险之剑"
+        _name = "冒险者之剑"
         _description = "冒险者最梦寐以求的武器。"
-        hasInitialized = true
         price = 1
         _chance = 100
     }
-    override func create(level:CGFloat) {
+    override func create() {
+        initialized = true
         _quality = Quality.NORMAL
         let atk = AttackAttribute()
         atk._value = 2

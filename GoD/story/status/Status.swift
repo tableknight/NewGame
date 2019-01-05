@@ -17,7 +17,7 @@ class Status:Core {
     var _description = ""
     var _img = SKTexture()
     var _source = BUnit()
-    var afterTimesUp = {}
+    var timeupAction = {}
     var inEndOfRound = {}
     static let TURN_ATTACK = "turn_status"
     static let ATTACK_RETURN_BACK = "attack_return_back"
@@ -36,6 +36,7 @@ class Status:Core {
     static let REBORN = "reborn"
     static let RACE_SUPERIORITY = "race_superiorty"
     static let PROTECT_FROM_GOD = "protect_from_god"
+    static let PROTECTION_FROM_ICE = "protection_from_ice"
     static let FIRE_LORD = "fire_lord"
     static let FOCUS = "focus"
     static let ONE_PUNCH = "one_punch"
@@ -159,7 +160,7 @@ class LostSpeed:Status {
         super.init()
         _type = Status.LOST_SEPPD
         let this = self
-        afterTimesUp = {
+        timeupAction = {
             this._source._extensions.speed += 10
             debug("速度恢复")
         }
