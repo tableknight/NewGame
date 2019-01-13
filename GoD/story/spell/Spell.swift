@@ -177,7 +177,8 @@ class Spell:Core, IDisplay, ISelectTarget {
             damage *= 1.5
         }
         damage = specialDamage(damage: damage, to: to, from: from)
-        return -damageControl(damage)
+        _damageValue = -damageControl(damage)
+        return _damageValue
     }
     func fireDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
         let from = _battle._curRole
@@ -185,10 +186,6 @@ class Spell:Core, IDisplay, ISelectTarget {
         if isPhysical {
             damage = from.getAttack()
         }
-        if damage < 5 {
-            return -seed(min: 0, max: 5).toFloat()
-        }
-//        let x = from.getFirePower() - to.getFireResistance()
         damage *= fireFactor(from: from, to: to)
         
         if !isMultiple && isFire {
@@ -202,7 +199,8 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
-        return -damageControl(damage)
+        _damageValue = -damageControl(damage)
+        return _damageValue
     }
     internal func fireFactor(from:BUnit, to:BUnit) -> CGFloat {
         let x = from.getFirePower() - to.getFireResistance()
@@ -229,7 +227,8 @@ class Spell:Core, IDisplay, ISelectTarget {
         damage *= waterFactor(from: from, to: to)
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
-        return -damageControl(damage)
+        _damageValue = -damageControl(damage)
+        return _damageValue
     }
     func thunderDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
         let from = _battle._curRole
@@ -245,7 +244,8 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
-        return -damageControl(damage)
+        _damageValue = -damageControl(damage)
+        return _damageValue
     }
     private func damageControl(_ d:CGFloat) -> CGFloat {
         var damage = d * _rate

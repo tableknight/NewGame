@@ -171,6 +171,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             price.position.y = lastY - gap * 2
             price.fontSize = name.fontSize * 0.6
             price.text = "出售价格：\(armor._price)G"
+            price.fontColor = UIColor.orange
             addChild(price)
             _displayHeight += price.fontSize + gap * 2
         }

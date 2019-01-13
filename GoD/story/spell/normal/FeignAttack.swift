@@ -20,39 +20,25 @@ class FeignAttack: Physical {
     override func cast(completion:@escaping () -> Void) {
         var t = _battle._selectedTarget!
         let c = _battle._curRole
-        let b = _battle!
         let this = self
-        b.roleMove(from: c, to: t, completion: {
-            c.actionAttack {
-                let seat = t._unit._seat
-                let seats = [this.getUnitBeyondTarget(seat: seat), this.getUnitUnderTarget(seat: seat), this.getUnitInTheLeftOfTarget(seat: seat), this.getUnitInTheRightOfTarget(seat: seat)]
-                let ts = this.getTargetsBySeats(seats: seats)
-                if ts.count > 0 {
-                    t = ts[this.seed(max: ts.count)]
-                    this._damageValue = this.physicalDamage(t)
-                    let damage = this._damageValue
-                    t.actionAttacked(defend: t.isDefend) {
-//                        t.hpChange(value: damage)
-                        t.showValue(value: damage) {
-                            b.moveBack(unit: c, completion: {
-                                completion()
-                            })
-                        }
-                    }
-                } else {
-                    t.actionWait {
-                        //                t.hpChange(value: damage)
-                        //                t.showValue(value: damage)
-                        b.moveBack(unit: c, completion: {
-                            completion()
-                        })
+        c.actionAttack {
+            let seat = t._unit._seat
+            let seats = [this.getUnitBeyondTarget(seat: seat), this.getUnitUnderTarget(seat: seat), this.getUnitInTheLeftOfTarget(seat: seat), this.getUnitInTheRightOfTarget(seat: seat)]
+            let ts = this.getTargetsBySeats(seats: seats)
+            if ts.count > 0 {
+                t = ts[this.seed(max: ts.count)]
+                this._damageValue = this.physicalDamage(t)
+                let damage = this._damageValue
+                t.actionAttacked(defend: t.isDefend) {
+                    t.showValue(value: damage) {
+                        completion()
                     }
                 }
+            } else {
+                t.showText(text: "MISS")
+                completion()
             }
-        })
-        
-        
-        
+        }
         
     }
     

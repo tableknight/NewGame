@@ -34,7 +34,7 @@ class SpellPanel:UIPanel {
             return
         }
 //        let _char = Data.instance._char!
-        if _lastSelectedIcon.contains(touchPoint!) {
+        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             let spell = _lastSelectedIcon._displayItemType as! Spell
             if _spellBoxInuse.contains(_lastSelectedIcon) {
                 let index = _role._spellsInuse.index(of: spell)
@@ -206,7 +206,7 @@ class SpellPanel:UIPanel {
     override func pageReload() {
         _spellBoxUnused.removeAllChildren()
         _spellBoxInuse.removeAllChildren()
-        _lastSelectedIcon = Icon(quality: 1)
+        _lastSelectedIcon = nil
         showSpellsUnused()
         showSpellsInuse()
     }

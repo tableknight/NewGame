@@ -12,8 +12,9 @@ class Heal: Magical {
         super.init()
         _quality = Quality.NORMAL
         targetEnemy = false
+        canBeTargetSelf = true
         _name = "治疗"
-        _cooldown = 2
+        _cooldown = 1
         _description = "恢复己方目标最大生命50%的生命值"
     }
     override func cast(completion:@escaping () -> Void) {

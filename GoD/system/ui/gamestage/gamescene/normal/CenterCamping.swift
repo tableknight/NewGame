@@ -78,21 +78,31 @@ class CenterCamping: StandScene {
             let ec = EastCamping()
 //            let char = Game.instance.curStage._curScene._role!
             let char = self._role!
-            char.removeFromParent()
             Game.instance.curStage.switchScene(next: ec, afterCreation: {
                 ec.setRole(x: 0, y: 5, char: char)
             }, completion: {})
-            self.removeFromParent()
-        } else 
+        } else
         if pos.x == 11 && pos.y == 2 {
             let ec = SelfHome()
             //            let char = Game.instance.curStage._curScene._role!
             let char = self._role!
-            char.removeFromParent()
             Game.instance.curStage.switchScene(next: ec, afterCreation: {
                 ec.setRole(x: 6, y: 7, char: char)
             }, completion: {})
-            self.removeFromParent()
+        } else
+        if pos.x == 3 && pos.y == 3 {
+            let store = GeneralStore()
+            let char = self._role!
+            Game.instance.curStage.switchScene(next: store, afterCreation: {
+                store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
+            })
+        } else
+        if pos.x == 10 && pos.y == 9 {
+            let store = OutfitStore()
+            let char = self._role!
+            Game.instance.curStage.switchScene(next: store, afterCreation: {
+                store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
+            })
         }
     }
     
@@ -103,7 +113,7 @@ class CenterCamping: StandScene {
 //        createCoord()
         addItem(x: 1, y: 2, item: House2(), width: 0, height: 0)
         addItem(x: 8, y: 8, item: House1(), width: 0, height: 0)
-        addItem(x: 10, y: 2, item: MyHouse(), z: MyScene.MAP_LAYER_Z)
+        addItem(x: 10, y: 2, item: MyHouse(), width:0, z: MyScene.MAP_LAYER_Z)
 //        addItem(x: 0, y: 9, item: Stump())
 //        addItem(x: 3, y: 11, item: Stump())
 //        addItem(x: 7, y: 11, item: Stump())
@@ -325,7 +335,7 @@ class CenterCamping: StandScene {
         addItem(x: 4, y: 3, item: hb1)
         _mapMatrix[3][4] = CELL_BOARD
         let hb2 = HouseBoard()
-        hb2._text = "装备屋"
+        hb2._text = "铁匠铺"
         addItem(x: 11, y: 9, item: hb2)
         _mapMatrix[9][11] = CELL_BOARD
         

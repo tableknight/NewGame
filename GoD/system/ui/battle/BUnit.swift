@@ -585,6 +585,7 @@ class BUnit: SKSpriteNode {
     }
     func showText(text:String = "", color:UIColor = UIColor.white, completion:@escaping () -> Void = {}) {
         if "" == text {
+            completion()
             return
         }
         let valueText = addLabel(fontSize: 20)

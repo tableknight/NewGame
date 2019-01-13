@@ -106,7 +106,11 @@ class GroundSets: Core {
             partPos = 1
         }
 //        let wall = _wall
-        return _wall.getNode(partPos, 1)
+        let node = _wall.getNode(partPos, 1)
+//        let nodeTop = _wall.getNode(partPos, -0.5, 1, 0.5)
+//        nodeTop.anchorPoint = CGPoint(x: 0.5, y: 0)
+//        node.addChild(nodeTop)
+        return node
     }
     var groundHeight:CGFloat = 5
     var startTopPos: Int = 8

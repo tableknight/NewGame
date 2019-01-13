@@ -31,6 +31,13 @@ class OutfitPanel: UIPanel {
             }
             return
         }
+        if _discardButton.contains(touchPoint!) {
+            if _lastSelectedIcon != nil {
+                _char.removeProp(p: _lastSelectedIcon._displayItemType as! Prop)
+                pageReload()
+                return
+            }
+        }
         outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!)
         outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!)
         outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!)
@@ -59,7 +66,7 @@ class OutfitPanel: UIPanel {
 
         
         
-        if _lastSelectedIcon.contains(touchPoint!) {
+        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             let outfit = _lastSelectedIcon._displayItemType as! Outfit
             if outfit._level > _char._level {
                 showMsg(text: "你暂时无法使用这件比你更强大的装备。")
@@ -77,7 +84,7 @@ class OutfitPanel: UIPanel {
                 _char._weapon = weapon
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
             if _lastSelectedIcon._displayItemType is Amulet {
@@ -92,7 +99,7 @@ class OutfitPanel: UIPanel {
                 _char._amulet = amulet
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
             if _char.hasShield && _lastSelectedIcon._displayItemType is Shield {
@@ -107,7 +114,7 @@ class OutfitPanel: UIPanel {
                 _char._shield = shield
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
             if _lastSelectedIcon._displayItemType is Ring {
@@ -132,7 +139,7 @@ class OutfitPanel: UIPanel {
                 
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
             if _char.hasMark && _lastSelectedIcon._displayItemType is MagicMark {
@@ -147,7 +154,7 @@ class OutfitPanel: UIPanel {
                 _char._magicMark = mark
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
             if _lastSelectedIcon._displayItemType is SoulStone {
@@ -162,22 +169,28 @@ class OutfitPanel: UIPanel {
                 _char._soulStone = soulStone
                 pageReload()
                 _lastSelectedIcon.selected = false
-                _lastSelectedIcon = Icon(quality: 1)
+                _lastSelectedIcon = nil
                 return
             }
         }
         let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
         if !rlt {
-            _lastSelectedIcon.selected = false
+            _lastSelectedIcon?.selected = false
             _lastSelectedIcon = Icon()
         }
         
     }
+    private var _discardButton = Button()
     override func create() {
         _label.text = "卸下\\装备：再次点击已选中的物品。"
         _pageSize = 20
         createCloseButton()
         createPageButtons()
+        _discardButton.xAxis = _closeButton.xAxis - _closeButton.width - _standardGap
+        _discardButton.yAxis = _closeButton.yAxis
+        _discardButton.zPosition = _closeButton.zPosition
+        _discardButton.text = "丢弃"
+        addChild(_discardButton)
         createOutfitList()
         addChild(_propBox)
         createPropList()
@@ -341,9 +354,6 @@ class OutfitPanel: UIPanel {
 
 
 class OutfitSlot:Icon {
-    override init(quality: Int) {
-        super.init(quality: quality)
-    }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

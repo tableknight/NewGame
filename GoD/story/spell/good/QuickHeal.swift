@@ -13,7 +13,6 @@ class QuickHeal: Magical {
         _quality = Quality.GOOD
         targetEnemy = false
         _name = "快速治疗"
-        _cooldown = 1
         _description = "恢复己方目标最大生命25%的生命值"
         canBeTargetSelf = true
     }

@@ -142,7 +142,7 @@ class MyStage: SKSpriteNode {
     func showScene() {
         _curScene.isHidden = false
     }
-    func showDialog(img:SKTexture, text:String, name:String) {
+    func showDialog(img:SKTexture, text:String, name:String, action:@escaping () -> Void = {}) {
         if nil != _curDialog {
             return
         }
@@ -155,6 +155,7 @@ class MyStage: SKSpriteNode {
         addChild(dlg)
         dlg.yAxis = -cellSize * 2
         _curDialog = dlg
+        action()
     }
     
     func removeDialog(dlg:Dialog) {

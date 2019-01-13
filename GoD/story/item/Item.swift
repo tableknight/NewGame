@@ -199,8 +199,8 @@ class TownScroll:Item {
         usable = true
         usableInBattle = true
         price = 6
-        _name = "传送卷轴"
-        _description = "传送中"
+        _name = "传送之卷·贝拉姆"
+        _description = "传送到贝拉姆村"
     }
     override func use() {
         removeFromChar()
@@ -208,6 +208,46 @@ class TownScroll:Item {
         let c = CenterCamping()
         let char = Game.instance.curStage._curScene._role!
 //        let stage = Game.instance.
+        Game.instance.curStage.switchScene(next: c, afterCreation: {
+            c.setRole(x: 5, y: 7, char: char)
+        })
+    }
+}
+class GodTownScroll:TownScroll {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = true
+        price = 50
+        _name = "传送之卷·神域"
+        _description = "传送到神域·雪之国"
+    }
+    override func use() {
+        removeFromChar()
+        showMsg(text: _description)
+        let c = CenterCamping()
+        let char = Game.instance.curStage._curScene._role!
+        //        let stage = Game.instance.
+        Game.instance.curStage.switchScene(next: c, afterCreation: {
+            c.setRole(x: 5, y: 7, char: char)
+        })
+    }
+}
+class DeathTownScroll:TownScroll {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = true
+        price = 50
+        _name = "传送之卷·冥界"
+        _description = "传送到冥界"
+    }
+    override func use() {
+        removeFromChar()
+        showMsg(text: _description)
+        let c = CenterCamping()
+        let char = Game.instance.curStage._curScene._role!
+        //        let stage = Game.instance.
         Game.instance.curStage.switchScene(next: c, afterCreation: {
             c.setRole(x: 5, y: 7, char: char)
         })
@@ -223,7 +263,7 @@ class BlastScroll:Item {
         _name = "爆破卷轴"
         _description = "移除面前的一个障碍物(只能在远古秘径中使用)"
     }
-    override func use(target: Creature) {
+    override func use() {
         let stage = Game.instance.curStage!
         let scene = Game.instance.curStage._curScene!
         let bChar = scene._role!
@@ -240,3 +280,73 @@ class BlastScroll:Item {
     }
 }
 
+class RandomWeapon:Item {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = false
+        price = 25
+        _name = "武器"
+        _description = "获得一个随机属性的\(_name)"
+    }
+    override func use() {
+        removeFromChar()
+        let l = Loot()
+        let char = Game.instance.char!
+        let weapon = l.getWeaponById(id: weaponId)
+        weapon.create(level: char._level)
+        char.addProp(p: weapon)
+        let stage = Game.instance.curStage!
+        stage.removePanel(stage._curPanel!)
+        let op = OutfitPanel()
+        op.create()
+        stage.showPanel(op)
+    }
+    var weaponId:Int = 0
+}
+
+class RandomArmor:Item {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = false
+        price = 25
+        _name = "防具"
+        _description = "获得一个随机属性的\(_name)"
+    }
+    override func use() {
+        removeFromChar()
+        let l = Loot()
+        let char = Game.instance.char!
+        let armor = l.getArmorById(id: armorId)
+        armor.create(level: char._level)
+        char.addProp(p: armor)
+        let stage = Game.instance.curStage!
+        stage.removePanel(stage._curPanel!)
+        let op = OutfitPanel()
+        op.create()
+        stage.showPanel(op)
+    }
+    var armorId:Int = 0
+}
+
+class RandomSacredSpell:Item {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = false
+        price = 180
+        _name = "法术?"
+        _description = "获得一个随机的神之技"
+        _quality = Quality.SACRED
+    }
+    override func use() {
+        removeFromChar()
+        let l = Loot()
+        let char = Game.instance.char!
+        let book = SpellBook()
+        book.spell = l.getSacredSpell(id: l._sacredSpellArray.one())
+        char.addProp(p: book)
+    }
+    var armorId:Int = 0
+}

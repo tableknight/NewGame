@@ -56,16 +56,16 @@ class Dialog: SKSpriteNode {
     }
     
     func addConfirmButton() {
-        _confirmButton.position.x = cellSize * 6
-        _confirmButton.position.y = -cellSize * 2.5
+        _confirmButton.position.x = _closeButton.xAxis
+        _confirmButton.position.y = _closeButton.yAxis - cellSize * 3
         _confirmButton.text = "确定"
         _confirmButton._bg.removeFromParent()
         addChild(_confirmButton)
     }
     
     func addNextButton() {
-        _nextButton.position.x = cellSize * 6
-        _nextButton.position.y = -cellSize * 2.5
+        _nextButton.position.x = _closeButton.xAxis
+        _nextButton.position.y = _closeButton.yAxis - cellSize * 3
         _nextButton._bg.removeFromParent()
         _nextButton.text = "继续"
         addChild(_nextButton)

@@ -45,19 +45,21 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SecretMeadow()
+        let bs = CenterCamping()
         bs._level = 1
         bs.create()
         let e = Emily()
         e.create()
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
         for m in e._minions + [e] {
-            m._spellsInuse = [MultipleHit(), Bitslap(), FireFist()]
+            m._spellsInuse = [SoulLash(), Refresh()]
         }
 //        e._minions[0]._spellsInuse.append(Crazy())
         let hm = ThorsHammer()
         hm.create()
         e.addProp(p: hm)
+        
+        e.addMoney(num: 1000)
         
         bs.setRole(x: 5, y: 7, role: e)
         stage.loadScene(scene: bs)
@@ -91,6 +93,9 @@ class GameScene: SKScene {
         let p = Potion()
         p._count = 5
         e.addProp(p: p)
+        
+        let rw = RandomWeapon()
+        e.addProp(p: rw)
     }
     
     override func didMove(to view: SKView) {
@@ -110,6 +115,8 @@ class GameScene: SKScene {
 //        cf.create()
 //        addChild(cf)
         realScene()
+//        let r = RoofSets()
+//        addChild(r.rightConnect)
 //        let p = AcientRoadSelection()
 //        p.create()
 //        addChild(p)

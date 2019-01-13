@@ -28,25 +28,25 @@ class InnerHouse: StandScene {
         
     }
     internal func createWall(wallTexture:SKTexture) {
-        let ws = wallTexture.getCell(0, 1, 1, 2)
+//        let ws = wallTexture.getCell(0, 1, 1, 2)
         let wc = wallTexture.getCell(0.5, 1, 1, 2)
-        let we = wallTexture.getCell(1, 1, 1, 2)
+//        let we = wallTexture.getCell(1, 1, 1, 2)
         let start = -halfSize
         let end = halfSize
-        let wallStart = SKSpriteNode(texture: ws)
-        wallStart.position.x = cellSize * start
-        wallStart.position.y = cellSize * (halfSize + 1.5)
-        _mapLayer.addChild(wallStart)
-        for i in start.toInt() + 1...end.toInt() - 1 {
+//        let wallStart = SKSpriteNode(texture: ws)
+//        wallStart.position.x = cellSize * start
+//        wallStart.position.y = cellSize * (halfSize + 1.5)
+//        _mapLayer.addChild(wallStart)
+        for i in start.toInt()...end.toInt(){
             let wallConnect = SKSpriteNode(texture: wc)
             wallConnect.position.x = cellSize * i.toFloat()
             wallConnect.position.y = cellSize * (halfSize + 1.5)
             _mapLayer.addChild(wallConnect)
         }
-        let wallEnd = SKSpriteNode(texture: we)
-        wallEnd.position.x = cellSize * end
-        wallEnd.position.y = wallStart.yAxis
-        _mapLayer.addChild(wallEnd)
+//        let wallEnd = SKSpriteNode(texture: we)
+//        wallEnd.position.x = cellSize * end
+//        wallEnd.position.y = wallStart.yAxis
+//        _mapLayer.addChild(wallEnd)
     }
     internal func createInnerGround() {
         _mapSet.groundHeight = halfSize
@@ -138,8 +138,10 @@ class InnerHouse: StandScene {
         //            _mapLayer.addChild(wallDeep)
         //        }
     }
+    internal var _roofSets:RoofSets!
+    internal var _bottomWallTexture:SKTexture!
     internal func createRoof() {
-        let rs = roofSets()
+        let rs = _roofSets!
         let start = -halfSize
         let end = halfSize
         let doorX = _doorX - halfSize.toInt()
@@ -195,23 +197,23 @@ class InnerHouse: StandScene {
         brc.yAxis = blc.yAxis
         _mapLayer.addChild(brc)
         
-        let wallStart = _mapSet.getWallPart(part: "start")
-        wallStart.position.x = cellSize * start - cellSize
-        wallStart.position.y = -cellSize * (halfSize + 1) + cellSize
-        _mapLayer.addChild(wallStart)
-        for i in start.toInt()...end.toInt() {
+//        let wallStart = _mapSet.getWallPart(part: "start")
+//        wallStart.position.x = cellSize * start - cellSize
+//        wallStart.position.y = -cellSize * (halfSize + 1) + cellSize
+//        _mapLayer.addChild(wallStart)
+        for i in start.toInt() - 1...end.toInt() + 1 {
             if i != doorX {
-                let wallConnect = _mapSet.getWallPart(part: "connect")
+                let wallConnect = SKSpriteNode(texture: _bottomWallTexture)
                 wallConnect.position.x = cellSize * i.toFloat()
-                wallConnect.position.y = wallStart.position.y
+                wallConnect.position.y = cellSize * start
                 wallConnect.zPosition = z
                 _mapLayer.addChild(wallConnect)
             }
         }
-        let wallEnd = _mapSet.getWallPart(part: "end")
-        wallEnd.position.x = cellSize * end + cellSize
-        wallEnd.position.y = wallStart.position.y
-        _mapLayer.addChild(wallEnd)
+//        let wallEnd = _mapSet.getWallPart(part: "end")
+//        wallEnd.position.x = cellSize * end + cellSize
+//        wallEnd.position.y = wallStart.position.y
+//        _mapLayer.addChild(wallEnd)
         
         let le = rs.leftEnd
         le.zPosition = z
@@ -224,5 +226,42 @@ class InnerHouse: StandScene {
         re.xAxis = (doorX + 1).toFloat() * cellSize
         _mapLayer.addChild(re)
     }
-    
+    func createWall(x:CGFloat, y:CGFloat, width:CGFloat) {
+        let rs = _roofSets!
+        let z = MyScene.ITEM_LAYER_Z + 30
+        let wc = _wallTexture.getCell(0.5, 1, 1, 2)
+        for i in x.toInt()...(x + width - 1).toInt() {
+            let rh = rs.roofConnectH
+            rh.position.x = cellSize * (i.toFloat() - halfSize)
+            rh.position.y = cellSize * (halfSize - y + 1.5)
+            rh.anchorPoint = CGPoint(x: 0.5, y: 0)
+            rh.zPosition = z
+            _itemLayer.addChild(rh)
+            let wallConnect = SKSpriteNode(texture: wc)
+            wallConnect.position.x = cellSize * (i.toFloat() - halfSize)
+            wallConnect.position.y = cellSize * (halfSize - y - 0.5)
+            wallConnect.anchorPoint = CGPoint(x: 0.5, y: 0)
+            wallConnect.zPosition = z
+            _itemLayer.addChild(wallConnect)
+        }
+    }
+    func createWall(x:CGFloat, y:CGFloat, height:CGFloat) {
+        let rs = _roofSets!
+        let z = MyScene.ITEM_LAYER_Z + 30
+        let wc = _wallTexture.getCell(0.5, 1, 1, 2)
+        for i in y.toInt()...(y + height - 1).toInt() {
+            let rh = rs.roofConnectV
+            rh.position.x = cellSize * (x - halfSize)
+            rh.position.y = cellSize * (halfSize - i.toFloat() + 1.5)
+            rh.anchorPoint = CGPoint(x: 0.5, y: 0)
+            rh.zPosition = z
+            _itemLayer.addChild(rh)
+        }
+        let wallConnect = SKSpriteNode(texture: wc)
+        wallConnect.position.x = cellSize * (x - halfSize)
+        wallConnect.position.y = cellSize * (halfSize - y + 0.5 - height)
+        wallConnect.anchorPoint = CGPoint(x: 0.5, y: 0)
+        wallConnect.zPosition = z
+        _itemLayer.addChild(wallConnect)
+    }
 }

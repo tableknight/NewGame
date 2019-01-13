@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class roofSets:Core {
+class RoofSets:Core {
     var _t:SKTexture!
     var _corner:SKTexture!
     private var cellSize:CGFloat = 48
@@ -27,6 +27,30 @@ class roofSets:Core {
             let node = SKSpriteNode()
             node.addChild(t)
             node.addChild(b)
+            return node
+        }
+    }
+    var topEnd:SKSpriteNode {
+        get {
+            let l = _t.getNode(0, 0, 0.5, 0)
+            let r = _t.getNode(1, 1, 1, 0.5)
+            l.anchorPoint = CGPoint(x: 1, y: 0.5)
+            r.anchorPoint = CGPoint(x: 0, y: 0.5)
+            let node = SKSpriteNode()
+            node.addChild(l)
+            node.addChild(r)
+            return node
+        }
+    }
+    var bottomEnd:SKSpriteNode {
+        get {
+            let l = _t.getNode(0, 0, 0.5, 0)
+            let r = _t.getNode(1, 1, 1, 0.5)
+            l.anchorPoint = CGPoint(x: 1, y: 0.5)
+            r.anchorPoint = CGPoint(x: 0, y: 0.5)
+            let node = SKSpriteNode()
+            node.addChild(l)
+            node.addChild(r)
             return node
         }
     }
@@ -68,6 +92,63 @@ class roofSets:Core {
             node.addChild(l)
             node.addChild(r)
             return node
+        }
+    }
+    var rightConnect:SKSpriteNode {
+        get {
+            let node = _t.getNode(1, 0.5)
+            let corner = _corner.getNode(0, 0, 0.5, 0.5)
+            corner.anchorPoint = CGPoint(x: 1, y: 1)
+            corner.zPosition = node.zPosition + 1
+            let corner1 = _corner.getNode(0, -0.5, 0.5, 0.5)
+            corner1.anchorPoint = CGPoint(x: 1, y: 0)
+            corner1.zPosition = node.zPosition + 1
+            node.addChild(corner1)
+            node.addChild(corner)
+            return SKSpriteNode(texture: node.toTexture())
+        }
+    }
+    var leftConnect:SKSpriteNode {
+        get {
+            let node = _t.getNode(0, 0.5)
+            let corner = _corner.getNode(0.5, 0, 0.5, 0.5)
+            corner.anchorPoint = CGPoint(x: 0, y: 1)
+            corner.zPosition = node.zPosition + 1
+            let corner1 = _corner.getNode(0.5, -0.5, 0.5, 0.5)
+            corner1.anchorPoint = CGPoint(x: 0, y: 0)
+            corner1.zPosition = node.zPosition + 1
+            node.addChild(corner1)
+            node.addChild(corner)
+            return SKSpriteNode(texture: node.toTexture())
+        }
+    }
+    var topConnect:SKSpriteNode {
+        get {
+            let node = _t.getNode(0.5, 0)
+            let corner = _corner.getNode(0, 0, 0.5, 0.5)
+            corner.anchorPoint = CGPoint(x: 1, y: 1)
+            corner.zPosition = node.zPosition + 1
+            
+            let corner1 = _corner.getNode(0.5, 0, 0.5, 0.5)
+            corner1.anchorPoint = CGPoint(x: 0, y: 1)
+            corner1.zPosition = node.zPosition + 1
+            node.addChild(corner1)
+            node.addChild(corner)
+            return SKSpriteNode(texture: node.toTexture())
+        }
+    }
+    var bottomConnect:SKSpriteNode {
+        get {
+            let node = _t.getNode(0.5, 1)
+            let corner = _corner.getNode(0.5, -0.5, 0.5, 0.5)
+            corner.anchorPoint = CGPoint(x: 0, y: 0)
+            corner.zPosition = node.zPosition + 1
+            let corner1 = _corner.getNode(0, -0.5, 0.5, 0.5)
+            corner1.anchorPoint = CGPoint(x: 1, y: 0)
+            corner1.zPosition = node.zPosition + 1
+            node.addChild(corner1)
+            node.addChild(corner)
+            return SKSpriteNode(texture: node.toTexture())
         }
     }
     var topLeftCorner:SKSpriteNode {

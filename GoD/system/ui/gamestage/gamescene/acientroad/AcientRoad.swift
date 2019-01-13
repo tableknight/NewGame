@@ -316,6 +316,9 @@ class AcientRoad: MyScene {
         addItem(x: _portalNext.x, y: _portalNext.y, item: next)
         prev.zPosition = MyScene.ROLE_LAYER_Z - 1
         next.zPosition = prev.zPosition
+        if next is PortalFinal {
+            next.zPosition = MyScene.ITEM_LAYER_Z + 2
+        }
     }
     func getMonsterByIndex(index:Int) -> Creature {
         return Creature()

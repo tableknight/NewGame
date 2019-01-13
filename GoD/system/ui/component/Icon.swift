@@ -11,17 +11,6 @@ class Icon:SKSpriteNode {
 //    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
 //        super.init(texture: texture, color: color, size: size)
 //    }
-    init(quality:Int) {
-        let size = CGSize(width: Game.CELLSIZE, height: Game.CELLSIZE)
-        super.init(texture: nil, color: UIColor.red, size: size)
-//        isUserInteractionEnabled = true
-        _background = createBackground(width: cellSize, height: cellSize)
-//        _background.position.x = cellSize * 0.5
-//        _background.position.y = -cellSize * 0.5
-        addChild(_background)
-        self.quality = quality
-//        _text.text = text
-    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
 //        self.anchorPoint = CGPoint(x: 0, y: 1)
@@ -86,9 +75,6 @@ class Icon:SKSpriteNode {
 //let s = SKSpriteNode()
 //let i = Icon(size: CGSize(width: 1, height: 1))
 class SpellIcon: Icon {
-    override init(quality: Int) {
-        super.init(quality: quality)
-    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
@@ -108,9 +94,6 @@ class SpellIcon: Icon {
 }
 
 class PropIcon: Icon {
-    override init(quality: Int) {
-        super.init(quality: quality)
-    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _label.position.x = 3
@@ -154,10 +137,6 @@ class BattlePropIcon: PropIcon {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    override init(quality: Int) {
-        super.init(quality: quality)
     }
     
     var timeleft:Int {

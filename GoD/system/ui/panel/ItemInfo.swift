@@ -65,6 +65,7 @@ class ItemInfo:SKSpriteNode, IPanelSize {
             } else {
                 price.text = "出售价格：\(item._price)G"
             }
+            price.fontColor = UIColor.orange
             addChild(price)
             _displayHeight += price.fontSize + cellSize * 0.5
         }

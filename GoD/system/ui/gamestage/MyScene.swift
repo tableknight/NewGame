@@ -45,7 +45,7 @@ class MyScene: SKSpriteNode, IInitialize {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _nameLabel.position.x = -halfSize * cellSize
-        _nameLabel.position.y = halfSize * cellSize + cellSize * 2.5 + 24
+        _nameLabel.position.y = halfSize * cellSize + cellSize * 3.5
         _nameLabel.fontSize = 24
         addChild(_nameLabel)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
@@ -371,6 +371,18 @@ class MyScene: SKSpriteNode, IInitialize {
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)
     }
+    internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode, z:CGFloat = -1) {
+        item.anchorPoint = CGPoint(x: 0.5, y: 0)
+        item.position.x = (-halfSize + x) * cellSize
+        item.position.y = (halfSize - 0.5 - y) * cellSize
+        if z == -1 {
+            item.zPosition = MyScene.ITEM_LAYER_Z + y
+        } else {
+            item.zPosition = z
+        }
+        item.name = getItemName(CGPoint(x: x, y: y))
+        _itemLayer.addChild(item)
+    }
     internal func addGround(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
         item.position.x = (-halfSize + x) * cellSize
@@ -508,9 +520,18 @@ class Chest:UIItem {
         super.init(coder: aDecoder)
     }
     override func triggerEvent() {
+        if _triggered {
+            return
+        }
         let item = Game.instance.pictureChest.getCell(_x.toFloat(), 3)
         setTexture(item)
         _triggered = true
+        let l = Loot()
+        let list = l.loot(level: Game.instance.curStage._curScene._level)
+        for p in list {
+            Game.instance.char.addProp(p: p)
+        }
+        showMsg(text: "宝箱中的东西已经全部放入背包里了。")
     }
     private var _x = 0
     var _triggered = false
@@ -529,8 +550,9 @@ class UIRole:UIItem {
         roleNode.zPosition = shadow.zPosition + 1
         addChild(shadow)
         addChild(roleNode)
+        _roleNode = roleNode
     }
-    
+    var _roleNode:SKSpriteNode!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

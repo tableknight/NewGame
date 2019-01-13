@@ -32,12 +32,8 @@ class ThunderAttack: Magical {
         let t = _battle._selectedTarget!
         _damageValue = thunderDamage(t)
         let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            
+        if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-//                t.hpChange(value: damage)
                 t.showValue(value: damage) {
                     completion()
                     t.showText(text: "TR -10")

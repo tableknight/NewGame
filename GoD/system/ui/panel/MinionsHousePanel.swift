@@ -226,6 +226,68 @@ class MinionsHousePanel: UIPanel {
     private var _minionsCount = Label()
     
 }
+class CharComponent:SKSpriteNode {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        let rect = CGRect(x: 0, y: -cellSize, width: cellSize * 2.5, height: cellSize)
+        _bg = SKShapeNode(rect: rect, cornerRadius: 2)
+        _bg.fillColor = UIColor.black
+        
+        let gap:CGFloat = cellSize * 0.25
+        _hpbar.position.x = gap
+        _hpbar.position.y = -cellSize * 0.65
+        _hpbar._color = UIColor.red
+        _expbar.position.x = _hpbar.position.x
+        _expbar.position.y = _hpbar.position.y - 10
+        _expbar._color = UIColor.green
+        _name.position.x = gap
+        _name.position.y = -gap - 6
+        _name.fontSize = 15
+        _name.align = "left"
+        
+        addChild(_bg)
+        addChild(_hpbar)
+        addChild(_expbar)
+        addChild(_name)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    var unit:Creature {
+        set {
+            _unit = newValue
+            _name.text = "Lv.\(_unit._level.toInt())[\(_unit._name)]"
+            _name.fontColor = QualityColor.getColor(_unit._quality)
+            _hpbar.setBar(value: _unit._extensions.hp / _unit._extensions.health)
+            _expbar.setBar(value: _unit._exp / _unit.expNext())
+        }
+        get {
+            return _unit
+        }
+    }
+    var selected:Bool {
+        set {
+            _selected = newValue
+            if newValue {
+                _bg.lineWidth = 4
+                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+            } else {
+                _bg.lineWidth = 1
+                _bg.strokeColor = UIColor.white
+            }
+        }
+        get {
+            return _selected
+        }
+    }
+    internal var _selected = false
+    internal var _unit = Creature()
+    internal var _hpbar = HBar()
+    internal var _expbar = HBar()
+    internal var _name = Label()
+    internal var _bg = SKShapeNode()
+}
 
 class MinionsHouseComponent:CharComponent {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

@@ -11,7 +11,7 @@ class BargeAbout: Passive {
     
     override init() {
         super.init()
-        _name = "横冲直撞"
+        _name = "鲁莽"
         _description = "降低100点命中，提升100点必杀"
         _quality = Quality.NORMAL
         

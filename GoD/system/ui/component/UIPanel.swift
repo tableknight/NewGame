@@ -70,7 +70,7 @@ class UIPanel:SKSpriteNode {
         addChild(_nextButton)
         
         _prevButton.text = "上一页"
-        _prevButton.position.x = _nextButton.position.x - cellSize * 1.875
+        _prevButton.position.x = _nextButton.position.x - _nextButton.width - _standardGap
         _prevButton.position.y = _nextButton.position.y
         _prevButton.zPosition = self.zPosition + 2
         addChild(_prevButton)
@@ -161,8 +161,10 @@ class UIPanel:SKSpriteNode {
     func showInfosAction(node:SKSpriteNode, touchPoint:CGPoint) -> Bool {
         for icon in node.children {
             if icon.contains(touchPoint) {
-                _lastSelectedIcon.selected = false
-                _lastSelectedIcon = icon as! Icon
+                if nil != _lastSelectedIcon {
+                    _lastSelectedIcon.selected = false
+                }
+                _lastSelectedIcon = icon as? Icon
                 _lastSelectedIcon.selected = true
                 displayInfos(icon: _lastSelectedIcon)
                 return true
@@ -179,7 +181,7 @@ class UIPanel:SKSpriteNode {
     
     internal var _bg:SKShapeNode!
     internal var _infosDisplay = SKSpriteNode()
-    internal var _lastSelectedIcon = Icon()
+    internal var _lastSelectedIcon:Icon!
     internal var _label:Label!
     internal var _closeButton = Button()
     internal var _prevButton = Button()

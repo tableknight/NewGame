@@ -56,6 +56,48 @@ class RoundButton:SKSpriteNode {
         bg.lineWidth = 2
         addChild(bg)
         _label.text = text
+        _bg = bg
     }
     var _label = Label()
+    internal var _bg:SKShapeNode!
+}
+class SpellRoundButton:RoundButton {
+    private var _selectable = true
+    var selectable:Bool {
+        set {
+            _selectable = newValue
+            if newValue {
+                _bg.strokeColor = UIColor.lightGray
+                self.alpha = 1
+            } else {
+                _bg.strokeColor = UIColor.gray
+                self.alpha = 0.5
+            }
+        }
+        get {
+            return _selectable
+        }
+    }
+    var _spell:Spell!
+    var spell:Spell {
+        set {
+            _spell = newValue
+            _label.text = newValue._name
+        }
+        get {
+            return _spell
+        }
+    }
+    private var _timeleft = 0
+    var timeleft:Int {
+        set {
+            if newValue > 0 {
+                _label.text = "\(newValue)"
+            }
+            _timeleft = newValue
+        }
+        get {
+            return _timeleft
+        }
+    }
 }

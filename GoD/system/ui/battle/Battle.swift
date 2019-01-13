@@ -164,6 +164,12 @@ class Battle: SKSpriteNode {
             return
         }
         
+        for button in _spellsButton {
+            if button.selectable && button.contains(s) {
+                spellSelect(spell: button.spell)
+                return
+            }
+        }
         
         
         if _orderItem.contains(s) && !_orderItem.isHidden {
@@ -210,12 +216,12 @@ class Battle: SKSpriteNode {
             hideCancel()
             moveEnd()
             return
-        } else if _orderSpell.contains(s) && !_orderSpell.isHidden {
-            showSpellCards()
-            hideOrder()
-            showCancel()
-            _waitingForSelectTarget = false
-            return
+//        } else if _orderSpell.contains(s) && !_orderSpell.isHidden {
+//            showSpellCards()
+//            hideOrder()
+//            showCancel()
+//            _waitingForSelectTarget = false
+//            return
         }
         
         if _waitingForSelectTarget {
@@ -760,12 +766,13 @@ class Battle: SKSpriteNode {
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
+        let t:CGFloat = 10
         _orderAttack = createMenuButtons(x: x, y: y, size: size, text: "攻击")
         _orderDefend = createMenuButtons(x: x + gap, y: y, size: size, text: "防御")
-        _orderSpell = createMenuButtons(x: x + gap * 2 , y: y, size: size, text: "法术")
-        _orderItem = createMenuButtons(x: x + gap * 3, y: y, size: size, text: "物品")
-        _orderSummon = createMenuButtons(x: x + gap * 4, y: y, size: size, text: "召唤")
-        _orderRecall = createMenuButtons(x: x + gap * 5, y: y, size: size, text: "召回")
+//        _orderSpell = createMenuButtons(x: x + gap * 2 , y: y, size: size, text: "法术")
+        _orderItem = createMenuButtons(x: x + gap * 0.5, y: y - gap + t, size: size, text: "物品")
+        _orderSummon = createMenuButtons(x: x + gap * 1.5, y: y - gap + t, size: size, text: "召唤")
+        _orderRecall = createMenuButtons(x: x + gap * 2.5, y: y - gap + t, size: size, text: "召回")
         _orderCancel = createMenuButtons(x: -x, y: y, size: size, text: "取消")
         
         _orders.append(_orderAttack)
@@ -774,6 +781,36 @@ class Battle: SKSpriteNode {
         _orders.append(_orderItem)
         _orders.append(_orderSummon)
         _orders.append(_orderRecall)
+    }
+    internal var _spellsButton = Array<SpellRoundButton>()
+    internal func createRoleSpellsButton() {
+        _spellsButton = []
+        let y = -cellSize * 6.5
+        let size:CGFloat = cellSize * 0.45
+        let x = -cellSize * 3.5
+        let gap = size + cellSize * 0.5
+        var i:CGFloat = 2
+        for s in _curRole._unit._spellsInuse {
+            let srb = SpellRoundButton()
+            srb.create(text: s._name, size: size)
+            srb.spell = s
+            _spellsButton.append(srb)
+            if s._timeleft > 0 {
+                srb.timeleft = s._timeleft
+                srb.selectable = false
+            } else {
+                srb.selectable = !(s is Passive || s is Auro)
+            }
+            srb.xAxis = x + gap * i
+            srb.yAxis = y
+            i += 1
+            addChild(srb)
+        }
+    }
+    internal func removeRoleSpellsButton() {
+        for s in _spellsButton {
+            s.removeFromParent()
+        }
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -1207,6 +1244,7 @@ class Battle: SKSpriteNode {
             let item = bip.selectedItem!
             item._battle = self
             if item is TownScroll {
+                Game.instance.curStage.removeBattle(self)
                 item.use()
             } else {
                 this.waitingForSelectItemTarget = true
@@ -1271,6 +1309,34 @@ class Battle: SKSpriteNode {
 //        card.zPosition = 70
 //        addChild(card)
     }
+    internal func spellSelect(spell:Spell) {
+        let this = self
+        this._selectedSpell = spell
+        this._selectedSpell._battle = this
+        this.hideOrder()
+        this.showCancel()
+        if this._selectedSpell.isAutoSelectTarget {
+            this._waitingForSelectTarget = false
+            this._selectedSpell.findTarget()
+            this.setUnitDefault(all: true)
+            this.execOrder()
+            this.hideCancel()
+        } else {
+            if this._selectedSpell is SummonFlower {
+                this.waitingForSelectSummonSeat = true
+                this.setUnitDefault()
+                this.showSummonableSeats(selectAll: false)
+            } else
+                if this._selectedSpell is Interchange {
+                    this.waitingForSelectSummonSeat = true
+                    this.setUnitDefault()
+                    this.showSummonableSeats()
+            }
+            
+            this._waitingForSelectTarget = true
+            this.showAvailableUnits(selectObject: this._selectedSpell)
+        }
+    }
     internal func wandWitch(spell:Spell) -> Bool {
         if spell.isCurse {
             if _curRole._unit is Character {
@@ -1317,6 +1383,7 @@ class Battle: SKSpriteNode {
             _orderSummon.isHidden = true
         }
         showUnitInfo(hidden: false)
+        createRoleSpellsButton()
     }
     internal func hideOrder() {
         for o in _orders {
@@ -1324,6 +1391,7 @@ class Battle: SKSpriteNode {
 //            o.removeFromParent()
         }
         showUnitInfo(hidden: true)
+        removeRoleSpellsButton()
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

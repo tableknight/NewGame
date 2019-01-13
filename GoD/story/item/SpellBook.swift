@@ -16,8 +16,8 @@ class SpellBook:Item {
     var spell:Spell {
         set {
             _spell = newValue
-            _name = newValue._name
-            _description = newValue._description
+            _name = "\(newValue._name)之卷"
+            _description = "使用后习得法术[\(newValue._name)]，\(newValue._description)"
             _quality = newValue._quality
         }
         get {

@@ -26,9 +26,9 @@ class Loot: Core {
             return Dagger()
         case 4:
             return Blunt()
-        case 5:
-            return Instrument()
         case 6:
+            return Instrument()
+        case 5:
             return Fist()
         default:
             return Sword()
@@ -47,13 +47,11 @@ class Loot: Core {
             return Amulet()
         case 1:
             return Ring()
-        case 2:
-            return MagicMark()
         case 3:
-            return Ring()
-        case 4:
+            return MagicMark()
+        case 2:
             return Shield()
-        case 5:
+        case 4:
             return EarRing()
         default:
             return Ring()
@@ -69,7 +67,7 @@ class Loot: Core {
     
     func loot(role:Creature) {
         var chance = seed().toFloat()
-        let lucky = role._lucky * 0.01 + 1
+        let lucky = Game.instance.char._lucky * 0.01 + 1
         if chance < 20 * lucky  {
             let a = lootArmor(level: role._level)
             _props.append(a)
@@ -99,6 +97,37 @@ class Loot: Core {
         }
         externalLootAction()
     }
+    func loot(level:CGFloat) -> Array<Prop> {
+        var chance = seed().toFloat()
+        let lucky = Game.instance.char._lucky * 0.01 + 1
+        if chance < 50 * lucky  {
+            let a = lootArmor(level: level)
+            _props.append(a)
+        }
+        chance = seed().toFloat()
+        if chance < 75 * lucky {
+            let w = lootWeapon(level: level)
+            _props.append(w)
+        }
+        chance = seed().toFloat()
+        if chance < 100 * lucky {
+            let item = getItem()
+            _props.append(item)
+        }
+        chance = seed().toFloat()
+        if chance < 50 * lucky {
+            let sacred = getSacred()
+            if nil != sacred {
+                _props.append(sacred!)
+            }
+        }
+        externalLootAction()
+        return _props
+    }
+    
+//    func createList() -> Array<Prop> {
+//
+//    }
     
     func getExp(level:CGFloat) -> CGFloat {
         let l = level + 1

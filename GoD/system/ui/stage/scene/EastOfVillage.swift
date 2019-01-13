@@ -30,7 +30,7 @@ class EastOfNewComersVillage: UIScene {
         addItem(x: 2, item: DoubleTrees())
         addSingleCellItem(x: 0, line: 1, texture: ob.getCell(15, 10))
         addSingleCellItem(x: 3, line: 2, texture: t.getCell(6, 9))
-        addItem(x: 3, item: MagicHouse())
+        addItem(x: 3, item: MagicHouse1())
         addItem(x: 10, item: VillageTrees())
         addItem(x: 13, item: VillagersHouse())
         addItem(x: 16, item: Goods())
@@ -76,7 +76,7 @@ class EastOfNewComersVillage: UIScene {
     
 }
 
-class MagicHouse:UIItem {
+class MagicHouse1:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let t = Game.instance.tilee_outsidetown

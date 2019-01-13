@@ -20,7 +20,7 @@ class BattleSpellCard:UIPanel {
         }
         
         //        let _char = Data.instance._char!
-        if _lastSelectedIcon.contains(touchPoint!) {
+        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             let spell = _lastSelectedIcon._displayItemType as! Spell
             selectedSpell = spell
             _lastSelectedIcon = Icon()
@@ -132,10 +132,6 @@ class BattleSpellIcon:SpellIcon {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    override init(quality: Int) {
-        super.init(quality: quality)
     }
     
     var timeleft:Int {

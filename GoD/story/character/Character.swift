@@ -75,25 +75,21 @@ class Character: Creature {
     }
     
     func addProp(p:Prop) {
-        if p is Item {
-            if p is SpellBook {
-                _props.append(p)
-            } else {
-                var exist = false
-                for e in _props {
-                    if type(of: e) == type(of: p) {
-                        let i = e as! Item
-                        i._count += p._count
-                        exist = true
-                        break
-                    }
-                }
-                if !exist {
-                    _props.append(p)
+        if p is Item && !(p is SpellBook){
+            var exist = false
+            for e in _props {
+                if type(of: e) == type(of: p) {
+                    let i = e as! Item
+                    i._count += 1
+                    exist = true
+                    break
                 }
             }
+            if !exist {
+                _props.insert(p, at: 0)
+            }
         } else {
-            _props.append(p)
+            _props.insert(p, at: 0)
         }
     }
     
@@ -136,6 +132,17 @@ class Character: Creature {
                 _props.remove(at: i!)
             }
         }
+    }
+    func hasProp(p:Prop) -> Prop? {
+        let i = _props.index(of: p)
+        if nil != i {
+            return _props[i!]
+        }
+        return nil
+    }
+    func discardProp(p:Prop) {
+        let i = _props.index(of: p)
+        _props.remove(at: i!)
     }
     func removeStorage(p:Prop) {
         let i = _props.index(of: p)
@@ -195,6 +202,9 @@ class Character: Creature {
     
     func addMoney(num:Int) {
         _money += num
+    }
+    func lostMoney(num:Int) {
+        _money -= num
     }
     
 //    func hasSpell(spell:Spell) -> Bool {

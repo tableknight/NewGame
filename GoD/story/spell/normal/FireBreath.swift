@@ -10,7 +10,7 @@ import SpriteKit
 class FireBreath: Magical {
     override init() {
         super.init()
-        isWater = true
+        isFire = true
         _name = "火焰呼吸"
         _description = "对目标造成精神80%的火焰伤害"
         _rate = 0.8
@@ -31,12 +31,8 @@ class FireBreath: Magical {
         let t = _battle._selectedTarget!
         _damageValue = fireDamage(t)
         let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            
+        if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-//                t.hpChange(value: damage)
                 t.showValue(value: damage) {
                     completion()
                 }

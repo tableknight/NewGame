@@ -184,10 +184,8 @@
 		090FEBFF21BB9B2B004276BB /* UIUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFA21BB9B2A004276BB /* UIUnit.swift */; };
 		090FEC0021BB9B2B004276BB /* SpellPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFC21BB9B2A004276BB /* SpellPanel.swift */; };
 		090FEC0121BB9B2B004276BB /* ItemPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFD21BB9B2A004276BB /* ItemPanel.swift */; };
-		090FEC0221BB9B2B004276BB /* IUsingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFE21BB9B2A004276BB /* IUsingItem.swift */; };
 		090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFF21BB9B2A004276BB /* LootPanel.swift */; };
 		090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0021BB9B2A004276BB /* ItemInfo.swift */; };
-		090FEC0521BB9B2B004276BB /* RoleList1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0121BB9B2A004276BB /* RoleList1.swift */; };
 		090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0221BB9B2A004276BB /* MinionPanel.swift */; };
 		090FEC0721BB9B2B004276BB /* DealingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0321BB9B2A004276BB /* DealingPanel.swift */; };
 		090FEC0821BB9B2B004276BB /* ArmorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0421BB9B2A004276BB /* ArmorInfo.swift */; };
@@ -263,6 +261,11 @@
 		0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
+		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
+		094E68D021E203EE00414583 /* SellingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CF21E203EE00414583 /* SellingPanel.swift */; };
+		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
+		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
+		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -487,10 +490,8 @@
 		090FEAFA21BB9B2A004276BB /* UIUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUnit.swift; sourceTree = "<group>"; };
 		090FEAFC21BB9B2A004276BB /* SpellPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellPanel.swift; sourceTree = "<group>"; };
 		090FEAFD21BB9B2A004276BB /* ItemPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemPanel.swift; sourceTree = "<group>"; };
-		090FEAFE21BB9B2A004276BB /* IUsingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUsingItem.swift; sourceTree = "<group>"; };
 		090FEAFF21BB9B2A004276BB /* LootPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LootPanel.swift; sourceTree = "<group>"; };
 		090FEB0021BB9B2A004276BB /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
-		090FEB0121BB9B2A004276BB /* RoleList1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleList1.swift; sourceTree = "<group>"; };
 		090FEB0221BB9B2A004276BB /* MinionPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinionPanel.swift; sourceTree = "<group>"; };
 		090FEB0321BB9B2A004276BB /* DealingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealingPanel.swift; sourceTree = "<group>"; };
 		090FEB0421BB9B2A004276BB /* ArmorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmorInfo.swift; sourceTree = "<group>"; };
@@ -566,6 +567,11 @@
 		0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTemplate.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
+		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
+		094E68CF21E203EE00414583 /* SellingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellingPanel.swift; sourceTree = "<group>"; };
+		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
+		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
+		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -1063,10 +1069,8 @@
 			children = (
 				090FEAFC21BB9B2A004276BB /* SpellPanel.swift */,
 				090FEAFD21BB9B2A004276BB /* ItemPanel.swift */,
-				090FEAFE21BB9B2A004276BB /* IUsingItem.swift */,
 				090FEAFF21BB9B2A004276BB /* LootPanel.swift */,
 				090FEB0021BB9B2A004276BB /* ItemInfo.swift */,
-				090FEB0121BB9B2A004276BB /* RoleList1.swift */,
 				090FEB0221BB9B2A004276BB /* MinionPanel.swift */,
 				090FEB0321BB9B2A004276BB /* DealingPanel.swift */,
 				090FEB0421BB9B2A004276BB /* ArmorInfo.swift */,
@@ -1078,6 +1082,7 @@
 				09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */,
 				09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */,
 				09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */,
+				094E68CF21E203EE00414583 /* SellingPanel.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1247,6 +1252,10 @@
 				09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */,
 				09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */,
 				0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */,
+				094E68CD21E1C8CD00414583 /* GeneralStore.swift */,
+				094E68D121E37E6700414583 /* OutfitStore.swift */,
+				094E68D321E8E1A900414583 /* MagicHouse.swift */,
+				094E68D521EA228E00414583 /* ChurchHouse.swift */,
 			);
 			path = normal;
 			sourceTree = "<group>";
@@ -1420,6 +1429,7 @@
 				090FEB6421BB9B2B004276BB /* SacredSoulStone.swift in Sources */,
 				094E68CC21E064C500414583 /* ShootTwo.swift in Sources */,
 				090FEB6621BB9B2B004276BB /* MagicMark.swift in Sources */,
+				094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */,
 				090FEBE021BB9B2B004276BB /* Magical.swift in Sources */,
 				090FEBCB21BB9B2B004276BB /* PriceOfBlood.swift in Sources */,
 				090FEB8021BB9B2B004276BB /* FirePower.swift in Sources */,
@@ -1507,6 +1517,7 @@
 				090FEB9421BB9B2B004276BB /* DeathAngelKhalil.swift in Sources */,
 				090FEB6521BB9B2B004276BB /* SacredRing.swift in Sources */,
 				090FEC2121BB9B2B004276BB /* Forest.swift in Sources */,
+				094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */,
 				090FEB8121BB9B2B004276BB /* WaterPower.swift in Sources */,
 				090FEBDE21BB9B2B004276BB /* Focus.swift in Sources */,
 				090FEBDD21BB9B2B004276BB /* Cruel.swift in Sources */,
@@ -1521,12 +1532,12 @@
 				090FEB9521BB9B2B004276BB /* Race.swift in Sources */,
 				090FEBC021BB9B2B004276BB /* ProtectionFromIce.swift in Sources */,
 				090FEC1521BB9B2B004276BB /* UICell.swift in Sources */,
-				090FEC0521BB9B2B004276BB /* RoleList1.swift in Sources */,
 				090FEC0F21BB9B2B004276BB /* UIPanel.swift in Sources */,
 				090FEC3921BB9B2B004276BB /* MinionsHouseInside.swift in Sources */,
 				090FEBB221BB9B2B004276BB /* MagicConvert.swift in Sources */,
 				090FEBC621BB9B2B004276BB /* ProtectFromGod.swift in Sources */,
 				090FEB9321BB9B2B004276BB /* Iberis.swift in Sources */,
+				094E68D221E37E6700414583 /* OutfitStore.swift in Sources */,
 				090FEBF121BB9B2B004276BB /* Loot.swift in Sources */,
 				090FEBCD21BB9B2B004276BB /* LastChance.swift in Sources */,
 				090FEC3121BB9B2B004276BB /* NorthOfVillage.swift in Sources */,
@@ -1545,6 +1556,7 @@
 				090FEC4C21BCC418004276BB /* SecretMeadow.swift in Sources */,
 				090FEB8C21BB9B2B004276BB /* IChar.swift in Sources */,
 				09C6BF9421D5F1FD0003C7F1 /* AcientRoadSelection.swift in Sources */,
+				094E68D021E203EE00414583 /* SellingPanel.swift in Sources */,
 				090FEB5921BB9B2B004276BB /* SacredAmulet.swift in Sources */,
 				09C6BF8621CBE06F0003C7F1 /* SelectProfession.swift in Sources */,
 				090FEC0A21BB9B2B004276BB /* RoleInfoPanel.swift in Sources */,
@@ -1554,6 +1566,7 @@
 				090FEC4921BB9B2B004276BB /* test.swift in Sources */,
 				090FEBC521BB9B2B004276BB /* FireRain.swift in Sources */,
 				090FEC1021BB9B2B004276BB /* Avatar.swift in Sources */,
+				094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */,
 				090FEC1E21BB9B2B004276BB /* Village.swift in Sources */,
 				090FEB8A21BB9B2B004276BB /* Attribute.swift in Sources */,
 				090FEC2721BB9B2B004276BB /* RandomScene.swift in Sources */,
@@ -1568,7 +1581,6 @@
 				090FEBBA21BB9B2B004276BB /* ShootAll.swift in Sources */,
 				090FEC4821BB9B2B004276BB /* Label.swift in Sources */,
 				090FEBD321BB9B2B004276BB /* FireFist.swift in Sources */,
-				090FEC0221BB9B2B004276BB /* IUsingItem.swift in Sources */,
 				090FEC3621BB9B2B004276BB /* StartValley.swift in Sources */,
 				090FEC0021BB9B2B004276BB /* SpellPanel.swift in Sources */,
 				090FEBC821BB9B2B004276BB /* FireOrFired.swift in Sources */,

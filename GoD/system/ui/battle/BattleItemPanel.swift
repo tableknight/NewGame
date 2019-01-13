@@ -31,7 +31,7 @@ class BattleItemPanel: UIPanel {
             }
             return
         }
-        if _lastSelectedIcon.contains(touchPoint!) {
+        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             close()
             let item = _lastSelectedIcon._displayItemType as! Item
             selectedItem = item
@@ -40,8 +40,8 @@ class BattleItemPanel: UIPanel {
         }
         let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
         if !rlt {
-            _lastSelectedIcon.selected = false
-            _lastSelectedIcon = Icon(quality: 1)
+            _lastSelectedIcon?.selected = false
+            _lastSelectedIcon = nil
         }
         
     }

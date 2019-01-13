@@ -31,70 +31,138 @@ class ItemPanel: UIPanel {
             }
             return
         }
-        if _lastSelectedIcon.contains(touchPoint!) {
-            if _lastSelectedIcon._displayItemType is SpellBook {
-                let spellBook = _lastSelectedIcon._displayItemType as! SpellBook
-                if !_char.hasSpell(spell: spellBook.spell) {
-                    _char._spells.append(spellBook.spell)
-                    _char.removeProp(p: spellBook)
-//                    showMsg(text: "你学会了技能[\(spellBook._name)]！")
-                    debug("你学会了技能[\(spellBook._name)]！")
-                    _lastSelectedIcon = Icon()
-                    pageReload()
-                    return
-                }
-            }
-            let item = _lastSelectedIcon._displayItemType as! Item
-            if !item.usable {
+        if _discardButton.contains(touchPoint!) {
+            if _lastSelectedIcon != nil {
+                _char.discardProp(p: _lastSelectedIcon._displayItemType as! Item)
+                pageReload()
                 return
             }
-            if item is Potion {
-                let rl = RoleList()
-                let ml = [_char] + _char._minions
-                rl._parentNode = self
-                self.isHidden = true
-                rl.create(list: ml)
-                rl.selectAction = {
-                    if item._count > 0 {
-                        let unit = rl._lastSelected!._unit
-                        item.use(target: unit!)
-                        rl._lastSelected!.reload()
-                        item.reduce()
+        }
+        for node in _propBox.children {
+            if node.contains(touchPoint!) {
+                let icon = node as! Icon
+                if icon.selected {
+                    icon.selected = false
+                    if icon._displayItemType is SpellBook {
+                        let spellBook = icon._displayItemType as! SpellBook
+                        if !_char.hasSpell(spell: spellBook.spell) {
+                            _char._spells.append(spellBook.spell)
+                            _char.removeProp(p: spellBook)
+                            pageReload()
+                        } else {
+                            showMsg(text: "\(spellBook.spell._name) 不能重复学习！")
+                        }
+                        return
                     }
+                    let item = icon._displayItemType as! Item
+                    if !item.usable {
+                        return
+                    }
+                    if item is Potion {
+                        let rl = RoleList()
+                        let ml = [_char] + _char._minions
+                        rl._parentNode = self
+                        self.isHidden = true
+                        rl.create(list: ml)
+                        rl.selectAction = {
+                            if item._count > 0 {
+                                let unit = rl._lastSelected!._unit
+                                item.use(target: unit!)
+                                rl._lastSelected!.reload()
+                            }
+                        }
+                        let this = self
+                        rl.closeAction = {
+                            this.pageReload()
+                            this.isHidden = false
+                        }
+                        Game.instance.curStage.showPanel(rl)
+                        return
+                    }
+                    
+                    if item is TownScroll {
+                        Game.instance.curStage.removePanel(self)
+                    }
+                    item.use()
+                    pageReload()
+                } else {
+                    _lastSelectedIcon?.selected = false
+                    icon.selected = true
+                    _lastSelectedIcon = icon
+                    displayInfos(icon: icon)
                 }
-                let this = self
-                rl.closeAction = {
-                    this.pageReload()
-                    this.isHidden = false
-                }
-                Game.instance.curStage.showPanel(rl)
-                return
             }
-//            if item is SpellBook {
-//                let book = item as! SpellBook
-//                
+        }
+//        if _lastSelectedIcon.contains(touchPoint!) {
+//            if _lastSelectedIcon._displayItemType is SpellBook {
+//                let spellBook = _lastSelectedIcon._displayItemType as! SpellBook
+//                if !_char.hasSpell(spell: spellBook.spell) {
+//                    _char._spells.append(spellBook.spell)
+//                    _char.removeProp(p: spellBook)
+////                    showMsg(text: "你学会了技能[\(spellBook._name)]！")
+//                    debug("你学会了技能[\(spellBook._name)]！")
+//                    _lastSelectedIcon = Icon()
+//                    pageReload()
+//                    return
+//                }
 //            }
-            //else
-            if item is TownScroll {
-                Game.instance.curStage.removePanel(self)
-            }
-            item.use(target: _char)
-            _lastSelectedIcon = Icon()
-            pageReload()
-            return
-        }
-        let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
-        if !rlt {
-            _lastSelectedIcon.selected = false
-            _lastSelectedIcon = Icon(quality: 1)
-        }
+//            let item = _lastSelectedIcon._displayItemType as! Item
+//            if !item.usable {
+//                return
+//            }
+//            if item is Potion {
+//                let rl = RoleList()
+//                let ml = [_char] + _char._minions
+//                rl._parentNode = self
+//                self.isHidden = true
+//                rl.create(list: ml)
+//                rl.selectAction = {
+//                    if item._count > 0 {
+//                        let unit = rl._lastSelected!._unit
+//                        item.use(target: unit!)
+//                        rl._lastSelected!.reload()
+//                        item.reduce()
+//                    }
+//                }
+//                let this = self
+//                rl.closeAction = {
+//                    this.pageReload()
+//                    this.isHidden = false
+//                }
+//                Game.instance.curStage.showPanel(rl)
+//                return
+//            }
+////            if item is SpellBook {
+////                let book = item as! SpellBook
+////
+////            }
+//            //else
+//            if item is TownScroll {
+//                Game.instance.curStage.removePanel(self)
+//            }
+//            item.use(target: _char)
+//            _lastSelectedIcon = Icon()
+//            pageReload()
+//            return
+//        }
+//        let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
+//        if !rlt {
+//            _lastSelectedIcon.selected = false
+//            _lastSelectedIcon = Icon(quality: 1)
+//        }
 
     }
+    private var _discardButton = Button()
     override func create() {
         _label.text = "使用：再次点击已选中的物品。"
         _pageSize = 30
         createCloseButton()
         createPageButtons()
+        _discardButton.xAxis = _closeButton.xAxis - _closeButton.width - _standardGap
+        _discardButton.yAxis = _closeButton.yAxis
+        _discardButton.zPosition = _closeButton.zPosition
+        _discardButton.text = "丢弃"
+        addChild(_discardButton)
         addChild(_propBox)
         createPropList()
     }
@@ -117,6 +185,7 @@ class ItemPanel: UIPanel {
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
+                icon.quality = props[i]._quality
                 _propBox.addChild(icon)
             }
         }

@@ -35,23 +35,24 @@ class DeathGaze: Magical {
         _damageValue = magicalDamage(t)
         let damage = _damageValue
         let this = self
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            
+        if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {
-                    if this.seed() < 15 {
-                        t.showText(text: "SLASHED") {
-                            t.actionDead {
-                                completion()
-                                t.removeFromBattle()
-                                t.removeFromParent()
-                            }
-                        }
-                    } else {
+                    if t.isDead() {
                         completion()
+                    } else {
+                        if this.seed() < 15 {
+                            t.showText(text: "SLASHED") {
+                                t.actionDead {
+                                    completion()
+                                    t.removeFromBattle()
+                                    t.removeFromParent()
+                                }
+                            }
+                        } else {
+                            completion()
+                        }
                     }
                 }
                 

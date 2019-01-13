@@ -27,7 +27,7 @@ class Prop:Core, IDisplay {
     var sellingPrice:Int {
         set {
             _sellingPrice = newValue
-            _price = newValue / 4
+            _price = newValue / 2
         }
         get {
             return _sellingPrice
@@ -36,7 +36,7 @@ class Prop:Core, IDisplay {
     var price:Int {
         set {
             _price = newValue
-            _sellingPrice = newValue * 4
+            _sellingPrice = newValue * 2
         }
         get {
             return _price
