@@ -69,7 +69,12 @@ class CenterCamping: StandScene {
     override func moveEndAction() {
         let pos = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
         if pos.x == 8 && pos.y == 0 {
-            showMsg(text: "north")
+            let ec = NorthCamping()
+            //            let char = Game.instance.curStage._curScene._role!
+            let char = self._role!
+            Game.instance.curStage.switchScene(next: ec, afterCreation: {
+                ec.setRole(x: 10, y: 11, char: char)
+            }, completion: {})
         } else
         if pos.x == 0 && pos.y == 5 {
             showMsg(text: "west")
@@ -449,6 +454,18 @@ class House4:UIItem {
         self.size = CGSize(width: cellSize * 7, height: cellSize * 5)
         //        xAxis = cellSize * 0.5
         //        yAxis = -size.height * 0.5
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class HouseChurch:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        let t = Game.instance.tilee_outsidetown
+        setTexture(t.getCell(8, 4, 6, 5))
+        self.size = CGSize(width: cellSize * 6, height: cellSize * 4)
     }
     
     required init?(coder aDecoder: NSCoder) {

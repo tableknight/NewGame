@@ -391,6 +391,13 @@ class MyScene: SKSpriteNode, IInitialize {
 //        item.name = getItemName(CGPoint(x: x, y: y))
         _mapLayer.addChild(item)
     }
+    internal func setCell(x:Int, y:Int, width: Int, height: Int, cell: Int = MyScene.CELL_ITEM) {
+        for x in x...(x + width - 1) {
+            for y in (y - height + 1)...y {
+                _mapMatrix[y][x] = cell
+            }
+        }
+    }
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode, width: CGFloat = 0, height: CGFloat = 0, cell: Int = MyScene.CELL_ITEM, z:CGFloat = -1) {
         item.anchorPoint = CGPoint(x: 0, y: 0)
         item.position.x = (-halfSize - 0.5 + x) * cellSize
@@ -480,7 +487,7 @@ class MyScene: SKSpriteNode, IInitialize {
         node.addChild(roleNode)
         return node
     }
-    internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
+//    internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
     internal var _mapSet:GroundSets!
     internal var _mapLayer = SKSpriteNode()
     internal var _roleLayer = SKSpriteNode()
@@ -506,6 +513,7 @@ class MyScene: SKSpriteNode, IInitialize {
     var _level:CGFloat = 1
     var _name = ""
     var _nameLabel = Label()
+    internal let _wallShadow = SKTexture(imageNamed: "wall_shadow2")
 }
 
 class Chest:UIItem {

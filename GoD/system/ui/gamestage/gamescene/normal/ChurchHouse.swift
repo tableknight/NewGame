@@ -27,6 +27,26 @@ class ChurchHouse: InnerHouse {
     
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        let itemPoints:Array<Array<Int>> = [
+            [1,2],
+            [3,2],
+            [1,5],
+            [3,5],
+            [1,8],
+            [3,8],
+            [7,2],
+            [9,2],
+            [7,5],
+            [9,5],
+            [9,8],
+            ]
+        for p in itemPoints {
+            if cell == CELL_ITEM && point.equalTo(CGPoint(x: p[0].toFloat(), y: p[1].toFloat())) {
+                let tower = getNextCellItem(x: p[0], y: p[1]) as! Tower
+                tower.showDialog()
+                return true
+            }
+        }
         if cell == CELL_ROLE && point.equalTo(CGPoint(x: 2, y: 1)) {
             let role = getNextCellItem(x: 2, y: 1) as! UIRole
             let stage = Game.instance.curStage!
@@ -52,59 +72,12 @@ class ChurchHouse: InnerHouse {
             }
             return true
         }
-        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 4, y: 0)) {
-            let role = getNextCellItem(x: 4, y: 0) as! UIRole
-            let stage = Game.instance.curStage!
-            stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
-                             name: "神秘商人")
-            let dlg = stage._curDialog!
-            dlg.addConfirmButton()
-            dlg._confirmAction = {
-                stage.removeDialog(dlg: dlg)
-                let sp = SellingPanel()
-                //                let level = Game.instance.char._level
-                let l = Loot()
-                sp._goodsList = []
-                for i in 0...6 {
-                    let w = RandomWeapon()
-                    if i == 6 {
-                        w.price = 50
-                    }
-                    w.weaponId = i
-                    w._name = "\(l.getWeaponById(id: i)._name)?"
-                    sp._goodsList.append(w)
-                }
-                sp.create()
-                stage.showPanel(sp)
-            }
+        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 5, y: 0)) {
+            let role = getNextCellItem(x: 5, y: 0) as! UIRole
+            role.speak(text: "愿诸神保佑你。")
             return true
         }
-        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 8, y: 1)) {
-            let role = getNextCellItem(x: 8, y: 1) as! UIRole
-            let stage = Game.instance.curStage!
-            stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
-                             name: "防具大师范铁隆")
-            let dlg = stage._curDialog!
-            dlg.addConfirmButton()
-            dlg._confirmAction = {
-                stage.removeDialog(dlg: dlg)
-                let sp = SellingPanel()
-                let level = Game.instance.char._level
-                let l = Loot()
-                
-                sp._goodsList = []
-                for i in 0...3 {
-                    let w = l.getArmorById(id: i)
-                    w.create(level:level)
-                    sp._goodsList.append(w)
-                }
-                sp.create()
-                stage.showPanel(sp)
-            }
-            return true
-        }
+        
         if cell == CELL_ROLE && point.equalTo(CGPoint(x: 6, y: 0)) {
             let role = getNextCellItem(x: 6, y: 0) as! UIRole
             let stage = Game.instance.curStage!
@@ -177,88 +150,74 @@ class ChurchHouse: InnerHouse {
             addItem(x: 5, y: i.toFloat(), item: a2.getNode(4, 10.5, 2, 1), z:MyScene.MAP_LAYER_Z)
         }
         addItem(x: 4, y: 1, item: ti.getNode(8, 10, 3, 2), width: 0)
-        addItem(x: 1, y: 3, item: Table1(), width: 0)
-        //        addItem(x: 0.5, y: y, item: ic.getNode(11, 2))
-        //        addItem(x: 2, y: y, item: ic.getNode(14, 0))
-        //        addItem(x: 3.5, y: y, item: ic.getNode(15, 0))
-        //        addItem(x: 6.5, y: y, item: ic.getNode(12, 1))
-        //        addItem(x: 8, y: y, item: ic.getNode(15, 1))
-        //        addItem(x: 9.5, y: y, item: ic.getNode(14, 1))
-        //        addItem(x: 3.5, y: 4.25, item: ic.getNode(10, 0), z:z + 1)
-        //        addItem(x: 6.5, y: 4.25, item: ic.getNode(10, 1), z:z + 1)
-        //        addItem(x: 5, y: 5, item: ib.getNode(14, 1, 1, 2), z:z + 1)
-        //        addItem(x: 0, y: 6, item: ti.getNode(9, 6, 1, 2), z:z + 1)
-        //        addItem(x: 10, y: 6, item: ti.getNode(10, 6, 1, 2), z:z + 1)
-        //        addItem(x: 0, y: 0, item: ic.getNode(14, 6, 1, 2))
-        //        addItem(x: 1, y: 0, item: ic.getNode(14, 6, 1, 2))
-        //        addItem(x: 0, y: 1, item: ic.getNode(14, 6, 1, 2))
-        //        addItem(x: 9, y: 0, item: OutfitShow1())
-        //        addItem(x: 10, y: 0, item: OutfitShow2())
-        //        addItem(x: 10, y: 1, item: OutfitShow3())
-        //        let r1 = UIRole()
-        //        r1.create(roleNode: Game.instance.pictureBaldo.getNode(1, 0))
-        //        addItem(x: 2, y: 1, item: r1)
-        //
-        //        let r2 = UIRole()
-        //        r2.create(roleNode: Game.instance.pictureBaldo.getNode(7, 4))
-        //        addItem(x: 8, y: 1, item: r2)
-        //
-        //        let sst = SKTexture(imageNamed: "secret_seller").getCell(1, 0)
-        //
-        //        let ss1 = UIRole()
-        //        ss1.create(roleNode: SKSpriteNode(texture: sst))
-        //        addItem(x: 4, y: 0, item: ss1)
-        //        let ss2 = UIRole()
-        //        ss2.create(roleNode: SKSpriteNode(texture: sst))
-        //        addItem(x: 6, y: 0, item: ss2)
-        //
-        //        createWall(x: 6, y: 5, width: 2)
-        //        createWall(x: 9, y: 5, width: 2)
-        //        createWall(x: 3, y: 5, width: 2)
-        //        createWall(x: 0, y: 5, width: 2)
-        //        createWall(x: 5, y: 0, height: 6)
-        //        addItem(x: 5, y: 3, item: _roofSets.bottomConnect, z: z)
-        //        addItem(x: 11, y: 3, item: _roofSets.rightConnect)
-        //        addItem(x: -1, y: 3, item: _roofSets.leftConnect)
-        //        addItem(x: 7, y: 3, item: _roofSets.leftEnd, z: z)
-        //        addItem(x: 1, y: 3, item: _roofSets.leftEnd, z: z)
-        //        addItem(x: 9, y: 3, item: _roofSets.rightEnd, z: z)
-        //        addItem(x: 3, y: 3, item: _roofSets.rightEnd, z: z)
-        //        let s = _roofSets.topConnect
-        //        addItem(x: 5, y: -3, item: s, z: z)
-        //
-        //        let itemPoints:Array<Array<Int>> = [
-        //            [0, 0],
-        //            [1, 0],
-        //            [0, 1],
-        //            [9, 0],
-        //            [10, 0],
-        //            [10, 1],
-        //            [5, 0],
-        //            [5, 1],
-        //            [5, 2],
-        //            [5, 3],
-        //            [5, 4],
-        //            [5, 5],
-        //            [0, 5],
-        //            [1, 5],
-        //            [3, 5],
-        //            [4, 5],
-        //            [5, 5],
-        //            [6, 5],
-        //            [7, 5],
-        //            [9, 5],
-        //            [10, 5],
-        //            [0, 6],
-        //            [10, 6],
-        //            ]
-        //        for p in itemPoints {
-        //            _mapMatrix[p[1]][p[0]] = CELL_ITEM
-        //        }
-        //        let roleoints:Array<Array<Int>> = [[2,1],[8,1],[4,0],[6,0]]
-        //        for p in roleoints {
-        //            _mapMatrix[p[1]][p[0]] = CELL_ROLE
-        //        }
+//        addItem(x: 1, y: 2.5, item: Table1(), width: 0)
+//        addItem(x: 1, y: 5, item: Table1(), width: 0)
+//        addItem(x: 1, y: 7.5, item: Table1(), width: 0)
+//        addItem(x: 8, y: 2.5, item: Table1(), width: 0)
+//        addItem(x: 8, y: 5, item: Table1(), width: 0)
+//        addItem(x: 8, y: 7.5, item: Table1(), width: 0)
+        
+        let r1 = UIRole()
+        r1.create(roleNode: Game.instance.picturePeople2.getNode(7, 0))
+        addItem(x: 5, y: 0, item: r1, z:MyScene.MAP_LAYER_Z)
+        
+//        setCell(x: 1, y: 8, width: 2, height: 2)
+//        setCell(x: 1, y: 5, width: 2, height: 2)
+//        setCell(x: 1, y: 3, width: 2, height: 2)
+//        setCell(x: 8, y: 8, width: 2, height: 2)
+//        setCell(x: 8, y: 5, width: 2, height: 2)
+//        setCell(x: 8, y: 3, width: 2, height: 2)
+        setCell(x: 4, y: 1, width: 3, height: 1)
+        _mapMatrix[0][5] = CELL_ROLE
+
+        addItem(x: 1, y: 2, item: FireEnergeTower())
+        addItem(x: 3, y: 2, item: WaterEnergeTower())
+        addItem(x: 2, y: 2, item: SKSpriteNode(texture: _wallShadow))
+        addItem(x: 4, y: 2, item: SKSpriteNode(texture: _wallShadow))
+        
+        _mapMatrix[2][1] = CELL_ITEM
+        _mapMatrix[2][3] = CELL_ITEM
+        
+        addItem(x: 1, y: 5, item: ThunderEnergeTower())
+        addItem(x: 3, y: 5, item: TimeReduceTower())
+        addItem(x: 2, y: 5, item: SKSpriteNode(texture: _wallShadow))
+        addItem(x: 4, y: 5, item: SKSpriteNode(texture: _wallShadow))
+        
+        _mapMatrix[5][1] = CELL_ITEM
+        _mapMatrix[5][3] = CELL_ITEM
+        
+        addItem(x: 1, y: 8, item: PhysicalPowerTower())
+        addItem(x: 3, y: 8, item: MagicalPowerTower())
+        addItem(x: 2, y: 8, item: SKSpriteNode(texture: _wallShadow))
+        addItem(x: 4, y: 8, item: SKSpriteNode(texture: _wallShadow))
+        
+        _mapMatrix[8][1] = CELL_ITEM
+        _mapMatrix[8][3] = CELL_ITEM
+        
+        addItem(x: 7, y: 2, item: AttackPowerTower())
+        addItem(x: 9, y: 2, item: DefencePowerTower())
+        addItem(x: 8, y: 2, item: SKSpriteNode(texture: _wallShadow))
+        addItem(x: 10, y: 2, item: SKSpriteNode(texture: _wallShadow))
+        
+        _mapMatrix[2][7] = CELL_ITEM
+        _mapMatrix[2][9] = CELL_ITEM
+        
+        addItem(x: 7, y: 5, item: MindPowerTower())
+        addItem(x: 9, y: 5, item: LuckyPowerTower())
+        addItem(x: 8, y: 5, item: SKSpriteNode(texture: _wallShadow))
+        addItem(x: 10, y: 5, item: SKSpriteNode(texture: _wallShadow))
+        
+        _mapMatrix[5][7] = CELL_ITEM
+        _mapMatrix[5][9] = CELL_ITEM
+        
+//        addItem(x: 7, y: 8, item: MindPowerTower())
+        addItem(x: 9, y: 8, item: SpeedPowerTower())
+        addItem(x: 10, y: 8, item: SKSpriteNode(texture: _wallShadow))
+        
+//        _mapMatrix[2][7] = CELL_ITEM
+        _mapMatrix[8][10] = CELL_ITEM
+        
+        
     }
     private let CELL_ROLE = 151
 }

@@ -20,7 +20,7 @@ class OutfitStore: InnerHouse {
 //        _wallTexture = oa4.getCell(14, 9, 2, 2)
 //        _mapSet = GroundSets(ground: ia4.getCell(0, 2, 2, 2), wall: _wallTexture)
         _roofSets = RoofSets()
-        let ia4 = Game.instance.inside_a4
+        _bottomWallTexture = Game.instance.inside_a5.getCell(1, 3)
         _wallTexture = Game.instance.outside_a4.getCell(0, 9, 2, 2)
         _mapSet = GroundSets(ground: Game.instance.inside_a2.getCell(0, 5, 2, 2), wall: _wallTexture)
     }

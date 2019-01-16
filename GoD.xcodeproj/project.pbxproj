@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090C0DE521EB260E008C46AA /* NorthCanmping.swift */; };
+		090C0DE921ECCCF2008C46AA /* SnowLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090C0DE821ECCCF2008C46AA /* SnowLanding.swift */; };
 		090FE9FB21BB983E004276BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FE9FA21BB983E004276BB /* AppDelegate.swift */; };
 		090FE9FD21BB983E004276BB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 090FE9FC21BB983E004276BB /* GameScene.sks */; };
 		090FE9FF21BB983E004276BB /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 090FE9FE21BB983E004276BB /* Actions.sks */; };
@@ -266,6 +268,7 @@
 		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
+		09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -307,6 +310,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		090C0DE521EB260E008C46AA /* NorthCanmping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthCanmping.swift; sourceTree = "<group>"; };
+		090C0DE821ECCCF2008C46AA /* SnowLanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding.swift; sourceTree = "<group>"; };
 		090FE9F721BB983E004276BB /* GoD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		090FE9FA21BB983E004276BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		090FE9FC21BB983E004276BB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -572,6 +577,7 @@
 		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
+		09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding1.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -620,6 +626,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090C0DE721ECCCC3008C46AA /* snowlanding */ = {
+			isa = PBXGroup;
+			children = (
+				090C0DE821ECCCF2008C46AA /* SnowLanding.swift */,
+				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
+			);
+			path = snowlanding;
+			sourceTree = "<group>";
+		};
 		090FE9EE21BB983E004276BB = {
 			isa = PBXGroup;
 			children = (
@@ -1246,6 +1261,7 @@
 		09C6BF8921CF32180003C7F1 /* normal */ = {
 			isa = PBXGroup;
 			children = (
+				090C0DE721ECCCC3008C46AA /* snowlanding */,
 				09C6BF8B21CF34A40003C7F1 /* StandScene.swift */,
 				09C6BF8D21CFD02E0003C7F1 /* CenterCamping.swift */,
 				09C6BF9521D7867D0003C7F1 /* EastCamping.swift */,
@@ -1256,6 +1272,7 @@
 				094E68D121E37E6700414583 /* OutfitStore.swift */,
 				094E68D321E8E1A900414583 /* MagicHouse.swift */,
 				094E68D521EA228E00414583 /* ChurchHouse.swift */,
+				090C0DE521EB260E008C46AA /* NorthCanmping.swift */,
 			);
 			path = normal;
 			sourceTree = "<group>";
@@ -1523,6 +1540,7 @@
 				090FEBDD21BB9B2B004276BB /* Cruel.swift in Sources */,
 				090FEC1721BB9B2B004276BB /* NextFloor.swift in Sources */,
 				090FEC1C21BB9B2B004276BB /* SceneSets.swift in Sources */,
+				09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */,
 				090FEC1221BB9B2B004276BB /* Actor.swift in Sources */,
 				09C6BFA421DC8B2D0003C7F1 /* BloodAbyss.swift in Sources */,
 				090FEBF721BB9B2B004276BB /* CardSlot.swift in Sources */,
@@ -1600,7 +1618,9 @@
 				090FEC2B21BB9B2B004276BB /* FrozenLand.swift in Sources */,
 				090FEC4021BB9B2B004276BB /* HouseSets.swift in Sources */,
 				090FEB8221BB9B2B004276BB /* ElementalPower.swift in Sources */,
+				090C0DE921ECCCF2008C46AA /* SnowLanding.swift in Sources */,
 				09C6BF8E21CFD02E0003C7F1 /* CenterCamping.swift in Sources */,
+				090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */,
 				090FEB8721BB9B2B004276BB /* Mind.swift in Sources */,
 				090FEBA221BB9B2B004276BB /* Creature.swift in Sources */,
 				090FEC3A21BB9B2B004276BB /* AdventurersUnionInside.swift in Sources */,

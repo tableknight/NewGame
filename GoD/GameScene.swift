@@ -45,7 +45,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = CenterCamping()
+        let bs = SnowLanding1()
         bs._level = 1
         bs.create()
         let e = Emily()
@@ -61,7 +61,7 @@ class GameScene: SKScene {
         
         e.addMoney(num: 1000)
         
-        bs.setRole(x: 5, y: 7, role: e)
+        bs.setRole(x: 5, y: 5, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         let bow = Bow()

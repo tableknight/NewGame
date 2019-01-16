@@ -256,5 +256,77 @@ class GroundSets: Core {
 
         return gs.toTexture()
     }
+    var cellSize:CGFloat = 48
+    func getCombinationV(x1:CGFloat, y1:CGFloat, x2:CGFloat, y2:CGFloat) -> SKSpriteNode {
+        let t = _wall.getNode(x1, y1, 1, 0.5)
+        let b = _wall.getNode(x2, y2, 1, 0.5)
+        t.anchorPoint = CGPoint(x: 0.5, y: 0)
+        b.anchorPoint = CGPoint(x: 0.5, y: 1)
+        t.yAxis = cellSize * 0.5
+        b.yAxis = t.yAxis
+        //        b.yAxis = 0
+        let node = SKSpriteNode()
+        node.addChild(t)
+        node.addChild(b)
+        //        node.color = UIColor.red
+        //        node.size = CGSize(width: cellSize, height: cellSize)
+        return node
+    }
+    var thinConnection:SKSpriteNode {
+        get {
+            return getCombinationV(x1: 0.5, y1: -0.5, x2: 0.5, y2: 1)
+        }
+    }
+    var thinRight:SKSpriteNode {
+        get {
+            return getCombinationV(x1: 1, y1: -0.5, x2: 1, y2: 1)
+        }
+    }
+    
+    var thinLeft:SKSpriteNode {
+        get {
+            return getCombinationV(x1: 0, y1: -0.5, x2: 0, y2: 1)
+        }
+    }
+    var groundBottomLeft:SKSpriteNode {
+        get {
+            return _ground.getNode(0, 1)
+        }
+    }
+    var groundTopLeft:SKSpriteNode {
+        get {
+            return _ground.getNode(0, 0)
+        }
+    }
+    var groundLeftConnection:SKSpriteNode {
+        get {
+            return _ground.getNode(0, 0.5)
+        }
+    }
+    var groundTopConnection:SKSpriteNode {
+        get {
+            return _ground.getNode(0.5, 0)
+        }
+    }
+    var groundTopRight:SKSpriteNode {
+        get {
+            return _ground.getNode(1, 0)
+        }
+    }
+    var groundRightConnection:SKSpriteNode {
+        get {
+            return _ground.getNode(1, 0.5)
+        }
+    }
+    var groundBottomRight:SKSpriteNode {
+        get {
+            return _ground.getNode(1, 1)
+        }
+    }
+    var fullConnection:SKSpriteNode {
+        get {
+            return _ground.getNode(0.5, 0.5)
+        }
+    }
 }
 

@@ -29,38 +29,6 @@ class EastCamping: StandScene {
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
-        
-//        if point.x == 3 && point.y == 2 && cell == CELL_DOOR {
-//            showMsg(text: "house1")
-//            return true
-//        }
-//        if point.x == 10 && point.y == 8 && cell == CELL_DOOR {
-//            showMsg(text: "house1")
-//            return true
-//        }
-//        if (point.x == 4 || point.x == 5) && point.y == 6 && cell == CELL_ROAD {
-//            //            showMsg(text: "road")
-//            let rp = AcientRoadSelection()
-//            rp.create()
-//            Game.instance.curStage.showPanel(rp)
-//            return true
-//        }
-//        if point.x == 4 && point.y == 7 && cell == CELL_ROLE {
-//            Game.instance.curStage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
-//                                              text: "这里是前往神域的唯一入口，通过100层远古试炼，就可以进去神域，升入神格.........不过，我建议你放弃。",
-//                                              name: "神官苏维亚")
-//            return true
-//        }
-//        let hb1 = getNextCellItem(x: 4, y: 3)
-//        if hb1.contains(touchPoint) && cell == CELL_BOARD {
-//            hb1.triggerEvent()
-//            return true
-//        }
-//        let hb2 = getNextCellItem(x: 11, y: 9)
-//        if hb2.contains(touchPoint) && cell == CELL_BOARD {
-//            hb2.triggerEvent()
-//            return true
-//        }
         if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
             return true
         }
@@ -72,12 +40,18 @@ class EastCamping: StandScene {
         if pos.x == 0 && pos.y == 5 {
             let cc = CenterCamping()
             let char = _role!
-            _role.removeFromParent()
             Game.instance.curStage.switchScene(next: cc, afterCreation: {
                 cc.setRole(x: 12, y: 3, char: char)
 //                cc._role.faceWest()
             }, completion: {})
-            self.removeFromParent()
+        }
+        if pos.x == 5 && pos.y == 2 {
+            let cc = MagicHouse()
+            let char = _role!
+            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+                cc.setRole(x: 5, y: 9, char: char)
+                //                cc._role.faceWest()
+            }, completion: {})
         }
     }
     override func create() {

@@ -17,7 +17,7 @@ class GeneralStore: InnerHouse {
         let ia4 = Game.instance.inside_a4
         _wallTexture = Game.instance.outside_a3.getCell(2, 7, 2, 2)
         _mapSet = GroundSets(ground: ia4.getCell(14, 12, 2, 2), wall: _wallTexture)
-        
+        _bottomWallTexture = Game.instance.inside_a5.getCell(1, 7)
     }
     
     required init?(coder aDecoder: NSCoder) {

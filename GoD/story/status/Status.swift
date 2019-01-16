@@ -65,96 +65,6 @@ class Status:Core {
     static let SPEED_POWER = "speed_power"
     
 }
-
-class FireEnerge:Status {
-    override init() {
-        super.init()
-        _type = Status.FIRE_ENERGE
-        _name = "火源守护"
-        _description = "提升50点火焰伤害和50点火焰抗性"
-    }
-}
-class WaterEnerge:Status {
-    override init() {
-        super.init()
-        _type = Status.WATER_ENERGE
-        _name = "寒冰守护"
-        _description = "提升50点冰冷伤害和50点冰冷抗性。"
-    }
-}
-class ThunderEnerge:Status {
-    override init() {
-        super.init()
-        _type = Status.WATER_ENERGE
-        _name = "雷鸣守护"
-        _description = "提升50点雷电伤害和50点雷电抗性。"
-    }
-}
-class TimeReduce:Status {
-    override init() {
-        super.init()
-        _type = Status.WATER_ENERGE
-        _name = "时空扭转"
-        _description = "减少所有技能1回合冷却时间。"
-    }
-}
-class PhysicalPower:Status {
-    override init() {
-        super.init()
-        _type = Status.WATER_ENERGE
-        _name = "无坚不摧之力"
-        _description = "提升50%造成物理伤害。"
-    }
-}
-class MagicalPower:Status {
-    override init() {
-        super.init()
-        _type = Status.WATER_ENERGE
-        _name = "黑暗降临"
-        _description = "提升50%造成法术伤害。"
-    }
-}
-class AttackPower:Status {
-    override init() {
-        super.init()
-        _type = Status.THUNDER_ENERGE
-        _name = "战争之神"
-        _description = "提升50点攻击力和25点必杀。"
-    }
-}
-class DefencePower:Status {
-    override init() {
-        super.init()
-        _type = Status.DEFENCE_POWER
-        _name = "守护之神"
-        _description = "提升50点防御和25点闪避。"
-    }
-}
-class MindPower:Status {
-    override init() {
-        super.init()
-        _type = Status.MIND_POWER
-        _name = "智慧之神"
-        _description = "提升25点念力。"
-    }
-}
-class LuckyPower:Status {
-    override init() {
-        super.init()
-        _type = Status.LUCKY_POWER
-        _name = "幸运之神"
-        _description = "提升25点幸运。"
-    }
-}
-class SpeedPower:Status {
-    override init() {
-        super.init()
-        _type = Status.SPEED_POWER
-        _name = "光影之神"
-        _description = "提升50点速度和25点命中。"
-    }
-}
-
 class LostSpeed:Status {
     override init() {
         super.init()
@@ -166,3 +76,12 @@ class LostSpeed:Status {
         }
     }
 }
+
+
+
+
+
+
+
+
+
