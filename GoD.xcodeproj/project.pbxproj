@@ -269,6 +269,13 @@
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
 		09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */; };
+		09C66C6F21F0B6F900E1C153 /* BossBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6E21F0B6F900E1C153 /* BossBattle.swift */; };
+		09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7221F0B83A00E1C153 /* Boss.swift */; };
+		09C66C7521F0B88300E1C153 /* Toppur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7421F0B88300E1C153 /* Toppur.swift */; };
+		09C66C7721F0CBCB00E1C153 /* ToppurBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7621F0CBCB00E1C153 /* ToppurBattle.swift */; };
+		09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7821F7586800E1C153 /* SnowLanding2.swift */; };
+		09C66C7D21F7637300E1C153 /* Micalu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7C21F7637300E1C153 /* Micalu.swift */; };
+		09C66C7F21F764C900E1C153 /* MicaluBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7E21F764C900E1C153 /* MicaluBattle.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -578,6 +585,13 @@
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
 		09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding1.swift; sourceTree = "<group>"; };
+		09C66C6E21F0B6F900E1C153 /* BossBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossBattle.swift; sourceTree = "<group>"; };
+		09C66C7221F0B83A00E1C153 /* Boss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
+		09C66C7421F0B88300E1C153 /* Toppur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toppur.swift; sourceTree = "<group>"; };
+		09C66C7621F0CBCB00E1C153 /* ToppurBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppurBattle.swift; sourceTree = "<group>"; };
+		09C66C7821F7586800E1C153 /* SnowLanding2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding2.swift; sourceTree = "<group>"; };
+		09C66C7C21F7637300E1C153 /* Micalu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Micalu.swift; sourceTree = "<group>"; };
+		09C66C7E21F764C900E1C153 /* MicaluBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicaluBattle.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -631,6 +645,7 @@
 			children = (
 				090C0DE821ECCCF2008C46AA /* SnowLanding.swift */,
 				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
+				09C66C7821F7586800E1C153 /* SnowLanding2.swift */,
 			);
 			path = snowlanding;
 			sourceTree = "<group>";
@@ -823,6 +838,7 @@
 				090FEA7921BB9B2A004276BB /* Unit.swift */,
 				090FEA8D21BB9B2A004276BB /* Emily.swift */,
 				090FEA8E21BB9B2A004276BB /* Creature.swift */,
+				09C66C7221F0B83A00E1C153 /* Boss.swift */,
 			);
 			path = character;
 			sourceTree = "<group>";
@@ -1017,6 +1033,7 @@
 		090FEAE521BB9B2A004276BB /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				09C66C7021F0B78B00E1C153 /* boss */,
 				090FEAE621BB9B2A004276BB /* battle */,
 				090FEAED21BB9B2A004276BB /* gamestage */,
 				090FEAF021BB9B2A004276BB /* card */,
@@ -1039,6 +1056,7 @@
 				09C6BF7F21C8BB440003C7F1 /* BattleSpellCard.swift */,
 				09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */,
 				094E68C921DE238C00414583 /* ISelectTarget.swift */,
+				09C66C6E21F0B6F900E1C153 /* BossBattle.swift */,
 			);
 			path = battle;
 			sourceTree = "<group>";
@@ -1258,6 +1276,41 @@
 			path = gamescene;
 			sourceTree = "<group>";
 		};
+		09C66C7021F0B78B00E1C153 /* boss */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C7A21F7635300E1C153 /* angel */,
+			);
+			path = boss;
+			sourceTree = "<group>";
+		};
+		09C66C7121F0B79A00E1C153 /* toppur */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C7421F0B88300E1C153 /* Toppur.swift */,
+				09C66C7621F0CBCB00E1C153 /* ToppurBattle.swift */,
+			);
+			path = toppur;
+			sourceTree = "<group>";
+		};
+		09C66C7A21F7635300E1C153 /* angel */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C7B21F7636700E1C153 /* micalu */,
+				09C66C7121F0B79A00E1C153 /* toppur */,
+			);
+			path = angel;
+			sourceTree = "<group>";
+		};
+		09C66C7B21F7636700E1C153 /* micalu */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C7C21F7637300E1C153 /* Micalu.swift */,
+				09C66C7E21F764C900E1C153 /* MicaluBattle.swift */,
+			);
+			path = micalu;
+			sourceTree = "<group>";
+		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
 			isa = PBXGroup;
 			children = (
@@ -1436,6 +1489,7 @@
 				090FEBF321BB9B2B004276BB /* Battle.swift in Sources */,
 				090FEB9A21BB9B2B004276BB /* DarkCrow.swift in Sources */,
 				090FEC4621BB9B2B004276BB /* SelectSpell.swift in Sources */,
+				09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */,
 				090FEBBF21BB9B2B004276BB /* FragileCurse.swift in Sources */,
 				090FEB9821BB9B2B004276BB /* Python.swift in Sources */,
 				090FEBB621BB9B2B004276BB /* MagicReflect.swift in Sources */,
@@ -1451,6 +1505,7 @@
 				090FEBCB21BB9B2B004276BB /* PriceOfBlood.swift in Sources */,
 				090FEB8021BB9B2B004276BB /* FirePower.swift in Sources */,
 				090FEB6B21BB9B2B004276BB /* EarRing.swift in Sources */,
+				09C66C7F21F764C900E1C153 /* MicaluBattle.swift in Sources */,
 				090FEB7221BB9B2B004276BB /* Break.swift in Sources */,
 				09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */,
 				090FEC2921BB9B2B004276BB /* UIRandomScene.swift in Sources */,
@@ -1473,6 +1528,7 @@
 				090FEBE721BB9B2B004276BB /* Structure.swift in Sources */,
 				090FEBDB21BB9B2B004276BB /* Energetic.swift in Sources */,
 				090FEBE421BB9B2B004276BB /* Spell.swift in Sources */,
+				09C66C7521F0B88300E1C153 /* Toppur.swift in Sources */,
 				090FEBD521BB9B2B004276BB /* QuickHeal.swift in Sources */,
 				090FEB6D21BB9B2B004276BB /* Armor.swift in Sources */,
 				090FEBF521BB9B2B004276BB /* MyStage.swift in Sources */,
@@ -1589,6 +1645,7 @@
 				090FEB8A21BB9B2B004276BB /* Attribute.swift in Sources */,
 				090FEC2721BB9B2B004276BB /* RandomScene.swift in Sources */,
 				090FEBD021BB9B2B004276BB /* Disappear.swift in Sources */,
+				09C66C6F21F0B6F900E1C153 /* BossBattle.swift in Sources */,
 				090FEBB121BB9B2B004276BB /* TurnAttack.swift in Sources */,
 				090FEBC721BB9B2B004276BB /* OneShootDoubleKill.swift in Sources */,
 				090FEBA821BB9B2B004276BB /* VampireBlood.swift in Sources */,
@@ -1605,6 +1662,7 @@
 				090FEBFA21BB9B2B004276BB /* Card.swift in Sources */,
 				090FEC3F21BB9B2B004276BB /* exts.swift in Sources */,
 				090FEBB021BB9B2B004276BB /* Steal.swift in Sources */,
+				09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */,
 				090FEB9F21BB9B2B004276BB /* SummonUnit.swift in Sources */,
 				090FEBEE21BB9B2B004276BB /* Game.swift in Sources */,
 				090FEC4221BB9B2B004276BB /* SelectMinion.swift in Sources */,
@@ -1656,6 +1714,7 @@
 				090FEB5121BB9B2B004276BB /* Wand.swift in Sources */,
 				090FEB8921BB9B2B004276BB /* Prop.swift in Sources */,
 				090FEBD821BB9B2B004276BB /* FireBreath.swift in Sources */,
+				09C66C7D21F7637300E1C153 /* Micalu.swift in Sources */,
 				09C6BFA021DC65F70003C7F1 /* AcientRoad.swift in Sources */,
 				090FEBA121BB9B2B004276BB /* Emily.swift in Sources */,
 				090FEC3C21BB9B2B004276BB /* WestOfVillage.swift in Sources */,
@@ -1678,6 +1737,7 @@
 				09C6BF9221D5F0510003C7F1 /* Border.swift in Sources */,
 				090FEB7321BB9B2B004276BB /* Rhythm.swift in Sources */,
 				090FEC1321BB9B2B004276BB /* Button.swift in Sources */,
+				09C66C7721F0CBCB00E1C153 /* ToppurBattle.swift in Sources */,
 				090FEC2421BB9B2B004276BB /* BaseScene.swift in Sources */,
 				090FEB5B21BB9B2B004276BB /* SacredMark.swift in Sources */,
 				090FEBF821BB9B2B004276BB /* EvilCard.swift in Sources */,

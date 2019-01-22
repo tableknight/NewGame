@@ -23,33 +23,38 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = Battle()
+        let b = MicaluBattle()
         var es = Array<Creature>()
         
-        for _ in 0...3 {
+        for _ in 0...2 {
             let c = GiantWasp()
-            c.create(level: 20)
-            es.append(c)
+            c.create(level: 45)
+//            es.append(c)
         }
+//        es[0]._seat = BUnit.TBL
+//        es[1]._seat = BUnit.TBM
+//        es[2]._seat = BUnit.TBR
+//        es[3]._seat = BUnit.TBM
+//        es[4]._seat = BUnit.TBR
+        let t = Micalu()
+        t.create(level: 46)
+        t._seat = BUnit.TTM
+        es.append(t)
         //        b.setEvils(evils: es)
         b.setEnemyPart(minions: es)
         b.setPlayerPart(roles: [Game.instance.char] + Game.instance.char.getReadyMinions())
-        //        b.setRoles(roles: [Game.instance.char] + Game.instance.char._minions)
         
-        let potion = Potion()
-        potion._count = 1
-        Game.instance.char.addProp(p: potion)
-        addChild(b)
+        Game.instance.curStage.addBattle(b)
         b.battleStart()
     }
     
     func realScene() {
         let stage = MyStage()
-        let bs = SnowLanding1()
+        let bs = SnowLanding2()
         bs._level = 1
         bs.create()
         let e = Emily()
-        e.create()
+        e.create(level: e._level)
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
         for m in e._minions + [e] {
             m._spellsInuse = [SoulLash(), Refresh()]
@@ -115,6 +120,7 @@ class GameScene: SKScene {
 //        cf.create()
 //        addChild(cf)
         realScene()
+        battle()
 //        let r = RoofSets()
 //        addChild(r.rightConnect)
 //        let p = AcientRoadSelection()

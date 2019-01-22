@@ -13,7 +13,7 @@ class SnowLanding1: SnowLanding {
 //        _name = "雪之国"
 //        let oa4 = Game.instance.outside_a4
 //        _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
-        
+        _name = "\(super._name) 零之阶梯"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -137,7 +137,7 @@ class SnowLanding1: SnowLanding {
             addItem(x: x.toFloat(), y: y.toFloat(), item: ob.getNode(13, 4, 1, 2))
             i += 2
         }
-        addItem(x: 9, y: 1, item: Toppur())
+        addItem(x: 9, y: 1, item: RoleToppur())
 //        let oa2 = Game.instance.outside_a2
 //        addGround(x: 3, y: 10, item: oa2.getNode(10, 5, 2, 0.5))
 //        addItem(x: 2, y: 10, item: oa4.getNode(10, 9, 1, 2.5))
@@ -156,10 +156,10 @@ class SnowLanding1: SnowLanding {
     
 }
 
-class Toppur: UIRole {
+class RoleToppur: UIRole {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.texture = SKTexture(imageNamed: "Actor3_6")
+        self.texture = SKTexture(imageNamed: "Toppur")
         self.size = CGSize(width: cellSize * 2, height: cellSize * 2)
     }
     

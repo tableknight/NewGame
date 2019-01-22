@@ -383,11 +383,15 @@ class MyScene: SKSpriteNode, IInitialize {
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)
     }
-    internal func addGround(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
+    internal func addGround(x:CGFloat, y:CGFloat, item:SKSpriteNode, z:CGFloat = -1) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
         item.position.x = (-halfSize + x) * cellSize
         item.position.y = (halfSize - 0.5 - y) * cellSize
-        item.zPosition = MyScene.MAP_LAYER_Z
+        if z > -1 {
+            item.zPosition = z
+        } else {
+            item.zPosition = MyScene.MAP_LAYER_Z + y
+        }
 //        item.name = getItemName(CGPoint(x: x, y: y))
         _mapLayer.addChild(item)
     }

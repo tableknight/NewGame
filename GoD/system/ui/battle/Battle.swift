@@ -298,7 +298,7 @@ class Battle: SKSpriteNode {
         let y3 = -c * 2
         let y4 = -c * 4
         
-        let s:CGFloat = cellSize * 0.5
+        let s:CGFloat = 0
         
         ttl.x = x1 + s
         ttl.y = y1
@@ -1065,15 +1065,14 @@ class Battle: SKSpriteNode {
         _curRole.showText(text:_selectedSpell._name)
     }
     internal func execOrder() {
-        let this = self
         speakSpellName()
-        let delay:CGFloat = _selectedSpell.isPhysical && !(_selectedSpell is Attack) ? 1 : 0
-        setTimeout(delay: delay, completion: {
-            this._selectedSpell.cast {
-                this.cdSpell(spell: this._selectedSpell)
-                this.moveEnd()
-            }
-        })
+//        let delay:CGFloat = _selectedSpell.isPhysical && !(_selectedSpell is Attack) ? 1 : 0
+//        setTimeout(delay: delay, completion: {
+//        })
+        self._selectedSpell.cast {
+            self.cdSpell(spell: self._selectedSpell)
+            self.moveEnd()
+        }
     
     }
     func roleMove(from:BUnit, to:BUnit, completion:@escaping () -> Void) {
@@ -1520,10 +1519,15 @@ class Battle: SKSpriteNode {
             bUnit.playerPart = false
             bUnit.create()
             bUnit.faceSouth()
-            let index = seed(max: _enemySeatsArray.count)
-            bUnit.position = _enemySeats[_enemySeatsArray[index]]!
-            m._seat = _enemySeatsArray[index]
-            _enemySeatsArray.remove(at: index)
+            if m._seat == BUnit.STAND_BY {
+                let index = seed(max: _enemySeatsArray.count)
+                m._seat = _enemySeatsArray[index]
+                _enemySeatsArray.remove(at: index)
+            }
+            bUnit.position = _enemySeats[m._seat]!
+            if m is Boss {
+                bUnit.yAxis = cellSize * 5
+            }
             _enemyPart.append(bUnit)
             _evilsOrg.append(bUnit)
             addChild(bUnit)

@@ -168,9 +168,6 @@ class Spell:Core, IDisplay, ISelectTarget {
         debug("m atk:\(atk.toInt()), def:\(def.toInt())")
         
         var damage = atk - def
-        if damage < 5 {
-            return -seed(min: 0, max: 5).toFloat()
-        }
         damage *= 1 + (from.getMagicalDamage() - to.getMagicalResistance()) * 0.01
         
         if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: MagicalPower()) {
@@ -249,9 +246,10 @@ class Spell:Core, IDisplay, ISelectTarget {
     }
     private func damageControl(_ d:CGFloat) -> CGFloat {
         var damage = d * _rate
-        damage = seed(min: (damage * 0.8).toInt(), max: (damage * 1.2).toInt()).toFloat()
         if damage < 5 {
             damage = seed(min:1, max: 6).toFloat()
+        } else {
+            damage = seed(min: (damage * 0.8).toInt(), max: (damage * 1.2).toInt()).toFloat()
         }
         return damage
     }
@@ -645,7 +643,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
     }
     internal func findTargetRandom2() {
-        let part = targetEnemy ? _battle._enemyPart : _battle._playerPart
+        let part = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
         let index = seed(max: part.count)
         _battle._selectedTargets = [part[index]]
         if part.count > 1 {

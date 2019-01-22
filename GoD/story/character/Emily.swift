@@ -19,11 +19,11 @@ class Emily:Character {
 //        strengthChange(value: 30)
 //        agilityChange(value: 20)
 //        intellectChange(value: 5)
-//        staminaChange(value: 150)
-//        strengthChange(value: 100)
-//        agilityChange(value: 50)
-//        intellectChange(value: 25)
-        _level = 1
+        staminaChange(value: 250)
+        strengthChange(value: 100)
+        agilityChange(value: 50)
+        intellectChange(value: 25)
+        _level = 66
 //        let c = Core()
 //        for _ in 0..._level.toInt() {
 //            let seed = c.seed()
@@ -70,8 +70,8 @@ class Emily:Character {
         
         
         darkCrow._seat = BUnit.BTM
-//        blackCat._seat = BUnit.BTL
-//        bq._seat = BUnit.BBR
+        blackCat._seat = BUnit.BTL
+        bq._seat = BUnit.BBR
         
         
         

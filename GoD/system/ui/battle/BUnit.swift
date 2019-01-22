@@ -76,6 +76,9 @@ class BUnit: SKSpriteNode {
         if playerPart {
             _charSize = cellSize * 1.25
         }
+        if _unit is Boss {
+            _charSize = cellSize * 2
+        }
 //        self.size = CGSize(width: _charSize, height: _charSize)
         _charNode.size = CGSize(width: _charSize, height: _charSize)
         circleY = -_charSize * 0.25
@@ -175,7 +178,11 @@ class BUnit: SKSpriteNode {
     var _charTexture = SKTexture()
     private var _charNode = SKSpriteNode()
     func faceSouth() {
-        _charNode.texture = _charTexture.getCell(1, 0)
+        if _unit is Boss {
+            _charNode.texture = _charTexture
+        } else {
+            _charNode.texture = _charTexture.getCell(1, 0)
+        }
     }
     func faceNorth() {
         var y:CGFloat = 3
@@ -356,18 +363,32 @@ class BUnit: SKSpriteNode {
         _charNode.run(go, completion: completion)
     }
     func actionCast(completion:@escaping () -> Void) {
-        let wt1 = SKAction.wait(forDuration: TimeInterval(1))
-        let wt = SKAction.wait(forDuration: TimeInterval(0.1))
-        let n = SKAction.setTexture(_charTexture.getCell(0, 3))
-        let w = SKAction.setTexture(_charTexture.getCell(0, 1))
-        let s = SKAction.setTexture(_charTexture.getCell(0, 0))
-        let e = SKAction.setTexture(_charTexture.getCell(0, 2))
-        var go = SKAction.sequence([wt1, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
-        if !playerPart {
-            go = SKAction.sequence([wt1, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
-        }
-        _charNode.run(go) {
-            completion()
+        if _unit is Boss {
+            let wait = SKAction.wait(forDuration: TimeInterval(1))
+            let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
+            let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
+            let go = SKAction.sequence([wait,fadeout,fadein,fadeout,fadein,fadeout,fadein])
+//            let go = SKAction.sequence([wait, fadeout, SKAction.wait(forDuration: TimeInterval(0.5))])
+            _charNode.run(go) {
+                completion()
+//                self._charNode.run(fadein)
+//                setTimeout(delay: 1, completion: {
+//                })
+            }
+        } else {
+            let wt1 = SKAction.wait(forDuration: TimeInterval(1))
+            let wt = SKAction.wait(forDuration: TimeInterval(0.1))
+            let n = SKAction.setTexture(_charTexture.getCell(0, 3))
+            let w = SKAction.setTexture(_charTexture.getCell(0, 1))
+            let s = SKAction.setTexture(_charTexture.getCell(0, 0))
+            let e = SKAction.setTexture(_charTexture.getCell(0, 2))
+            var go = SKAction.sequence([wt1, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
+            if !playerPart {
+                go = SKAction.sequence([wt1, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
+            }
+            _charNode.run(go) {
+                completion()
+            }
         }
     }
     func actionAvoid(completion:@escaping () -> Void) {
@@ -785,8 +806,20 @@ class BUnit: SKSpriteNode {
         })
     }
     func actionShoot(completion:@escaping () -> Void) {
+        let d = cellSize * 0.3
+        var v = CGVector(dx: 0, dy: -d)
+        var v2 = CGVector(dx: 0, dy: d)
+        if !playerPart {
+            v = CGVector(dx: 0, dy: d)
+            v2 = CGVector(dx: 0, dy: -d)
+        }
+        //        let w = SKAction.wait(forDuration: TimeInterval(2))
+        let move1 = SKAction.move(by: v, duration: 0)
+        let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(1))
-        _charNode.run(wait, completion: completion)
+        let go = SKAction.sequence([move1, wait, move2])
+        _charNode.run(go, completion: completion)
+        _select.run(go)
     }
     func isDead() -> Bool {
         if _unit._extensions.hp <= 0 {
