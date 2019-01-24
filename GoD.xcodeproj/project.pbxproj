@@ -276,6 +276,10 @@
 		09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7821F7586800E1C153 /* SnowLanding2.swift */; };
 		09C66C7D21F7637300E1C153 /* Micalu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7C21F7637300E1C153 /* Micalu.swift */; };
 		09C66C7F21F764C900E1C153 /* MicaluBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7E21F764C900E1C153 /* MicaluBattle.swift */; };
+		09C66C8121F8B4C000E1C153 /* SnowLanding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */; };
+		09C66C8421F8C30100E1C153 /* Sumahl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8321F8C30100E1C153 /* Sumahl.swift */; };
+		09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */; };
+		09C66C8821FA08F100E1C153 /* Lewis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8721FA08F100E1C153 /* Lewis.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -592,6 +596,10 @@
 		09C66C7821F7586800E1C153 /* SnowLanding2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding2.swift; sourceTree = "<group>"; };
 		09C66C7C21F7637300E1C153 /* Micalu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Micalu.swift; sourceTree = "<group>"; };
 		09C66C7E21F764C900E1C153 /* MicaluBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicaluBattle.swift; sourceTree = "<group>"; };
+		09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding3.swift; sourceTree = "<group>"; };
+		09C66C8321F8C30100E1C153 /* Sumahl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sumahl.swift; sourceTree = "<group>"; };
+		09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding4.swift; sourceTree = "<group>"; };
+		09C66C8721FA08F100E1C153 /* Lewis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lewis.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -646,6 +654,8 @@
 				090C0DE821ECCCF2008C46AA /* SnowLanding.swift */,
 				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
 				09C66C7821F7586800E1C153 /* SnowLanding2.swift */,
+				09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */,
+				09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */,
 			);
 			path = snowlanding;
 			sourceTree = "<group>";
@@ -1296,6 +1306,8 @@
 		09C66C7A21F7635300E1C153 /* angel */ = {
 			isa = PBXGroup;
 			children = (
+				09C66C8921FA090700E1C153 /* lewis */,
+				09C66C8221F8C2F100E1C153 /* sumahl */,
 				09C66C7B21F7636700E1C153 /* micalu */,
 				09C66C7121F0B79A00E1C153 /* toppur */,
 			);
@@ -1309,6 +1321,22 @@
 				09C66C7E21F764C900E1C153 /* MicaluBattle.swift */,
 			);
 			path = micalu;
+			sourceTree = "<group>";
+		};
+		09C66C8221F8C2F100E1C153 /* sumahl */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C8321F8C30100E1C153 /* Sumahl.swift */,
+			);
+			path = sumahl;
+			sourceTree = "<group>";
+		};
+		09C66C8921FA090700E1C153 /* lewis */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C8721FA08F100E1C153 /* Lewis.swift */,
+			);
+			path = lewis;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1598,6 +1626,7 @@
 				090FEC1C21BB9B2B004276BB /* SceneSets.swift in Sources */,
 				09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */,
 				090FEC1221BB9B2B004276BB /* Actor.swift in Sources */,
+				09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */,
 				09C6BFA421DC8B2D0003C7F1 /* BloodAbyss.swift in Sources */,
 				090FEBF721BB9B2B004276BB /* CardSlot.swift in Sources */,
 				090FEB7D21BB9B2B004276BB /* AttackAttribute.swift in Sources */,
@@ -1723,11 +1752,13 @@
 				090FEBB921BB9B2B004276BB /* Firelord.swift in Sources */,
 				09C6BF9021D1EACE0003C7F1 /* MapSets.swift in Sources */,
 				090FEBD221BB9B2B004276BB /* Bitslap.swift in Sources */,
+				09C66C8821FA08F100E1C153 /* Lewis.swift in Sources */,
 				090FEC2C21BB9B2B004276BB /* DeadEarth.swift in Sources */,
 				090FEB8F21BB9B2B004276BB /* Character.swift in Sources */,
 				090FEB9D21BB9B2B004276BB /* TreeSpirit.swift in Sources */,
 				090FEBA421BB9B2B004276BB /* SpiritIntervene.swift in Sources */,
 				09C6BF8C21CF34A40003C7F1 /* StandScene.swift in Sources */,
+				09C66C8421F8C30100E1C153 /* Sumahl.swift in Sources */,
 				090FEB9E21BB9B2B004276BB /* Mummy.swift in Sources */,
 				090FEB9221BB9B2B004276BB /* Unit.swift in Sources */,
 				090FEBAD21BB9B2B004276BB /* LifeDraw.swift in Sources */,
@@ -1751,6 +1782,7 @@
 				090FEBF621BB9B2B004276BB /* MyScene.swift in Sources */,
 				090FEC3521BB9B2B004276BB /* CenterVillage.swift in Sources */,
 				090FEC5021BCF0E3004276BB /* CellMonster.swift in Sources */,
+				09C66C8121F8B4C000E1C153 /* SnowLanding3.swift in Sources */,
 				090FEB5621BB9B2B004276BB /* Fist.swift in Sources */,
 				090FEB6721BB9B2B004276BB /* SoulStone.swift in Sources */,
 				090FEC0E21BB9B2B004276BB /* MenuButton.swift in Sources */,

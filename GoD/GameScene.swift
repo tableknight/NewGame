@@ -36,7 +36,7 @@ class GameScene: SKScene {
 //        es[2]._seat = BUnit.TBR
 //        es[3]._seat = BUnit.TBM
 //        es[4]._seat = BUnit.TBR
-        let t = Micalu()
+        let t = Lewis()
         t.create(level: 46)
         t._seat = BUnit.TTM
         es.append(t)
@@ -50,7 +50,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SnowLanding2()
+        let bs = SnowLanding4()
         bs._level = 1
         bs.create()
         let e = Emily()
