@@ -163,7 +163,6 @@
 		090FEBE221BB9B2B004276BB /* Attack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAD521BB9B2A004276BB /* Attack.swift */; };
 		090FEBE321BB9B2B004276BB /* Passive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAD621BB9B2A004276BB /* Passive.swift */; };
 		090FEBE421BB9B2B004276BB /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAD721BB9B2A004276BB /* Spell.swift */; };
-		090FEBE521BB9B2B004276BB /* Active.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAD821BB9B2A004276BB /* Active.swift */; };
 		090FEBE721BB9B2B004276BB /* Structure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADA21BB9B2A004276BB /* Structure.swift */; };
 		090FEBE821BB9B2B004276BB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADC21BB9B2A004276BB /* Status.swift */; };
 		090FEBE921BB9B2B004276BB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEADE21BB9B2A004276BB /* Item.swift */; };
@@ -487,7 +486,6 @@
 		090FEAD521BB9B2A004276BB /* Attack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attack.swift; sourceTree = "<group>"; };
 		090FEAD621BB9B2A004276BB /* Passive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passive.swift; sourceTree = "<group>"; };
 		090FEAD721BB9B2A004276BB /* Spell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
-		090FEAD821BB9B2A004276BB /* Active.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Active.swift; sourceTree = "<group>"; };
 		090FEADA21BB9B2A004276BB /* Structure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structure.swift; sourceTree = "<group>"; };
 		090FEADC21BB9B2A004276BB /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		090FEADE21BB9B2A004276BB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -929,7 +927,6 @@
 				090FEAD421BB9B2A004276BB /* Defend.swift */,
 				090FEAD721BB9B2A004276BB /* Spell.swift */,
 				090FEA9021BB9B2A004276BB /* Physical.swift */,
-				090FEAD821BB9B2A004276BB /* Active.swift */,
 			);
 			path = spell;
 			sourceTree = "<group>";
@@ -1528,7 +1525,6 @@
 				090FEB6121BB9B2B004276BB /* SacredShield.swift in Sources */,
 				090FEBD421BB9B2B004276BB /* BloodThirty.swift in Sources */,
 				09C6BFA621DC8D710003C7F1 /* LostArea.swift in Sources */,
-				090FEBE521BB9B2B004276BB /* Active.swift in Sources */,
 				090FEBB321BB9B2B004276BB /* AttackReturnBack.swift in Sources */,
 				090FEB5A21BB9B2B004276BB /* SacredDagger.swift in Sources */,
 				090FEC1F21BB9B2B004276BB /* IScenery.swift in Sources */,
