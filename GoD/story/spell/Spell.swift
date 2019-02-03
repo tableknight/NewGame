@@ -301,6 +301,19 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         return damage
     }
+    func findPlayerMinion() {
+        var arr = Array<BUnit>()
+        for u in _battle._playerPart {
+            if u._unit is Character {
+                
+            } else {
+                arr.append(u)
+            }
+        }
+        if arr.count > 0 {
+            _battle._selectedTarget = arr.one()
+        }
+    }
     //默认近战 
     func findTarget() {
         var ts = Array<BUnit>()
@@ -691,6 +704,25 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         
         return bu
+    }
+    
+    func findTargetInALine() {
+        var list = Array<String>()
+        let rs = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
+        let t = rs.one()
+        for seats in [[BUnit.TTL, BUnit.TTM, BUnit.TTR],[BUnit.TBL, BUnit.TBM, BUnit.TBR],[BUnit.BTL, BUnit.BTM, BUnit.BTR],[BUnit.BBL, BUnit.BBM, BUnit.BBR]] {
+            if seats.index(of: t._unit._seat) != nil {
+                list = seats
+                break
+            }
+        }
+        
+        _battle._selectedTargets = []
+        for u in rs {
+            if list.index(of: u._unit._seat) != nil {
+                _battle._selectedTargets.append(u)
+            }
+        }
     }
     
     func selectable() -> Bool {

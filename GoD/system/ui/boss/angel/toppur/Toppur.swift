@@ -23,6 +23,25 @@ class Toppur:Boss {
         _extensions.health *= 5
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [MagicConvert(), MagicReflect()]
+    }
+}
+
+class ToppurServant:BossMinion {
+    override init() {
+        super.init()
+        _name = "艾琪"
+        _img = Game.instance.pictureNature.getCell(3, 7, 3, 4)
+    }
+    override func create(level: CGFloat) {
+        _quality = Quality.RARE
+        _growth.stamina = 2.5
+        _growth.strength = 3.5
+        _growth.agility = 2.2
+        _growth.intellect = 1
+        levelTo(level: level)
+        _extensions.health *= 2
+        _extensions.hp = _extensions.health
+        
+        _spellsInuse = [LineAttack(), RecoveryFromAttack()]
     }
 }

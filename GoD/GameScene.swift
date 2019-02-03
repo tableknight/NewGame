@@ -23,25 +23,26 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = MicaluBattle()
-        var es = Array<Creature>()
+        let b = ToppurBattle()
+        let es = Array<Creature>()
         
-        for _ in 0...2 {
-            let c = GiantWasp()
-            c.create(level: 45)
-//            es.append(c)
-        }
-//        es[0]._seat = BUnit.TBL
-//        es[1]._seat = BUnit.TBM
-//        es[2]._seat = BUnit.TBR
-//        es[3]._seat = BUnit.TBM
-//        es[4]._seat = BUnit.TBR
-        let t = Lewis()
-        t.create(level: 46)
-        t._seat = BUnit.TTM
-        es.append(t)
-        //        b.setEvils(evils: es)
+//        for _ in 0...2 {
+//            let c = GiantWasp()
+//            c.create(level: 45)
+////            es.append(c)
+//        }
+////        es[0]._seat = BUnit.TBL
+////        es[1]._seat = BUnit.TBM
+////        es[2]._seat = BUnit.TBR
+////        es[3]._seat = BUnit.TBM
+////        es[4]._seat = BUnit.TBR
+//        let t = Lewis()
+//        t.create(level: 46)
+//        t._seat = BUnit.TTM
+//        es.append(t)
+//        //        b.setEvils(evils: es)
         b.setEnemyPart(minions: es)
+        
         b.setPlayerPart(roles: [Game.instance.char] + Game.instance.char.getReadyMinions())
         
         Game.instance.curStage.addBattle(b)
@@ -57,7 +58,7 @@ class GameScene: SKScene {
         e.create(level: e._level)
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
         for m in e._minions + [e] {
-            m._spellsInuse = [SoulLash(), Refresh()]
+            m._spellsInuse = [SoulLash(), FireBreath()]
         }
 //        e._minions[0]._spellsInuse.append(Crazy())
         let hm = ThorsHammer()

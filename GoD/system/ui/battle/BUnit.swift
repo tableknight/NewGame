@@ -80,7 +80,11 @@ class BUnit: SKSpriteNode {
             _charSize = cellSize * 2
         }
 //        self.size = CGSize(width: _charSize, height: _charSize)
-        _charNode.size = CGSize(width: _charSize, height: _charSize)
+        if _unit is Lewis {
+            _charNode.size = CGSize(width: _charSize * 1.5, height: _charSize)
+        } else {
+            _charNode.size = CGSize(width: _charSize, height: _charSize)
+        }
         circleY = -_charSize * 0.25
         _select.size = CGSize(width: _charSize, height: _charSize)
         _select.texture = _selectTexture.getCell(3, 0)
@@ -88,6 +92,9 @@ class BUnit: SKSpriteNode {
         _select.zPosition = 40
         _charNode.zPosition = 50
         _levelLabel.position.y = -_charSize + 10
+        if _unit is Boss {
+            _levelLabel.position.y = -_charSize * 0.75 - 10
+        }
         _levelLabel.position.x = 0
 //        faceEast()
         addChild(_select)
@@ -178,7 +185,7 @@ class BUnit: SKSpriteNode {
     var _charTexture = SKTexture()
     private var _charNode = SKSpriteNode()
     func faceSouth() {
-        if _unit is Boss {
+        if _unit is Boss || _unit is IFace {
             _charNode.texture = _charTexture
         } else {
             _charNode.texture = _charTexture.getCell(1, 0)
@@ -271,18 +278,20 @@ class BUnit: SKSpriteNode {
         let move1 = SKAction.move(by: v, duration: 0)
         let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(0.15))
-        let go = SKAction.sequence([move1, wait, move2])
+        let go = SKAction.sequence([wait, move1, wait, move2])
         let this = self
         _select.run(go)
         _charNode.run(go, completion: {
             completion()
-            if this._battle._selectedTarget!.hasStatus(type: Status.ICE_GUARD) {
-                if this.seed() < 15 {
-                    this._extensions.speed -= 10
-                    this.showText(text: "SPEED -10")
-                    let status = LostSpeed()
-                    status._source = this
-                    this.addStatus(status: status)
+            if self._battle._selectedTarget != nil {
+                if this._battle._selectedTarget!.hasStatus(type: Status.ICE_GUARD) {
+                    if this.seed() < 15 {
+                        this._extensions.speed -= 10
+                        this.showText(text: "SPEED -10")
+                        let status = LostSpeed()
+                        status._source = this
+                        this.addStatus(status: status)
+                    }
                 }
             }
         })
@@ -305,6 +314,24 @@ class BUnit: SKSpriteNode {
         })
         setTimeout(delay: 0.8, completion: {
             this.auroUp(x: 2) {
+                completion()
+            }
+        })
+    }
+    func actionDebuff(completion:@escaping () -> Void) {
+        auroDown()
+        let this = self
+        setTimeout(delay: 0.2, completion: {
+            this.auroDown()
+        })
+        setTimeout(delay: 0.4, completion: {
+            this.auroDown()
+        })
+        setTimeout(delay: 0.6, completion: {
+            this.auroDown()
+        })
+        setTimeout(delay: 0.8, completion: {
+            this.auroDown() {
                 completion()
             }
         })
@@ -363,7 +390,7 @@ class BUnit: SKSpriteNode {
         _charNode.run(go, completion: completion)
     }
     func actionCast(completion:@escaping () -> Void) {
-        if _unit is Boss {
+        if _unit is Boss || _unit is IFace {
             let wait = SKAction.wait(forDuration: TimeInterval(1))
             let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
             let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))

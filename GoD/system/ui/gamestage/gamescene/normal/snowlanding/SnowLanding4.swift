@@ -13,7 +13,7 @@ class SnowLanding4: SnowLanding {
         //        _name = "雪之国"
         //        let oa4 = Game.instance.outside_a4
         //        _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
-        _name = "\(super._name) 零之阶梯"
+        _name = "\(super._name) 誓言阶梯"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -109,7 +109,7 @@ class RoleLewis: UIRole {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.texture = SKTexture(imageNamed: "Lewis")
-        self.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        self.size = CGSize(width: cellSize * 3, height: cellSize * 2)
     }
     
     required init?(coder aDecoder: NSCoder) {

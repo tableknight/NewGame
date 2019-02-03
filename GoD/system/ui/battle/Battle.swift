@@ -548,7 +548,9 @@ class Battle: SKSpriteNode {
             unit._speed = 0
         }
     }
-    
+    internal func getSpellAttack() -> Spell {
+        return Attack()
+    }
     internal func createAI() {
         let _seed = seed(max:101)
         let sensitive = _curRole._unit._sensitive
@@ -556,7 +558,7 @@ class Battle: SKSpriteNode {
             let sps = _curRole.getActiveSpell()
 //            debug("ai cast spell")
             if sps.count < 1 {
-                _selectedSpell = Attack()
+                _selectedSpell = getSpellAttack()
             } else {
                 _selectedSpell = sps[seed(max: sps.count)]
             }
@@ -574,7 +576,7 @@ class Battle: SKSpriteNode {
             }
         } else {
 //            debug("ai cast attack")
-            _selectedSpell = Attack()
+            _selectedSpell = getSpellAttack()
             _selectedSpell._battle = self
             _selectedSpell.findTarget()
             execOrder()
@@ -1066,13 +1068,13 @@ class Battle: SKSpriteNode {
     }
     internal func execOrder() {
         speakSpellName()
-//        let delay:CGFloat = _selectedSpell.isPhysical && !(_selectedSpell is Attack) ? 1 : 0
-//        setTimeout(delay: delay, completion: {
-//        })
-        self._selectedSpell.cast {
-            self.cdSpell(spell: self._selectedSpell)
-            self.moveEnd()
-        }
+        let delay:CGFloat = _selectedSpell is Attack ? 0 : 1
+        setTimeout(delay: delay, completion: {
+            self._selectedSpell.cast {
+                self.cdSpell(spell: self._selectedSpell)
+                self.moveEnd()
+            }
+        })
     
     }
     func roleMove(from:BUnit, to:BUnit, completion:@escaping () -> Void) {
@@ -1526,12 +1528,20 @@ class Battle: SKSpriteNode {
             }
             bUnit.position = _enemySeats[m._seat]!
             if m is Boss {
-                bUnit.yAxis = cellSize * 5
+                bUnit.yAxis = cellSize * 4.75
             }
             _enemyPart.append(bUnit)
             _evilsOrg.append(bUnit)
             addChild(bUnit)
         }
+    }
+    func addEnemy(bUnit:BUnit) {
+        bUnit._battle = self
+        bUnit.playerPart = false
+        bUnit.faceSouth()
+        bUnit.position = _enemySeats[bUnit._unit._seat]!
+        _enemyPart.append(bUnit)
+        addChild(bUnit)
     }
     func setPlayerPart(roles:Array<Creature>) {
         for r in roles {

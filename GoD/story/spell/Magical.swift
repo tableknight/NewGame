@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Magical: Spell {
+class Magical: Active {
     
     override init() {
         super.init()
