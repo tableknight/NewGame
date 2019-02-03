@@ -1,9 +1,14 @@
 //
-//  active.swift
-//  TheWitchNight
+//  Active.swift
+//  GoD
 //
-//  Created by kai chen on 2018/3/18.
-//  Copyright © 2018年 Chen. All rights reserved.
+//  Created by kai chen on 2019/2/4.
+//  Copyright © 2019年 Chen. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
+class Active: Spell {
+    override init() {
+        super.init()
+    }
+}

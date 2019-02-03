@@ -283,6 +283,7 @@
 		09C66C8E21FD4EC200E1C153 /* LewisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8D21FD4EC200E1C153 /* LewisBattle.swift */; };
 		09C66C9021FD571B00E1C153 /* IFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8F21FD571B00E1C153 /* IFace.swift */; };
 		09C66C9221FD58FA00E1C153 /* BossMinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9121FD58FA00E1C153 /* BossMinion.swift */; };
+		09C66C942207489800E1C153 /* Active.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C932207489800E1C153 /* Active.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -606,6 +607,7 @@
 		09C66C8D21FD4EC200E1C153 /* LewisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LewisBattle.swift; sourceTree = "<group>"; };
 		09C66C8F21FD571B00E1C153 /* IFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IFace.swift; sourceTree = "<group>"; };
 		09C66C9121FD58FA00E1C153 /* BossMinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossMinion.swift; sourceTree = "<group>"; };
+		09C66C932207489800E1C153 /* Active.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Active.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -924,6 +926,7 @@
 				090FEAA521BB9B2A004276BB /* Auro.swift */,
 				090FEAD621BB9B2A004276BB /* Passive.swift */,
 				090FEAD521BB9B2A004276BB /* Attack.swift */,
+				09C66C932207489800E1C153 /* Active.swift */,
 				090FEAD421BB9B2A004276BB /* Defend.swift */,
 				090FEAD721BB9B2A004276BB /* Spell.swift */,
 				090FEA9021BB9B2A004276BB /* Physical.swift */,
@@ -1750,6 +1753,7 @@
 				090FEBD721BB9B2B004276BB /* FeignAttack.swift in Sources */,
 				090FEBE221BB9B2B004276BB /* Attack.swift in Sources */,
 				090FEBAB21BB9B2B004276BB /* DancingOnIce.swift in Sources */,
+				09C66C942207489800E1C153 /* Active.swift in Sources */,
 				090FEB8521BB9B2B004276BB /* Critical.swift in Sources */,
 				090FEB8621BB9B2B004276BB /* Speed.swift in Sources */,
 				090FEC3021BB9B2B004276BB /* MagicHouseInside.swift in Sources */,
