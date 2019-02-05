@@ -23,7 +23,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = ToppurBattle()
+        let b = SumahlBattle()
         let es = Array<Creature>()
         
 //        for _ in 0...2 {

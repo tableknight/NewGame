@@ -403,15 +403,15 @@ class BUnit: SKSpriteNode {
 //                })
             }
         } else {
-            let wt1 = SKAction.wait(forDuration: TimeInterval(1))
+            let wt1 = SKAction.wait(forDuration: TimeInterval(0.5))
             let wt = SKAction.wait(forDuration: TimeInterval(0.1))
             let n = SKAction.setTexture(_charTexture.getCell(0, 3))
             let w = SKAction.setTexture(_charTexture.getCell(0, 1))
             let s = SKAction.setTexture(_charTexture.getCell(0, 0))
             let e = SKAction.setTexture(_charTexture.getCell(0, 2))
-            var go = SKAction.sequence([wt1, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
+            var go = SKAction.sequence([wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
             if !playerPart {
-                go = SKAction.sequence([wt1, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
+                go = SKAction.sequence([wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
             }
             _charNode.run(go) {
                 completion()

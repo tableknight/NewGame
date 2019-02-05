@@ -168,6 +168,23 @@ class Character: Creature {
         _extensions.hp = _extensions.health
     }
     
+    override func levelTo(level: CGFloat) {
+        for _ in 0...level.toInt() {
+            for _ in 1..._levelPoint {
+                let sd = seed()
+                if sd < 25 {
+                    staminaChange(value: 1)
+                } else if sd < 50 {
+                    strengthChange(value: 1)
+                } else if sd < 75 {
+                    agilityChange(value: 1)
+                } else {
+                    intellectChange(value: 1)
+                }
+            }
+        }
+    }
+    
     func getReadyMinions() -> Array<Creature> {
         var ms = Array<Creature>()
         for m in _minions {

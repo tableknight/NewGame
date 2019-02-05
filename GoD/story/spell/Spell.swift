@@ -126,8 +126,11 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         return def
     }
+    internal func getAttack() -> CGFloat {
+        return _battle._curRole.getAttack()
+    }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
-        let atk = from.getAttack()
+        let atk = self.getAttack()
         
         let def = getDefRate(from: from, to:to)
         
@@ -160,9 +163,12 @@ class Spell:Core, IDisplay, ISelectTarget {
         _damageValue = damageControl(damage)
         return -_damageValue
     }
+    internal func getSelfSpirit() -> CGFloat {
+        return _battle._curRole.getSpirit()
+    }
     func magicalDamage(_ to:BUnit) -> CGFloat {
         let from = _battle._curRole
-        let atk = from.getSpirit()
+        let atk = getSelfSpirit()
         let def = to.getSpirit()
         
         debug("m atk:\(atk.toInt()), def:\(def.toInt())")

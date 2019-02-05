@@ -15,21 +15,48 @@ class Sumahl:Boss {
     }
     override func create(level: CGFloat) {
         _quality = Quality.SACRED
-        _growth.stamina = 2.5
-        _growth.strength = 3.5
-        _growth.agility = 3.8
-        _growth.intellect = 2
-        levelTo(level: 51)
-        _extensions.health *= 4
+        _growth.stamina = 3.5
+        _growth.strength = 1.5
+        _growth.agility = 2.8
+        _growth.intellect = 3.5
+        levelTo(level: level)
+        _extensions.health *= 3
         _extensions.hp = _extensions.health
-        _extensions.accuracy = 200
-        _extensions.avoid = 200
-        _extensions.critical = 100
         
-        let bow = Bow()
-        bow.create(level: 51)
-        _weapon = bow
         
-        _spellsInuse = [ShootAll(), ShootTwo(), FrozenShoot(), OneShootDoubleKill(), Attack()]
+    }
+}
+class SumahlServant1:BossMinion {
+    override init() {
+        super.init()
+        _name = "蜜雪"
+        _img = Game.instance.pictureActor3.getCell(9, 3, 3, 4)
+    }
+    override func create(level: CGFloat) {
+        _quality = Quality.NORMAL
+        _growth.stamina = 2.5
+        _growth.strength = 2.5
+        _growth.agility = 2.8
+        _growth.intellect = 1.6
+        levelTo(level: level)
+        
+        _spellsInuse = [HolySacrifice()]
+    }
+}
+class SumahlServant2:BossMinion {
+    override init() {
+        super.init()
+        _name = "露琪"
+        _img = Game.instance.pictureNature.getCell(6, 7, 3, 4)
+    }
+    override func create(level: CGFloat) {
+        _quality = Quality.NORMAL
+        _growth.stamina = 2.1
+        _growth.strength = 1.5
+        _growth.agility = 2.8
+        _growth.intellect = 2.6
+        levelTo(level: level)
+        
+        _spellsInuse = [LifeFlow()]
     }
 }

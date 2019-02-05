@@ -20,7 +20,7 @@ class Toppur:Boss {
         _growth.agility = 1.8
         _growth.intellect = 3
         levelTo(level: 46)
-        _extensions.health *= 5
+        _extensions.health *= 4
         _extensions.hp = _extensions.health
         
     }

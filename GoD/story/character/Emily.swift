@@ -19,11 +19,8 @@ class Emily:Character {
 //        strengthChange(value: 30)
 //        agilityChange(value: 20)
 //        intellectChange(value: 5)
-        staminaChange(value: 250)
-        strengthChange(value: 100)
-        agilityChange(value: 50)
-        intellectChange(value: 25)
-        _level = 66
+        _level = 55
+        self.levelTo(level: _level)
 //        let c = Core()
 //        for _ in 0..._level.toInt() {
 //            let seed = c.seed()

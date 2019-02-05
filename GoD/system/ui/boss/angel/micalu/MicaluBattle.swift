@@ -24,4 +24,64 @@ class MicaluBattle: BossBattle {
             super.createAI()
         }
     }
+    override func setEnemyPart(minions: Array<Creature>) {
+        let level:CGFloat = 50
+        var es = Array<Creature>()
+//        for _ in 0...1 {
+//            let lm = ToppurServant()
+//            lm.create(level: level)
+//            es.append(lm)
+//        }
+//        es[0]._seat = BUnit.TBL
+//        es[1]._seat = BUnit.TBR
+        let ms1 = MicaluServant1()
+        ms1.create(level: level)
+        ms1._seat = BUnit.TBL
+        es.append(ms1)
+        
+        let ms2 = MicaluServant2()
+        ms2.create(level: level)
+        ms2._seat = BUnit.TBR
+        es.append(ms2)
+        
+        let t = Micalu()
+        t.create(level: level)
+        t._seat = BUnit.TTM
+        es.append(t)
+        
+        super.setEnemyPart(minions: es)
+    }
+    override func getBossYAxis() -> CGFloat {
+        return cellSize * 4.25
+    }
+}
+
+class SixShooter: Physical {
+    override init() {
+        super.init()
+        _name = "乱射"
+        _description = "进行六次快速射击，每次伤害递减18%"
+        _rate = 0.75
+        _quality = Quality.GOOD
+        _cooldown = 2
+    }
+    override func cast(completion:@escaping () -> Void) {
+        let c = _battle._curRole
+        c.actionShoot {
+            for i in 0...5 {
+                setTimeout(delay: i.toFloat() * 0.5, completion: {
+                    let t = self._battle._playerPart.one()
+                    let damage = self.physicalDamage(t) * pow(0.82, i.toFloat())
+                    if !self.hadSpecialAction(t: t) {
+                        if !self.hasMissed(target: t) {
+                            t.actionAttacked {
+                                t.showValue(value: damage)
+                            }
+                        }
+                    }
+                })
+            }
+            setTimeout(delay: 5, completion: completion)
+        }
+    }
 }

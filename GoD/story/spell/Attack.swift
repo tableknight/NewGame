@@ -45,13 +45,8 @@ class Attack: Physical {
         let b = _battle!
         let t = b._selectedTarget!
         let c = b._curRole
-//        let role = c._unit
         
-        var rate:CGFloat = 1
-        if c.hasStatus(type: Status.CRAZY) {
-            rate = 2
-        }
-        _damageValue = physicalDamage(t) * rate
+        _damageValue = physicalDamage(t)
         
         if c.hasSpell(spell: TruePower()) {
             _damageValue *= 1.3

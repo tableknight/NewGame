@@ -22,12 +22,19 @@ class MagicReflect: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.EYE_TO_EYE
-        status._timeleft = 2
+        status._timeleft = 3
         t.addStatus(status: status)
         c.actionCast {
             t.actionBuff {
                 completion()
             }
+        }
+    }
+    override func findTarget() {
+        if _battle._curRole._unit is Boss {
+            _battle._selectedTarget = _battle._curRole
+        } else {
+            _battle._selectedTarget = _battle._curRole.playerPart ? _battle._playerPart.one() : _battle._enemyPart.one()
         }
     }
 }

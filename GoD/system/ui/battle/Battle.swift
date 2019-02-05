@@ -522,22 +522,35 @@ class Battle: SKSpriteNode {
             }
         }
         
+        if this._curRole.hasSpell(spell: Crazy()) {
+            this._selectedSpell = Attack()
+            this._selectedSpell._rate = 2
+            this._selectedSpell._battle = self
+            this._selectedSpell.findTarget()
+            this.execOrder()
+            return
+        }
+        
+        if _curRole.hasStatus(type: Status.CONFUSED) {
+            var all = _playerPart + _enemyPart
+            let index = all.index(of: _curRole)
+            all.remove(at: index!)
+            _selectedSpell = Attack()
+            _selectedSpell._battle = self
+            _selectedTarget = all.one()
+            _curRole.showText(text: "CONFUSED") {
+                self.execOrder()
+            }
+            return
+        }
+        
         if !_curRole.playerPart {
             this.createAI()
         } else {
-            if this._curRole.hasSpell(spell: Crazy()) {
-                this._selectedSpell = Attack()
-                this._selectedSpell._battle = self
-                this._selectedSpell.findTarget()
-                this.execOrder()
-//                this.hideOrder()
-//                this.hideCancel()
-            } else {
-                this._curRole.setOrderMode()
-                this.defaultOrderAttack()
-                this.showOrder()
-                this.hideCancel()
-            }
+            this._curRole.setOrderMode()
+            this.defaultOrderAttack()
+            this.showOrder()
+            this.hideCancel()
         }
     }
     internal func cleanUnitStatus() {
@@ -1534,6 +1547,9 @@ class Battle: SKSpriteNode {
             _evilsOrg.append(bUnit)
             addChild(bUnit)
         }
+    }
+    internal func getBossYAxis() -> CGFloat {
+        return cellSize * 4.25
     }
     func addEnemy(bUnit:BUnit) {
         bUnit._battle = self
