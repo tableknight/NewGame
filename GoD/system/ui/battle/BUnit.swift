@@ -603,8 +603,8 @@ class BUnit: SKSpriteNode {
         }
         setTimeout(delay: 0.5, completion: {
             if this.isDead() {
+                this.removeFromBattle()
                 this.actionDead {
-                    this.removeFromBattle()
                     this.removeFromParent()
                     if !this._battle.hasFinished() {
                         completion()
@@ -629,6 +629,7 @@ class BUnit: SKSpriteNode {
                 }
             }
         })
+        
         hpChange(value: value)
     }
     func showText(text:String = "", color:UIColor = UIColor.white, completion:@escaping () -> Void = {}) {

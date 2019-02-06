@@ -10,6 +10,10 @@ import SpriteKit
 class Battle: SKSpriteNode {
     internal func touchAction(s:CGPoint) {
         
+        if cancelTouch {
+            return
+        }
+        
         //        if _roundLabel.contains(s) {
         //            Game.instance.stage.removeBattle(b: self)
         //            let tp = TownScroll()
@@ -486,8 +490,8 @@ class Battle: SKSpriteNode {
                 debug("单位已不在战斗中")
                 return
             }
-            
-            this.createAction()
+            let delay:CGFloat = self._curRole.playerPart ? 0.5 : 0
+            setTimeout(delay: delay, completion: self.createAction)
         }
     }
     internal func createAction() {
@@ -547,6 +551,8 @@ class Battle: SKSpriteNode {
         if !_curRole.playerPart {
             this.createAI()
         } else {
+//            moveEnd()
+            cancelTouch = false
             this._curRole.setOrderMode()
             this.defaultOrderAttack()
             this.showOrder()
@@ -1080,6 +1086,7 @@ class Battle: SKSpriteNode {
         _curRole.showText(text:_selectedSpell._name)
     }
     internal func execOrder() {
+        cancelTouch = true
         speakSpellName()
         let delay:CGFloat = _selectedSpell is Attack ? 0 : 1
         setTimeout(delay: delay, completion: {
@@ -1212,6 +1219,8 @@ class Battle: SKSpriteNode {
             target = BUnit.TBM
         } else if s == BUnit.TTR {
             target = BUnit.TBR
+        } else {
+            return false
         }
         if !target.isEmpty {
             for u in _enemyPart {
@@ -1234,6 +1243,8 @@ class Battle: SKSpriteNode {
         } else
         if s == BUnit.BBR {
             target = BUnit.BTR
+        } else {
+            return false
         }
         if !target.isEmpty {
             for u in _playerPart {
@@ -1380,7 +1391,7 @@ class Battle: SKSpriteNode {
         }
         _spellCards = Array<BattleSpellIcon>()
     }
-    
+    internal var cancelTouch = true
     internal var _orders = Array<RoundButton>()
     internal func showOrder() {
         for o in _orders {
@@ -1550,6 +1561,14 @@ class Battle: SKSpriteNode {
     }
     internal func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
+    }
+    func addEnemy(unit:Creature) -> BUnit {
+        let bUnit = BUnit()
+        bUnit.setUnit(unit: unit)
+        bUnit.create()
+        addEnemy(bUnit: bUnit)
+        
+        return bUnit
     }
     func addEnemy(bUnit:BUnit) {
         bUnit._battle = self
@@ -1756,19 +1775,19 @@ class Battle: SKSpriteNode {
             if nil != index {
                 _playerPart.remove(at: index!)
             } else {
-                debug("removeFromPart index nil")
+                debug("removeFromPart index nil1")
             }
         } else {
             let index = _enemyPart.index(of: unit)
             if nil != index {
                 _enemyPart.remove(at: index!)
-                debug("removeFromPart index nil")
+                debug("removeFromPart index nil2")
             }
         }
         let index = _roleAll.index(of: unit)
         if nil != index {
             _roleAll.remove(at: index!)
-            debug("removeFromPart index nil")
+            debug("removeFromPart index nil3")
         }
     }
     

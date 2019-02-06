@@ -285,6 +285,8 @@
 		09C66C9221FD58FA00E1C153 /* BossMinion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9121FD58FA00E1C153 /* BossMinion.swift */; };
 		09C66C942207489800E1C153 /* Active.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C932207489800E1C153 /* Active.swift */; };
 		09C66C962209E4B600E1C153 /* SumahlBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C952209E4B600E1C153 /* SumahlBattle.swift */; };
+		09C66C9C220B063200E1C153 /* Francis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9B220B063200E1C153 /* Francis.swift */; };
+		09C66C9E220B0AAB00E1C153 /* FrancisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -610,6 +612,8 @@
 		09C66C9121FD58FA00E1C153 /* BossMinion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossMinion.swift; sourceTree = "<group>"; };
 		09C66C932207489800E1C153 /* Active.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Active.swift; sourceTree = "<group>"; };
 		09C66C952209E4B600E1C153 /* SumahlBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumahlBattle.swift; sourceTree = "<group>"; };
+		09C66C9B220B063200E1C153 /* Francis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Francis.swift; sourceTree = "<group>"; };
+		09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrancisBattle.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -1300,6 +1304,7 @@
 		09C66C7021F0B78B00E1C153 /* boss */ = {
 			isa = PBXGroup;
 			children = (
+				09C66C99220B05B400E1C153 /* demon */,
 				09C66C7A21F7635300E1C153 /* angel */,
 				09C66C8F21FD571B00E1C153 /* IFace.swift */,
 				09C66C9121FD58FA00E1C153 /* BossMinion.swift */,
@@ -1360,6 +1365,23 @@
 				09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */,
 			);
 			path = newSpell;
+			sourceTree = "<group>";
+		};
+		09C66C99220B05B400E1C153 /* demon */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C9A220B061A00E1C153 /* francis */,
+			);
+			path = demon;
+			sourceTree = "<group>";
+		};
+		09C66C9A220B061A00E1C153 /* francis */ = {
+			isa = PBXGroup;
+			children = (
+				09C66C9B220B063200E1C153 /* Francis.swift */,
+				09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */,
+			);
+			path = francis;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1532,6 +1554,7 @@
 				090FEBD421BB9B2B004276BB /* BloodThirty.swift in Sources */,
 				09C6BFA621DC8D710003C7F1 /* LostArea.swift in Sources */,
 				090FEBB321BB9B2B004276BB /* AttackReturnBack.swift in Sources */,
+				09C66C9E220B0AAB00E1C153 /* FrancisBattle.swift in Sources */,
 				090FEB5A21BB9B2B004276BB /* SacredDagger.swift in Sources */,
 				090FEC1F21BB9B2B004276BB /* IScenery.swift in Sources */,
 				090FEBA021BB9B2B004276BB /* FlowerOfHeal.swift in Sources */,
@@ -1589,6 +1612,7 @@
 				090FEC4421BB9B2B004276BB /* SelectImage.swift in Sources */,
 				090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */,
 				090FEBCF21BB9B2B004276BB /* MightOfOaks.swift in Sources */,
+				09C66C9C220B063200E1C153 /* Francis.swift in Sources */,
 				09C66C8E21FD4EC200E1C153 /* LewisBattle.swift in Sources */,
 				090FEBE821BB9B2B004276BB /* Status.swift in Sources */,
 				090FEBCC21BB9B2B004276BB /* FrozenShoot.swift in Sources */,

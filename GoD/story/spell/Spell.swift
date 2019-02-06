@@ -345,6 +345,9 @@ class Spell:Core, IDisplay, ISelectTarget {
                 ts = _battle._playerPart
             }
         }
+        if ts.count < 1 {
+            debug("--------------------------------findtarget")
+        }
         _battle._selectedTarget = ts.one()
     }
     var _damageValue:CGFloat = 0

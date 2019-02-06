@@ -42,6 +42,7 @@ class LewisBattle: BossBattle {
             super.createAI()
         }
     }
+    //阵亡cui song随从位置
     private func getDeadPos() -> String {
         var posArray = Array<String>()
         for u in _enemyPart {
