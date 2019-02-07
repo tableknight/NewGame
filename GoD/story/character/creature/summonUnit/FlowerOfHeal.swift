@@ -52,7 +52,7 @@ class HealOfFlower: Passive {
         }
         c.actionCast {
             
-            let ts = this.getAdajcentUnits(from: c)
+            let ts = this.getAdajcentUnits(target: c)
             for u in ts {
                 u.actionHealed {
                     let value = u.getHealth() * rate

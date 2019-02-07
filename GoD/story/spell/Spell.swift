@@ -98,9 +98,13 @@ class Spell:Core, IDisplay, ISelectTarget {
     func cast(completion:@escaping () -> Void) {
         completion()
     }
-//    func on(t:Creature) {}
-//    func off(t:Creature) {}
     func physicalDamage(_ to:BUnit) -> CGFloat {
+        if to._unit is Dius {
+            let d = to._unit as! Dius
+            if d._wwakness != Dius.DEFENCE {
+                return 0
+            }
+        }
         let from = _battle._curRole
         _damageValue = physicalDamage(from: from, to: to)
         return _damageValue
@@ -115,7 +119,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if def > 0.75 {
             def = 0.75
         }
-        if def < 0.25 {
+        if def < 0.25 || def.isNaN{
             def = 0.25
         }
 //        debug("\(to._unit._name) odef = \(odef)")
@@ -129,6 +133,9 @@ class Spell:Core, IDisplay, ISelectTarget {
     internal func getAttack() -> CGFloat {
         return _battle._curRole.getAttack()
     }
+    func levelFactor(_ from: BUnit, _ to:BUnit) -> CGFloat {
+        return (from._unit._level / to._unit._level)
+    }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
         let atk = self.getAttack()
         
@@ -137,7 +144,7 @@ class Spell:Core, IDisplay, ISelectTarget {
 //        let msg = "p atk:\(atk.toInt()), def:\(to.getDefence(t: from._unit).toInt()) "
 //        debug(msg)
         
-        var  damage = atk * (1 - def) * (from._unit._level / to._unit._level)
+        var  damage = atk * (1 - def) * levelFactor(from, to)
         if damage < 5 {
             return -seed(min: 0, max: 5).toFloat()
         }
@@ -167,14 +174,21 @@ class Spell:Core, IDisplay, ISelectTarget {
         return _battle._curRole.getSpirit()
     }
     func magicalDamage(_ to:BUnit) -> CGFloat {
+        var def = to.getSpirit()
+        if to._unit is Dius {
+            let d = to._unit as! Dius
+            if d._wwakness != Dius.SPIRIT {
+                return 0
+            } else {
+                def = 0
+            }
+            
+        }
         let from = _battle._curRole
         let atk = getSelfSpirit()
-        let def = to.getSpirit()
-        
-        debug("m atk:\(atk.toInt()), def:\(def.toInt())")
         
         var damage = atk - def
-        damage *= 1 + (from.getMagicalDamage() - to.getMagicalResistance()) * 0.01
+        damage *= (1 + (from.getMagicalDamage() - to.getMagicalResistance()) * 0.01) * levelFactor(from, to)
         
         if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: MagicalPower()) {
             damage *= 1.5
@@ -184,12 +198,18 @@ class Spell:Core, IDisplay, ISelectTarget {
         return _damageValue
     }
     func fireDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
+        if to._unit is Dius {
+            let d = to._unit as! Dius
+            if d._wwakness != Dius.FIRE {
+                return 0
+            }
+        }
         let from = _battle._curRole
         var damage = from.getSpirit()
         if isPhysical {
             damage = from.getAttack()
         }
-        damage *= fireFactor(from: from, to: to)
+        damage *= fireFactor(from: from, to: to) * levelFactor(from, to)
         
         if !isMultiple && isFire {
             if from._unit is Character {
@@ -218,6 +238,12 @@ class Spell:Core, IDisplay, ISelectTarget {
         return 1 + (x * 0.01)
     }
     func waterDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
+        if to._unit is Dius {
+            let d = to._unit as! Dius
+            if d._wwakness != Dius.WATER {
+                return 0
+            }
+        }
         let from = _battle._curRole
         var damage = from.getSpirit()
         if isPhysical {
@@ -227,13 +253,19 @@ class Spell:Core, IDisplay, ISelectTarget {
             return -seed(min: 0, max: 5).toFloat()
         }
 //        let x = from.getWaterPower() - to.getWaterResistance()
-        damage *= waterFactor(from: from, to: to)
+        damage *= waterFactor(from: from, to: to) * levelFactor(from, to)
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
         _damageValue = -damageControl(damage)
         return _damageValue
     }
     func thunderDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
+        if to._unit is Dius {
+            let d = to._unit as! Dius
+            if d._wwakness != Dius.THUNDER {
+                return 0
+            }
+        }
         let from = _battle._curRole
         var damage = from.getSpirit()
         if isPhysical {
@@ -243,7 +275,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             return -seed(min: 0, max: 5).toFloat()
         }
 //        let x = from.getThunderPower() - to.getThunderResistance()
-        damage *= thunderFactor(from: from, to: to)
+        damage *= thunderFactor(from: from, to: to) * levelFactor(from, to)
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
@@ -319,6 +351,9 @@ class Spell:Core, IDisplay, ISelectTarget {
         if arr.count > 0 {
             _battle._selectedTarget = arr.one()
         }
+    }
+    func findtargetAll() {
+        _battle._selectedTargets = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
     }
     //默认近战 
     func findTarget() {
@@ -487,7 +522,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         switch seat {
         case BUnit.TBL:
             return BUnit.TTL
-        case "tbm":
+        case BUnit.TBM:
             return "ttm"
         case "tbr":
             return "ttr"
@@ -510,7 +545,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         case "ttr":
             return "tbr"
         case "btl":
-            return "bbm"
+            return "bbl"
         case "btm":
             return "bbm"
         case "btr":
@@ -597,13 +632,14 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         return ts
     }
-    func getAdajcentUnits(from:BUnit) -> Array<BUnit> {
+    func getAdajcentUnits(target:BUnit) -> Array<BUnit> {
 //        var ts = Array<BUnit>()
         var seats = Array<String>()
-        seats.append(getUnitBeyondTarget(seat: from._unit._seat))
-        seats.append(getUnitUnderTarget(seat: from._unit._seat))
-        seats.append(getUnitInTheLeftOfTarget(seat: from._unit._seat))
-        seats.append(getUnitInTheRightOfTarget(seat: from._unit._seat))
+        let seat = target._unit._seat
+        seats.append(getUnitBeyondTarget(seat: seat))
+        seats.append(getUnitUnderTarget(seat: seat))
+        seats.append(getUnitInTheLeftOfTarget(seat: seat))
+        seats.append(getUnitInTheRightOfTarget(seat: seat))
         return getTargetsBySeats(seats: seats)
     }
     func setFrozen(target:BUnit, completion:@escaping () -> Void) {

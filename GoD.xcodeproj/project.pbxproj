@@ -287,6 +287,8 @@
 		09C66C962209E4B600E1C153 /* SumahlBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C952209E4B600E1C153 /* SumahlBattle.swift */; };
 		09C66C9C220B063200E1C153 /* Francis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9B220B063200E1C153 /* Francis.swift */; };
 		09C66C9E220B0AAB00E1C153 /* FrancisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */; };
+		09C66CA1220C1B1200E1C153 /* Dius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA0220C1B1200E1C153 /* Dius.swift */; };
+		09C66CA3220C1C9D00E1C153 /* DiusBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -614,6 +616,8 @@
 		09C66C952209E4B600E1C153 /* SumahlBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumahlBattle.swift; sourceTree = "<group>"; };
 		09C66C9B220B063200E1C153 /* Francis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Francis.swift; sourceTree = "<group>"; };
 		09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrancisBattle.swift; sourceTree = "<group>"; };
+		09C66CA0220C1B1200E1C153 /* Dius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dius.swift; sourceTree = "<group>"; };
+		09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiusBattle.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -1370,6 +1374,7 @@
 		09C66C99220B05B400E1C153 /* demon */ = {
 			isa = PBXGroup;
 			children = (
+				09C66C9F220C1AF000E1C153 /* dius */,
 				09C66C9A220B061A00E1C153 /* francis */,
 			);
 			path = demon;
@@ -1382,6 +1387,15 @@
 				09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */,
 			);
 			path = francis;
+			sourceTree = "<group>";
+		};
+		09C66C9F220C1AF000E1C153 /* dius */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CA0220C1B1200E1C153 /* Dius.swift */,
+				09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */,
+			);
+			path = dius;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1558,6 +1572,7 @@
 				090FEB5A21BB9B2B004276BB /* SacredDagger.swift in Sources */,
 				090FEC1F21BB9B2B004276BB /* IScenery.swift in Sources */,
 				090FEBA021BB9B2B004276BB /* FlowerOfHeal.swift in Sources */,
+				09C66CA1220C1B1200E1C153 /* Dius.swift in Sources */,
 				090FEB7B21BB9B2B004276BB /* Intellect.swift in Sources */,
 				090FEBF321BB9B2B004276BB /* Battle.swift in Sources */,
 				090FEB9A21BB9B2B004276BB /* DarkCrow.swift in Sources */,
@@ -1583,6 +1598,7 @@
 				09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */,
 				090FEC2921BB9B2B004276BB /* UIRandomScene.swift in Sources */,
 				090FEBE321BB9B2B004276BB /* Passive.swift in Sources */,
+				09C66CA3220C1C9D00E1C153 /* DiusBattle.swift in Sources */,
 				090FEBFD21BB9B2B004276BB /* PItem.swift in Sources */,
 				090FEC2D21BB9B2B004276BB /* Meadow.swift in Sources */,
 				090FEB5421BB9B2B004276BB /* Sword.swift in Sources */,

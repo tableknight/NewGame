@@ -23,7 +23,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = FrancisBattle()
+        let b = DiusBattle()
         let es = Array<Creature>()
         
 //        for _ in 0...2 {
@@ -42,8 +42,11 @@ class GameScene: SKScene {
 //        es.append(t)
 //        //        b.setEvils(evils: es)
         b.setEnemyPart(minions: es)
-        
-        b.setPlayerPart(roles: [Game.instance.char] + Game.instance.char.getReadyMinions())
+        let cs = [Game.instance.char] + Game.instance.char.getReadyMinions()
+        for u in cs {
+//            u._ElementalResistance.water += 70
+        }
+        b.setPlayerPart(roles: cs)
         
         Game.instance.curStage.addBattle(b)
         b.battleStart()
