@@ -289,6 +289,8 @@
 		09C66C9E220B0AAB00E1C153 /* FrancisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */; };
 		09C66CA1220C1B1200E1C153 /* Dius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA0220C1B1200E1C153 /* Dius.swift */; };
 		09C66CA3220C1C9D00E1C153 /* DiusBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */; };
+		09C66CA6220C896100E1C153 /* Idlir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA5220C896100E1C153 /* Idlir.swift */; };
+		09C66CA8220C8ADD00E1C153 /* IdlirBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -618,6 +620,8 @@
 		09C66C9D220B0AAB00E1C153 /* FrancisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrancisBattle.swift; sourceTree = "<group>"; };
 		09C66CA0220C1B1200E1C153 /* Dius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dius.swift; sourceTree = "<group>"; };
 		09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiusBattle.swift; sourceTree = "<group>"; };
+		09C66CA5220C896100E1C153 /* Idlir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idlir.swift; sourceTree = "<group>"; };
+		09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdlirBattle.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -1374,6 +1378,7 @@
 		09C66C99220B05B400E1C153 /* demon */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CA4220C894D00E1C153 /* idlir */,
 				09C66C9F220C1AF000E1C153 /* dius */,
 				09C66C9A220B061A00E1C153 /* francis */,
 			);
@@ -1396,6 +1401,15 @@
 				09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */,
 			);
 			path = dius;
+			sourceTree = "<group>";
+		};
+		09C66CA4220C894D00E1C153 /* idlir */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CA5220C896100E1C153 /* Idlir.swift */,
+				09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */,
+			);
+			path = idlir;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1714,6 +1728,7 @@
 				090FEB9B21BB9B2B004276BB /* VirulentToad.swift in Sources */,
 				090FEB7A21BB9B2B004276BB /* Strength.swift in Sources */,
 				090FEC3421BB9B2B004276BB /* WeaponsHouseInside.swift in Sources */,
+				09C66CA8220C8ADD00E1C153 /* IdlirBattle.swift in Sources */,
 				090FEC3B21BB9B2B004276BB /* TheDevilPath.swift in Sources */,
 				090FEBAA21BB9B2B004276BB /* Immune.swift in Sources */,
 				090FEB6F21BB9B2B004276BB /* Chaos.swift in Sources */,
@@ -1858,6 +1873,7 @@
 				090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */,
 				090FEB5221BB9B2B004276BB /* Bow.swift in Sources */,
 				090FEC4121BB9B2B004276BB /* GroundSets.swift in Sources */,
+				09C66CA6220C896100E1C153 /* Idlir.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

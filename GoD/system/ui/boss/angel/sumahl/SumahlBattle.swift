@@ -159,8 +159,8 @@ class HolySacrifice: Physical {
         _description = "牺牲15%当前生命，作为额外攻击力。对目标造成攻击力100%的物理伤害"
         _quality = Quality.RARE
     }
-    override func getAttack() -> CGFloat {
-        return _battle._curRole.getAttack() + _battle._curRole.getHp() * 0.15
+    override func getAttack(from: BUnit) -> CGFloat {
+        return from.getAttack() + _battle._curRole.getHp() * 0.15
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

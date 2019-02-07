@@ -23,7 +23,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = DiusBattle()
+        let b = IdlirBattle()
         let es = Array<Creature>()
         
 //        for _ in 0...2 {

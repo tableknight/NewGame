@@ -130,14 +130,14 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         return def
     }
-    internal func getAttack() -> CGFloat {
-        return _battle._curRole.getAttack()
+    internal func getAttack(from: BUnit) -> CGFloat {
+        return from.getAttack()
     }
     func levelFactor(_ from: BUnit, _ to:BUnit) -> CGFloat {
         return (from._unit._level / to._unit._level)
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
-        let atk = self.getAttack()
+        let atk = self.getAttack(from: from)
         
         let def = getDefRate(from: from, to:to)
         
