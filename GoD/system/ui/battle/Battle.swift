@@ -506,6 +506,16 @@ class Battle: SKSpriteNode {
             return
         }
         
+        if _curRole.hasStatus(type: Status.BURNING) {
+            let s = _curRole.getStatus(type: Status.BURNING) as! BurningStatus
+            let damage = s.getBurningDamage(unit: _curRole)
+            _curRole.showValue(value: damage)
+            if _curRole.isDead() {
+                moveEnd()
+                return
+            }
+        }
+        
         if !_curRole._unit.hasAction {
             moveEnd()
             return
@@ -971,12 +981,20 @@ class Battle: SKSpriteNode {
     }
     internal func execOrder() {
         cancelTouch = true
-        speakSpellName()
-        let delay:CGFloat = _selectedSpell is Attack ? 0 : 1
+        let delay:CGFloat = 0
         setTimeout(delay: delay, completion: {
-            self._selectedSpell.cast {
-                self.cdSpell(spell: self._selectedSpell)
-                self.moveEnd()
+            if self._selectedSpell is Attack {
+                self._selectedSpell.cast {
+                    self.cdSpell(spell: self._selectedSpell)
+                    self.moveEnd()
+                }
+            } else {
+                self._curRole.showText(text: self._selectedSpell._name) {
+                    self._selectedSpell.cast {
+                        self.cdSpell(spell: self._selectedSpell)
+                        self.moveEnd()
+                    }
+                }
             }
         })
     

@@ -267,6 +267,18 @@ class BUnit: SKSpriteNode {
         _charNode.run(go)
     }
     
+    func burning() {
+        let t = self
+        if t.hasStatus(type: Status.BURNING) {
+            let s = t.getStatus(type: Status.BURNING) as! BurningStatus
+            s._level += 1
+            s._timeleft = 3
+            t.addStatus(status: s)
+        } else {
+            t.addStatus(status: BurningStatus())
+        }
+    }
+    
     func actionAttack(completion:@escaping () -> Void) {
         let range = _charSize * 0.5
         var v = CGVector(dx: 0, dy: range)

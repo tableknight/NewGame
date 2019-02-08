@@ -52,6 +52,7 @@ class Status:Core {
     static let LOST_SEPPD = "lost_speed"
     static let IMMUNE = "immune"
     static let DOMINATE = "dominate"
+    static let BURNING = "burning"
     
     static let FIRE_ENERGE = "fire_energe"
     static let WATER_ENERGE = "water_energe"
@@ -78,6 +79,19 @@ class LostSpeed:Status {
     }
 }
 
+class BurningStatus:Status {
+    override init() {
+        super.init()
+        _type = Status.BURNING
+//        timeupAction = {}
+        _timeleft = 3
+    }
+    var _level:CGFloat = 1
+    func getBurningDamage(unit:BUnit) -> CGFloat {
+        let damage = unit.getHealth() * 0.05
+        return -damage * _level
+    }
+}
 
 
 

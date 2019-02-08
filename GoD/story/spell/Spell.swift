@@ -206,7 +206,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         let from = _battle._curRole
         var damage = from.getSpirit()
-        if isPhysical {
+        if self is Physical {
             damage = from.getAttack()
         }
         damage *= fireFactor(from: from, to: to) * levelFactor(from, to)
@@ -246,7 +246,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         let from = _battle._curRole
         var damage = from.getSpirit()
-        if isPhysical {
+        if self is Physical {
             damage = from.getAttack()
         }
         if damage < 5 {
@@ -268,7 +268,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         let from = _battle._curRole
         var damage = from.getSpirit()
-        if isPhysical {
+        if self is Physical {
             damage = from.getAttack()
         }
         if damage < 5 {
@@ -389,7 +389,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     func isAttackReturnBack(t:BUnit, completion:@escaping () -> Void) -> Bool {
 //        let t = _battle._selectedTarget
         let c = _battle._curRole
-        if isClose && isPhysical && c._unit.isClose() {
+        if isClose && self is Physical && c._unit.isClose() {
             let damage = _damageValue
             if t.hasStatus(type: Status.ATTACK_RETURN_BACK) {
                 t.removeStatus(type: Status.ATTACK_RETURN_BACK)
@@ -401,7 +401,7 @@ class Spell:Core, IDisplay, ISelectTarget {
                 }
                 return true
             }
-        } else if isMagical {
+        } else if self is Magical {
             let damage = _damageValue
             if t.hasStatus(type: Status.EYE_TO_EYE) {
                 t.removeStatus(type: Status.EYE_TO_EYE)
@@ -418,7 +418,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     }
     
     func isAttackTurned(t:BUnit, completion:@escaping () -> Void) -> Bool {
-        if isPhysical {
+        if self is Physical {
 //            let t = _battle._selectedTarget
             let damage = _damageValue
             if t.hasStatus(type: Status.TURN_ATTACK) {
@@ -432,7 +432,7 @@ class Spell:Core, IDisplay, ISelectTarget {
 //                }
                 return true
             }
-        } else if isMagical {
+        } else if self is Magical {
             let damage = _damageValue
             if t.hasStatus(type: Status.TURN_MAGIC) {
 //                t.hpChange(value: -damage)
@@ -749,6 +749,10 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         
         return bu
+    }
+    
+    func burningOne(t: BUnit) {
+        
     }
     
     func findTargetInALine() {
