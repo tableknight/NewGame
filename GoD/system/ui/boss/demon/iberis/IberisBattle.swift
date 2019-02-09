@@ -55,6 +55,9 @@ class IberisBattle: BossBattle {
                 }
             }
         }
+        if _roleAll[0]._unit._name == _roleAll[1]._unit._name {
+            debug("出错了")
+        }
     }
     
     override func findNextRole(completion: @escaping () -> Void) {

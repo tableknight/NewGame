@@ -761,9 +761,16 @@ class Battle: SKSpriteNode {
     func placeEvils() {}
     func placeRoles() {}
     func silenceUnit(unit:BUnit) {
-        let index = _roleAll.index(of: unit)
-        if nil != index {
-            _roleAll.remove(at: index!)
+        if unit._unit is Boss {
+            unit.showText(text: "IMMUNE")
+        } else {
+            unit.showText(text: "SILENCED")
+            let index = _roleAll.index(of: unit)
+            if nil != index {
+                _roleAll.remove(at: index!)
+            } else {
+                debug("silenceUnit not exist")
+            }
         }
     }
     //unused

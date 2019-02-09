@@ -43,9 +43,7 @@ class SoulLash: Magical {
                 t.showValue(value: damage) {
                     if this.seed() < 25 {
                         b?.silenceUnit(unit: t)
-                        t.showText(text: "SILENCED") {
-                            completion()
-                        }
+                        completion()
                     } else {
                         completion()
                     }

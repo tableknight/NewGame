@@ -82,7 +82,6 @@
 		090FEB9021BB9B2B004276BB /* IUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7721BB9B2A004276BB /* IUnit.swift */; };
 		090FEB9121BB9B2B004276BB /* PowerLord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7821BB9B2A004276BB /* PowerLord.swift */; };
 		090FEB9221BB9B2B004276BB /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7921BB9B2A004276BB /* Unit.swift */; };
-		090FEB9321BB9B2B004276BB /* Iberis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7C21BB9B2A004276BB /* Iberis.swift */; };
 		090FEB9421BB9B2B004276BB /* DeathAngelKhalil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */; };
 		090FEB9521BB9B2B004276BB /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7E21BB9B2A004276BB /* Race.swift */; };
 		090FEB9621BB9B2B004276BB /* Rizen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7F21BB9B2A004276BB /* Rizen.swift */; };
@@ -291,6 +290,11 @@
 		09C66CA3220C1C9D00E1C153 /* DiusBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */; };
 		09C66CA6220C896100E1C153 /* Idlir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA5220C896100E1C153 /* Idlir.swift */; };
 		09C66CA8220C8ADD00E1C153 /* IdlirBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */; };
+		09C66CAB220D786000E1C153 /* Pitheron.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CAA220D786000E1C153 /* Pitheron.swift */; };
+		09C66CAE220D799F00E1C153 /* Iberis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CAD220D799F00E1C153 /* Iberis.swift */; };
+		09C66CB0220D7AD200E1C153 /* IberisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CAF220D7AD200E1C153 /* IberisBattle.swift */; };
+		09C66CB3220F21C700E1C153 /* Umisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB2220F21C700E1C153 /* Umisa.swift */; };
+		09C66CB5220F230600E1C153 /* UmisaBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB4220F230600E1C153 /* UmisaBattle.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -413,7 +417,6 @@
 		090FEA7721BB9B2A004276BB /* IUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUnit.swift; sourceTree = "<group>"; };
 		090FEA7821BB9B2A004276BB /* PowerLord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerLord.swift; sourceTree = "<group>"; };
 		090FEA7921BB9B2A004276BB /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
-		090FEA7C21BB9B2A004276BB /* Iberis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iberis.swift; sourceTree = "<group>"; };
 		090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathAngelKhalil.swift; sourceTree = "<group>"; };
 		090FEA7E21BB9B2A004276BB /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		090FEA7F21BB9B2A004276BB /* Rizen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rizen.swift; sourceTree = "<group>"; };
@@ -622,6 +625,11 @@
 		09C66CA2220C1C9D00E1C153 /* DiusBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiusBattle.swift; sourceTree = "<group>"; };
 		09C66CA5220C896100E1C153 /* Idlir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idlir.swift; sourceTree = "<group>"; };
 		09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdlirBattle.swift; sourceTree = "<group>"; };
+		09C66CAA220D786000E1C153 /* Pitheron.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitheron.swift; sourceTree = "<group>"; };
+		09C66CAD220D799F00E1C153 /* Iberis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iberis.swift; sourceTree = "<group>"; };
+		09C66CAF220D7AD200E1C153 /* IberisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IberisBattle.swift; sourceTree = "<group>"; };
+		09C66CB2220F21C700E1C153 /* Umisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Umisa.swift; sourceTree = "<group>"; };
+		09C66CB4220F230600E1C153 /* UmisaBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmisaBattle.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -891,7 +899,6 @@
 		090FEA7B21BB9B2A004276BB /* dominator */ = {
 			isa = PBXGroup;
 			children = (
-				090FEA7C21BB9B2A004276BB /* Iberis.swift */,
 				090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */,
 			);
 			path = dominator;
@@ -1378,6 +1385,9 @@
 		09C66C99220B05B400E1C153 /* demon */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CB1220F21B800E1C153 /* umisa */,
+				09C66CAC220D78D900E1C153 /* iberis */,
+				09C66CA9220D781F00E1C153 /* pitheron */,
 				09C66CA4220C894D00E1C153 /* idlir */,
 				09C66C9F220C1AF000E1C153 /* dius */,
 				09C66C9A220B061A00E1C153 /* francis */,
@@ -1410,6 +1420,32 @@
 				09C66CA7220C8ADD00E1C153 /* IdlirBattle.swift */,
 			);
 			path = idlir;
+			sourceTree = "<group>";
+		};
+		09C66CA9220D781F00E1C153 /* pitheron */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CAA220D786000E1C153 /* Pitheron.swift */,
+			);
+			path = pitheron;
+			sourceTree = "<group>";
+		};
+		09C66CAC220D78D900E1C153 /* iberis */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CAD220D799F00E1C153 /* Iberis.swift */,
+				09C66CAF220D7AD200E1C153 /* IberisBattle.swift */,
+			);
+			path = iberis;
+			sourceTree = "<group>";
+		};
+		09C66CB1220F21B800E1C153 /* umisa */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CB2220F21C700E1C153 /* Umisa.swift */,
+				09C66CB4220F230600E1C153 /* UmisaBattle.swift */,
+			);
+			path = umisa;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1617,6 +1653,7 @@
 				090FEC2D21BB9B2B004276BB /* Meadow.swift in Sources */,
 				090FEB5421BB9B2B004276BB /* Sword.swift in Sources */,
 				090FEC2021BB9B2B004276BB /* SmallRoom.swift in Sources */,
+				09C66CB5220F230600E1C153 /* UmisaBattle.swift in Sources */,
 				0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */,
 				09C6BF8221CA5F220003C7F1 /* BattleItemPanel.swift in Sources */,
 				090FEB7421BB9B2B004276BB /* Health.swift in Sources */,
@@ -1717,7 +1754,6 @@
 				090FEC3921BB9B2B004276BB /* MinionsHouseInside.swift in Sources */,
 				090FEBB221BB9B2B004276BB /* MagicConvert.swift in Sources */,
 				090FEBC621BB9B2B004276BB /* ProtectFromGod.swift in Sources */,
-				090FEB9321BB9B2B004276BB /* Iberis.swift in Sources */,
 				094E68D221E37E6700414583 /* OutfitStore.swift in Sources */,
 				090FEBF121BB9B2B004276BB /* Loot.swift in Sources */,
 				090FEBCD21BB9B2B004276BB /* LastChance.swift in Sources */,
@@ -1790,6 +1826,7 @@
 				090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */,
 				090FEB8721BB9B2B004276BB /* Mind.swift in Sources */,
 				090FEBA221BB9B2B004276BB /* Creature.swift in Sources */,
+				09C66CB3220F21C700E1C153 /* Umisa.swift in Sources */,
 				090FEC3A21BB9B2B004276BB /* AdventurersUnionInside.swift in Sources */,
 				090FEBA321BB9B2B004276BB /* Physical.swift in Sources */,
 				090FEC1A21BB9B2B004276BB /* Pot.swift in Sources */,
@@ -1820,6 +1857,7 @@
 				090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */,
 				090FEBE921BB9B2B004276BB /* Item.swift in Sources */,
 				090FEC0B21BB9B2B004276BB /* MinionsList.swift in Sources */,
+				09C66CAB220D786000E1C153 /* Pitheron.swift in Sources */,
 				090FEC0D21BB9B2B004276BB /* HBar.swift in Sources */,
 				090FEBFC21BB9B2B004276BB /* UIEvil.swift in Sources */,
 				090FEC1421BB9B2B004276BB /* Dialog.swift in Sources */,
@@ -1835,9 +1873,11 @@
 				090FEBB921BB9B2B004276BB /* Firelord.swift in Sources */,
 				09C6BF9021D1EACE0003C7F1 /* MapSets.swift in Sources */,
 				090FEBD221BB9B2B004276BB /* Bitslap.swift in Sources */,
+				09C66CB0220D7AD200E1C153 /* IberisBattle.swift in Sources */,
 				09C66C8821FA08F100E1C153 /* Lewis.swift in Sources */,
 				090FEC2C21BB9B2B004276BB /* DeadEarth.swift in Sources */,
 				090FEB8F21BB9B2B004276BB /* Character.swift in Sources */,
+				09C66CAE220D799F00E1C153 /* Iberis.swift in Sources */,
 				090FEB9D21BB9B2B004276BB /* TreeSpirit.swift in Sources */,
 				090FEBA421BB9B2B004276BB /* SpiritIntervene.swift in Sources */,
 				09C6BF8C21CF34A40003C7F1 /* StandScene.swift in Sources */,

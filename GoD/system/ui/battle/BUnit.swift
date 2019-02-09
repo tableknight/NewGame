@@ -137,7 +137,7 @@ class BUnit: SKSpriteNode {
         let label = Label()
         label.fontColor = UIColor.red
         label.fontSize = fontSize
-//        label.zPosition = 100
+        label.zPosition = MyScene.MASK_LAYER_Z
         label.align = "center"
         addChild(label)
         return label
@@ -355,7 +355,7 @@ class BUnit: SKSpriteNode {
 //            completion()
 //            return
         }
-        if defend {
+        if isDefend || defend {
             actionDefead {
                 completion()
             }
@@ -582,7 +582,7 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel()
 //        valueText.isHidden = false
-        valueText.position.y = _charSize * (playerPart ? 0.25 : 0.5)
+        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.35)
         var color = textColor
         var text = "\(value.toInt())";
         if value > 0 {
@@ -651,7 +651,7 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel(fontSize: 20)
 //        _valueText.isHidden = false
-        valueText.position.y = _charSize * (playerPart ? 0.25 : 0.5)
+        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.35)
         valueText.text = text
         valueText.fontColor = color
         let v = CGVector(dx: 0, dy: _charSize * 0.5)

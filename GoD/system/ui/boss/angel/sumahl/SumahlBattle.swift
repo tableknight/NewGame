@@ -140,7 +140,6 @@ class SilenceAll: Magical {
             for t in ts {
                 if !self.statusMissed(baseline: 50, target: t, completion: {}) {
                     t.actionDebuff {
-                        t.showText(text: "SILENCED")
                         self._battle.silenceUnit(unit: t)
                     }
                 }
