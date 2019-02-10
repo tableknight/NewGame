@@ -13,7 +13,7 @@ class Dominate: Magical {
         _tear = 1
         _name = "战场主宰"
         _description = "使自己的种族属性始终处于优势，持续5回合"
-        isAutoSelectTarget = true
+        autoCast = true
         _quality = Quality.RARE
     }
     override func cast(completion:@escaping () -> Void) {

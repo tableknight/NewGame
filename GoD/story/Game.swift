@@ -362,7 +362,9 @@ class Game {
         Game.instance.stage.showLogs()
     }
 }
-
+func debugger(_ text:String) {
+    print(text)
+}
 func debug(_ text:String) {
     print(text)
 //    let cellSize = Game.instance.cellSize

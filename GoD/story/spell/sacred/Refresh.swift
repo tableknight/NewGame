@@ -15,7 +15,7 @@ class Refresh: Magical {
         _description = "刷新其他技能的冷却时间"
         _quality = Quality.SACRED
         _cooldown = 2
-        isAutoSelectTarget = true
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         let ss = _battle._curRole._unit._spellsInuse

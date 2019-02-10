@@ -16,7 +16,7 @@ class Reborn: Passive {
         _description = "行动结束后恢复5%最大生命"
         hasAfterMoveAction = true
     }
-    override func afterMove(completion: @escaping () -> Void) {
+    override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         _rate = 0.05
         if c._unit is Character {
@@ -27,11 +27,11 @@ class Reborn: Passive {
         }
         let h = c.getHealth() * _rate
 //        c.hpChange(value: h)
-        setTimeout(delay: 1, completion: {
-            c.showValue(value: h) {
-                completion()
-            }
-        })
+        c.showValue(value: h) {
+            completion()
+        }
+//        setTimeout(delay: 1, completion: {
+//        })
     
     }
 }

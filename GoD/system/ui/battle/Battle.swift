@@ -506,16 +506,36 @@ class Battle: SKSpriteNode {
             return
         }
         
-        if _curRole.hasStatus(type: Status.BURNING) {
-            let s = _curRole.getStatus(type: Status.BURNING) as! BurningStatus
-            let damage = s.getBurningDamage(unit: _curRole)
-            _curRole.showValue(value: damage)
-            if _curRole.isDead() {
-                moveEnd()
+        for s in _curRole._status.values {
+            if s.hasBeforeMoveAction {
+                s.hasBeforeMoveAction = false
+                s._castSpell.cast {
+                    if self._curRole.isDead() {
+                        self.moveEnd()
+                    } else {
+                        self.controlAction()
+                    }
+                }
                 return
             }
         }
         
+        controlAction()
+        
+//        if _curRole.hasStatus(type: Status.BURNING) {
+//            let s = _curRole.getStatus(type: Status.BURNING) as! BurningStatus
+//            let damage = s.getBurningDamage(unit: _curRole)
+//            _curRole.showValue(value: damage)
+//            if _curRole.isDead() {
+//                moveEnd()
+//                return
+//            }
+//        }
+        
+        
+    }
+    internal func controlAction() {
+        let this = self
         if !_curRole._unit.hasAction {
             moveEnd()
             return
@@ -561,12 +581,11 @@ class Battle: SKSpriteNode {
         if !_curRole.playerPart {
             this.createAI()
         } else {
-//            moveEnd()
             cancelTouch = false
-            this._curRole.setOrderMode()
-            this.defaultOrderAttack()
-            this.showOrder()
-            this.hideCancel()
+            _curRole.setOrderMode()
+            defaultOrderAttack()
+            showOrder()
+            hideCancel()
         }
     }
     internal func cleanUnitStatus() {
@@ -1212,7 +1231,7 @@ class Battle: SKSpriteNode {
                 this._selectedSpell._battle = this
                 this.hideOrder()
                 this.showCancel()
-                if this._selectedSpell.isAutoSelectTarget {
+                if this._selectedSpell.autoCast {
                     this._waitingForSelectTarget = false
                     this._selectedSpell.findTarget()
                     this.setUnitDefault(all: true)
@@ -1249,7 +1268,7 @@ class Battle: SKSpriteNode {
         this._selectedSpell._battle = this
         this.hideOrder()
         this.showCancel()
-        if this._selectedSpell.isAutoSelectTarget {
+        if this._selectedSpell.autoCast {
             this._waitingForSelectTarget = false
             this._selectedSpell.findTarget()
             this.setUnitDefault(all: true)

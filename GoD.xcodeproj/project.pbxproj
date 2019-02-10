@@ -295,6 +295,13 @@
 		09C66CB0220D7AD200E1C153 /* IberisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CAF220D7AD200E1C153 /* IberisBattle.swift */; };
 		09C66CB3220F21C700E1C153 /* Umisa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB2220F21C700E1C153 /* Umisa.swift */; };
 		09C66CB5220F230600E1C153 /* UmisaBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB4220F230600E1C153 /* UmisaBattle.swift */; };
+		09C66CB8220FCA1900E1C153 /* George.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB7220FCA1900E1C153 /* George.swift */; };
+		09C66CBA221004AD00E1C153 /* GeorgeBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CB9221004AD00E1C153 /* GeorgeBattle.swift */; };
+		09C66CBE2210617900E1C153 /* ElementWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CBD2210617900E1C153 /* ElementWizard.swift */; };
+		09C66CC022106A2800E1C153 /* WizardBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CBF22106A2800E1C153 /* WizardBattle.swift */; };
+		09C66CC222106F5A00E1C153 /* IceBomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CC122106F5A00E1C153 /* IceBomb.swift */; };
+		09C66CC52210780C00E1C153 /* Burning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CC42210780C00E1C153 /* Burning.swift */; };
+		09C66CC72210782500E1C153 /* Derivant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CC62210782500E1C153 /* Derivant.swift */; };
 		09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */; };
 		09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */; };
 		09C6BF7E21C523DE0003C7F1 /* SelectableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */; };
@@ -630,6 +637,13 @@
 		09C66CAF220D7AD200E1C153 /* IberisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IberisBattle.swift; sourceTree = "<group>"; };
 		09C66CB2220F21C700E1C153 /* Umisa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Umisa.swift; sourceTree = "<group>"; };
 		09C66CB4220F230600E1C153 /* UmisaBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmisaBattle.swift; sourceTree = "<group>"; };
+		09C66CB7220FCA1900E1C153 /* George.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = George.swift; sourceTree = "<group>"; };
+		09C66CB9221004AD00E1C153 /* GeorgeBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeorgeBattle.swift; sourceTree = "<group>"; };
+		09C66CBD2210617900E1C153 /* ElementWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementWizard.swift; sourceTree = "<group>"; };
+		09C66CBF22106A2800E1C153 /* WizardBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardBattle.swift; sourceTree = "<group>"; };
+		09C66CC122106F5A00E1C153 /* IceBomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceBomb.swift; sourceTree = "<group>"; };
+		09C66CC42210780C00E1C153 /* Burning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Burning.swift; sourceTree = "<group>"; };
+		09C66CC62210782500E1C153 /* Derivant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Derivant.swift; sourceTree = "<group>"; };
 		09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitPanel.swift; sourceTree = "<group>"; };
 		09C6BF7B21C4D63D0003C7F1 /* RoleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleList.swift; sourceTree = "<group>"; };
 		09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
@@ -938,6 +952,7 @@
 		090FEA8F21BB9B2A004276BB /* spell */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CC3221077FC00E1C153 /* derivant */,
 				09C66C8A21FD49EF00E1C153 /* newSpell */,
 				090FEA9121BB9B2A004276BB /* sacred */,
 				090FEAA821BB9B2A004276BB /* rare */,
@@ -1319,6 +1334,7 @@
 		09C66C7021F0B78B00E1C153 /* boss */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CBB2210615700E1C153 /* road */,
 				09C66C99220B05B400E1C153 /* demon */,
 				09C66C7A21F7635300E1C153 /* angel */,
 				09C66C8F21FD571B00E1C153 /* IFace.swift */,
@@ -1378,6 +1394,7 @@
 			isa = PBXGroup;
 			children = (
 				09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */,
+				09C66CC122106F5A00E1C153 /* IceBomb.swift */,
 			);
 			path = newSpell;
 			sourceTree = "<group>";
@@ -1385,6 +1402,7 @@
 		09C66C99220B05B400E1C153 /* demon */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CB6220FCA0100E1C153 /* george */,
 				09C66CB1220F21B800E1C153 /* umisa */,
 				09C66CAC220D78D900E1C153 /* iberis */,
 				09C66CA9220D781F00E1C153 /* pitheron */,
@@ -1446,6 +1464,41 @@
 				09C66CB4220F230600E1C153 /* UmisaBattle.swift */,
 			);
 			path = umisa;
+			sourceTree = "<group>";
+		};
+		09C66CB6220FCA0100E1C153 /* george */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CB7220FCA1900E1C153 /* George.swift */,
+				09C66CB9221004AD00E1C153 /* GeorgeBattle.swift */,
+			);
+			path = george;
+			sourceTree = "<group>";
+		};
+		09C66CBB2210615700E1C153 /* road */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CBC2210616000E1C153 /* wizard */,
+			);
+			path = road;
+			sourceTree = "<group>";
+		};
+		09C66CBC2210616000E1C153 /* wizard */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CBD2210617900E1C153 /* ElementWizard.swift */,
+				09C66CBF22106A2800E1C153 /* WizardBattle.swift */,
+			);
+			path = wizard;
+			sourceTree = "<group>";
+		};
+		09C66CC3221077FC00E1C153 /* derivant */ = {
+			isa = PBXGroup;
+			children = (
+				09C66CC42210780C00E1C153 /* Burning.swift */,
+				09C66CC62210782500E1C153 /* Derivant.swift */,
+			);
+			path = derivant;
 			sourceTree = "<group>";
 		};
 		09C6BF8921CF32180003C7F1 /* normal */ = {
@@ -1627,6 +1680,7 @@
 				090FEBF321BB9B2B004276BB /* Battle.swift in Sources */,
 				090FEB9A21BB9B2B004276BB /* DarkCrow.swift in Sources */,
 				090FEC4621BB9B2B004276BB /* SelectSpell.swift in Sources */,
+				09C66CC222106F5A00E1C153 /* IceBomb.swift in Sources */,
 				09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */,
 				090FEBBF21BB9B2B004276BB /* FragileCurse.swift in Sources */,
 				090FEB9821BB9B2B004276BB /* Python.swift in Sources */,
@@ -1720,6 +1774,7 @@
 				090FEBB721BB9B2B004276BB /* Auro.swift in Sources */,
 				090FEB6A21BB9B2B004276BB /* Amulet.swift in Sources */,
 				090FEB9121BB9B2B004276BB /* PowerLord.swift in Sources */,
+				09C66CC72210782500E1C153 /* Derivant.swift in Sources */,
 				090FEBF021BB9B2B004276BB /* BUnit.swift in Sources */,
 				090FEC4721BB9B2B004276BB /* CreationFlow.swift in Sources */,
 				090FEBC221BB9B2B004276BB /* Crazy.swift in Sources */,
@@ -1824,6 +1879,7 @@
 				090C0DE921ECCCF2008C46AA /* SnowLanding.swift in Sources */,
 				09C6BF8E21CFD02E0003C7F1 /* CenterCamping.swift in Sources */,
 				090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */,
+				09C66CC52210780C00E1C153 /* Burning.swift in Sources */,
 				090FEB8721BB9B2B004276BB /* Mind.swift in Sources */,
 				090FEBA221BB9B2B004276BB /* Creature.swift in Sources */,
 				09C66CB3220F21C700E1C153 /* Umisa.swift in Sources */,
@@ -1841,6 +1897,7 @@
 				090FEC2521BB9B2B004276BB /* Stage.swift in Sources */,
 				090FEC3E21BB9B2B004276BB /* BorderSets.swift in Sources */,
 				090FEBE121BB9B2B004276BB /* Defend.swift in Sources */,
+				09C66CBE2210617900E1C153 /* ElementWizard.swift in Sources */,
 				090FEBA621BB9B2B004276BB /* SoulLash.swift in Sources */,
 				090FEBFB21BB9B2B004276BB /* EvilBook.swift in Sources */,
 				09C6BFA221DC861F0003C7F1 /* WinterLand.swift in Sources */,
@@ -1870,6 +1927,7 @@
 				090FEC3C21BB9B2B004276BB /* WestOfVillage.swift in Sources */,
 				090FEC0121BB9B2B004276BB /* ItemPanel.swift in Sources */,
 				090FEB7921BB9B2B004276BB /* ThunderPower.swift in Sources */,
+				09C66CBA221004AD00E1C153 /* GeorgeBattle.swift in Sources */,
 				090FEBB921BB9B2B004276BB /* Firelord.swift in Sources */,
 				09C6BF9021D1EACE0003C7F1 /* MapSets.swift in Sources */,
 				090FEBD221BB9B2B004276BB /* Bitslap.swift in Sources */,
@@ -1894,6 +1952,7 @@
 				09C66C7721F0CBCB00E1C153 /* ToppurBattle.swift in Sources */,
 				090FEC2421BB9B2B004276BB /* BaseScene.swift in Sources */,
 				090FEB5B21BB9B2B004276BB /* SacredMark.swift in Sources */,
+				09C66CC022106A2800E1C153 /* WizardBattle.swift in Sources */,
 				090FEBF821BB9B2B004276BB /* EvilCard.swift in Sources */,
 				090FEBB421BB9B2B004276BB /* OnePunch.swift in Sources */,
 				090FEB6821BB9B2B004276BB /* Shield.swift in Sources */,
@@ -1910,6 +1969,7 @@
 				090FEB6721BB9B2B004276BB /* SoulStone.swift in Sources */,
 				090FEC0E21BB9B2B004276BB /* MenuButton.swift in Sources */,
 				090FEBDF21BB9B2B004276BB /* Bellicose.swift in Sources */,
+				09C66CB8220FCA1900E1C153 /* George.swift in Sources */,
 				090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */,
 				090FEB5221BB9B2B004276BB /* Bow.swift in Sources */,
 				090FEC4121BB9B2B004276BB /* GroundSets.swift in Sources */,

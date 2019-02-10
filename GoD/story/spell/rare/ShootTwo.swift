@@ -17,7 +17,7 @@ class ShootTwo: Physical {
         _quality = Quality.RARE
         _rate = 0.8
         isClose = false
-        isAutoSelectTarget = true
+        autoCast = true
     }
     
     override func cast(completion:@escaping () -> Void) {

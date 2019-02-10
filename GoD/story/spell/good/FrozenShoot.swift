@@ -14,8 +14,8 @@ class FrozenShoot: Magical {
         isWater = true
         _name = "寒冰射击"
         _cooldown = 2
-        _rate = 0.6
-        _description = "对目标造成精神60%的冰冷伤害，有一定几率冻结目标"
+        _rate = 0.25
+        _description = "对目标造成精神25%的冰冷伤害，有一定几率冻结目标"
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!
@@ -29,7 +29,7 @@ class FrozenShoot: Magical {
                     t.showValue(value: damage) {
                         completion()
                     }
-                    this.setFrozen(target: t, completion: {})
+                    this.setFrozen(target: t)
                 }
             }
         }

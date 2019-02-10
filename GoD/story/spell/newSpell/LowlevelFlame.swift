@@ -12,8 +12,8 @@ class LowlevelFlame: Magical {
         super.init()
         isFire = true
         _name = "低阶火焰"
-        _description = "对目标造成精神65%的火焰伤害"
-        _rate = 0.65
+        _description = "对目标造成精神35%的火焰伤害"
+        _rate = 0.35
         _quality = Quality.NORMAL
         _cooldown = 0
     }

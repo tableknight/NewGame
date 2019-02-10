@@ -14,7 +14,7 @@ class ShootAll: Physical {
         _description = "对所有敌方单位造成攻击40%的物理伤害"
         isClose = false
         _rate = 0.4
-        isAutoSelectTarget = true
+        autoCast = true
         _quality = Quality.RARE
         _cooldown = 2
     }

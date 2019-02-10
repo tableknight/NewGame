@@ -53,6 +53,7 @@ class Status:Core {
     static let IMMUNE = "immune"
     static let DOMINATE = "dominate"
     static let BURNING = "burning"
+    static let INFECTED = "infected"
     
     static let FIRE_ENERGE = "fire_energe"
     static let WATER_ENERGE = "water_energe"
@@ -65,7 +66,10 @@ class Status:Core {
     static let MIND_POWER = "mind_power"
     static let LUCKY_POWER = "lucky_power"
     static let SPEED_POWER = "speed_power"
+    static let ICE_BOMB = "speed_power"
     
+    var hasBeforeMoveAction = false
+    var _castSpell:Spell!
 }
 class LostSpeed:Status {
     override init() {
@@ -92,8 +96,6 @@ class BurningStatus:Status {
         return -damage * _level
     }
 }
-
-
 
 
 

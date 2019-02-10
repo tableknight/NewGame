@@ -58,12 +58,6 @@ class UmisaBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func addEnemy(bUnit: BUnit) {
-//        super.addEnemy(bUnit: bUnit)
-//        if bUnit._unit._seat == BUnit.TTR {
-//            bUnit.yAxis = cellSize * 4.75
-//        }
-//    }
 }
 class SummonCopy:Magical {
     override init() {
@@ -100,7 +94,7 @@ class CriticalBite:Physical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionAttack {
-            let assistant = self.d4()
+            let assistant = self.d3()
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
                     let damage = self.physicalDamage(t)
@@ -112,6 +106,7 @@ class CriticalBite:Physical {
                         }
                     }
                     if assistant {
+                        debugger("assistant")
                         if b._enemyPart.count > 1 && !t.isDead() {
                             var es = Array<BUnit>()
                             for u in b._enemyPart {

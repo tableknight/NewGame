@@ -69,7 +69,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     var isPassive = false
     var isAuro = false
     var hasInitialized = false
-    var isAutoSelectTarget = false
+    var autoCast = false
     var isMultiple = false
     var hasAfterMoveAction = false
     var _cooldown = 0
@@ -642,12 +642,12 @@ class Spell:Core, IDisplay, ISelectTarget {
         seats.append(getUnitInTheRightOfTarget(seat: seat))
         return getTargetsBySeats(seats: seats)
     }
-    func setFrozen(target:BUnit, completion:@escaping () -> Void) {
+    func setFrozen(target:BUnit, probability:CGFloat = 25) {
         let sed = seed().toFloat()
         let c = _battle._curRole
         let fromMind = c.getMind()
         let toMind = target.getMind()
-        let bound = 65 + fromMind - toMind
+        let bound = probability * ((fromMind - toMind) * 0.01 + 1)
         if sed < bound {
             print("feeezing!")
             let status = Status()

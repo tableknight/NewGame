@@ -16,7 +16,7 @@ class ThunderArray:Magical {
         _cooldown = 3
         _description = "随机造成2-4次雷电伤害，单次伤害为精神的35%"
         isThunder = true
-        isAutoSelectTarget = true
+        autoCast = true
         _rate = 0.35
     }
     private var _step = 0

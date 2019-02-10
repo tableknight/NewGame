@@ -23,7 +23,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = UmisaBattle()
+        let b = WizardBattle()
         let es = Array<Creature>()
         
 //        for _ in 0...2 {
@@ -44,7 +44,7 @@ class GameScene: SKScene {
         b.setEnemyPart(minions: es)
         let cs = [Game.instance.char] + Game.instance.char.getReadyMinions()
         for u in cs {
-//            u._ElementalResistance.water += 70
+            u._ElementalResistance.fire += 70
         }
         b.setPlayerPart(roles: cs)
         
@@ -61,7 +61,7 @@ class GameScene: SKScene {
         e.create(level: e._level)
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
         for m in e._minions + [e] {
-            m._spellsInuse = [SoulLash(), FireBreath()]
+            m._spellsInuse = [IceBomb()]
         }
 //        e._minions[0]._spellsInuse.append(Crazy())
         let hm = ThorsHammer()

@@ -12,10 +12,10 @@ class FireOrFired: Magical {
         super.init()
         isFire = true
         _name = "玩火"
-        _description = "对目标造成精神150%的火焰伤害或者燃烧自己20%当前生命值"
-        _rate = 1.5
+        _description = "对目标造成精神60%的火焰伤害或者燃烧自己20%当前生命值"
+        _rate = 0.6
         _quality = Quality.RARE
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
