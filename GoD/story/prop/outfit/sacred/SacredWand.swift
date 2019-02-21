@@ -23,13 +23,13 @@ class LightingRod:Wand {
     }
     override func on() {
         super.on()
-        Game.instance.char._ElementalPower.thunder += 50
-        Game.instance.char._ElementalResistance.thunder -= 50
+        Game.instance.char._elementalPower.thunder += 50
+        Game.instance.char._elementalResistance.thunder -= 50
     }
     override func off() {
         super.off()
-        Game.instance.char._ElementalPower.thunder -= 50
-        Game.instance.char._ElementalResistance.thunder += 50
+        Game.instance.char._elementalPower.thunder -= 50
+        Game.instance.char._elementalResistance.thunder += 50
     }
 }
 class FireMaster:Wand {

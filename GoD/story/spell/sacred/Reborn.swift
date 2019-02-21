@@ -13,16 +13,17 @@ class Reborn: Passive {
         super.init()
         _quality = Quality.SACRED
         _name = "重生"
-        _description = "行动结束后恢复5%最大生命"
+        _description = "行动结束后恢复10%最大生命"
         hasAfterMoveAction = true
+        _delay = 1.25
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        _rate = 0.05
+        _rate = 0.1
         if c._unit is Character {
             let char = c._unit as! Character
             if char._soulStone is HeartOfTarrasque {
-                _rate = 0.1
+                _rate = 0.2
             }
         }
         let h = c.getHealth() * _rate

@@ -28,9 +28,9 @@ class Dius:Boss {
         _extensions.health *= 4
         _extensions.hp = _extensions.health
         _extensions.defence = 0
-        _ElementalResistance.fire = 0
-        _ElementalResistance.water = 0
-        _ElementalResistance.thunder = 0
+        _elementalResistance.fire = 0
+        _elementalResistance.water = 0
+        _elementalResistance.thunder = 0
         
         _spellsInuse = [ExposeWeakness()]
     }

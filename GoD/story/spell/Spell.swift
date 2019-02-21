@@ -55,6 +55,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
     }
     
+    var _delay:CGFloat = 1.5
     var _canBeTargetPlayer = false
     var _canBeTargetSelf = false
     var _isClose = false
@@ -198,6 +199,10 @@ class Spell:Core, IDisplay, ISelectTarget {
         return _damageValue
     }
     func fireDamage(_ to:BUnit, isPhysical:Bool = false) -> CGFloat {
+        if d2() && to.hasSpell(spell: DragonBlood()) {
+            _damageValue = 0
+            return 0
+        }
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.FIRE {
@@ -445,6 +450,12 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         return false
     }
+    func isEmptyHand() -> Bool {
+        return _battle._curRole._unit._weapon == nil
+    }
+    func getAccuracy() -> CGFloat {
+        return _battle._curRole.getAccuracy()
+    }
     func hasMissed(target:BUnit, completion:@escaping () -> Void = {}) -> Bool {
         if target.isDefend {
             return false
@@ -456,7 +467,7 @@ class Spell:Core, IDisplay, ISelectTarget {
                 return false
             }
         }
-        let acc = c.getAccuracy()
+        let acc = getAccuracy()
         let avd = target.getAvoid()
         let sed = seed().toFloat()
         let this = self
@@ -500,6 +511,18 @@ class Spell:Core, IDisplay, ISelectTarget {
             return true
         }
         return false
+    }
+    
+    func hasPhysicalEvent(t:BUnit, completion:@escaping () -> Void = {}) -> Bool {
+        if !hadSpecialAction(t: t, completion: completion) {
+            if !self.hasMissed(target: t, completion: completion) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
     }
     
     func removeSpecialStatus(t:BUnit) {
@@ -713,10 +736,18 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
     }
     internal func findTargetPartAll() {
-        if _battle._curRole.playerPart {
-            _battle._selectedTargets = _battle._enemyPart
+        if targetEnemy {
+            if _battle._curRole.playerPart {
+                _battle._selectedTargets = _battle._enemyPart
+            } else {
+                _battle._selectedTargets = _battle._playerPart
+            }
         } else {
-            _battle._selectedTargets = _battle._playerPart
+            if _battle._curRole.playerPart {
+                _battle._selectedTargets = _battle._playerPart
+            } else {
+                _battle._selectedTargets = _battle._enemyPart
+            }
         }
     }
     internal func getRandomLeftUnit() -> BUnit {

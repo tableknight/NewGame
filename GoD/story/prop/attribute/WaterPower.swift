@@ -13,11 +13,11 @@ class WaterPower: Attribute {
         _name = "寒冰伤害"
     }
     override func on(unit: Creature) {
-        unit._ElementalPower.water += _value
+        unit._elementalPower.water += _value
     }
     
     override func off(unit: Creature) {
-        unit._ElementalPower.water -= _value
+        unit._elementalPower.water -= _value
     }
     override func create(level: CGFloat) {
         elementalAttrValue(level: level)

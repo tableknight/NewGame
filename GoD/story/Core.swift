@@ -39,6 +39,12 @@ class Core:NSObject{
     func d7() -> Bool {
         return arc4random_uniform(7) == 0
     }
+    func d8() -> Bool {
+        return arc4random_uniform(8) == 0
+    }
+    func d9() -> Bool {
+        return arc4random_uniform(9) == 0
+    }
     func d20() -> Bool {
         return arc4random_uniform(20) == 0
     }

@@ -28,6 +28,7 @@ class IceBomb: Magical {
                 spell._battle = self._battle
                 spell._target = t
                 s._castSpell = spell
+                s._timeleft = 1
                 s._type = Status.ICE_BOMB
                 s.hasBeforeMoveAction = true
                 t.addStatus(status: s)
@@ -45,11 +46,12 @@ class IceExplode:Derivant {
     override init() {
         super.init()
         _name = "冰暴"
+        _delay = 2.5
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = getAdajcentUnits(target: _target)
         if !self.hadSpecialAction(t: self._target) {
-            _target.showText(text: "EXPLODE") {
+//            _target.showText(text: "EXPLODE") {
                 self._target.actionAttacked {
                     self._rate = 0.5
                     let damage = self.waterDamage(self._target)
@@ -69,6 +71,6 @@ class IceExplode:Derivant {
                 })
                 setTimeout(delay: 2.5, completion: completion)
             }
-        }
+//        }
     }
 }

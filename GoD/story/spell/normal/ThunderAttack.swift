@@ -37,7 +37,7 @@ class ThunderAttack: Magical {
                 t.showValue(value: damage) {
                     completion()
                     t.showText(text: "TR -10")
-                    t._ElementalResistance.thunder -= 10
+                    t._elementalResistance.thunder -= 10
                 }
             }
         }

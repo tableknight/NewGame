@@ -13,8 +13,8 @@ class DeathGaze: Magical {
         super.init()
         //        isWater = true
         _name = "死亡凝视"
-        _description = "对目标造成精神80%的魔法伤害，15%几率即死"
-        _rate = 0.8
+        _description = "对目标造成精神30%的魔法伤害，小概率立即杀死目标f"
+        _rate = 0.30
         _quality = Quality.SACRED
         _cooldown = 2
     }

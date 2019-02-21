@@ -127,6 +127,9 @@ struct DamageColor {
     static let DAMAGE = UIColor.init(red: 1, green: 0.137, blue: 0.137, alpha: 1)
     static let HEAL = UIColor.green
     static let NORMAL = UIColor.white
+    static let FIRE = UIColor.orange
+    static let WATER = UIColor.init(red: 0.2, green: 0.53, blue: 1, alpha: 1)
+    static let THUNFER = UIColor.yellow
 }
 struct ElementColor {
     static let FIRE = UIColor.orange

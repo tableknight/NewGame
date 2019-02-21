@@ -19,7 +19,7 @@ class FlowerOfHeal: SummonUnit {
         _spellsInuse = [HealOfFlower()]
         _race = EvilType.NATURE
         _last = 5
-        hasAction = false
+//        hasAction = false
     }
     override func create(level: CGFloat) {
         _level = level
@@ -41,7 +41,7 @@ class HealOfFlower: Passive {
         _quality = Quality.SACRED
         _name = "花之治疗"
         _description = "行动结束后恢复相邻单位15%最大生命。"
-        hasAfterMoveAction = true
+//        hasAfterMoveAction = true
     }
     override func afterMove(completion: @escaping () -> Void) {
         let c = _battle._curRole

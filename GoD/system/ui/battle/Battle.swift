@@ -180,7 +180,7 @@ class Battle: SKSpriteNode {
             showItemPanel()
             hideOrder()
             showCancel()
-            _waitingForSelectTarget = false
+            waitingForSelectTarget = false
             return
         }
         
@@ -206,7 +206,7 @@ class Battle: SKSpriteNode {
             hideOrder()
             showCancel()
             //            _orderCancel.isHidden = false
-            _waitingForSelectTarget = true
+            waitingForSelectTarget = true
             _selectedSpell = Attack()
             _selectedSpell._battle = self
             showAvailableUnits(selectObject: _selectedSpell)
@@ -228,7 +228,7 @@ class Battle: SKSpriteNode {
 //            return
         }
         
-        if _waitingForSelectTarget {
+        if waitingForSelectTarget {
             _selectedTarget = nil
             for unit in _playerPart {
                 if unit.contains(s) && unit.selectable {
@@ -242,7 +242,7 @@ class Battle: SKSpriteNode {
                 }
             }
             if _selectedTarget != nil {
-                _waitingForSelectTarget = false
+                waitingForSelectTarget = false
                 setUnitDefault(all: true)
                 _selectedTarget!.setSelectedMode()
                 hideCancel()
@@ -389,43 +389,57 @@ class Battle: SKSpriteNode {
     internal var _roundLabel = Label()
     internal func defaultOrderAttack() {
         if !(_curRole._unit._weapon is Instrument) {
-            _waitingForSelectTarget = true
+            waitingForSelectTarget = true
             _selectedSpell = Attack()
             _selectedSpell._battle = self
             showAvailableUnits(selectObject: _selectedSpell)
         }
     }
     func reduceCooldown() {
-        for u in _enemyPart {
-            for s in u._unit._spellsInuse {
-                if s._timeleft > 0 {
-                    s._timeleft -= 1
-                }
+        let u = _curRole
+        for s in u._unit._spellsInuse + u._unit._spellsHidden {
+            if s._timeleft > 0 {
+                s._timeleft -= 1
             }
-            for status in u._status.values {
-                if status._timeleft > 0 {
-                    status._timeleft -= 1
-                    if status._timeleft == 0 {
-                        status.timeupAction()
-                    }
+        }
+        for status in u._status.values {
+            if status._timeleft > 0 && !status.hasBeforeMoveAction {
+                status._timeleft -= 1
+                if status._timeleft == 0 {
+                    status.timeupAction()
                 }
             }
         }
-        for u in _playerPart {
-            for s in u._unit._spellsInuse {
-                if s._timeleft > 0 {
-                    s._timeleft -= 1
-                }
-            }
-            for status in u._status.values {
-                if status._timeleft > 0 {
-                    status._timeleft -= 1
-                    if status._timeleft == 0 {
-                        status.timeupAction()
-                    }
-                }
-            }
-        }
+//        for u in _enemyPart {
+//            for s in u._unit._spellsInuse {
+//                if s._timeleft > 0 {
+//                    s._timeleft -= 1
+//                }
+//            }
+//            for status in u._status.values {
+//                if status._timeleft > 0 && !status.hasBeforeMoveAction {
+//                    status._timeleft -= 1
+//                    if status._timeleft == 0 {
+//                        status.timeupAction()
+//                    }
+//                }
+//            }
+//        }
+//        for u in _playerPart {
+//            for s in u._unit._spellsInuse {
+//                if s._timeleft > 0 {
+//                    s._timeleft -= 1
+//                }
+//            }
+//            for status in u._status.values {
+//                if status._timeleft > 0 && !status.hasBeforeMoveAction {
+//                    status._timeleft -= 1
+//                    if status._timeleft == 0 {
+//                        status.timeupAction()
+//                    }
+//                }
+//            }
+//        }
         
 //        for p in _char._props {
 //            if p is Item {
@@ -494,33 +508,53 @@ class Battle: SKSpriteNode {
             setTimeout(delay: delay, completion: self.createAction)
         }
     }
+    func getSpell(u:BUnit) -> Spell {
+        var sps = Array<Spell>()
+        for s in u.getActiveSpell() {
+            if s._timeleft == 0 {
+                sps.append(s)
+            }
+        }
+        if sps.count < 1 {
+            return BossAttack()
+        } else {
+            return sps.one()
+        }
+    }
     internal func createAction() {
-        let this = self
         _curRole.isDefend = false
-        if this._curRole.hasStatus(type: Status.FREEZING) {
-            this._curRole.actionUnfreeze {
-                print("unfreezing")
-                this._curRole.removeStatus(type: Status.FREEZING)
-                this.moveEnd()
-            }
-            return
-        }
         
+//        var delay:CGFloat = 0
+        var castSpells = Array<Status>()
         for s in _curRole._status.values {
-            if s.hasBeforeMoveAction {
-                s.hasBeforeMoveAction = false
-                s._castSpell.cast {
-                    if self._curRole.isDead() {
-                        self.moveEnd()
-                    } else {
-                        self.controlAction()
-                    }
-                }
-                return
+            if s.hasBeforeMoveAction && s._timeleft > 0 {
+                castSpells.append(s)
             }
         }
-        
-        controlAction()
+        if castSpells.count > 0 {
+            var i = 0
+            func castFunc() {
+                if i < castSpells.count {
+                    let s = castSpells[i]
+                    s._castSpell._battle = self
+                    s._castSpell.cast {
+                        s._timeleft -= 1
+                        if s._timeleft < 1 {
+                            s.timeupAction()
+                        }
+                        castFunc()
+                    }
+                    i += 1
+                } else {
+                    self.controlAction()
+                }
+            }
+            castFunc()
+        } else {
+            controlAction()
+        }
+//        setTimeout(delay: delay, completion: controlAction)
+//        controlAction()
         
 //        if _curRole.hasStatus(type: Status.BURNING) {
 //            let s = _curRole.getStatus(type: Status.BURNING) as! BurningStatus
@@ -531,13 +565,15 @@ class Battle: SKSpriteNode {
 //                return
 //            }
 //        }
-        
-        
     }
     internal func controlAction() {
         let this = self
-        if !_curRole._unit.hasAction {
-            moveEnd()
+        if this._curRole.hasStatus(type: Status.FREEZING) {
+            this._curRole.actionUnfreeze {
+                print("unfreezing")
+                this._curRole.removeStatus(type: Status.FREEZING)
+                this.moveEnd()
+            }
             return
         }
         
@@ -554,6 +590,15 @@ class Battle: SKSpriteNode {
                 execOrder()
                 return
             }
+        }
+        
+        if _curRole._unit is SummonUnit {
+            //            _selectedSpell = _curRole._unit._spellsInuse[0]
+            _selectedSpell = getSpell(u: _curRole)
+            _selectedSpell._battle = self
+            _selectedSpell.findTarget()
+            execOrder()
+            return
         }
         
         if this._curRole.hasSpell(spell: Crazy()) {
@@ -603,13 +648,14 @@ class Battle: SKSpriteNode {
         let _seed = seed(max:101)
         let sensitive = _curRole._unit._sensitive
         if _seed < sensitive {
-            let sps = _curRole.getActiveSpell()
-//            debug("ai cast spell")
-            if sps.count < 1 {
-                _selectedSpell = getSpellAttack()
-            } else {
-                _selectedSpell = sps[seed(max: sps.count)]
-            }
+//            let sps = _curRole.getActiveSpell()
+////            debug("ai cast spell")
+//            if sps.count < 1 {
+//                _selectedSpell = getSpellAttack()
+//            } else {
+//                _selectedSpell = sps[seed(max: sps.count)]
+//            }
+            _selectedSpell = getSpell(u: _curRole)
             _selectedSpell._battle = self
             _selectedSpell.findTarget()
             execOrder()
@@ -710,7 +756,7 @@ class Battle: SKSpriteNode {
         _round += 1
         _roundLabel.text = "第\(_round)回合"
         cleanUnitStatus()
-        reduceCooldown()
+//        reduceCooldown()
         calcSpeedLine()
         orderUnits()
         let this = self
@@ -721,6 +767,13 @@ class Battle: SKSpriteNode {
     internal func orderUnits() {
         var all = _enemyPart + _playerPart
         _roleAll = []
+        for i in 0...all.count - 1 {
+            if all[i].hasSpell(spell: Vanguard()) {
+                _roleAll.append(all[i])
+                all.remove(at: i)
+                break
+            }
+        }
         while all.count > 0 {
             for unit in all {
                 if nil != unit._unit._weapon {
@@ -848,15 +901,21 @@ class Battle: SKSpriteNode {
         let gap = size + cellSize * 0.5
         var i:CGFloat = 2
         for s in _curRole._unit._spellsInuse {
+            s._battle = self
+            if s is Auro || s is Passive {
+                continue
+            }
             let srb = SpellRoundButton()
             srb.create(text: s._name, size: size)
             srb.spell = s
             _spellsButton.append(srb)
+//            debug("\(_curRole._unit._name) \(s._name) is  \(s._timeleft)")
+            
             if s._timeleft > 0 {
                 srb.timeleft = s._timeleft
                 srb.selectable = false
             } else {
-                srb.selectable = !(s is Passive || s is Auro)
+                srb.selectable = s.selectable()
             }
             srb.xAxis = x + gap * i
             srb.yAxis = y
@@ -881,7 +940,7 @@ class Battle: SKSpriteNode {
         return s
     }
     var _selectedSpell = Spell()
-    internal var _waitingForSelectTarget = false
+    internal var waitingForSelectTarget = false
     internal var waitingForSelectItemTarget = false
     internal var waitingForSelectSummonSeat = false
     internal var waitingForSelectRecallTarget = false
@@ -961,25 +1020,50 @@ class Battle: SKSpriteNode {
     //行动结束后释放的法术或者道具只能存在一个
     internal func moveEnd() {
         let spells = _curRole._unit._spellsInuse + _curRole._unit._spellsHidden
-        var selectedSpell:Spell? = nil
+        let castSpells = Array<Spell>()
         for spell in spells {
             if spell.hasAfterMoveAction {
-                selectedSpell = spell
-                break
+                spell._battle = self
+                spell.findTarget()
             }
         }
-        if nil != selectedSpell {
-            let this = self
-            _curRole.showText(text: selectedSpell!._name) {
-                selectedSpell!._battle = this
-                selectedSpell!.findTarget()
-                selectedSpell!.cast {
-                    this.moveStart()
+        var i = 0
+        func castAction() {
+//            debug("i \(i)")
+            if i < spells.count {
+                let s = spells[i]
+                if s.hasAfterMoveAction {
+                    s._battle = self
+                    s.findTarget()
+                    s.cast {
+                        i += 1
+                        castAction()
+                    }
+                } else {
+                    i += 1
+                    castAction()
+                }
+                
+            } else {
+                if !self.hasFinished() {
+                    self.moveStart()
                 }
             }
-        } else {
-            moveStart()
         }
+        castAction()
+        reduceCooldown()
+//        moveStart()
+//        if nil != selectedSpell {
+//            let this = self
+//            _curRole.showText(text: selectedSpell!._name) {
+//                selectedSpell!._battle = this
+//                selectedSpell!.findTarget()
+//                selectedSpell!.cast {
+//                    this.moveStart()
+//                }
+//            }
+//        } else {
+//        }
     }
     internal func cdSpell(spell:Spell) {
         if Mode.nocd {
@@ -991,6 +1075,7 @@ class Battle: SKSpriteNode {
             } else {
                 spell._timeleft = spell._cooldown + 1
             }
+//            debug("\(_curRole._unit._name) \(spell._name) is  \(spell._timeleft)")
         }
     }
     internal func speak(text:String = "") {
@@ -1061,7 +1146,7 @@ class Battle: SKSpriteNode {
         hideCancel()
         showOrder()
         _orderCancel.isHidden = true
-        _waitingForSelectTarget = false
+        waitingForSelectTarget = false
         waitingForSelectSummonSeat = false
         waitingForSelectItemTarget = false
         waitingForSelectRecallTarget = false
@@ -1209,6 +1294,7 @@ class Battle: SKSpriteNode {
         addChild(bip)
     }
     internal var _spellCards = Array<BattleSpellIcon>()
+    //abondoned
     internal func showSpellCards() {
         var spells = Array<Spell>()
         for s in _curRole._unit._spellsInuse {
@@ -1232,7 +1318,7 @@ class Battle: SKSpriteNode {
                 this.hideOrder()
                 this.showCancel()
                 if this._selectedSpell.autoCast {
-                    this._waitingForSelectTarget = false
+                    this.waitingForSelectTarget = false
                     this._selectedSpell.findTarget()
                     this.setUnitDefault(all: true)
                     this.execOrder()
@@ -1249,7 +1335,7 @@ class Battle: SKSpriteNode {
                         this.showSummonableSeats()
                     }
                     
-                    this._waitingForSelectTarget = true
+                    this.waitingForSelectTarget = true
                     this.showAvailableUnits(selectObject: this._selectedSpell)
                 }
             }
@@ -1269,7 +1355,7 @@ class Battle: SKSpriteNode {
         this.hideOrder()
         this.showCancel()
         if this._selectedSpell.autoCast {
-            this._waitingForSelectTarget = false
+            this.waitingForSelectTarget = false
             this._selectedSpell.findTarget()
             this.setUnitDefault(all: true)
             this.execOrder()
@@ -1279,15 +1365,15 @@ class Battle: SKSpriteNode {
                 this.waitingForSelectSummonSeat = true
                 this.setUnitDefault()
                 this.showSummonableSeats(selectAll: false)
-            } else
-                if this._selectedSpell is Interchange {
+            } else if this._selectedSpell is Interchange {
                     this.waitingForSelectSummonSeat = true
                     this.setUnitDefault()
                     this.showSummonableSeats()
+            } else {
+                this.waitingForSelectTarget = true
+                this.showAvailableUnits(selectObject: this._selectedSpell)
             }
             
-            this._waitingForSelectTarget = true
-            this.showAvailableUnits(selectObject: this._selectedSpell)
         }
     }
     internal func wandWitch(spell:Spell) -> Bool {
@@ -1485,6 +1571,9 @@ class Battle: SKSpriteNode {
             _enemyPart.append(bUnit)
             _evilsOrg.append(bUnit)
             addChild(bUnit)
+            
+//            m._rhythm = 200
+//            bUnit.burning()
         }
     }
     internal func getBossYAxis() -> CGFloat {
@@ -1506,6 +1595,25 @@ class Battle: SKSpriteNode {
         _enemyPart.append(bUnit)
         addChild(bUnit)
     }
+    
+    func addPlayerMinion(unit:Creature) -> BUnit {
+        let bUnit = BUnit()
+        bUnit.playerPart = true
+        bUnit.setUnit(unit: unit)
+        bUnit.create()
+        addPlayerMinion(bUnit: bUnit)
+        
+        return bUnit
+    }
+    func addPlayerMinion(bUnit:BUnit) {
+        bUnit._battle = self
+        bUnit.playerPart = true
+        bUnit.faceNorth()
+        bUnit.position = _playerSeats[bUnit._unit._seat]!
+        _playerPart.append(bUnit)
+        addChild(bUnit)
+    }
+    
     func setPlayerPart(roles:Array<Creature>) {
         for r in roles {
             let bUnit = BUnit()
@@ -1695,6 +1803,24 @@ class Battle: SKSpriteNode {
         default:
             return llt
         }
+    }
+    
+    func getEmptySeats() -> Array<String> {
+        var ps = [BUnit.BTL,BUnit.BTM,BUnit.BTR,BUnit.BBL,BUnit.BBM,BUnit.BBR]
+        var seats = Array<String>()
+        for i in 0...ps.count - 1 {
+            for u in _playerPart {
+                if u._unit._seat == ps[i] {
+                    ps[i] = "e"
+                    //                    ps.remove(at: i)
+                }
+            }
+            if ps[i] != "e" {
+                seats.append(ps[i])
+            }
+        }
+        
+        return seats
     }
     
     func removeFromPart(unit:BUnit) {

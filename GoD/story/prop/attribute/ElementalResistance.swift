@@ -13,15 +13,15 @@ class ElementalResistance: Attribute {
         _name = "元素抗性"
     }
     override func on(unit: Creature) {
-        unit._ElementalResistance.fire += _value
-        unit._ElementalResistance.water += _value
-        unit._ElementalResistance.thunder += _value
+        unit._elementalResistance.fire += _value
+        unit._elementalResistance.water += _value
+        unit._elementalResistance.thunder += _value
     }
     
     override func off(unit: Creature) {
-        unit._ElementalResistance.fire -= _value
-        unit._ElementalResistance.water -= _value
-        unit._ElementalResistance.thunder -= _value
+        unit._elementalResistance.fire -= _value
+        unit._elementalResistance.water -= _value
+        unit._elementalResistance.thunder -= _value
     }
     override func create(level: CGFloat) {
         elementalAttrValue(level: level)

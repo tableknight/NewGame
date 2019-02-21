@@ -91,11 +91,11 @@ class CopperRing:Ring {
     }
     override func on() {
         super.on()
-        Game.instance.char._ElementalResistance.fire += 5
+        Game.instance.char._elementalResistance.fire += 5
     }
     override func off() {
         super.off()
-        Game.instance.char._ElementalResistance.fire -= 5
+        Game.instance.char._elementalResistance.fire -= 5
     }
 }
 class SilverRing:Ring {
@@ -116,11 +116,11 @@ class SilverRing:Ring {
     }
     override func on() {
         super.on()
-        Game.instance.char._ElementalResistance.fire += 15
+        Game.instance.char._elementalResistance.fire += 15
     }
     override func off() {
         super.off()
-        Game.instance.char._ElementalResistance.fire -= 15
+        Game.instance.char._elementalResistance.fire -= 15
     }
 }
 class DellarsGoldenRing:Ring {
@@ -141,11 +141,11 @@ class DellarsGoldenRing:Ring {
     }
     override func on() {
         super.on()
-        Game.instance.char._ElementalResistance.fire += 35
+        Game.instance.char._elementalResistance.fire += 35
     }
     override func off() {
         super.off()
-        Game.instance.char._ElementalResistance.fire -= 35
+        Game.instance.char._elementalResistance.fire -= 35
     }
 }
 class LuckyRing:Ring {

@@ -13,11 +13,11 @@ class WaterResistance: Attribute {
         _name = "寒冰抗性"
     }
     override func on(unit: Creature) {
-        unit._ElementalResistance.water += _value
+        unit._elementalResistance.water += _value
     }
     
     override func off(unit: Creature) {
-        unit._ElementalResistance.water -= _value
+        unit._elementalResistance.water -= _value
     }
     override func create(level: CGFloat) {
         elementalAttrValue(level: level)

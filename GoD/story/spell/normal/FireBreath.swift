@@ -12,8 +12,8 @@ class FireBreath: Magical {
         super.init()
         isFire = true
         _name = "火焰呼吸"
-        _description = "对目标造成精神80%的火焰伤害"
-        _rate = 0.8
+        _description = "对目标造成精神25%的火焰伤害， 有一定几率点燃目标"
+        _rate = 0.25
         _quality = Quality.NORMAL
         _cooldown = 1
     }
@@ -35,6 +35,9 @@ class FireBreath: Magical {
             t.actionAttacked {
                 t.showValue(value: damage) {
                     completion()
+                    if self.d3() {
+                        t.burning()
+                    }
                 }
             }
         }

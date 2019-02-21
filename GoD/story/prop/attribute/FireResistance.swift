@@ -13,11 +13,11 @@ class FireResistance: Attribute {
         _name = "火焰抗性"
     }
     override func on(unit: Creature) {
-        unit._ElementalResistance.fire += _value
+        unit._elementalResistance.fire += _value
     }
     
     override func off(unit: Creature) {
-        unit._ElementalResistance.fire -= _value
+        unit._elementalResistance.fire -= _value
     }
     override func create(level: CGFloat) {
         elementalAttrValue(level: level)

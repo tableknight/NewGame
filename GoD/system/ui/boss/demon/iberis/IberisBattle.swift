@@ -40,6 +40,14 @@ class IberisBattle: BossBattle {
     override func orderUnits() {
         var all = _playerPart
         _roleAll = []
+        for i in 0...all.count - 1 {
+            if all[i].hasSpell(spell: Vanguard()) {
+                _roleAll.append(all[i])
+                _roleAll.append(_enemyPart[0])
+                all.remove(at: i)
+                break
+            }
+        }
         while all.count > 0 {
             for unit in all {
                 if unit._speed >= _speedLine {
@@ -155,19 +163,19 @@ class ElementPwoerUp:Magical {
             s._timeleft = 3
             s._type = "element_power_up"
             c.addStatus(status: s)
-            c._ElementalPower.fire += 50
-            c._ElementalPower.thunder += 50
-            c._ElementalPower.water += 50
-            c._ElementalResistance.fire += 50
-            c._ElementalResistance.water += 50
-            c._ElementalResistance.thunder += 50
+            c._elementalPower.fire += 50
+            c._elementalPower.thunder += 50
+            c._elementalPower.water += 50
+            c._elementalResistance.fire += 50
+            c._elementalResistance.water += 50
+            c._elementalResistance.thunder += 50
             s.timeupAction = {
-                c._ElementalPower.fire -= 50
-                c._ElementalPower.thunder -= 50
-                c._ElementalPower.water -= 50
-                c._ElementalResistance.fire -= 50
-                c._ElementalResistance.water -= 50
-                c._ElementalResistance.thunder -= 50
+                c._elementalPower.fire -= 50
+                c._elementalPower.thunder -= 50
+                c._elementalPower.water -= 50
+                c._elementalResistance.fire -= 50
+                c._elementalResistance.water -= 50
+                c._elementalResistance.thunder -= 50
             }
             c.actionBuff {
                 completion()

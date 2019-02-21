@@ -10,6 +10,7 @@ import SpriteKit
 class Burning:Derivant {
     override init() {
         super.init()
+        _delay = 1.25
     }
     override func cast(completion: @escaping () -> Void) {
         let s = _target.getStatus(type: Status.BURNING) as! BurningStatus

@@ -183,7 +183,7 @@ class BUnit: SKSpriteNode {
         
     }
     var _charTexture = SKTexture()
-    private var _charNode = SKSpriteNode()
+    var _charNode = SKSpriteNode()
     func faceSouth() {
         if _unit is Boss || _unit is IFace {
             _charNode.texture = _charTexture
@@ -269,14 +269,28 @@ class BUnit: SKSpriteNode {
     
     func burning() {
         let t = self
+        let spell = Burning()
+        spell._battle = self._battle
+        spell._target = self
         if t.hasStatus(type: Status.BURNING) {
             let s = t.getStatus(type: Status.BURNING) as! BurningStatus
             s._level += 1
-            s._timeleft = 3
+            s._castSpell = spell
             t.addStatus(status: s)
         } else {
-            t.addStatus(status: BurningStatus())
+            let bs = BurningStatus()
+            bs._castSpell = spell
+            t.addStatus(status: bs)
         }
+    }
+    func freezing() {
+        let target = self
+        let status = Status()
+        status._type = Status.FREEZING
+        status._timeleft = 1
+        target.addStatus(status: status)
+        target.isDefend = false
+        target.actionFrozen(){}
     }
     
     func actionAttack(completion:@escaping () -> Void) {
@@ -355,7 +369,7 @@ class BUnit: SKSpriteNode {
 //            completion()
 //            return
         }
-        if isDefend || defend {
+        if (isDefend || defend) && _battle._selectedSpell is Physical {
             actionDefead {
                 completion()
             }
@@ -540,6 +554,11 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
+    func showMiss(completion:@escaping () -> Void = {}) {
+        showText(text: "MISS") {
+            completion()
+        }
+    }
     func showValue(value:CGFloat, isCritical:Bool = false, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
         if sheildEvilExpel(value: value) {
@@ -618,9 +637,9 @@ class BUnit: SKSpriteNode {
                 this.removeFromBattle()
                 this.actionDead {
                     this.removeFromParent()
-                    if !this._battle.hasFinished() {
-                        completion()
-                    }
+                    completion()
+//                    if !this._battle.hasFinished() {
+//                    }
                 }
             } else {
                 completion()
@@ -876,8 +895,8 @@ class BUnit: SKSpriteNode {
     }
     func getActiveSpell() -> Array<Spell> {
         var spells = Array<Spell>()
-        for s in _unit._spellsInuse {
-            if !s.isPassive && !s.isAuro {
+        for s in _unit._spellsInuse + _unit._spellsHidden {
+            if s is Active {
                 spells.append(s)
             }
         }
@@ -963,7 +982,7 @@ class BUnit: SKSpriteNode {
         return spirit
     }
     func getFirePower() -> CGFloat {
-        var val = _unit._ElementalPower.fire
+        var val = _unit._elementalPower.fire
 //        if hasStatus(type: Status.FIRE_LORD) {
 //            val += 20
 //        }
@@ -975,24 +994,24 @@ class BUnit: SKSpriteNode {
             val += 50
         }
         
-        return val + _ElementalPower.fire + _elemental.damage
+        return val + _elementalPower.fire + _elemental.damage
     }
     func getWaterPower() -> CGFloat {
-        var val = _unit._ElementalPower.water
+        var val = _unit._elementalPower.water
         if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
-        return val + _ElementalPower.water + _elemental.damage
+        return val + _elementalPower.water + _elemental.damage
     }
     func getThunderPower() -> CGFloat {
-        var val = _unit._ElementalPower.thunder
+        var val = _unit._elementalPower.thunder
         if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
-        return val + _ElementalPower.thunder + _elemental.damage
+        return val + _elementalPower.thunder + _elemental.damage
     }
     func getFireResistance() -> CGFloat {
-        var val = _unit._ElementalResistance.fire
+        var val = _unit._elementalResistance.fire
 //        if hasStatus(type: Status.FIRE_LORD) {
 //            val += 20
 //        }
@@ -1004,21 +1023,21 @@ class BUnit: SKSpriteNode {
             val += 50
         }
         
-        return val + _ElementalResistance.fire + _elemental.resistance
+        return val + _elementalResistance.fire + _elemental.resistance
     }
     func getWaterResistance() -> CGFloat {
-        var val = _unit._ElementalResistance.water
+        var val = _unit._elementalResistance.water
         if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
-        return val + _ElementalResistance.water + _elemental.resistance
+        return val + _elementalResistance.water + _elemental.resistance
     }
     func getThunderResistance() -> CGFloat {
-        var val = _unit._ElementalResistance.thunder
+        var val = _unit._elementalResistance.thunder
         if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
-        return val + _ElementalResistance.thunder + _elemental.resistance
+        return val + _elementalResistance.thunder + _elemental.resistance
     }
     
     func getMagicalDamage() -> CGFloat {
@@ -1326,13 +1345,13 @@ class BUnit: SKSpriteNode {
     var _chaos:CGFloat = 0
     var _race:Int = -1
     
-    var _ElementalPower = Elemental(
+    var _elementalPower = Elemental(
         fire : 0,
         water : 0,
         thunder : 0
     )
     
-    var _ElementalResistance = Elemental(
+    var _elementalResistance = Elemental(
         fire : 0,
         water : 0,
         thunder : 0

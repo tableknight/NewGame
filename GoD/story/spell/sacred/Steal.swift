@@ -35,7 +35,7 @@ class Steal: Magical {
                     })
                 } else {
                     setTimeout(delay: 1, completion: {
-                        t.showText(text: "stolen") {
+                        t.showText(text: "STOLEN") {
                             completion()
                         }
                     })

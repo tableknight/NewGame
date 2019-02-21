@@ -15,22 +15,19 @@ class Lighting: Passive {
         isMagical = true
         isThunder = true
         _quality = Quality.RARE
-        _description = "行动结束时对随机敌方目标造成雷击,雷击造成精神50%的雷电伤害"
-        _rate = 0.5
+        _description = "行动结束时对随机敌方目标造成雷击,雷击造成精神15%的雷电伤害"
+        _rate = 0.15
         hasAfterMoveAction = true
+        _delay = 1.5
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         if c._unit._weapon is ThorsHammer {
-            _rate = 1
+            _rate = 0.3
         }
-        let this = self
-        let t = this._battle._selectedTarget!
-        this._damageValue = this.thunderDamage(t)
-        let damage = this._damageValue
-        if this.hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
+        let t = _battle._selectedTarget!
+        let damage = thunderDamage(t)
+        if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
                 t.showValue(value: damage) {
                     completion()

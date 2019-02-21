@@ -10,6 +10,11 @@ import SpriteKit
 class SummonUnit: Creature {
     override init() {
         super.init()
+        _spellsInuse = [BossAttack()]
     }
     var _last = 0
+    var canBeControl = false
+    internal func createPropValue() -> CGFloat {
+        return seed(min: 10, max: 20).toFloat() * 0.1
+    }
 }

@@ -41,13 +41,13 @@ class Unit:Core {
     var _chaos:CGFloat = 0
     var _img:SKTexture = SKTexture()
     
-    var _ElementalPower = Elemental(
+    var _elementalPower = Elemental(
         fire : 0,
         water : 0,
         thunder : 0
     )
     
-    var _ElementalResistance = Elemental(
+    var _elementalResistance = Elemental(
         fire : 0,
         water : 0,
         thunder : 0

@@ -66,7 +66,7 @@ class Status:Core {
     static let MIND_POWER = "mind_power"
     static let LUCKY_POWER = "lucky_power"
     static let SPEED_POWER = "speed_power"
-    static let ICE_BOMB = "speed_power"
+    static let ICE_BOMB = "ice_bomb"
     
     var hasBeforeMoveAction = false
     var _castSpell:Spell!
@@ -89,6 +89,7 @@ class BurningStatus:Status {
         _type = Status.BURNING
 //        timeupAction = {}
         _timeleft = 3
+        hasBeforeMoveAction = true
     }
     var _level:CGFloat = 1
     func getBurningDamage(unit:BUnit) -> CGFloat {
