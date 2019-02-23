@@ -12,9 +12,9 @@ class FireFist: Physical {
         super.init()
         isClose = true
         _name = "火焰掌"
-        _description = "对目标造成攻击力120%的火焰伤害，需要空手"
+        _description = "对目标造成攻击力60%的火焰伤害，需要空手"
         isFire = true
-        _rate = 1.2
+        _rate = 0.6
         _quality = Quality.GOOD
         _cooldown = 1
     }
@@ -49,7 +49,7 @@ class FireFist: Physical {
     }
     
     override func selectable() -> Bool {
-        return nil == _battle._curRole._unit._weapon
+        return isEmptyHand()
         
     }
 }

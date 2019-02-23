@@ -1250,6 +1250,10 @@ class BUnit: SKSpriteNode {
         let val = _unit._chaos
         return val + _chaos
     }
+    func getSensitive() -> Int {
+        let val = _unit._sensitive
+        return val + _sensitive
+    }
     private var _speakNode = SKSpriteNode()
     func speak(text:String, autoRemove:Bool = true, duration:CGFloat = 3) {
         let node = SKSpriteNode()
@@ -1359,6 +1363,7 @@ class BUnit: SKSpriteNode {
     var _magical = Magic(damage: 0, resistance: 0)
     var _elemental = Magic(damage: 0, resistance: 0)
     var _physical = Magic(damage: 0, resistance: 0)
+    var _sensitive:Int = 0
     
     func strengthChange(value: CGFloat) {
         _mains.strength += value

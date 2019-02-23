@@ -23,7 +23,7 @@ class Taunt: Magical {
         let this = self
         c.actionCast {
             for t in ts {
-                if !this.statusMissed(baseline: 60, target: t,completion: {}) {
+                if !this.statusMissed(baseline: 60, target: t, bossImmnue: t._unit is Boss) {
                     let s = Status()
                     s._timeleft = 1
                     s._type = Status.TAUNTED

@@ -49,6 +49,7 @@ class Emily:Character {
         darkCrow.create(level: _minionlevel)
 //        darkCrow.levelup()
         darkCrow._spellCount = 4
+        darkCrow._spellsInuse = []
 //        darkCrow._spellsInuse = [Crazy()]
         _minions.append(darkCrow)
         
@@ -56,6 +57,7 @@ class Emily:Character {
         w.create(level: _minionlevel)
         w._spellCount = 1
         _minions.append(w)
+        w._spellsInuse = [FireFist()]
         
         let bq = BloodQueen()
         bq.create(level: _minionlevel)

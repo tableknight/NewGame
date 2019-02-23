@@ -10,61 +10,45 @@ import SpriteKit
 class FlowerOfHeal: SummonUnit {
     override init() {
         super.init()
-        _stars.strength = 2.0
-        _stars.stamina = 2.0
+        _stars.strength = 1.3
+        _stars.stamina = 1.3
         _stars.agility = 1.0
         _stars.intellect = 1.0
+        _sensitive = 100
         _name = "治疗之花"
         _img = SKTexture(imageNamed: "13000013.png")
         _spellsInuse = [HealOfFlower()]
         _race = EvilType.NATURE
         _last = 5
-//        hasAction = false
     }
     override func create(level: CGFloat) {
         _level = level
-//        createQuality()
-//        _growth.stamina = _stars.stamina + extraProperty(value: _stars.stamina)
-//        _growth.strength = _stars.strength + extraProperty(value: _stars.strength)
-//        _growth.agility = _stars.agility + extraProperty(value: _stars.agility)
-//        _growth.intellect = _stars.intellect + extraProperty(value: _stars.intellect)
-//        protectNew()
         levelTo(level: level)
         _extensions.hp = _extensions.health
-//        _slot = seed(min: _spellSlot.min, max: _spellSlot.max + 1)
-//        _spellCount = _slot
     }
 }
-class HealOfFlower: Passive {
+class HealOfFlower: Magical {
     override init() {
         super.init()
         _quality = Quality.SACRED
-        _name = "花之治疗"
-        _description = "行动结束后恢复相邻单位15%最大生命。"
-//        hasAfterMoveAction = true
+        _name = "花语"
+        _description = "恢复相邻单位15%最大生命。"
     }
-    override func afterMove(completion: @escaping () -> Void) {
+    override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let this = self
         var rate:CGFloat = 0.15
         if Game.instance.char._magicMark is MarkOfVitality {
             rate = 0.3
         }
         c.actionCast {
-            
-            let ts = this.getAdajcentUnits(target: c)
+            let ts = self.getAdajcentUnits(target: c)
             for u in ts {
                 u.actionHealed {
                     let value = u.getHealth() * rate
-//                    u.hpChange(value: value)
                     u.showValue(value: value)
-                    
                 }
             }
-            
-            
-            
-            setTimeout(delay: 1, completion: {
+            setTimeout(delay: 1.5, completion: {
                 let su = c._unit as! SummonUnit
                 if su._last < 1 {
                     c.actionDead {

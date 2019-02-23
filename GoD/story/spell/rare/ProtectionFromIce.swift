@@ -12,6 +12,7 @@ class ProtectionFromIce: Magical {
     override init() {
         super.init()
         _tear = 2
+        isWater = true
         _quality = Quality.RARE
         _name = "冰棺"
         _description = "对己方单位释放护盾，抵挡一次致命攻击，持续3回合"

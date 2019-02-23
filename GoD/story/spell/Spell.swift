@@ -686,8 +686,8 @@ class Spell:Core, IDisplay, ISelectTarget {
         return seed(min: 1, max: 4)
     }
     
-    internal func statusMissed(baseline:CGFloat, target:BUnit, completion:@escaping () -> Void) -> Bool {
-        if target.hasStatus(type: Status.IMMUNE) {
+    internal func statusMissed(baseline:CGFloat, target:BUnit, bossImmnue:Bool = false, completion:@escaping () -> Void = {}) -> Bool {
+        if bossImmnue || target.hasStatus(type: Status.IMMUNE) {
             target.showText(text: "IMMUNE") {
                 completion()
             }

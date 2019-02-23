@@ -121,7 +121,7 @@ class Unit:Core {
         _extensions.accuracy += value * 0
         _extensions.avoid += value * 0.1
         _extensions.critical += value * 0
-        _extensions.spirit += value * 3
+        _extensions.spirit += value * 2
         _extensions.health += value * 0.5
         _extensions.hp += value * 0.5
         _extensions.mp += value * 3

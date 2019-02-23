@@ -23,11 +23,11 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = Battle()
+        let b = FrancisBattle()
         var es = Array<Creature>()
-        let role = UndeadWarrior()
-        role.create(level: 50)
-        es.append(role)
+//        let role = UndeadWarrior()
+//        role.create(level: 50)
+//        es.append(role)
 //        let r2 = UndeadMinion1()
 //        r2.create(level: 50)
 //        es.append(r2)
@@ -47,7 +47,8 @@ class GameScene: SKScene {
 //        es.append(t)
 //        //        b.setEvils(evils: es)
         b.setEnemyPart(minions: es)
-        let cs:Array<Creature> = [Game.instance.char]
+        let char = Game.instance.char!
+        let cs:Array<Creature> = [char] + char.getReadyMinions()
 //        for u in cs {
 //            u._elementalResistance.fire += 70
 //        }
@@ -66,9 +67,9 @@ class GameScene: SKScene {
         let e = Emily()
         e.create(level: e._level)
 //        e._spellsInuse = [SpiritIntervene(), SoulLash()]
-        for m in e._minions + [e] {
-            m._spellsInuse = [LowerSummon()]
-        }
+//        for m in e._minions + [e] {
+//            m._spellsInuse = [LowerSummon()]
+//        }
 //        e._minions[0]._spellsInuse.append(Crazy())
         let hm = ThorsHammer()
         hm.create()

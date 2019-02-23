@@ -11,10 +11,9 @@ import SpriteKit
 class DeathGaze: Magical {
     override init() {
         super.init()
-        //        isWater = true
         _name = "死亡凝视"
-        _description = "对目标造成精神30%的魔法伤害，小概率立即杀死目标f"
-        _rate = 0.30
+        _description = "对目标造成精神65%的魔法伤害，小概率立即杀死目标"
+        _rate = 0.65
         _quality = Quality.SACRED
         _cooldown = 2
     }

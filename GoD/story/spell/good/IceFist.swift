@@ -52,7 +52,7 @@ class IceFist: Physical {
     }
     
     override func selectable() -> Bool {
-        return _battle._curRole._unit._weapon == nil
+        return isEmptyHand()
     }
 }
 

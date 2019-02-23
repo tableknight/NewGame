@@ -13,6 +13,6 @@ class ProtectFromGod: Passive {
         super.init()
         _quality = Quality.RARE
         _name = "神之庇护"
-        _description = "免疫中毒和流血"
+        _description = "免疫燃烧"
     }
 }

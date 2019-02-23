@@ -13,14 +13,6 @@ class Battle: SKSpriteNode {
         if cancelTouch {
             return
         }
-        
-        //        if _roundLabel.contains(s) {
-        //            Game.instance.stage.removeBattle(b: self)
-        //            let tp = TownScroll()
-        //            tp.use(target: Creature())
-        //            return
-        //        }
-        
         if _orderCancel.contains(s) && _orderCancel.visible {
             cancelButtonClicked()
             return
@@ -47,7 +39,7 @@ class Battle: SKSpriteNode {
         
         if waitingForSelectRecallTarget {
             for u in _playerPart {
-                if u.contains(s) {
+                if u.contains(s) && u.selectable {
                     _playerUnit.showText(text: "召回")
                     u._unit._seat = BUnit.STAND_BY
                     
@@ -84,40 +76,7 @@ class Battle: SKSpriteNode {
                         hideCancel()
                         return
                     }
-                    if _selectedSpell is SummonFlower {
-                        let flower = FlowerOfHeal()
-                        if _curRole._unit is Character {
-                            flower._growth.strength = 1
-                            flower._growth.stamina = 1
-                            flower._growth.agility = 1
-                            flower._growth.intellect = 1
-                        } else {
-                            flower._growth.strength = _curRole._unit._growth.strength * 0.5
-                            flower._growth.stamina = _curRole._unit._growth.stamina * 0.5
-                            flower._growth.agility = _curRole._unit._growth.agility * 0.5
-                            flower._growth.intellect = _curRole._unit._growth.intellect * 0.5
-                        }
-                        flower.create(level: _curRole._unit._level)
-                        
-                        //                        _mainChar.showText(text: _selectedSpell._name)
-                        //                        _curRole.speak(text: "")
-                        speakSpellName()
-                        let this = self
-                        _curRole.actionCast {
-                            u.removeFromParent()
-                            this.waitingForSelectSummonSeat = false
-                            flower._seat = seat
-                            let flowerBUnit = this.createPlayerPartUnit(c: flower)
-                            this.cdSpell(spell: this._selectedSpell)
-                            flowerBUnit.actionSummon {
-                                this.moveEnd()
-                            }
-                        }
-                        setUnitDefault(all: true)
-                        cleanSummonSeats()
-                        hideCancel()
-                        return
-                    }
+                    
                     if u.isEmpty {
                         if _char._minionsCount <= (_playerPart.count - 1) {
                             showMsg(text: "战场随从已达上限！")
@@ -511,7 +470,8 @@ class Battle: SKSpriteNode {
     func getSpell(u:BUnit) -> Spell {
         var sps = Array<Spell>()
         for s in u.getActiveSpell() {
-            if s._timeleft == 0 {
+            s._battle = self
+            if s._timeleft == 0 && s.selectable() {
                 sps.append(s)
             }
         }
@@ -601,14 +561,14 @@ class Battle: SKSpriteNode {
             return
         }
         
-        if this._curRole.hasSpell(spell: Crazy()) {
-            this._selectedSpell = Attack()
-            this._selectedSpell._rate = 2
-            this._selectedSpell._battle = self
-            this._selectedSpell.findTarget()
-            this.execOrder()
-            return
-        }
+//        if this._curRole.hasSpell(spell: Crazy()) {
+//            this._selectedSpell = Attack()
+//            this._selectedSpell._rate = 2
+//            this._selectedSpell._battle = self
+//            this._selectedSpell.findTarget()
+//            this.execOrder()
+//            return
+//        }
         
         if _curRole.hasStatus(type: Status.CONFUSED) {
             var all = _playerPart + _enemyPart
@@ -623,7 +583,7 @@ class Battle: SKSpriteNode {
             return
         }
         
-        if !_curRole.playerPart {
+        if !(_curRole._unit is Character) {
             this.createAI()
         } else {
             cancelTouch = false
@@ -645,31 +605,22 @@ class Battle: SKSpriteNode {
         return Attack()
     }
     internal func createAI() {
-        let _seed = seed(max:101)
-        let sensitive = _curRole._unit._sensitive
-        if _seed < sensitive {
-//            let sps = _curRole.getActiveSpell()
-////            debug("ai cast spell")
-//            if sps.count < 1 {
-//                _selectedSpell = getSpellAttack()
-//            } else {
-//                _selectedSpell = sps[seed(max: sps.count)]
-//            }
+        if seed() < 15 {
+            _curRole.isDefend = true
+            _selectedSpell = Defend()
+            _selectedSpell._battle = self
+            _curRole.showText(text: "防御") {
+                self.execOrder()
+            }
+            return
+        }
+        debug("sensitive \(_curRole.getSensitive())")
+        if seed() < _curRole.getSensitive() {
             _selectedSpell = getSpell(u: _curRole)
             _selectedSpell._battle = self
             _selectedSpell.findTarget()
             execOrder()
-        } else if _seed < (sensitive + 25) {
-//            debug("ai cast defend")
-            _curRole.isDefend = true
-            _selectedSpell = Defend()
-            _selectedSpell._battle = self
-            let this = self
-            _curRole.showText(text: "防御") {
-                this.execOrder()
-            }
         } else {
-//            debug("ai cast attack")
             _selectedSpell = getSpellAttack()
             _selectedSpell._battle = self
             _selectedSpell.findTarget()
@@ -681,7 +632,6 @@ class Battle: SKSpriteNode {
         if victory {
             return
         }
-        print("defeat")
         let l = Loot()
         let ms = _char.getReadyMinions()
         for u in _evilsOrg {
@@ -1954,7 +1904,7 @@ class Battle: SKSpriteNode {
     
     internal func showRecallMinions() {
         for u in _playerPart {
-            if !(u._unit is Character) {
+            if _char._minions.index(of: u._unit) != nil {
                 u.setSelectableMode()
             }
         }
