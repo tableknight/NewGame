@@ -23,7 +23,7 @@ class Iberis:Boss {
         _extensions.health *= 4
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [ChopChop(), FlameAttack(), ElementPwoerUp()]
+        _spellsInuse = [ChopChop(), FlameAttack(), ElementPowerUp()]
         for _ in 0...3 {
             _spellsInuse.append(BossAttack())
         }

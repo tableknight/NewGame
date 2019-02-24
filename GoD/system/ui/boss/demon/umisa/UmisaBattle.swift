@@ -59,7 +59,7 @@ class UmisaBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
 }
-class SummonCopy:Magical {
+class SummonCopy:Magical, BossOnly {
     override init() {
         super.init()
         _name = "分身之术"

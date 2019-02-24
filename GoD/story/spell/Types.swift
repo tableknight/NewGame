@@ -16,3 +16,6 @@ protocol BowSkill {
 protocol Curse {
     
 }
+protocol BossOnly {
+    
+}

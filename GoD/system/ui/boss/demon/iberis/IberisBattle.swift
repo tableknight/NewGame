@@ -91,8 +91,9 @@ class FlameAttack: Physical {
         super.init()
         _name = "烈焰轰击"
         isFire = true
-        _description = "对目标造成30%攻击力的火焰伤害，并且点燃目标"
-        _rate = 0.4
+        _description = "对目标造成60%攻击力的火焰伤害，并且点燃目标"
+        _rate = 0.6
+        _cooldown = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -116,16 +117,16 @@ class FlameAttack: Physical {
     }
 }
 
-class ChopChop: Physical {
+class ChopChop: Physical, BossOnly {
     override init() {
         super.init()
         _name = "乱剑挥砍"
-        _description = "猛烈的挥舞双键对目标造成2-4次物理攻击，每次造成攻击力35%的伤害"
+        _description = "猛烈的挥舞双键对目标造成2-6次物理攻击，每次造成攻击力35%的伤害"
         _rate = 0.35
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let times = 1 + seed(max: 3)
+        let times = 1 + seed(max: 5)
         _battle._curRole.actionAttack {
             for i in 0...times {
                 if i == 0 {
@@ -150,17 +151,19 @@ class ChopChop: Physical {
         }
     }
 }
-class ElementPwoerUp:Magical {
+class ElementPowerUp:Magical {
     override init() {
         super.init()
         _name = "元素强化"
-        _description = "i提升自身50点元素攻击和元素抵抗"
+        _description = "提升自身50点元素攻击和元素抵抗"
+        _cooldown = 3
+        _quality = Quality.SACRED
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         c.actionCast {
             let s = Status()
-            s._timeleft = 3
+            s._timeleft = 5
             s._type = "element_power_up"
             c.addStatus(status: s)
             c._elementalPower.fire += 50

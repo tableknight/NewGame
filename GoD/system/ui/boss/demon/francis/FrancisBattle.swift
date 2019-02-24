@@ -42,7 +42,7 @@ class FrancisBattle: BossBattle {
     }
 }
 
-class SummonServant: Magical {
+class SummonServant: Magical, BossOnly {
     override init() {
         super.init()
         _name = "亡灵召唤"
@@ -93,7 +93,7 @@ class SummonServant: Magical {
     }
 }
 
-class Nova: Magical {
+class Nova: Magical, BossOnly {
     override init() {
         super.init()
         _name = "冲击波"
@@ -118,7 +118,7 @@ class Nova: Magical {
     }
 }
 
-class DeathAttack:Physical {
+class DeathAttack:Physical, BossOnly {
     override init() {
         super.init()
         _name = "死亡一击"
@@ -156,13 +156,13 @@ class AttackPowerUp: Passive {
     override init() {
         super.init()
         _name = "力量增强"
-        _description = "行动结束提升25%基础攻击力"
+        _description = "行动结束提升15%基础攻击力"
         _quality = Quality.RARE
         hasAfterMoveAction = true
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let up = c._unit._extensions.attack * 0.5
+        let up = c._unit._extensions.attack * 0.15
         c._extensions.attack += up
         c.actionBuff {
             completion()
@@ -175,7 +175,9 @@ class Reinforce: Magical {
         super.init()
         _name = "强化"
         _description = "提升目标100%的基础攻击力和基础防御力，持续3回合"
+        targetEnemy = false
         _quality = Quality.RARE
+        canBeTargetSelf = true
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -201,16 +203,16 @@ class Reinforce: Magical {
     }
 
     override func findTarget() {
-        _battle._selectedTarget = _battle._curRole.playerPart ? _battle._playerPart.one() : _battle._enemyPart.one()
+        findSingleTargetNotBlocked()
     }
 }
 class SoulExtract: Magical {
     override init() {
         super.init()
         _name = "灵魂抽取"
-        _description = "对目标造成80%精神的魔法伤害，并h抽取其基础属性各一点"
+        _description = "对目标造成60%精神的魔法伤害，并抽取其基础属性各一点"
         _quality = Quality.SACRED
-        _rate = 0.8
+        _rate = 0.6
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

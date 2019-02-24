@@ -39,7 +39,7 @@ class DiusBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
 }
-class ExposeWeakness: Passive {
+class ExposeWeakness: Passive, BossOnly {
     override init() {
         super.init()
         _name = ""
@@ -79,8 +79,9 @@ class BallLighting: Magical {
     override init() {
         super.init()
         _name = "球状闪电"
-        _description = "对目标及相邻单位造成精神35%的雷电伤害"
-        _rate = 0.35
+        _description = "对目标及相邻单位造成精神55%的雷电伤害"
+        _rate = 0.55
+        _cooldown = 2
         isThunder = true
     }
     override func cast(completion: @escaping () -> Void) {
@@ -105,8 +106,9 @@ class SuperWater:Magical {
     override init() {
         super.init()
         _name = "超级洪流"
-        _description = "对所有敌方目标造成精神25%的寒冰伤害"
-        _rate = 0.25
+        _description = "对所有敌方目标造成精神45%的寒冰伤害"
+        _rate = 0.45
+        _cooldown = 3
         isWater = true
     }
     override func cast(completion: @escaping () -> Void) {
@@ -128,8 +130,9 @@ class FireExplode:Magical {
     override init() {
         super.init()
         _name = "烈焰爆轰"
-        _description = "对目标造成精神60%的火焰伤害"
-        _rate = 0.6
+        _description = "对目标造成精神100%的火焰伤害"
+        _rate = 0.9
+        _cooldown = 2
         isFire = true
     }
     override func cast(completion: @escaping () -> Void) {

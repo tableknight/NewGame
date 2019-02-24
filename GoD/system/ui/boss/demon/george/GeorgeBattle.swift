@@ -90,6 +90,7 @@ class Screaming: Magical {
         super.init()
         _name = "尖叫"
         _description = "对目标造成精神80%的法术伤害"
+        _cooldown = 1
         _rate = 0.8
     }
     override func cast(completion:@escaping () -> Void) {
@@ -127,11 +128,12 @@ class Screaming: Magical {
     }
 }
 
-class Infection:Magical {
+class Infection:Magical, Curse {
     override init() {
         super.init()
         _name = "感染"
         _description = "对敌方所有目标释放诅咒感染，75%几率令目标感染瘟疫"
+        _cooldown = 3
     }
     override func cast(completion: @escaping () -> Void) {
         _battle._curRole.actionCast {
@@ -153,12 +155,12 @@ class Infection:Magical {
         _battle._selectedTargets = _battle._playerPart
     }
 }
-class DrawBlood:Magical {
+class DrawBlood:Magical, BossOnly {
     override init() {
         super.init()
         _name = "群体吸血"
-        _description = "对敌方所有目标造成精神30%的法术攻击，并且恢复造成伤害的总量"
-        _rate = 0.3
+        _description = "对敌方所有目标造成精神40%的法术攻击，并且恢复造成伤害的总量"
+        _rate = 0.4
     }
     override func cast(completion: @escaping () -> Void) {
         var recovery:CGFloat = 0

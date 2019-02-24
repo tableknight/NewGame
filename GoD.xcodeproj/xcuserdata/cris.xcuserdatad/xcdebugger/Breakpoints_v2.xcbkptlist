@@ -719,8 +719,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1570"
             endingLineNumber = "1570"
-            landmarkName = "setPlayerPart(roles:)"
-            landmarkType = "7">
+            landmarkName = "Battle"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -831,8 +831,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "904"
             endingLineNumber = "904"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
+            landmarkName = "Battle"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1183,8 +1183,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1651"
             endingLineNumber = "1651"
-            landmarkName = "createPlayerPartUnit(c:)"
-            landmarkType = "7">
+            landmarkName = "Battle"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2399,8 +2399,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "903"
             endingLineNumber = "903"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
+            landmarkName = "Battle"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2431,7 +2431,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1777"
             endingLineNumber = "1777"
-            landmarkName = "removeFromPart(unit:)"
+            landmarkName = "getEmptySeats()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2975,8 +2975,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1004"
             endingLineNumber = "1004"
-            landmarkName = "moveEnd()"
-            landmarkType = "7">
+            landmarkName = "castAction()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
