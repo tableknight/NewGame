@@ -783,6 +783,10 @@ class Battle: SKSpriteNode {
     func placeEvils() {}
     func placeRoles() {}
     func silenceUnit(unit:BUnit) {
+        if unit.hasSpell(spell: RaceSuperiority()) || unit.hasStatus(type: Status.IMMUNE) {
+            unit.showText(text: "IMMUNE")
+            return
+        }
         if unit._unit is Boss {
             unit.showText(text: "IMMUNE")
         } else {

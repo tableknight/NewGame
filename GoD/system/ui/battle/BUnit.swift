@@ -291,6 +291,10 @@ class BUnit: SKSpriteNode {
         }
     }
     func freezing() {
+        if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) {
+            showText(text: "IMMUNE")
+            return
+        }
         let target = self
         let status = Status()
         status._type = Status.FREEZING
