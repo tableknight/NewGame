@@ -259,6 +259,7 @@
 		090FEC5021BCF0E3004276BB /* CellMonster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC4F21BCF0E3004276BB /* CellMonster.swift */; };
 		090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC5121BE9A38004276BB /* RolePanel.swift */; };
 		0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */; };
+		0922C94B22225BEC002DC201 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94A22225BEC002DC201 /* Types.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -623,6 +624,7 @@
 		090FEC4F21BCF0E3004276BB /* CellMonster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMonster.swift; sourceTree = "<group>"; };
 		090FEC5121BE9A38004276BB /* RolePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePanel.swift; sourceTree = "<group>"; };
 		0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTemplate.swift; sourceTree = "<group>"; };
+		0922C94A22225BEC002DC201 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -998,6 +1000,7 @@
 		090FEA8F21BB9B2A004276BB /* spell */ = {
 			isa = PBXGroup;
 			children = (
+				0922C94C2222E15A002DC201 /* deprecated */,
 				09C66CC3221077FC00E1C153 /* derivant */,
 				09C66C8A21FD49EF00E1C153 /* newSpell */,
 				090FEA9121BB9B2A004276BB /* sacred */,
@@ -1007,6 +1010,7 @@
 				090FEAD221BB9B2A004276BB /* Magical.swift */,
 				090FEAA521BB9B2A004276BB /* Auro.swift */,
 				090FEAD621BB9B2A004276BB /* Passive.swift */,
+				0922C94A22225BEC002DC201 /* Types.swift */,
 				090FEAD521BB9B2A004276BB /* Attack.swift */,
 				09C66CE9221EEFE300E1C153 /* NoAction.swift */,
 				09C66C932207489800E1C153 /* Active.swift */,
@@ -1055,7 +1059,6 @@
 				090FEAAF21BB9B2A004276BB /* FragileCurse.swift */,
 				090FEAB021BB9B2A004276BB /* ProtectionFromIce.swift */,
 				090FEAB121BB9B2A004276BB /* Dominate.swift */,
-				090FEAB221BB9B2A004276BB /* Crazy.swift */,
 				090FEAB321BB9B2A004276BB /* TruePower.swift */,
 				090FEAB421BB9B2A004276BB /* Interchange.swift */,
 				090FEAB521BB9B2A004276BB /* FireRain.swift */,
@@ -1078,7 +1081,6 @@
 				090FEABF21BB9B2A004276BB /* Sacrifice.swift */,
 				090FEAC021BB9B2A004276BB /* MightOfOaks.swift */,
 				090FEAC121BB9B2A004276BB /* Disappear.swift */,
-				090FEAC221BB9B2A004276BB /* MultipleHit.swift */,
 				090FEAC321BB9B2A004276BB /* Bitslap.swift */,
 				090FEAC421BB9B2A004276BB /* FireFist.swift */,
 				090FEAC521BB9B2A004276BB /* BloodThirty.swift */,
@@ -1376,6 +1378,15 @@
 				09C6BF8921CF32180003C7F1 /* normal */,
 			);
 			path = gamescene;
+			sourceTree = "<group>";
+		};
+		0922C94C2222E15A002DC201 /* deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				090FEAB221BB9B2A004276BB /* Crazy.swift */,
+				090FEAC221BB9B2A004276BB /* MultipleHit.swift */,
+			);
+			path = deprecated;
 			sourceTree = "<group>";
 		};
 		09C66C7021F0B78B00E1C153 /* boss */ = {
@@ -1875,6 +1886,7 @@
 				09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */,
 				09C6BFA421DC8B2D0003C7F1 /* BloodAbyss.swift in Sources */,
 				090FEBF721BB9B2B004276BB /* CardSlot.swift in Sources */,
+				0922C94B22225BEC002DC201 /* Types.swift in Sources */,
 				09C66CEE221EF28B00E1C153 /* HighLevelSummon.swift in Sources */,
 				090FEB7D21BB9B2B004276BB /* AttackAttribute.swift in Sources */,
 				090FEBC421BB9B2B004276BB /* Interchange.swift in Sources */,

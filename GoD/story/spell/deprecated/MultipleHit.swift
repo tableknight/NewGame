@@ -13,9 +13,9 @@ class MultipleHit: Physical {
         isClose = true
         _quality = Quality.GOOD
         _cooldown = 2
-        _rate = 0.45
+        _rate = 0.25
         _name = "连击"
-        _description = "对同一目标造成2-6次伤害，每次造成攻击45%的物理伤害"
+        _description = "对同一目标造成2-6次伤害，每次造成攻击25%的物理伤害"
     }
     override func cast(completion:@escaping () -> Void) {
         let times = seed(min: 2, max: 7)

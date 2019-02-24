@@ -8,11 +8,11 @@
 
 
 import SpriteKit
-class LightingFist:Physical {
+class LightingFist:Physical, HandSkill {
     override init() {
         super.init()
         _name = "闪雷破"
-        _description = "对目标造成65%攻击力的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
+        _description = "对目标造成65%攻击力的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗，需要空手"
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 0.65

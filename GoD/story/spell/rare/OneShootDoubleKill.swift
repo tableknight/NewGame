@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class OneShootDoubleKill: Physical {
+class OneShootDoubleKill: Physical, BowSkill {
     
     override init() {
         super.init()
@@ -53,8 +53,7 @@ class OneShootDoubleKill: Physical {
     }
     
     override func selectable() -> Bool {
-        let w = _battle._curRole._unit._weapon
-        return w != nil && !w!.isClose
+        return isWeaponBow()
     }
     override func findTarget() {
         findSingleTargetNotBlocked()

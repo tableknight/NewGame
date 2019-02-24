@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Firelord: Passive {
+class Firelord: Auro {
     
     override init() {
         super.init()

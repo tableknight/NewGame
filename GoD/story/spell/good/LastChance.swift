@@ -16,7 +16,6 @@ class LastChance: Physical {
         _cooldown = 1
         _rate = 3.5
         targetAll = true
-        canBeTargetSelf = false
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -12,7 +12,7 @@ class Strong: Passive {
     override init() {
         super.init()
         _name = "强壮"
-        _description = "提升20%防御"
+        _description = "提升20%基础防御"
         _quality = Quality.NORMAL
         
     }

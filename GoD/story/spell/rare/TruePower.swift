@@ -12,7 +12,7 @@ class TruePower: Passive {
     override init() {
         super.init()
         _name = "全力以赴"
-        _description = "提升30%普通攻击伤害"
+        _description = "提升10%基础力量"
         _quality = Quality.RARE
         
     }

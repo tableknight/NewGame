@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class ShootAll: Physical {
+class ShootAll: Physical, BowSkill {
     override init() {
         super.init()
         _name = "散射"
@@ -51,12 +51,7 @@ class ShootAll: Physical {
     }
     
     override func selectable() -> Bool {
-        let c = _battle._curRole
-        if c._unit.isClose() {
-            return false
-        }
-        
-        return true
+        return isWeaponBow()
     }
     
 }

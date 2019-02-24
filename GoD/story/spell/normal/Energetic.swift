@@ -12,7 +12,7 @@ class Energetic: Passive {
     override init() {
         super.init()
         _name = "精力充沛"
-        _description = "提升20%进精神"
+        _description = "提升20%基础精神"
         _quality = Quality.NORMAL
         
     }

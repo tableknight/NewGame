@@ -7,12 +7,12 @@
 //
 
 import SpriteKit
-class IceFist: Physical {
+class IceFist: Physical, HandSkill {
     override init() {
         super.init()
         isClose = true
         _name = "寒冰掌"
-        _description = "对目标造成60%攻击力的伤害，附加当前生命15%的寒冰伤害，需要空手"
+        _description = "对目标造成60%攻击力的伤害，附加当前生命15%的寒冰伤害"
         isWater = true
         _rate = 0.6
         _quality = Quality.GOOD

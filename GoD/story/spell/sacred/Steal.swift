@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Steal: Magical {
+class Steal: Physical {
     override init() {
         super.init()
         _name = "行窃"

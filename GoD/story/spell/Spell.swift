@@ -117,11 +117,11 @@ class Spell:Core, IDisplay, ISelectTarget {
 //        let base =
         let r = atan(level * 0.05) + 0.2
         var def = (odef / atan(odef / level / 2)) / (level * 8) * r
-        if def > 0.75 {
-            def = 0.75
+        if def > 0.85 {
+            def = 0.85
         }
-        if def < 0.25 || def.isNaN{
-            def = 0.25
+        if def < 0.15 || def.isNaN{
+            def = 0.15
         }
 //        debug("\(to._unit._name) odef = \(odef)")
 //        debug("def = \(def)")
@@ -307,15 +307,23 @@ class Spell:Core, IDisplay, ISelectTarget {
     internal func raceFactor(to:BUnit, from:BUnit) -> CGFloat {
         var factor:CGFloat = 1
         
+        if from.hasSpell(spell: Dominate()) {
+            return 1.15
+        }
+        
+        if to.hasSpell(spell: Dominate()) {
+            return 0.85
+        }
+        
         if to.getRace() == EvilType.FINAL {
-            factor = 0.75
+            factor = 0.85
         }
         if from.getRace() == EvilType.FINAL {
             factor =  1.15
         }
         
         if to.getRace() - from.getRace() == 1 {
-            factor =  0.75
+            factor =  0.85
         }
         
         if to.getRace() - from.getRace() == -1 {
@@ -327,7 +335,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         
         if from.getRace() == EvilType.RISEN && to.getRace() == EvilType.NATURE {
-            factor =  0.75
+            factor =  0.85
         }
         
         if from._unit._weapon is HolyPower && to.getRace() == EvilType.RISEN {
@@ -453,6 +461,9 @@ class Spell:Core, IDisplay, ISelectTarget {
     func isEmptyHand() -> Bool {
         return _battle._curRole._unit._weapon == nil
     }
+    func isWeaponBow() -> Bool {
+        return _battle._curRole._unit._weapon is Bow
+    }
     func getAccuracy() -> CGFloat {
         return _battle._curRole.getAccuracy()
     }
@@ -497,6 +508,12 @@ class Spell:Core, IDisplay, ISelectTarget {
     }
     internal var CRITICAL:CGFloat = 1.6
     func chargeCritical(to:BUnit) {
+        if _battle._curRole.hasSpell(spell: Cruel()) {
+            if to.getHp() / to.getHealth() <= 0.2 {
+                beCritical = true
+                return
+            }
+        }
         let ctl = _battle._curRole.getCritical(t:to)
         if seed().toFloat() < ctl {
             beCritical = true
@@ -683,7 +700,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     }
     
     internal func getTimeleft() -> Int {
-        return seed(min: 1, max: 4)
+        return 5
     }
     
     internal func statusMissed(baseline:CGFloat, target:BUnit, bossImmnue:Bool = false, completion:@escaping () -> Void = {}) -> Bool {

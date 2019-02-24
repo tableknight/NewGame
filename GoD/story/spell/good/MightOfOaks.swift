@@ -11,7 +11,7 @@ class MightOfOaks: Magical {
     override init() {
         super.init()
         _name = "橡树之力"
-        _description = "减少15%物理伤害，持续5回合"
+        _description = "对己方目标释放橡树魔法，减少15%物理伤害，持续5回合"
         _tear = 1
         _quality = Quality.GOOD
         targetEnemy = false

@@ -12,7 +12,7 @@ class Bellicose: Passive {
     override init() {
         super.init()
         _name = "好战"
-        _description = "提升20%攻击力"
+        _description = "提升30%基础攻击力"
         _quality = Quality.NORMAL
         
     }

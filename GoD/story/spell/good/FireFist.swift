@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class FireFist: Physical {
+class FireFist: Physical, HandSkill {
     override init() {
         super.init()
         isClose = true

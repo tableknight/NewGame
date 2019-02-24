@@ -10,11 +10,10 @@ import SpriteKit
 class PriceOfBlood: Magical {
     override init() {
         super.init()
-        _name = "血的代价"
+        _name = "以血换血"
         _description = "牺牲25%当前生命，对目标造成等量的物理伤害"
         _quality = Quality.GOOD
         _cooldown = 2
-        _rate = 3.5
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

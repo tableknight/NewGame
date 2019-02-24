@@ -181,6 +181,10 @@ class BUnit: SKSpriteNode {
         addChild(_levelLabel)
         _charTexture = unit._img
         
+        if hasSpell(spell: TruePower()) {
+            strengthChange(value: 10)
+        }
+        
     }
     var _charTexture = SKTexture()
     var _charNode = SKSpriteNode()
@@ -268,6 +272,9 @@ class BUnit: SKSpriteNode {
     }
     
     func burning() {
+        if hasSpell(spell: ProtectFromGod()) {
+            return
+        }
         let t = self
         let spell = Burning()
         spell._battle = self._battle
@@ -309,17 +316,6 @@ class BUnit: SKSpriteNode {
         _select.run(go)
         _charNode.run(go, completion: {
             completion()
-            if self._battle._selectedTarget != nil {
-                if this._battle._selectedTarget!.hasStatus(type: Status.ICE_GUARD) {
-                    if this.seed() < 15 {
-                        this._extensions.speed -= 10
-                        this.showText(text: "SPEED -10")
-                        let status = LostSpeed()
-                        status._source = this
-                        this.addStatus(status: status)
-                    }
-                }
-            }
         })
     }
     func actionWait(_ time:CGFloat = 1, completion:@escaping () -> Void) {
@@ -398,6 +394,12 @@ class BUnit: SKSpriteNode {
         _charNode.run(fadeGo) {
             this._acting = false
             completion()
+            if self.hasStatus(type: Status.ICE_GUARD) {
+                let c = self._battle._curRole
+                if Core().d5() {
+                    c.showText(text: "SPEED -10")
+                }
+            }
         }
     }
     func actionDefead(completion:@escaping () -> Void) {
@@ -599,6 +601,19 @@ class BUnit: SKSpriteNode {
         if markOfHeaven(value: value) {
             value *= 0.85
         }
+        
+        if hasStatus(type: Status.PROTECTION_FROM_ICE) {
+            if value < 0 {
+                if -value > getHp() {
+                    showText(text: "FATAL") {
+                        completion()
+                    }
+                    removeStatus(type: Status.PROTECTION_FROM_ICE)
+                    return
+                }
+            }
+        }
+        
         let valueText = addLabel()
 //        valueText.isHidden = false
         valueText.position.y = _charSize * (playerPart ? 0.35 : 0.35)
@@ -799,8 +814,9 @@ class BUnit: SKSpriteNode {
         _charNode.run(wait, completion: completion)
     }
     func actionCursed(completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
-        _charNode.run(wait, completion: completion)
+        actionDebuff {
+            completion()
+        }
     }
     func actionUnfreeze(completion:@escaping () -> Void) {
         let wait = SKAction.wait(forDuration: TimeInterval(1))
@@ -1072,10 +1088,10 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: Sacrifice()) {
             acc += 50
         }
-        if nil != _battle && hasAuro(auro: Focus()) {
+        if hasAuro(auro: Focus()) {
             acc += 20
         }
-        if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
+        if _unit is Character && _stage.hasTowerStatus(status: SpeedPower()) {
             acc += 25
         }
         return acc
@@ -1087,10 +1103,6 @@ class BUnit: SKSpriteNode {
         }
         if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
             avd += 25
-        }
-        
-        if hasStatus(type: Status.DISAPPEAR) {
-            avd += 50
         }
         
         return avd
@@ -1113,7 +1125,7 @@ class BUnit: SKSpriteNode {
         }
         
         if hasSpell(spell: Bellicose()) {
-            atk *= 1.2
+            atk *= 1.3
         }
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             atk += 50
@@ -1137,14 +1149,14 @@ class BUnit: SKSpriteNode {
             def *= 0.5
         }
         var rate:CGFloat = 1
-        if hasStatus(type: Status.FRAGILE) {
-            rate = 0.5
-        }
+//        if hasStatus(type: Status.FRAGILE) {
+//            rate = 0.5
+//        }
         if hasSpell(spell: Strong()) {
             rate += 0.2
         }
         if hasStatus(type: Status.ICE_GUARD) {
-            rate += 1
+            rate += 0.1
         }
         def *= rate
         if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
@@ -1159,11 +1171,6 @@ class BUnit: SKSpriteNode {
         }
         if hasSpell(spell: BargeAbout()) {
             ctl += 100
-        }
-        if hasSpell(spell: Cruel()) {
-            if t.getHp() / t.getHealth() < 0.2 {
-                ctl = ctl * 2
-            }
         }
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             ctl += 25

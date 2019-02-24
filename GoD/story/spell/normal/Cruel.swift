@@ -12,7 +12,7 @@ class Cruel: Passive {
     override init() {
         super.init()
         _name = "凶残"
-        _description = "攻击生命低于20%的单位时，暴击率翻倍"
+        _description = "攻击生命低于20%的单位时，一定暴击"
         _quality = Quality.NORMAL
         
     }

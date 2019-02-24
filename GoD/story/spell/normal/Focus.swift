@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Focus: Passive {
+class Focus: Auro {
     
     override init() {
         super.init()

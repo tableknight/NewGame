@@ -959,7 +959,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "966"
             endingLineNumber = "966"
-            landmarkName = "getSpirit()"
+            landmarkName = "hasAuro(auro:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1023,7 +1023,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1108"
             endingLineNumber = "1108"
-            landmarkName = "getAttack()"
+            landmarkName = "getAvoid()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1807,7 +1807,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "810"
             endingLineNumber = "810"
-            landmarkName = "auroUp(x:completion:)"
+            landmarkName = "actionRecall(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2223,8 +2223,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "189"
             endingLineNumber = "189"
-            landmarkName = "faceSouth()"
-            landmarkType = "7">
+            landmarkName = "BUnit"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2463,7 +2463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "965"
             endingLineNumber = "965"
-            landmarkName = "getSpirit()"
+            landmarkName = "hasAuro(auro:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,11 +7,11 @@
 //
 
 import SpriteKit
-class FragileCurse: Magical {
+class FragileCurse: Magical, Curse {
     override init() {
         super.init()
         _name = "虚弱诅咒"
-        _description = "65%几率降低目标50%防御"
+        _description = "65%几率降低目标50%基础防御"
         _quality = Quality.RARE
     }
     override func cast(completion:@escaping () -> Void) {
@@ -25,6 +25,10 @@ class FragileCurse: Magical {
                     s._timeleft = this.getTimeleft()
                     s._type = Status.FRAGILE
                     t.addStatus(status: s)
+                    t._extensions.defence -= t._unit._extensions.defence * 0.5
+                    s.timeupAction = {
+                        t._extensions.defence += t._unit._extensions.defence * 0.5
+                    }
                     completion()
                 }
             }

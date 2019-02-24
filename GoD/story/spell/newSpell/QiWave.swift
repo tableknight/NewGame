@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class QiWave:Physical {
+class QiWave:Physical, HandSkill {
     override init() {
         super.init()
         _name = "气功波"
@@ -44,6 +44,6 @@ class QiWave:Physical {
         
     }
     override func selectable() -> Bool {
-        return _battle._curRole._unit._weapon == nil
+        return isEmptyHand()
     }
 }

@@ -24,6 +24,10 @@ class Disappear: Magical {
         status._type = Status.DISAPPEAR
         status._timeleft = 5
         c.addStatus(status: status)
+        c._extensions.avoid += 50
+        status.timeupAction = {
+            c._extensions.avoid -= 50
+        }
         c.actionCast {
             c.actionBuff {
                 completion()

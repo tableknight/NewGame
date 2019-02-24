@@ -10,14 +10,14 @@ import SpriteKit
 class BreakDefence:Physical {
     override init() {
         super.init()
-        _name = "气功波"
-        _description = "对防御目标造成50%-100%攻击力的物理伤害"
+        _name = "破竹"
+        _description = "对防御目标造成50%-150%攻击力的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 0
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        _rate = seed(min: 50, max: 100).toFloat() * 0.01
+        _rate = seed(min: 50, max: 150).toFloat() * 0.01
         _battle._curRole.actionAttack {
             if t.isDefend {
                 let damage = self.physicalDamage(t)
