@@ -76,12 +76,13 @@ class SumahlBattle: BossBattle {
     }
 }
 
-class MindIntervene: Physical {
+class MindIntervene: Physical, Curse {
     override init() {
         super.init()
         _name = "精神扰乱"
         _description = "对目标释放诅咒术，有100%几率使其精神产生混乱，随机攻击目标，不分敌友"
         _quality = Quality.SACRED
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -89,7 +90,7 @@ class MindIntervene: Physical {
         c.actionCast {
             if !self.statusMissed(baseline: 100, target: t, completion: completion) {
                 t.actionDebuff {
-                    t.showText(text: "CONFUSE") {
+                    t.showText(text: "CONFUSED") {
                         completion()
                         let s = Status()
                         s._type = Status.CONFUSED
@@ -110,7 +111,8 @@ class HealAll: Magical {
         super.init()
         _name = "群体治疗"
         _quality = Quality.SACRED
-        _description = "恢复s所有己方单位15%的最大生命！"
+        _description = "恢复所有己方单位25%的最大生命"
+        _cooldown = 3
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -126,12 +128,13 @@ class HealAll: Magical {
         }
     }
 }
-class SilenceAll: Magical {
+class SilenceAll: Magical, Curse {
     override init() {
         super.init()
         _name = "群体静默"
         _description = "对敌方所有单位释放诅咒术，令其有50%的几率静默"
         _quality = Quality.SACRED
+        _cooldown = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -148,7 +151,7 @@ class SilenceAll: Magical {
         }
     }
     override func findTarget() {
-        _battle._selectedTargets = _battle._playerPart
+        findTargetPartAll()
     }
 }
 class HolySacrifice: Physical {

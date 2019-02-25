@@ -91,9 +91,10 @@ class FlameAttack: Physical {
         super.init()
         _name = "烈焰轰击"
         isFire = true
-        _description = "对目标造成60%攻击力的火焰伤害，并且点燃目标"
+        _description = "对目标造成攻击力60%的火焰伤害，并且点燃目标"
         _rate = 0.6
         _cooldown = 1
+        _quality = Quality.GOOD
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

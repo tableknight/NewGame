@@ -82,7 +82,7 @@ class SummonCopy:Magical, BossOnly {
     }
 }
 
-class CriticalBite:Physical {
+class CriticalBite:Physical, BossOnly {
     override init() {
         super.init()
         _name = "致命撕咬"

@@ -12,7 +12,7 @@ class LowerSummon:Magical {
         super.init()
         _name = "低阶召唤"
         _description = "召唤一个亡灵战士为你而战，最多只能控制一个亡灵战士"
-        _quality = Quality.SACRED
+        _quality = Quality.GOOD
         _cooldown = 3
         autoCast = true
     }

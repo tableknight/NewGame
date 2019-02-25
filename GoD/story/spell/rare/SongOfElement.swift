@@ -12,7 +12,7 @@ class SongOfElement:Magical {
         super.init()
         _name = "冰火之歌"
         _description = "对目标造成精神40%的冰火混合伤害，有j小概率点燃或或冰冻目标"
-        _quality = Quality.SACRED
+        _quality = Quality.RARE
         _cooldown = 2
         _rate = 0.2
     }

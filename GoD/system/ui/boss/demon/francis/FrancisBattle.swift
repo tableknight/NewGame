@@ -105,8 +105,8 @@ class Nova: Magical, BossOnly {
         let ts = _battle._playerPart
         _battle._curRole.actionCast {
             for t in ts {
+                let damage = self.magicalDamage(t)
                 if !self.hadSpecialAction(t: t, completion: completion) {
-                    let damage = self.magicalDamage(t)
 //                    let damage:CGFloat = 1
                     t.actionAttacked {
                         t.showValue(value: damage)
@@ -127,10 +127,10 @@ class DeathAttack:Physical, BossOnly {
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
+        let damage = self.physicalDamage(t)
         _battle._curRole.actionAttack {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
-                    let damage = self.physicalDamage(t)
                     t.showValue(value: damage) {
                         if !t.isDead() {
                             if self.d4() {
@@ -174,7 +174,7 @@ class Reinforce: Magical {
     override init() {
         super.init()
         _name = "强化"
-        _description = "提升目标100%的基础攻击力和基础防御力，持续3回合"
+        _description = "提升目标100%的基础攻击力和基础防御力，持续2回合"
         targetEnemy = false
         _quality = Quality.RARE
         canBeTargetSelf = true
@@ -189,7 +189,7 @@ class Reinforce: Magical {
                 let def = t._unit._extensions.defence
                 t._extensions.attack += atk
                 t._extensions.defence += def
-                s._timeleft = 3
+                s._timeleft = 2
                 s.timeupAction = {
                     t._extensions.attack -= atk
                     t._extensions.defence -= def
@@ -213,13 +213,14 @@ class SoulExtract: Magical {
         _description = "对目标造成60%精神的魔法伤害，并抽取其基础属性各一点"
         _quality = Quality.SACRED
         _rate = 0.6
+        _cooldown = 3
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
+        let damage = self.magicalDamage(t)
         c.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
-                let damage = self.magicalDamage(t)
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         t.showText(text: "LOST") {

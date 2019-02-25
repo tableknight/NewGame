@@ -260,6 +260,7 @@
 		090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC5121BE9A38004276BB /* RolePanel.swift */; };
 		0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */; };
 		0922C94B22225BEC002DC201 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94A22225BEC002DC201 /* Types.swift */; };
+		0922C94F22243834002DC201 /* DancingDragon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94E22243834002DC201 /* DancingDragon.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -308,7 +309,7 @@
 		09C66CCD2212FBDA00E1C153 /* AttackHard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CCC2212FBDA00E1C153 /* AttackHard.swift */; };
 		09C66CCF2212FD6C00E1C153 /* ScreamLoud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CCE2212FD6C00E1C153 /* ScreamLoud.swift */; };
 		09C66CD12212FF3F00E1C153 /* LightingFist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD02212FF3F00E1C153 /* LightingFist.swift */; };
-		09C66CD42213040100E1C153 /* ChaosArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD32213040100E1C153 /* ChaosArrow.swift */; };
+		09C66CD42213040100E1C153 /* ChaosAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD32213040100E1C153 /* ChaosAttack.swift */; };
 		09C66CD62215B50E00E1C153 /* SongOfElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD52215B50E00E1C153 /* SongOfElement.swift */; };
 		09C66CD82215B73300E1C153 /* ElementMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD72215B73300E1C153 /* ElementMaster.swift */; };
 		09C66CDA2215BC5800E1C153 /* Vanguard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66CD92215BC5800E1C153 /* Vanguard.swift */; };
@@ -625,6 +626,7 @@
 		090FEC5121BE9A38004276BB /* RolePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePanel.swift; sourceTree = "<group>"; };
 		0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTemplate.swift; sourceTree = "<group>"; };
 		0922C94A22225BEC002DC201 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		0922C94E22243834002DC201 /* DancingDragon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancingDragon.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -673,7 +675,7 @@
 		09C66CCC2212FBDA00E1C153 /* AttackHard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackHard.swift; sourceTree = "<group>"; };
 		09C66CCE2212FD6C00E1C153 /* ScreamLoud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreamLoud.swift; sourceTree = "<group>"; };
 		09C66CD02212FF3F00E1C153 /* LightingFist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingFist.swift; sourceTree = "<group>"; };
-		09C66CD32213040100E1C153 /* ChaosArrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaosArrow.swift; sourceTree = "<group>"; };
+		09C66CD32213040100E1C153 /* ChaosAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaosAttack.swift; sourceTree = "<group>"; };
 		09C66CD52215B50E00E1C153 /* SongOfElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongOfElement.swift; sourceTree = "<group>"; };
 		09C66CD72215B73300E1C153 /* ElementMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementMaster.swift; sourceTree = "<group>"; };
 		09C66CD92215BC5800E1C153 /* Vanguard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vanguard.swift; sourceTree = "<group>"; };
@@ -1024,8 +1026,16 @@
 		090FEA9121BB9B2A004276BB /* sacred */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CC122106F5A00E1C153 /* IceBomb.swift */,
+				09C66CF1221EF96B00E1C153 /* BearFriend.swift */,
+				09C66CED221EF28B00E1C153 /* HighLevelSummon.swift */,
+				09C66CE7221EEBAD00E1C153 /* WaterCopy.swift */,
+				09C66CDD2215BF0500E1C153 /* SpringIsComing.swift */,
+				09C66CE5221D9D4300E1C153 /* ControlUndead.swift */,
+				09C66CD72215B73300E1C153 /* ElementMaster.swift */,
 				090FEA9221BB9B2A004276BB /* SpiritIntervene.swift */,
 				090FEA9321BB9B2A004276BB /* MagicSword.swift */,
+				09C66CD02212FF3F00E1C153 /* LightingFist.swift */,
 				090FEA9421BB9B2A004276BB /* SoulLash.swift */,
 				090FEA9521BB9B2A004276BB /* Reborn.swift */,
 				090FEA9621BB9B2A004276BB /* VampireBlood.swift */,
@@ -1050,6 +1060,8 @@
 		090FEAA821BB9B2A004276BB /* rare */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CD52215B50E00E1C153 /* SongOfElement.swift */,
+				09C66CC82212F48800E1C153 /* QiWave.swift */,
 				090FEAA921BB9B2A004276BB /* Firelord.swift */,
 				090FEAAA21BB9B2A004276BB /* ShootAll.swift */,
 				090FEAAB21BB9B2A004276BB /* DeathStrike.swift */,
@@ -1067,6 +1079,7 @@
 				090FEAB821BB9B2A004276BB /* FireOrFired.swift */,
 				090FEAB921BB9B2A004276BB /* Taunt.swift */,
 				094E68CB21E064C500414583 /* ShootTwo.swift */,
+				0922C94E22243834002DC201 /* DancingDragon.swift */,
 			);
 			path = rare;
 			sourceTree = "<group>";
@@ -1074,8 +1087,14 @@
 		090FEABA21BB9B2A004276BB /* good */ = {
 			isa = PBXGroup;
 			children = (
+				09C66CD32213040100E1C153 /* ChaosAttack.swift */,
+				09C66CEF221EF7D000E1C153 /* DragonBlood.swift */,
 				090FEABB21BB9B2A004276BB /* IceFist.swift */,
+				09C66CEB221EF15C00E1C153 /* IceSpear.swift */,
+				09C66CE322184CDE00E1C153 /* LowerSummon.swift */,
 				090FEABC21BB9B2A004276BB /* PriceOfBlood.swift */,
+				09C66CD92215BC5800E1C153 /* Vanguard.swift */,
+				09C66CDB2215BDFE00E1C153 /* TrueSight.swift */,
 				090FEABD21BB9B2A004276BB /* FrozenShoot.swift */,
 				090FEABE21BB9B2A004276BB /* LastChance.swift */,
 				090FEABF21BB9B2A004276BB /* Sacrifice.swift */,
@@ -1092,7 +1111,11 @@
 		090FEAC721BB9B2A004276BB /* normal */ = {
 			isa = PBXGroup;
 			children = (
+				09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */,
+				09C66CCA2212F9F200E1C153 /* BreakDefence.swift */,
+				09C66CCE2212FD6C00E1C153 /* ScreamLoud.swift */,
 				090FEAC821BB9B2A004276BB /* Strong.swift */,
+				09C66CCC2212FBDA00E1C153 /* AttackHard.swift */,
 				090FEAC921BB9B2A004276BB /* FeignAttack.swift */,
 				090FEACA21BB9B2A004276BB /* FireBreath.swift */,
 				090FEACB21BB9B2A004276BB /* BargeAbout.swift */,
@@ -1451,26 +1474,6 @@
 		09C66C8A21FD49EF00E1C153 /* newSpell */ = {
 			isa = PBXGroup;
 			children = (
-				09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */,
-				09C66CC122106F5A00E1C153 /* IceBomb.swift */,
-				09C66CC82212F48800E1C153 /* QiWave.swift */,
-				09C66CCA2212F9F200E1C153 /* BreakDefence.swift */,
-				09C66CCC2212FBDA00E1C153 /* AttackHard.swift */,
-				09C66CCE2212FD6C00E1C153 /* ScreamLoud.swift */,
-				09C66CD02212FF3F00E1C153 /* LightingFist.swift */,
-				09C66CD32213040100E1C153 /* ChaosArrow.swift */,
-				09C66CD52215B50E00E1C153 /* SongOfElement.swift */,
-				09C66CD72215B73300E1C153 /* ElementMaster.swift */,
-				09C66CD92215BC5800E1C153 /* Vanguard.swift */,
-				09C66CDB2215BDFE00E1C153 /* TrueSight.swift */,
-				09C66CDD2215BF0500E1C153 /* SpringIsComing.swift */,
-				09C66CE322184CDE00E1C153 /* LowerSummon.swift */,
-				09C66CE5221D9D4300E1C153 /* ControlUndead.swift */,
-				09C66CE7221EEBAD00E1C153 /* WaterCopy.swift */,
-				09C66CEB221EF15C00E1C153 /* IceSpear.swift */,
-				09C66CED221EF28B00E1C153 /* HighLevelSummon.swift */,
-				09C66CEF221EF7D000E1C153 /* DragonBlood.swift */,
-				09C66CF1221EF96B00E1C153 /* BearFriend.swift */,
 			);
 			path = newSpell;
 			sourceTree = "<group>";
@@ -1748,6 +1751,7 @@
 				090FEBD421BB9B2B004276BB /* BloodThirty.swift in Sources */,
 				09C6BFA621DC8D710003C7F1 /* LostArea.swift in Sources */,
 				090FEBB321BB9B2B004276BB /* AttackReturnBack.swift in Sources */,
+				0922C94F22243834002DC201 /* DancingDragon.swift in Sources */,
 				09C66C9E220B0AAB00E1C153 /* FrancisBattle.swift in Sources */,
 				090FEB5A21BB9B2B004276BB /* SacredDagger.swift in Sources */,
 				090FEC1F21BB9B2B004276BB /* IScenery.swift in Sources */,
@@ -1981,7 +1985,7 @@
 				090FEC1A21BB9B2B004276BB /* Pot.swift in Sources */,
 				090FEBDA21BB9B2B004276BB /* ThunderAttack.swift in Sources */,
 				090FEB9721BB9B2B004276BB /* BlackCat.swift in Sources */,
-				09C66CD42213040100E1C153 /* ChaosArrow.swift in Sources */,
+				09C66CD42213040100E1C153 /* ChaosAttack.swift in Sources */,
 				090FEBA921BB9B2B004276BB /* Refresh.swift in Sources */,
 				090FEB7021BB9B2B004276BB /* Stamina.swift in Sources */,
 				09C66CCD2212FBDA00E1C153 /* AttackHard.swift in Sources */,

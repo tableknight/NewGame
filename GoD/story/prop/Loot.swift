@@ -155,7 +155,7 @@ class Loot: Core {
             return getSacredSpell(id: spellAttay.one())
         }
     }
-    
+    let normalSpellCount = 15
     func getNormalSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -178,11 +178,22 @@ class Loot: Core {
             return Energetic()
         case 9:
             return ThunderAttack()
+        case 10:
+            return LowlevelFlame()
+        case 11:
+            return BreakDefence()
+        case 12:
+            return AttackHard()
+        case 13:
+            return ScreamLoud()
+        case 14:
+            return Screaming()
         default:
             return Cruel()
         }
     }
     var _goodSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11]
+    let goodSpellCount = 21
     func getGoodSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -209,11 +220,30 @@ class Loot: Core {
             return PriceOfBlood()
         case 11:
             return MightOfOaks()
+        case 12:
+            return ChaosAttack()
+        case 13:
+            return Vanguard()
+        case 14:
+            return TrueSight()
+        case 15:
+            return LowerSummon()
+        case 16:
+            return IceSpear()
+        case 17:
+            return DragonBlood()
+        case 18:
+            return FlameAttack()
+        case 19:
+            return OathBreaker()
+        case 20:
+            return LineAttack()
         default:
             return BloodThirsty()
         }
     }
     var _rareSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+    let rareSpellCount = 29
     func getRareSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -250,11 +280,36 @@ class Loot: Core {
             return Dominate()
         case 16:
             return ShootAll()
+        case 17:
+            return QiWave()
+        case 18:
+            return SongOfElement()
+        case 19:
+            return Infection()
+        case 20:
+            return DancingDragon()
+        case 21:
+            return BallLighting()
+        case 22:
+            return SuperWater()
+        case 23:
+            return FireExplode()
+        case 24:
+            return Reinforce()
+        case 25:
+            return AttackPowerUp()
+        case 26:
+            return HolySacrifice()
+        case 27:
+            return LifeFlow()
+        case 28:
+            return RecoveryFromAttack()
         default:
             return Lighting()
         }
     }
     var _sacredSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+    let sacredSpellCount = 33
     func getSacredSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -295,6 +350,34 @@ class Loot: Core {
             return Reborn()
         case 18:
             return SoulLash()
+        case 19:
+            return LightingFist()
+        case 20:
+            return IceBomb()
+        case 21:
+            return ElementMaster()
+        case 22:
+            return SpringIsComing()
+        case 23:
+            return ControlUndead()
+        case 24:
+            return WaterCopy()
+        case 25:
+            return HighLevelSummon()
+        case 26:
+            return BearFriend()
+        case 27:
+            return ElementPowerUp()
+        case 28:
+            return SoulExtract()
+        case 29:
+            return MindIntervene()
+        case 30:
+            return HealAll()
+        case 31:
+            return SilenceAll()
+        case 32:
+            return SixShooter()
         default:
             return VampireBlood()
         }

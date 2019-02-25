@@ -81,7 +81,7 @@ class LewisBattle: BossBattle {
     }
 }
 
-class SoulControl: Magical {
+class SoulControl: Magical, BossOnly {
     override init() {
         super.init()
         _name = "精神控制"
@@ -136,7 +136,7 @@ class LewisAttack: Physical {
     
 }
 
-class HandOfGod: Physical {
+class HandOfGod: Physical, BossOnly {
     override init() {
         super.init()
         isClose = true
@@ -171,7 +171,7 @@ class HandOfGod: Physical {
         
     }
 }
-class PowerUp: Magical {
+class PowerUp: Magical, BossOnly {
     override init() {
         super.init()
         _name = "力量增强"
@@ -211,7 +211,7 @@ class PowerUp: Magical {
     }
 }
 
-class OathBreaker:Magical {
+class OathBreaker:Magical, Curse {
     override init() {
         super.init()
         _name = "誓言·破"
@@ -243,11 +243,11 @@ class OathBreaker:Magical {
         _battle._selectedTargets = _battle._playerPart
     }
 }
-class SoulWatch: Magical {
+class SoulWatch: Magical, BossOnly {
     override init() {
         super.init()
         _name = "灵魂窥探"
-        _description = "对地方所有目标造成精神100%的法术伤害"
+        _description = "对敌方所有目标造成精神100%的法术伤害"
         _quality = Quality.SACRED
     }
     override func cast(completion: @escaping () -> Void) {

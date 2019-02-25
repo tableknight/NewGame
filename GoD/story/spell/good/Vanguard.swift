@@ -12,7 +12,7 @@ class Vanguard:Passive {
         super.init()
         _name = "急先锋"
         _description = "每回合总是第一个出手"
-        _quality = Quality.SACRED
+        _quality = Quality.GOOD
     }
     
 }

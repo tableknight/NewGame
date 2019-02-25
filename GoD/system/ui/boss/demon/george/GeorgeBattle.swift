@@ -90,6 +90,7 @@ class Screaming: Magical {
         super.init()
         _name = "尖叫"
         _description = "对目标造成精神80%的法术伤害"
+        _quality = Quality.NORMAL
         _cooldown = 1
         _rate = 0.8
     }
@@ -133,6 +134,7 @@ class Infection:Magical, Curse {
         super.init()
         _name = "感染"
         _description = "对敌方所有目标释放诅咒感染，75%几率令目标感染瘟疫"
+        _quality = Quality.RARE
         _cooldown = 3
     }
     override func cast(completion: @escaping () -> Void) {

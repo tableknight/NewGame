@@ -83,6 +83,7 @@ class BallLighting: Magical {
         _rate = 0.55
         _cooldown = 2
         isThunder = true
+        _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
@@ -110,6 +111,7 @@ class SuperWater:Magical {
         _rate = 0.45
         _cooldown = 3
         isWater = true
+        _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
         _battle._curRole.actionCast {
@@ -130,19 +132,22 @@ class FireExplode:Magical {
     override init() {
         super.init()
         _name = "烈焰爆轰"
-        _description = "对目标造成精神100%的火焰伤害"
-        _rate = 0.9
-        _cooldown = 2
+        _description = "对目标造成精神100%的火焰伤害,并有一定几率点燃目标"
+        _cooldown = 3
         isFire = true
+        _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
+        let damage = self.fireDamage(t)
         _battle._curRole.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
-                    let damage = self.fireDamage(t)
                     t.showValue(value: damage) {
                         completion()
+                    }
+                    if self.d7() {
+                        t.burning()
                     }
                 }
             }

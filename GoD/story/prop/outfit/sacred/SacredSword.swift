@@ -136,4 +136,16 @@ class ElementalSword:Sword {
         sacredAttrCount()
     }
 }
+class IberisHand:Sword {
+    override init() {
+        super.init()
+        _name = "伊比利斯之舞"
+        _description = "提升乱舞次数"
+        _level = 51
+        _chance = 15
+    }
+    override func createQuality() {
+        sacredAttrCount()
+    }
+}
 

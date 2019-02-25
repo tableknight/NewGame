@@ -56,13 +56,13 @@ class MicaluBattle: BossBattle {
     }
 }
 
-class SixShooter: Physical {
+class SixShooter: Physical, BowSkill {
     override init() {
         super.init()
         _name = "乱射"
-        _description = "进行六次快速射击，每次伤害递减18%"
-        _rate = 0.75
-        _quality = Quality.GOOD
+        _description = "进行六次快速射击，每次伤害递减38%"
+        _rate = 0.38
+        _quality = Quality.SACRED
         _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
@@ -83,5 +83,8 @@ class SixShooter: Physical {
             }
             setTimeout(delay: 5, completion: completion)
         }
+    }
+    override func selectable() -> Bool {
+        return isWeaponBow()
     }
 }
