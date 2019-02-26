@@ -16,6 +16,7 @@ class Immune: Magical {
         _description = "目标在本回合内，免疫所有控制和诅咒"
         targetAll = true
         _quality = Quality.SACRED
+        _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

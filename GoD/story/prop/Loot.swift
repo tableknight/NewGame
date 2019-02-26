@@ -155,7 +155,7 @@ class Loot: Core {
             return getSacredSpell(id: spellAttay.one())
         }
     }
-    let normalSpellCount = 15
+    let normalSpellCount = 14
     func getNormalSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -186,8 +186,6 @@ class Loot: Core {
             return AttackHard()
         case 13:
             return ScreamLoud()
-        case 14:
-            return Screaming()
         default:
             return Cruel()
         }
@@ -199,7 +197,7 @@ class Loot: Core {
         case 0:
             return BloodThirsty()
         case 1:
-            return MultipleHit()
+            return BloodThirsty() //多余
         case 2:
             return FireFist()
         case 3:
@@ -249,7 +247,7 @@ class Loot: Core {
         case 0:
             return Lighting()
         case 1:
-            return Crazy()
+            return Lighting() //
         case 2:
             return ProtectFromGod()
         case 3:
@@ -285,7 +283,7 @@ class Loot: Core {
         case 18:
             return SongOfElement()
         case 19:
-            return Infection()
+            return Lighting() //多余
         case 20:
             return DancingDragon()
         case 21:

@@ -217,6 +217,8 @@ class OathBreaker:Magical, Curse {
         _name = "誓言·破"
         _description = "对地方所有目标释放誓言，50%几率降低其50%防御"
         _quality = Quality.GOOD
+        _cooldown = 1
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
@@ -240,7 +242,7 @@ class OathBreaker:Magical, Curse {
         }
     }
     override func findTarget() {
-        _battle._selectedTargets = _battle._playerPart
+        findTargetPartAll()
     }
 }
 class SoulWatch: Magical, BossOnly {

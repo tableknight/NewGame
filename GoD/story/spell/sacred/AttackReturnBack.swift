@@ -15,6 +15,8 @@ class AttackReturnBack: Magical {
         _description = "对己方单位释放护盾，将下一次近战物理伤害反弹攻击者"
         targetEnemy = false
         _quality = Quality.SACRED
+        _cooldown = 3
+        canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

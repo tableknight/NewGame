@@ -35,6 +35,5 @@ class Disappear: Magical {
         }
     }
     override func findTarget() {
-        _battle._selectedTarget = _battle._curRole
     }
 }

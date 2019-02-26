@@ -7,13 +7,13 @@
 //
 
 import SpriteKit
-class Steal: Physical {
+class Steal: Physical, HandSkill {
     override init() {
         super.init()
         _name = "行窃"
-        _description = "对目标和自己造成攻击力50%的物理伤害，或者偷取目标1耐力，1力量，1敏捷，1智力"
+        _description = "对目标和自己造成攻击50%的物理伤害，或者偷取目标1耐力，1力量，1敏捷，1智力"
         _quality = Quality.SACRED
-        _cooldown = 2
+        _cooldown = 1
         _rate = 0.5
     }
     override func cast(completion:@escaping () -> Void) {
@@ -52,7 +52,9 @@ class Steal: Physical {
         }
     }
     
-    
+    override func selectable() -> Bool {
+        return isEmptyHand()
+    }
     
 }
 

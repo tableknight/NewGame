@@ -82,7 +82,7 @@ class MindIntervene: Physical, Curse {
         _name = "精神扰乱"
         _description = "对目标释放诅咒术，有100%几率使其精神产生混乱，随机攻击目标，不分敌友"
         _quality = Quality.SACRED
-        _cooldown = 1
+        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -113,19 +113,24 @@ class HealAll: Magical {
         _quality = Quality.SACRED
         _description = "恢复所有己方单位25%的最大生命"
         _cooldown = 3
+        autoCast = true
+        targetEnemy = false
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let ts = _battle._enemyPart
+        let ts = _battle._selectedTargets
         c.actionCast {
             for t in ts {
                 t.actionHealed {
-                    let value = t.getHealth() * 0.15
+                    let value = t.getHealth() * 0.25
                     t.showValue(value: value)
                 }
             }
-            setTimeout(delay: 3, completion: completion)
+            setTimeout(delay: 2.5, completion: completion)
         }
+    }
+    override func findTarget() {
+        findTargetPartAll()
     }
 }
 class SilenceAll: Magical, Curse {
@@ -135,6 +140,7 @@ class SilenceAll: Magical, Curse {
         _description = "对敌方所有单位释放诅咒术，令其有50%的几率静默"
         _quality = Quality.SACRED
         _cooldown = 1
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
@@ -158,8 +164,9 @@ class HolySacrifice: Physical {
     override init() {
         super.init()
         _name = "神圣牺牲"
-        _description = "牺牲15%当前生命，作为额外攻击力。对目标造成攻击力100%的物理伤害"
+        _description = "牺牲15%当前生命，作为额外攻击。对目标造成攻击100%的物理伤害"
         _quality = Quality.RARE
+        _cooldown = 1
     }
     override func getAttack(from: BUnit) -> CGFloat {
         return from.getAttack() + _battle._curRole.getHp() * 0.15
@@ -185,12 +192,13 @@ class HolySacrifice: Physical {
         }
     }
 }
-class LifeFlow: Physical {
+class LifeFlow: Magical {
     override init() {
         super.init()
         _name = "生命分涌"
         _description = "牺牲15%当前生命，作为额外精神。对目标造成精神100%的魔法伤害"
         _quality = Quality.RARE
+        _cooldown = 1
     }
     override func getSelfSpirit() -> CGFloat {
         return _battle._curRole.getSpirit() + _battle._curRole.getHp() * 0.15
@@ -212,8 +220,5 @@ class LifeFlow: Physical {
             }
             
         }
-    }
-    override func findTarget() {
-        findSingleTargetNotBlocked()
     }
 }

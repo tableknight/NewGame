@@ -11,7 +11,7 @@ class AttackHard:Physical {
     override init() {
         super.init()
         _name = "奋力一击"
-        _description = "牺牲30点命中，对目标造成105%攻击力的物理伤害"
+        _description = "牺牲30点命中，对目标造成攻击105%的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 1
         _rate = 1.05

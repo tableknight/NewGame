@@ -174,7 +174,7 @@ class Reinforce: Magical {
     override init() {
         super.init()
         _name = "强化"
-        _description = "提升目标100%的基础攻击力和基础防御力，持续2回合"
+        _description = "提升目标60%的基础攻击力和基础防御力，持续2回合"
         targetEnemy = false
         _quality = Quality.RARE
         canBeTargetSelf = true
@@ -185,8 +185,8 @@ class Reinforce: Magical {
         c.actionCast {
             t.actionBuff {
                 let s = Status()
-                let atk = t._unit._extensions.attack
-                let def = t._unit._extensions.defence
+                let atk = t._unit._extensions.attack * 0.6
+                let def = t._unit._extensions.defence * 0.6
                 t._extensions.attack += atk
                 t._extensions.defence += def
                 s._timeleft = 2

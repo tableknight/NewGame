@@ -15,9 +15,10 @@ class ProtectionFromIce: Magical {
         isWater = true
         _quality = Quality.RARE
         _name = "冰棺"
-        _description = "对己方单位释放护盾，抵挡一次致命攻击，持续3回合"
+        _description = "对己方单位释放护盾，抵挡一次致命攻击"
         targetEnemy = false
         canBeTargetSelf = true
+        _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

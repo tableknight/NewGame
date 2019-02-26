@@ -26,17 +26,17 @@ class FeignAttack: Physical {
             let seats = [this.getUnitBeyondTarget(seat: seat), this.getUnitUnderTarget(seat: seat), this.getUnitInTheLeftOfTarget(seat: seat), this.getUnitInTheRightOfTarget(seat: seat)]
             let ts = this.getTargetsBySeats(seats: seats)
             if ts.count > 0 {
-                t = ts[this.seed(max: ts.count)]
-                this._damageValue = this.physicalDamage(t)
-                let damage = this._damageValue
+                t = ts.one()
+                let damage = self.physicalDamage(t)
                 t.actionAttacked(defend: t.isDefend) {
                     t.showValue(value: damage) {
                         completion()
                     }
                 }
             } else {
-                t.showText(text: "MISS")
-                completion()
+                t.showMiss {
+                    completion()
+                }
             }
         }
         

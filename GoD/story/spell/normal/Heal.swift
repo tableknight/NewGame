@@ -19,12 +19,10 @@ class Heal: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let h = _battle._curRole.getHealth() * 0.5
+        let h = t.getHealth() * 0.5
         let c = _battle._curRole
-//        _timeleft = _cooldown
         c.actionCast {
             t.actionHealed {
-//                t.hpChange(value: h)
                 t.showValue(value: h) {
                     completion()
                 }

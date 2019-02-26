@@ -14,10 +14,10 @@ class FireRain: Magical {
         _name = "火雨"
         autoCast = true
         targetEnemy = true
-        _description = "对所有敌方目标造成精神15%的火焰伤害"
+        _description = "对所有敌方目标造成精神35%的火焰伤害"
         _quality = Quality.RARE
-        _rate = 0.15
-        _cooldown = 3
+        _rate = 0.35
+        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -45,11 +45,7 @@ class FireRain: Magical {
     }
     
     override func findTarget() {
-        if _battle._curRole.playerPart {
-            _battle._selectedTargets = _battle._enemyPart
-        } else {
-            _battle._selectedTargets = _battle._playerPart
-        }
+        findTargetPartAll()
     }
     
 }

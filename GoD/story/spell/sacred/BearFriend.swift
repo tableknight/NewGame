@@ -13,7 +13,7 @@ class BearFriend:Magical {
         _name = "熊人之友"
         _description = "召唤一个熊战士为你而战，最多只能控制一个熊战士"
         _quality = Quality.SACRED
-        _cooldown = 3
+        _cooldown = 5
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {

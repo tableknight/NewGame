@@ -50,19 +50,19 @@ class IceExplode:Derivant {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = getAdajcentUnits(target: _target)
+        let damage = self.waterDamage(self._target)
         if !self.hadSpecialAction(t: self._target) {
 //            _target.showText(text: "EXPLODE") {
                 self._target.actionAttacked {
                     self._rate = 0.5
-                    let damage = self.waterDamage(self._target)
                     self._target.showValue(value: damage)
                 }
                 
                 setTimeout(delay: 0.5, completion: {
                     for t in ts {
+                        self._rate = 0.25
+                        let damage = self.waterDamage(t)
                         if !self.hadSpecialAction(t: t) {
-                            self._rate = 0.25
-                            let damage = self.waterDamage(t)
                             t.actionAttacked {
                                 t.showValue(value: damage)
                             }

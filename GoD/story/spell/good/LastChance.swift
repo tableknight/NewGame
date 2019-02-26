@@ -11,11 +11,10 @@ class LastChance: Physical {
     override init() {
         super.init()
         _name = "殊死一搏"
-        _description = "对目标造成攻击力350%的物理伤害，或者为目标恢复75%最大生命"
+        _description = "对目标造成攻击300%的物理伤害，或者为目标恢复75%最大生命"
         _quality = Quality.GOOD
         _cooldown = 1
-        _rate = 3.5
-        targetAll = true
+        _rate = 3
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -42,9 +41,4 @@ class LastChance: Physical {
             }
         }
     }
-    
-    override func findTarget() {
-        findSingleTargetNotBlocked()
-    }
-    
 }

@@ -91,7 +91,7 @@ class FlameAttack: Physical {
         super.init()
         _name = "烈焰轰击"
         isFire = true
-        _description = "对目标造成攻击力60%的火焰伤害，并且点燃目标"
+        _description = "对目标造成攻击60%的火焰伤害，点燃目标"
         _rate = 0.6
         _cooldown = 1
         _quality = Quality.GOOD

@@ -99,7 +99,7 @@ class LineAttack: Physical {
     override init() {
         super.init()
         _name = "顺劈斩"
-        _description = "对目标同一行单位造成攻击力55%的物理伤害"
+        _description = "对目标同一行单位造成攻击55%的物理伤害"
         _rate = 0.55
         _quality = Quality.GOOD
         _cooldown = 2
@@ -131,9 +131,9 @@ class RecoveryFromAttack:Physical {
     override init() {
         super.init()
         _name = "吸血攻击"
-        _description = "对目标造成攻击力100%的物理伤害，并恢复50%的生命值"
+        _description = "对目标造成攻击100%的物理伤害，并恢复50%的生命值"
         _quality = Quality.RARE
-        _cooldown = 3
+        _cooldown = 4
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

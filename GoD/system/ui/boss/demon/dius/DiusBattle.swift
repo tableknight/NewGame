@@ -112,12 +112,13 @@ class SuperWater:Magical {
         _cooldown = 3
         isWater = true
         _quality = Quality.RARE
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         _battle._curRole.actionCast {
             for t in self._battle._selectedTargets {
+                let damage = self.waterDamage(t)
                 if !self.hadSpecialAction(t: t) {
-                    let damage = self.waterDamage(t)
                     t.showValue(value: damage)
                 }
             }
@@ -132,7 +133,7 @@ class FireExplode:Magical {
     override init() {
         super.init()
         _name = "烈焰爆轰"
-        _description = "对目标造成精神100%的火焰伤害,并有一定几率点燃目标"
+        _description = "对目标造成精神100%的火焰伤害,有小概率点燃目标"
         _cooldown = 3
         isFire = true
         _quality = Quality.RARE

@@ -11,10 +11,11 @@ class OneShootDoubleKill: Physical, BowSkill {
     
     override init() {
         super.init()
-        _name = "穿刺设计"
-        _description = "对目标和身后单位造成攻击80%的物理伤害"
+        _name = "穿刺射击"
+        _description = "对目标和身后单位造成攻击60%的物理伤害"
         _quality = Quality.RARE
-        _rate = 0.8
+        _rate = 0.6
+        _cooldown = 1
         isClose = false
     }
     

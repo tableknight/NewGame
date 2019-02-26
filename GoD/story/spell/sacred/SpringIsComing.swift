@@ -15,6 +15,7 @@ class SpringIsComing:Magical {
         _quality = Quality.SACRED
         _cooldown = 3
         targetEnemy = false
+        canBeTargetSelf = true
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

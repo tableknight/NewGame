@@ -12,8 +12,8 @@ class IceSpear: Magical {
         super.init()
         isWater = true
         _name = "冰刺"
-        _description = "对目标造成精神10%的冰冷伤害，冻结目标，如果目标已冻结，则造成精神40%的寒冰伤害"
-        _rate = 0.1
+        _description = "对目标造成精神30%的冰冷伤害，冻结目标，如果目标已冻结，则造成4倍伤害"
+        _rate = 0.3
         _quality = Quality.GOOD
         _cooldown = 1
     }
@@ -21,7 +21,7 @@ class IceSpear: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         if t.hasStatus(type: Status.FREEZING) {
-            _rate = 0.4
+            _rate = 1.2
         }
         let damage = waterDamage(t)
         c.actionCast {

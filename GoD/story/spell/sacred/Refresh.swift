@@ -14,7 +14,7 @@ class Refresh: Magical {
         _name = "回溯"
         _description = "刷新其他技能的冷却时间"
         _quality = Quality.SACRED
-        _cooldown = 2
+        _cooldown = 5
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
@@ -22,7 +22,7 @@ class Refresh: Magical {
         for s in ss {
             s._timeleft = 0
         }
-        self._timeleft = 2
+        self._timeleft = 5
         _battle.hideOrder()
         _battle.showOrder()
     }

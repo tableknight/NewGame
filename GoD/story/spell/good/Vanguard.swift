@@ -11,7 +11,7 @@ class Vanguard:Passive {
     override init() {
         super.init()
         _name = "急先锋"
-        _description = "每回合总是第一个出手"
+        _description = "总是第一个出手"
         _quality = Quality.GOOD
     }
     

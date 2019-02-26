@@ -15,10 +15,10 @@ class TurnAttack: Magical {
         _name = "攻击吸收"
         _description = "对己方单位释放护盾，将下一次物理伤害转化为生命回复"
         targetEnemy = false
+        _cooldown = 3
+        canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {
-//        let r = _battle._curRole
-        _timeleft = 2
         let t = _battle._selectedTarget!
         removeSpecialStatus(t:t)
         let status = Status()

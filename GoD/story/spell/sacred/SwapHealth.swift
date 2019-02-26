@@ -15,6 +15,7 @@ class SwapHealth: Magical {
         _quality = Quality.SACRED
         _tear = 1
         targetEnemy = false
+        _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

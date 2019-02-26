@@ -85,7 +85,7 @@ class GeorgeAttack: BossAttack {
     }
 }
 
-class Screaming: Magical {
+class Screaming: Magical, BossOnly {
     override init() {
         super.init()
         _name = "尖叫"
@@ -129,7 +129,7 @@ class Screaming: Magical {
     }
 }
 
-class Infection:Magical, Curse {
+class Infection:Magical, Curse, BossOnly {
     override init() {
         super.init()
         _name = "感染"

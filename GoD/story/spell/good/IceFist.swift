@@ -33,18 +33,15 @@ class IceFist: Physical, HandSkill {
         let b = _battle!
         let t = b._selectedTarget!
         let c = b._curRole
-        //        let role = c._unit
-        _damageValue = physicalDamage(t)
-        let damage = _damageValue
+        let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
                 let attechment = c.getHp() * -0.15
                 t.actionAttacked(defend: t.isDefend) {
                     t.showValue(value: damage)
-                    let waterRate = (c.getWaterPower() - t.getWaterResistance()) * 0.01 + 1
-                    let waterDamage:CGFloat = attechment * waterRate
+                    let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)
                     setTimeout(delay: 0.5, completion: {
-                        t.showValue(value: waterDamage, isCritical: false, textColor: ElementColor.getColor(Element.WATER), completion: completion)
+                        t.showValue(value: waterDamage, textColor: ElementColor.getColor(Element.WATER), completion: completion)
                     })
                 }
             }

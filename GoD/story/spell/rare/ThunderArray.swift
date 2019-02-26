@@ -14,7 +14,7 @@ class ThunderArray:Magical {
         _quality = Quality.RARE
         _name = "雷击阵"
         _cooldown = 3
-        _description = "随机造成2-4次雷电伤害，单次伤害为精神的35%"
+        _description = "随机造成2-5次雷电伤害，单次伤害为精神的35%"
         isThunder = true
         autoCast = true
         _rate = 0.35
@@ -23,9 +23,9 @@ class ThunderArray:Magical {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         let this = self
-        let times = seed(min: 1, max: 4)
+        let times = seed(min: 1, max: 5)
 //        let times = 5;
-        debug("雷电次数 \(times + 1)")
+//        debug("雷电次数 \(times + 1)")
         let timeSpace:CGFloat = 0.5
         _step = times
         c.actionCast {

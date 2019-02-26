@@ -11,7 +11,7 @@ class ChaosAttack:Physical {
     override init() {
         super.init()
         _name = "混沌攻击"
-        _description = "对目标造成攻击力75%的物理或元素伤害"
+        _description = "对目标造成攻击75%的物理或元素伤害"
         _quality = Quality.GOOD
         _cooldown = 1
         autoCast = true
@@ -37,7 +37,7 @@ class ChaosAttack:Physical {
         _battle._curRole.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage, isCritical: false, textColor: color, completion: completion)
+                    t.showValue(value: damage, textColor: color, completion: completion)
                 }
             }
         }

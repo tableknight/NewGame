@@ -978,6 +978,10 @@ class BUnit: SKSpriteNode {
         _status.removeValue(forKey: type)
     }
     func addStatus(status:Status) {
+        if hasStatus(type: status._type) {
+            removeStatus(type: status._type)
+            status.timeupAction()
+        }
         _status[status._type] = status
     }
     

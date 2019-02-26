@@ -13,7 +13,7 @@ class HighLevelSummon:Magical {
         _name = "高阶召唤"
         _description = "召唤一个亡灵巫师为你而战，最多只能控制一个亡灵巫师"
         _quality = Quality.SACRED
-        _cooldown = 3
+        _cooldown = 5
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {

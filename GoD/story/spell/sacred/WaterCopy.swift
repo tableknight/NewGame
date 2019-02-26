@@ -13,7 +13,7 @@ class WaterCopy:Magical {
         _name = "水分身"
         _description = "召唤一个水分身，继承所有属性，无法攻击"
         _quality = Quality.RARE
-        _cooldown = 3
+        _cooldown = 5
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {

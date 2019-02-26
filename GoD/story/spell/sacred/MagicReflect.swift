@@ -15,6 +15,7 @@ class MagicReflect: Magical {
         _description = "对己方单位释放护盾，将下一次魔法伤害反弹施法者"
         targetEnemy = false
         _quality = Quality.SACRED
+        canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -22,7 +23,7 @@ class MagicReflect: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.EYE_TO_EYE
-        status._timeleft = 3
+        status._timeleft = 2
         t.addStatus(status: status)
         c.actionCast {
             t.actionBuff {

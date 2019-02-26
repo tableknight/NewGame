@@ -12,7 +12,7 @@ class VampireBlood: Passive {
     override init() {
         super.init()
         _name = "吸血鬼血统"
-        _description = "回复普通攻击造成伤害的20%"
+        _description = "普通攻击回复造成伤害的20%"
         _quality = Quality.SACRED
         
     }

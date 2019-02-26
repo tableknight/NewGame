@@ -13,8 +13,8 @@ class DeathStrike: Magical {
         _quality = Quality.RARE
         _name = "死亡冲击"
         _cooldown = 2
-        _rate = 0.8
-        _description = "对目标造成精神80%的魔法伤害，每次偷取目标10点精神"
+        _rate = 0.6
+        _description = "对目标造成精神60%的魔法伤害，每次偷取目标10点精神"
         targetEnemy = true
     }
     override func cast(completion:@escaping () -> Void) {

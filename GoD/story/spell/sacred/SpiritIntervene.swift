@@ -16,6 +16,7 @@ class SpiritIntervene: Magical {
         _tear = 1
         targetAll = true
         canBeTargetPlayer = true
+        canBeTargetSelf = false
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -32,7 +33,8 @@ class SpiritIntervene: Magical {
     }
     
     override func findTarget() {
-        let all = _battle._playerPart + _battle._enemyPart
+        var all = _battle._playerPart + _battle._enemyPart
+        all.remove(at: all.index(of: _battle._curRole)!)
         _battle._selectedTarget = all.one()
     }
     

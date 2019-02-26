@@ -12,8 +12,8 @@ class FireOrFired: Magical {
         super.init()
         isFire = true
         _name = "玩火"
-        _description = "对目标造成精神60%的火焰伤害或者燃烧自己20%当前生命值"
-        _rate = 0.6
+        _description = "对目标造成精神110%的火焰伤害或者燃烧自己25%当前生命值"
+        _rate = 1.1
         _quality = Quality.RARE
         _cooldown = 1
     }
@@ -40,7 +40,7 @@ class FireOrFired: Magical {
             }
         }
         if chance < seed() {
-            damage = c.getHp() * 0.2
+            damage = c.getHp() * 0.25
             if damage < 1 {
                 damage = 1
             }

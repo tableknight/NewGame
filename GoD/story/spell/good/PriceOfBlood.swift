@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class PriceOfBlood: Magical {
+class PriceOfBlood: Physical {
     override init() {
         super.init()
         _name = "以血换血"

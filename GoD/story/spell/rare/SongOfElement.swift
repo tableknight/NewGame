@@ -11,10 +11,10 @@ class SongOfElement:Magical {
     override init() {
         super.init()
         _name = "冰火之歌"
-        _description = "对目标造成精神40%的冰火混合伤害，有j小概率点燃或或冰冻目标"
+        _description = "对目标造成精神40%的冰火混合伤害，有小概率点燃或冰冻目标"
         _quality = Quality.RARE
         _cooldown = 2
-        _rate = 0.2
+        _rate = 0.4
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

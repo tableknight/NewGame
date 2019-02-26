@@ -12,18 +12,17 @@ class FireFist: Physical, HandSkill {
         super.init()
         isClose = true
         _name = "火焰掌"
-        _description = "对目标造成攻击力60%的火焰伤害，需要空手"
+        _description = "对目标造成攻击80%的火焰伤害"
         isFire = true
-        _rate = 0.6
+        _rate = 0.8
         _quality = Quality.GOOD
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
         let c = b._curRole
-        let this = self
         c.actionAttack {
-            this.attack {
+            self.attack {
                 completion()
             }
         }
@@ -32,14 +31,10 @@ class FireFist: Physical, HandSkill {
     private func attack(completion:@escaping () -> Void) {
         let b = _battle!
         let t = b._selectedTarget!
-        let c = b._curRole
-        //        let role = c._unit
-        let fireRate = fireFactor(from: c, to: t)
-        _damageValue = -c.getAttack() * fireRate * _rate
-        let damage = _damageValue
+        let damage = fireDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                t.actionAttacked(defend: t.isDefend) {
+                t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()
                     }

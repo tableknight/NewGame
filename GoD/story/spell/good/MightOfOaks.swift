@@ -16,6 +16,7 @@ class MightOfOaks: Magical {
         _quality = Quality.GOOD
         targetEnemy = false
         canBeTargetSelf = true
+        _cooldown = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

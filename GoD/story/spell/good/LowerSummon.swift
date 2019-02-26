@@ -13,7 +13,7 @@ class LowerSummon:Magical {
         _name = "低阶召唤"
         _description = "召唤一个亡灵战士为你而战，最多只能控制一个亡灵战士"
         _quality = Quality.GOOD
-        _cooldown = 3
+        _cooldown = 5
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {

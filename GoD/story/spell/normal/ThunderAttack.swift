@@ -35,8 +35,9 @@ class ThunderAttack: Magical {
         if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
                 t.showValue(value: damage) {
-                    completion()
-                    t.showText(text: "TR -10")
+                    t.showText(text: "TR -10") {
+                        completion()
+                    }
                     t._elementalResistance.thunder -= 10
                 }
             }

@@ -13,7 +13,7 @@ class ControlUndead:Magical {
         _name = "控制亡灵"
         _description = "有一定几率控制一个地方亡灵生物"
         _quality = Quality.SACRED
-        _cooldown = 0
+        _cooldown = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

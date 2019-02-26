@@ -11,7 +11,7 @@ class ScreamLoud:Magical {
     override init() {
         super.init()
         _name = "震耳怒吼"
-        _description = "大声的吼叫，大概率降低目标30%防御和命中，持续3回合"
+        _description = "大声的吼叫，大概率降低目标30%防御和30点命中，持续3回合"
         _quality = Quality.NORMAL
         _cooldown = 1
         autoCast = true

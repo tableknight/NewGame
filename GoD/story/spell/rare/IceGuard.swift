@@ -13,20 +13,20 @@ class IceGuard: Magical {
         _tear = 1
         _quality = Quality.RARE
         _name = "寒冰护盾"
-        _description = "对己方单位释放护盾，提升100%防御，持续5回合，有一定几率降低攻击者10点速度"
+        _description = "对自己释放护盾，提升100%防御，持续5回合，有一定几率降低攻击者10点速度"
         targetEnemy = false
         canBeTargetSelf = true
+        _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        let t = _battle._selectedTarget!
+        let c = _battle._curRole
         let status = Status()
         status._type = Status.ICE_GUARD
         status._timeleft = 5
-        t.addStatus(status: status)
+        c.addStatus(status: status)
         
-        let c = _battle._curRole
         c.actionCast {
-            t.actionBuff {
+            c.actionBuff {
                 completion()
             }
         }

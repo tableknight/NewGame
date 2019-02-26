@@ -43,11 +43,7 @@ class ShootAll: Physical, BowSkill {
     }
     
     override func findTarget() {
-        if _battle._curRole.playerPart {
-            _battle._selectedTargets = _battle._enemyPart
-        } else {
-            _battle._selectedTargets = _battle._playerPart
-        }
+        findTargetPartAll()
     }
     
     override func selectable() -> Bool {
