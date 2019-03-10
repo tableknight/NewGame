@@ -125,6 +125,7 @@ class SellingPanel: UIPanel {
                 let y = base / 3
                 let x = base % 3
                 let icon = PropIcon()
+                icon.iconLabel = props[i]._name
                 icon.count = props[i]._count
                 icon._displayItemType = props[i]
                 icon.quality = props[i]._quality
@@ -142,6 +143,7 @@ class SellingPanel: UIPanel {
             let sii = SellingItemIcon()
             let y = i / 2
             let x = i % 2
+            sii.iconLabel = _goodsList[i]._name
             sii._displayItemType = _goodsList[i]
             sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
             sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()

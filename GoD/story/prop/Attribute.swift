@@ -50,7 +50,12 @@ class Attribute: Core {
     }
     
      func elementalAttrValue(level:CGFloat) {
-        _value = seed(min: 5, max: 11).toFloat()
+        if level < 20 {
+            _value = seed(min: 5, max: 11).toFloat()
+        } else {
+            _value = seed(min: 10, max: 21).toFloat()
+        }
+        
     }
      func lowerAttrValue(level:CGFloat) {
         var min = (level * 0.2).toInt()

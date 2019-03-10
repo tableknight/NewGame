@@ -5,7 +5,7 @@
 //  Created by kai chen on 2018/5/20.
 //  Copyright © 2018年 Chen. All rights reserved.
 //
-
+//deprecated
 import SpriteKit
 class DealingPanel:UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

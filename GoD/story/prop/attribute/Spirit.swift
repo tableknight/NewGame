@@ -20,6 +20,22 @@ class Spirit: Attribute {
         unit._extensions.spirit -= _value
     }
     override func create(level: CGFloat) {
+        midAttrValue(level: level)
+    }
+}
+class SpiritBase: Attribute {
+    override init() {
+        super.init()
+        _name = "精神"
+    }
+    override func on(unit: Creature) {
+        unit._extensions.spirit += _value
+    }
+    
+    override func off(unit: Creature) {
+        unit._extensions.spirit -= _value
+    }
+    override func create(level: CGFloat) {
         upperAttrValue(level: level)
     }
 }

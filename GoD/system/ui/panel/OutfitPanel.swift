@@ -22,6 +22,7 @@ class OutfitPanel: UIPanel {
                 _curPage += 1
                 pageReload()
             }
+            _lastSelectedIcon = nil
             return
         }
         if _prevButton.contains(touchPoint!) {
@@ -29,6 +30,7 @@ class OutfitPanel: UIPanel {
                 _curPage -= 1
                 pageReload()
             }
+            _lastSelectedIcon = nil
             return
         }
         if _discardButton.contains(touchPoint!) {
@@ -82,6 +84,7 @@ class OutfitPanel: UIPanel {
                 weapon.on()
                 _weapon.outfit = weapon
                 _char._weapon = weapon
+                _weapon.iconLabel = weapon._name
                 pageReload()
                 _lastSelectedIcon.selected = false
                 _lastSelectedIcon = nil
@@ -96,6 +99,7 @@ class OutfitPanel: UIPanel {
                 _char.removeProp(p: amulet)
                 amulet.on()
                 _amulet.outfit = amulet
+                _amulet.iconLabel = amulet._name
                 _char._amulet = amulet
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -112,6 +116,7 @@ class OutfitPanel: UIPanel {
                 shield.on()
                 _shield.outfit = shield
                 _char._shield = shield
+                _shield.iconLabel = shield._name
                 pageReload()
                 _lastSelectedIcon.selected = false
                 _lastSelectedIcon = nil
@@ -124,13 +129,16 @@ class OutfitPanel: UIPanel {
                     _char.addProp(p: _char._leftRing!)
                     _char._leftRing = ring
                     _leftRing.outfit = ring
+                    _leftRing.iconLabel = ring._name
                 } else
                 if _char._leftRing == nil {
                     _char._leftRing = ring
                     _leftRing.outfit = ring
+                    _leftRing.iconLabel = ring._name
                 } else if _char._rightRing == nil {
                     _char._rightRing = ring
                     _rightRing.outfit = ring
+                    _rightRing.iconLabel = ring._name
                 } else {
                     debug("ring on error in itempanel")
                 }
@@ -151,6 +159,7 @@ class OutfitPanel: UIPanel {
                 _char.removeProp(p: mark)
                 mark.on()
                 _magicMark.outfit = mark
+                _magicMark.iconLabel = mark._name
                 _char._magicMark = mark
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -166,6 +175,7 @@ class OutfitPanel: UIPanel {
                 _char.removeProp(p: soulStone)
                 soulStone.on()
                 _soulStone.outfit = soulStone
+                _soulStone.iconLabel = soulStone._name
                 _char._soulStone = soulStone
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -209,9 +219,12 @@ class OutfitPanel: UIPanel {
                     _selectedSlot = nil
                     callback()
                     pageReload()
+                    slot.iconLabel = ""
                     return
                 }
             }
+        } else {
+            _selectedSlot = nil
         }
     }
     func getOutfits() -> Array<Outfit> {
@@ -241,6 +254,7 @@ class OutfitPanel: UIPanel {
                 let y = base / 4
                 let x = base % 4
                 let icon = Icon()
+                icon.iconLabel = props[i]._name
                 icon._displayItemType = props[i]
                 icon.quality = props[i]._quality
                 icon.position.y = startY - gap * y.toFloat()
@@ -282,6 +296,7 @@ class OutfitPanel: UIPanel {
             _weapon = createSlot(x: startX, y: _amulet.position.y - gap)
             if _char._weapon != nil {
                 _weapon.outfit = _char._weapon
+                _weapon.iconLabel = _char._weapon!._name
             }
             addChild(_weapon)
             _outfitSlots.append(_weapon)
@@ -290,6 +305,7 @@ class OutfitPanel: UIPanel {
             _shield = createSlot(x: line2, y: _weapon.position.y)
             if _char._shield != nil {
                 _shield.outfit = _char._shield
+                _shield.iconLabel = _char._shield!._name
             }
             addChild(_shield)
             _outfitSlots.append(_shield)
@@ -297,12 +313,14 @@ class OutfitPanel: UIPanel {
         _leftRing = createSlot(x: startX, y: _amulet.position.y - gap * 2)
         if _char._leftRing != nil {
             _leftRing.outfit = _char._leftRing
+            _leftRing.iconLabel = _char._leftRing!._name
         }
         addChild(_leftRing)
         _outfitSlots.append(_leftRing)
         _rightRing = createSlot(x: line2, y: _amulet.position.y - gap * 2)
         if _char._rightRing != nil {
             _rightRing.outfit = _char._rightRing
+            _rightRing.iconLabel = _char._rightRing!._name
         }
         addChild(_rightRing)
         _outfitSlots.append(_rightRing)
@@ -310,6 +328,7 @@ class OutfitPanel: UIPanel {
             _magicMark = createSlot(x: _amulet.xAxis, y: _leftRing.position.y - gap)
             if _char._magicMark != nil {
                 _magicMark.outfit = _char._magicMark
+                _magicMark.iconLabel = _char._magicMark!._name
             }
             addChild(_magicMark)
             _outfitSlots.append(_magicMark)
@@ -317,6 +336,7 @@ class OutfitPanel: UIPanel {
         _soulStone = createSlot(x: _amulet.xAxis, y: _leftRing.position.y - gap * 2)
         if _char._soulStone != nil {
             _soulStone.outfit = _char._soulStone
+            _soulStone.iconLabel = _char._soulStone!._name
         }
         addChild(_soulStone)
         _outfitSlots.append(_soulStone)

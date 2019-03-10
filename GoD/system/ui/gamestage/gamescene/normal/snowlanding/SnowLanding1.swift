@@ -161,6 +161,7 @@ class RoleToppur: UIRole {
         super.init(texture: texture, color: color, size: size)
         self.texture = SKTexture(imageNamed: "Toppur")
         self.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        _xSize = 2
     }
     
     required init?(coder aDecoder: NSCoder) {

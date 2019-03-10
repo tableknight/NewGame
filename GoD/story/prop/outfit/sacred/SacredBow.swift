@@ -12,37 +12,57 @@ class Hawkeye:Bow {
         super.init()
         _name = "鹰眼"
         _description = "攻击无法被闪避"
-        _level = 45
+        _level = 33
         _chance = 50
+        _quality = Quality.SACRED
+        price = 235
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: CRITICAL, value: seedFloat(min: 20, max: 26), remove: true)
+        createAttr(attrId: SPEED, value: seedFloat(min: 20, max: 26), remove: true)
+        createAttr(attrId: LUCKY, value: seedFloat(min: 20, max: 26), remove: true)
+        _attrCount = 2
+        createAttrs()
     }
 }
 class Boreas:Bow {
     override init() {
         super.init()
         _name = "北风之神"
-        _description = "使你的攻击力翻倍"
+        _description = "攻击力翻倍"
         _level = 55
         _chance = 100
+        _quality = Quality.SACRED
+        price = 455
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
         _attackSpeed = seed(min: 5, max: 9).toFloat() * 0.1
+        createSelfAttrs()
+        createAttr(attrId: STRENGTH, value: 35, remove: true)
+        createAttr(attrId: DEFENCE, value: 35, remove: true)
+        createAttr(attrId: THUNDERRESISTANCE, value: 35, remove: true)
+        createAttr(attrId: HEALTH, value: 35, remove: true)
+        _attrCount = 2
+        createAttrs()
     }
 }
 class Skylark:Bow {
     override init() {
         super.init()
         _name = "云雀"
-        _description = "射出的箭发出一种云雀的叫声"
-        _level = 31
+        _description = "射箭的声音像云雀的叫声"
+        _level = 11
         _chance = 100
+        _quality = Quality.SACRED
+        price = 65
     }
-    override func createQuality() {
-        sacredAttrCount()
-        _attackSpeed = 1.5
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: SPEED, value: 10, remove: true)
+        createAttr(attrId: AVOID, value: 10, remove: true)
+        _attrCount = 3
+        createAttrs()
     }
 }
 
@@ -50,20 +70,18 @@ class SoundOfWind:Bow {
     override init() {
         super.init()
         _name = "风声"
-        _description = "闪避 +40"
+        _description = "像风一样灵巧"
         _level = 66
-        removeAttrId(id: AVOID)
-        _chance = 80
+        _chance = 30
+        _quality = Quality.SACRED
+        price = 677
     }
-    override func createQuality() {
-        sacredAttrCount()
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._extensions.avoid += 40
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._extensions.avoid -= 40
+    override func create() {
+        createAttr(attrId: ATTACK_BASE)
+        createAttr(attrId: AGILITY, value: seedFloat(min: 30, max: 51), remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 30, max: 51), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 51), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 30, max: 51), remove: true)
+        createAttr(attrId: AVOID, value: seedFloat(min: 30, max: 51), remove: true)
     }
 }

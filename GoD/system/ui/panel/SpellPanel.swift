@@ -154,6 +154,7 @@ class SpellPanel:UIPanel {
             for i in 0...spells.count - 1 {
                 let x = i % 10
                 let icon = SpellIcon()
+                icon.iconLabel = spells[i]._name
                 icon.spell = spells[i]
                 icon._displayItemType = spells[i]
                 icon.position.y = startY
@@ -165,9 +166,21 @@ class SpellPanel:UIPanel {
             
         }
     }
-    
+    private func getSpellUnused() -> Array<Spell> {
+        var spells = Array<Spell>()
+        for s in Game.instance.char._spells {
+            if _role is Character {
+                spells.append(s)
+            } else {
+                if !(s is BowSkill) && !(s is HandSkill) {
+                    spells.append(s)
+                }
+            }
+        }
+        return spells
+    }
     private func showSpellsUnused() {
-        let spells = Game.instance.char._spells
+        let spells = getSpellUnused()
 //        let startX:CGFloat = 0
         let startX = -_standardWidth * 0.5 + cellSize * 0.375
         let startY = _standardHeight * 0.5 - _standardGap - cellSize * 1.75
@@ -185,6 +198,7 @@ class SpellPanel:UIPanel {
                 let y = base / 6
                 let x = base % 6
                 let icon = SpellIcon()
+                icon.iconLabel = spells[i]._name
                 icon.spell = spells[i]
                 icon._displayItemType = spells[i]
                 icon.position.y = startY - (_standardGap + cellSize) * y.toFloat()

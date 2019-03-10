@@ -7,7 +7,7 @@
 //
 //        let ci = CharInfo()
 //        addChild(ci)
-
+//deprecated
 import SpriteKit
 class RoleInfoPanel:SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

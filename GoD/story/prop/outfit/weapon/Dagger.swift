@@ -16,9 +16,4 @@ class Dagger: Weapon {
         _selfAttrs = [ATTACK, AVOID]
         removeAttrId(id: AVOID)
     }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        let attr = _attrs[0]
-        attr._value = attr._value * 0.5
-    }
 }

@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class AttackAttribute: Attribute {
+class AttackAttributeBase: Attribute {
     override init() {
         super.init()
         _name = "攻击"
@@ -21,5 +21,21 @@ class AttackAttribute: Attribute {
     }
     override func create(level: CGFloat) {
         upperAttrValue(level: level * 2)
+    }
+}
+class AttackAttribute: Attribute {
+    override init() {
+        super.init()
+        _name = "攻击"
+    }
+    override func on(unit: Creature) {
+        unit._extensions.attack += _value
+    }
+    
+    override func off(unit: Creature) {
+        unit._extensions.attack -= _value
+    }
+    override func create(level: CGFloat) {
+        midAttrValue(level: level)
     }
 }

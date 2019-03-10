@@ -39,6 +39,7 @@ class Unit:Core {
     var _revenge:CGFloat = 5
     var _rhythm:CGFloat = 5
     var _chaos:CGFloat = 0
+    var _power:CGFloat = 0
     var _img:SKTexture = SKTexture()
     
     var _elementalPower = Elemental(

@@ -13,17 +13,11 @@ class Blunt: Weapon {
         _name = "钝器"
         _outfitName = "钝器"
         _attackSpeed = seed(min: 80, max: 110).toFloat() * 0.01
-        _selfAttrs = [ATTACK, CRITICAL]
+        _selfAttrs = [ATTACK_BASE, CRITICAL]
         removeAttrId(id: CRITICAL)
     }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        let attr = _attrs[0]
-        attr._value = attr._value * 2
-    }
-    override func create() {
-        super.create()
-        let attr = _attrs[0]
-        attr._value = attr._value * 2
+    override func createSelfAttrs() {
+        super.createSelfAttrs()
+        _attrs[0]._value *= 1.2
     }
 }

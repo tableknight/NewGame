@@ -11,18 +11,17 @@ class PuppetMark: MagicMark {
     override init() {
         super.init()
         _name = "傀儡印记"
-        _description = "减少一个技能栏，以便多携带一个傀儡参战"
+        _description = "减少一个技能栏，增加一个随从位"
         _level = 52
         _chance = 10
         _quality = Quality.SACRED
-        _attrCount = 3
+        price = 996
     }
     override func create() {
-        initialized = true
         createSpell()
-        createPrice()
     }
     override func on() {
+        super.on()
         let char = Game.instance.char!
         char._spellCount -= 1
         if char._spellsInuse.count > char._spellCount {
@@ -32,6 +31,7 @@ class PuppetMark: MagicMark {
         char._minionsCount += 1
     }
     override func off() {
+        super.off()
         let char = Game.instance.char!
         char._minionsCount -= 1
         let minions = char.getReadyMinions()
@@ -45,15 +45,14 @@ class MarkOfOaks:MagicMark {
     override init() {
         super.init()
         _name = "橡树印记"
-        _description = "受到物理伤害时有一定几率对自己释放橡树之力"
+        _description = "受物理伤害时有几率对释放橡树之力"
         _level = 25
         _chance = 75
         _quality = Quality.SACRED
+        price = 110
     }
     override func create() {
-        initialized = true
         _spell = MightOfOaks()
-        createPrice()
     }
 }
 class MarkOfDeathGod:MagicMark {
@@ -64,11 +63,10 @@ class MarkOfDeathGod:MagicMark {
         _level = 43
         _chance = 25
         _quality = Quality.SACRED
+        price = 225
     }
     override func create() {
-        initialized = true
         createSpell()
-        createPrice()
     }
 }
 class MarkOfVitality:MagicMark {
@@ -79,11 +77,10 @@ class MarkOfVitality:MagicMark {
         _level = 18
         _chance = 100
         _quality = Quality.SACRED
+        price = 100
     }
     override func create() {
-        initialized = true
         _spell = SummonFlower()
-        createPrice()
     }
 }
 class MarkOfHeaven:MagicMark {
@@ -94,26 +91,24 @@ class MarkOfHeaven:MagicMark {
         _level = 31
         _chance = 75
         _quality = Quality.SACRED
+        price = 187
     }
     override func create() {
-        initialized = true
         createSpell()
-        createPrice()
     }
 }
 class MoltenFire:MagicMark {
     override init() {
         super.init()
         _name = "融火"
-        _description = "提升所有火元素伤害"
+        _description = "提升火元素伤害"
         _level = 48
         _chance = 30
         _quality = Quality.SACRED
     }
     override func create() {
-        initialized = true
         createSpell()
-        createPrice()
+        createAttr(attrId: FIREPOWER, value: seedFloat(min: 40, max: 51), remove: true)
     }
 }
 class TheEye:MagicMark {
@@ -124,11 +119,10 @@ class TheEye:MagicMark {
         _level = 68
         _chance = 5
         _quality = Quality.SACRED
+        price = 2880
     }
     override func create() {
-        initialized = true
         createSpell()
-        createPrice()
     }
     override func on() {
         super.on()

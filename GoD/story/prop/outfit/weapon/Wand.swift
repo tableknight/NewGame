@@ -14,17 +14,7 @@ class Wand: Weapon {
         _name = "法杖"
         _outfitName = "法杖"
         _attackSpeed = seed(min: 90, max: 120).toFloat() * 0.01
-        _selfAttrs = [ATTACK, SPIRIT]
-        removeAttrId(id: SPIRIT)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        let attr = _attrs[1]
-        attr._value = attr._value * 1.4
-    }
-    override func create() {
-        super.create()
-        let attr = _attrs[1]
-        attr._value = attr._value * 1.4
+        _selfAttrs = [INTELLECT]
+        removeAttrId(id: INTELLECT)
     }
 }

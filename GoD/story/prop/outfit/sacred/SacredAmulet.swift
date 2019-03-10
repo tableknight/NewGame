@@ -14,14 +14,16 @@ class TrueLie: Amulet {
         _description = "获得一个额外的技能栏"
         _level = 68
         _chance = 5
-        _attrCount = 3
         _quality = Quality.SACRED
+        price = 1689
     }
     override func create() {
-        initialized = true
         createSelfAttrs()
+        createAttr(attrId: AVOID, value: 35, remove: true)
+        createAttr(attrId: REVENGE, value: seedFloat(min: 15, max: 21), remove: true)
+        createAttr(attrId: SPIRIT, value: seedFloat(min: 50, max: 81), remove: true)
+        _attrCount = 2
         createAttrs()
-        createPrice()
     }
     override func on() {
         super.on()
@@ -43,16 +45,21 @@ class MedalOfCourage:Amulet {
     override init() {
         super.init()
         _name = "勇气勋章"
-        _level = 20
+        _description = "最下面写着一行小字，二等功J·R"
+        _level = 5
         _chance = 100
-        _attrCount = 7
         _quality = Quality.SACRED
+        price = 18
     }
     
-    override func create(level:CGFloat) {
-        initialized = true
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STAMINA, value: 4, remove: true)
+        createAttr(attrId: STRENGTH, value: 4, remove: true)
+        createAttr(attrId: AGILITY, value: 4, remove: true)
+        createAttr(attrId: INTELLECT, value: 4, remove: true)
+        _attrCount = 1
         createAttrs()
-        createPrice()
     }
 }
 
@@ -60,117 +67,90 @@ class FangOfVampire:Amulet {
     override init() {
         super.init()
         _name = "吸血鬼獠牙"
-        _description = "提升所有攻击吸血效果100%。"
+        _description = "提升所有物理吸血效果100%。"
         _level = 35
         _chance = 75
         _quality = Quality.SACRED
-        _attrCount = 3
+        price = 229
     }
     
-    override func create(level:CGFloat) {
-        initialized = true
+    override func create() {
         createSelfAttrs()
+        createAttr(attrId: STRENGTH, value: 25, remove: true)
+        createAttr(attrId: CRITICAL, value: 25, remove: true)
+        createAttr(attrId: FIREPOWER, value: 25, remove: true)
+        _attrCount = 2
         createAttrs()
-        createPrice()
     }
 }
 class MoonShadow:Amulet {
     override init() {
         super.init()
         _name = "月影"
-        _agl = seed(min: 30, max: 36).toFloat()
-        _level = 35
-        _description = "提升\(_agl)点敏捷"
-        removeAttrId(id: AGILITY)
+        _level = 15
+//        _description = "迅捷无影踪"
         _chance = 60
         _quality = Quality.SACRED
-        _attrCount = seed(min: 3, max: 5)
+        price = 82
     }
-    var _agl:CGFloat = 0
-    override func create(level:CGFloat) {
-        initialized = true
-        createSelfAttrs()
+    override func create() {
+        createAttr(attrId: AGILITY, value: 25, remove: true)
+        _attrCount = seed(min: 2, max: 5)
         createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance._char.agilityChange(value: _agl)
-    }
-    override func off() {
-        super.off()
-        Game.instance._char.agilityChange(value: -_agl)
     }
 }
 class EternityNight:Amulet {
     override init() {
         super.init()
         _name = "永夜"
-        _chaos = seed(min: 20, max: 26).toFloat()
         _level = 28
-        _description = "提升\(_chaos)点混乱"
-        removeAttrId(id: CHAOS)
         _chance = 80
-        sacredAttrCount()
+        _quality = Quality.SACRED
+        price = 126
     }
-    var _chaos:CGFloat = 0
     override func create() {
-        initialized = true
         createSelfAttrs()
-        createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance._char._chaos += _chaos
-    }
-    override func off() {
-        super.off()
-        Game.instance._char._chaos -= _chaos
+        createAttr(attrId: AVOID, value: 15, remove: true)
+        createAttr(attrId: WATERPOWER, value: 25, remove: true)
+        createAttr(attrId: WATERRESISTANCE, value: 35, remove: true)
+        createAttr(attrId: LUCKY, value: seedFloat(min: 10, max: 16), remove: true)
     }
 }
 class Sparkling:Amulet {
     override init() {
         super.init()
         _name = "群星闪耀"
-        _value = seed(min: 20, max: 26).toFloat()
-        _description = "提升\(_value)点幸运"
-        _level = 25
-        removeAttrId(id: LUCKY)
-        _chance = 100
-        sacredAttrCount()
+        _level = 12
+        _chance  = 75
+        _quality = Quality.SACRED
+        price = 98
     }
-    var _value:CGFloat = 0
     override func create() {
-        initialized = true
         createSelfAttrs()
+        createAttr(attrId: STAMINA, value: 10, remove: true)
+        createAttr(attrId: DEFENCE, value: 20, remove: true)
+        createAttr(attrId: SPEED, value: seedFloat(min: 10, max: 16), remove: true)
+        _attrCount = 2
         createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance._char._lucky += _value
-    }
-    override func off() {
-        super.off()
-        Game.instance._char._lucky -= _value
     }
 }
 class MedalOfHero:Amulet {
     override init() {
         super.init()
         _name = "英雄勋章"
-        _description = "战斗中低挡一次致命伤害"
+        _description = "低挡一次致命伤害"
         _level = 18
-        _chance = 100
-        _attrCount = 4
+        _chance = 60
         _quality = Quality.SACRED
+        price = 186
     }
     override func create() {
-        initialized = true
         createSelfAttrs()
+        createAttr(attrId: FIRERESISTANCE, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: WATERRESISTANCE, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: THUNDERRESISTANCE, value: seedFloat(min: 20, max: 31), remove: true)
+        _attrCount = 2
         createAttrs()
-        createPrice()
     }
 }
 class JadeHeart:Amulet {
@@ -180,12 +160,15 @@ class JadeHeart:Amulet {
         _description = "降低来自首领的伤害"
         _level = 43
         _chance = 20
-        sacredAttrCount()
+        _quality = Quality.SACRED
+        price = 654
     }
     override func create() {
-        initialized = true
         createSelfAttrs()
+        createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: THUNDERRESISTANCE, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: SPEED, value: seedFloat(min: 30, max: 41), remove: true)
+        _attrCount = seed(min: 2, max: 4)
         createAttrs()
-        createPrice()
     }
 }

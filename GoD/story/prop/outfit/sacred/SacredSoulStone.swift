@@ -12,17 +12,14 @@ class HeartOfSwamp: SoulStone {
         super.init()
         _name = "沼泽之心"
         _description = "种族转换为生灵。"
-        _level = 50
-        _selfAttrs = [MIND]
+        _level = 30
         _race = EvilType.NATURE
         _chance = 30
+        _quality = Quality.SACRED
+        price = 286
     }
     override func create() {
-        _quality = Quality.SACRED
-        createSelfAttrs()
-        _attrs[0]._value = 25
-        initialized = true
-        createPrice()
+        createAttr(attrId: MIND, value: seedFloat(min: 15, max: 31), remove: true)
     }
 }
 class PandoraHearts:SoulStone {
@@ -32,23 +29,36 @@ class PandoraHearts:SoulStone {
         _description = "随机获取一个未获得的神之技"
         _level = 55
         _race = EvilType.DEMON
-        _chance = 0
-    }
-    var _spell = Spell()
-    override func create() {
+        _chance = 2
         _quality = Quality.SACRED
-        initialized = true
-        let unSavedSpells = Array<Spell>()
-        _spell = unSavedSpells.one()
-        createPrice()
+        price = 2202
+    }
+    var _spell:Spell!
+    override func create() {
+        var unSavedSpells = Array<Spell>()
+        let l = Loot()
+        let c = Game.instance.char!
+        for i in 0...l.sacredSpellCount - 1 {
+            let spell = l.getSacredSpell(id: i)
+            if !c.hasSpell(spell: spell) {
+                unSavedSpells.append(spell)
+            }
+        }
+        if unSavedSpells.count > 0 {
+            _spell = unSavedSpells.one()
+        }
     }
     override func on() {
         super.on()
-        Game.instance.char._spells.append(_spell)
+        if nil != _spell {
+            Game.instance.char._spells.append(_spell!)
+        }
     }
     override func off() {
         super.off()
-        Game.instance.char.removeSpell(spell: _spell)
+        if nil != _spell {
+            Game.instance.char.removeSpell(spell: _spell!)
+        }
     }
 }
 class HeartOfTarrasque:SoulStone {
@@ -56,14 +66,14 @@ class HeartOfTarrasque:SoulStone {
         super.init()
         _name = "魔龙之心"
         _description = "提升重生的治疗效果100%"
-        _level = 58
+        _level = 38
         _race = EvilType.NATURE
         _chance = 40
+        _quality = Quality.SACRED
+        price = 348
     }
     override func create() {
-        _quality = Quality.SACRED
-        initialized = true
-        createPrice()
+        
     }
 }
 

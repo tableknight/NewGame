@@ -10,8 +10,8 @@ import SpriteKit
 class Amulet: Armor {
     override init() {
         super.init()
-        _name = "饰品"
-        _outfitName = "饰品"
+        _name = "项链"
+        _outfitName = "项链"
         _selfAttrs = [HEALTH]
         removeAttrId(id: HEALTH)
     }

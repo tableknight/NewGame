@@ -15,6 +15,7 @@ class QiWave:Physical, HandSkill {
         _quality = Quality.RARE
         _rate = 0.75
         _cooldown = 2
+        isClose = false
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets

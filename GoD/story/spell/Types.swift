@@ -19,3 +19,15 @@ protocol Curse {
 protocol BossOnly {
     
 }
+protocol Summon {
+    
+}
+protocol Fire {
+    
+}
+protocol Water {
+    
+}
+protocol Thunder {
+    
+}

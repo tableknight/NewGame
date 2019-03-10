@@ -10,23 +10,22 @@ import SpriteKit
 class IberisThignbone:Blunt {
     override init() {
         super.init()
-        _name = "伊比利斯的大腿骨"
-        _critical = seed(min: 40, max: 51).toFloat()
-        _description = "提升\(_critical)点暴击"
-        removeAttrId(id: CRITICAL)
+        _name = "伊比利斯的腿骨"
+        _description = "打人特别疼"
         _chance = 90
+        _quality = Quality.SACRED
+        _level = 23
+        price = 126
     }
-    var _critical:CGFloat = 0
-    override func createQuality() {
-        sacredAttrCount()
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._extensions.critical += _critical
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._extensions.critical -= _critical
+    
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STRENGTH, value: 15, remove: true)
+        createAttr(attrId: STAMINA, value: 15, remove: true)
+        createAttr(attrId: REVENGE, value: 15, remove: true)
+        createAttr(attrId: SPEED, value: -15, remove: true)
+        _attrCount = 1
+        createAttrs()
     }
 }
 class GiantFang:Blunt {
@@ -36,9 +35,16 @@ class GiantFang:Blunt {
         _description = "攻击吸血"
         _level = 42
         _chance = 60
+        _quality = Quality.SACRED
+        price = 288
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STAMINA, value: 30, remove: true)
+        createAttr(attrId: HEALTH, value: seedFloat(min: 40, max: 66), remove: true)
+        createAttr(attrId: DEFENCE, value: seedFloat(min: 30, max: 41), remove: true)
+        _attrCount = 3
+        createAttrs()
     }
 }
 
@@ -49,9 +55,16 @@ class ThorsHammer:Blunt {
         _description = "提升落雷伤害100%"
         _level = 48
         _chance = 30
+        _quality = Quality.SACRED
+        price = 882
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STRENGTH, value: 40, remove: true)
+        createAttr(attrId: THUNDERPOWER, value: 40, remove: true)
+        createAttr(attrId: THUNDERRESISTANCE, value: 40, remove: true)
+        _attrCount = 3
+        createAttrs()
     }
 }
 
@@ -62,9 +75,17 @@ class HolyPower:Blunt {
         _description = "对亡灵的伤害提升100%"
         _level = 65
         _chance = 35
+        _quality = Quality.SACRED
+        price = 998
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 40, max: 51), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 40, max: 51), remove: true)
+        createAttr(attrId: CRITICAL, value: seedFloat(min: 40, max: 51), remove: true)
+        createAttr(attrId: HEALTH, value: seedFloat(min: 80, max: 101), remove: true)
+        _attrCount = 1
+        createAttrs()
     }
 }
 
@@ -72,11 +93,20 @@ class IdyllssHand:Blunt {
     override init() {
         super.init()
         _name = "埃迪斯之手"
-        _description = "攻击之后有一定几率再次攻击"
+        _description = "普通攻击有一定几率造成两次伤害"
         _level = 71
         _chance = 5
+        _quality = Quality.SACRED
+        price = 2882
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createAttr(attrId: ATTACK_BASE)
+        createAttr(attrId: CRITICAL, value: 60, remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 45, max: 56), remove: true)
+        createAttr(attrId: AGILITY, value: seedFloat(min: 45, max: 56), remove: true)
+        createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 21), remove: true)
+        createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 21), remove: true)
+        _attrCount = 2
+        createAttrs()
     }
 }

@@ -535,7 +535,7 @@ class BUnit: SKSpriteNode {
         return false
     }
     func markMightOfOaks() -> Bool {
-        if !_battle._selectedSpell.isPhysical {
+        if !(_battle._selectedSpell is Physical) {
             return false
         }
         if _unit is Character {

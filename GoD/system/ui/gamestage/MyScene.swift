@@ -142,22 +142,7 @@ class MyScene: SKSpriteNode, IInitialize {
             return
         } else
         if nextCell == CELL_MONSTER {
-            let mon = getNextCellItem(x: nextX, y: nextY) as! UIEvil
-            if mon.contains(touchPoint) {
-                mon.triggerEvent()
-                let this = self
-                mon.defeatedAction = {
-                    
-                }
-                mon.defeatAction = {
-                    this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
-                    mon.removeFromParent()
-                    let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
-                    mon.run(wait) {
-                        mon.removeFromParent()
-                    }
-                }
-            }
+            meetMonster(nextCell, nextX, nextY, touchPoint)
             _isMoving = false
             return
         }
@@ -207,6 +192,25 @@ class MyScene: SKSpriteNode, IInitialize {
             }
             this.moveEndAction()
         })
+    }
+    
+    internal func meetMonster(_ cell:Int, _ nextX:Int, _ nextY:Int, _ touchPoint:CGPoint) {
+        let mon = getNextCellItem(x: nextX, y: nextY) as! UIEvil
+        if mon.contains(touchPoint) {
+            mon.triggerEvent()
+            let this = self
+            mon.defeatedAction = {
+                
+            }
+            mon.defeatAction = {
+                this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
+                mon.removeFromParent()
+                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
+                mon.run(wait) {
+                    mon.removeFromParent()
+                }
+            }
+        }
     }
     
     func getNextCellItem(x:Int, y:Int) -> UIItem {

@@ -16,6 +16,12 @@ class Icon:SKSpriteNode {
 //        self.anchorPoint = CGPoint(x: 0, y: 1)
         _background = createBackground(width: cellSize, height: cellSize)
         addChild(_background)
+//        _iconLabel.text = "封"
+        _iconLabel.align = "center"
+        _iconLabel.position.x = cellSize * 0.5
+        _iconLabel.position.y = -cellSize * 0.25
+        _iconLabel.fontSize = cellSize * 0.5
+        addChild(_iconLabel)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        let touchPoint = touches.first?.location(in: self)
@@ -54,12 +60,28 @@ class Icon:SKSpriteNode {
             _color = QualityColor.getColor(newValue)
             _quality = newValue
             _background.strokeColor = _color
+            _iconLabel.fontColor = _color
         }
         get {
             return _quality
         }
     }
     
+    var iconLabel:String {
+        get {
+            return _prop!._name
+        }
+        set {
+            var n = ""
+            for s in newValue {
+                n.append(s)
+                break
+            }
+            _iconLabel.text = n
+        }
+    }
+    
+    internal var _iconLabel = Label()
     internal var _selected:Bool = false
     internal var _background = SKShapeNode()
     internal var _text:Label = Label()

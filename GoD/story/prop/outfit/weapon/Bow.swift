@@ -14,7 +14,7 @@ class Bow: Weapon {
         _name = "弓"
         _outfitName = "弓"
         _attackSpeed = seed(min: 100, max: 130).toFloat() * 0.01
-        _selfAttrs = [ATTACK, AGILITY]
+        _selfAttrs = [ATTACK_BASE, AGILITY]
         removeAttrId(id: AGILITY)
     }
 }

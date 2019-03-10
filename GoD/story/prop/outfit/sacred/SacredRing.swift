@@ -14,13 +14,15 @@ class RingOfDead:Ring {
         _description = "种族转换为亡灵。"
         _level = 12
         _chance = 100
+        _quality = Quality.SACRED
+        price = 108
     }
     override func create() {
-        _quality = Quality.SACRED
-        _attrCount = seed(min: 3, max: 6)
+        createAttr(attrId: MIND, value: 10, remove: true)
+        createAttr(attrId: INTELLECT, value: 10, remove: true)
+        createAttr(attrId: WATERRESISTANCE, value: 10, remove: true)
+        _attrCount = 2
         createAttrs()
-        initialized = true
-        createPrice()
     }
 //    private var _backup = 0
     override func on() {
@@ -44,9 +46,15 @@ class IdlirWeddingRing:Ring {
         _description = "变形成为伊德利尔的新娘"
         _level = 29
         _chance = 100
+        _quality = Quality.SACRED
+        price = 199
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createAttr(attrId: SPIRIT, value: 0, remove: true)
+        createAttr(attrId: SPEED, value: 0, remove: true)
+        createAttr(attrId: AVOID, value: 0, remove: true)
+        _attrCount = seed(min: 2, max: 4)
+        createAttrs()
     }
     var _originalImage = SKTexture()
     override func on() {
@@ -66,115 +74,84 @@ class ApprenticeRing:Ring {
         super.init()
         _name = "学徒法戒"
         _description = "略微提高玩火的成功几率"
-        _level = 15
+        _level = 2
         _chance = 50
+        _quality = Quality.SACRED
+        price = 40
     }
-    override func createQuality() {
-        sacredAttrCount()
+    override func create() {
+        createAttr(attrId: INTELLECT, value: 2, remove: true)
+        createAttr(attrId: SPIRIT, value: 2, remove: true)
+        createAttr(attrId: FIREPOWER, value: 0, remove: true)
+        _attrCount = 2
+        createAttrs()
     }
 }
 class CopperRing:Ring {
     override init() {
         super.init()
         _name = "铜质戒指"
-        _description = "火焰抵抗 +5"
+        _description = "铜的比较耐火"
         _level = 5
-        removeAttrId(id: FIRERESISTANCE)
         _chance = 100
+        _quality = Quality.SACRED
+        price = 28
     }
     override func create() {
-        _quality = Quality.SACRED
-        initialized = true
-        _attrCount = 3
+        createAttr(attrId: FIRERESISTANCE, value: 10, remove: true)
+        _attrCount = seed(min: 2, max: 4)
         createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._elementalResistance.fire += 5
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._elementalResistance.fire -= 5
     }
 }
 class SilverRing:Ring {
     override init() {
         super.init()
         _name = "银质戒指"
-        _description = "火焰抵抗 +15"
         _level = 15
-        removeAttrId(id: FIRERESISTANCE)
         _chance = 100
+        _quality = Quality.SACRED
+        price = 92
     }
     override func create() {
-        _quality = Quality.SACRED
-        initialized = true
-        _attrCount = 3
+        createAttr(attrId: STRENGTH, value: 10, remove: true)
+        createAttr(attrId: AVOID, value: 10, remove: true)
+        createAttr(attrId: FIRERESISTANCE, value: 15, remove: true)
+        _attrCount = 2
         createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._elementalResistance.fire += 15
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._elementalResistance.fire -= 15
     }
 }
 class DellarsGoldenRing:Ring {
     override init() {
         super.init()
         _name = "德拉的金戒"
-        _description = "火焰抵抗 +35"
-        _level = 35
-        removeAttrId(id: FIRERESISTANCE)
+        _description = "真金不怕火炼"
+        _level = 25
         _chance = 60
+        _quality = Quality.SACRED
+        price = 112
     }
     override func create() {
-        _quality = Quality.SACRED
-        initialized = true
-        _attrCount = seed(min: 3, max: 6)
+        createAttr(attrId: FIRERESISTANCE, value: 30, remove: true)
+        createAttr(attrId: FIREPOWER, value: 30, remove: true)
+        _attrCount = seed(min: 2, max: 4)
         createAttrs()
-        createPrice()
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._elementalResistance.fire += 35
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._elementalResistance.fire -= 35
     }
 }
 class LuckyRing:Ring {
     override init() {
         super.init()
         _name = "幸运指环"
-        _avoid = seed(min: 10, max: 16).toFloat()
-        _lucky = seed(min: 10, max: 16).toFloat()
-        _description = "幸运 +\(_lucky) & 闪避 +\(_avoid)"
         _level = 15
-        removeAttrId(id: LUCKY)
-        removeAttrId(id: AVOID)
         _chance = 100
+        _quality = Quality.SACRED
+        price = 88
     }
-    var _lucky:CGFloat = 0
-    var _avoid:CGFloat = 0
-    override func createQuality() {
-        sacredAttrCount()
-        _attrCount = 3
-    }
-    override func on() {
-        super.on()
-        Game.instance.char._lucky += _lucky
-        Game.instance.char._extensions.avoid += _avoid
-    }
-    override func off() {
-        super.off()
-        Game.instance.char._lucky -= _lucky
-        Game.instance.char._extensions.avoid -= _avoid
+    override func create() {
+        createAttr(attrId: AVOID, value: 8, remove: true)
+        createAttr(attrId: RHYTHM, value: 8, remove: true)
+        createAttr(attrId: REVENGE, value: 8, remove: true)
+        createAttr(attrId: CRITICAL, value: 10, remove: true)
+        createAttr(attrId: LUCKY, value: seedFloat(min: 10, max: 21), remove: true)
     }
 }
 

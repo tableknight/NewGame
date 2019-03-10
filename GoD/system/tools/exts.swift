@@ -144,6 +144,9 @@ extension SKSpriteNode {
     func seed(min:Int = 0, max:Int = 100) -> Int {
         return Int(arc4random_uniform(UInt32(max - min))) + min
     }
+    func seedFloat(min:Int = 0, max:Int = 101) -> CGFloat {
+        return CGFloat(Int(arc4random_uniform(UInt32(max - min))) + min)
+    }
     func toTexture() -> SKTexture {
         let view = SKView()
         return view.texture(from: self)!

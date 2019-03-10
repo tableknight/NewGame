@@ -74,6 +74,7 @@ class LootPanel:UIPanel {
             let lc = PropIcon()
             let y = i / 4
             let mod = i % 4
+            lc.iconLabel = p._name
             lc.count = p._count
             lc.selected = true
             lc._displayItemType = p

@@ -317,6 +317,7 @@ class RolePanel:UIPanel {
                 //                spellIcon.anchorPoint = CGPoint(x: 0, y: 1)
                 _propertyLayer.addChild(spellIcon)
                 if _unit._spellsInuse.count > i {
+                    spellIcon.iconLabel = _unit._spellsInuse[i]._name
                     spellIcon.spell = _unit._spellsInuse[i]
                     spellIcon._displayItemType = _unit._spellsInuse[i]
                     spellIcon.quality = _unit._spellsInuse[i]._quality

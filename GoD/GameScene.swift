@@ -22,6 +22,81 @@ class GameScene: SKScene {
         }
     }
     
+    func addSacredOutfit() {
+        let l = Loot()
+        let c = Game.instance.char!
+        for i in l._sacredBows {
+            let b = l.getSacredBow(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        for i in l._sacredMarks {
+            let b = l.getSacredMark(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        for i in l._sacredRings {
+            let b = l.getSacredRing(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredWands {
+            let b = l.getSacredWand(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredBlunts {
+            let b = l.getSacredBlunt(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+
+        for i in l._sacredSwords {
+            let b = l.getSacredSword(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+
+        for i in l._sacredAmulets {
+            let b = l.getSacredAmulet(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredDaggers {
+            let b = l.getSacredDagger(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredShields {
+            let b = l.getSacredShield(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+
+        for i in l._sacredEarrings {
+            let b = l.getSacredEarring(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredSoulstones {
+            let b = l.getSacredSoulstone(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+        
+        for i in l._sacredInstruments {
+            let b = l.getSacredInstrument(id: i)
+            b.create()
+            c.addProp(p: b)
+        }
+
+    }
+    
     func battle() {
         let b = FrancisBattle()
         var es = Array<Creature>()
@@ -61,85 +136,92 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SnowLanding4()
-        bs._level = 1
+        let bs = MorningPalace()
         bs.create()
         let e = Emily()
         e.create(level: e._level)
-//        e._spellsInuse = [SpiritIntervene(), SoulLash()]
-//        for m in e._minions + [e] {
-//            m._spellsInuse = [LowerSummon()]
-//        }
-//        e._minions[0]._spellsInuse.append(Crazy())
-        let hm = ThorsHammer()
-        hm.create()
-        e.addProp(p: hm)
         
         e.addMoney(num: 1000)
+        e._spellsInuse = [LowlevelFlame(), SummonFlower()]
         
         bs.setRole(x: 5, y: 5, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
-        let bow = Bow()
-        bow.create(level: 1)
-        e.addProp(p: bow)
-        let i = Instrument()
-        i.create(level: 1)
-        e.addProp(p: i)
         addChild(stage)
-        let bc = BlastScroll()
-        bc._count = 5
-        Game.instance.char.addProp(p: bc)
         
-        var props = Array<Prop>()
-        props.append(bc)
-        let swd = Sword()
-        swd.create(level: bs._level)
-        props.append(swd)
+        let bs1 = BlastScroll()
+        bs1._count = 10
+        e.addProp(p: bs1)
         
-        
-        let ss = SealScroll()
-        ss._count = 5
-        Game.instance.char.addProp(p: ss)
-        
-        let ts = TownScroll()
-        ts._count = 5
-        Game.instance.char.addProp(p: ts)
-        
-        let p = Potion()
-        p._count = 5
-        e.addProp(p: p)
-        
-        let rw = RandomWeapon()
-        e.addProp(p: rw)
     }
     
+    
+    
     override func didMove(to view: SKView) {
-//        let sp = SelecProfession()
-//        sp.create()
-//        addChild(sp)
-//        let rsp = RoleSelectPanel()
-//        rsp.create()
-//        addChild(rsp)
-//        let si = SelectMinion()
-//        si.create()
-////        let ic = ImageComponent()
-////        let p = Game.instance.pictureActor1
-////        ic.create(image: p)
-//        addChild(si)
-//        let cf = CreationFlow()
-//        cf.create()
-//        addChild(cf)
         realScene()
-        battle()
-//        let r = RoofSets()
-//        addChild(r.rightConnect)
-//        let p = AcientRoadSelection()
-//        p.create()
-//        addChild(p)
-//        let _ = Game.instance.curStage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
-//                                                  text: "你好，这是远古石碑，是前往无尽深渊的唯一入口！触摸石碑的中心，与石碑产生共鸣。",
-//                                                  name: "神官苏维亚")
+//        addSacredOutfit()
+//        echoOutfit(item: Game.instance.char._props.one() as! Outfit)
+//        for p in Game.instance.char._props {
+//            echoOutfit(item: p as! Outfit)
+//        }
+    }
+    func echoSpell(spell:Spell) {
+        var str = "{name:\"\(spell._name)\","
+        str.append("description:\"\(spell._description)\",")
+        str.append("quality:\"\(spell._quality)\",")
+        str.append("cooldown:\"\(spell._cooldown)\",")
+        str.append("magical:\(spell is Magical ? "true" : "false"),")
+        str.append("physical:\(spell is Physical ? "true" : "false"),")
+        str.append("passive:\(spell is Passive ? "true" : "false"),")
+        str.append("auro:\(spell is Auro ? "true" : "false"),")
+        str.append("fire:\(spell.isFire ? "true" : "false"),")
+        str.append("water:\(spell.isWater ? "true" : "false"),")
+        str.append("thunder:\(spell.isThunder ? "true" : "false"),")
+        str.append("handSkill:\(spell is HandSkill ? "true" : "false"),")
+        str.append("bowSkill:\(spell is BowSkill ? "true" : "false"),")
+        str.append("curse:\(spell is Curse ? "true" : "false"),")
+        str.append("summon:\(spell is Summon ? "true" : "false"),")
+        str.append("close:\(spell.isClose ? "true" : "false")")
+        str.append("},")
+        debug(str)
+    }
+    
+    func echoOutfit(item:Outfit) {
+        let ai = ArmorInfo()
+        ai.create(armor: item)
+        
+        var spd = "攻速 "
+        var spell = ""
+        if item is Sword {
+            spd += "较快"
+        } else if item is Dagger {
+            spd += "很快"
+        } else if item is Instrument {
+            spd += "一般"
+            spell = "随机神之技"
+        } else if item is Blunt {
+            spd += "很慢"
+        } else if item is Bow {
+            spd += "较快"
+        } else if item is Wand {
+            spd += "较慢"
+        } else {
+            spd = ""
+        }
+        
+        if item is MagicMark {
+            spell = "随机神之技"
+        }
+        
+        var str = "{fullName:\"\(ai._nameText)\","
+        str.append("name:\"\(item._name)\",")
+        str.append("speed:\"\(spd)\",")
+        str.append("attrs:\(ai._attrTexts),")
+        str.append("spell:\"\(spell)\",")
+        str.append("description:\"\(ai._desText)\",")
+        str.append("price:\"\(ai._priceText)\",")
+        str.append("},")
+        debug(str)
     }
     
     

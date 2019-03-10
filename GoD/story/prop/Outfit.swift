@@ -91,6 +91,18 @@ class Outfit:Prop {
             _attrs.append(a)
         }
     }
+    func createAttr(attrId:Int, value:CGFloat = 0, remove:Bool = false) {
+        let attr = getAttrById(id: attrId)
+        if value != 0 {
+            attr._value = value
+        } else {
+            attr.create(level: _level)
+        }
+        _attrs.append(attr)
+        if remove {
+            removeAttrId(id: attrId)
+        }
+    }
     func createAttrs() {
         if _attrCount < 1 {
             return
@@ -129,8 +141,11 @@ class Outfit:Prop {
     var LUCKY = 21
     var BREAK = 22
     var REVENGE = 23
-    var RHYTHM = 23
-    var CHAOS = 23
+    var RHYTHM = 24
+    var CHAOS = 25
+    var ATTACK_BASE = 26
+    var SPIRIT_BASE = 27
+    var MAGICAL_POWER = 28
     internal func getAttrById(id:Int) -> Attribute {
         switch id {
         case STAMINA:
@@ -185,6 +200,12 @@ class Outfit:Prop {
             return Rhythm()
         case CHAOS:
             return Chaos()
+        case ATTACK_BASE:
+            return AttackAttributeBase()
+        case SPIRIT_BASE:
+            return SpiritBase()
+        case MAGICAL_POWER:
+            return MagicalDamage()
         default:
             return Attribute()
         }

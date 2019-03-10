@@ -13,4 +13,8 @@ class EarRing: Amulet {
         _name = "耳环"
         _outfitName = "耳环"
     }
+    override func createSelfAttrs() {
+//        createAttr(attrId: , value: <#T##CGFloat#>, remove: <#T##Bool#>)
+        createAttr(attrId: MAGICAL_POWER)
+    }
 }

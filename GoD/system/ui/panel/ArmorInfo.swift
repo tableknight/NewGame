@@ -28,6 +28,13 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
     
     private var _armor = Outfit()
     var _displayWidth:CGFloat = 0
+    var _nameText = ""
+    var _speedText = ""
+    var _attrTexts = Array<String>()
+    var _markSpellName = ""
+    var _desText = ""
+    var _insSpellName = ""
+    var _priceText = ""
     func create(armor:Outfit) {
         _armor = armor
         let startX = cellSize * 0.25
@@ -51,6 +58,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         name.position.x = startX
         name.position.y = startY
         addChild(name)
+        _nameText = name.text!
         
         var width:CGFloat = 100 + (nameText.count * 24).toFloat()
         _displayHeight = cellSize
@@ -107,6 +115,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             addChild(spd)
             _displayHeight += name.fontSize + gap * 2
             lastY = spd.position.y - spd.fontSize - gap
+            _speedText = "攻速 \(str)"
         }
         
         if armor._attrs.count > 0 {
@@ -115,12 +124,13 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
                 label.fontSize = name.fontSize * 0.7
                 //                label.fontName = ""
                 label.text = armor._attrs[i].getText()
-                label.position.x = startX - 1
+                label.position.x = startX
                 label.position.y = lastY - gap
                 label.fontColor = UIColor.white
                 addChild(label)
                 lastY = label.position.y - label.fontSize
                 _displayHeight += label.fontSize + gap
+                _attrTexts.append(label.text!)
             }
         }
         
@@ -134,6 +144,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             lastY = spellName.position.y - spellName.fontSize
             _displayHeight += spellName.fontSize + gap
             addChild(spellName)
+            _markSpellName = spellName.text!
         }
         
         if !armor._description.isEmpty {
@@ -149,20 +160,28 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             lastY = lastY - gap - 18
             _displayHeight += des.fontSize + gap
             addChild(des)
+            _desText = des.text!
+            
+//            let desWidth = 100 + (armor._description.count * 18).toFloat()
+//            if desWidth > width {
+//                width = desWidth
+//            }
         }
         
-//        if armor is Instrument {
-//            //            let ins = armor as! Instrument
-//            let spellName = Label()
-//            spellName.align = "left"
-//            spellName.position.x = startX
-//            spellName.position.y = lastY - 30
-//            spellName.fontColor = QualityColor.getColor(armor._quality)
-//            spellName.fontSize = 16
-//            spellName.text = armor._description
-//            lastY = lastY - 30
-//            addChild(spellName)
-//        }
+        if armor is Instrument {
+            let ins = armor as! Instrument
+            let spellName = Label()
+            spellName.align = "left"
+            spellName.position.x = startX
+            spellName.position.y = lastY - gap
+            spellName.fontColor = QualityColor.getColor(ins._spell._quality)
+            spellName.fontSize = 16
+            spellName.text = "[\(ins._spell._name)]"
+            lastY = lastY - gap - 16
+            _displayHeight += 30
+            addChild(spellName)
+            _insSpellName = spellName.text!
+        }
         
         if armor._price > 0 {
             let price = Label()
@@ -174,6 +193,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             price.fontColor = UIColor.orange
             addChild(price)
             _displayHeight += price.fontSize + gap * 2
+            _priceText = price.text!
         }
         _displayWidth = width
         let bg = createBackground(width: _displayWidth, height: _displayHeight)

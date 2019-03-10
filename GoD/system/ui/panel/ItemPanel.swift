@@ -180,6 +180,7 @@ class ItemPanel: UIPanel {
                 let y = base / 6
                 let x = base % 6
                 let icon = PropIcon()
+                icon.iconLabel = props[i]._name
                 icon.count = props[i]._count
                 icon._displayItemType = props[i]
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
@@ -227,6 +228,11 @@ class PropComponent:SKSpriteNode {
 //        bg.lineWidth = 2
         _bg = bg
         addChild(bg)
+        _iconLabel.align = "center"
+        _iconLabel.position.x = cellSize * 0.5
+        _iconLabel.position.y = -cellSize * 0.25
+        _iconLabel.fontSize = cellSize * 0.5
+        addChild(_iconLabel)
     }
 
     var armor:Prop {
@@ -254,6 +260,13 @@ class PropComponent:SKSpriteNode {
             _armorImg = SKSpriteNode(texture: newValue._img)
             _bg.strokeColor = QualityColor.getColor(newValue._quality)
             addChild(_armorImg)
+            
+            var n = ""
+            for s in newValue._name {
+                n.append(s)
+                break
+            }
+            _iconLabel.text = n
 
             if newValue is Item && !(newValue is SpellBook) {
                 let num = "\((newValue as! Item)._count)"
@@ -280,6 +293,7 @@ class PropComponent:SKSpriteNode {
             return _prop
         }
     }
+    internal var _iconLabel = Label()
     private var _selected = false
     var selected:Bool {
         set {

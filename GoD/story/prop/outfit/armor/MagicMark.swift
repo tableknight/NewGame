@@ -19,27 +19,30 @@ class MagicMark: Armor {
         _level = level
         createQuality()
         createSpell()
-//        _description = _spell._description
-//        _level = _spell._level
-        
-        initialized = true
         createPrice()
+    }
+    override func createQuality() {
+        let _seed = seed()
+        if _seed < 70 {
+            _quality = Quality.NORMAL
+        } else if _seed < 90 {
+            _quality = Quality.GOOD
+        } else if _seed < 96 {
+            _quality = Quality.RARE
+        } else {
+            _quality = Quality.SACRED
+        }
     }
     internal func createSpell() {
         let l = Loot()
-        var spellAttay = Array<Int>()
         if _quality == Quality.NORMAL {
-            spellAttay = l._normalSpellArray
-            _spell = l.getNormalSpell(id: spellAttay.one())
+            _spell = l.getNormalSpell(id: seed(to: l.normalSpellCount))
         } else if _quality == Quality.GOOD {
-            spellAttay = l._goodSpellArray
-            _spell = l.getGoodSpell(id: spellAttay.one())
+            _spell = l.getGoodSpell(id: seed(to: l.goodSpellCount))
         } else if _quality == Quality.RARE {
-            spellAttay = l._rareSpellArray
-            _spell = l.getRareSpell(id: spellAttay.one())
+            _spell = l.getRareSpell(id: seed(to: l.rareSpellCount))
         } else {
-            spellAttay = l._sacredSpellArray
-            _spell = l.getSacredSpell(id: spellAttay.one())
+            _spell = l.getSacredSpell(id: l.sacredSpellCount)
         }
     }
     private var _spellAppended = false

@@ -418,7 +418,7 @@ class Loot: Core {
     func getList() -> Array<Prop> {
         return _props
     }
-    var _sacredSwords = [1,2,3,4,5,6,7]
+    var _sacredSwords = [1,2,3,4,5,6,7,8]
     func getSacredSword(id:Int) -> Sword {
         switch id {
         case 1:
@@ -435,6 +435,8 @@ class Loot: Core {
             return BloodBlade()
         case 7:
             return ElementalSword()
+        case 8:
+            return IberisHand()
         default:
             return NewSword()
         }

@@ -13,38 +13,32 @@ class Instrument: Weapon {
         _name = "法器"
         _outfitName = "法器"
         _attackSpeed = 1.0
-        _selfAttrs = [SPIRIT]
+        _selfAttrs = [SPIRIT_BASE]
     }
     override func create(level: CGFloat) {
         _level = level
-        initialized = true
         createQuality()
         createSelfAttrs()
     
-        _attrs[0]._value *= 2
-        var spellAttay = Array<Int>()
-        let l = Loot()
-        if _quality == Quality.NORMAL {
-            spellAttay = l._normalSpellArray
-            _spell = l.getNormalSpell(id: spellAttay.one())
-        } else if _quality == Quality.GOOD {
-            spellAttay = l._goodSpellArray
-            _spell = l.getGoodSpell(id: spellAttay.one())
-        } else if _quality == Quality.RARE {
-            spellAttay = l._rareSpellArray
-            _spell = l.getRareSpell(id: spellAttay.one())
-        } else {
-            spellAttay = l._sacredSpellArray
-            _spell = l.getSacredSpell(id: spellAttay.one())
-        }
-//        if _level < _spell._level {
-//            _level = _spell._level
-//        }
+        createSpell()
+        
         _description = "[" + _spell._name + "]"
         createPrice()
         _price *= 4
         _sellingPrice *= 4
         
+    }
+    internal func createSpell() {
+        let l = Loot()
+        if _quality == Quality.NORMAL {
+            _spell = l.getNormalSpell(id: seed(to: l.normalSpellCount))
+        } else if _quality == Quality.GOOD {
+            _spell = l.getGoodSpell(id: seed(to: l.goodSpellCount))
+        } else if _quality == Quality.RARE {
+            _spell = l.getRareSpell(id: seed(to: l.rareSpellCount))
+        } else {
+            _spell = l.getSacredSpell(id: l.sacredSpellCount)
+        }
     }
     override func create() {
         create(level: _level)

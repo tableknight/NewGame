@@ -156,8 +156,8 @@ class AcientRoad: MyScene {
         super.init(texture: texture, color: color, size: size)
         _floorSize = seed(min: 1, max: 7)
         _index = Game.instance.curStage.getSceneIndex()
-        debug("current _floorSize \(_floorSize)")
-        debug("current index \(_index)")
+//        debug("current _floorSize \(_floorSize)")
+//        debug("current index \(_index)")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -187,11 +187,14 @@ class AcientRoad: MyScene {
             ]
         }
     }
+    internal func getBoxCount() -> Int {
+        return seed(max: 3)
+    }
     override func createMapMatrix() {
         _mapMatrix = []
         let towerCountTotal = seed(max: 3)
         var towerCount = 0
-        let chestCountTotal = seed(max: 3)
+        let chestCountTotal = getBoxCount()
         var chestCount = 0
         for y in 0...halfSize.toInt() * 2 - 1 {
             var row:Array<Int> = []

@@ -13,6 +13,9 @@ class Core:NSObject{
     func seed(min:Int = 0, max:Int = 101) -> Int {
         return Int(arc4random_uniform(UInt32(max - min))) + min
     }
+    func seedFloat(min:Int = 0, max:Int = 101) -> CGFloat {
+        return CGFloat(Int(arc4random_uniform(UInt32(max - min))) + min)
+    }
     func seed(to:Int) -> Int {
         return Int(arc4random_uniform(UInt32(to)))
     }

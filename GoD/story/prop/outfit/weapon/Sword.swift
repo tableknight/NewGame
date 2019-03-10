@@ -13,7 +13,7 @@ class Sword: Weapon {
         _name = "剑"
         _outfitName = "剑"
         _attackSpeed = seed(min: 100, max: 130).toFloat() * 0.01
-        _selfAttrs = [ATTACK, ACCURACY]
-        removeAttrId(id: ACCURACY)
+        _selfAttrs = [ATTACK_BASE, STRENGTH]
+        removeAttrId(id: STRENGTH)
     }
 }

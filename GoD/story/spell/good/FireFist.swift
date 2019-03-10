@@ -11,7 +11,7 @@ class FireFist: Physical, HandSkill {
     override init() {
         super.init()
         isClose = true
-        _name = "火焰掌"
+        _name = "烈焰拳"
         _description = "对目标造成攻击80%的火焰伤害"
         isFire = true
         _rate = 0.8

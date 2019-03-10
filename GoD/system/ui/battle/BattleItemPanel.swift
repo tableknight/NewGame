@@ -70,6 +70,7 @@ class BattleItemPanel: UIPanel {
                 let x = base % 6
                 let icon = BattlePropIcon()
                 icon.count = props[i]._count
+                icon.iconLabel = props[i]._name
                 icon._displayItemType = props[i]
                 icon.timeleft = (props[i] as! Item)._timeleft
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
