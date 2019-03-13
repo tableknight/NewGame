@@ -25,7 +25,7 @@ class MicaluBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 36
         var es = Array<Creature>()
 //        for _ in 0...1 {
 //            let lm = ToppurServant()

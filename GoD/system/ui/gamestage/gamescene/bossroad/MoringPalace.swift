@@ -15,7 +15,7 @@ class MorningPalace: BossRoad {
         for _ in 0...10 {
             _itemEnum.append(11)
         }
-        _name = "早宫"
+        _name = "早·宫"
         _floorSize = 5
         _level = 23
     }
@@ -55,10 +55,10 @@ class MorningPalace: BossRoad {
     
     override func getMonsterByIndex(index: Int) -> Creature {
         switch index {
-        case 1:
-            return ToppurServant()
-        default:
-            return SnowLady()
+            case 1:
+                return ToppurServant()
+            default:
+                return ToppurServant()
         }
     }
     override func getSelfScene() -> BossRoad {
@@ -172,7 +172,7 @@ class MP19:UIItem {
 class MP110:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.outside_b.getCell(9, 4))
+        setTexture(Game.instance.outside_b.getCell(9, 7))
     }
     
     required init?(coder aDecoder: NSCoder) {

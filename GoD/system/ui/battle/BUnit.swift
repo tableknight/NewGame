@@ -421,6 +421,15 @@ class BUnit: SKSpriteNode {
         let go = SKAction.sequence([move1, wait, move2])
         _charNode.run(go, completion: completion)
     }
+    func actionSpark(completion:@escaping () -> Void) {
+        let wait = SKAction.wait(forDuration: TimeInterval(0.25))
+        let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
+        let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
+        let go = SKAction.sequence([wait,fadeout,fadein,fadeout,fadein,fadeout,fadein])
+        _charNode.run(go) {
+            completion()
+        }
+    }
     func actionCast(completion:@escaping () -> Void) {
         if _unit is Boss || _unit is IFace {
             let wait = SKAction.wait(forDuration: TimeInterval(1))

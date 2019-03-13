@@ -103,7 +103,7 @@ class BossRoad: AcientRoad {
         let nextPoint = getNextPoint()
         let nextY = nextPoint.y
         let nextX = nextPoint.x
-        if nextX == _portalNext.x && nextY == _portalNext.y {
+        if nextX == _portalNext.x && nextY == _portalNext.y && _index >= _floorSize {
             finalBattle()
             return true
 

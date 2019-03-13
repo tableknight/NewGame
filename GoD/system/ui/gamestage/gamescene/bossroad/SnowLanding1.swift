@@ -10,10 +10,6 @@ import SpriteKit
 class SnowLanding1: SnowLanding {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-//        _name = "雪之国"
-//        let oa4 = Game.instance.outside_a4
-//        _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
-        _name = "\(super._name) 零之阶梯"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,7 +33,34 @@ class SnowLanding1: SnowLanding {
     }
     
     override func moveEndAction() {
-        
+        let pos = convertPixelToIndex(x: _role.xAxis, y: _role.yAxis)
+        let stage = Game.instance.curStage!
+        let char = _role!
+        if pos.x == 10 && pos.y == 0 {
+            let nextScene = ZeroPalace()
+            _role.removeFromParent()
+            stage.switchScene(next: nextScene, afterCreation: {
+                nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
+            })
+            self.removeFromParent()
+        } else if pos.x == 1 && pos.y == 0 {
+            showMsg(text: "go bossroad")
+        } else if pos.x == 0 && pos.y == 3 {
+            showMsg(text: "go bossroad")
+        } else if pos.x == 2 && pos.y == 8 {
+            let nextScene = MorningPalace()
+            _role.removeFromParent()
+            stage.switchScene(next: nextScene, afterCreation: {
+                nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
+            })
+            self.removeFromParent()
+        } else if pos.x == 5 && pos.y == 0 {
+            showMsg(text: "go bossroad")
+        } else if pos.x == 3 && pos.y == 6 {
+            showMsg(text: "go bossroad")
+        } else if pos.x == 2 && pos.y == 10 {
+            showMsg(text: "go bossroad")
+        }
     }
     override func create() {
         super.create()
@@ -49,6 +72,7 @@ class SnowLanding1: SnowLanding {
         addGround(x: 5 + x, y: 5 + y, item: ms.thinConnection)
         addGround(x: 6 + x, y: 5 + y, item: ms.thinConnection)
         addGround(x: 7 + x, y: 5 + y, item: SKSpriteNode(texture: s))
+        addGround(x: 7 + x, y: 3 + y, item: SKSpriteNode(texture: s))
         addGround(x: 8 + x, y: 5 + y, item: ms.thinConnection)
         addGround(x: 9 + x, y: 5 + y, item: ms.thinConnection)
         addGround(x: 10 + x, y: 5 + y, item: ms.thinRight)
@@ -66,11 +90,11 @@ class SnowLanding1: SnowLanding {
         addGround(x: 5 + x, y: 2 + y, item: ms.groundLeftConnection)
         addGround(x: 5 + x, y: 3 + y, item: ms.thinLeft)
         addGround(x: 6 + x, y: 3 + y, item: ms.thinConnection)
-        addGround(x: 7 + x, y: 3 + y, item: SKSpriteNode(texture: s))
+        
         addGround(x: 8 + x, y: 3 + y, item: ms.thinConnection)
         addGround(x: 9 + x, y: 3 + y, item: ms.thinRight)
         addGround(x: 9 + x, y: 2 + y, item: ms.groundBottomRight)
-        addGround(x: 9 + x, y: 1 + y, item: ms.groundRightConnection)
+//        addGround(x: 9 + x, y: 1 + y, item: ms.groundRightConnection)
         addGround(x: 10 + x, y: 2 + y, item: ms.groundRightConnection)
         addGround(x: 0, y: 4, item: ms.thinLeft)
         addGround(x: 1, y: 5, item: ms.groundBottomLeft)
@@ -87,57 +111,75 @@ class SnowLanding1: SnowLanding {
 //        addGround(x: 9, y: 0, item: ms.fullConnection)
 //        addGround(x: 10, y: 0, item: ms.fullConnection)
         let ob = Game.instance.outside_b
-        addGround(x: 10, y: 0, item: SKSpriteNode(texture: s))
-        addItem(x: 6, y: 2, item: ob.getNode(8, 4))
-        addItem(x: 9, y: 0, item: ms.fullConnection)
-        addGround(x: 7, y: 8, item: ob.getNode(9, 4))
+        
+        addItem(x: 5, y: 1, item: ob.getNode(8, 4))
+//        addItem(x: 9, y: 0, item: ms.fullConnection)
         addItem(x: 8, y: 9, item: ob.getNode(15, 4))
-        addGround(x: 9, y: 5, item: ob.getNode(11, 4))
-        addGround(x: 9, y: 3, item: ob.getNode(11, 4))
+        
         addGround(x: 8, y: 6, item: ob.getNode(11, 4))
-        addGround(x: 7, y: 7, item: ob.getNode(11, 4))
-        addGround(x: 9, y: 6, item: ob.getNode(11, 4))
-        let treePoints:Array<Int> = [
-            7,0,
-            0,0,
-            0,1,
-            2,4,
-            5,1,
-            0,2,
-            2,0,
-        ]
-        var i = 0
-        for _ in 0...treePoints.count / 2 - 1 {
-            let x = treePoints[i]
-            let y = treePoints[i + 1]
-            addItem(x: x.toFloat(), y: y.toFloat(), item: ob.getNode(8, 1, 2, 2), width: 0)
-            i += 2
-        }
+        
+        addGround(x: 3, y: 6, item: ob.getNode(7, 8))
+        addGround(x: 3, y: 7, item: ob.getNode(11, 4))
+        
+//        addGround(x: 5, y: 3, item: ob.getNode(7, 8))
+        addGround(x: 5, y: 4, item: ob.getNode(11, 4))
+        
+        addGround(x: 2, y: 10, item: ob.getNode(7, 8))
+        addGround(x: 2, y: 11, item: ob.getNode(11, 4))
+        
+        let dy:CGFloat = 0
+        addGround(x: 10, y: 0 - dy, item: SKSpriteNode(texture: s))
+        addGround(x: 1, y: 0 - dy, item: SKSpriteNode(texture: s))
+        addGround(x: 0, y: 3 - dy, item: SKSpriteNode(texture: s))
+        addGround(x: 2, y: 8 - dy, item: SKSpriteNode(texture: s))
+        addGround(x: 5, y: 0 - dy, item: SKSpriteNode(texture: s), z:MyScene.MAP_LAYER_Z + 12)
+        
+        
+        
+        addGround(x: 9, y: 12, item: SKSpriteNode(texture: s))
+//        let treePoints:Array<Int> = [
+//            7,0,
+//            0,0,
+//            0,1,
+//            2,4,
+//            5,1,
+//            0,2,
+//            2,0,
+//        ]
+//        var i = 0
+//        for _ in 0...treePoints.count / 2 - 1 {
+//            let x = treePoints[i]
+//            let y = treePoints[i + 1]
+//            addItem(x: x.toFloat(), y: y.toFloat(), item: ob.getNode(8, 1, 2, 2), width: 0)
+//            i += 2
+//        }
         let treePoints1:Array<Int> = [
+            0,0,
+            3,0,
+            3,5,
+            1,2,
+            4,3,
             0,5,
-            5,9,
             4,10,
-            7,10,
-            10,9,
-            2,8,
+            7,11,
+            4,2,
+            10,3,
+            1,8,
             0,10,
-            1,11,
-            11,10,
             11,9,
             9,8,
             12,0,
             12,1,
             12,6,
-            12,8
         ]
-        i = 0
+        var i = 0
         for _ in 0...treePoints1.count / 2 - 1 {
             let x = treePoints1[i]
             let y = treePoints1[i + 1]
             addItem(x: x.toFloat(), y: y.toFloat(), item: ob.getNode(13, 4, 1, 2))
             i += 2
         }
-        addItem(x: 9, y: 1, item: RoleToppur())
+//        addItem(x: 9, y: 1, item: RoleToppur())
 //        let oa2 = Game.instance.outside_a2
 //        addGround(x: 3, y: 10, item: oa2.getNode(10, 5, 2, 0.5))
 //        addItem(x: 2, y: 10, item: oa4.getNode(10, 9, 1, 2.5))

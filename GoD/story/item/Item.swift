@@ -271,7 +271,7 @@ class BlastScroll:Item {
         if stage._curPanel != nil {
             stage.removePanel(stage._curPanel!)
         }
-        bChar.actionBuff {
+        bChar.actionSpark {
             if (scene as! AcientRoad).blastItem() {
                 this.removeFromChar()
             }

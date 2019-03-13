@@ -264,6 +264,7 @@
 		0922C951222ECB97002DC201 /* MagicalDamage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C950222ECB97002DC201 /* MagicalDamage.swift */; };
 		0922C9542233FA0E002DC201 /* BossRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9532233FA0E002DC201 /* BossRoad.swift */; };
 		0922C9562234D992002DC201 /* MoringPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9552234D992002DC201 /* MoringPalace.swift */; };
+		0922C95822394EA4002DC201 /* ZeroPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95722394EA4002DC201 /* ZeroPalace.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -633,6 +634,7 @@
 		0922C950222ECB97002DC201 /* MagicalDamage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicalDamage.swift; sourceTree = "<group>"; };
 		0922C9532233FA0E002DC201 /* BossRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossRoad.swift; sourceTree = "<group>"; };
 		0922C9552234D992002DC201 /* MoringPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoringPalace.swift; sourceTree = "<group>"; };
+		0922C95722394EA4002DC201 /* ZeroPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPalace.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -750,7 +752,6 @@
 			isa = PBXGroup;
 			children = (
 				090C0DE821ECCCF2008C46AA /* SnowLanding.swift */,
-				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
 				09C66C7821F7586800E1C153 /* SnowLanding2.swift */,
 				09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */,
 				09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */,
@@ -1425,6 +1426,8 @@
 			children = (
 				0922C9532233FA0E002DC201 /* BossRoad.swift */,
 				0922C9552234D992002DC201 /* MoringPalace.swift */,
+				0922C95722394EA4002DC201 /* ZeroPalace.swift */,
+				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
 			);
 			path = bossroad;
 			sourceTree = "<group>";
@@ -1787,6 +1790,7 @@
 				090FEC4521BB9B2B004276BB /* RoleSelectPanel.swift in Sources */,
 				090FEBD921BB9B2B004276BB /* BargeAbout.swift in Sources */,
 				090FEBCE21BB9B2B004276BB /* Sacrifice.swift in Sources */,
+				0922C95822394EA4002DC201 /* ZeroPalace.swift in Sources */,
 				090FEB7621BB9B2B004276BB /* FireResistance.swift in Sources */,
 				090FEB6421BB9B2B004276BB /* SacredSoulStone.swift in Sources */,
 				094E68CC21E064C500414583 /* ShootTwo.swift in Sources */,

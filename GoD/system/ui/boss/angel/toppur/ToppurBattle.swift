@@ -38,7 +38,7 @@ class ToppurBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 23
         var es = Array<Creature>()
         for _ in 0...1 {
             let lm = ToppurServant()
