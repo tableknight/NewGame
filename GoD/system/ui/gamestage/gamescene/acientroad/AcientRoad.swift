@@ -54,11 +54,9 @@ class AcientRoad: MyScene {
             } else {
                 let prevIndex = _index - 1
                 let prevScene = stage.getSceneByIndex(index: prevIndex)
-                char.removeFromParent()
                 stage.switchScene(next: prevScene!, completion: {
                     prevScene!.setRole(x: prevScene!._portalNext.x, y: prevScene!._portalNext.y, char: char)
                 })
-                self.removeFromParent()
             }
         //进入下一个场景
         } else if pos.x == _portalNext.x && pos.y == _portalNext.y {
@@ -69,16 +67,14 @@ class AcientRoad: MyScene {
             //进入本层下一个场景
             } else if _index < _floorSize {
                 var nextScene = stage.getSceneByIndex(index: nextIndex)
-                _role.removeFromParent()
                 if nil == nextScene {
                     nextScene = getSceneById(id: _id)
                     //将下一个新创建的场景加入 舞台场景库
                     stage._scenes.append(nextScene!)
                 }
-                stage.switchScene(next: nextScene!, afterCreation: {
+                stage.switchScene(next: nextScene!, completion: {
                     nextScene!.setRole(x: nextScene!._portalPrev.x, y: nextScene!._portalPrev.y, char: char)
                 })
-                self.removeFromParent()
             } else {
                 debug("_index error _floorSize")
             }
@@ -87,14 +83,12 @@ class AcientRoad: MyScene {
     internal func goFloor(floorLevel:Int) {
         let stage = Game.instance.curStage!
         let char = stage._curScene._role!
-        char.removeFromParent()
         stage.clearScene()
         if 0 == floorLevel {
             let cc = CenterCamping()
             stage.switchScene(next: cc, afterCreation: {
                 cc.setRole(x: 5, y: 7, char: char)
             })
-            self.removeFromParent()
             return
         }
         let ar = AcientRoad()
@@ -107,7 +101,7 @@ class AcientRoad: MyScene {
             scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
             char.faceSouth()
         })
-        self.removeFromParent()
+        
         scene._level = floorLevel.toFloat()
         stage.saveScene(scene: scene)
     }
@@ -116,7 +110,7 @@ class AcientRoad: MyScene {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enemyCount = 5
+        let enemyCount = _level < 10 ? 3 : 5
         for _ in 0...enemyCount {
             let e = getMonsterByIndex(index: _monsterEnum.one())
             e.create(level: _level)

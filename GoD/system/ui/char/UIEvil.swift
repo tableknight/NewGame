@@ -22,7 +22,7 @@ class UIEvil: UIUnit {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enemyCount = seed(min: 1, max: 4)
+        let enemyCount = seed(min: 1, max: sc._level < 10 ? 2 : 4)
         for _ in 0...enemyCount {
             let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
             e.create(level: sc._level)

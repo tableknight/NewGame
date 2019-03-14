@@ -136,7 +136,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SnowLanding1()
+        let bs = CenterCamping()
         bs.create()
         let e = Emily()
         e.create(level: e._level)
@@ -152,6 +152,14 @@ class GameScene: SKScene {
         let bs1 = BlastScroll()
         bs1._count = 10
         e.addProp(p: bs1)
+        
+        let gt = GodTownScroll()
+        gt._count = 10
+        e.addProp(p: gt)
+        
+        let ggg = TownScroll()
+        ggg._count = 10
+        e.addProp(p: ggg)
         
     }
     

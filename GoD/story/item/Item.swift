@@ -199,7 +199,7 @@ class TownScroll:Item {
         usable = true
         usableInBattle = true
         price = 6
-        _name = "传送之卷·贝拉姆"
+        _name = "传送之卷·贝"
         _description = "传送到贝拉姆村"
     }
     override func use() {
@@ -219,17 +219,17 @@ class GodTownScroll:TownScroll {
         usable = true
         usableInBattle = true
         price = 50
-        _name = "传送之卷·神域"
+        _name = "传送之卷·雪"
         _description = "传送到神域·雪之国"
     }
     override func use() {
         removeFromChar()
         showMsg(text: _description)
-        let c = CenterCamping()
+        let c = SnowLanding1()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
         Game.instance.curStage.switchScene(next: c, afterCreation: {
-            c.setRole(x: 5, y: 7, char: char)
+            c.setRole(x: 7, y: 7, char: char)
         })
     }
 }

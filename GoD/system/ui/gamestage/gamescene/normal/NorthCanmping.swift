@@ -35,13 +35,11 @@ class NorthCamping: StandScene {
         if pos.x == 10 && pos.y == 11 {
             let cc = CenterCamping()
             let char = _role!
-            _role.removeFromParent()
             Game.instance.curStage.switchScene(next: cc, afterCreation: {
                 cc.setRole(x: 8, y: 0, char: char)
                 //                cc._role.faceWest()
                 char.faceSouth()
             }, completion: {})
-            self.removeFromParent()
         }
     }
     override func create() {

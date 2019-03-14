@@ -38,39 +38,39 @@ class Emily:Character {
         _spells = [
         ]
         let _minionlevel:CGFloat = _level
-        _spellCount = 4
-        _minionsCount = 3
+        _spellCount = 2
+        _minionsCount = 2
         let blackCat = BlackCat()
         blackCat.create(level: _minionlevel)
         blackCat._spellCount = 1
         blackCat._spellsInuse = []
         _minions.append(blackCat)
-        let darkCrow = DarkCrow()
-        darkCrow.create(level: _minionlevel)
-//        darkCrow.levelup()
-        darkCrow._spellCount = 4
-        darkCrow._spellsInuse = []
-//        darkCrow._spellsInuse = [Crazy()]
-        _minions.append(darkCrow)
+//        let darkCrow = DarkCrow()
+//        darkCrow.create(level: _minionlevel)
+////        darkCrow.levelup()
+//        darkCrow._spellCount = 4
+//        darkCrow._spellsInuse = []
+////        darkCrow._spellsInuse = [Crazy()]
+//        _minions.append(darkCrow)
         
-        let w = GiantWasp()
-        w.create(level: _minionlevel)
-        w._spellCount = 1
-        _minions.append(w)
-        w._spellsInuse = [FireFist()]
+//        let w = GiantWasp()
+//        w.create(level: _minionlevel)
+//        w._spellCount = 1
+//        _minions.append(w)
+//        w._spellsInuse = [FireFist()]
         
-        let bq = BloodQueen()
-        bq.create(level: _minionlevel)
-//        bq.levelup()
-        bq._spellsInuse = [FireBreath()]
-        _minions.append(bq)
-        
-        
+//        let bq = BloodQueen()
+//        bq.create(level: _minionlevel)
+////        bq.levelup()
+//        bq._spellsInuse = [FireBreath()]
+//        _minions.append(bq)
         
         
-        darkCrow._seat = BUnit.BTM
+        
+        
+//        darkCrow._seat = BUnit.BTM
         blackCat._seat = BUnit.BTL
-        bq._seat = BUnit.BBR
+//        bq._seat = BUnit.BBR
         
         
         

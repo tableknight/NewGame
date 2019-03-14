@@ -167,6 +167,7 @@ class MyStage: SKSpriteNode {
         _sceneChangeMask.isHidden = false
         _sceneChangeMask.alpha = 1
     }
+    //进入以创建场景设置角色用completion事件 进入未初始化地图用afterCreation
     func switchScene(next:MyScene, afterCreation:@escaping () -> Void = {},  completion:@escaping () -> Void = {}) {
         if !loaded {
             return

@@ -45,9 +45,17 @@ class CenterCamping: StandScene {
             return true
         }
         if point.x == 4 && point.y == 7 && cell == CELL_ROLE {
-            Game.instance.curStage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
+            let stage = Game.instance.curStage!
+            stage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
                                      text: "这里是前往神域的唯一入口，通过100层远古试炼，就可以进去神域，升入神格.........不过，我建议你放弃。",
                                      name: "神官苏维亚")
+            stage._curDialog?.addConfirmButton()
+            stage._curDialog?._confirmAction = {
+                let rp = AcientRoadSelection()
+                rp.create()
+                stage.removeDialog(dlg: stage._curDialog!)
+                stage.showPanel(rp)
+            }
             return true
         }
         let hb1 = getNextCellItem(x: 4, y: 3)

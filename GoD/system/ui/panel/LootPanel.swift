@@ -16,16 +16,30 @@ class LootPanel:UIPanel {
             confirmAction()
             for u in _propBox.children {
                 let icon = u as! PropIcon
-                if icon.selected {
-                    _char.addProp(p: icon._displayItemType as! Prop)
-                }
+                _char.addProp(p: icon._displayItemType as! Prop)
             }
             return
+        } else if _discardButton.contains(touchPoint!) {
+            if _lastSelectedIcon != nil {
+                let p = _lastSelectedIcon._displayItemType as! Prop
+                let index = _props.index(of: p)
+                _props.remove(at: index!)
+                pageReload()
+                return
+            }
         }
         for u in _propBox.children {
             if u.contains(touchPoint!) {
                 let icon = u as! PropIcon
-                icon.selected = !icon.selected
+                if icon.selected {
+                    let p = icon._displayItemType as! Prop
+                    let index = _props.index(of: p)
+                    _props.remove(at: index!)
+                    pageReload()
+                    _lastSelectedIcon = nil
+                } else {
+                    icon.selected = true
+                }
                 displayInfos(icon: icon)
             }
         }
@@ -58,13 +72,18 @@ class LootPanel:UIPanel {
         _closeButton.position.x = _standardWidth * 0.25 - cellSize * 0.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)
+        _discardButton.xAxis = _closeButton.xAxis - _closeButton.width - _standardGap
+        _discardButton.yAxis = _closeButton.yAxis
+        _discardButton.zPosition = _closeButton.zPosition
+        _discardButton.text = "丢弃"
+        addChild(_discardButton)
 //        _selectButton.text = "确定"
 //        _selectButton.position.x = _closeButton.xAxis
 //        _selectButton.position.y = -_closeButton.yAxis + cellSize * 0.5
 //        _selectButton.zPosition = _closeButton.zPosition
 //        addChild(_selectButton)
     }
-    
+    private var _discardButton = Button()
     private func listProps() {
         let startX = -cellSize * 2.5
         let startY = cellSize * 1.25
@@ -76,7 +95,7 @@ class LootPanel:UIPanel {
             let mod = i % 4
             lc.iconLabel = p._name
             lc.count = p._count
-            lc.selected = true
+//            lc.selected = true
             lc._displayItemType = p
             lc.position.x = startX + mod.toFloat() * gap
             lc.position.y = startY - y.toFloat() * gap
@@ -84,6 +103,10 @@ class LootPanel:UIPanel {
             _propBox.addChild(lc)
             i += 1
         }
+    }
+    override func pageReload() {
+        _propBox.removeAllChildren()
+        listProps()
     }
     
     private func removeProp(p:PropComponent) {

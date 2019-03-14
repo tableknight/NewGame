@@ -38,24 +38,23 @@ class SnowLanding1: SnowLanding {
         let char = _role!
         if pos.x == 10 && pos.y == 0 {
             let nextScene = ZeroPalace()
-            _role.removeFromParent()
             stage.switchScene(next: nextScene, afterCreation: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-            self.removeFromParent()
         } else if pos.x == 1 && pos.y == 0 {
             showMsg(text: "go bossroad")
         } else if pos.x == 0 && pos.y == 3 {
             showMsg(text: "go bossroad")
         } else if pos.x == 2 && pos.y == 8 {
             let nextScene = MorningPalace()
-            _role.removeFromParent()
             stage.switchScene(next: nextScene, afterCreation: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-            self.removeFromParent()
-        } else if pos.x == 5 && pos.y == 0 {
-            showMsg(text: "go bossroad")
+        } else if pos.x == 9 && pos.y == 11 {
+            let nextScene = CenterCamping()
+            stage.switchScene(next: nextScene, afterCreation: {
+                nextScene.setRole(x: 5, y: 7, char: char)
+            })
         } else if pos.x == 3 && pos.y == 6 {
             showMsg(text: "go bossroad")
         } else if pos.x == 2 && pos.y == 10 {
