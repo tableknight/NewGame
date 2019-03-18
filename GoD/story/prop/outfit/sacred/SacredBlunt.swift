@@ -82,7 +82,7 @@ class HolyPower:Blunt {
         createSelfAttrs()
         createAttr(attrId: STRENGTH, value: seedFloat(min: 40, max: 51), remove: true)
         createAttr(attrId: STAMINA, value: seedFloat(min: 40, max: 51), remove: true)
-        createAttr(attrId: CRITICAL, value: seedFloat(min: 40, max: 51), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 40, max: 51), remove: true)
         createAttr(attrId: HEALTH, value: seedFloat(min: 80, max: 101), remove: true)
         _attrCount = 1
         createAttrs()

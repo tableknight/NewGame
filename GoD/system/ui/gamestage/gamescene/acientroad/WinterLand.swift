@@ -10,10 +10,13 @@ import SpriteKit
 class WinterLand: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [1,1,1,1,2,2,2,2,3]
+        _itemEnum = [1,2,3,4,5,6,7,8,9,10]
+        for _ in 0...10 {
+            _itemEnum.append(11)
+        }
         _monsterEnum = [1,2,3,4]
-        let oa4 = Game.instance.dungeon_a4
-        _mapSet = GroundSets(ground: oa4.getCell(6, 2, 2, 2), wall: oa4.getCell(6, 4, 2, 2))
+        let oa4 = Game.instance.outside_a4
+        _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
         _name = "寒冰大陆"
         _id = AcientRoad.WINTER_LAND
     }
@@ -25,13 +28,29 @@ class WinterLand: AcientRoad {
     override func getItemByIndex(index: Int) -> UIItem {
         switch index {
         case 1:
-            return WinterItem1()
+            return MP11()
         case 2:
-            return WinterItem2()
+            return MP12()
         case 3:
-            return WinterItem3()
+            return MP13()
+        case 4:
+            return MP14()
+        case 5:
+            return MP15()
+        case 6:
+            return MP16()
+        case 7:
+            return MP17()
+        case 8:
+            return MP18()
+        case 9:
+            return MP19()
+        case 10:
+            return MP110()
+        case 11:
+            return MP21()
         default:
-            return WinterItem2()
+            return MP11()
         }
     }
     

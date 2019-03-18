@@ -33,6 +33,14 @@ class SelfHome: InnerHouse {
             if point.x == 4 && point.y == 1 {
                 let item = getNextCellItem(x: 4, y: 1)
                 item.speak(text: "欢迎回家！")
+                let char = Game.instance.curStage._curScene._role!
+                char.actionHealed {
+                    char._unit._extensions.hp = char._unit._extensions.health
+                }
+                for m in Game.instance.char._minions {
+                    m._extensions.hp = m._extensions.health
+                }
+                
                 return true
             }
         }

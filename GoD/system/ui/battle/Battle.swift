@@ -25,6 +25,7 @@ class Battle: SKSpriteNode {
                 if u.contains(s) && u.selectable {
                     waitingForSelectItemTarget = false
                     this.hideCancel()
+                    this.hideOrder()
                     this.setUnitDefault(all: true)
                     let item = _selectedItem!
                     item._battle = self
@@ -628,6 +629,7 @@ class Battle: SKSpriteNode {
         }
     }
     var victory = false
+    var lootPanelConfirmAction = {}
     internal func defeat() {
         if victory {
             return
@@ -635,26 +637,32 @@ class Battle: SKSpriteNode {
         let l = Loot()
         let ms = _char.getReadyMinions()
         for u in _evilsOrg {
-            l.loot(role: u._unit)
-            let exp = l.getExp(level: u._unit._level)
-            _char.expUp(up: exp)
-            debug("\(_char._name)获得了\(exp.toInt())点经验。")
+            if _char._level - u._unit._level <= 5 {
+                l.loot(role: u._unit)
+                let exp = l.getExp(level: u._unit._level)
+                _char.expUp(up: exp)
+            }
+//            debug("\(_char._name)获得了\(exp.toInt())点经验。")
             for m in ms {
-                if m._extensions.hp > 0 {
+                if m._extensions.hp > 0 && m._level - u._unit._level <= 5 {
                     let ep = l.getExp(level: u._unit._level)
                     m.expUp(up: ep)
-                    debug("\(m._name)获得了\(ep.toInt())点经验。")
+//                    debug("\(m._name)获得了\(ep.toInt())点经验。")
                 }
             }
         }
         victory = true
         let list = l.getList()
+        
         fadeOutBattle()
         
         if list.count > 0 {
             let p = LootPanel()
             p.create(props: list)
             Game.instance.curStage.showPanel(p)
+            p.confirmAction = {
+                self.lootPanelConfirmAction()
+            }
         }
     }
     internal func defeated() {
@@ -830,13 +838,13 @@ class Battle: SKSpriteNode {
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
-        let t:CGFloat = 10
+//        let t:CGFloat = 10
         _orderAttack = createMenuButtons(x: x, y: y, size: size, text: "攻击")
         _orderDefend = createMenuButtons(x: x + gap, y: y, size: size, text: "防御")
 //        _orderSpell = createMenuButtons(x: x + gap * 2 , y: y, size: size, text: "法术")
-        _orderItem = createMenuButtons(x: x + gap * 0.5, y: y - gap + t, size: size, text: "物品")
-        _orderSummon = createMenuButtons(x: x + gap * 1.5, y: y - gap + t, size: size, text: "召唤")
-        _orderRecall = createMenuButtons(x: x + gap * 2.5, y: y - gap + t, size: size, text: "召回")
+        _orderItem = createMenuButtons(x: x + gap * 2, y: y, size: size, text: "物品")
+        _orderSummon = createMenuButtons(x: x + gap * 3, y: y, size: size, text: "召唤")
+        _orderRecall = createMenuButtons(x: x + gap * 4, y: y, size: size, text: "召回")
         _orderCancel = createMenuButtons(x: -x, y: y, size: size, text: "取消")
         
         _orders.append(_orderAttack)
@@ -853,7 +861,7 @@ class Battle: SKSpriteNode {
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
-        var i:CGFloat = 2
+        var i:CGFloat = 5
         for s in _curRole._unit._spellsInuse {
             s._battle = self
             if s is Auro || s is Passive {
@@ -1004,8 +1012,9 @@ class Battle: SKSpriteNode {
                 }
             }
         }
-        castAction()
         reduceCooldown()
+        castAction()
+        
 //        moveStart()
 //        if nil != selectedSpell {
 //            let this = self
@@ -1583,6 +1592,14 @@ class Battle: SKSpriteNode {
                 _playerUnit = bUnit
             }
         }
+    }
+    func getUnitBySeat(seat:String) -> BUnit? {
+        for u in _playerPart + _enemyPart {
+            if seat == u._unit._seat {
+                return u
+            }
+        }
+        return nil
     }
     internal var _emptyPos = [0,1,2,3,4,5]
 //    func setEvilPos(unit:BUnit) {

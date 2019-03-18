@@ -142,7 +142,7 @@ class GameScene: SKScene {
         e.create(level: e._level)
         
         e.addMoney(num: 1000)
-        e._spellsInuse = [LowlevelFlame(), SummonFlower()]
+        e._spellsInuse = [LowlevelFlame(), FeignAttack()]
         
         bs.setRole(x: 5, y: 5, role: e)
         stage.loadScene(scene: bs)
@@ -160,6 +160,10 @@ class GameScene: SKScene {
         let ggg = TownScroll()
         ggg._count = 10
         e.addProp(p: ggg)
+        
+        let po = Potion()
+        po._count = 10
+        e.addProp(p: po)
         
     }
     

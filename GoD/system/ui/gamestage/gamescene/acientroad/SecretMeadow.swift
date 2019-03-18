@@ -10,7 +10,13 @@ import SpriteKit
 class SecretMeadow: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [1,1,2,2,1,2,3,4]
+        _itemEnum = [11,12,13,14,15,16,17,18,19,110]
+        for _ in 0...8 {
+//            _itemEnum.append(21)
+//            _itemEnum.append(22)
+//            _itemEnum.append(23)
+            _itemEnum.append(24)
+        }
         _monsterEnum = [1,2,3,4]
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
@@ -24,16 +30,36 @@ class SecretMeadow: AcientRoad {
     
     override func getItemByIndex(index: Int) -> UIItem {
         switch index {
-        case 1:
-            return MeadowItem1()
-        case 2:
-            return MeadowItem2()
-        case 3:
-            return MeadowItem3()
-        case 4:
-            return MeadowItem4()
+        case 11:
+            return MI11()
+        case 12:
+            return MI12()
+        case 13:
+            return MI13()
+        case 14:
+            return MI14()
+        case 15:
+            return MI15()
+        case 16:
+            return MI16()
+        case 17:
+            return MI17()
+        case 18:
+            return MI18()
+        case 19:
+            return MI19()
+        case 110:
+            return MI110()
+        case 21:
+            return MI21()
+        case 22:
+            return MI22()
+        case 23:
+            return MI23()
+        case 24:
+            return MI24()
         default:
-            return MeadowItem2()
+            return MI24()
         }
     }
     
@@ -52,7 +78,7 @@ class SecretMeadow: AcientRoad {
         }
     }
 }
-class MeadowItem2:UIItem {
+class MI24:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
 //        let itemPoints:Array<Array<CGFloat>> = [
@@ -73,7 +99,7 @@ class MeadowItem2:UIItem {
         super.init(coder: aDecoder)
     }
 }
-class MeadowItem4:UIItem {
+class MI23:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         setTexture(Game.instance.dungeon_b.getCell(3, 11, 1, 2))
@@ -83,7 +109,7 @@ class MeadowItem4:UIItem {
         super.init(coder: aDecoder)
     }
 }
-class MeadowItem1:UIItem {
+class MI110:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
 //        let itemPoints:Array<Array<CGFloat>> = [
@@ -103,10 +129,111 @@ class MeadowItem1:UIItem {
     }
 }
 
-class MeadowItem3:UIItem {
+class MI19:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         setTexture(Game.instance.dungeon_b.getCell(1, 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+
+class MI11:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(14, 5))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI12:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(6, 9))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI13:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(14, 6))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI14:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(0, 13))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI15:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(4, 12))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI16:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(6, 12))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI17:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(3, 10))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI18:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(3, 9))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI21:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(5, 12, 1, 2))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
+class MI22:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        setTexture(Game.instance.outside_b.getCell(12, 6, 1, 2))
     }
     
     required init?(coder aDecoder: NSCoder) {

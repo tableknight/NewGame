@@ -89,7 +89,7 @@ class WaterEnergeTower:Tower {
 class ThunderEnerge:Status {
     override init() {
         super.init()
-        _type = Status.WATER_ENERGE
+        _type = Status.THUNDER_ENERGE
         _name = "雷鸣守护"
         _description = "提升50点雷电伤害和50点雷电抗性。"
     }

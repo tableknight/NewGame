@@ -10,35 +10,25 @@ import SpriteKit
 class Attack: Physical {
     override init() {
         super.init()
-        isClose = true
-        isPhysical = true
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
-        let t = b._selectedTarget!
         let c = b._curRole
-        let role = c._unit
-        let this = self
-        if role.isClose() {
-            b.roleMove(from: c, to: t, completion: {
-                c.actionAttack {
-                    this.attack {
-                        b.moveBack(unit: c) {
-                            completion()
-                        }
-                    }
-                }
-            })
-        } else {
-            c.actionShoot {
-                this.attack {
+        setTimeout(delay: 0.25, completion: {
+            c.actionAttack {
+                self.attack {
                     completion()
                 }
             }
-        }
-        
-        
-        
+        })
+//        if c._unit is Character {
+//        } else {
+//            c.actionAttack {
+//                self.attack {
+//                    completion()
+//                }
+//            }
+//        }
     }
     
     private func attack(completion:@escaping () -> Void) {

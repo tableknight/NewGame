@@ -12,6 +12,9 @@ class AcientRoad: MyScene {
     static let WINTER_LAND = 2
     static let BLOOD_ABYSS = 3
     static let LOST_AREA = 4
+    static let FRESH_GRASS = 5
+    static let SECRET_VALLEY = 6
+    static let FIRE_SOURCE = 7
     
     internal var index:Int {
         set {
@@ -22,7 +25,8 @@ class AcientRoad: MyScene {
         }
     }
     override func create() {
-        _nameLabel.text = "远古秘径第\(_level.toInt())层 —— \(_name)第\(_index)域"
+        halfSize = seedFloat(min: 3, max: 7)
+        _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区域"
         createGround()
         createPortalPoints()
         createMapMatrix()
@@ -62,7 +66,7 @@ class AcientRoad: MyScene {
         } else if pos.x == _portalNext.x && pos.y == _portalNext.y {
             let nextIndex = _index + 1
             //如果是本层最后一个场景 则进入战斗
-            if _index == _floorSize {
+            if _index >= _floorSize {
                 triggerEvent()
             //进入本层下一个场景
             } else if _index < _floorSize {
@@ -72,6 +76,7 @@ class AcientRoad: MyScene {
                     //将下一个新创建的场景加入 舞台场景库
                     stage._scenes.append(nextScene!)
                 }
+                nextScene?._level = _level
                 stage.switchScene(next: nextScene!, completion: {
                     nextScene!.setRole(x: nextScene!._portalPrev.x, y: nextScene!._portalPrev.y, char: char)
                 })
@@ -126,7 +131,7 @@ class AcientRoad: MyScene {
         b.defeatedAction = {
             this.defeatedAction()
         }
-        b.defeatAction = {
+        b.lootPanelConfirmAction = {
             this.defeatAction()
         }
         stage.addBattle(b)
@@ -170,6 +175,15 @@ class AcientRoad: MyScene {
         if AcientRoad.BLOOD_ABYSS == id {
             return BloodAbyss()
         }
+        if AcientRoad.FRESH_GRASS == id {
+            return FreshGrass()
+        }
+        if AcientRoad.SECRET_VALLEY == id {
+            return SecretValley()
+        }
+        if AcientRoad.FIRE_SOURCE == id {
+            return FireSource()
+        }
         return SecretMeadow()
     }
     var sceneList:Array<Int> {
@@ -178,6 +192,9 @@ class AcientRoad: MyScene {
                     AcientRoad.WINTER_LAND,
                     AcientRoad.BLOOD_ABYSS,
                     AcientRoad.LOST_AREA,
+                    AcientRoad.FRESH_GRASS,
+                    AcientRoad.SECRET_VALLEY,
+//                    AcientRoad.FIRE_SOURCE
             ]
         }
     }
@@ -314,7 +331,7 @@ class AcientRoad: MyScene {
         prev.zPosition = MyScene.ROLE_LAYER_Z - 1
         next.zPosition = prev.zPosition
         if next is PortalFinal {
-            next.zPosition = MyScene.ITEM_LAYER_Z + 2
+            next.zPosition = MyScene.ITEM_LAYER_Z + 20
         }
     }
     func getMonsterByIndex(index:Int) -> Creature {

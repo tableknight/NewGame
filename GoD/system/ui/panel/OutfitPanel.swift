@@ -85,6 +85,7 @@ class OutfitPanel: UIPanel {
                 _weapon.outfit = weapon
                 _char._weapon = weapon
                 _weapon.iconLabel = weapon._name
+                _weapon.quality = weapon._quality
                 pageReload()
                 _lastSelectedIcon.selected = false
                 _lastSelectedIcon = nil
@@ -100,6 +101,7 @@ class OutfitPanel: UIPanel {
                 amulet.on()
                 _amulet.outfit = amulet
                 _amulet.iconLabel = amulet._name
+                _amulet.quality = amulet._quality
                 _char._amulet = amulet
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -117,6 +119,7 @@ class OutfitPanel: UIPanel {
                 _shield.outfit = shield
                 _char._shield = shield
                 _shield.iconLabel = shield._name
+                _shield.quality = shield._quality
                 pageReload()
                 _lastSelectedIcon.selected = false
                 _lastSelectedIcon = nil
@@ -130,15 +133,18 @@ class OutfitPanel: UIPanel {
                     _char._leftRing = ring
                     _leftRing.outfit = ring
                     _leftRing.iconLabel = ring._name
+                    _leftRing.quality = ring._quality
                 } else
                 if _char._leftRing == nil {
                     _char._leftRing = ring
                     _leftRing.outfit = ring
                     _leftRing.iconLabel = ring._name
+                    _leftRing.quality = ring._quality
                 } else if _char._rightRing == nil {
                     _char._rightRing = ring
                     _rightRing.outfit = ring
                     _rightRing.iconLabel = ring._name
+                    _rightRing.quality = ring._quality
                 } else {
                     debug("ring on error in itempanel")
                 }
@@ -160,6 +166,7 @@ class OutfitPanel: UIPanel {
                 mark.on()
                 _magicMark.outfit = mark
                 _magicMark.iconLabel = mark._name
+                _magicMark.quality = _magicMark._quality
                 _char._magicMark = mark
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -176,6 +183,7 @@ class OutfitPanel: UIPanel {
                 soulStone.on()
                 _soulStone.outfit = soulStone
                 _soulStone.iconLabel = soulStone._name
+                _soulStone.quality = soulStone._quality
                 _char._soulStone = soulStone
                 pageReload()
                 _lastSelectedIcon.selected = false
@@ -224,7 +232,7 @@ class OutfitPanel: UIPanel {
                 }
             }
         } else {
-            _selectedSlot = nil
+//            _selectedSlot = nil
         }
     }
     func getOutfits() -> Array<Outfit> {
@@ -286,6 +294,8 @@ class OutfitPanel: UIPanel {
         _amulet = createSlot(x: startX + cellSize * 0.75, y: startY)
         if _char._amulet != nil {
             _amulet.outfit = _char._amulet
+            _amulet.iconLabel = _char._amulet!._name
+            _amulet.quality = _char._amulet!._quality
         }
         _char.hasWeapon = true
         _char.hasShield = true
@@ -297,6 +307,7 @@ class OutfitPanel: UIPanel {
             if _char._weapon != nil {
                 _weapon.outfit = _char._weapon
                 _weapon.iconLabel = _char._weapon!._name
+                _weapon.quality = _char._weapon!._quality
             }
             addChild(_weapon)
             _outfitSlots.append(_weapon)
@@ -306,6 +317,7 @@ class OutfitPanel: UIPanel {
             if _char._shield != nil {
                 _shield.outfit = _char._shield
                 _shield.iconLabel = _char._shield!._name
+                _shield.quality = _char._shield!._quality
             }
             addChild(_shield)
             _outfitSlots.append(_shield)
@@ -314,6 +326,7 @@ class OutfitPanel: UIPanel {
         if _char._leftRing != nil {
             _leftRing.outfit = _char._leftRing
             _leftRing.iconLabel = _char._leftRing!._name
+            _leftRing.quality = _char._leftRing!._quality
         }
         addChild(_leftRing)
         _outfitSlots.append(_leftRing)
@@ -321,6 +334,7 @@ class OutfitPanel: UIPanel {
         if _char._rightRing != nil {
             _rightRing.outfit = _char._rightRing
             _rightRing.iconLabel = _char._rightRing!._name
+            _rightRing.quality = _char._rightRing!._quality
         }
         addChild(_rightRing)
         _outfitSlots.append(_rightRing)
@@ -329,6 +343,7 @@ class OutfitPanel: UIPanel {
             if _char._magicMark != nil {
                 _magicMark.outfit = _char._magicMark
                 _magicMark.iconLabel = _char._magicMark!._name
+                _magicMark.quality = _char._magicMark!._quality
             }
             addChild(_magicMark)
             _outfitSlots.append(_magicMark)
@@ -337,6 +352,7 @@ class OutfitPanel: UIPanel {
         if _char._soulStone != nil {
             _soulStone.outfit = _char._soulStone
             _soulStone.iconLabel = _char._soulStone!._name
+            _soulStone.quality = _char._soulStone!._quality
         }
         addChild(_soulStone)
         _outfitSlots.append(_soulStone)

@@ -8,20 +8,20 @@
 
 import SpriteKit
 class LostForest: UIRandomScene {
-    override func getEvilById(_ id: Int) -> Creature {
-        switch id {
-        case 0:
-            return DarkNinja()
-        case 1:
-            return HellNight()
-        case 2:
-            return BloodQueen()
-        case 3:
-            return ManWizard()
-        default:
-            return HellNight()
-        }
-    }
+//    override func getEvilById(_ id: Int) -> Creature {
+//        switch id {
+//        case 0:
+//            return DarkNinja()
+//        case 1:
+//            return HellNight()
+//        case 2:
+//            return BloodQueen()
+//        case 3:
+//            return ManWizard()
+//        default:
+//            return HellNight()
+//        }
+//    }
     override func getItem() -> UIItem {
         let n = seed(max:70)
         if n < 20 {

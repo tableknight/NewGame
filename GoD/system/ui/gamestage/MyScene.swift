@@ -544,10 +544,13 @@ class Chest:UIItem {
         _triggered = true
         let l = Loot()
         let list = l.loot(level: Game.instance.curStage._curScene._level)
-        for p in list {
-            Game.instance.char.addProp(p: p)
-        }
-        showMsg(text: "宝箱中的东西已经全部放入背包里了。")
+//        for p in list {
+//            Game.instance.char.addProp(p: p)
+//        }
+//        showMsg(text: "宝箱中的东西已经全部放入背包里了。")
+        let p = LootPanel()
+        p.create(props: list)
+        Game.instance.curStage.showPanel(p)
     }
     private var _x = 0
     var _triggered = false

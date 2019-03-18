@@ -97,6 +97,8 @@ class LootPanel:UIPanel {
             lc.count = p._count
 //            lc.selected = true
             lc._displayItemType = p
+            lc.iconLabel = p._name
+            lc.quality = p._quality
             lc.position.x = startX + mod.toFloat() * gap
             lc.position.y = startY - y.toFloat() * gap
             lc.zPosition = self.zPosition + 3

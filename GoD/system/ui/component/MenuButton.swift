@@ -83,6 +83,17 @@ class SpellRoundButton:RoundButton {
         set {
             _spell = newValue
             _label.text = newValue._name
+//            var n = ""
+//            for s in newValue._name {
+//                n.append(s)
+//                break
+//            }
+//            _label.text = n
+//            _label.fontSize = 24
+//            _label.position.y = 12
+//            _label.fontColor = QualityColor.getColor(newValue._quality)
+//            _bg.strokeColor = QualityColor.getColor(newValue._quality)
+            
         }
         get {
             return _spell

@@ -10,7 +10,7 @@ import SpriteKit
 class LostArea: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [1,1,1,1,2,2,2,2,12,21,21]
+        _itemEnum = [1,1,1,1,2,2,2,2,12,21,21,3,4,5,6]
         _monsterEnum = [1,2,3,4]
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
@@ -28,6 +28,14 @@ class LostArea: AcientRoad {
             return LostItem1()
         case 2:
             return LostItem2()
+        case 3:
+            return getUIItem1(11, 7)
+        case 4:
+            return getUIItem1(14, 6)
+        case 5:
+            return getUIItem1(8, 7)
+        case 6:
+            return getUIItem1(3, 9)
         case 21:
             return LostItem21()
         case 12:
@@ -35,6 +43,12 @@ class LostArea: AcientRoad {
         default:
             return LostItem2()
         }
+    }
+    
+    private func getUIItem1(_ x:CGFloat, _ y:CGFloat) -> UIItem {
+        let item = UIItem()
+        item.setTexture(Game.instance.outside_b.getCell(x, y))
+        return item
     }
     
     override func getMonsterByIndex(index: Int) -> Creature {

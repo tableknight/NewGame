@@ -305,6 +305,10 @@ class BUnit: SKSpriteNode {
     }
     
     func actionAttack(completion:@escaping () -> Void) {
+        if _unit._weapon is Bow {
+            actionShoot(completion: completion)
+            return
+        }
         let range = _charSize * 0.5
         var v = CGVector(dx: 0, dy: range)
         var v2 = CGVector(dx: 0, dy: -range)
@@ -316,7 +320,6 @@ class BUnit: SKSpriteNode {
         let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(0.15))
         let go = SKAction.sequence([wait, move1, wait, move2])
-        let this = self
         _select.run(go)
         _charNode.run(go, completion: {
             completion()

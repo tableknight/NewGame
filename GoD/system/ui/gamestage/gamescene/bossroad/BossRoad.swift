@@ -32,7 +32,7 @@ class BossRoad: AcientRoad {
     }
     
     override func create() {
-        if _floorSize == _index {
+        if _floorSize >= _index {
             halfSize = 6
         }
         super.create()

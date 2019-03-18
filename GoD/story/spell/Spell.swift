@@ -482,7 +482,11 @@ class Spell:Core, IDisplay, ISelectTarget {
         let avd = target.getAvoid()
         let sed = seed().toFloat()
         let this = self
-        if sed > (acc - avd) {
+        var value = acc - avd
+        if value < 5 {
+            value = 5
+        }
+        if sed > value {
             target.showText(text: "Miss") {
                 //发动复仇
                 if this.isClose && target._unit.isClose() && this.seed() < target.getRevenge().toInt() {
@@ -593,6 +597,15 @@ class Spell:Core, IDisplay, ISelectTarget {
         default:
             return ""
         }
+    }
+    func getUnitBehindTarget(seat: String) -> String {
+        if seat == BUnit.TBL { return BUnit.TTL}
+        if seat == BUnit.TBM { return BUnit.TTM}
+        if seat == BUnit.TBR { return BUnit.TTR}
+        if seat == BUnit.BTL { return BUnit.BBL}
+        if seat == BUnit.BTM { return BUnit.BBM}
+        if seat == BUnit.TBL { return BUnit.BBL}
+        return ""
     }
     func getUnitsInRowOf(seat:String) -> Array<String> {
         var seats = Array<String>()

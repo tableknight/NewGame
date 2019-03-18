@@ -106,7 +106,7 @@ class RoadComponent: SKSpriteNode {
         _border = createBorder(width: 8, height: cellSize * 0.75)
         addChild(_border)
         let label = Label()
-        label.text = "远古迷径 第\(floor)层"
+        label.text = "远古之路 第\(floor)层"
         label.fontSize = 24
         label.position.x = cellSize * 0.5
         label.position.y = -6

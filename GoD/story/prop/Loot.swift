@@ -114,13 +114,34 @@ class Loot: Core {
             let item = getItem()
             _props.append(item)
         }
-        chance = seed().toFloat()
-        if chance < 50 * lucky {
-            let sacred = getSacred()
-            if nil != sacred {
-                _props.append(sacred!)
+        
+        let sacreds = [
+            _sacredSwords,
+            _sacredDaggers,
+            _sacredShields,
+            _sacredAmulets,
+            _sacredRings,
+            _sacredSoulstones,
+            _sacredInstruments,
+            _sacredWands,
+            _sacredBlunts,
+            _sacredMarks,
+            _sacredBows,
+            _sacredEarrings,
+        ]
+        var count = 0
+        for a in sacreds {
+            count += a.count
+        }
+        let times = (count.toFloat() * lucky * 0.25).toInt()
+//        debug("掉落次数 times \(times)")
+        for _ in 0...times {
+            let s = getSacred()
+            if nil != s {
+                _props.append(s!)
             }
         }
+        
         externalLootAction()
         return _props
     }
@@ -191,7 +212,7 @@ class Loot: Core {
         }
     }
     var _goodSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11]
-    let goodSpellCount = 21
+    let goodSpellCount = 22
     func getGoodSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -236,6 +257,8 @@ class Loot: Core {
             return OathBreaker()
         case 20:
             return LineAttack()
+        case 21:
+            return WindPunish()
         default:
             return BloodThirsty()
         }
@@ -647,6 +670,7 @@ class Loot: Core {
         default:
             return getSacredSword(id:_sacredSwords.one())
         }
+        
     }
     
     func getSacred() -> Outfit? {
