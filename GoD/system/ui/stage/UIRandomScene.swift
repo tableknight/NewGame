@@ -106,10 +106,10 @@ class UIRandomScene: UIScene {
             }
         }
         if !exist {
-            nextScene = stage.getSceneById(id: stage._curScene._id)
-            nextScene._index = nextIndex
-            nextScene._level = _level
-            stage._scenes.append(nextScene)
+//            nextScene = stage.getSceneById(id: stage._curScene._id)
+//            nextScene._index = nextIndex
+//            nextScene._level = _level
+//            stage._scenes.append(nextScene)
             //            nextScene.create()
         }
         stage.switchScene(next: nextScene)

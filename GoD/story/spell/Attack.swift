@@ -43,12 +43,12 @@ class Attack: Physical {
         }
         let this = self
         let damage = _damageValue
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
+        if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                t.actionAttacked(defend: t.isDefend) {
-                    t.showValue(value: damage)
+                t.actionAttacked {
+                    t.showValue(value: damage) {
+                        completion()
+                    }
 //                    t.hpChange(value: damage)
                     if c._unit._weapon is DragonSaliva {
                         setTimeout(delay: 0.5, completion: {
@@ -59,10 +59,10 @@ class Attack: Physical {
                                 this.attackMore(completion: completion)
                             }
                         })
-                    } else {
-                        t.showValue(value: damage) {
-                            this.attackMore(completion: completion)
-                        }
+//                    } else {
+//                        t.showValue(value: damage) {
+//                            this.attackMore(completion: completion)
+//                        }
                     }
                     
                     var isGiantFang = false
@@ -72,7 +72,7 @@ class Attack: Physical {
                     
                     if c.hasSpell(spell: VampireBlood()) || isGiantFang {
                         var recoveryFactor:CGFloat = isGiantFang ? 0.2 : 0.3
-                        if c._unit.isMainChar {
+                        if c._unit is Character {
                             let char = c._unit as! Character
                             if char._amulet is FangOfVampire {
                                 recoveryFactor *= 2

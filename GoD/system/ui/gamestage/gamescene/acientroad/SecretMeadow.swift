@@ -77,6 +77,11 @@ class SecretMeadow: AcientRoad {
             return TreeSpirit()
         }
     }
+    
+    override func getWallTexture() -> SKTexture {
+        return Game.instance.sf_outside_b.getCell(13, 2, 1, 2)
+    }
+    
 }
 class MI24:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

@@ -37,7 +37,7 @@ class AcientRoadSelection:UIPanel {
                     let floorLevel = rc._floor
                     let stage = Game.instance.curStage!
                     stage.removePanel(self)
-                    stage.enterFloor(floor: floorLevel)
+                    stage.enterFloor(floor: floorLevel.toFloat())
                 } else {
                     rc.selected = true
                     _selectedRoad?.selected = false

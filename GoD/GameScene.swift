@@ -136,22 +136,18 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = CenterCamping()
+        let bs = HiddenArea()
         bs.create()
         let e = Emily()
         e.create(level: e._level)
         
         e.addMoney(num: 1000)
-        e._spellsInuse = [LowlevelFlame(), FeignAttack()]
+        e._spellsInuse = []
         
-        bs.setRole(x: 5, y: 5, role: e)
+        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
-        
-        let bs1 = BlastScroll()
-        bs1._count = 10
-        e.addProp(p: bs1)
         
         let gt = GodTownScroll()
         gt._count = 10

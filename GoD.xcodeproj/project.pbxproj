@@ -269,6 +269,8 @@
 		0922C95C223C879D002DC201 /* SecretValley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95B223C879D002DC201 /* SecretValley.swift */; };
 		0922C95E223CAF16002DC201 /* FireSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95D223CAF16002DC201 /* FireSource.swift */; };
 		0922C960223D41EE002DC201 /* WindPunish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95F223D41EE002DC201 /* WindPunish.swift */; };
+		0922C9622245244A002DC201 /* Dungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9612245244A002DC201 /* Dungeon.swift */; };
+		0922C965224691D0002DC201 /* HiddenArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C964224691D0002DC201 /* HiddenArea.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -643,6 +645,8 @@
 		0922C95B223C879D002DC201 /* SecretValley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretValley.swift; sourceTree = "<group>"; };
 		0922C95D223CAF16002DC201 /* FireSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSource.swift; sourceTree = "<group>"; };
 		0922C95F223D41EE002DC201 /* WindPunish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindPunish.swift; sourceTree = "<group>"; };
+		0922C9612245244A002DC201 /* Dungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dungeon.swift; sourceTree = "<group>"; };
+		0922C964224691D0002DC201 /* HiddenArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenArea.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1414,6 +1418,7 @@
 		090FEC4A21BCC36C004276BB /* gamescene */ = {
 			isa = PBXGroup;
 			children = (
+				0922C9632245245F002DC201 /* dungeon */,
 				0922C9522233F9B0002DC201 /* bossroad */,
 				09C6BF8A21CF345A0003C7F1 /* acientroad */,
 				09C6BF8921CF32180003C7F1 /* normal */,
@@ -1439,6 +1444,14 @@
 				09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */,
 			);
 			path = bossroad;
+			sourceTree = "<group>";
+		};
+		0922C9632245245F002DC201 /* dungeon */ = {
+			isa = PBXGroup;
+			children = (
+				0922C9612245244A002DC201 /* Dungeon.swift */,
+			);
+			path = dungeon;
 			sourceTree = "<group>";
 		};
 		09C66C7021F0B78B00E1C153 /* boss */ = {
@@ -1640,6 +1653,7 @@
 				0922C959223BFB0B002DC201 /* FreshGrass.swift */,
 				0922C95B223C879D002DC201 /* SecretValley.swift */,
 				0922C95D223CAF16002DC201 /* FireSource.swift */,
+				0922C964224691D0002DC201 /* HiddenArea.swift */,
 			);
 			path = acientroad;
 			sourceTree = "<group>";
@@ -1956,6 +1970,7 @@
 				090FEBAA21BB9B2B004276BB /* Immune.swift in Sources */,
 				090FEB6F21BB9B2B004276BB /* Chaos.swift in Sources */,
 				09C66C9221FD58FA00E1C153 /* BossMinion.swift in Sources */,
+				0922C965224691D0002DC201 /* HiddenArea.swift in Sources */,
 				090FEB5F21BB9B2B004276BB /* SacredBlunt.swift in Sources */,
 				090FEB5821BB9B2B004276BB /* Weapon.swift in Sources */,
 				09C66CD12212FF3F00E1C153 /* LightingFist.swift in Sources */,
@@ -2061,6 +2076,7 @@
 				090FEB5121BB9B2B004276BB /* Wand.swift in Sources */,
 				090FEB8921BB9B2B004276BB /* Prop.swift in Sources */,
 				090FEBD821BB9B2B004276BB /* FireBreath.swift in Sources */,
+				0922C9622245244A002DC201 /* Dungeon.swift in Sources */,
 				09C66C7D21F7637300E1C153 /* Micalu.swift in Sources */,
 				09C6BFA021DC65F70003C7F1 /* AcientRoad.swift in Sources */,
 				090FEBA121BB9B2B004276BB /* Emily.swift in Sources */,

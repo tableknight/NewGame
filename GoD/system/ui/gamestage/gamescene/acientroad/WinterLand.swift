@@ -68,6 +68,9 @@ class WinterLand: AcientRoad {
             return SnowLady()
         }
     }
+    override func getWallTexture() -> SKTexture {
+        return Game.instance.outside_b.getCell(13, 4, 1, 2)
+    }
 }
 class WinterItem2:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

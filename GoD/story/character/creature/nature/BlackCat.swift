@@ -11,7 +11,7 @@ class BlackCat: Natrue {
     override init() {
         super.init()
         _stars.strength = 1.0
-        _stars.stamina = 1.0
+        _stars.stamina = 1.5
         _stars.agility = 1.8
         _stars.intellect = 1.9
         _name = "奇奇"

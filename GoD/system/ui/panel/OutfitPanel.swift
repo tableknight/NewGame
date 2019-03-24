@@ -166,7 +166,7 @@ class OutfitPanel: UIPanel {
                 mark.on()
                 _magicMark.outfit = mark
                 _magicMark.iconLabel = mark._name
-                _magicMark.quality = _magicMark._quality
+                _magicMark.quality = mark._quality
                 _char._magicMark = mark
                 pageReload()
                 _lastSelectedIcon.selected = false

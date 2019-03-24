@@ -18,7 +18,7 @@ class UIEvil: UIUnit {
     
     override func triggerEvent() {
         let stage = Game.instance.curStage!
-        let sc = stage._curScene as! AcientRoad
+        let sc = stage._curScene!
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         

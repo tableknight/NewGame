@@ -196,17 +196,25 @@ class MyStage: SKSpriteNode {
             }
         })
     }
-    func enterFloor(floor:Int) {
+    func enterFloor(floor:CGFloat) {
         clearScene()
-        let ar = AcientRoad()
         let char = _curScene._role!
-        let  scene = floor > ar.sceneList.count ? ar.getSceneById(id: ar.sceneList.one()) : ar.getSceneById(id: floor)
-        scene._level = floor.toFloat()
-        saveScene(scene: scene)
-        switchScene(next: scene, afterCreation: {
-            scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
-            char.faceSouth()
-        })
+        if 0 == floor {
+            let scene = CenterCamping()
+            switchScene(next: scene, afterCreation: {
+                scene.setRole(x: 5, y: 7, char: char)
+                char.faceSouth()
+            })
+        } else {
+            let ar = AcientRoad()
+            let  scene = floor > 6 ? ar.getSceneById(id: ar.sceneList.one()) : ar.getSceneById(id: floor.toInt())
+            scene._level = floor
+            saveScene(scene: scene)
+            switchScene(next: scene, afterCreation: {
+                scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
+                char.faceSouth()
+            })
+        }
     }
     func gohome() {
         let char = _curScene._role!

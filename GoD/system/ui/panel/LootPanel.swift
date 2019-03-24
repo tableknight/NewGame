@@ -32,11 +32,11 @@ class LootPanel:UIPanel {
             if u.contains(touchPoint!) {
                 let icon = u as! PropIcon
                 if icon.selected {
-                    let p = icon._displayItemType as! Prop
-                    let index = _props.index(of: p)
-                    _props.remove(at: index!)
-                    pageReload()
-                    _lastSelectedIcon = nil
+//                    let p = icon._displayItemType as! Prop
+//                    let index = _props.index(of: p)
+//                    _props.remove(at: index!)
+//                    pageReload()
+//                    _lastSelectedIcon = nil
                 } else {
                     icon.selected = true
                 }

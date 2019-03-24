@@ -583,23 +583,6 @@ class UIStage:SKSpriteNode {
         }
         _moving = false
     }
-    var _sceneSize = 2
-    func getSceneById(id:Int) -> UIScene {
-        switch id {
-        case 0:
-            return Meadow()
-        case 1:
-            return DeadEarth()
-        case 2:
-            return LostForest()
-        case 3:
-            return FrozenLand()
-        case 4:
-            return BloodSquare()
-        default:
-            return getSceneById(id:seed(min: 0, max: 5))
-        }
-    }
     private var _sceneChangeMask = SKSpriteNode()
     private func createSceneChangeMask() {
         let rect = CGRect(x: -cellSize * 8, y: -cellSize * 5, width: cellSize * 16, height: cellSize * 10)

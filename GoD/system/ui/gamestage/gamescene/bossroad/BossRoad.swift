@@ -72,10 +72,6 @@ class BossRoad: AcientRoad {
         }
     }
     
-    override func getBoxCount() -> Int {
-        return seed(max: 4)
-    }
-    
     func getSelfScene() -> BossRoad {
         return BossRoad()
     }
@@ -113,7 +109,7 @@ class BossRoad: AcientRoad {
         
     }
     
-    override func createPortalPoints() {
+    func createPortalPoints() {
         var xs = Array<Int>()
         var ys = Array<Int>()
         for i in 0...halfSize.toInt() * 2 {
@@ -131,15 +127,15 @@ class BossRoad: AcientRoad {
         _specialPoints.append(_portalNext)
         _specialPoints.append(_portalPrev)
     }
-    override func addPortalItem() {
-        _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_PORTAL
-        let next:UIItem = _index >= _floorSize ? getPortalFinal() : Portal1()
-        addItem(x: _portalNext.x, y: _portalNext.y, item: next)
-        next.zPosition = MyScene.ROLE_LAYER_Z - 1
-        if _floorSize == _index {
-            next.zPosition = MyScene.ITEM_LAYER_Z + 22
-        }
-    }
+//    func addPortalItem() {
+//        _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_PORTAL
+//        let next:UIItem = _index >= _floorSize ? getPortalFinal() : Portal1()
+//        addItem(x: _portalNext.x, y: _portalNext.y, item: next)
+//        next.zPosition = MyScene.ROLE_LAYER_Z - 1
+//        if _floorSize == _index {
+//            next.zPosition = MyScene.ITEM_LAYER_Z + 22
+//        }
+//    }
     func getPortalFinal() -> UIItem {
         return PortalFinal()
     }

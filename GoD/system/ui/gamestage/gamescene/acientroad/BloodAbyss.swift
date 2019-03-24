@@ -53,6 +53,9 @@ class BloodAbyss: AcientRoad {
             return BloodBat()
         }
     }
+    override func getWallTexture() -> SKTexture {
+        return Game.instance.dungeon_b.getCell(6, 9, 1, 2)
+    }
 }
 
 class BloodBat: Demon {

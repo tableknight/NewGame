@@ -521,12 +521,12 @@ class DungeonListPanel:SKSpriteNode {
     }
     
     func createDungeon(l:Int) {
-        let stage = Game.instance.stage!
-        stage.removePanelDefault(p: self)
-        let scene = stage.getSceneById(id: l - 1)
-        stage.saveScene(scene: scene)
-        scene._level = l
-        stage.switchScene(next: scene)
+//        let stage = Game.instance.stage!
+//        stage.removePanelDefault(p: self)
+//        let scene = stage.getSceneById(id: l - 1)
+//        stage.saveScene(scene: scene)
+//        scene._level = l
+//        stage.switchScene(next: scene)
     }
     
     private var _closeButton = Button()

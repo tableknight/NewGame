@@ -146,7 +146,7 @@ class Battle: SKSpriteNode {
         
         if _orderSummon.contains(s) && !_orderSummon.isHidden {
             hideOrder()
-            showCancel()
+//            showCancel()
             showMinionsList()
             //            showSummonableSeats()
             return
@@ -1916,7 +1916,8 @@ class Battle: SKSpriteNode {
             this._selectedMinion = clp._lastSelected!._unit
         }
         clp.closeAction = {
-            
+            self.showOrder()
+            self.hideCancel()
         }
 //        clp.create(list: summonableMinions)
         

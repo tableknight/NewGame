@@ -55,6 +55,10 @@ class SecretValley: AcientRoad {
         }
     }
     
+    override func getWallTexture() -> SKTexture {
+        return Game.instance.outside_b.getCell(12, 6, 1, 2)
+    }
+    
     private func getUIItem1(_ x:CGFloat, _ y:CGFloat) -> UIItem {
         let item = UIItem()
         item.setTexture(Game.instance.outside_b.getCell(x, y))

@@ -26,7 +26,63 @@ extension SKSpriteNode {
         }
     }
 }
-
+let LandFragment:Array<Array<CGFloat>> = [
+    [0,0,1,0,1,2],
+//    "00101222",
+    [1,0,2,0,0,2],
+//    "10200212",
+    [0,0,0,1,2,1],
+//    "00012122",
+    [0,1,0,2,2,0],
+//    "01022021",
+    [0,0,1,0,2,2],
+//    "00100122",
+    [1,0,2,0,0,2],
+//    "10202102",
+    [0,1,0,2,1,2],
+//    "01021220",
+    [0,0,2,1,2,2],
+//    "00212212",
+    [1,0,0,1],
+//    "101101",
+    [1,0,2,1],
+//    "101121",
+    [0,1,1,1,1,2],
+//    "011112",
+    [1,1,2,1,1,2],
+//    "112112",
+    [0,0,2,0,0,2],
+    [0,0,2,0,2,2],
+//    "00200222",
+    [1,0,2,0,0,2],
+//    "00102002",
+    [0,1,0,2,2,0],
+//    "00010220",
+    [0,0,0,2,2,2],
+//    "00021222",
+    [0,0,2,0,2,1],
+//    "00202122",
+    [1,0,1,1,2,2],
+//    "101122",
+    [1,1,2,1,0,2],
+//    "112102",
+    [0,0,1,1,1,2],
+//    "001112",
+    [0,1,1,1,2,0],
+//    "011120",
+    [0,1,0,2,1,2],
+//    "00010212",
+    [0,0,2,0,2,1],
+//    "00102021",
+    [1,0,0,2,2,2],
+//    "10021222",
+    [0,1,2,1,2,2],
+//    "01202122",
+    [1,0,1,1,1,2],
+//    "101112",
+    [0,1,1,1,2,1],
+//    "011121",
+]
 struct Quality {
     static let NORMAL = 1
     static let GOOD = 2
@@ -249,7 +305,9 @@ class Game {
     var door2 = SKTexture(imageNamed: "Door2.png")
     var crystal = SKTexture(imageNamed: "Crystal.png")
     var sf_outside_c:SKTexture = SKTexture(imageNamed: "SF_Outside_C.png")
+    var sf_outside_b:SKTexture = SKTexture(imageNamed: "SF_Outside_B.png")
     var sf_outside_a4:SKTexture = SKTexture(imageNamed: "SF_Outside_A4.png")
+    var sf_outside_a5:SKTexture = SKTexture(imageNamed: "SF_Outside_A5.png")
     var sf_outside_a3:SKTexture = SKTexture(imageNamed: "SF_Outside_A3.png")
     var sf_inside_a4 = SKTexture(imageNamed: "SF_Inside_A4.png")
     var sf_inside_c = SKTexture(imageNamed: "SF_Inside_C.png")

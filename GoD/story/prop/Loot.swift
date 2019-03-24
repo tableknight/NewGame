@@ -410,7 +410,6 @@ class Loot: Core {
         list += [2,2,2]
         list += [3,3]
         list += [4]
-        list += [5,5,5,5,5,5,5]
         return getItemByid(id: list.one())
     }
     func getItemByid(id: Int) -> Item {
@@ -429,12 +428,7 @@ class Loot: Core {
         if 4 == id {
             return SealScroll()
         }
-        if 5 == id {
-            return BlastScroll()
-        }
-        if 6 == id {
-            
-        }
+        
         return TheWitchsTear()
     }
     private var _props = Array<Prop>()

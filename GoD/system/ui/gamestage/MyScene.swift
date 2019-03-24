@@ -495,6 +495,60 @@ class MyScene: SKSpriteNode, IInitialize {
         node.addChild(roleNode)
         return node
     }
+    func getRandomMonterCellItem() -> UIEvil {
+        let ue = UIEvil()
+        let ranMon = getMonsterByIndex(index: _monsterEnum.one())
+        ue.setTexture(ranMon._img)
+        let face = [NORTH,SOUTH,EAST,WEST].one()
+        if face == NORTH {
+            ue.faceNorth()
+        } else
+            if face == SOUTH {
+                ue.faceSouth()
+            } else
+                if face == WEST {
+                    ue.faceWest()
+                } else
+                    if face == EAST {
+                        ue.faceEast()
+        }
+        
+        return ue
+    }
+    func getMonsterByIndex(index:Int) -> Creature {
+        return Creature()
+    }
+    func getRandomTower() -> Tower {
+        return getTowerByIndex(index: _towerEnum.one())
+    }
+    func getTowerByIndex(index:Int) -> Tower {
+        switch index {
+        case TOWER_MIND_POWER:
+            return MindPowerTower()
+        case TOWER_FIRE_ENERGE:
+            return FireEnergeTower()
+        case TOWER_LUCKY_POWER:
+            return LuckyPowerTower()
+        case TOWER_SPEED_POWER:
+            return SpeedPowerTower()
+        case TOWER_TIME_REDUCE:
+            return TimeReduceTower()
+        case TOWER_ATTACK_POWER:
+            return AttackPowerTower()
+        case TOWER_WATER_ENERGE:
+            return WaterEnergeTower()
+        case TOWER_DEFENCE_POWER:
+            return DefencePowerTower()
+        case TOWER_MAGICAL_POWER:
+            return MagicalPowerTower()
+        case TOWER_PHYSICAL_POWER:
+            return PhysicalPowerTower()
+        case TOWER_THUNDER_ENERGE:
+            return ThunderEnergeTower()
+        default:
+            return FireEnergeTower()
+        }
+    }
 //    internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
     internal var _mapSet:GroundSets!
     internal var _mapLayer = SKSpriteNode()
@@ -550,10 +604,13 @@ class Chest:UIItem {
 //        showMsg(text: "宝箱中的东西已经全部放入背包里了。")
         let p = LootPanel()
         p.create(props: list)
+        p.confirmAction = self.confirmAction
         Game.instance.curStage.showPanel(p)
+        
     }
     private var _x = 0
     var _triggered = false
+    var confirmAction = {}
     
 }
 class UIRole:UIItem {

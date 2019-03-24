@@ -71,10 +71,10 @@ class ItemPanel: UIPanel {
                                 rl._lastSelected!.reload()
                             }
                         }
-                        let this = self
                         rl.closeAction = {
-                            this.pageReload()
-                            this.isHidden = false
+                            self.pageReload()
+                            self.isHidden = false
+                            Game.instance.curStage._curPanel = self
                         }
                         Game.instance.curStage.showPanel(rl)
                         return
