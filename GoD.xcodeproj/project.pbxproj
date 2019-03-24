@@ -271,6 +271,7 @@
 		0922C960223D41EE002DC201 /* WindPunish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95F223D41EE002DC201 /* WindPunish.swift */; };
 		0922C9622245244A002DC201 /* Dungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9612245244A002DC201 /* Dungeon.swift */; };
 		0922C965224691D0002DC201 /* HiddenArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C964224691D0002DC201 /* HiddenArea.swift */; };
+		0922C9672247C66F002DC201 /* DemonTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9662247C66E002DC201 /* DemonTown.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -647,6 +648,7 @@
 		0922C95F223D41EE002DC201 /* WindPunish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindPunish.swift; sourceTree = "<group>"; };
 		0922C9612245244A002DC201 /* Dungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dungeon.swift; sourceTree = "<group>"; };
 		0922C964224691D0002DC201 /* HiddenArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenArea.swift; sourceTree = "<group>"; };
+		0922C9662247C66E002DC201 /* DemonTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonTown.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1438,6 +1440,7 @@
 		0922C9522233F9B0002DC201 /* bossroad */ = {
 			isa = PBXGroup;
 			children = (
+				0922C9682247C9B1002DC201 /* demontown */,
 				0922C9532233FA0E002DC201 /* BossRoad.swift */,
 				0922C9552234D992002DC201 /* MoringPalace.swift */,
 				0922C95722394EA4002DC201 /* ZeroPalace.swift */,
@@ -1452,6 +1455,14 @@
 				0922C9612245244A002DC201 /* Dungeon.swift */,
 			);
 			path = dungeon;
+			sourceTree = "<group>";
+		};
+		0922C9682247C9B1002DC201 /* demontown */ = {
+			isa = PBXGroup;
+			children = (
+				0922C9662247C66E002DC201 /* DemonTown.swift */,
+			);
+			path = demontown;
 			sourceTree = "<group>";
 		};
 		09C66C7021F0B78B00E1C153 /* boss */ = {
@@ -1868,6 +1879,7 @@
 				090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */,
 				09C66CCB2212F9F200E1C153 /* BreakDefence.swift in Sources */,
 				090FEBCF21BB9B2B004276BB /* MightOfOaks.swift in Sources */,
+				0922C9672247C66F002DC201 /* DemonTown.swift in Sources */,
 				0922C95A223BFB0B002DC201 /* FreshGrass.swift in Sources */,
 				09C66C9C220B063200E1C153 /* Francis.swift in Sources */,
 				09C66CDC2215BDFE00E1C153 /* TrueSight.swift in Sources */,

@@ -20,6 +20,10 @@ class Break: Attribute {
         unit._break -= _value
     }
     override func create(level: CGFloat) {
-        _value = seed(min: 1, max: 11).toFloat()
+        if level < 15 {
+            _value = seed(min: 1, max: 6).toFloat()
+        } else {
+            _value = seed(min: 1, max: 11).toFloat()
+        }
     }
 }

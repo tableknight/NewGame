@@ -299,6 +299,7 @@ class Game {
     var outside_a3:SKTexture = SKTexture(imageNamed: "Outside_A3.png")
     var outside_a4:SKTexture = SKTexture(imageNamed: "Outside_A4.png")
     var dungeon_a4:SKTexture = SKTexture(imageNamed: "Dungeon_A4.png")
+    var dungeon_a2:SKTexture = SKTexture(imageNamed: "Dungeon_A2.png")
     var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
     var dungeon_b = SKTexture(imageNamed: "Dungeon_B.png")
     var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png")

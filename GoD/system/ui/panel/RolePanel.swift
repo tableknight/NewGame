@@ -299,6 +299,8 @@ class RolePanel:UIPanel {
         if unit is Character {
             _attrLucky = addAttrLabel(x: x5, y: y3, text: "幸运", value: bUnitRole.getLucky())
             _attrRevenge = addAttrLabel(x: x5, y: y4, text: "复仇", value: bUnitRole.getRevenge())
+        } else {
+            _ = addAttrLabel(x: x5, y: y3, text: "法敏", value: unit._sensitive.toFloat())
         }
         _spellY = y6
         loadSpells()

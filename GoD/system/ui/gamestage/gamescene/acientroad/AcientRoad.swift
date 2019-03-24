@@ -27,7 +27,7 @@ class AcientRoad: Dungeon {
     }
     override func create() {
         super.create()
-        _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区域"
+        _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
     }
     override func hasAction(cell:Int, touchPoint:CGPoint) -> Bool {
@@ -325,9 +325,13 @@ class AcientRoad: Dungeon {
         if _index < _floorSize {
             addGround(x: _portalNext.x, y: _portalNext.y, item: PortalNext())
         } else {
-            addItem(x: _portalNext.x, y: _portalNext.y, item: PortalFinal())
+            addItem(x: _portalNext.x, y: _portalNext.y, item: getPortalFinal())
         }
         addGround(x: _portalPrev.x, y: _portalPrev.y, item: PortalPrev())
+    }
+    
+    func getPortalFinal() -> UIItem {
+        return PortalFinal()
     }
     
     func getRandomItem() -> UIItem {

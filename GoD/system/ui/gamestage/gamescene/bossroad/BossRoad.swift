@@ -40,6 +40,10 @@ class BossRoad: AcientRoad {
         
     }
     
+    override func createTowers() {
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -127,6 +131,14 @@ class BossRoad: AcientRoad {
         _specialPoints.append(_portalNext)
         _specialPoints.append(_portalPrev)
     }
+    override func addPortalItem() {
+        if _index < _floorSize {
+            addGround(x: _portalNext.x, y: _portalNext.y, item: PortalNext())
+        } else {
+            addItem(x: _portalNext.x, y: _portalNext.y, item: getPortalFinal())
+        }
+//        addGround(x: _portalPrev.x, y: _portalPrev.y, item: PortalPrev())
+    }
 //    func addPortalItem() {
 //        _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_PORTAL
 //        let next:UIItem = _index >= _floorSize ? getPortalFinal() : Portal1()
@@ -136,9 +148,7 @@ class BossRoad: AcientRoad {
 //            next.zPosition = MyScene.ITEM_LAYER_Z + 22
 //        }
 //    }
-    func getPortalFinal() -> UIItem {
-        return PortalFinal()
-    }
+    
 }
 
 class Portal1:UIItem {

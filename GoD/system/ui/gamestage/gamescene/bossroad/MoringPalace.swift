@@ -77,6 +77,10 @@ class MorningPalace: BossRoad {
         Game.instance.curStage.addBattle(b)
         b.battleStart()
     }
+    
+    override func getWallTexture() -> SKTexture {
+        return Game.instance.outside_b.getCell(13, 4, 1, 2)
+    }
 }
 
 class MP11:UIItem {

@@ -20,7 +20,13 @@ class Rhythm: Attribute {
         unit._rhythm -= _value
     }
     override func create(level: CGFloat) {
-        _value = seed(min: 1, max: 6).toFloat()
+        if level < 20 {
+            _value = seed(min: 1, max: 4).toFloat()
+        } else if level < 50 {
+            _value = seed(min: 1, max: 6).toFloat()
+        } else {
+            _value = seed(min: 1, max: 9).toFloat()
+        }
     }
 }
 
