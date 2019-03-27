@@ -16,7 +16,7 @@ class Creature: Unit {
     
     var _stars:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
     var _growth:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
-    var _spellSlot:SpellSlot = SpellSlot(max: 0, min: 0)
+    var _spellSlot:SpellSlot = SpellSlot(max: 3, min: 0)
     var _spellCount = 2
     var _moveSpeed:CGFloat = 0
 
@@ -61,6 +61,7 @@ class Creature: Unit {
         _extensions.hp = _extensions.health
         _slot = seed(min: _spellSlot.min, max: _spellSlot.max + 1)
         _spellCount = _slot
+        _sensitive = seed(min: 15, max: 56)
     }
     func protectNew() {
         if _level < 10 {

@@ -19,7 +19,7 @@ class Dungeon: MyScene {
         super.init(coder: aDecoder)
     }
     override func create() {
-        halfSize = seedFloat(min: 3, max: 7)
+        createSize()
 //        halfSize = 3
         _nameLabel.text = "恶魔之城"
         createMap()
@@ -29,6 +29,10 @@ class Dungeon: MyScene {
         createTreasureBoxes()
         createTowers()
         createEnemy()
+    }
+    
+    func createSize() {
+        halfSize = seedFloat(min: 3, max: 7)
     }
     
     override func createMapMatrix() {

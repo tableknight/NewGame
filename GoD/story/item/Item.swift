@@ -142,7 +142,7 @@ class LittlePotion:Potion {
         super.init()
         price = 3
         _cooldown = 2
-        _name = "小型治疗药水"
+        _name = "治疗药水(小)"
         _description = "恢复25%最大生命值"
         _rate = 0.25
     }
@@ -239,8 +239,8 @@ class DeathTownScroll:TownScroll {
         usable = true
         usableInBattle = true
         price = 50
-        _name = "传送之卷·冥界"
-        _description = "传送到冥界"
+        _name = "传送之卷·冥"
+        _description = "传送到恶魔之城"
     }
     override func use() {
         removeFromChar()

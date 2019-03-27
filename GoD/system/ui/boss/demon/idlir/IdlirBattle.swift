@@ -26,7 +26,7 @@ class IdlirBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 25
         var es = Array<Creature>()
         
         let t = Idlir()

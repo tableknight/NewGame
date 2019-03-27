@@ -25,7 +25,7 @@ class GeorgeBattle: BossBattle {
 //    }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 61
         var es = Array<Creature>()
         
         let s1 = GeorgeServant1()

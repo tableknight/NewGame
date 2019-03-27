@@ -28,7 +28,7 @@ class DiusBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 33
         var es = Array<Creature>()
         
         let t = Dius()

@@ -48,7 +48,7 @@ class UmisaBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 54
         var es = Array<Creature>()
         
         let t = Umisa()

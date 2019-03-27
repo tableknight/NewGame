@@ -85,7 +85,7 @@ class DemonTown: BossRoad {
 class PortalDungeon:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        let s = Game.instance.dungeon_a2.getCell(12, 3)
+        let s = Game.instance.dungeon_b.getCell(3, 1)
         setTexture(s)
     }
     
