@@ -12,7 +12,7 @@ class CityOfDeath: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
-        _monsterEnum = [1,2,3,4,5]
+        _monsterEnum = [1,2,3,4]
         _name = "死亡之城"
         _floorSize = 12
         _level = 54
@@ -23,21 +23,18 @@ class CityOfDeath: DemonTown {
     }
     override func getMonsterByIndex(index: Int) -> Creature {
         if index == 1 {
-            return UndeadMinion11()
+            return Crawler()
         }
         if index == 2 {
-            return UndeadMinion12()
+            return UnderworldRider()
         }
         if index == 3 {
-            return UndeadMinion13()
+            return EvilCurse()
         }
         if index == 4 {
-            return UndeadMinion14()
+            return DeathGod()
         }
-        if index == 5 {
-            return UndeadMinion15()
-        }
-        return UndeadMinion1()
+        return Crawler()
     }
     
     override func getSelfScene() -> BossRoad {
@@ -61,7 +58,7 @@ class CityOfDeath: DemonTown {
     
     override func getWallTexture() -> SKTexture {
         let node = SKSpriteNode()
-        let top = Game.instance.inside_a5.getNode(0, 0)
+        let top = getRoof()
         top.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.addChild(top)
         let btop = Game.instance.dungeon_a4.getNode(4, 7.5, 1, 0.5)
@@ -84,6 +81,51 @@ class RoleUmisa: UIRole {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+}
+
+class Crawler: Demon {
+    override init() {
+        super.init()
+        _stars.strength = 2
+        _stars.stamina = 2
+        _stars.agility = 1
+        _stars.intellect = 0.8
+        _name = "爬行者"
+        _img = SKTexture(imageNamed: "crawler")
+    }
+}
+class UnderworldRider: Demon {
+    override init() {
+        super.init()
+        _stars.strength = 1.8
+        _stars.stamina = 1.2
+        _stars.agility = 2.1
+        _stars.intellect = 0.6
+        _name = "灵界骑士"
+        _img = SKTexture(imageNamed: "underworld_rider")
+    }
+}
+class DeathGod: Demon {
+    override init() {
+        super.init()
+        _stars.strength = 0.6
+        _stars.stamina = 1.1
+        _stars.agility = 1.6
+        _stars.intellect = 2.4
+        _name = "死神"
+        _img = SKTexture(imageNamed: "death_god")
+    }
+}
+class EvilCurse: Man {
+    override init() {
+        super.init()
+        _stars.strength = 2.2
+        _stars.stamina = 0.8
+        _stars.agility = 2.2
+        _stars.intellect = 0.6
+        _name = "恶咒"
+        _img = SKTexture(imageNamed: "evil_curse")
     }
 }
 

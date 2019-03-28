@@ -25,6 +25,7 @@ class Dungeon: MyScene {
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
+        createWallShadow()
         createPortals()
         createTreasureBoxes()
         createTowers()
@@ -165,6 +166,7 @@ class Dungeon: MyScene {
         }
     }
     internal var _visiblePoints = Array<CGPoint>()
+    internal var _wallPoints = Array<CGPoint>()
     internal func findVisiblePoints() -> Array<CGPoint> {
         var points = Array<CGPoint>()
         for y in 0...halfSize.toInt() * 2 - 1 {
@@ -178,10 +180,31 @@ class Dungeon: MyScene {
                             points.append(CGPoint(x: x, y: y))
                         }
                     }
+                } else {
+                    _wallPoints.append(CGPoint(x: x, y: y))
                 }
             }
         }
         return points
+    }
+    
+    internal func createWallShadow() {
+        let t = SKTexture(imageNamed: "wall_shadow_12")
+        let t2 = Game.instance.inside_a5.getCell(0,0)
+        for p in _wallPoints {
+            if p.x.toInt() < halfSize.toInt() * 2 - 1 {
+                if CELL_EMPTY == _mapMatrix[p.y.toInt()][p.x.toInt() + 1] {
+                    let shadow = SKSpriteNode(texture: t)
+                    addGround(x: p.x + 1, y: p.y, item: shadow)
+                    shadow.xAxis = shadow.xAxis - 18
+                }
+            }
+            if p.y > 0 {
+                if CELL_ITEM == _mapMatrix[p.y.toInt() - 1][p.x.toInt()] {
+                    addItem(x: p.x, y: p.y - 1, item: SKSpriteNode(texture: t2), z: 120)
+                }
+            }
+        }
     }
     
     internal func createTowers() {
@@ -248,7 +271,8 @@ class Dungeon: MyScene {
     
     internal func getWallTexture() -> SKTexture {
         let node = SKSpriteNode()
-        let top = Game.instance.inside_a5.getNode(0, 0)
+//        let top = Game.instance.inside_a5.getNode(0, 0)
+        let top = getRoof()
         top.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.addChild(top)
         let btop = Game.instance.inside_a4.getNode(0, 2.5, 1, 0.5)
@@ -259,6 +283,11 @@ class Dungeon: MyScene {
         bb.yAxis = -cellSize * 0.5
         node.addChild(bb)
         return node.toTexture()
+    }
+    
+    internal func getRoof() -> SKSpriteNode {
+        return Game.instance.inside_a5.getNode(0,0,1,0.875)
+//        return Game.instance.dungeon_a4.getNode(0, 7, 1, 0.75)
     }
     
     internal func addWall(x:CGFloat, y:CGFloat, item:SKSpriteNode) {

@@ -11,7 +11,7 @@ class CityOfSorrow: DemonTown {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
-        _mapSet = GroundSets(ground: oa4.getCell(12, 12, 2, 2), wall: oa4.getCell(12, 14, 2, 2))
+        _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
         _monsterEnum = [1,2,3,4]
         _name = "悲伤之城"
         _floorSize = 6
@@ -47,6 +47,7 @@ class CityOfSorrow: DemonTown {
     override func getPortalFinal() -> UIItem {
         return RoleDius()
     }
+    
     
     override func finalBattle() {
         let b = DiusBattle()

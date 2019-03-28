@@ -278,6 +278,7 @@
 		0922C970224910A0002DC201 /* CityOfSin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C96F224910A0002DC201 /* CityOfSin.swift */; };
 		0922C97222491409002DC201 /* CityOfDeath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C97122491409002DC201 /* CityOfDeath.swift */; };
 		0922C9742249179C002DC201 /* CityOfLethe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9732249179C002DC201 /* CityOfLethe.swift */; };
+		0922C976224D12F0002DC201 /* CityOfCurse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C975224D12F0002DC201 /* CityOfCurse.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -661,6 +662,7 @@
 		0922C96F224910A0002DC201 /* CityOfSin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityOfSin.swift; sourceTree = "<group>"; };
 		0922C97122491409002DC201 /* CityOfDeath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityOfDeath.swift; sourceTree = "<group>"; };
 		0922C9732249179C002DC201 /* CityOfLethe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityOfLethe.swift; sourceTree = "<group>"; };
+		0922C975224D12F0002DC201 /* CityOfCurse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityOfCurse.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1473,6 +1475,7 @@
 			isa = PBXGroup;
 			children = (
 				0922C9662247C66E002DC201 /* DemonTown.swift */,
+				0922C975224D12F0002DC201 /* CityOfCurse.swift */,
 				0922C9732249179C002DC201 /* CityOfLethe.swift */,
 				0922C97122491409002DC201 /* CityOfDeath.swift */,
 				0922C9692248BEF1002DC201 /* CityOfFail.swift */,
@@ -1878,6 +1881,7 @@
 				09C66CD82215B73300E1C153 /* ElementMaster.swift in Sources */,
 				09C66CE02215BFC400E1C153 /* SeedOfLife.swift in Sources */,
 				090FEBD121BB9B2B004276BB /* MultipleHit.swift in Sources */,
+				0922C976224D12F0002DC201 /* CityOfCurse.swift in Sources */,
 				090FEB6C21BB9B2B004276BB /* IDisplay.swift in Sources */,
 				090FEBBB21BB9B2B004276BB /* DeathStrike.swift in Sources */,
 				090FEC2621BB9B2B004276BB /* UIPart.swift in Sources */,

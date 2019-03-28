@@ -136,7 +136,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = CityOfSorrow()
+        let bs = CityOfCurse()
         bs.create()
         let e = Emily()
         e.create(level: e._level)

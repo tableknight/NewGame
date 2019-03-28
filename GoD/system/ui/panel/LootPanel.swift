@@ -20,18 +20,22 @@ class LootPanel:UIPanel {
             }
             return
         } else if _discardButton.contains(touchPoint!) {
-            if _lastSelectedIcon != nil {
-                let p = _lastSelectedIcon._displayItemType as! Prop
-                let index = _props.index(of: p)
-                _props.remove(at: index!)
-                pageReload()
-                return
+            for u in _propBox.children {
+                let icon = u as! PropIcon
+                if icon.selected {
+                    let p = icon._displayItemType as! Prop
+                    let index = _props.index(of: p)
+                    _props.remove(at: index!)
+                }
             }
+            pageReload()
+            return
         }
         for u in _propBox.children {
             if u.contains(touchPoint!) {
                 let icon = u as! PropIcon
                 if icon.selected {
+                    icon.selected = false
 //                    let p = icon._displayItemType as! Prop
 //                    let index = _props.index(of: p)
 //                    _props.remove(at: index!)

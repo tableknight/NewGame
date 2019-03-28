@@ -23,6 +23,7 @@ class CityOfDesire: DemonTown {
     }
     override func createSize() {
         halfSize = seedFloat(min: 3, max: 6)
+//        halfSize = 6
     }
     override func getMonsterByIndex(index: Int) -> Creature {
         if index == 1 {
@@ -61,7 +62,7 @@ class CityOfDesire: DemonTown {
     
     override func getWallTexture() -> SKTexture {
         let node = SKSpriteNode()
-        let top = Game.instance.inside_a5.getNode(0, 0)
+        let top = getRoof()
         top.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.addChild(top)
         let btop = Game.instance.inside_a4.getNode(0, 2.5, 1, 0.5)

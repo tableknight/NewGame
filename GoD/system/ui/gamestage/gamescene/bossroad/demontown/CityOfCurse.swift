@@ -1,17 +1,17 @@
 //
-//  CityOfLethe.swift
+//  CityOfCurse.swift
 //  GoD
 //
-//  Created by kai chen on 2019/3/25.
+//  Created by kai chen on 2019/3/28.
 //  Copyright © 2019年 Chen. All rights reserved.
 //
 
 import SpriteKit
-class CityOfLethe: DemonTown {
+class CityOfCurse: DemonTown {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
-        _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
+        _mapSet = GroundSets(ground: oa4.getCell(14, 2, 2, 2), wall: oa4.getCell(14, 4, 2, 2))
         _monsterEnum = [1,2,3,4,5]
         _name = "遗忘之城"
         _floorSize = 10
@@ -67,10 +67,10 @@ class CityOfLethe: DemonTown {
         let top = getRoof()
         top.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.addChild(top)
-        let btop = Game.instance.dungeon_a4.getNode(8, 2.5, 1, 0.5)
+        let btop = Game.instance.inside_a4.getNode(6, 2.5, 1, 0.5)
         btop.anchorPoint = CGPoint(x: 0.5, y: 1)
         node.addChild(btop)
-        let bb = Game.instance.dungeon_a4.getNode(8, 4, 1, 0.5)
+        let bb = Game.instance.inside_a4.getNode(6, 4, 1, 0.5)
         bb.anchorPoint = CGPoint(x: 0.5, y: 1)
         bb.yAxis = -cellSize * 0.5
         node.addChild(bb)
@@ -78,15 +78,5 @@ class CityOfLethe: DemonTown {
     }
     
 }
-class RoleGeorge: UIRole {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        self.texture = SKTexture(imageNamed: "George")
-        self.size = CGSize(width: cellSize * 2, height: cellSize * 2)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+
 
