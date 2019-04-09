@@ -12,5 +12,6 @@ class Physical: Active {
     override init() {
         super.init()
         isPhysical = true
+        isClose = true
     }
 }

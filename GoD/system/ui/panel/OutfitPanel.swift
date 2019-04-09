@@ -69,6 +69,9 @@ class OutfitPanel: UIPanel {
         
         
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
+            if nil == _lastSelectedIcon._displayItemType {
+                return
+            }
             let outfit = _lastSelectedIcon._displayItemType as! Outfit
             if outfit._level > _char._level {
                 showMsg(text: "你暂时无法使用这件比你更强大的装备。")

@@ -205,10 +205,10 @@ class MyScene: SKSpriteNode, IInitialize {
             mon.defeatAction = {
                 this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
                 mon.removeFromParent()
-                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
-                mon.run(wait) {
-                    mon.removeFromParent()
-                }
+//                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
+//                mon.run(wait) {
+//                    mon.removeFromParent()
+//                }
             }
         }
     }
@@ -466,7 +466,7 @@ class MyScene: SKSpriteNode, IInitialize {
         char._charSize = cellSize
         char.setUnit(unit: role)
         char.createForStage()
-        char.faceNorth()
+        char.faceSouth()
         _roleLayer.addChild(char)
 //        char.anchorPoint = CGPoint(x: 0.5, y: 1)
         char.position.x = (x - halfSize) * cellSize
@@ -593,20 +593,38 @@ class Chest:UIItem {
         if _triggered {
             return
         }
+        _triggered = true
         let item = Game.instance.pictureChest.getCell(_x.toFloat(), 3)
         setTexture(item)
-        _triggered = true
+        
+        if Core().d4() {
+            let b = MimicBattle()
+            b._level = Game.instance.curStage._curScene._level
+            b.setEnemyPart(minions: Array<Creature>())
+            let char = Game.instance.char!
+            let cs:Array<Creature> = [char] + char.getReadyMinions()
+            b.setPlayerPart(roles: cs)
+            Game.instance.curStage.addBattle(b)
+            b.battleStart()
+            b.defeatAction = {
+                self.loot()
+            }
+            b.defeatedAction = {
+                
+            }
+            return
+        }
+        
+        loot()
+        
+    }
+    private func loot() {
         let l = Loot()
         let list = l.loot(level: Game.instance.curStage._curScene._level)
-//        for p in list {
-//            Game.instance.char.addProp(p: p)
-//        }
-//        showMsg(text: "宝箱中的东西已经全部放入背包里了。")
         let p = LootPanel()
         p.create(props: list)
         p.confirmAction = self.confirmAction
         Game.instance.curStage.showPanel(p)
-        
     }
     private var _x = 0
     var _triggered = false

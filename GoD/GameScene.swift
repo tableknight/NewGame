@@ -98,7 +98,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = FrancisBattle()
+        let b = MimicBattle()
         var es = Array<Creature>()
 //        let role = UndeadWarrior()
 //        role.create(level: 50)
@@ -136,15 +136,16 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = CityOfCurse()
+        let bs = SelfHome()
         bs.create()
         let e = Emily()
         e.create(level: e._level)
         
         e.addMoney(num: 1000)
-        e._spellsInuse = []
-        
-        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
+//        e._spellsInuse = []
+//        e._spellsInuse = [LineAttack()]
+        bs.setRole(x: 2, y: 1, role: e)
+//        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
@@ -163,10 +164,24 @@ class GameScene: SKScene {
         
     }
     
+    private func startNewGame() {
+        
+    }
     
-    
+    private func welcome() {
+        let flow = CreationFlow()
+        flow.create()
+        flow.gameScene = self
+        flow.actionCreate = {
+            flow.removeFromParent()
+//            self.realScene()
+        }
+        addChild(flow)
+    }
     override func didMove(to view: SKView) {
-        realScene()
+        welcome()
+//        realScene()
+//        battle()
 //        addSacredOutfit()
 //        echoOutfit(item: Game.instance.char._props.one() as! Outfit)
 //        for p in Game.instance.char._props {

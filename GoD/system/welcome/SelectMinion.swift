@@ -81,7 +81,7 @@ class SelectMinion:UIPanel {
             let y = i % 3
             let mc = SelectMinionComponent()
             mc.create(minion: minions[i])
-            mc.position.x = 0
+            mc.position.x = -cellSize * 1.5
             mc.zPosition = self.zPosition + 5
             mc.position.y = startY - y.toFloat() * cellSize * 2.25
             _minionLayer.addChild(mc)
@@ -112,11 +112,11 @@ class SelectMinionComponent:SKSpriteNode {
     }
     private var _bg = SKShapeNode()
     
-    var _minion = Creature()
+    var _minion:Creature!
     func create(minion:Creature) {
         createBg()
         _minion = minion
-        let m = _minion
+        let m = minion
         let size = cellSize * 1.5
         let gap = cellSize * 0.25
         let startX = -cellSize * 3.5
@@ -146,14 +146,14 @@ class SelectMinionComponent:SKSpriteNode {
         level.position.y = -cellSize * 0.5
         addChild(level)
         
-        let _hpbar = HBar()
-        let barWidth = cellSize * 3
-        _hpbar.create(width: barWidth, height: 12, value: m._extensions.hp / m._extensions.health, color: Game.HPBAR_COLOR)
-        addChild(_hpbar)
-        
-        let _expbar = HBar()
-        _expbar.create(width: barWidth, height: 10, value: m._exp / m.expNext(), color: Game.EXPBAR_COLOR)
-        addChild(_expbar)
+//        let _hpbar = HBar()
+//        let barWidth = cellSize * 3
+//        _hpbar.create(width: barWidth, height: 12, value: m._extensions.hp / m._extensions.health, color: Game.HPBAR_COLOR)
+//        addChild(_hpbar)
+//
+//        let _expbar = HBar()
+//        _expbar.create(width: barWidth, height: 10, value: m._exp / m.expNext(), color: Game.EXPBAR_COLOR)
+//        addChild(_expbar)
         
         let race = Label()
         race.text = "lv.\(m._level.toInt())[\(EvilType.getTypeLabel(type: minion._race))]"
@@ -162,12 +162,12 @@ class SelectMinionComponent:SKSpriteNode {
         race.position.y = level.position.y - level.fontSize - 6
         addChild(race)
         
-        _hpbar.position.y = race.position.y - race.fontSize - 12
-        _expbar.position.y = _hpbar.position.y - 18
-        _hpbar.position.x = size + gap * 2 + startX
-        _expbar.position.x = _hpbar.position.x
-        _hpbar.zPosition = self.zPosition + 3
-        _expbar.zPosition = self.zPosition + 3
+//        _hpbar.position.y = race.position.y - race.fontSize - 12
+//        _expbar.position.y = _hpbar.position.y - 18
+//        _hpbar.position.x = size + gap * 2 + startX
+//        _expbar.position.x = _hpbar.position.x
+//        _hpbar.zPosition = self.zPosition + 3
+//        _expbar.zPosition = self.zPosition + 3
         
 //        let seatGap = cellSize * 0.125
 //

@@ -25,7 +25,8 @@ class UIEvil: UIUnit {
         let enemyCount = seed(min: 1, max: sc._level < 10 ? 2 : 4)
         for _ in 0...enemyCount {
             let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
-            e.create(level: sc._level)
+            let level = Core().d20() ? 1 : sc._level
+            e.create(level: level)
             enimies.append(e)
         }
         stage.hideScene()

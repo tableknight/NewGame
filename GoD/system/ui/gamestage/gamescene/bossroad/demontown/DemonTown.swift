@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class DemonTown: BossRoad {
+class DemonTown: BossRoad, InnerMaze {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4

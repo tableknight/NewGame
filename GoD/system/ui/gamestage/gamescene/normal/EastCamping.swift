@@ -188,8 +188,13 @@ class EastCamping: StandScene {
         for a in treePoint {
             addItem(x: a[0], y: a[1], item: TallTree())
         }
-        
-        let total = house + treePoint
+        let riverPoint:Array<Array<CGFloat>> = [
+            [9,4],
+            [9,3],
+            [9,5],
+            [8,2],
+        ]
+        let total = house + treePoint + riverPoint
         for p in total {
             _mapMatrix[p[1].toInt()][p[0].toInt()] = CELL_BLOCK
         }

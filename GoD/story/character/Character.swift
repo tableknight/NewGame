@@ -169,7 +169,7 @@ class Character: Creature {
     }
     
     override func levelTo(level: CGFloat) {
-        for _ in 0...level.toInt() {
+        for _ in 0...level.toInt() - 1 {
             for _ in 1..._levelPoint {
                 let sd = seed()
                 if sd < 25 {

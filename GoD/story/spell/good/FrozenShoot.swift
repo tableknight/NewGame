@@ -12,6 +12,7 @@ class FrozenShoot: Physical, BowSkill {
         super.init()
         _quality = Quality.GOOD
         isWater = true
+        isClose = false
         _name = "寒冰射击"
         _cooldown = 2
         _rate = 0.65

@@ -15,7 +15,11 @@ class BossBattle: Battle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-//    override func getSpellAttack() -> Spell {
-//        return BossAttack()
-//    }
+    override func defeat() {
+        if victory {
+            return
+        }
+        victory = true
+        fadeOutBattle()
+    }
 }

@@ -444,6 +444,9 @@ class Battle: SKSpriteNode {
         }
     }
     func moveStart() {
+        if hasFinished() {
+            return
+        }
         if _roleAll.count <= 0 {
             debug("roleAll empty")
             roundEnd()
@@ -666,14 +669,11 @@ class Battle: SKSpriteNode {
         }
     }
     internal func defeated() {
-//        print("defeated")
         victory = false
         showMsg(text: "战斗失败！")
         fadeOutBattle()
     }
     func fadeOutBattle() {
-//        let this = self
-//        run(SKAction.fadeOut(withDuration: TimeInterval(1))) {}
         if victory {
             defeatAction()
         } else {
@@ -1007,9 +1007,7 @@ class Battle: SKSpriteNode {
                 }
                 
             } else {
-                if !self.hasFinished() {
-                    self.moveStart()
-                }
+                self.moveStart()
             }
         }
         reduceCooldown()

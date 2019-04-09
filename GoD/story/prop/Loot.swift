@@ -115,25 +115,26 @@ class Loot: Core {
             _props.append(item)
         }
         
-        let sacreds = [
-            _sacredSwords,
-            _sacredDaggers,
-            _sacredShields,
-            _sacredAmulets,
-            _sacredRings,
-            _sacredSoulstones,
-            _sacredInstruments,
-            _sacredWands,
-            _sacredBlunts,
-            _sacredMarks,
-            _sacredBows,
-            _sacredEarrings,
-        ]
-        var count = 0
-        for a in sacreds {
-            count += a.count
-        }
-        let times = (count.toFloat() * lucky * 0.25).toInt()
+//        let sacreds = [
+//            _sacredSwords,
+//            _sacredDaggers,
+//            _sacredShields,
+//            _sacredAmulets,
+//            _sacredRings,
+//            _sacredSoulstones,
+//            _sacredInstruments,
+//            _sacredWands,
+//            _sacredBlunts,
+//            _sacredMarks,
+//            _sacredBows,
+//            _sacredEarrings,
+//        ]
+//        var count = 0
+//        for a in sacreds {
+//            count += a.count
+//        }
+        let count:CGFloat = 3
+        let times = (count * lucky).toInt()
 //        debug("掉落次数 times \(times)")
         for _ in 0...times {
             let s = getSacred()
@@ -670,7 +671,7 @@ class Loot: Core {
     func getSacred() -> Outfit? {
         let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
         if outfit._level <= _char._level - 5 {
-            if seed() < outfit._chance {
+            if seed(max: 200) < outfit._chance {
                 outfit.create()
                 return outfit
             }

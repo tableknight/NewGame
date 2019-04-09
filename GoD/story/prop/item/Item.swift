@@ -162,7 +162,7 @@ class SealScroll:Item {
     
     override func use(unit: BUnit, completion:@escaping () -> Void) {
         let this = self
-        let char = Game.instance._char!
+        let char = Game.instance.char!
         let c = _battle._curRole
         removeFromChar()
         c.showText(text: "封印") {
@@ -176,6 +176,7 @@ class SealScroll:Item {
                         unit.actionDead {
                             unit.removeFromBattle()
                             unit.removeFromParent()
+                            unit._unit._seat = BUnit.STAND_BY
                             char._minions.append(unit._unit)
                             setTimeout(delay: 0.5) {
                                 if !this._battle.hasFinished() {

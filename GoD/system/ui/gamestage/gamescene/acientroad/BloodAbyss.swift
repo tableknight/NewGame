@@ -86,7 +86,7 @@ class Kodagu: Demon {
         _stars.intellect = 0.6
         _name = "达古"
         _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = SKTexture(imageNamed: "Kodagu.png")
+        _img = SKTexture(imageNamed: "Kodagu")
         specialUnit = true
     }
     override func create(level: CGFloat) {
@@ -119,14 +119,9 @@ class HellBaron: Natrue {
         _stars.agility = 2.1
         _stars.intellect = 2.4
         _name = "地狱男爵"
-        _spellSlot = SpellSlot(max: 3, min: 0)
-        _img = SKTexture(imageNamed: "HellBaron.png")
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [LifeDraw()]
-        }
+        _spellSlot = SpellSlot(max: 3, min: 1)
+        _img = SKTexture(imageNamed: "HellBaron")
+        _spellsInuse = [LifeDraw()]
     }
 }
 

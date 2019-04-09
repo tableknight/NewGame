@@ -52,7 +52,7 @@ class NewSword: Sword {
     }
     override func create() {
         initialized = true
-        _quality = Quality.NORMAL
+        _quality = Quality.SACRED
         let atk = AttackAttribute()
         atk._value = 2
         _attrs.append(atk)

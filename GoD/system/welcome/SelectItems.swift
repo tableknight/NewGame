@@ -39,7 +39,7 @@ class SelectItems: UIPanel {
                     let index = _selectedItems.index(of: prop)
                     _selectedItems.remove(at: index!)
                 } else {
-                    if _selectedItems.count < 3 {
+                    if _selectedItems.count < 2 {
                         let prop = pi._displayItemType as! Prop
                         _selectedItems.append(prop)
                         pi.selected = true
@@ -58,6 +58,7 @@ class SelectItems: UIPanel {
         createPageButtons()
         _prevButton.text = "上一步"
         _nextButton.text = "下一步"
+        _closeButton.text = "返回"
         addChild(_propBox)
         createPropList()
     }
@@ -96,16 +97,13 @@ class SelectItems: UIPanel {
         ps.append(potion)
         
         let st = SealScroll()
-        st._count = 5
+        st._count = 2
         ps.append(st)
         
         let tear = TheWitchsTear()
         tear._count = 5
         ps.append(tear)
         
-        let bs = BlastScroll()
-        bs._count = 5
-        ps.append(bs)
         
         
         return ps
@@ -124,7 +122,7 @@ class SelectItems: UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    private var _selectedItems = Array<Prop>()
+    var _selectedItems = Array<Prop>()
     var nextAction = {}
     var prevAction = {}
     var closeAction = {}

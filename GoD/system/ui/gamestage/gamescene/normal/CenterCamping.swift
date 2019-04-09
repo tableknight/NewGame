@@ -30,11 +30,11 @@ class CenterCamping: StandScene {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         
         if point.x == 3 && point.y == 2 && cell == CELL_DOOR {
-            showMsg(text: "house1")
+//            showMsg(text: "house1")
             return true
         }
         if point.x == 10 && point.y == 8 && cell == CELL_DOOR {
-            showMsg(text: "house1")
+//            showMsg(text: "house1")
             return true
         }
         if (point.x == 4 || point.x == 5) && point.y == 6 && cell == CELL_ROAD {
@@ -85,7 +85,7 @@ class CenterCamping: StandScene {
             }, completion: {})
         } else
         if pos.x == 0 && pos.y == 5 {
-            showMsg(text: "west")
+//            showMsg(text: "west")
         } else
         if pos.x == 12 && pos.y == 3 {
             let ec = EastCamping()

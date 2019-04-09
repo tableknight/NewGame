@@ -13,6 +13,7 @@ class SelecProfession:UIPanel {
         for b in _buttons {
             if b.contains(touchPoint!) {
                 _index = b.index
+                _selectedRole = _infos[_index]
                 createProComponent()
             }
         }
@@ -51,11 +52,11 @@ class SelecProfession:UIPanel {
         _nextButton.text = "下一步"
         
         _infos = [
-            ["骑士", "成为一名骑士，你将会获得6点属性成长、可同时使用2个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、盾牌、灵魂石和左右法戒。", 5, true, true, false, 1, 2, [Strong(), FeignAttack(), Taunt()]],
-            ["封印师", "成为一名封印师，你将会获得4点属性成长、可同时使用2个技能、可配置3个随从跟随战斗，并且可以装备武器、饰品、灵魂石和左右法戒。", 4, true, false, false, 3, 2, []],
-            ["主教", "成为一名牧师，你将会获得4点属性成长、可同时使用3个技能、可配置2个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 4, true, false, true, 2, 3, []],
-            ["法师", "成为一名法师，你将会获得5点属性成长、可同时使用3个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 5, true, false, true, 1, 3, []],
-            ["盗贼", "成为一名盗贼，你将会获得7点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 7, false, false, false, 1, 1, []],
+            ["骑士", "成为一名骑士，你将会获得6点属性成长、可同时使用2个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、盾牌、灵魂石和左右法戒。", 5, true, true, false, 1, 2, [LineAttack()]],
+            ["傀儡师", "成为一名儡师，你将会获得4点属性成长、可同时使用2个技能、可配置3个随从跟随战斗，并且可以装备武器、饰品、灵魂石和左右法戒。", 4, true, false, false, 3, 2, [ScreamLoud()]],
+            ["使徒", "成为一名使徒，你将会获得4点属性成长、可同时使用3个技能、可配置2个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 4, true, false, true, 2, 3, [Heal()]],
+            ["巫师", "成为一名巫师，你将会获得5点属性成长、可同时使用3个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 5, true, false, true, 1, 3, [LowlevelFlame()]],
+            ["刺客", "成为一名刺客，你将会获得7点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 7, false, false, false, 2, 2, [FireFist()]],
 //            ["", "成为一个武道家，你将会获得6点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 6, false, false, false, 2, 2, []]
         ]
         createProComponent()
@@ -102,6 +103,7 @@ class SelecProfession:UIPanel {
     private var _index = 0
     private var _component:ProfessionComponent?
     private var _buttons = Array<ProButton>()
+    var _selectedRole:Array<Any>!
     
 }
 class ProButton: Button {

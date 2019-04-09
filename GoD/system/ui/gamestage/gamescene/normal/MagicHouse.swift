@@ -99,10 +99,10 @@ class MagicHouse: InnerHouse {
             return
         }
         if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
-            let cc = CenterCamping()
+            let cc = EastCamping()
             let char = _role!
             Game.instance.curStage.switchScene(next: cc, afterCreation: {
-                cc.setRole(x: 10, y: 9, char: char)
+                cc.setRole(x: 5, y: 2, char: char)
                 char.faceSouth()
             }, completion: {})
         }

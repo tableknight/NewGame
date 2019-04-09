@@ -25,10 +25,12 @@ class Dungeon: MyScene {
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
-        createWallShadow()
+        createTowers()
+        if self is InnerMaze {
+            createWallShadow()
+        }
         createPortals()
         createTreasureBoxes()
-        createTowers()
         createEnemy()
     }
     
@@ -187,16 +189,17 @@ class Dungeon: MyScene {
         }
         return points
     }
-    
+    internal let _wall_shadow = SKTexture(imageNamed: "wall_shadow_12")
     internal func createWallShadow() {
-        let t = SKTexture(imageNamed: "wall_shadow_12")
+//        let t = _wall_shadow
         let t2 = Game.instance.inside_a5.getCell(0,0)
         for p in _wallPoints {
+            if CELL_TOWER == _mapMatrix[p.y.toInt()][p.x.toInt()] {
+                continue
+            }
             if p.x.toInt() < halfSize.toInt() * 2 - 1 {
                 if CELL_EMPTY == _mapMatrix[p.y.toInt()][p.x.toInt() + 1] {
-                    let shadow = SKSpriteNode(texture: t)
-                    addGround(x: p.x + 1, y: p.y, item: shadow)
-                    shadow.xAxis = shadow.xAxis - 18
+                    addShadow(x: p.x, y: p.y)
                 }
             }
             if p.y > 0 {
@@ -205,6 +208,12 @@ class Dungeon: MyScene {
                 }
             }
         }
+    }
+    
+    internal func addShadow(x:CGFloat, y:CGFloat) {
+        let shadow = SKSpriteNode(texture: _wall_shadow)
+        addGround(x: x + 1, y: y, item: shadow)
+        shadow.xAxis = shadow.xAxis - 18
     }
     
     internal func createTowers() {
@@ -310,4 +319,8 @@ class MapWall:UIItem {
         super.init(coder: aDecoder)
     }
     var wallTexture:SKTexture!
+}
+
+protocol InnerMaze {
+    
 }

@@ -56,7 +56,41 @@ class CreationFlow:SKSpriteNode {
             this.showPanel(2)
         }
         selectMinion.nextAction = {
+            if nil == selectImage._lastSelectedComponent._image {
+                self.showPanel(0)
+                return
+            }
+            let image = selectImage._lastSelectedComponent._image!
+            var role = selectPro._selectedRole
+            if nil == role {
+                role = ["冒险者", "", 5, true, false, true, 2, 2, []]
+            }
+            let items = selectItems._selectedItems
+            let minion = selectMinion._lastSelectedComponent._minion
+            let stage = MyStage()
+            let scene = SelfHome()
+            scene.create()
+            let e = Character()
+            e.create(level: 1)
+            e._img = image
+            e._spellsInuse = role![8] as! Array<Spell>
+            e._props = items
+            e.hasWeapon = role![3] as! Bool
+            e.hasShield = role![4] as! Bool
+            e.hasMark = role![5] as! Bool
+            e._minionsCount = role![6] as! Int
+            e._spellCount = role![7] as! Int
+            scene.setRole(x: 2, y: 1, role: e)
+            //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
+            stage.loadScene(scene: scene)
+            stage.createMenu()
+            self.gameScene!.addChild(stage)
+            if minion != nil {
+                minion!._seat = BUnit.BTM
+                e._minions = [minion!]
+            }
             
+            self.actionCreate()
         }
         
         _panels.append(selectImage)
@@ -65,21 +99,23 @@ class CreationFlow:SKSpriteNode {
         _panels.append(selectMinion)
     }
     
-    private func loadStage(char:Character) {
-        removeFromParent()
-        Game.instance._char = char
-        let bUnit = BUnit()
-        bUnit.setUnit(unit: char)
-        bUnit.createForStage()
-        let stage = UIStage()
-        stage.showSceneMask()
-        stage.setChar(bUnit)
-        Game.instance.stage = stage
-        Game.instance.scene.addChild(stage)
-        stage.maskFadeOut {
-            stage._char.speak(text: "新的世界，新的旅程！")
-        }
-    }
+//    private func loadStage(char:Character) {
+//        removeFromParent()
+//        Game.instance._char = char
+//        let bUnit = BUnit()
+//        bUnit.setUnit(unit: char)
+//        bUnit.createForStage()
+//        let stage = UIStage()
+//        stage.showSceneMask()
+//        stage.setChar(bUnit)
+//        Game.instance.stage = stage
+//        Game.instance.scene.addChild(stage)
+//        stage.maskFadeOut {
+//            stage._char.speak(text: "新的世界，新的旅程！")
+//        }
+//    }
+    var actionCreate = {}
+    var actionReturn = {}
     
     func showPanel(_ i:Int) {
         for u in _panels {
@@ -89,4 +125,5 @@ class CreationFlow:SKSpriteNode {
     }
     
     private var _panels = Array<UIPanel>()
+    var gameScene:GameScene!
 }

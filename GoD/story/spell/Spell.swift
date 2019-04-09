@@ -816,24 +816,24 @@ class Spell:Core, IDisplay, ISelectTarget {
         
     }
     
-    func findTargetInALine() {
-        var list = Array<String>()
-        let rs = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
-        let t = rs.one()
-        for seats in [[BUnit.TTL, BUnit.TTM, BUnit.TTR],[BUnit.TBL, BUnit.TBM, BUnit.TBR],[BUnit.BTL, BUnit.BTM, BUnit.BTR],[BUnit.BBL, BUnit.BBM, BUnit.BBR]] {
-            if seats.index(of: t._unit._seat) != nil {
-                list = seats
-                break
-            }
-        }
-        
-        _battle._selectedTargets = []
-        for u in rs {
-            if list.index(of: u._unit._seat) != nil {
-                _battle._selectedTargets.append(u)
-            }
-        }
-    }
+//    func findTargetInALine() {
+//        var list = Array<String>()
+//        let rs = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
+//        let t = rs.one()
+//        for seats in [[BUnit.TTL, BUnit.TTM, BUnit.TTR],[BUnit.TBL, BUnit.TBM, BUnit.TBR],[BUnit.BTL, BUnit.BTM, BUnit.BTR],[BUnit.BBL, BUnit.BBM, BUnit.BBR]] {
+//            if seats.index(of: t._unit._seat) != nil {
+//                list = seats
+//                break
+//            }
+//        }
+//        
+//        _battle._selectedTargets = []
+//        for u in rs {
+//            if list.index(of: u._unit._seat) != nil {
+//                _battle._selectedTargets.append(u)
+//            }
+//        }
+//    }
     
     func selectable() -> Bool {
         return true

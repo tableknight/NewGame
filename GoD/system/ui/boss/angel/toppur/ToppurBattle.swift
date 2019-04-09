@@ -106,7 +106,14 @@ class LineAttack: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let ts = _battle._selectedTargets
+        let ss = getUnitsInRowOf(seat: _battle._selectedTarget!._unit._seat)
+        var ts = Array<BUnit>()
+        for s in ss {
+            let u = _battle.getUnitBySeat(seat: s)
+            if u != nil {
+                ts.append(u!)
+            }
+        }
         c.actionAttack {
             for t in ts {
                 let damage = self.physicalDamage(t)
@@ -122,9 +129,6 @@ class LineAttack: Physical {
         }
     }
     
-    override func findTarget() {
-        findTargetInALine()
-    }
 }
 
 class RecoveryFromAttack:Physical {

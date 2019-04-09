@@ -21,6 +21,9 @@ class Emily:Character {
 //        intellectChange(value: 5)
         _level = 1
 //        self.levelTo(level: _level)
+//        let bow = Bow()
+//        bow.create(level: 100)
+//        _weapon = bow
 //        let c = Core()
 //        for _ in 0..._level.toInt() {
 //            let seed = c.seed()
@@ -34,9 +37,7 @@ class Emily:Character {
 //                intellectChange(value: 5)
 //            }
 //        }
-        _spellsInuse = []
-        _spells = [
-        ]
+//        _spellsInuse = [ShootAll()]
         let _minionlevel:CGFloat = _level
         _spellCount = 2
         _minionsCount = 2
