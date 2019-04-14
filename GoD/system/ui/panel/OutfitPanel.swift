@@ -40,12 +40,18 @@ class OutfitPanel: UIPanel {
                 return
             }
         }
-        outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!)
+        if _char.hasWeapon {
+            outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!)
+        }
         outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!)
-        outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!)
+        if _char.hasShield {
+            outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!)
+        }
         outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!)
         outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!)
-        outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!)
+        if _char.hasMark {
+            outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!)
+        }
         outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!)
         
 //        if _weapon.contains(touchPoint!) {
@@ -300,9 +306,9 @@ class OutfitPanel: UIPanel {
             _amulet.iconLabel = _char._amulet!._name
             _amulet.quality = _char._amulet!._quality
         }
-        _char.hasWeapon = true
-        _char.hasShield = true
-        _char.hasMark = true
+//        _char.hasWeapon = true
+//        _char.hasShield = true
+//        _char.hasMark = true
         addChild(_amulet)
         _outfitSlots.append(_amulet)
         if _char.hasWeapon {

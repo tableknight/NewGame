@@ -11,6 +11,7 @@ class LootPanel:UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         _infosDisplay.removeFromParent()
+        //confirm
         if _closeButton.contains(touchPoint!) {
             Game.instance.curStage.removePanel(self)
             confirmAction()

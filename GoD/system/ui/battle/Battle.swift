@@ -666,6 +666,8 @@ class Battle: SKSpriteNode {
             p.confirmAction = {
                 self.lootPanelConfirmAction()
             }
+        } else {
+            self.lootPanelConfirmAction()
         }
     }
     internal func defeated() {

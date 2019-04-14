@@ -135,7 +135,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         return from.getAttack()
     }
     func levelFactor(_ from: BUnit, _ to:BUnit) -> CGFloat {
-        return (from._unit._level / to._unit._level)
+        return 1 + (from._unit._level / to._unit._level) * 0.05
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
         let atk = self.getAttack(from: from)

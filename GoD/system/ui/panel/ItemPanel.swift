@@ -165,6 +165,13 @@ class ItemPanel: UIPanel {
         addChild(_discardButton)
         addChild(_propBox)
         createPropList()
+        let moneyLabel = Label()
+        moneyLabel.text = "金钱：\(_char._money)G"
+        moneyLabel.position.x = _label.position.x
+        moneyLabel.position.y = -_label.position.y + _label.fontSize
+        moneyLabel.zPosition = _label.zPosition
+        moneyLabel.fontSize = _label.fontSize
+        addChild(moneyLabel)
     }
     func createPropList() {
         let props = getPropsCountMoreThan1()

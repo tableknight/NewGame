@@ -15,6 +15,9 @@ class SelecProfession:UIPanel {
                 _index = b.index
                 _selectedRole = _infos[_index]
                 createProComponent()
+                b.selected = true
+            } else {
+                b.selected = false
             }
         }
         if _nextButton.contains(touchPoint!) {
@@ -185,6 +188,7 @@ class ProfessionComponent:SelectableComponent {
         var i:CGFloat = 0
         for u in spells {
             let si = SpellIcon()
+            si.iconLabel = u._name
             si.spell = u
             si.xAxis = startX + i * (cellSize + gap)
             si.yAxis = label.position.y - cellSize * 0.75

@@ -80,15 +80,16 @@ class CreationFlow:SKSpriteNode {
             e.hasMark = role![5] as! Bool
             e._minionsCount = role![6] as! Int
             e._spellCount = role![7] as! Int
+            e._levelPoint = role![2] as! Int
+            e._seat = BUnit.BBM
             scene.setRole(x: 2, y: 1, role: e)
-            //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
-            stage.loadScene(scene: scene)
-            stage.createMenu()
-            self.gameScene!.addChild(stage)
             if minion != nil {
                 minion!._seat = BUnit.BTM
                 e._minions = [minion!]
             }
+            stage.loadScene(scene: scene)
+            stage.createMenu()
+            self.gameScene!.addChild(stage)
             
             self.actionCreate()
         }

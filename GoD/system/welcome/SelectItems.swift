@@ -77,6 +77,7 @@ class SelectItems: UIPanel {
                 let x = base % 6
                 let icon = PropIcon()
                 icon.count = props[i]._count
+                icon.iconLabel = props[i]._name
                 icon._displayItemType = props[i]
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
