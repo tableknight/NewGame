@@ -190,8 +190,8 @@ class Loot: Core {
             return FeignAttack()
         case 4:
             return FireBreath()
-        case 5:
-            return Heal()
+//        case 5:
+//            return Heal() //职业初始技能专属
         case 6:
             return Focus()
         case 7:
@@ -200,14 +200,14 @@ class Loot: Core {
             return Energetic()
         case 9:
             return ThunderAttack()
-        case 10:
-            return LowlevelFlame()
+//        case 10:
+//            return LowlevelFlame()
         case 11:
             return BreakDefence()
         case 12:
             return AttackHard()
-        case 13:
-            return ScreamLoud()
+//        case 13:
+//            return ScreamLoud()
         default:
             return Cruel()
         }
@@ -220,8 +220,8 @@ class Loot: Core {
             return BloodThirsty()
         case 1:
             return BloodThirsty() //多余
-        case 2:
-            return FireFist()
+//        case 2:
+//            return FireFist()
         case 3:
             return FrozenShoot()
         case 4:
@@ -256,8 +256,8 @@ class Loot: Core {
             return FlameAttack()
         case 19:
             return OathBreaker()
-        case 20:
-            return LineAttack()
+//        case 20:
+//            return LineAttack()
         case 21:
             return WindPunish()
         default:

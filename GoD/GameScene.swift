@@ -98,7 +98,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = MimicBattle()
+        let b = Battle()
         var es = Array<Creature>()
 //        let role = UndeadWarrior()
 //        role.create(level: 50)
@@ -121,6 +121,9 @@ class GameScene: SKScene {
 //        t._seat = BUnit.TTM
 //        es.append(t)
 //        //        b.setEvils(evils: es)
+        let r = HellBaron()
+        r.create(level: 1)
+        es.append(r)
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
         let cs:Array<Creature> = [char] + char.getReadyMinions()
@@ -128,7 +131,7 @@ class GameScene: SKScene {
 //            u._elementalResistance.fire += 70
 //        }
         b.setPlayerPart(roles: cs)
-        Game.instance.char._spellsInuse = [BearFriend()]
+//        Game.instance.char._spellsInuse = [BearFriend()]
         
         Game.instance.curStage.addBattle(b)
         b.battleStart()

@@ -16,7 +16,6 @@ class DarkCrow: Natrue {
         _stars.intellect = 0.6
         _name = "阿福"
         _race = EvilType.NATURE
-        _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureNature.getCell(0, 3, 3, 4)
         _spellsInuse = []
     }

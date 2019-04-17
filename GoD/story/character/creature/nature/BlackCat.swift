@@ -10,13 +10,12 @@ import SpriteKit
 class BlackCat: Natrue {
     override init() {
         super.init()
-        _stars.strength = 1.0
-        _stars.stamina = 1.5
-        _stars.agility = 1.8
-        _stars.intellect = 1.9
+        _stars.strength = 1.4
+        _stars.stamina = 1.1
+        _stars.agility = 2.1
+        _stars.intellect = 1.1
         _name = "奇奇"
         _race = EvilType.NATURE
-        _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureNature.getCell(3, 3, 3, 4)
         _spellsInuse = []
     }

@@ -15,6 +15,7 @@ class Burning:Derivant {
     override func cast(completion: @escaping () -> Void) {
         let s = _target.getStatus(type: Status.BURNING) as! BurningStatus
         let damage = s.getBurningDamage(unit: _target)
+//        let damage = -self._target.getHealth()
         if !hadSpecialAction(t: _target, completion: completion) {
             self._target.showValue(value: damage) {
                 completion()

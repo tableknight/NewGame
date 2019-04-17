@@ -81,9 +81,9 @@ class SelectMinion:UIPanel {
             let y = i % 3
             let mc = SelectMinionComponent()
             mc.create(minion: minions[i])
-            mc.position.x = -cellSize * 1.5
+            mc.position.x = -cellSize * 1.25
             mc.zPosition = self.zPosition + 5
-            mc.position.y = startY - y.toFloat() * cellSize * 2.25
+            mc.position.y = startY - y.toFloat() * cellSize * 1.75
             _minionLayer.addChild(mc)
             _minionComponents.append(mc)
         }

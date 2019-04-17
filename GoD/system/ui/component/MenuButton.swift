@@ -40,7 +40,7 @@ class RoundButton:SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         //        let rect = SKShapeNode(
         zPosition = UIStage.UILAYER
-        _label.fontSize = 14
+        _label.fontSize = 20
         _label.align = "center"
         _label.position.y = _label.fontSize * 0.5
         addChild(_label)
@@ -82,13 +82,13 @@ class SpellRoundButton:RoundButton {
     var spell:Spell {
         set {
             _spell = newValue
-            _label.text = newValue._name
-//            var n = ""
-//            for s in newValue._name {
-//                n.append(s)
-//                break
-//            }
-//            _label.text = n
+//            _label.text = newValue._name
+            var n = ""
+            for s in newValue._name {
+                n.append(s)
+                break
+            }
+            _label.text = n
 //            _label.fontSize = 24
 //            _label.position.y = 12
 //            _label.fontColor = QualityColor.getColor(newValue._quality)

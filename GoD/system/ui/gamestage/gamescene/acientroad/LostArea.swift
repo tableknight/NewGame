@@ -61,7 +61,7 @@ class LostArea: AcientRoad {
         return Game.instance.outside_b.getCell(5, 12, 1, 2)
     }
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
-        if Core().d4() {
+        if Core().d2() {
             super.addWall(x: x, y: y, item: item)
         } else {
             addItem(x: x, y: y, item: getItemByIndex(index: _itemEnum.one()))
