@@ -145,6 +145,12 @@ class BoneWitch: Rizen {
         _spellsInuse = [FireBreath()]
         _img = Game.instance.pictureMonster.getCell(3, 7, 3, 4)
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class RedEyeDemon: Demon {
     override init() {
@@ -162,6 +168,12 @@ class RedEyeDemon: Demon {
         if _spellCount > 0 && aQuarter() {
             _spellsInuse = [Strong()]
         }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class DeadSpirit: Rizen {
@@ -184,7 +196,12 @@ class DeadSpirit: Rizen {
             _spellsInuse.append(Energetic())
         }
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class WasteWalker: Rizen {
     override init() {
@@ -203,5 +220,10 @@ class WasteWalker: Rizen {
             _spellsInuse = [Cruel()]
         }
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

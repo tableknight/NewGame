@@ -94,6 +94,12 @@ class Crawler: Demon {
         _name = "爬行者"
         _img = SKTexture(imageNamed: "crawler")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UnderworldRider: Demon {
     override init() {
@@ -104,6 +110,12 @@ class UnderworldRider: Demon {
         _stars.intellect = 0.6
         _name = "灵界骑士"
         _img = SKTexture(imageNamed: "underworld_rider")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class DeathGod: Demon {
@@ -116,6 +128,12 @@ class DeathGod: Demon {
         _name = "死神"
         _img = SKTexture(imageNamed: "death_god")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class EvilCurse: Man {
     override init() {
@@ -126,6 +144,12 @@ class EvilCurse: Man {
         _stars.intellect = 0.6
         _name = "恶咒"
         _img = SKTexture(imageNamed: "evil_curse")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

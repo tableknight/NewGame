@@ -8,6 +8,12 @@
 
 import SpriteKit
 class PuppetMark: MagicMark {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "傀儡印记"
@@ -54,6 +60,12 @@ class MarkOfOaks:MagicMark {
     override func create() {
         _spell = MightOfOaks()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class MarkOfDeathGod:MagicMark {
     override init() {
@@ -67,6 +79,12 @@ class MarkOfDeathGod:MagicMark {
     }
     override func create() {
         createSpell()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class MarkOfVitality:MagicMark {
@@ -82,6 +100,12 @@ class MarkOfVitality:MagicMark {
     override func create() {
         _spell = SummonFlower()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class MarkOfHeaven:MagicMark {
     override init() {
@@ -96,6 +120,12 @@ class MarkOfHeaven:MagicMark {
     override func create() {
         createSpell()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class MoltenFire:MagicMark {
     override init() {
@@ -109,6 +139,12 @@ class MoltenFire:MagicMark {
     override func create() {
         createSpell()
         createAttr(attrId: FIREPOWER, value: seedFloat(min: 40, max: 51), remove: true)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class TheEye:MagicMark {
@@ -140,5 +176,11 @@ class TheEye:MagicMark {
                 debug("spell exist in TheEye \(spell._name)")
             }
         }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

@@ -8,6 +8,12 @@
 
 import SpriteKit
 class RingOfDead:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "亡灵之戒"
@@ -40,6 +46,12 @@ class RingOfDead:Ring {
     }
 }
 class IdlirWeddingRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "伊德利尔的婚戒"
@@ -70,6 +82,12 @@ class IdlirWeddingRing:Ring {
     }
 }
 class ApprenticeRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "学徒法戒"
@@ -88,6 +106,12 @@ class ApprenticeRing:Ring {
     }
 }
 class CopperRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "铜质戒指"
@@ -104,6 +128,12 @@ class CopperRing:Ring {
     }
 }
 class SilverRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "银质戒指"
@@ -121,6 +151,12 @@ class SilverRing:Ring {
     }
 }
 class DellarsGoldenRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "德拉的金戒"
@@ -138,6 +174,12 @@ class DellarsGoldenRing:Ring {
     }
 }
 class LuckyRing:Ring {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "幸运指环"

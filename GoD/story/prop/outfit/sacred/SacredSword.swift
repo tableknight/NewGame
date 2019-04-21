@@ -40,6 +40,12 @@ class NewSwordPlus: Sword {
         _attrs.append(int)
         createPrice()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class NewSword: Sword {
     override init() {
@@ -74,6 +80,12 @@ class NewSword: Sword {
         _attrs.append(int)
         createPrice()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class DragonSlayer: Sword {
     override init() {
@@ -96,6 +108,12 @@ class DragonSlayer: Sword {
         removeAttrId(id: REVENGE)
         _attrCount = 3
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class DragonSaliva: Sword {
@@ -122,6 +140,12 @@ class DragonSaliva: Sword {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class TheExorcist:Sword {
     static let CHANCE:Int = 35
@@ -143,6 +167,12 @@ class TheExorcist:Sword {
         _attrCount = 1
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class BloodBlade:Sword {
     override init() {
@@ -161,6 +191,12 @@ class BloodBlade:Sword {
         createAttr(attrId: ACCURACY, value: seedFloat(min: 15, max: 26), remove: true)
         _attrCount = 2
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class ElementalSword:Sword {
@@ -195,6 +231,12 @@ class ElementalSword:Sword {
             c._spellsHidden.remove(at: i!)
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class IberisHand:Sword {
     override init() {
@@ -214,6 +256,12 @@ class IberisHand:Sword {
         createAttr(attrId: CRITICAL, value: 30, remove: true)
         createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 16), remove: true)
         createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 16), remove: true)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

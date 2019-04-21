@@ -14,4 +14,10 @@ class DragonBlood:Passive {
         _description = "有一半几率免疫火焰伤害"
         _quality = Quality.GOOD
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

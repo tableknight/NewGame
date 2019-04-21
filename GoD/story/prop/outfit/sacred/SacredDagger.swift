@@ -25,6 +25,12 @@ class NightBlade: Dagger {
         _attrCount = seed(min: 2, max: 5)
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class LazesPedicureKnife:Dagger {
     override init() {
@@ -43,5 +49,11 @@ class LazesPedicureKnife:Dagger {
         createAttr(attrId: LUCKY, value: 15, remove: true)
         _attrCount = 2
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

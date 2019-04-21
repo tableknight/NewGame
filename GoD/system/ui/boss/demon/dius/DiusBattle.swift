@@ -40,6 +40,12 @@ class DiusBattle: BossBattle {
     }
 }
 class ExposeWeakness: Passive, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = ""
@@ -76,6 +82,12 @@ class ExposeWeakness: Passive, BossOnly {
     }
 }
 class BallLighting: Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "球状闪电"
@@ -104,6 +116,12 @@ class BallLighting: Magical {
     }
 }
 class SuperWater:Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "超级洪流"
@@ -130,6 +148,12 @@ class SuperWater:Magical {
     }
 }
 class FireExplode:Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "烈焰爆轰"

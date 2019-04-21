@@ -17,4 +17,10 @@ class SummonUnit: Creature {
     internal func createPropValue() -> CGFloat {
         return seed(min: 10, max: 20).toFloat() * 0.1
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

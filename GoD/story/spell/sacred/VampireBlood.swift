@@ -8,7 +8,12 @@
 
 import SpriteKit
 class VampireBlood: Passive {
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "吸血鬼血统"

@@ -534,6 +534,10 @@ class Battle: SKSpriteNode {
         if hasFinished() {
             return
         }
+        if _curRole.isDead() {
+            moveEnd()
+            return
+        }
         let this = self
         if this._curRole.hasStatus(type: Status.FREEZING) {
             this._curRole.actionUnfreeze {
@@ -844,10 +848,10 @@ class Battle: SKSpriteNode {
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
 //        let t:CGFloat = 10
-        _orderAttack = createMenuButtons(x: x, y: y, size: size, text: "攻")
-        _orderDefend = createMenuButtons(x: x + gap, y: y, size: size, text: "防")
+        _orderAttack = createMenuButtons(x: x, y: y, size: size, text: "攻击")
+        _orderDefend = createMenuButtons(x: x + gap, y: y, size: size, text: "防御")
 //        _orderSpell = createMenuButtons(x: x + gap * 2 , y: y, size: size, text: "法术")
-        _orderItem = createMenuButtons(x: x + gap * 2, y: y, size: size, text: "物")
+        _orderItem = createMenuButtons(x: x + gap * 2, y: y, size: size, text: "物品")
         _orderSummon = createMenuButtons(x: x + gap * 3, y: y, size: size, text: "召唤")
         _orderRecall = createMenuButtons(x: x + gap * 4, y: y, size: size, text: "召回")
         _orderCancel = createMenuButtons(x: -x, y: y, size: size, text: "取消")
@@ -1534,7 +1538,7 @@ class Battle: SKSpriteNode {
             if m is Boss {
                 bUnit.yAxis = cellSize * 4.75
             }
-            bUnit.burning()
+//            bUnit.burning()
             _enemyPart.append(bUnit)
             _evilsOrg.append(bUnit)
             addChild(bUnit)

@@ -39,6 +39,12 @@ class TrueLie: Amulet {
         }
         c._spellCount -= 1
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class MedalOfCourage:Amulet {
@@ -61,6 +67,12 @@ class MedalOfCourage:Amulet {
         _attrCount = 1
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class FangOfVampire:Amulet {
@@ -82,6 +94,12 @@ class FangOfVampire:Amulet {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class MoonShadow:Amulet {
     override init() {
@@ -97,6 +115,12 @@ class MoonShadow:Amulet {
         createAttr(attrId: AGILITY, value: 25, remove: true)
         _attrCount = seed(min: 2, max: 5)
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class EternityNight:Amulet {
@@ -115,6 +139,12 @@ class EternityNight:Amulet {
         createAttr(attrId: WATERRESISTANCE, value: 35, remove: true)
         createAttr(attrId: LUCKY, value: seedFloat(min: 10, max: 16), remove: true)
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Sparkling:Amulet {
     override init() {
@@ -132,6 +162,12 @@ class Sparkling:Amulet {
         createAttr(attrId: SPEED, value: seedFloat(min: 10, max: 16), remove: true)
         _attrCount = 2
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class MedalOfHero:Amulet {
@@ -152,6 +188,12 @@ class MedalOfHero:Amulet {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class JadeHeart:Amulet {
     override init() {
@@ -170,5 +212,11 @@ class JadeHeart:Amulet {
         createAttr(attrId: SPEED, value: seedFloat(min: 30, max: 41), remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

@@ -8,6 +8,19 @@
 
 import SpriteKit
 class Outfit:Prop {
+    private enum CodingKeys: String, CodingKey {
+        case _attrs
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _attrs = try values.decode(Array.self, forKey: ._attrs)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_attrs, forKey: ._attrs)
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         
@@ -37,6 +50,11 @@ class Outfit:Prop {
                 RHYTHM
         ]
     }
+    
+//    required init(from decoder: Decoder) throws {
+//        fatalError("init(from:) has not been implemented")
+//    }
+    
 
     internal var _attrCount:Int = 0
     override func create(level:CGFloat) {

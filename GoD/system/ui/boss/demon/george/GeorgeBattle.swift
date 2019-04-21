@@ -86,6 +86,12 @@ class GeorgeAttack: BossAttack {
 }
 
 class Screaming: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "尖叫"
@@ -130,6 +136,12 @@ class Screaming: Magical, BossOnly {
 }
 
 class Infection:Magical, Curse, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "感染"
@@ -158,6 +170,12 @@ class Infection:Magical, Curse, BossOnly {
     }
 }
 class DrawBlood:Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "群体吸血"

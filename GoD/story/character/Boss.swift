@@ -18,4 +18,10 @@ class Boss: Creature {
         intellectChange(value: (level + 10) * _growth.intellect)
         _level = level
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

@@ -86,6 +86,12 @@ class UndeadMinion11: Rizen {
         _img = SKTexture(imageNamed: "undead_minion_1")
         _spellsInuse = [DeathAttack()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion12: Rizen {
     override init() {
@@ -98,6 +104,12 @@ class UndeadMinion12: Rizen {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_2")
         _spellsInuse = [LineAttack()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class UndeadMinion13: Rizen {
@@ -112,6 +124,12 @@ class UndeadMinion13: Rizen {
         _img = SKTexture(imageNamed: "undead_minion_3")
         _spellsInuse = [AttackPowerUp()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion14: Rizen {
     override init() {
@@ -125,6 +143,12 @@ class UndeadMinion14: Rizen {
         _img = SKTexture(imageNamed: "undead_minion_4")
         _spellsInuse = [SoulExtract()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion15: Rizen {
     override init() {
@@ -137,5 +161,11 @@ class UndeadMinion15: Rizen {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
         _spellsInuse = [Reinforce()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

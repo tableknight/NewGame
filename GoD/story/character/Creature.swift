@@ -7,8 +7,37 @@
 //
 import SpriteKit
 class Creature: Unit {
-    
-    
+    private enum CodingKeys: String, CodingKey {
+        case _stars
+        case _growth
+        case _spellCount
+        case _sensitive
+        case _weapon
+        case _seat
+        case isMainChar
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _stars = try values.decode(Mains.self, forKey: ._stars)
+        _growth = try values.decode(Mains.self, forKey: ._growth)
+        _spellCount = try values.decode(Int.self, forKey: ._spellCount)
+        _sensitive = try values.decode(Int.self, forKey: ._sensitive)
+        _weapon = try values.decode(Weapon.self, forKey: ._weapon)
+        _seat = try values.decode(String.self, forKey: ._seat)
+        isMainChar = try values.decode(Bool.self, forKey: .isMainChar)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_stars, forKey: ._stars)
+        try container.encode(_growth, forKey: ._growth)
+        try container.encode(_spellCount, forKey: ._spellCount)
+        try container.encode(_sensitive, forKey: ._sensitive)
+        try container.encode(_weapon, forKey: ._weapon)
+        try container.encode(_seat, forKey: ._seat)
+        try container.encode(isMainChar, forKey: .isMainChar)
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
     }
@@ -19,7 +48,14 @@ class Creature: Unit {
     var _spellSlot:SpellSlot = SpellSlot(max: 3, min: 0)
     var _spellCount = 2
     var _moveSpeed:CGFloat = 0
-
+    var _sensitive = 33
+    var _weapon:Weapon?
+    var _seat = BUnit.STAND_BY
+    var isMainChar = false
+    //矩阵图第三行和第四行特殊
+    var specialUnit = false
+    //非行动单位
+    var hasAction = true
     func beMore() -> Bool {
         let sed = seed(max: 100)
         if _quality >= Int(sed / 25) {
@@ -30,11 +66,11 @@ class Creature: Unit {
     }
     func extraProperty(value: CGFloat) -> CGFloat {
         let size = seed(max: Int(value * 10))
-        let value = CGFloat(size) * 0.01
+        let v = CGFloat(size) * 0.01
         if beMore() {
-            return value
+            return v
         } else {
-            return -value
+            return -v
         }
     }
     func createQuality() {
@@ -127,12 +163,5 @@ class Creature: Unit {
     func getLoots() -> Array<Prop> {
         return Array<Prop>()
     }
-    var _sensitive = 33
-    var _weapon:Weapon?
-    var _seat = BUnit.STAND_BY
-    var isMainChar = false
-    //矩阵图第三行和第四行特殊
-    var specialUnit = false
-    //非行动单位
-    var hasAction = true
+    
 }

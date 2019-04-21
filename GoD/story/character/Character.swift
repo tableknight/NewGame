@@ -8,16 +8,16 @@
 
 import SpriteKit
 class Character: Creature {
-    static var MAX_STORED_MINIONS_COUNT = "maxStoredMinionsCount"
-    static var MAX_MINIONS_COUNT = "maxMinionsCount"
+//    static var MAX_STORED_MINIONS_COUNT = "maxStoredMinionsCount"
+//    static var MAX_MINIONS_COUNT = "maxMinionsCount"
     override init() {
         super.init()
         isMainChar = true
         _name = "冒险者"
-        _setting["maxStoredMinionsCount"] = 5
-        _setting["maxMinionsCount"] = 6
-        _setting["storageSize"] = 40
-        _setting["bagSize"] = 24
+//        _setting["maxStoredMinionsCount"] = 5
+//        _setting["maxMinionsCount"] = 6
+//        _setting["storageSize"] = 40
+//        _setting["bagSize"] = 24
         _seat = BUnit.LLM
 //        _img = Data.instance
     }
@@ -184,6 +184,12 @@ class Character: Creature {
             }
         }
     }
+    func addMoney(num:Int) {
+        _money += num
+    }
+    func lostMoney(num:Int) {
+        _money -= num
+    }
     
     func getReadyMinions() -> Array<Creature> {
         var ms = Array<Creature>()
@@ -195,7 +201,6 @@ class Character: Creature {
         return ms
     }
     
-    var _dungeonLevel:Int = 1
     var _minionsCount = 2
     var _props = Array<Prop>()
     var _storage = Array<Prop>()
@@ -214,15 +219,37 @@ class Character: Creature {
     var _magicMark:MagicMark?
     var _soulStone:SoulStone?
     
+    var _dungeonLevel:Int = 1
     var _levelPoint = 5
     var _money = 0
     
-    func addMoney(num:Int) {
-        _money += num
+    private enum CodingKeys: String, CodingKey {
+        case _dungeonLevel
+        case _minionsCount
+        case _props
+        case _minions
+        case hasShield
+        case hasEarring
+        case hasWeapon
+        case hasMark
+        case _amulet
+        case _leftRing
+        case _rightRing
+        case _shield
+        case _magicMark
+        case _soulStone
+        case _levelPoint
+        case _money
     }
-    func lostMoney(num:Int) {
-        _money -= num
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
     }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    
+    
     
 //    func hasSpell(spell:Spell) -> Bool {
 //        for s in _spells {
@@ -243,23 +270,23 @@ class Character: Creature {
 //        return true
 //    }
     
-    var _setting = Dictionary<String, Any>()
-    var _boss:Dictionary<String, Dictionary<String, String>> = [
-        "malkus" : ["name": "马尔库斯", "passed": "0", "level" : "21"],
-        "dius" : ["name": "迪乌斯", "passed": "0", "level" : "32"],
-        "umisa" : ["name": "犹弥萨", "passed": "0", "level" : "40"],
-        "francis" : ["name": "佛朗西斯", "passed": "0", "level" : "46"],
-        "idylls" : ["name": "埃迪尔斯", "passed": "0", "level" : "50"],
-        "kukur" : ["name": "库库尔", "passed": "0", "level" : "59"],
-        "pitheron" : ["name": "皮瑟隆", "passed": "0", "level" : "66"],
-        "iberis" : ["name": "伊比利斯", "passed": "0", "level" : "78"],
-        "georgeantonbill" : ["name": "乔治安顿比尔", "passed": "0", "level" : "82"],
-        "idlir" : ["name": "伊德利尔", "passed": "0", "level" : "88"],
-        "cusses" : ["name": "库塞斯", "passed": "0", "level" : "96"],
-        "eykan" : ["name": "埃坎", "passed": "0", "level" : "102"],
-    ]
+//    var _setting = Dictionary<String, Any>()
+//    var _boss:Dictionary<String, Dictionary<String, String>> = [
+//        "malkus" : ["name": "马尔库斯", "passed": "0", "level" : "21"],
+//        "dius" : ["name": "迪乌斯", "passed": "0", "level" : "32"],
+//        "umisa" : ["name": "犹弥萨", "passed": "0", "level" : "40"],
+//        "francis" : ["name": "佛朗西斯", "passed": "0", "level" : "46"],
+//        "idylls" : ["name": "埃迪尔斯", "passed": "0", "level" : "50"],
+//        "kukur" : ["name": "库库尔", "passed": "0", "level" : "59"],
+//        "pitheron" : ["name": "皮瑟隆", "passed": "0", "level" : "66"],
+//        "iberis" : ["name": "伊比利斯", "passed": "0", "level" : "78"],
+//        "georgeantonbill" : ["name": "乔治安顿比尔", "passed": "0", "level" : "82"],
+//        "idlir" : ["name": "伊德利尔", "passed": "0", "level" : "88"],
+//        "cusses" : ["name": "库塞斯", "passed": "0", "level" : "96"],
+//        "eykan" : ["name": "埃坎", "passed": "0", "level" : "102"],
+//    ]
     
-    var _event = Array<Int>()
+//    var _event = Array<Int>()
     
 //    var fn:() -> Void = {}
 }

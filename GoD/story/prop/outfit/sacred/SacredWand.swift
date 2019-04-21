@@ -23,6 +23,12 @@ class LightingRod:Wand {
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class FireMaster:Wand {
     override init() {
@@ -41,6 +47,12 @@ class FireMaster:Wand {
         createAttr(attrId: FIREPOWER, value: 35, remove: true)
         _attrCount = seed(min: 1, max: 4)
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class WitchWand:Wand {
@@ -61,6 +73,12 @@ class WitchWand:Wand {
         createAttr(attrId: MIND, value: 42, remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class PuppetMaster:Wand {
@@ -94,5 +112,11 @@ class PuppetMaster:Wand {
         if minions.count > char._minionsCount {
             minions[0]._seat = BUnit.STAND_BY
         }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

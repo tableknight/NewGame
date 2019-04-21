@@ -8,6 +8,13 @@
 
 import SpriteKit
 class Spirit: Attribute {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "精神"
@@ -24,6 +31,13 @@ class Spirit: Attribute {
     }
 }
 class SpiritBase: Attribute {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "精神"

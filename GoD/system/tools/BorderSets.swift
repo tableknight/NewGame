@@ -8,6 +8,12 @@
 
 import SpriteKit
 class BorderSets: Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     var _border:SKTexture = SKTexture()
     var _corner:SKTexture = SKTexture()
     init(border:SKTexture, corner:SKTexture) {
@@ -58,6 +64,7 @@ class BorderSets: Core {
 //        smallCorner.anchorPoint = CGPoint(x: 0, y: 1)
 //        node.addChild(smallCorner)
 //        horizontal_border = view.texture(from: node)
+        super.init()
     }
     
     func topLeftCorner() -> SKTexture {

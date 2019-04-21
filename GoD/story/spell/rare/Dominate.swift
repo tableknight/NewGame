@@ -14,5 +14,11 @@ class Dominate: Passive {
         _description = "使自己的种族属性始终处于优势"
         _quality = Quality.RARE
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 

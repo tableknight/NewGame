@@ -57,6 +57,12 @@ class ToppurBattle: BossBattle {
     }
 }
 class FateDecision: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         //        isWater = true
@@ -96,6 +102,12 @@ class FateDecision: Magical, BossOnly {
     
 }
 class LineAttack: Physical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "顺劈斩"
@@ -132,6 +144,12 @@ class LineAttack: Physical {
 }
 
 class RecoveryFromAttack:Physical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "吸血攻击"

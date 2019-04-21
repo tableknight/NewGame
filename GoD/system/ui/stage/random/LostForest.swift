@@ -69,6 +69,12 @@ class DarkNinja: Man {
             _spellsInuse = [Disappear()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class HellNight: Rizen {
@@ -88,6 +94,12 @@ class HellNight: Rizen {
             _spellsInuse = [BargeAbout()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class BloodQueen: Demon {
@@ -100,6 +112,12 @@ class BloodQueen: Demon {
         _name = "鲜血女王"
         _spellSlot = SpellSlot(max: 3, min: 1)
         _img = Game.instance.pictureEvil.getCell(6, 7, 3, 4)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 
 }
@@ -120,6 +138,12 @@ class ManWizard: Man {
         if _spellCount > 0 && aQuarter() {
             _spellsInuse = [FrozenShoot()]
         }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

@@ -8,11 +8,18 @@
 
 import SpriteKit
 class HouseSets: Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     private var _roofs = SKTexture()
     private var _wall = SKTexture()
     init(roofs:SKTexture, wall:SKTexture) {
         _roofs = roofs
         _wall = wall
+        super.init()
     }
     func roofStart() -> SKSpriteNode {
         return SKSpriteNode(texture: _roofs.getCell(0, 1, 1, 2))

@@ -25,6 +25,12 @@ class Lewis:Boss {
         
         _spellsInuse = []
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class LewisMinion:BossMinion, IFace {
     override init() {
@@ -43,5 +49,11 @@ class LewisMinion:BossMinion, IFace {
         levelTo(level: level)
         
         _spellsInuse = [HandOfGod()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

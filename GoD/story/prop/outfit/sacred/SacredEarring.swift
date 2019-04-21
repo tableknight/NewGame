@@ -25,6 +25,12 @@ class VerdasTear: EarRing {
         createAttr(attrId: WATERRESISTANCE, value: 15)
         createAttr(attrId: THUNDERRESISTANCE, value: 15)
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class DeepSeaPearl: EarRing {
@@ -43,6 +49,12 @@ class DeepSeaPearl: EarRing {
         createAttr(attrId: REVENGE, value: 5, remove: true)
         _attrCount = 2
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -80,6 +92,22 @@ class EyeOfDius: EarRing {
             char._extensions.hp = char._extensions.health
         }
     }
+    private enum CodingKeys: String, CodingKey {
+        case _value
+        case _plus
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _value = try values.decode(Int.self, forKey: ._value)
+        _plus = try values.decode(CGFloat.self, forKey: ._plus)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_value, forKey: ._value)
+        try container.encode(_plus, forKey: ._plus)
+        try super.encode(to: encoder)
+    }
 }
 
 class LavaCrystal: EarRing {
@@ -99,5 +127,11 @@ class LavaCrystal: EarRing {
         createAttr(attrId: STAMINA, value: -45, remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

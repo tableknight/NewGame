@@ -40,22 +40,22 @@ class MinionsHousePanel: UIPanel {
             for mc in _curStoredMinions {
                 if mc.contains(touchPoint!) {
                     if _lastSelectedStoredMinion == mc {
-                        let max = _char._setting[Character.MAX_MINIONS_COUNT] as! Int
-                        if _char._minions.count < max {
-                            let i = _char._storedMinions.index(of: mc.unit)
-                            if nil != i {
-                                _char._storedMinions.remove(at: i!)
-                                _char._minions.append(mc.unit)
-                                mc.unit._seat = BUnit.STAND_BY
-                                mc.removeFromParent()
-                                _lastSelectedStoredMinion = MinionsHouseComponent()
-                                _curPageStored = 1
-                                createStoredMinions()
-                                _curPageChar = 1
-                                createCharMinions()
-                                setMinionsCountLabel()
-                            }
-                        }
+//                        let max = _char._setting[Character.MAX_MINIONS_COUNT] as! Int
+//                        if _char._minions.count < max {
+//                            let i = _char._storedMinions.index(of: mc.unit)
+//                            if nil != i {
+//                                _char._storedMinions.remove(at: i!)
+//                                _char._minions.append(mc.unit)
+//                                mc.unit._seat = BUnit.STAND_BY
+//                                mc.removeFromParent()
+//                                _lastSelectedStoredMinion = MinionsHouseComponent()
+//                                _curPageStored = 1
+//                                createStoredMinions()
+//                                _curPageChar = 1
+//                                createCharMinions()
+//                                setMinionsCountLabel()
+//                            }
+//                        }
                     } else {
                         _lastSelectedStoredMinion.selected = false
                         mc.selected = true
@@ -67,22 +67,22 @@ class MinionsHousePanel: UIPanel {
             for mhc in _curCharMinions {
                 if mhc.contains(touchPoint!) {
                     if _lastSelectedCharMinion == mhc {
-                        let max = _char._setting[Character.MAX_STORED_MINIONS_COUNT] as! Int
-                        if _char._storedMinions.count < max {
-                            let i = _char._minions.index(of: mhc.unit)
-                            if nil != i {
-                                _char._minions.remove(at: i!)
-                                _char._storedMinions.append(mhc.unit)
-                                mhc.unit._seat = BUnit.STAND_BY
-                                mhc.removeFromParent()
-                                _lastSelectedCharMinion = MinionsHouseComponent()
-                                _curPageStored = 1
-                                createStoredMinions()
-                                _curPageChar = 1
-                                createCharMinions()
-                                setMinionsCountLabel()
-                            }
-                        }
+//                        let max = _char._setting[Character.MAX_STORED_MINIONS_COUNT] as! Int
+//                        if _char._storedMinions.count < max {
+//                            let i = _char._minions.index(of: mhc.unit)
+//                            if nil != i {
+//                                _char._minions.remove(at: i!)
+//                                _char._storedMinions.append(mhc.unit)
+//                                mhc.unit._seat = BUnit.STAND_BY
+//                                mhc.removeFromParent()
+//                                _lastSelectedCharMinion = MinionsHouseComponent()
+//                                _curPageStored = 1
+//                                createStoredMinions()
+//                                _curPageChar = 1
+//                                createCharMinions()
+//                                setMinionsCountLabel()
+//                            }
+//                        }
                     } else {
                         _lastSelectedCharMinion.selected = false
                         mhc.selected = true
@@ -144,8 +144,8 @@ class MinionsHousePanel: UIPanel {
     }
     
     func setMinionsCountLabel() {
-        _storedMinionsCount.text = "\(_char._storedMinions.count)/\(_char._setting["maxStoredMinionsCount"] ?? 0)"
-        _minionsCount.text = "\(_char._minions.count)/\(_char._setting["maxMinionsCount"] ?? 0)"
+//        _storedMinionsCount.text = "\(_char._storedMinions.count)/\(_char._setting["maxStoredMinionsCount"] ?? 0)"
+//        _minionsCount.text = "\(_char._minions.count)/\(_char._setting["maxMinionsCount"] ?? 0)"
     }
     
     func createPageButtons0() {

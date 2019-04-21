@@ -43,6 +43,12 @@ class FrancisBattle: BossBattle {
 }
 
 class SummonServant: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "亡灵召唤"
@@ -94,6 +100,12 @@ class SummonServant: Magical, BossOnly {
 }
 
 class Nova: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "冲击波"
@@ -119,6 +131,12 @@ class Nova: Magical, BossOnly {
 }
 
 class DeathAttack:Physical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "死亡一击"
@@ -168,6 +186,12 @@ class AttackPowerUp: Passive {
             completion()
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class Reinforce: Magical {
@@ -205,6 +229,12 @@ class Reinforce: Magical {
     override func findTarget() {
         findSingleTargetNotBlocked()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class SoulExtract: Magical {
     override init() {
@@ -241,5 +271,11 @@ class SoulExtract: Magical {
     }
     override func findTarget() {
         findSingleTargetNotBlocked()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

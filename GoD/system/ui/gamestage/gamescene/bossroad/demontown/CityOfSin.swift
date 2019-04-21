@@ -97,6 +97,12 @@ class LostElf: Man {
         _name = "迷失精灵"
         _img = SKTexture(imageNamed: "lost_elf")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class Niro: Man {
@@ -108,6 +114,12 @@ class Niro: Man {
         _stars.intellect = 1.1
         _name = "尼路"
         _img = SKTexture(imageNamed: "niro")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -121,6 +133,12 @@ class Gerute: Demon {
         _name = "格鲁特"
         _img = SKTexture(imageNamed: "gerute")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class SoulSeaker: Demon {
@@ -132,5 +150,11 @@ class SoulSeaker: Demon {
         _stars.intellect = 2.4
         _name = "索魂者"
         _img = SKTexture(imageNamed: "soul_seaker")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

@@ -9,8 +9,76 @@
 import SpriteKit
 import GameplayKit
 
+
 class GameScene: SKScene {
-    
+    override func didMove(to view: SKView) {
+        let bow = Bow()
+        bow.create(level: 10)
+        save(b: bow)
+        
+        if let b = getBow() {
+            print(b._attrs.count)
+        }
+        
+//        let t = SubTryer()
+//        save(st: t)
+//        print(getSubTryer()?.sib._sibName)
+//        print(getSubTryer()?._subName)
+//        print(getSubTryer()?._name)
+//        if let ats = getSubTryer()?._attrs {
+//            print(ats.count)
+//        }
+//        let st = SubTryer()
+//        st._name = "2"
+//        st._subName = "22"
+//        st.sib._sibName = "33"
+//        save(st: st)
+//        if let s = SubTryer.getData() {
+//            print(s._subName)
+//            print(s._name)
+//        } else {
+//            print(st)
+//        }
+//        let t = Tryer()
+//        t._name = "a"
+//        save1(st: t)
+//        print(getSubTryer()?.sib._sibName)
+//        print(SubTryer.getData1()?._subName)
+//        print(SubTryer.getData1()?._name)
+        
+    }
+//    func getTryer() -> Tryer? {
+//        let us = UserDefaults.standard
+//        if let data = us.data(forKey: "tryer1") {
+//            return try? JSONDecoder().decode(Tryer.self, from: data)
+//        }
+//        return nil
+//    }
+    func getBow() -> Bow? {
+        let us = UserDefaults.standard
+        if let data = us.data(forKey: "bow") {
+            return try? JSONDecoder().decode(Bow.self, from: data)
+        }
+        return nil
+    }
+    func save(b:Bow) {
+        if let data = try? JSONEncoder().encode(b) {
+            let us = UserDefaults.standard
+            us.set(data, forKey: "bow")
+            us.synchronize()
+        }
+    }
+//    func save1(st:Tryer) {
+//        
+//        if let data = try? JSONEncoder().encode(st) {
+//            
+//            let us = UserDefaults.standard
+//            
+//            us.set(data, forKey: "tryer1")
+//            us.synchronize()
+//        }
+//    }
+
 //    private var label : SKLabelNode?
 //    private var spinnyNode : SKShapeNode?
     
@@ -139,7 +207,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SelfHome()
+        let bs = BlackWaterTown()
         bs.create()
         let e = Emily()
         e.create(level: e._level)
@@ -147,7 +215,7 @@ class GameScene: SKScene {
         e.addMoney(num: 1000)
 //        e._spellsInuse = []
 //        e._spellsInuse = [LineAttack()]
-        bs.setRole(x: 2, y: 1, role: e)
+        bs.setRole(x: 4, y: 4, role: e)
 //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
@@ -181,16 +249,7 @@ class GameScene: SKScene {
         }
         addChild(flow)
     }
-    override func didMove(to view: SKView) {
-        welcome()
-//        realScene()
-//        battle()
-//        addSacredOutfit()
-//        echoOutfit(item: Game.instance.char._props.one() as! Outfit)
-//        for p in Game.instance.char._props {
-//            echoOutfit(item: p as! Outfit)
-//        }
-    }
+    
     func echoSpell(spell:Spell) {
         var str = "{name:\"\(spell._name)\","
         str.append("description:\"\(spell._description)\",")

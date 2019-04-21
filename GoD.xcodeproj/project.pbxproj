@@ -289,6 +289,9 @@
 		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
+		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
+		097EC6C9226A07C600B9407A /* DemonPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonPortal.swift */; };
+		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
 		09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */; };
 		09C66C6F21F0B6F900E1C153 /* BossBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6E21F0B6F900E1C153 /* BossBattle.swift */; };
 		09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7221F0B83A00E1C153 /* Boss.swift */; };
@@ -676,6 +679,9 @@
 		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
+		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
+		097EC6C8226A07C600B9407A /* DemonPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonPortal.swift; sourceTree = "<group>"; };
+		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
 		09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding1.swift; sourceTree = "<group>"; };
 		09C66C6E21F0B6F900E1C153 /* BossBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossBattle.swift; sourceTree = "<group>"; };
 		09C66C7221F0B83A00E1C153 /* Boss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
@@ -820,6 +826,7 @@
 				090FE9FE21BB983E004276BB /* Actions.sks */,
 				090FE9FC21BB983E004276BB /* GameScene.sks */,
 				090FE9FA21BB983E004276BB /* AppDelegate.swift */,
+				097EC6CA226B695C00B9407A /* Tryer.swift */,
 				090FEA0021BB983E004276BB /* GameScene.swift */,
 				090FEA0221BB983E004276BB /* GameViewController.swift */,
 				090FEA0721BB983F004276BB /* Assets.xcassets */,
@@ -1489,6 +1496,7 @@
 				0922C96F224910A0002DC201 /* CityOfSin.swift */,
 				0922C96B2248C297002DC201 /* CityOfSorrow.swift */,
 				0922C96D22490CD8002DC201 /* CityOfDesire.swift */,
+				097EC6C8226A07C600B9407A /* DemonPortal.swift */,
 			);
 			path = demontown;
 			sourceTree = "<group>";
@@ -1687,6 +1695,7 @@
 				094E68D321E8E1A900414583 /* MagicHouse.swift */,
 				094E68D521EA228E00414583 /* ChurchHouse.swift */,
 				090C0DE521EB260E008C46AA /* NorthCanmping.swift */,
+				097EC6C6226814D000B9407A /* BlackWaterTown.swift */,
 			);
 			path = normal;
 			sourceTree = "<group>";
@@ -1893,6 +1902,7 @@
 				0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */,
 				09C6BF8221CA5F220003C7F1 /* BattleItemPanel.swift in Sources */,
 				090FEB7421BB9B2B004276BB /* Health.swift in Sources */,
+				097EC6CB226B695C00B9407A /* Tryer.swift in Sources */,
 				090FEC0C21BB9B2B004276BB /* Icon.swift in Sources */,
 				090FEC1821BB9B2B004276BB /* Bed.swift in Sources */,
 				090FEC4E21BCC4A6004276BB /* MyItem.swift in Sources */,
@@ -1955,6 +1965,7 @@
 				0922C960223D41EE002DC201 /* WindPunish.swift in Sources */,
 				090FEC1B21BB9B2B004276BB /* SmallHouse.swift in Sources */,
 				090FEBDC21BB9B2B004276BB /* Heal.swift in Sources */,
+				097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */,
 				090FEB6021BB9B2B004276BB /* SacredInstrument.swift in Sources */,
 				090FEC3321BB9B2B004276BB /* InnInside.swift in Sources */,
 				090FEBC321BB9B2B004276BB /* TruePower.swift in Sources */,
@@ -2116,6 +2127,7 @@
 				090FEBAB21BB9B2B004276BB /* DancingOnIce.swift in Sources */,
 				09C66C942207489800E1C153 /* Active.swift in Sources */,
 				09C66C962209E4B600E1C153 /* SumahlBattle.swift in Sources */,
+				097EC6C9226A07C600B9407A /* DemonPortal.swift in Sources */,
 				090FEB8521BB9B2B004276BB /* Critical.swift in Sources */,
 				09C66CDE2215BF0500E1C153 /* SpringIsComing.swift in Sources */,
 				090FEB8621BB9B2B004276BB /* Speed.swift in Sources */,

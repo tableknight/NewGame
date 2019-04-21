@@ -8,6 +8,12 @@
 //总结 143.999999999988 注意转换
 import SpriteKit
 class Scenery:Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     var _matrix:Array<Array<Int>> = Array()
     internal var _ground:SKSpriteNode = SKSpriteNode()
     internal var _itemLayer:SKSpriteNode = SKSpriteNode()

@@ -86,9 +86,9 @@ class InnInside: UIScene {
             if 8 == pos && !stage._dialogExist {
                 let img = SKTexture(imageNamed: "11000001.png").getCell(1, 0)
                 let c = stage.showDialog(img: img, text: "你好，冒险者。", name: "金刚级冒险者莫莫伊")
-                if char._event.contains(3) {
-                    return
-                }
+//                if char._event.contains(3) {
+//                    return
+//                }
                 c.addNextButton()
                 c._nextAction = {
                     c.text = "这是见面礼，祝你好运！"
@@ -98,7 +98,7 @@ class InnInside: UIScene {
                         p._count = 5
                         char.addProp(p: p)
                         c.remove()
-                        char._event.append(3)
+//                        char._event.append(3)
                         stage._char.speak(text: "谢谢你～～")
                     }
                 }

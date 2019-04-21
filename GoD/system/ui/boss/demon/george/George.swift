@@ -29,6 +29,12 @@ class George:Boss {
         //            _spellsInuse.append(BossAttack())
         //        }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class GeorgeServant1:BossMinion {
@@ -48,6 +54,12 @@ class GeorgeServant1:BossMinion {
         _extensions.hp = _extensions.health
         _spellsInuse = [Reborn()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class GeorgeServant2:BossMinion {
     override init() {
@@ -66,5 +78,11 @@ class GeorgeServant2:BossMinion {
         _extensions.hp = _extensions.health
         _sensitive = 60
         _spellsInuse = [Reborn(), Screaming()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

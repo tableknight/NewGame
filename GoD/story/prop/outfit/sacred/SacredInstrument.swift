@@ -27,6 +27,12 @@ class TheMonatNotes:Instrument {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class NoPants:Instrument {
     override init() {
@@ -46,6 +52,12 @@ class NoPants:Instrument {
         createAttr(attrId: WATERPOWER, value: seedFloat(min: 10, max: 21), remove: true)
         createAttr(attrId: THUNDERPOWER, value: seedFloat(min: 10, max: 21), remove: true)
         
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

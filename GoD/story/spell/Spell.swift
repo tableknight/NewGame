@@ -54,7 +54,57 @@ class Spell:Core, IDisplay, ISelectTarget {
             return _isClose
         }
     }
-    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _canBeTargetPlayer = try values.decode(Bool.self, forKey: ._canBeTargetPlayer)
+        _canBeTargetSelf = try values.decode(Bool.self, forKey: ._canBeTargetSelf)
+        _isClose = try values.decode(Bool.self, forKey: ._isClose)
+        _targetEnemy = try values.decode(Bool.self, forKey: ._targetEnemy)
+        _targetAll = try values.decode(Bool.self, forKey: ._targetAll)
+        isPhysical = try values.decode(Bool.self, forKey: .isPhysical)
+        isMagical = try values.decode(Bool.self, forKey: .isMagical)
+        isFire = try values.decode(Bool.self, forKey: .isFire)
+        isCurse = try values.decode(Bool.self, forKey: .isCurse)
+        isWater = try values.decode(Bool.self, forKey: .isWater)
+        isThunder = try values.decode(Bool.self, forKey: .isThunder)
+        isPassive = try values.decode(Bool.self, forKey: .isPassive)
+        isAuro = try values.decode(Bool.self, forKey: .isAuro)
+        autoCast = try values.decode(Bool.self, forKey: .autoCast)
+        isMultiple = try values.decode(Bool.self, forKey: .isMultiple)
+        hasAfterMoveAction = try values.decode(Bool.self, forKey: .hasAfterMoveAction)
+        _name = try values.decode(String.self, forKey: ._name)
+        _description = try values.decode(String.self, forKey: ._description)
+        _rate = try values.decode(CGFloat.self, forKey: ._rate)
+        _level = try values.decode(CGFloat.self, forKey: ._level)
+        _quality = try values.decode(Int.self, forKey: ._quality)
+        //        try super.init(from: decoder)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_canBeTargetSelf, forKey: ._canBeTargetSelf)
+        try container.encode(_canBeTargetPlayer, forKey: ._canBeTargetPlayer)
+        try container.encode(_isClose, forKey: ._isClose)
+        try container.encode(_targetEnemy, forKey: ._targetEnemy)
+        try container.encode(_targetAll, forKey: ._targetAll)
+        try container.encode(isPhysical, forKey: .isPhysical)
+        try container.encode(isMagical, forKey: .isMagical)
+        try container.encode(isFire, forKey: .isFire)
+        try container.encode(isCurse, forKey: .isCurse)
+        try container.encode(isWater, forKey: .isWater)
+        try container.encode(isThunder, forKey: .isThunder)
+        try container.encode(isPassive, forKey: .isPassive)
+        try container.encode(isAuro, forKey: .isAuro)
+        try container.encode(autoCast, forKey: .autoCast)
+        try container.encode(isMultiple, forKey: .isMultiple)
+        try container.encode(hasAfterMoveAction, forKey: .hasAfterMoveAction)
+        try container.encode(_name, forKey: ._name)
+        try container.encode(_description, forKey: ._description)
+        try container.encode(_rate, forKey: ._rate)
+        try container.encode(_level, forKey: ._level)
+        try container.encode(_quality, forKey: ._quality)
+        try super.encode(to: encoder)
+    }
     var _delay:CGFloat = 1.5
     var _canBeTargetPlayer = false
     var _canBeTargetSelf = false
@@ -84,9 +134,36 @@ class Spell:Core, IDisplay, ISelectTarget {
     var _tear = 0
     var _speakings = Array<String>()
     internal var beCritical = false
+    private enum CodingKeys: String, CodingKey {
+        case _canBeTargetPlayer
+        case _canBeTargetSelf
+        case _isClose
+        case _targetEnemy
+        case _targetAll
+        case isPhysical
+        case isMagical
+        case isFire
+        case isCurse
+        case isWater
+        case isThunder
+        case isPassive
+        case isAuro
+        case autoCast
+        case isMultiple
+        case hasAfterMoveAction
+        case _cooldown
+        case _timeleft
+        case _name
+        case _description
+        case _rate
+        case _quality
+        case _level
+        case _speakings
+    }
     override init() {
         super.init()
     }
+    
     func beforeMove(completion:@escaping () -> Void) {
         completion()
     }

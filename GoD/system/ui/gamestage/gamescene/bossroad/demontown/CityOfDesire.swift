@@ -98,6 +98,12 @@ class Ayer: Demon {
         _name = "艾尔"
         _img = SKTexture(imageNamed: "ayer")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Shuran: Demon {
     override init() {
@@ -108,6 +114,12 @@ class Shuran: Demon {
         _stars.intellect = 1
         _name = "舒兰"
         _img = SKTexture(imageNamed: "shuran")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class Lanis: Demon {
@@ -120,6 +132,12 @@ class Lanis: Demon {
         _name = "兰尼斯"
         _img = SKTexture(imageNamed: "lanis")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Angela: Demon {
     override init() {
@@ -130,5 +148,11 @@ class Angela: Demon {
         _stars.intellect = 3
         _name = "安吉拉"
         _img = SKTexture(imageNamed: "angela")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

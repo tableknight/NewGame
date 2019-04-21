@@ -113,4 +113,10 @@ class GreenGhost: Natrue {
         _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureCollabo8_2.getCell(3, 7, 3, 4)
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

@@ -26,6 +26,12 @@ class Francis:Boss {
         
         _spellsInuse = []
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class UndeadMinion1: BossMinion {
@@ -40,6 +46,12 @@ class UndeadMinion1: BossMinion {
         _img = SKTexture(imageNamed: "undead_minion_1")
         _spellsInuse = [DeathAttack()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion2: BossMinion {
     override init() {
@@ -52,6 +64,12 @@ class UndeadMinion2: BossMinion {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_2")
         _spellsInuse = [LineAttack()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class UndeadMinion3: BossMinion {
@@ -66,6 +84,12 @@ class UndeadMinion3: BossMinion {
         _img = SKTexture(imageNamed: "undead_minion_3")
         _spellsInuse = [AttackPowerUp()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion4: BossMinion {
     override init() {
@@ -79,6 +103,12 @@ class UndeadMinion4: BossMinion {
         _img = SKTexture(imageNamed: "undead_minion_4")
         _spellsInuse = [SoulExtract()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class UndeadMinion5: BossMinion {
     override init() {
@@ -91,6 +121,12 @@ class UndeadMinion5: BossMinion {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
         _spellsInuse = [Reinforce()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

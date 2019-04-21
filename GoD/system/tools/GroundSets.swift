@@ -64,7 +64,12 @@ class GroundSets: Core {
 //        __ge = gEnd()
 //
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     func groundStart(_ size:Int = 3) -> SKTexture {
         if size == 2 {
             return _ground.getCell(0, 1, 1, 2)

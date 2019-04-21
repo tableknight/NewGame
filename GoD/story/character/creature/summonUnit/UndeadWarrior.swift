@@ -19,6 +19,12 @@ class UndeadWarrior: SummonUnit {
         _img = SKTexture(imageNamed: "undead_warrior")
         
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class UndeadWitch: SummonUnit {
@@ -32,5 +38,11 @@ class UndeadWitch: SummonUnit {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
         _spellsInuse = [IceSpear(), FireBreath()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

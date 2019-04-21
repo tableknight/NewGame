@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Chen. All rights reserved.
 //
 import SpriteKit
-class Core:NSObject{
+class Core:NSObject, Codable{
     override init() {
         super.init()
     }

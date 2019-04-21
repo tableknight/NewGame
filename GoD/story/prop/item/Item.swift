@@ -8,6 +8,12 @@
 
 import SpriteKit
 class Item:Prop, ISelectTarget {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     var targetAll: Bool {
         get {
             return _isTargetAll
@@ -60,6 +66,10 @@ class Item:Prop, ISelectTarget {
         super.init()
     }
     
+//    required init(from decoder: Decoder) throws {
+//        fatalError("init(from:) has not been implemented")
+//    }
+    
     var usable = false
     var usableInBattle = false
     var _timeleft = 0
@@ -93,6 +103,12 @@ class TheWitchsTear:Item {
         _quality = Quality.NORMAL
         _description = "一滴来自天使的眼泪，经过时间的沉淀，变成了一颗晶莹剔透的水晶，似乎拥有某种魔力"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class Potion:Item {
@@ -105,7 +121,12 @@ class Potion:Item {
         _name = "治疗药水"
         _description = "恢复50%最大生命值"
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     internal var _rate:CGFloat = 0.5
     
     override func use(target: Creature) {
@@ -146,6 +167,12 @@ class LittlePotion:Potion {
         _description = "恢复25%最大生命值"
         _rate = 0.25
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class SealScroll:Item {
@@ -159,7 +186,12 @@ class SealScroll:Item {
         _name = "封印卷轴"
         _description = "对目标释放封印术"
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func use(unit: BUnit, completion:@escaping () -> Void) {
         let this = self
         let char = Game.instance.char!
@@ -203,6 +235,12 @@ class TownScroll:Item {
         _name = "传送之卷·贝"
         _description = "传送到贝拉姆村"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func use() {
         removeFromChar()
         showMsg(text: _description)
@@ -222,6 +260,12 @@ class GodTownScroll:TownScroll {
         price = 50
         _name = "传送之卷·雪"
         _description = "传送到神域·雪之国"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
     override func use() {
         removeFromChar()
@@ -243,6 +287,12 @@ class DeathTownScroll:TownScroll {
         _name = "传送之卷·冥"
         _description = "传送到恶魔之城"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func use() {
         removeFromChar()
         showMsg(text: _description)
@@ -263,6 +313,12 @@ class BlastScroll:Item {
         price = 3
         _name = "爆破卷轴"
         _description = "移除面前的一个障碍物(只能在远古秘径中使用)"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
     override func use() {
         let stage = Game.instance.curStage!
@@ -290,6 +346,12 @@ class RandomWeapon:Item {
         _name = "武器"
         _description = "获得一个随机属性的\(_name)"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func use() {
         removeFromChar()
         let l = Loot()
@@ -314,6 +376,12 @@ class RandomArmor:Item {
         price = 25
         _name = "防具"
         _description = "获得一个随机属性的\(_name)"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
     override func use() {
         removeFromChar()
@@ -340,6 +408,12 @@ class RandomSacredSpell:Item {
         _name = "法术?"
         _description = "获得一个随机的神之技"
         _quality = Quality.SACRED
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
     override func use() {
         removeFromChar()

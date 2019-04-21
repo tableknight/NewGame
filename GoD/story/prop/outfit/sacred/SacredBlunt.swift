@@ -27,6 +27,12 @@ class IberisThignbone:Blunt {
         _attrCount = 1
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class GiantFang:Blunt {
     override init() {
@@ -45,6 +51,12 @@ class GiantFang:Blunt {
         createAttr(attrId: DEFENCE, value: seedFloat(min: 30, max: 41), remove: true)
         _attrCount = 3
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -65,6 +77,12 @@ class ThorsHammer:Blunt {
         createAttr(attrId: THUNDERRESISTANCE, value: 40, remove: true)
         _attrCount = 3
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -87,6 +105,12 @@ class HolyPower:Blunt {
         _attrCount = 1
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class IdyllssHand:Blunt {
@@ -108,5 +132,11 @@ class IdyllssHand:Blunt {
         createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 21), remove: true)
         _attrCount = 2
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

@@ -8,6 +8,12 @@
 
 import SpriteKit
 class Status:Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
     }
@@ -81,6 +87,12 @@ class LostSpeed:Status {
             debug("速度恢复")
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class BurningStatus:Status {
@@ -95,6 +107,12 @@ class BurningStatus:Status {
     func getBurningDamage(unit:BUnit) -> CGFloat {
         let damage = unit.getHealth() * 0.05
         return -damage * _level
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

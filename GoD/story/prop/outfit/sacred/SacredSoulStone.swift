@@ -21,6 +21,12 @@ class HeartOfSwamp: SoulStone {
     override func create() {
         createAttr(attrId: MIND, value: seedFloat(min: 15, max: 31), remove: true)
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class PandoraHearts:SoulStone {
     override init() {
@@ -33,7 +39,6 @@ class PandoraHearts:SoulStone {
         _quality = Quality.SACRED
         price = 2202
     }
-    var _spell:Spell!
     override func create() {
         var unSavedSpells = Array<Spell>()
         let l = Loot()
@@ -49,16 +54,36 @@ class PandoraHearts:SoulStone {
         }
     }
     override func on() {
-        super.on()
-        if nil != _spell {
-            Game.instance.char._spells.append(_spell!)
+        let char = Game.instance.char!
+        if !(char.hasSpell(spell: _spell)) {
+            char._spells.append(_spell)
+            _spellAppended = true
         }
     }
     override func off() {
-        super.off()
-        if nil != _spell {
-            Game.instance.char.removeSpell(spell: _spell!)
+        if _spellAppended {
+            let char = Game.instance.char!
+            char.removeSpell(spell: _spell)
+            _spellAppended = false
         }
+    }
+    var _spellAppended = false
+    var _spell:Spell!
+    private enum CodingKeys: String, CodingKey {
+        case _spellAppended
+        case _spell
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+        _spell = try values.decode(Spell.self, forKey: ._spell)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_spellAppended, forKey: ._spellAppended)
+        try container.encode(_spell, forKey: ._spell)
+        try super.encode(to: encoder)
     }
 }
 class HeartOfTarrasque:SoulStone {
@@ -74,6 +99,12 @@ class HeartOfTarrasque:SoulStone {
     }
     override func create() {
         
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

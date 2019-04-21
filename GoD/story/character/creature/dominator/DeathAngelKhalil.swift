@@ -24,6 +24,12 @@ class DeathAngelKhalil:PowerLord {
         _extensions.hp = _extensions.health
         _spellsInuse = [KhalilsGaze(), KhalilsSong(), KhalilsSob()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class KhalilsGaze:Magical {
     override init() {
@@ -64,6 +70,12 @@ class KhalilsGaze:Magical {
             debug("gase has no target!")
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class KhalilsSong:Magical {
@@ -87,6 +99,12 @@ class KhalilsSong:Magical {
     override func findTarget() {
         let b = _battle!
         b._selectedTarget = b._playerPart.one()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -120,6 +138,12 @@ class KhalilsSob:Magical {
     override func findTarget() {
         _battle._selectedTargets = getTargetsBySeats(seats: getUnitsInRowOf(seat: _battle._playerPart.one()._unit._seat))
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class NecPriest: Rizen {
@@ -133,7 +157,12 @@ class NecPriest: Rizen {
         _img = SKTexture(imageNamed: "nec_priest.png")
         _spellsInuse = [SpiritIntervene(), QuickHeal()]
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class LoiteringBanshee: Rizen {
@@ -147,7 +176,12 @@ class LoiteringBanshee: Rizen {
         _img = SKTexture(imageNamed: "loitering_banshee.png")
         _spellsInuse = [DeathScream(), Addict()]
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class DeathScream:Magical {
     override init() {
@@ -170,6 +204,12 @@ class DeathScream:Magical {
     }
     override func findTarget() {
         _battle._selectedTarget = _battle._playerPart.one()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class Addict:Magical {
@@ -199,5 +239,11 @@ class Addict:Magical {
     }
     override func findTarget() {
         _battle._selectedTarget = _battle._playerPart.one()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

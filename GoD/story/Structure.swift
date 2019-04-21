@@ -6,13 +6,13 @@
 //  Copyright © 2018年 Chen. All rights reserved.
 //
 import SpriteKit
-struct Mains {
+struct Mains:Codable {
     var stamina:CGFloat = 0
     var strength:CGFloat = 0
     var agility:CGFloat = 0
     var intellect:CGFloat = 0
 }
-struct Extensions {
+struct Extensions:Codable {
     var attack:CGFloat
     var defence:CGFloat
     var speed:CGFloat
@@ -25,12 +25,12 @@ struct Extensions {
     var health:CGFloat
     var mind:CGFloat
 }
-struct Elemental {
+struct Elemental:Codable {
     var fire:CGFloat
     var water:CGFloat
     var thunder:CGFloat
 }
-struct Magic {
+struct Magic:Codable {
     var damage:CGFloat
     var resistance:CGFloat
 }

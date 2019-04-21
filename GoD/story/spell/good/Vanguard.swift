@@ -14,6 +14,11 @@ class Vanguard:Passive {
         _description = "总是第一个出手"
         _quality = Quality.GOOD
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 

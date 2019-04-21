@@ -106,9 +106,9 @@ class MinionsHouseInside: UIScene {
                     dlg.text = "封印怪物需要使用[封印卷轴]，怪物的血量越少，封印成功的几率也就越大。"
                     dlg._nextAction = {
                         dlg.text = "怪物的能力多种多样，就算是同一种怪物，属性也是有所不同的，尽量找厉害一点的怪物作为手下吧。"
-                        if Game.instance._char._event.contains(2) {
-                            return
-                        }
+//                        if Game.instance._char._event.contains(2) {
+//                            return
+//                        }
                         dlg._nextAction = {
                             dlg.text = "好了，我呢，私人赞助你几个[封印卷轴]，希望你招募到强大的手下。"
                             dlg._nextAction = {
@@ -116,7 +116,7 @@ class MinionsHouseInside: UIScene {
                                 ss._count = 5
                                 Game.instance._char.addProp(p: ss)
                                 showMsg(text: "获得[封印卷轴]x5。")
-                                Game.instance._char._event.append(2)
+//                                Game.instance._char._event.append(2)
                                 dlg.remove()
                                 stage._char.speak(text: "谢谢～～")
                             }

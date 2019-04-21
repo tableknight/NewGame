@@ -14,6 +14,22 @@ class MagicMark: Armor {
         _outfitName = "魔印"
         _level = 1
     }
+    private enum CodingKeys: String, CodingKey {
+        case _spellAppended
+        case _spell
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+        _spell = try values.decode(Spell.self, forKey: ._spell)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_spellAppended, forKey: ._spellAppended)
+        try container.encode(_spell, forKey: ._spell)
+        try super.encode(to: encoder)
+    }
     var _spell:Spell = Spell()
     override func create(level: CGFloat) {
         _level = level

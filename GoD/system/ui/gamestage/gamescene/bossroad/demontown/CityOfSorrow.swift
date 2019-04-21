@@ -82,6 +82,12 @@ class DreamSucker: Demon {
         _name = "食梦魔"
         _img = SKTexture(imageNamed: "dream_sucker")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class DarkWizard: Man {
     override init() {
@@ -92,6 +98,12 @@ class DarkWizard: Man {
         _stars.intellect = 2.8
         _name = "安吉拉"
         _img = SKTexture(imageNamed: "dark_wizard")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class CriticalJoker: Man {
@@ -104,6 +116,12 @@ class CriticalJoker: Man {
         _name = "安吉拉"
         _img = SKTexture(imageNamed: "critical_joker")
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class TheFallen: Man {
     override init() {
@@ -114,5 +132,11 @@ class TheFallen: Man {
         _stars.intellect = 0.8
         _name = "堕落者"
         _img = SKTexture(imageNamed: "the_fallen")
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

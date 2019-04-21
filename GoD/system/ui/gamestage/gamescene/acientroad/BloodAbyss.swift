@@ -75,6 +75,12 @@ class BloodBat: Demon {
             _spellsInuse = [VampireBlood()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class Kodagu: Demon {
@@ -95,6 +101,12 @@ class Kodagu: Demon {
             _spellsInuse = [BargeAbout()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class EvilSpirit: Natrue {
@@ -108,7 +120,12 @@ class EvilSpirit: Natrue {
         _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureEvil.getCell(9, 3, 3, 4)
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class HellBaron: Natrue {
@@ -122,6 +139,12 @@ class HellBaron: Natrue {
         _spellSlot = SpellSlot(max: 3, min: 1)
         _img = SKTexture(imageNamed: "HellBaron")
         _spellsInuse = [LifeDraw()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

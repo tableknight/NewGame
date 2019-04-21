@@ -23,6 +23,12 @@ class Faceless:Shield {
         _attrCount = 4
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Accident:Shield {
     override init() {
@@ -42,6 +48,12 @@ class Accident:Shield {
         createAttr(attrId: HEALTH, value: seedFloat(min: 30, max: 76), remove: true)
         _attrCount = 1
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class FrancisFace:Shield {
@@ -63,6 +75,12 @@ class FrancisFace:Shield {
         _attrCount = 1
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class EvilExpel:Shield {
     override init() {
@@ -81,5 +99,11 @@ class EvilExpel:Shield {
         createAttr(attrId: THUNDERRESISTANCE, value: 20, remove: true)
         _attrCount = 3
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

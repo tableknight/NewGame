@@ -8,6 +8,12 @@
 
 import SpriteKit
 class IceBomb: Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         isFire = true
@@ -43,6 +49,12 @@ class IceBomb: Magical {
 }
 
 class IceExplode:Derivant {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "冰暴"

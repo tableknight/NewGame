@@ -32,9 +32,21 @@ class Micalu:Boss {
         
         _spellsInuse = [SixShooter(), ShootTwo(), OneShootDoubleKill(), MagicReflect()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class MicaluServant1:BossMinion {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "米卡路之子"
@@ -54,6 +66,12 @@ class MicaluServant1:BossMinion {
     }
 }
 class MicaluServant2:BossMinion {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "米卡路之子"

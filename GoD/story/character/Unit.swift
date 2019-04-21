@@ -11,6 +11,64 @@ class Unit:Core {
         super.init()
         
     }
+    private enum CodingKeys: String, CodingKey {
+        case _mains
+        case _extensions
+        case _level
+        case _name
+        case _race
+        case _exp
+        case _leftPoint
+        case _spells
+        case _spellsInuse
+        case _spellsHidden
+        case _slot
+        case _lucky
+        case _break
+        case _revenge
+        case _rhythm
+        case _chaos
+        case _power
+        case _elementalPower
+        case _elementalResistance
+        case _magical
+        case _elemental
+        case _physical
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _mains = try values.decode(Mains.self, forKey: ._mains)
+        _extensions = try values.decode(Extensions.self, forKey: ._extensions)
+        _level = try values.decode(CGFloat.self, forKey: ._level)
+        _name = try values.decode(String.self, forKey: ._name)
+        _race = try values.decode(Int.self, forKey: ._race)
+        _exp = try values.decode(CGFloat.self, forKey: ._exp)
+        _leftPoint = try values.decode(Int.self, forKey: ._leftPoint)
+        _spells = try values.decode(Array.self, forKey: ._spells)
+        _spellsInuse = try values.decode(Array.self, forKey: ._spellsInuse)
+        _spellsHidden = try values.decode(Array.self, forKey: ._spellsHidden)
+        _slot = try values.decode(Int.self, forKey: ._slot)
+        _lucky = try values.decode(CGFloat.self, forKey: ._lucky)
+        _break = try values.decode(CGFloat.self, forKey: ._break)
+        _revenge = try values.decode(CGFloat.self, forKey: ._revenge)
+        _rhythm = try values.decode(CGFloat.self, forKey: ._rhythm)
+        _chaos = try values.decode(CGFloat.self, forKey: ._chaos)
+        _power = try values.decode(CGFloat.self, forKey: ._power)
+        _elementalPower = try values.decode(Elemental.self, forKey: ._elementalPower)
+        _elementalResistance = try values.decode(Elemental.self, forKey: ._elementalResistance)
+        _magical = try values.decode(Magic.self, forKey: ._magical)
+        _elemental = try values.decode(Magic.self, forKey: ._elemental)
+        _physical = try values.decode(Magic.self, forKey: ._physical)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    
+//    required init(from decoder: Decoder) throws {
+//        fatalError("init(from:) has not been implemented")
+//    }
+    
     var _mains:Mains = Mains(stamina:0, strength: 0, agility: 0, intellect: 0)
     var _extensions:Extensions = Extensions(
         attack: 0,

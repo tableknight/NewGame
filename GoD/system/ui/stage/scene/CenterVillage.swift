@@ -261,9 +261,9 @@ class CenterVillage: UIScene {
             let text = "嚯！新的冒险者，欢迎来到\(CenterVillage.VILLAGE_NAME)，我是村长，还没有决定做什么事情呢吧，总之，你可以先去村子西边的冒险者工会去看看。"
             let dlg = stage.showDialog(img: Game.instance.picturePeople1.getCell(7, 4), text: text, name: "村长维拉奇")
             
-            if Game.instance._char._event.contains(1) {
-                return
-            }
+//            if Game.instance._char._event.contains(1) {
+//                return
+//            }
             
             dlg.addNextButton()
             dlg._nextAction = {
@@ -273,7 +273,7 @@ class CenterVillage: UIScene {
                     ts._count = 5
                     Game.instance._char.addProp(p: ts)
                     showMsg(text: "你获得了[传送卷轴]x5。")
-                    Game.instance._char._event.append(1)
+//                    Game.instance._char._event.append(1)
 //                    dlg.remove()
                     dlg.text = "去找下旅店的药剂师莫莫伊吧，他会送给每一位新人礼物的。别忘了还有宠物之家的封印大师艾里。"
                     dlg._nextAction = {

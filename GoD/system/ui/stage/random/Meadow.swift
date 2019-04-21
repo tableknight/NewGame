@@ -135,6 +135,12 @@ class VirulentToad: Natrue {
 //        let img = _img
 //        let s = _img
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class GiantWasp: Natrue {
     override init() {
@@ -148,7 +154,12 @@ class GiantWasp: Natrue {
         _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureNature.getCell(0, 7, 3, 4)
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func create(level: CGFloat) {
         super.create(level: level)
         if _spellCount > 0 && aQuarter() {
@@ -169,7 +180,12 @@ class TreeSpirit: Natrue {
         _img = Game.instance.pictureNature.getCell(9, 7, 3, 4)
         //        _spells = [FrozenShoot()]
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override func create(level: CGFloat) {
         super.create(level: level)
         if _spellCount > 0 {
@@ -188,6 +204,12 @@ class Python: Natrue {
         _race = EvilType.NATURE
         _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureNature.getCell(3, 7, 3, 4)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

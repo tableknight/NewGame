@@ -82,6 +82,12 @@ class LewisBattle: BossBattle {
 }
 
 class SoulControl: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "精神控制"
@@ -112,6 +118,12 @@ class SoulControl: Magical, BossOnly {
 }
 
 class LewisAttack: Physical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
     }
@@ -137,6 +149,12 @@ class LewisAttack: Physical {
 }
 
 class HandOfGod: Physical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         isClose = true
@@ -172,6 +190,12 @@ class HandOfGod: Physical, BossOnly {
     }
 }
 class PowerUp: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "力量增强"
@@ -212,6 +236,12 @@ class PowerUp: Magical, BossOnly {
 }
 
 class OathBreaker:Magical, Curse {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "誓言·破"
@@ -246,6 +276,12 @@ class OathBreaker:Magical, Curse {
     }
 }
 class SoulWatch: Magical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "灵魂窥探"

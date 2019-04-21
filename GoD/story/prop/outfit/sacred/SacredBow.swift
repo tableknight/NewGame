@@ -25,6 +25,12 @@ class Hawkeye:Bow {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Boreas:Bow {
     override init() {
@@ -46,6 +52,12 @@ class Boreas:Bow {
         _attrCount = 2
         createAttrs()
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class Skylark:Bow {
     override init() {
@@ -63,6 +75,12 @@ class Skylark:Bow {
         createAttr(attrId: AVOID, value: 10, remove: true)
         _attrCount = 3
         createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 
@@ -83,5 +101,11 @@ class SoundOfWind:Bow {
         createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 51), remove: true)
         createAttr(attrId: INTELLECT, value: seedFloat(min: 30, max: 51), remove: true)
         createAttr(attrId: AVOID, value: seedFloat(min: 30, max: 51), remove: true)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

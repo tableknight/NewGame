@@ -15,5 +15,10 @@ class Crazy: Passive {
         _name = "疯狂"
         _description = "角色不受控制，行动开始对随机目标造成攻击200%的物理伤害"
     }
-
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

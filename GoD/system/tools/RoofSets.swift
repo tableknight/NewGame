@@ -8,12 +8,19 @@
 
 import SpriteKit
 class RoofSets:Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     var _t:SKTexture!
     var _corner:SKTexture!
     private var cellSize:CGFloat = 48
     init(texture:SKTexture = Game.instance.inside_a4.getCell(4, 7, 2, 2), corner:SKTexture = Game.instance.inside_a4.getCell(5, 5)) {
         _t = texture
         _corner = corner
+        super.init()
     }
     
     var roofConnectH:SKSpriteNode {

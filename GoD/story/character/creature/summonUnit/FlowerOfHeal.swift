@@ -26,6 +26,12 @@ class FlowerOfHeal: SummonUnit {
         levelTo(level: level)
         _extensions.hp = _extensions.health
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class HealOfFlower: Magical {
     override init() {
@@ -62,5 +68,11 @@ class HealOfFlower: Magical {
             })
         }
         
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

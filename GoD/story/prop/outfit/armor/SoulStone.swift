@@ -40,6 +40,19 @@ class SoulStone: Armor {
         
     }
     
+    private enum CodingKeys: String, CodingKey {
+        case _race
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _race = try values.decode(Int.self, forKey: ._race)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_race, forKey: ._race)
+        try super.encode(to: encoder)
+    }
     
 }
 

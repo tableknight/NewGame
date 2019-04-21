@@ -107,18 +107,19 @@ class ImageComponent:SelectableComponent {
     }
     func create(image:SKTexture, name:String) {
         let images:Array<SKTexture> = [image.getCell(0, 0), image.getCell(1, 0), image.getCell(2, 0)]
-        let i0 = SKAction.setTexture(images[0])
-//        let i1 = SKAction.setTexture(images[1])
-        let i2 = SKAction.setTexture(images[2])
-        let wait = SKAction.wait(forDuration: TimeInterval(0.5))
-        
-        let squ = SKAction.sequence([i0, wait, i2, wait])
-        let r = SKAction.repeatForever(squ)
+//        let i0 = SKAction.setTexture(images[0])
+////        let i1 = SKAction.setTexture(images[1])
+//        let i2 = SKAction.setTexture(images[2])
+//        let wait = SKAction.wait(forDuration: TimeInterval(0.5))
+//
+//        let squ = SKAction.sequence([i0, wait, i2, wait])
+//        let r = SKAction.repeatForever(squ)
         let role = SKSpriteNode()
         role.xAxis = cellSize * 0.75
         role.yAxis = -cellSize * 0.75
+        role.texture = images[1]
         role.size = CGSize(width: cellSize * 1.25, height: cellSize * 1.25)
-        role.run(r)
+//        role.run(r)
         addChild(role)
         _image = image
         

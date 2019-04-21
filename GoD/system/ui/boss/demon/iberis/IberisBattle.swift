@@ -87,6 +87,12 @@ class IberisBattle: BossBattle {
 }
 
 class FlameAttack: Physical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "烈焰轰击"
@@ -119,6 +125,12 @@ class FlameAttack: Physical {
 }
 
 class ChopChop: Physical, BossOnly {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "乱剑挥砍"
@@ -153,6 +165,12 @@ class ChopChop: Physical, BossOnly {
     }
 }
 class ElementPowerUp:Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "元素强化"

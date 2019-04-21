@@ -663,14 +663,14 @@ class BUnit: SKSpriteNode {
         valueText.run(go) {
             valueText.removeFromParent()
         }
-        setTimeout(delay: 0.5, completion: {
+        setTimeout(delay: 0.5) {
             if this.isDead() {
                 this.removeFromBattle()
                 this.actionDead {
                     this.removeFromParent()
                     completion()
-//                    if !this._battle.hasFinished() {
-//                    }
+                    //                    if !this._battle.hasFinished() {
+                    //                    }
                 }
             } else {
                 completion()
@@ -690,7 +690,7 @@ class BUnit: SKSpriteNode {
                     }
                 }
             }
-        })
+        }
         
         hpChange(value: value)
     }

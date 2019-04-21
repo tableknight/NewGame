@@ -257,6 +257,7 @@ class Game {
     var outside_a4:SKTexture = SKTexture(imageNamed: "Outside_A4.png")
     var dungeon_a4:SKTexture = SKTexture(imageNamed: "Dungeon_A4.png")
     var dungeon_a2:SKTexture = SKTexture(imageNamed: "Dungeon_A2.png")
+    var dungeon_a1:SKTexture = SKTexture(imageNamed: "Dungeon_A1.png")
     var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
     var dungeon_b = SKTexture(imageNamed: "Dungeon_B.png")
     var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png")
@@ -499,4 +500,10 @@ func createBorder(width: CGFloat, height: CGFloat, color:UIColor = UIColor.white
     node.size = CGSize(width: width, height: height)
     node.color = color
     return node
+}
+
+
+struct Saved: Codable {
+//    let chars: [Character]
+    let s = 1
 }

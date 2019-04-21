@@ -29,6 +29,21 @@ class EastCamping: StandScene {
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        if point.x == 9 && point.y == 4 {
+            let stage = Game.instance.curStage!
+            stage.showDialog(img: Game.instance.picturePeople2.getCell(10, 0),
+                             text: "需要用船吗？。",
+                             name: "船长杰徳")
+            stage._curDialog?.addConfirmButton()
+            stage._curDialog?._confirmAction = {
+                let rp = BlackWaterTown()
+                stage.removeDialog(dlg: stage._curDialog!)
+                stage.switchScene(next: rp, afterCreation: {
+                    rp.setRole(x: 4, y: 4, char: self._role)
+                })
+            }
+            return true
+        }
         if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
             return true
         }

@@ -137,6 +137,12 @@ class SnowLady: Man {
             _spellsInuse = [Disappear()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class FrozenSlime: Rizen {
@@ -156,6 +162,12 @@ class FrozenSlime: Rizen {
             _spellsInuse = [BargeAbout()]
         }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class IceBeast: Natrue {
@@ -169,7 +181,12 @@ class IceBeast: Natrue {
         _spellSlot = SpellSlot(max: 1, min: 0)
         _img = Game.instance.pictureMonster.getCell(3, 3, 3, 4)
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class SnowSpirit: Natrue {
@@ -188,5 +205,11 @@ class SnowSpirit: Natrue {
         if _spellCount > 0 && aQuarter() {
             _spellsInuse = [FrozenShoot()]
         }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

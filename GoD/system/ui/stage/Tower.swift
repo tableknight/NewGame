@@ -30,6 +30,12 @@ class Tower:UIItem {
     var _status:Status!
 }
 class FireEnerge:Status {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _type = Status.FIRE_ENERGE
@@ -58,6 +64,12 @@ class FireEnergeTower:Tower {
     }
 }
 class WaterEnerge:Status {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _type = Status.WATER_ENERGE
@@ -87,6 +99,12 @@ class WaterEnergeTower:Tower {
 }
 
 class ThunderEnerge:Status {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _type = Status.THUNDER_ENERGE
@@ -121,6 +139,12 @@ class TimeReduce:Status {
         _name = "时空扭转"
         _description = "减少所有技能1回合冷却时间。"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class TimeReduceTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -148,6 +172,12 @@ class PhysicalPower:Status {
         _type = Status.WATER_ENERGE
         _name = "无坚不摧之力"
         _description = "提升50%造成物理伤害。"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class PhysicalPowerTower:Tower {
@@ -177,6 +207,12 @@ class MagicalPower:Status {
         _name = "黑暗降临"
         _description = "提升50%造成法术伤害。"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class MagicalPowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -204,6 +240,12 @@ class AttackPower:Status {
         _type = Status.THUNDER_ENERGE
         _name = "战争之神"
         _description = "提升50点攻击力和25点必杀。"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class AttackPowerTower:Tower {
@@ -233,6 +275,12 @@ class DefencePower:Status {
         _name = "守护之神"
         _description = "提升50点防御和25点闪避。"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class DefencePowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -260,6 +308,12 @@ class MindPower:Status {
         _type = Status.MIND_POWER
         _name = "智慧之神"
         _description = "提升25点念力。"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class MindPowerTower:Tower {
@@ -289,6 +343,12 @@ class LuckyPower:Status {
         _name = "幸运之神"
         _description = "提升25点幸运。"
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class LuckyPowerTower:Tower {
@@ -317,6 +377,12 @@ class SpeedPower:Status {
         _type = Status.SPEED_POWER
         _name = "光影之神"
         _description = "提升50点速度和25点命中。"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 

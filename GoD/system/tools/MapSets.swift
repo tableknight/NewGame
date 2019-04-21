@@ -8,6 +8,12 @@
 
 import SpriteKit
 class MapSets: Core {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     private var _baseGround:SKTexture!
     private var _coverGround:SKTexture!
     var thinConnection:SKSpriteNode!
@@ -15,6 +21,7 @@ class MapSets: Core {
     init(coverGround:SKTexture, thinConnection:SKSpriteNode) {
         _coverGround = coverGround
         self.thinConnection = thinConnection
+        super.init()
     }
     var topLeftCover:SKSpriteNode {
         get {

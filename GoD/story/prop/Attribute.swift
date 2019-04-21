@@ -8,6 +8,25 @@
 
 import SpriteKit
 class Attribute: Core {
+    override init() {
+        super.init()
+    }
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _name = try values.decode(String.self, forKey: ._name)
+        _value = try values.decode(CGFloat.self, forKey: ._value)
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_name, forKey: ._name)
+        try container.encode(_value, forKey: ._value)
+        try super.encode(to: encoder)
+    }
+    private enum CodingKeys: String, CodingKey {
+        case _name
+        case _value
+    }
     var _name = ""
     var _value:CGFloat = 0
     func on(unit:Creature) -> Void {

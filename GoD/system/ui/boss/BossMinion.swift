@@ -15,6 +15,12 @@ class BossMinion: Creature {
     override func createQuality() {
         _quality = Quality.RARE
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 //    override func extraProperty(value: CGFloat) -> CGFloat {
 //        return 0
 //    }
@@ -48,6 +54,11 @@ class BossAttack: Physical {
             }
         }
     }
-    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     
 }

@@ -29,6 +29,12 @@ class ElementWizard:Boss {
         //            _spellsInuse.append(BossAttack())
         //        }
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 
 class MagicStudent:BossMinion {
@@ -48,5 +54,11 @@ class MagicStudent:BossMinion {
         _extensions.hp = _extensions.health
         _spellsInuse = [FireOrFired(), LowlevelFlame()]
         _sensitive = 65
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

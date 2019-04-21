@@ -20,4 +20,10 @@ class Blunt: Weapon {
         super.createSelfAttrs()
         _attrs[0]._value *= 1.2
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }

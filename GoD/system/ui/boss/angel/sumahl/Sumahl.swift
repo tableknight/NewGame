@@ -25,6 +25,12 @@ class Sumahl:Boss {
         
         
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class SumahlServant1:BossMinion {
     override init() {
@@ -42,6 +48,12 @@ class SumahlServant1:BossMinion {
         
         _spellsInuse = [HolySacrifice()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class SumahlServant2:BossMinion {
     override init() {
@@ -58,5 +70,11 @@ class SumahlServant2:BossMinion {
         levelTo(level: level)
         
         _spellsInuse = [LifeFlow()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

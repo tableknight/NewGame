@@ -100,6 +100,12 @@ class ChildLizard: Natrue {
         //        let img = _img
         //        let s = _img
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class ForestGuard: Natrue {
     override init() {
@@ -115,6 +121,12 @@ class ForestGuard: Natrue {
         //        let img = _img
         //        let s = _img
         _spellsInuse = [WindPunish()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }
 class CrazyPlant: Natrue {
@@ -132,6 +144,12 @@ class CrazyPlant: Natrue {
         //        let s = _img
         _spellsInuse = [LineAttack()]
     }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
 }
 class CowCow: Natrue {
     override init() {
@@ -147,5 +165,11 @@ class CowCow: Natrue {
         //        let img = _img
         //        let s = _img
         _spellsInuse = []
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
     }
 }

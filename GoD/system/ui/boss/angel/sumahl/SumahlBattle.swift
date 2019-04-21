@@ -77,6 +77,12 @@ class SumahlBattle: BossBattle {
 }
 
 class MindIntervene: Physical, Curse {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "精神扰乱"
@@ -107,6 +113,12 @@ class MindIntervene: Physical, Curse {
     }
 }
 class HealAll: Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "群体治疗"
@@ -134,6 +146,12 @@ class HealAll: Magical {
     }
 }
 class SilenceAll: Magical, Curse {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "群体静默"
@@ -161,6 +179,12 @@ class SilenceAll: Magical, Curse {
     }
 }
 class HolySacrifice: Physical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "神圣牺牲"
@@ -193,6 +217,12 @@ class HolySacrifice: Physical {
     }
 }
 class LifeFlow: Magical {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
     override init() {
         super.init()
         _name = "生命分涌"
