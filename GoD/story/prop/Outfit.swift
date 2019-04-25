@@ -10,15 +10,43 @@ import SpriteKit
 class Outfit:Prop {
     private enum CodingKeys: String, CodingKey {
         case _attrs
+        case _attrsClass
     }
     required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         let values = try decoder.container(keyedBy: CodingKeys.self)
         _attrs = try values.decode(Array.self, forKey: ._attrs)
-        try super.init(from: decoder)
+        let cls:Array<String> = try values.decode(Array.self, forKey: ._attrsClass)
+        let allAttrs = [SpiritBase(), AttackAttributeBase(), Agility(),Chaos(),Stamina(),Defence(),Break(),Rhythm(),Health(),WaterResistance(),FireResistance(),
+                        ThunderResistance(),Spirit(),ThunderPower(),Strength(),Intellect(),Revenge(),AttackAttribute(),
+                        Avoid(),Accuracy(),FirePower(),WaterPower(),ElementalPower(),Critical(),Speed(),Mind(),MagicalDamage(),Lucky(),ElementalResistance()]
+//        var allAttrs = Array<Attribute>()
+//        for i in _all {
+//            allAttrs.append(getAttrById(id: i))
+//        }
+        for i in 0...cls.count - 1 {
+            let tp = NSClassFromString(cls[i])
+            for a in allAttrs {
+                if tp == type(of: a) {
+                    a._value = _attrs[i]._value
+                    a._name = _attrs[i]._name
+                    _attrs[i] = a
+                    break
+                }
+            }
+//            _attrs[0] = _attrs[0] as! NSClassFromString(cls[i])
+//            cls[i]
+        }
+        
     }
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_attrs, forKey: ._attrs)
+        var classNames = Array<String>()
+        for i in _attrs {
+            classNames.append(NSStringFromClass(type(of: i)))
+        }
+        try container.encode(classNames, forKey: ._attrsClass)
         try super.encode(to: encoder)
     }
     override init() {

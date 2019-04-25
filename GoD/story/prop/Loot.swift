@@ -17,7 +17,9 @@ class Loot: Core {
     var externalLootAction = {}
     override init() {
         super.init()
-        _char = Game.instance.char!
+        if nil != Game.instance.char {
+            _char = Game.instance.char!
+        }
     }
     private var _char:Character!
     func getWeaponById(id:Int) -> Weapon {
@@ -40,7 +42,7 @@ class Loot: Core {
             return Sword()
         }
     }
-    private var _weaponlist = [0,1,2,3,4,5,6]
+    var _weaponlist = [0,1,2,3,4,5,6]
     func lootWeapon(level:CGFloat) -> Weapon {
         let weapon = getWeaponById(id: seed(min: 0, max: 7))
         weapon.create(level: level)
@@ -64,7 +66,7 @@ class Loot: Core {
         }
     }
     
-    private var _armorlist = [0,1,2,3,4,5]
+    var _armorlist = [0,1,2,3,4,5]
     func lootArmor(level:CGFloat) -> Armor {
         let armor = getArmorById(id: seed(min: 0, max: 6))
         armor.create(level: level)
@@ -182,6 +184,27 @@ class Loot: Core {
             spellAttay = _sacredSpellArray
             return getSacredSpell(id: spellAttay.one())
         }
+    }
+    func getAllSpells() -> Array<Spell> {
+        var spells = Array<Spell>()
+        for i in 0...normalSpellCount - 1 {
+            spells.append(getNormalSpell(id: i))
+        }
+        for i in 0...goodSpellCount - 1 {
+            spells.append(getGoodSpell(id: i))
+        }
+        for i in 0...rareSpellCount - 1 {
+            spells.append(getRareSpell(id: i))
+        }
+        for i in 0...sacredSpellCount - 1 {
+            spells.append(getSacredSpell(id: i))
+        }
+        spells.append(LineAttack())
+        spells.append(Heal())
+        spells.append(ScreamLoud())
+        spells.append(LowlevelFlame())
+        spells.append(FireFist())
+        return spells
     }
     let normalSpellCount = 14
     func getNormalSpell(id:Int) -> Spell {
@@ -434,6 +457,18 @@ class Loot: Core {
         }
         if 4 == id {
             return SealScroll()
+        }
+        
+        if 5 == id {
+            return GodTownScroll()
+        }
+        
+        if 6 == id {
+            return DeathTownScroll()
+        }
+        
+        if 7 == id {
+            return RandomSacredSpell()
         }
         
         return TheWitchsTear()

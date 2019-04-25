@@ -359,28 +359,53 @@ class Game {
         bg0.lineWidth = 0
         return bg0
     }
-    static func save() {
-//        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/save.dat"
-////        NSKeyedArchiver.archiveRootObject(Data.instance.document, toFile: path)
-//        let data = NSMutableData()
-//        let archiver = NSKeyedArchiver.init(forWritingWith: data)
-//        archiver.encode(Game.instance.document, forKey: "save")
-//        archiver.finishEncoding()
-//        data.write(toFile: path, atomically: true)
+    static func save(c:Character, key:String) {
+        if let data = try? JSONEncoder().encode(c) {
+            let us = UserDefaults.standard
+            us.set(data, forKey: key)
+            us.synchronize()
+        }
     }
-    static func load() {
-//        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] + "/save.dat"
-//        let undata = NSData(contentsOfFile: path)
-//        let unarchiver = NSKeyedUnarchiver.init(forReadingWith: undata! as Data)
-//        let document = unarchiver.decodeObject(forKey: "save") as! Documented
-//        Game.instance.document = document
-//        let save = unarchiver.
-//        NSKeyedArchiver.u
+    static func load(key:String) -> Character? {
+        let us = UserDefaults.standard
+        if let data = us.data(forKey: key) {
+            return try? JSONDecoder().decode(Character.self, from: data)
+        }
+        return nil
     }
+    static func saveRoles(roles:Array<RoleDocument>) {
+        if let data = try? JSONEncoder().encode(roles) {
+            let us = UserDefaults.standard
+            us.set(data, forKey: "roles")
+            us.synchronize()
+        }
+    }
+    static func loadRoles() -> Array<RoleDocument>? {
+        let us = UserDefaults.standard
+        if let data = us.data(forKey: "roles") {
+            return try? JSONDecoder().decode(Array.self, from: data)
+        }
+        return nil
+    }
+//    static func saveDocument(c:Character, key:String) {
+//        if let data = try? JSONEncoder().encode(c) {
+//            let us = UserDefaults.standard
+//            us.set(data, forKey: key)
+//            us.synchronize()
+//        }
+//    }
+//    static func loadDocument(key:String) -> Character? {
+//        let us = UserDefaults.standard
+//        if let data = us.data(forKey: key) {
+//            return try? JSONDecoder().decode(Character.self, from: data)
+//        }
+//        return nil
+//    }
     static func log(text:String) {
         Game.instance.logs.append(text)
         Game.instance.stage.showLogs()
     }
+    static var roles = Array<RoleDocument>()
 }
 func debugger(_ text:String) {
     print(text)
@@ -503,7 +528,8 @@ func createBorder(width: CGFloat, height: CGFloat, color:UIColor = UIColor.white
 }
 
 
-struct Saved: Codable {
+struct Roles: Codable {
 //    let chars: [Character]
-    let s = 1
+//    let s = 1
+    var chars = Array<RoleDocument>()
 }

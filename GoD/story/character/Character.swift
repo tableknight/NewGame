@@ -222,6 +222,7 @@ class Character: Creature {
     var _dungeonLevel:Int = 1
     var _levelPoint = 5
     var _money = 0
+    var _key = ""
     
     private enum CodingKeys: String, CodingKey {
         case _dungeonLevel
@@ -240,12 +241,158 @@ class Character: Creature {
         case _soulStone
         case _levelPoint
         case _money
+        case _propsClass
+        case itemsClass
+        case items
+        case weaponsClass
+        case weapons
+        case armorsClass
+        case armors
+        case spellBooks
+        case spellBooksClass
+        case marks
+        case instruments
+        case _key
     }
     
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        _dungeonLevel = try values.decode(Int.self, forKey: ._dungeonLevel)
+        _minionsCount = try values.decode(Int.self, forKey: ._minionsCount)
+//        _props = try values.decode(Array.self, forKey: ._props)
+        _minions = try values.decode(Array.self, forKey: ._minions)
+        hasShield = try values.decode(Bool.self, forKey: .hasShield)
+        hasEarring = try values.decode(Bool.self, forKey: .hasEarring)
+        hasWeapon = try values.decode(Bool.self, forKey: .hasWeapon)
+        hasMark = try values.decode(Bool.self, forKey: .hasMark)
+        _amulet = try? values.decode(Amulet.self, forKey: ._amulet)
+        _leftRing = try? values.decode(Ring.self, forKey: ._leftRing)
+        _rightRing = try? values.decode(Ring.self, forKey: ._rightRing)
+        _shield = try? values.decode(Shield.self, forKey: ._shield)
+        _magicMark = try? values.decode(MagicMark.self, forKey: ._magicMark)
+        _soulStone = try? values.decode(SoulStone.self, forKey: ._soulStone)
+        _levelPoint = try values.decode(Int.self, forKey: ._levelPoint)
+        _money = try values.decode(Int.self, forKey: ._money)
+        _key = try values.decode(String.self, forKey: ._key)
+//        let cls:Array<String> = try values.decode(Array.self, forKey: ._propsClass)
+        let marks:Array<MagicMark> = try values.decode(Array.self, forKey: .marks)
+        let instruments:Array<Instrument> = try values.decode(Array.self, forKey: .instruments)
+        let weapons:Array<Weapon> = try values.decode(Array.self, forKey: .weapons)
+//        let weaponsClass:Array<String> = try values.decode(Array.self, forKey: .weaponsClass)
+        let armors:Array<Armor> = try values.decode(Array.self, forKey: .armors)
+//        let armorsClass:Array<String> = try values.decode(Array.self, forKey: .armorsClass)
+        let items:Array<Item> = try values.decode(Array.self, forKey: .items)
+        let itemsClass:Array<String> = try values.decode(Array.self, forKey: .itemsClass)
+        let spellBooks:Array<SpellBook> = try values.decode(Array.self, forKey: .spellBooks)
+//        let spellBooksClass:Array<String> = try values.decode(Array.self, forKey: .spellBooksClass)
+        
+//        let allProps = [Wand(),Bow(),Blunt(),Sword(),Instrument(),Fist(),Dagger(),
+//                        MagicMark(), SoulStone(), Shield(), Ring(), EarRing(), Amulet()]
+        _props = []
+        let l = Loot()
+        var allWeapons = Array<Weapon>()
+        for i in l._weaponlist {
+            allWeapons.append(l.getWeaponById(id: i))
+        }
+        var allArmors = Array<Armor>()
+        for i in l._armorlist {
+            allArmors.append(l.getArmorById(id: i))
+        }
+        var allItems = Array<Item>()
+        for i in 0...7 {
+            allItems.append(l.getItemByid(id: i))
+        }
+        if itemsClass.count > 0 {
+            for i in 0...itemsClass.count - 1 {
+                let tp = NSClassFromString(itemsClass[i])
+                for a in allItems {
+                    if tp == type(of: a) {
+                        a._count = items[i]._count
+                        //                    addProp(p: a)
+                        _props.append(a)
+                        break
+                    }
+                }
+            }
+        }
+        for w in weapons {
+//            addProp(p: w)
+            _props.append(w)
+        }
+        for a in armors {
+//            addProp(p: a)
+            _props.append(a)
+        }
+        for s in spellBooks {
+//            addProp(p: s)
+            _props.append(s)
+        }
+        for m in marks {
+            _props.append(m)
+        }
+        for i in instruments {
+            _props.append(i)
+        }
+        
     }
     override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_dungeonLevel, forKey: ._dungeonLevel)
+        try container.encode(_minionsCount, forKey: ._minionsCount)
+//        try container.encode(_props, forKey: ._props)
+        try container.encode(_minions, forKey: ._minions)
+        try container.encode(hasShield, forKey: .hasShield)
+        try container.encode(hasEarring, forKey: .hasEarring)
+        try container.encode(hasWeapon, forKey: .hasWeapon)
+        try container.encode(hasMark, forKey: .hasMark)
+        try container.encode(_amulet, forKey: ._amulet)
+        try container.encode(_leftRing, forKey: ._leftRing)
+        try container.encode(_rightRing, forKey: ._rightRing)
+        try container.encode(_shield, forKey: ._shield)
+        try container.encode(_magicMark, forKey: ._magicMark)
+        try container.encode(_soulStone, forKey: ._soulStone)
+        try container.encode(_levelPoint, forKey: ._levelPoint)
+        try container.encode(_money, forKey: ._money)
+        try container.encode(_key, forKey: ._key)
+        var weapons = Array<Weapon>()
+        var armors = Array<Armor>()
+        var items = Array<Item>()
+        var spellBooks = Array<SpellBook>()
+        var weaponClassNames = Array<String>()
+        var armorClassNames = Array<String>()
+        var itemClassNames = Array<String>()
+        var spellBookClassNames = Array<String>()
+        var marks = Array<MagicMark>()
+        var instrments = Array<Instrument>()
+        for i in _props {
+            if i is MagicMark {
+                marks.append(i as! MagicMark)
+            } else if i is Instrument {
+                instrments.append(i as! Instrument)
+            } else if i is Weapon {
+                weaponClassNames.append(NSStringFromClass(type(of: i)))
+                weapons.append(i as! Weapon)
+            } else if i is Armor {
+                armorClassNames.append(NSStringFromClass(type(of: i)))
+                armors.append(i as! Armor)
+            } else if i is SpellBook {
+                spellBookClassNames.append(NSStringFromClass(type(of: i)))
+                spellBooks.append(i as! SpellBook)
+            } else if i is Item {
+                itemClassNames.append(NSStringFromClass(type(of: i)))
+                items.append(i as! Item)
+            }
+        }
+        try container.encode(weapons, forKey: .weapons)
+        try container.encode(weaponClassNames, forKey: .weaponsClass)
+        try container.encode(armors, forKey: .armors)
+        try container.encode(armorClassNames, forKey: .armorsClass)
+        try container.encode(items, forKey: .items)
+        try container.encode(itemClassNames, forKey: .itemsClass)
+        try container.encode(spellBooks, forKey: .spellBooks)
+        try container.encode(marks, forKey: .marks)
+        try container.encode(instrments, forKey: .instruments)
         try super.encode(to: encoder)
     }
     

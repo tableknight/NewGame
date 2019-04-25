@@ -11,7 +11,8 @@ class Emily:Character {
     override init() {
         super.init()
 //        _name = "艾米丽"
-        _img = SKTexture(imageNamed: "test_role")
+        _imgUrl = "test_role"
+        _img = SKTexture(imageNamed: _imgUrl)
         _seat = BUnit.BBM
 //        _name = "艾米丽"
 //        _minionsCount = 2

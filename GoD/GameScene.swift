@@ -12,40 +12,22 @@ import GameplayKit
 
 class GameScene: SKScene {
     override func didMove(to view: SKView) {
-        let bow = Bow()
-        bow.create(level: 10)
-        save(b: bow)
-        
-        if let b = getBow() {
-            print(b._attrs.count)
-        }
-        
-//        let t = SubTryer()
-//        save(st: t)
-//        print(getSubTryer()?.sib._sibName)
-//        print(getSubTryer()?._subName)
-//        print(getSubTryer()?._name)
-//        if let ats = getSubTryer()?._attrs {
-//            print(ats.count)
-//        }
-//        let st = SubTryer()
-//        st._name = "2"
-//        st._subName = "22"
-//        st.sib._sibName = "33"
-//        save(st: st)
-//        if let s = SubTryer.getData() {
-//            print(s._subName)
-//            print(s._name)
+//        realScene()
+        homePage()
+//        let rd = RoleDocument()
+//        rd._name = "yingzi"
+//        rd._key = "as"
+//        rd._level = 10
+//        
+////        var rs = Roles()
+////        rs.chars.append(rs)
+//        save(b: [rd])
+//        
+//        if let r = load() {
+//            print(r)
 //        } else {
-//            print(st)
+//            print(rd)
 //        }
-//        let t = Tryer()
-//        t._name = "a"
-//        save1(st: t)
-//        print(getSubTryer()?.sib._sibName)
-//        print(SubTryer.getData1()?._subName)
-//        print(SubTryer.getData1()?._name)
-        
     }
 //    func getTryer() -> Tryer? {
 //        let us = UserDefaults.standard
@@ -54,19 +36,25 @@ class GameScene: SKScene {
 //        }
 //        return nil
 //    }
-    func getBow() -> Bow? {
+    func load() -> Array<RoleDocument>? {
         let us = UserDefaults.standard
         if let data = us.data(forKey: "bow") {
-            return try? JSONDecoder().decode(Bow.self, from: data)
+            return try? JSONDecoder().decode(Array.self, from: data)
         }
         return nil
     }
-    func save(b:Bow) {
+    func save(b:Array<RoleDocument>) {
         if let data = try? JSONEncoder().encode(b) {
             let us = UserDefaults.standard
             us.set(data, forKey: "bow")
             us.synchronize()
         }
+    }
+    func homePage() {
+        let welcome = Welcome()
+        welcome.create()
+        welcome._gameScene = self
+        addChild(welcome)
     }
 //    func save1(st:Tryer) {
 //        
@@ -207,31 +195,39 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = BlackWaterTown()
+        let bs = CenterCamping()
         bs.create()
-        let e = Emily()
-        e.create(level: e._level)
         
-        e.addMoney(num: 1000)
-//        e._spellsInuse = []
+        
+        let e = Game.load(key: "char")!
+        
+        
+//        let e = Emily()
+//        e.create(level: e._level)
+//        e.addMoney(num: 1000)
 //        e._spellsInuse = [LineAttack()]
-        bs.setRole(x: 4, y: 4, role: e)
+//        let bow = Bow()
+//        bow.create(level: 1)
+//        e.addProp(p: bow)
+        
+        
+        bs.setRole(x: 5, y: 7, role: e)
 //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
-        
-        let gt = GodTownScroll()
-        gt._count = 10
-        e.addProp(p: gt)
-        
-        let ggg = TownScroll()
-        ggg._count = 10
-        e.addProp(p: ggg)
-        
-        let po = Potion()
-        po._count = 10
-        e.addProp(p: po)
+//        
+//        let gt = GodTownScroll()
+//        gt._count = 10
+//        e.addProp(p: gt)
+//        
+//        let ggg = TownScroll()
+//        ggg._count = 10
+//        e.addProp(p: ggg)
+//        
+//        let po = Potion()
+//        po._count = 10
+//        e.addProp(p: po)
         
     }
     

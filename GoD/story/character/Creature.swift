@@ -22,7 +22,7 @@ class Creature: Unit {
         _growth = try values.decode(Mains.self, forKey: ._growth)
         _spellCount = try values.decode(Int.self, forKey: ._spellCount)
         _sensitive = try values.decode(Int.self, forKey: ._sensitive)
-        _weapon = try values.decode(Weapon.self, forKey: ._weapon)
+        _weapon = try? values.decode(Weapon.self, forKey: ._weapon)
         _seat = try values.decode(String.self, forKey: ._seat)
         isMainChar = try values.decode(Bool.self, forKey: .isMainChar)
         try super.init(from: decoder)

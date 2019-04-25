@@ -292,6 +292,9 @@
 		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
 		097EC6C9226A07C600B9407A /* DemonPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonPortal.swift */; };
 		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
+		09954DAE2271F89E0087B009 /* RoleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09954DAD2271F89E0087B009 /* RoleDocument.swift */; };
+		09954DB02271FB0F0087B009 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09954DAF2271FB0F0087B009 /* Welcome.swift */; };
+		09954DB22271FC380087B009 /* SelectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09954DB12271FC380087B009 /* SelectDocument.swift */; };
 		09C66C6D21ECD61200E1C153 /* SnowLanding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */; };
 		09C66C6F21F0B6F900E1C153 /* BossBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C6E21F0B6F900E1C153 /* BossBattle.swift */; };
 		09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7221F0B83A00E1C153 /* Boss.swift */; };
@@ -682,6 +685,9 @@
 		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
 		097EC6C8226A07C600B9407A /* DemonPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonPortal.swift; sourceTree = "<group>"; };
 		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
+		09954DAD2271F89E0087B009 /* RoleDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleDocument.swift; sourceTree = "<group>"; };
+		09954DAF2271FB0F0087B009 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		09954DB12271FC380087B009 /* SelectDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDocument.swift; sourceTree = "<group>"; };
 		09C66C6C21ECD61200E1C153 /* SnowLanding1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding1.swift; sourceTree = "<group>"; };
 		09C66C6E21F0B6F900E1C153 /* BossBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossBattle.swift; sourceTree = "<group>"; };
 		09C66C7221F0B83A00E1C153 /* Boss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
@@ -866,6 +872,7 @@
 				090FEADB21BB9B2A004276BB /* status */,
 				090FEAE221BB9B2A004276BB /* Core.swift */,
 				090FEAE321BB9B2A004276BB /* Game.swift */,
+				09954DAD2271F89E0087B009 /* RoleDocument.swift */,
 			);
 			path = story;
 			sourceTree = "<group>";
@@ -1212,14 +1219,14 @@
 			children = (
 				09C66C7021F0B78B00E1C153 /* boss */,
 				090FEAE621BB9B2A004276BB /* battle */,
-				090FEAED21BB9B2A004276BB /* gamestage */,
+				090FEAED21BB9B2A004276BB /* stage */,
 				090FEAF021BB9B2A004276BB /* card */,
 				090FEAF621BB9B2A004276BB /* char */,
 				090FEAFB21BB9B2A004276BB /* panel */,
 				090FEB0821BB9B2A004276BB /* component */,
 				090FEB1221BB9B2B004276BB /* cell */,
 				090FEB1921BB9B2B004276BB /* item */,
-				090FEB1B21BB9B2B004276BB /* stage */,
+				090FEB1B21BB9B2B004276BB /* stage_ */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -1238,7 +1245,7 @@
 			path = battle;
 			sourceTree = "<group>";
 		};
-		090FEAED21BB9B2A004276BB /* gamestage */ = {
+		090FEAED21BB9B2A004276BB /* stage */ = {
 			isa = PBXGroup;
 			children = (
 				090FEC4A21BCC36C004276BB /* gamescene */,
@@ -1248,7 +1255,7 @@
 				090FEC4D21BCC4A6004276BB /* MyItem.swift */,
 				090FEC4F21BCF0E3004276BB /* CellMonster.swift */,
 			);
-			path = gamestage;
+			path = stage;
 			sourceTree = "<group>";
 		};
 		090FEAF021BB9B2A004276BB /* card */ = {
@@ -1335,7 +1342,7 @@
 			path = item;
 			sourceTree = "<group>";
 		};
-		090FEB1B21BB9B2B004276BB /* stage */ = {
+		090FEB1B21BB9B2B004276BB /* stage_ */ = {
 			isa = PBXGroup;
 			children = (
 				090FEB2121BB9B2B004276BB /* scenery */,
@@ -1356,7 +1363,7 @@
 				090FEB3321BB9B2B004276BB /* scene */,
 				090FEB4121BB9B2B004276BB /* UIScene.swift */,
 			);
-			path = stage;
+			path = stage_;
 			sourceTree = "<group>";
 		};
 		090FEB1C21BB9B2B004276BB /* sceneSets */ = {
@@ -1431,6 +1438,8 @@
 				090FEB4C21BB9B2B004276BB /* SelectSpell.swift */,
 				090FEB4D21BB9B2B004276BB /* CreationFlow.swift */,
 				09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */,
+				09954DAF2271FB0F0087B009 /* Welcome.swift */,
+				09954DB12271FC380087B009 /* SelectDocument.swift */,
 			);
 			path = welcome;
 			sourceTree = "<group>";
@@ -1951,6 +1960,7 @@
 				090FEB8821BB9B2B004276BB /* Outfit.swift in Sources */,
 				09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */,
 				09C6BF9A21DA5CCC0003C7F1 /* SelfHome.swift in Sources */,
+				09954DB22271FC380087B009 /* SelectDocument.swift in Sources */,
 				090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */,
 				09C66CEC221EF15C00E1C153 /* IceSpear.swift in Sources */,
 				09C6BF7A21C34DAE0003C7F1 /* OutfitPanel.swift in Sources */,
@@ -1993,6 +2003,7 @@
 				090FEC1D21BB9B2B004276BB /* BaseStage.swift in Sources */,
 				090FEC2F21BB9B2B004276BB /* BloodSquare.swift in Sources */,
 				090FEB9421BB9B2B004276BB /* DeathAngelKhalil.swift in Sources */,
+				09954DB02271FB0F0087B009 /* Welcome.swift in Sources */,
 				090FEB6521BB9B2B004276BB /* SacredRing.swift in Sources */,
 				09C66CE8221EEBAD00E1C153 /* WaterCopy.swift in Sources */,
 				090FEC2121BB9B2B004276BB /* Forest.swift in Sources */,
@@ -2203,6 +2214,7 @@
 				09C66CB8220FCA1900E1C153 /* George.swift in Sources */,
 				090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */,
 				090FEB5221BB9B2B004276BB /* Bow.swift in Sources */,
+				09954DAE2271F89E0087B009 /* RoleDocument.swift in Sources */,
 				090FEC4121BB9B2B004276BB /* GroundSets.swift in Sources */,
 				0922C9742249179C002DC201 /* CityOfLethe.swift in Sources */,
 				09C66CA6220C896100E1C153 /* Idlir.swift in Sources */,

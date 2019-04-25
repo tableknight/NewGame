@@ -34,6 +34,7 @@ class Unit:Core {
         case _magical
         case _elemental
         case _physical
+        case _imgUrl
     }
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -44,9 +45,35 @@ class Unit:Core {
         _race = try values.decode(Int.self, forKey: ._race)
         _exp = try values.decode(CGFloat.self, forKey: ._exp)
         _leftPoint = try values.decode(Int.self, forKey: ._leftPoint)
-        _spells = try values.decode(Array.self, forKey: ._spells)
-        _spellsInuse = try values.decode(Array.self, forKey: ._spellsInuse)
-        _spellsHidden = try values.decode(Array.self, forKey: ._spellsHidden)
+        let spells:Array<String> = try values.decode(Array.self, forKey: ._spells)
+        let spellsInuse:Array<String> = try values.decode(Array.self, forKey: ._spellsInuse)
+        let spellsHidden:Array<String> = try values.decode(Array.self, forKey: ._spellsHidden)
+        let l = Loot()
+        let allSpells = l.getAllSpells()
+        for s in spells {
+            for spell in allSpells {
+                if NSClassFromString(s) == type(of: spell) {
+                    _spells.append(spell)
+                    break
+                }
+            }
+        }
+        for s in spellsInuse {
+            for spell in allSpells {
+                if NSClassFromString(s) == type(of: spell) {
+                    _spellsInuse.append(spell)
+                    break
+                }
+            }
+        }
+        for s in spellsHidden {
+            for spell in allSpells {
+                if NSClassFromString(s) == type(of: spell) {
+                    _spellsHidden.append(spell)
+                    break
+                }
+            }
+        }
         _slot = try values.decode(Int.self, forKey: ._slot)
         _lucky = try values.decode(CGFloat.self, forKey: ._lucky)
         _break = try values.decode(CGFloat.self, forKey: ._break)
@@ -59,9 +86,50 @@ class Unit:Core {
         _magical = try values.decode(Magic.self, forKey: ._magical)
         _elemental = try values.decode(Magic.self, forKey: ._elemental)
         _physical = try values.decode(Magic.self, forKey: ._physical)
+        _imgUrl = try values.decode(String.self, forKey: ._imgUrl)
+        if _imgUrl.isEmpty {
+            _imgUrl = "test_role"
+        }
+        _img = SKTexture(imageNamed: _imgUrl)
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(_mains, forKey: ._mains)
+        try container.encode(_extensions, forKey: ._extensions)
+        try container.encode(_level, forKey: ._level)
+        try container.encode(_name, forKey: ._name)
+        try container.encode(_race, forKey: ._race)
+        try container.encode(_exp, forKey: ._exp)
+        try container.encode(_leftPoint, forKey: ._leftPoint)
+        var spells = Array<String>()
+        var spellsInuse = Array<String>()
+        var spellsHidden = Array<String>()
+        for s in _spells {
+            spells.append(NSStringFromClass(type(of: s)))
+        }
+        for s in _spellsInuse {
+            spellsInuse.append(NSStringFromClass(type(of: s)))
+        }
+        for s in _spellsHidden {
+            spellsHidden.append(NSStringFromClass(type(of: s)))
+        }
+        try container.encode(spells, forKey: ._spells)
+        try container.encode(spellsInuse, forKey: ._spellsInuse)
+        try container.encode(spellsHidden, forKey: ._spellsHidden)
+        try container.encode(_slot, forKey: ._slot)
+        try container.encode(_lucky, forKey: ._lucky)
+        try container.encode(_break, forKey: ._break)
+        try container.encode(_revenge, forKey: ._revenge)
+        try container.encode(_rhythm, forKey: ._rhythm)
+        try container.encode(_chaos, forKey: ._chaos)
+        try container.encode(_power, forKey: ._power)
+        try container.encode(_elementalPower, forKey: ._elementalPower)
+        try container.encode(_elementalResistance, forKey: ._elementalResistance)
+        try container.encode(_magical, forKey: ._magical)
+        try container.encode(_elemental, forKey: ._elemental)
+        try container.encode(_physical, forKey: ._physical)
+        try container.encode(_imgUrl, forKey: ._imgUrl)
         try super.encode(to: encoder)
     }
     
@@ -99,6 +167,7 @@ class Unit:Core {
     var _chaos:CGFloat = 0
     var _power:CGFloat = 0
     var _img:SKTexture = SKTexture()
+    var _imgUrl:String = ""
     
     var _elementalPower = Elemental(
         fire : 0,

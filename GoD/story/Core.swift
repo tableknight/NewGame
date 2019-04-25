@@ -57,4 +57,8 @@ class Core:NSObject, Codable{
     func d20() -> Bool {
         return arc4random_uniform(20) == 0
     }
+    func getClassName(_ obj:AnyClass) -> String {
+        return NSStringFromClass(type(of: obj))
+    }
+//    func getClass(_ name:String)
 }

@@ -140,7 +140,9 @@ class LineAttack: Physical {
             setTimeout(delay: 2.5, completion: completion)
         }
     }
-    
+    override func selectable() -> Bool {
+        return _battle._curRole._unit.isClose()
+    }
 }
 
 class RecoveryFromAttack:Physical {

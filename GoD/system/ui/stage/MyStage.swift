@@ -55,6 +55,21 @@ class MyStage: SKSpriteNode {
             op.create()
             showPanel(op)
             return
+        } else if _quitButton.contains(touchPoint!) && _quitButton.visible {
+//            Game.save(c: Game.instance.char!, key: "char")
+//            self.removeFromParent()
+            let char = Game.instance.char!
+            if char._key.isEmpty {
+                char._key = "doc\(Game.roles.count)"
+                let roleDoc = RoleDocument()
+                roleDoc._name = char._name
+                roleDoc._level = char._level.toInt()
+                roleDoc._key = char._key
+                Game.roles.append(roleDoc)
+            }
+            Game.save(c: char, key: char._key)
+            Game.saveRoles(roles: Game.roles)
+            showMsg(text: "保存成功！")
         }
     }
     func loadScene(scene:MyScene) {
@@ -71,6 +86,7 @@ class MyStage: SKSpriteNode {
         _itemButton = createMenuButtons(x: -cellSize * 0.5 + x , y: y, size: size, text: "物品")
         _spellButton = createMenuButtons(x: cellSize * 0.5 + x, y: y, size: size, text: "法术")
         _minionButton = createMenuButtons(x: cellSize * 1.5 + x, y: y, size: size, text: "随从")
+        _quitButton = createMenuButtons(x: -cellSize * 3.3, y: -cellSize * 6.3, size: cellSize * 0.6, text: "保存退出")
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -251,6 +267,7 @@ class MyStage: SKSpriteNode {
     var _outfitButton:RoundButton!
     var _spellButton:RoundButton!
     var _minionButton:RoundButton!
+    var _quitButton:RoundButton!
     var _uiComponentList:Array<SKSpriteNode> = []
     var _scenes = Array<AcientRoad>()
     var _curPanel:UIPanel?

@@ -20,15 +20,23 @@ class MagicMark: Armor {
     }
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
+        let s = try values.decode(String.self, forKey: ._spell)
+        let l = Loot()
+        let allSpells = l.getAllSpells()
+        for spell in allSpells {
+            if NSClassFromString(s) == type(of: spell) {
+                _spell = spell
+                break
+            }
+        }
         _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
-        _spell = try values.decode(Spell.self, forKey: ._spell)
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_spellAppended, forKey: ._spellAppended)
-        try container.encode(_spell, forKey: ._spell)
-        try super.encode(to: encoder)
+        try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
     }
     var _spell:Spell = Spell()
     override func create(level: CGFloat) {
