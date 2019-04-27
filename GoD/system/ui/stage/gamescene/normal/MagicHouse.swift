@@ -19,6 +19,7 @@ class MagicHouse: InnerHouse {
         _wallTexture = i4.getCell(12, 12, 2, 2)
         _bottomWallTexture = Game.instance.inside_a5.getCell(1, 7)
         _mapSet = GroundSets(ground: i2.getCell(6, 2, 2, 2), wall: Game.instance.inside_a5.getCell(5, 7))
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +32,7 @@ class MagicHouse: InnerHouse {
             let role = getNextCellItem(x: 1, y: 1) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
+                             text: "人们对造物主总是充满了好奇，我愿意与你分享这份秘密，不过需要付出一些代价，你是否能够接受？",
                              name: "大魔法师梅露露", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -48,32 +49,17 @@ class MagicHouse: InnerHouse {
         if cell == CELL_ROLE && point.equalTo(CGPoint(x: 5, y: 4)) {
             let role = getNextCellItem(x: 5, y: 4) as! UIRole
             let stage = Game.instance.curStage!
+            
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
+                             text: "知识是力量的源泉，书籍是知识的海洋，你赋予我财富，我赐予你知识，这笔交易可否接受？？",
                              name: "大魔法师欧德林", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
                                 dlg._confirmAction = {
                                     stage.removeDialog(dlg: dlg)
                                     let sp = SellingPanel()
-                                    //                let level = Game.instance.char._level
-                                    let l = Loot()
-                                    sp._goodsList = []
-                                    for _ in 0...9 {
-                                        let b = SpellBook()
-                                        let s = self.seed(max: 3)
-                                        var spell = l.getNormalSpell(id: l._normalSpellArray.one())
-                                        b.price = 36
-                                        if 1 == s {
-                                            spell = l.getGoodSpell(id: l._goodSpellArray.one())
-                                            b.price = 96
-                                        } else if 2 == s {
-                                            spell = l.getRareSpell(id: l._rareSpellArray.one())
-                                            b.price = 216
-                                        }
-                                        b.spell = spell
-                                        sp._goodsList.append(b)
-                                    }
+                                    sp._goodsList = self._sellingBooks
+                                    
                                     sp.create()
                                     stage.showPanel(sp)
                                 }
@@ -153,8 +139,28 @@ class MagicHouse: InnerHouse {
         for p in roleoints {
             _mapMatrix[p[1]][p[0]] = CELL_ROLE
         }
+        
+        let l = Loot()
+        var list = Array<SpellBook>()
+        for _ in 0...9 {
+            let b = SpellBook()
+            let s = self.seed(max: 3)
+            var spell = l.getNormalSpell(id: l._normalSpellArray.one())
+            b.price = 36
+            if 1 == s {
+                spell = l.getGoodSpell(id: l._goodSpellArray.one())
+                b.price = 96
+            } else if 2 == s {
+                spell = l.getRareSpell(id: l._rareSpellArray.one())
+                b.price = 216
+            }
+            b.spell = spell
+            list.append(b)
+        }
+        _sellingBooks = list
     }
     private let CELL_ROLE = 151
+    private var _sellingBooks = Array<SpellBook>()
 }
 
 class Table1:UIItem {

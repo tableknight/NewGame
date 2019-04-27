@@ -135,7 +135,7 @@ class ThunderEnergeTower:Tower {
 class TimeReduce:Status {
     override init() {
         super.init()
-        _type = Status.WATER_ENERGE
+        _type = Status.TIME_REDUCE
         _name = "时空扭转"
         _description = "减少所有技能1回合冷却时间。"
     }
@@ -169,7 +169,7 @@ class TimeReduceTower:Tower {
 class PhysicalPower:Status {
     override init() {
         super.init()
-        _type = Status.WATER_ENERGE
+        _type = Status.PHYSICAL_POWER
         _name = "无坚不摧之力"
         _description = "提升50%造成物理伤害。"
     }
@@ -203,7 +203,7 @@ class PhysicalPowerTower:Tower {
 class MagicalPower:Status {
     override init() {
         super.init()
-        _type = Status.WATER_ENERGE
+        _type = Status.MAGICAL_POWER
         _name = "黑暗降临"
         _description = "提升50%造成法术伤害。"
     }
@@ -237,7 +237,7 @@ class MagicalPowerTower:Tower {
 class AttackPower:Status {
     override init() {
         super.init()
-        _type = Status.THUNDER_ENERGE
+        _type = Status.ATTACK_POWER
         _name = "战争之神"
         _description = "提升50点攻击力和25点必杀。"
     }

@@ -610,7 +610,7 @@ class Chest:UIItem {
                 self.loot()
             }
             b.defeatedAction = {
-                
+                self.confirmAction()
             }
             return
         }

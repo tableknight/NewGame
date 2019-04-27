@@ -157,11 +157,11 @@ class Dungeon: MyScene {
             _visiblePoints.remove(at: index)
             let chest = Chest()
             chest.confirmAction = {
-                let fo = SKAction.fadeOut(withDuration: TimeInterval(1))
-                chest.run(fo) {
-                    chest.removeFromParent()
-                    self._mapMatrix[point.y.toInt()][point.x.toInt()] = self.CELL_EMPTY
-                }
+//                let fo = SKAction.fadeOut(withDuration: TimeInterval(1))
+//                chest.run(fo) {
+//                }
+                chest.removeFromParent()
+                self._mapMatrix[point.y.toInt()][point.x.toInt()] = self.CELL_EMPTY
             }
             addItem(x: point.x, y: point.y, item: chest)
             _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_BOX

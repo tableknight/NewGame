@@ -290,7 +290,7 @@
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
 		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
-		097EC6C9226A07C600B9407A /* DemonPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonPortal.swift */; };
+		097EC6C9226A07C600B9407A /* DemonTownPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonTownPortal.swift */; };
 		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
 		09954DAE2271F89E0087B009 /* RoleDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09954DAD2271F89E0087B009 /* RoleDocument.swift */; };
 		09954DB02271FB0F0087B009 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09954DAF2271FB0F0087B009 /* Welcome.swift */; };
@@ -683,7 +683,7 @@
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
 		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
-		097EC6C8226A07C600B9407A /* DemonPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonPortal.swift; sourceTree = "<group>"; };
+		097EC6C8226A07C600B9407A /* DemonTownPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonTownPortal.swift; sourceTree = "<group>"; };
 		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
 		09954DAD2271F89E0087B009 /* RoleDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleDocument.swift; sourceTree = "<group>"; };
 		09954DAF2271FB0F0087B009 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
@@ -1505,7 +1505,7 @@
 				0922C96F224910A0002DC201 /* CityOfSin.swift */,
 				0922C96B2248C297002DC201 /* CityOfSorrow.swift */,
 				0922C96D22490CD8002DC201 /* CityOfDesire.swift */,
-				097EC6C8226A07C600B9407A /* DemonPortal.swift */,
+				097EC6C8226A07C600B9407A /* DemonTownPortal.swift */,
 			);
 			path = demontown;
 			sourceTree = "<group>";
@@ -2138,7 +2138,7 @@
 				090FEBAB21BB9B2B004276BB /* DancingOnIce.swift in Sources */,
 				09C66C942207489800E1C153 /* Active.swift in Sources */,
 				09C66C962209E4B600E1C153 /* SumahlBattle.swift in Sources */,
-				097EC6C9226A07C600B9407A /* DemonPortal.swift in Sources */,
+				097EC6C9226A07C600B9407A /* DemonTownPortal.swift in Sources */,
 				090FEB8521BB9B2B004276BB /* Critical.swift in Sources */,
 				09C66CDE2215BF0500E1C153 /* SpringIsComing.swift in Sources */,
 				090FEB8621BB9B2B004276BB /* Speed.swift in Sources */,

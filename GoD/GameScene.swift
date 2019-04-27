@@ -195,20 +195,20 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = CenterCamping()
+        let bs = DemonTownPortal()
         bs.create()
         
         
-        let e = Game.load(key: "char")!
+//        let e = Game.load(key: "char")!
         
         
-//        let e = Emily()
-//        e.create(level: e._level)
-//        e.addMoney(num: 1000)
-//        e._spellsInuse = [LineAttack()]
-//        let bow = Bow()
-//        bow.create(level: 1)
-//        e.addProp(p: bow)
+        let e = Emily()
+        e.create(level: e._level)
+        e.addMoney(num: 1000)
+        e._spellsInuse = [LineAttack()]
+        let bow = Bow()
+        bow.create(level: 1)
+        e.addProp(p: bow)
         
         
         bs.setRole(x: 5, y: 7, role: e)
@@ -221,10 +221,10 @@ class GameScene: SKScene {
 //        gt._count = 10
 //        e.addProp(p: gt)
 //        
-//        let ggg = TownScroll()
-//        ggg._count = 10
-//        e.addProp(p: ggg)
-//        
+        let ggg = TownScroll()
+        ggg._count = 10
+        e.addProp(p: ggg)
+//
 //        let po = Potion()
 //        po._count = 10
 //        e.addProp(p: po)

@@ -25,53 +25,12 @@ class Maze: Dungeon {
     }
     
     override func create() {
-        _fragment.append([1,0,2,0,0,1,0,2])
-        for _ in 0...4 {
-            _fragment.append([])
-            
-        }
-        _fragment.append([1,0,2,0,0,1,0,2])
-        _fragment.append([1,0,2,0])
-        _fragment.append([0,1,0,2])
-        for _ in 0...1 {
-            _fragment.append([])
-            
-        }
-//        _fragment.append([0,1,0,2])
-//        _fragment.append([])
-//        _fragment.append([0,1,0,2])
-        for _ in 0...1 {
-            _fragment.append([])
-            
-        }
-//        _fragment.append([1,0,2,0])
-//        _fragment.append([1,0,2,0])
-//        _fragment.append([0,1,0,2])
-        for _ in 0...3 {
-            _fragment.append([])
-            
-        }
-        for _ in 0...18 {
-            _fragment.append([])
-            
-        }
         createSize()
         _nameLabel.text = _name
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
         createWallShadow()
-        
-        let mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)
-        mark.alpha = 0.5
-        mark.size = CGSize(width: cellSize * 5, height: cellSize * 5)
-        addGround(x: 6, y: 8, item: mark)
-//        let t = SKTexture(imageNamed: "wall_shadow_12")
-//        addItem(x: 3, y: 6, item: Game.instance.dungeon_c.getNode(6, 8, 1, 2))
-//        addGround(x: 5, y: 6, item: SKSpriteNode(texture: t))
-//        addShadow(x: 4, y: 7)
-        _portalNext = CGPoint(x: 5, y: 5)
-        _portalPrev = CGPoint(x: 6, y: 7)
     }
     internal var _fragment = Array<Array<CGFloat>>()
     override func createMapMatrix() {

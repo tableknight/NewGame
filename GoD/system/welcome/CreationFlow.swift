@@ -82,6 +82,7 @@ class CreationFlow:SKSpriteNode {
             e._spellCount = role![7] as! Int
             e._levelPoint = role![2] as! Int
             e._seat = BUnit.BBM
+            e._name = role![0] as! String
             scene.setRole(x: 2, y: 1, role: e)
             if minion != nil {
                 minion!._seat = BUnit.BTM

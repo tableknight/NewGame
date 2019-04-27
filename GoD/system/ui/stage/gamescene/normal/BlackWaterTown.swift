@@ -51,10 +51,10 @@ class BlackWaterTown: StandScene {
             let fade = SKAction.fadeIn(withDuration: TimeInterval(1.5))
             _mark.removeFromParent()
             _portalMark.run(fade) {
-                let cc = DemonPortal()
+                let cc = DemonTownPortal()
                 let char = self._role!
                 Game.instance.curStage.switchScene(next: cc, afterCreation: {
-                    cc.setRole(x: 6, y: 6, char: char)
+                    cc.setRole(x: 6, y: 5, char: char)
                     char.faceSouth()
                 }, completion: {})
             }
@@ -132,6 +132,10 @@ class BlackWaterTown: StandScene {
         addItem(x: 8.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
         addItem(x: 11.5, y: 7.5, item: oc.getNode(1, 1, 1, 2))
         addItem(x: 11.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
+        _mapMatrix[7][8] = CELL_BLOCK
+        _mapMatrix[10][8] = CELL_BLOCK
+        _mapMatrix[7][11] = CELL_BLOCK
+        _mapMatrix[10][11] = CELL_BLOCK
 
     }
     private var _mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)
