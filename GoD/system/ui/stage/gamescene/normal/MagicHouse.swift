@@ -51,7 +51,7 @@ class MagicHouse: InnerHouse {
             let stage = Game.instance.curStage!
             
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "知识是力量的源泉，书籍是知识的海洋，你赋予我财富，我赐予你知识，这笔交易可否接受？？",
+                             text: "知识是力量的源泉，书籍是知识的海洋，金钱是遨游于海洋的方舟，我这么说你明白吗？？",
                              name: "大魔法师欧德林", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -110,11 +110,11 @@ class MagicHouse: InnerHouse {
         addItem(x: 8, y: 0, item: ic.getNode(4, 14))
         
         let r1 = UIRole()
-        r1.create(roleNode: Game.instance.pictureAll2.getNode(7, 7))
+        r1.create(roleNode: SKTexture(imageNamed: "Mei_lulu").getNode(1, 3))
         addItem(x: 1, y: 1, item: r1)
         
         let r2 = UIRole()
-        r2.create(roleNode: Game.instance.pictureActor2.getNode(1, 4))
+        r2.create(roleNode: SKTexture(imageNamed: "Oldlin").getNode(1, 0))
         addItem(x: 5, y: 4, item: r2)
         addGround(x: 0, y: 3, item: ic.getNode(1, 7))
         addGround(x: 2, y: 4, item: ic.getNode(4, 7))

@@ -50,14 +50,22 @@ class SelectImage:UIPanel {
         
         addChild(_listBox)
         _images = [
-            Game.instance.pictureCollabo8_2.getCell(6, 3, 3, 4),
-            Game.instance.pictureActor3.getCell(3, 7, 3, 4),
-            Game.instance.pictureActor1.getCell(0, 7, 3, 4),
-            Game.instance.pictureActor1.getCell(9, 3, 3, 4),
-            Game.instance.picturePeople1.getCell(0, 3, 3, 4),
-            Game.instance.picturePeople1.getCell(3, 3, 3, 4),
+//            Game.instance.pictureCollabo8_2.getCell(6, 3, 3, 4),
+//            Game.instance.pictureActor3.getCell(3, 7, 3, 4),
+//            Game.instance.pictureActor1.getCell(0, 7, 3, 4),
+//            Game.instance.pictureActor1.getCell(9, 3, 3, 4),
+//            Game.instance.picturePeople1.getCell(0, 3, 3, 4),
+//            Game.instance.picturePeople1.getCell(3, 3, 3, 4),
+            SKTexture(imageNamed: "role_1"),
+            SKTexture(imageNamed: "role_2"),
+            SKTexture(imageNamed: "role_3"),
+            SKTexture(imageNamed: "role_4"),
+            SKTexture(imageNamed: "role_5"),
+            SKTexture(imageNamed: "role_6"),
+            SKTexture(imageNamed: "role_7"),
+            SKTexture(imageNamed: "role_8")
         ]
-        _names = ["塞西", "洛丝丽雅", "莫贝尔", "弑羽", "狄菲" ,"安瑟玛薇"]
+        _names = ["塞西", "洛丝丽娅", "莫贝尔", "弑羽", "安瑟玛薇", "狄菲" , "夜薇", "入凡"]
         showImages()
         
     }

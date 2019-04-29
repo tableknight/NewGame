@@ -30,8 +30,8 @@ class GeneralStore: InnerHouse {
             let role = getNextCellItem(x: 3, y: 5) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                text: "交易，来一发？",
-                name: "希莉娅",
+                text: "今天c需要点什么呢？",
+                name: "莱莉娅",
                 action: {
                     let dlg = stage._curDialog!
                     dlg.addConfirmButton()
@@ -93,15 +93,15 @@ class GeneralStore: InnerHouse {
         addItem(x: 9, y: 6, item: it.getNode(12, 15, 2, 2), width: 0, z:MyScene.MAP_LAYER_Z)
         
         let r1 = UIRole()
-        r1.create(roleNode: Game.instance.picturePeople4.getNode(1, 3))
+        r1.create(roleNode: SKTexture(imageNamed: "boy1").getNode(1, 3))
         addItem(x: 1, y: 4, item: r1)
         
         let r2 = UIRole()
-        r2.create(roleNode: Game.instance.picturePeople4.getNode(4, 0))
+        r2.create(roleNode: SKTexture(imageNamed: "Ranliya").getNode(1, 0))
         addItem(x: 3, y: 5, item: r2)
         
         let r3 = UIRole()
-        r3.create(roleNode: Game.instance.picturePeople4.getNode(7, 2))
+        r3.create(roleNode: SKTexture(imageNamed: "boy2").getNode(1, 2))
         addItem(x: 2, y: 0, item: r3)
         
         let itemPoints:Array<Array<Int>> = [

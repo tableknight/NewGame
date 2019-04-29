@@ -1243,6 +1243,7 @@ class Battle: SKSpriteNode {
     }
     internal func showItemPanel() {
         let bip = BattleItemPanel()
+        bip._battle = self
         bip.create()
         let this = self
         bip.closeAction = {

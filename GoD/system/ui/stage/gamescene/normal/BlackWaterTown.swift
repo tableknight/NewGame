@@ -99,8 +99,8 @@ class BlackWaterTown: StandScene {
         addGround(x: 4, y: 6, item: river.topConnection)
         addGround(x: 5, y: 7, item: river.topRightCover)
         addGround(x: 6, y: 8, item: river.topRightCover)
-        let p2 = Game.instance.picturePeople2
-        addItem(x: 3, y: 4, item: getRoleNode(roleNode: p2.getNode(10, 0)))
+//        let p2 = Game.instance.picturePeople2
+        addItem(x: 3, y: 4, item: getRoleNode(roleNode: SKTexture(imageNamed: "Jade").getNode(1, 0)))
         //        let v = Game.instance.pictureVehicle
         addItem(x: 1, y: 4, item: Boat(), width: 0)
         let total:Array<Array<CGFloat>> = [

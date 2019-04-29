@@ -15,19 +15,11 @@ class BlackCat: Natrue {
         _stars.agility = 2.1
         _stars.intellect = 1.1
         _name = "奇奇"
-        _race = EvilType.NATURE
-        _img = Game.instance.pictureNature.getCell(3, 3, 3, 4)
-        _spellsInuse = []
+        _imgUrl = "kiki"
+        _img = SKTexture(imageNamed: _imgUrl)
     }
     override func createQuality() {
         _quality = Quality.NORMAL
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        _spellCount = 1
-    }
-    override func protectNew() {
-        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

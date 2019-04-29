@@ -11,7 +11,7 @@ class SelectDocument: UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         if nil != _selectedDc && _selectedDc.contains(touchPoint!){
-            
+            go()
         }
         for dc in _dcLayer.children {
             if dc.contains(touchPoint!) {
@@ -36,20 +36,11 @@ class SelectDocument: UIPanel {
             return
         }
         
-        if _nextButton.contains(touchPoint!) {
-            if nil == _selectedDc {
+        if nil == _selectedDc {
+            if _nextButton.contains(touchPoint!) {
+                go()
                 return
             }
-            self.removeFromParent()
-            let role = Game.load(key: _selectedDc._doc._key)!
-            let stage = MyStage()
-            let scene = SelfHome()
-            scene.create()
-            scene.setRole(x: 2, y: 1, role: role)
-            stage.loadScene(scene: scene)
-            stage.createMenu()
-            _gameScene!.addChild(stage)
-            return
         }
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -58,6 +49,17 @@ class SelectDocument: UIPanel {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    private func go() {
+        self.removeFromParent()
+        let role = Game.load(key: _selectedDc._doc._key)!
+        let stage = MyStage()
+        let scene = SelfHome()
+        scene.create()
+        scene.setRole(x: 2, y: 1, role: role)
+        stage.loadScene(scene: scene)
+        stage.createMenu()
+        _gameScene!.addChild(stage)
     }
     override func create() {
         createCloseButton()

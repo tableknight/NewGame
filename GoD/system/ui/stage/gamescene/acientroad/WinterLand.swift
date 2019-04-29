@@ -128,12 +128,10 @@ class SnowLady: Man {
         _stars.agility = 2.0
         _stars.intellect = 0.5
         _name = "冰雪女妖"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureBaldo.getCell(3, 3, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
+        _imgUrl = "snow_lady"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
+        if d4() {
             _spellsInuse = [Disappear()]
         }
     }
@@ -145,22 +143,17 @@ class SnowLady: Man {
     }
 }
 
-class FrozenSlime: Rizen {
+class FrozenSlime: Demon {
     override init() {
         super.init()
         _stars.strength = 1.1
-        _stars.stamina = 1.4
-        _stars.agility = 2.5
+        _stars.stamina = 2.4
+        _stars.agility = 1.5
         _stars.intellect = 0.6
         _name = "冰冻史莱姆"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = SKTexture(imageNamed: "slime.png")
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [BargeAbout()]
-        }
+        _imgUrl = "slime"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 3
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -178,8 +171,12 @@ class IceBeast: Natrue {
         _stars.agility = 1.5
         _stars.intellect = 1.5
         _name = "冰兽"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureMonster.getCell(3, 3, 3, 4)
+        _imgUrl = "ice_beast"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 1
+        if d7() {
+            _spellsInuse = [QuickHeal()]
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -197,12 +194,10 @@ class SnowSpirit: Natrue {
         _stars.agility = 2.5
         _stars.intellect = 1.9
         _name = "雪精"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureCollabo8_1.getCell(6, 7, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
+        _imgUrl = "snow_spirit"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
+        if d7() {
             _spellsInuse = [FrozenShoot()]
         }
     }

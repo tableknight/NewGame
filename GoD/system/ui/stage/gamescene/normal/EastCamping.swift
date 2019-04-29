@@ -103,8 +103,8 @@ class EastCamping: StandScene {
         }
         addGround(x: 9, y: 5, item: river.topLeftCover)
         
-        let p2 = Game.instance.picturePeople2
-        addItem(x: 9, y: 4, item: getRoleNode(roleNode: p2.getNode(10, 0)))
+//        let p2 = Game.instance.picturePeople2
+        addItem(x: 9, y: 4, item: getRoleNode(roleNode: SKTexture(imageNamed: "Jade").getNode(1, 0)))
 //        let v = Game.instance.pictureVehicle
         addItem(x: 10, y: 5, item: Boat(), width: 0)
         addItem(x: 0, y: 2, item: House4(), width:0, z: MyScene.MAP_LAYER_Z)

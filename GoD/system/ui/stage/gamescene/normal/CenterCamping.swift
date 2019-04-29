@@ -239,8 +239,8 @@ class CenterCamping: StandScene {
             addItem(x: a[0], y: a[1], item: TallTree())
         }
         
-        let ac3 = Game.instance.pictureActor3
-        addItem(x: 4, y: 7, item: getRoleNode(roleNode: ac3.getNode(7, 4)))
+//        let ac3 = Game.instance.pictureActor3
+        addItem(x: 4, y: 7, item: getRoleNode(roleNode: SKTexture(imageNamed: "Suvya").getNode(1, 0)))
         
         let db = Game.instance.dungeon_b
         

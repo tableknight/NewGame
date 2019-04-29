@@ -94,11 +94,9 @@ class ChildLizard: Natrue {
         _stars.agility = 1.1
         _stars.intellect = 0.6
         _name = "小蜥蜴"
-        _race = EvilType.NATURE
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureCollabo8_2.getCell(3, 7, 3, 4)
-        //        let img = _img
-        //        let s = _img
+        _imgUrl = "child_lizard"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 2
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -115,12 +113,12 @@ class ForestGuard: Natrue {
         _stars.agility = 1.1
         _stars.intellect = 2.6
         _name = "森林守卫"
-        _race = EvilType.MAN
-        _spellSlot = SpellSlot(max: 2, min: 1)
+        _imgUrl = "forest_guard"
         _img = SKTexture(imageNamed: "forest_guard")
-        //        let img = _img
-        //        let s = _img
-        _spellsInuse = [WindPunish()]
+        _spellCount = 3
+        if d2() {
+            _spellsInuse = [WindPunish()]
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -137,12 +135,9 @@ class CrazyPlant: Natrue {
         _stars.agility = 1.4
         _stars.intellect = 0.6
         _name = "疯狂植物"
-        _race = EvilType.NATURE
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = SKTexture(imageNamed: "crazy_plant")
-        //        let img = _img
-        //        let s = _img
-        _spellsInuse = [LineAttack()]
+        _imgUrl = "crazy_plant"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 2
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -154,17 +149,14 @@ class CrazyPlant: Natrue {
 class CowCow: Natrue {
     override init() {
         super.init()
-        _stars.strength = 1.6
-        _stars.stamina = 2.8
+        _stars.strength = 1.0
+        _stars.stamina = 2.9
         _stars.agility = 0.6
         _stars.intellect = 0.6
         _name = "奶牛"
-        _race = EvilType.NATURE
-        _spellSlot = SpellSlot(max: 3, min: 0)
-        _img = SKTexture(imageNamed: "cow")
-        //        let img = _img
-        //        let s = _img
-        _spellsInuse = []
+        _imgUrl = "cow_cow"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

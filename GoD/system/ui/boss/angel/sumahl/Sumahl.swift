@@ -36,7 +36,7 @@ class SumahlServant1:BossMinion {
     override init() {
         super.init()
         _name = "蜜雪"
-        _img = Game.instance.pictureActor3.getCell(9, 3, 3, 4)
+        _img = SKTexture(imageNamed: "Misheal")
     }
     override func create(level: CGFloat) {
         _quality = Quality.NORMAL
@@ -58,8 +58,8 @@ class SumahlServant1:BossMinion {
 class SumahlServant2:BossMinion {
     override init() {
         super.init()
-        _name = "露琪"
-        _img = Game.instance.pictureNature.getCell(6, 7, 3, 4)
+        _name = "蜜琪"
+        _img = SKTexture(imageNamed: "miki")
     }
     override func create(level: CGFloat) {
         _quality = Quality.NORMAL

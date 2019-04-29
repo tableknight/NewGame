@@ -84,7 +84,13 @@ class BattleItemPanel: UIPanel {
     private func getPropsInBattle() -> Array<Prop> {
         var ps = Array<Prop>()
         for p in _char._props {
-            if p is Item {
+            if p is SealScroll {
+                if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
+                    
+                } else {
+                    ps.append(p)
+                }
+            } else if p is Item {
                 let item = p as! Item
                 if item._count > 0 && item.usableInBattle {
                     ps.append(p)
@@ -114,5 +120,6 @@ class BattleItemPanel: UIPanel {
     var selectedItem:Item?
     var selectAction = {}
     var closeAction = {}
+    var _battle:Battle!
 }
 

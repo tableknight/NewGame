@@ -85,3 +85,92 @@ class SecretValley: AcientRoad {
         }
     }
 }
+class DarkNinja: Man {
+    override init() {
+        super.init()
+        _stars.strength = 2.0
+        _stars.stamina = 0.8
+        _stars.agility = 2.0
+        _stars.intellect = 0.6
+        _name = "黑暗忍着"
+        _imgUrl = "dark_ninja"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
+        if d5() {
+            _spellsInuse = [Disappear()]
+        }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+class HellNight: Rizen {
+    override init() {
+        super.init()
+        _stars.strength = 1.3
+        _stars.stamina = 3.0
+        _stars.agility = 0.5
+        _stars.intellect = 0.6
+        _name = "地狱骑士"
+        _imgUrl = "hell_rider"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
+        if d3() {
+            _spellsInuse = [BargeAbout()]
+        }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+class BloodQueen: Demon {
+    override init() {
+        super.init()
+        _stars.strength = 0.4
+        _stars.stamina = 1.2
+        _stars.agility = 1.2
+        _stars.intellect = 2.6
+        _name = "鲜血女王"
+        _imgUrl = "blood_queen"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 3
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    
+}
+
+class ManWizard: Man {
+    override init() {
+        super.init()
+        _stars.strength = 1.1
+        _stars.stamina = 0.8
+        _stars.agility = 2.5
+        _stars.intellect = 1.9
+        _name = "旅法师"
+        _imgUrl = "wander_wizard"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell23()
+        if d6() {
+            _spellsInuse = [FrozenShoot()]
+        }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}

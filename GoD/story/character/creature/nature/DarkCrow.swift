@@ -15,19 +15,11 @@ class DarkCrow: Natrue {
         _stars.agility = 1.0
         _stars.intellect = 0.6
         _name = "阿福"
-        _race = EvilType.NATURE
-        _img = Game.instance.pictureNature.getCell(0, 3, 3, 4)
-        _spellsInuse = []
+        _imgUrl = "afu"
+        _img = SKTexture(imageNamed: _imgUrl)
     }
     override func createQuality() {
         _quality = Quality.NORMAL
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        _spellCount = 1
-    }
-    override func protectNew() {
-        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

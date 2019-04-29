@@ -83,6 +83,86 @@ class SecretMeadow: AcientRoad {
     }
     
 }
+class VirulentToad: Natrue {
+    override init() {
+        super.init()
+        _stars.strength = 1.0
+        _stars.stamina = 2.8
+        _stars.agility = 0.6
+        _stars.intellect = 1.0
+        _name = "绿精灵"
+        _imgUrl = "green_spirit"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+class GiantWasp: Man {
+    override init() {
+        super.init()
+        _stars.strength = 2.2
+        _stars.stamina = 0.5
+        _stars.agility = 2.0
+        _stars.intellect = 0.8
+        _name = "露琪"
+        _imgUrl = "luki"
+        _img = SKTexture(imageNamed: _imgUrl)
+        if d4() {
+            _spellsInuse = [Reborn()]
+        }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+class TreeSpirit: Natrue {
+    override init() {
+        super.init()
+        _stars.strength = 1.0
+        _stars.stamina = 2.0
+        _stars.agility = 1.0
+        _stars.intellect = 2.2
+        _name = "树精"
+        _imgUrl = "tree_spirit"
+        _img = SKTexture(imageNamed: _imgUrl)
+        if d4() {
+            _spellsInuse = [FragileCurse()]
+        }
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+class Python: Man {
+    override init() {
+        super.init()
+        _stars.strength = 1.5
+        _stars.stamina = 1.4
+        _stars.agility = 1.3
+        _stars.intellect = 1.2
+        _name = "花仙子"
+        _imgUrl = "flower_fairy"
+        _img = SKTexture(imageNamed: _imgUrl)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
 class MI24:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)

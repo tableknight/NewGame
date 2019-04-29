@@ -35,7 +35,7 @@ class OutfitStore: InnerHouse {
             let role = getNextCellItem(x: 2, y: 1) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
+                             text: "王国第一铁匠岂是浪得虚名？要不要看看我的货呀？",
                              name: "武器大师范铁隆", action: {
                                 
                                 let dlg = stage._curDialog!
@@ -62,8 +62,8 @@ class OutfitStore: InnerHouse {
             let role = getNextCellItem(x: 4, y: 0) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
-                             name: "神秘商人", action: {
+                             text: "你想的，你要的，你求的，我全都有，看看吗？",
+                             name: "武器商人", action: {
                                 
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -92,8 +92,8 @@ class OutfitStore: InnerHouse {
             let role = getNextCellItem(x: 8, y: 1) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
-                             name: "防具大师范铁隆", action: {
+                             text: "哼，不买不要碰！",
+                             name: "防具大师金利", action: {
                                 
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -119,8 +119,8 @@ class OutfitStore: InnerHouse {
             let role = getNextCellItem(x: 6, y: 0) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "交易，来一发？",
-                             name: "神秘商人", action: {
+                             text: "我喜欢在夜晚交易，你呢？",
+                             name: "防具商人", action: {
                                 
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -226,20 +226,18 @@ class OutfitStore: InnerHouse {
 //        addItem(x: 7, y: 6, item: ic.getNode(12, 2, 3, 1), width: 0)
 //
         let r1 = UIRole()
-        r1.create(roleNode: Game.instance.pictureBaldo.getNode(1, 0))
+        r1.create(roleNode: SKTexture(imageNamed: "Vanteron").getNode(1, 0))
         addItem(x: 2, y: 1, item: r1)
 
         let r2 = UIRole()
-        r2.create(roleNode: Game.instance.pictureBaldo.getNode(7, 4))
+        r2.create(roleNode: SKTexture(imageNamed: "Ginly").getNode(1, 0))
         addItem(x: 8, y: 1, item: r2)
         
-        let sst = SKTexture(imageNamed: "secret_seller").getCell(1, 0)
-        
         let ss1 = UIRole()
-        ss1.create(roleNode: SKSpriteNode(texture: sst))
+        ss1.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
         addItem(x: 4, y: 0, item: ss1)
         let ss2 = UIRole()
-        ss2.create(roleNode: SKSpriteNode(texture: sst))
+        ss2.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
         addItem(x: 6, y: 0, item: ss2)
 //
         

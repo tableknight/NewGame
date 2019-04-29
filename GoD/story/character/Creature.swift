@@ -46,7 +46,7 @@ class Creature: Unit {
     var _stars:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
     var _growth:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
     var _spellSlot:SpellSlot = SpellSlot(max: 3, min: 0)
-    var _spellCount = 2
+    var _spellCount = 1
     var _moveSpeed:CGFloat = 0
     var _sensitive = 33
     var _weapon:Weapon?
@@ -92,29 +92,21 @@ class Creature: Unit {
         _growth.strength = _stars.strength + extraProperty(value: _stars.strength)
         _growth.agility = _stars.agility + extraProperty(value: _stars.agility)
         _growth.intellect = _stars.intellect + extraProperty(value: _stars.intellect)
-        protectNew()
         levelTo(level: level)
         _extensions.hp = _extensions.health
-        _slot = seed(min: _spellSlot.min, max: _spellSlot.max + 1)
-        _spellCount = _slot
-        _sensitive = seed(min: 15, max: 56)
+        magicSensitive()
     }
-    func protectNew() {
-        if _level < 10 {
-            let initMax:CGFloat = 1.2
-            if _growth.stamina > initMax {
-                _growth.stamina = initMax
-            }
-            if _growth.strength > initMax {
-                _growth.strength = initMax
-            }
-            if _growth.agility > initMax {
-                _growth.agility = initMax
-            }
-            if _growth.intellect > initMax {
-                _growth.intellect = initMax
-            }
-        }
+    func spell12() {
+        _spellCount = seed(min: 1, max: 3)
+    }
+    func spell13() {
+        _spellCount = seed(min: 1, max: 4)
+    }
+    func spell23() {
+        _spellCount = seed(min: 2, max: 4)
+    }
+    func magicSensitive() {
+        _sensitive = seed(min: 15, max: 56)
     }
     func levelTo(level:CGFloat) {
         staminaChange(value: (level + 10) * _growth.stamina)
@@ -160,8 +152,4 @@ class Creature: Unit {
         }
         return _weapon!.isClose
     }
-    func getLoots() -> Array<Prop> {
-        return Array<Prop>()
-    }
-    
 }

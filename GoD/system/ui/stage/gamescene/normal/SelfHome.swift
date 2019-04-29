@@ -76,7 +76,7 @@ class SelfHome: InnerHouse {
         addItem(x: 7, y: 0, item: ib.getNode(2, 7, 2, 2), width: 0)
         addItem(x: 3.5, y: -1.5, item: ib.getNode(12, 4, 2, 1), width: 0)
         let wife = UIRole()
-        wife.create(roleNode: Game.instance.pictureActor3.getNode(4, 4))
+        wife.create(roleNode: SKTexture(imageNamed: "family").getNode(1, 0))
         addItem(x: 4, y: 1, item: wife)
 //        addItem(x: 6, y: -1, item: ib.getNode(1, 3, 1, 2))
         

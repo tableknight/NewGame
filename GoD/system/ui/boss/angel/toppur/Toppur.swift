@@ -36,7 +36,7 @@ class ToppurServant:BossMinion {
     override init() {
         super.init()
         _name = "艾琪"
-        _img = Game.instance.pictureNature.getCell(3, 7, 3, 4)
+        _img = SKTexture(imageNamed: "aiki")
     }
     override func create(level: CGFloat) {
         _quality = Quality.RARE

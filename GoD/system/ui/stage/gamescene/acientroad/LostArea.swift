@@ -141,9 +141,10 @@ class BoneWitch: Rizen {
         _stars.agility = 1.0
         _stars.intellect = 2.8
         _name = "白骨巫师"
-        _spellSlot = SpellSlot(max: 2, min: 1)
+        _imgUrl = "bone_wizard"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
         _spellsInuse = [FireBreath()]
-        _img = Game.instance.pictureMonster.getCell(3, 7, 3, 4)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -160,8 +161,9 @@ class RedEyeDemon: Demon {
         _stars.agility = 2.1
         _stars.intellect = 0.6
         _name = "红眼恶魔"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureMonster.getCell(0, 7, 3, 4)
+        _imgUrl = "red_eye_demon"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
     }
     override func create(level: CGFloat) {
         super.create(level: level)
@@ -184,15 +186,13 @@ class DeadSpirit: Rizen {
         _stars.agility = 2.2
         _stars.intellect = 2.4
         _name = "死灵"
-        _spellSlot = SpellSlot(max: 3, min: 1)
-        _img = Game.instance.pictureMonster.getCell(6, 7, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
+        _imgUrl = "dead_spirit"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell23()
+        if d4() {
             _spellsInuse = [DeathStrike()]
         }
-        if _spellCount > 1 && aQuarter() {
+        if d8() {
             _spellsInuse.append(Energetic())
         }
     }
@@ -211,12 +211,10 @@ class WasteWalker: Rizen {
         _stars.agility = 1
         _stars.intellect = 0.4
         _name = "荒地行者"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureMonster.getCell(9, 7, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
+        _imgUrl = "waste_walker"
+        _img = SKTexture(imageNamed: _imgUrl)
+        _spellCount = 2
+        if d4() {
             _spellsInuse = [Cruel()]
         }
     }

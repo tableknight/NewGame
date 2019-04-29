@@ -66,12 +66,10 @@ class BloodBat: Demon {
         _stars.agility = 1.4
         _stars.intellect = 0.9
         _name = "血色蝙蝠"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = Game.instance.pictureMonster.getCell(0, 3, 3, 4)
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
+        _imgUrl = "blood_bat"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
+        if d9() {
             _spellsInuse = [VampireBlood()]
         }
     }
@@ -91,14 +89,11 @@ class Kodagu: Demon {
         _stars.agility = 0.6
         _stars.intellect = 0.6
         _name = "达古"
-        _spellSlot = SpellSlot(max: 2, min: 0)
-        _img = SKTexture(imageNamed: "Kodagu")
-        specialUnit = true
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [BargeAbout()]
+        _imgUrl = "Kodagu"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
+        if d9() {
+            _spellsInuse = [VampireBlood()]
         }
     }
     required init(from decoder: Decoder) throws {
@@ -109,7 +104,7 @@ class Kodagu: Demon {
     }
 }
 
-class EvilSpirit: Natrue {
+class EvilSpirit: Demon {
     override init() {
         super.init()
         _stars.strength = 0.5
@@ -117,8 +112,9 @@ class EvilSpirit: Natrue {
         _stars.agility = 0.8
         _stars.intellect = 2.5
         _name = "邪灵"
-        _spellSlot = SpellSlot(max: 1, min: 0)
-        _img = Game.instance.pictureEvil.getCell(9, 3, 3, 4)
+        _imgUrl = "evil_spirit"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell23()
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -136,9 +132,12 @@ class HellBaron: Natrue {
         _stars.agility = 2.1
         _stars.intellect = 2.4
         _name = "地狱男爵"
-        _spellSlot = SpellSlot(max: 3, min: 1)
-        _img = SKTexture(imageNamed: "HellBaron")
-        _spellsInuse = [LifeDraw()]
+        _imgUrl = "hell_baron"
+        _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
+        if d3() {
+            _spellsInuse = [LifeDraw()]
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

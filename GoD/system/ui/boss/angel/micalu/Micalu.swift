@@ -50,7 +50,7 @@ class MicaluServant1:BossMinion {
     override init() {
         super.init()
         _name = "米卡路之子"
-        _img = Game.instance.pictureActor3.getCell(10, 3, 3, 4)
+        _img = SKTexture(imageNamed: "son_of_micalu")
     }
     override func create(level: CGFloat) {
         _quality = Quality.SACRED
@@ -76,7 +76,7 @@ class MicaluServant2:BossMinion {
         super.init()
         _name = "米卡路之子"
         _sensitive = 85
-        _img = Game.instance.pictureActor3.getCell(10, 7, 3, 4)
+        _img = SKTexture(imageNamed: "son_of_micalu")
     }
     override func create(level: CGFloat) {
         _quality = Quality.SACRED
