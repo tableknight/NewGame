@@ -73,6 +73,7 @@ class CreationFlow:SKSpriteNode {
             let e = Character()
             e.create(level: 1)
             e._img = image
+            e._imgUrl = selectImage._lastSelectedComponent._imgUrl
             e._spellsInuse = role![8] as! Array<Spell>
             e._props = items
             e.hasWeapon = role![3] as! Bool
@@ -82,7 +83,8 @@ class CreationFlow:SKSpriteNode {
             e._spellCount = role![7] as! Int
             e._levelPoint = role![2] as! Int
             e._seat = BUnit.BBM
-            e._name = role![0] as! String
+            e._pro = role![0] as! String
+            e._name = selectImage._lastSelectedComponent._name
             scene.setRole(x: 2, y: 1, role: e)
             if minion != nil {
                 minion!._seat = BUnit.BTM

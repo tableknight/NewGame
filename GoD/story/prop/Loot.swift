@@ -72,79 +72,58 @@ class Loot: Core {
         armor.create(level: level)
         return armor
     }
-    
-    func loot(role:Creature) {
+//
+//    func loot(role:Creature) {
+//        var chance = seed().toFloat()
+//        let lucky = Game.instance.char._lucky * 0.01 + 1
+//        if chance < 20 * lucky  {
+//            let a = lootArmor(level: role._level)
+//            _props.append(a)
+//        }
+//        chance = seed().toFloat()
+//        if chance < 15 * lucky {
+//            let w = lootWeapon(level: role._level)
+//            _props.append(w)
+//        }
+//        chance = seed().toFloat()
+//        if chance < 2 * lucky {
+//            let book = SpellBook()
+//            book.spell = getSpellBook(role: role)
+//            _props.append(book)
+//        }
+//        chance = seed().toFloat()
+//        if chance < 30 * lucky {
+//            let item = getItem()
+//            _props.append(item)
+//        }
+//        chance = seed().toFloat()
+//        if chance < 10 * lucky {
+//            let sacred = getSacred()
+//            if nil != sacred {
+//                _props.append(sacred!)
+//            }
+//        }
+//        externalLootAction()
+//    }
+    func loot(level:CGFloat) {
         var chance = seed().toFloat()
-        let lucky = Game.instance.char._lucky * 0.01 + 1
-        if chance < 20 * lucky  {
-            let a = lootArmor(level: role._level)
-            _props.append(a)
-        }
-        chance = seed().toFloat()
-        if chance < 15 * lucky {
-            let w = lootWeapon(level: role._level)
-            _props.append(w)
-        }
-        chance = seed().toFloat()
-        if chance < 2 * lucky {
-            let book = SpellBook()
-            book.spell = getSpellBook(role: role)
-            _props.append(book)
-        }
-        chance = seed().toFloat()
-        if chance < 30 * lucky {
-            let item = getItem()
-            _props.append(item)
-        }
-        chance = seed().toFloat()
-        if chance < 10 * lucky {
-            let sacred = getSacred()
-            if nil != sacred {
-                _props.append(sacred!)
-            }
-        }
-        externalLootAction()
-    }
-    func loot(level:CGFloat) -> Array<Prop> {
-        var chance = seed().toFloat()
-        let lucky = Game.instance.char._lucky * 0.01 + 1
-        if chance < 50 * lucky  {
+        let lucky = _char._lucky * 0.01 + 1
+        if chance < 25 * lucky  {
             let a = lootArmor(level: level)
             _props.append(a)
         }
         chance = seed().toFloat()
-        if chance < 75 * lucky {
+        if chance < 25 * lucky {
             let w = lootWeapon(level: level)
             _props.append(w)
         }
         chance = seed().toFloat()
-        if chance < 100 * lucky {
+        if chance < 55 * lucky {
             let item = getItem()
             _props.append(item)
         }
-        
-//        let sacreds = [
-//            _sacredSwords,
-//            _sacredDaggers,
-//            _sacredShields,
-//            _sacredAmulets,
-//            _sacredRings,
-//            _sacredSoulstones,
-//            _sacredInstruments,
-//            _sacredWands,
-//            _sacredBlunts,
-//            _sacredMarks,
-//            _sacredBows,
-//            _sacredEarrings,
-//        ]
-//        var count = 0
-//        for a in sacreds {
-//            count += a.count
-//        }
-        let count:CGFloat = 3
-        let times = (count * lucky).toInt()
-//        debug("掉落次数 times \(times)")
-        for _ in 0...times {
+        chance = seed().toFloat()
+        if chance < 15 * lucky {
             let s = getSacred()
             if nil != s {
                 _props.append(s!)
@@ -152,16 +131,21 @@ class Loot: Core {
         }
         
         externalLootAction()
-        return _props
+//        return _props
     }
     
 //    func createList() -> Array<Prop> {
 //
 //    }
     
-    func getExp(level:CGFloat) -> CGFloat {
-        let l = level + 1
-        return l * l * atan(10.toFloat() + l * 0.1)
+    func getExp(selfLevel:CGFloat, enemyLevel:CGFloat) -> CGFloat {
+        if abs(selfLevel - enemyLevel) > 5 {
+          return 0
+        }
+        let lRate = 1 + (enemyLevel - selfLevel) * 0.1
+        let l = enemyLevel + 1
+        let exp =  l * l * atan(10.toFloat() + l * 0.1) * lRate
+        return exp
     }
     var _normalSpellArray = [0,1,2,3,4,5,6,7,8,9]
     
@@ -711,8 +695,8 @@ class Loot: Core {
     
     func getSacred() -> Outfit? {
         let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
-        if outfit._level <= _char._level - 5 {
-            if seed(max: 200) < outfit._chance {
+        if outfit._level <= _char._level + 5 {
+            if seed() <= outfit._chance {
                 outfit.create()
                 return outfit
             }

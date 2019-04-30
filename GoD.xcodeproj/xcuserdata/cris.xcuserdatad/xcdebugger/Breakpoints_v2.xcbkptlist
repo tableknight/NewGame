@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.115929"
+            timestampString = "578333436.489309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "create(unit:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,7 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.1161079"
+            timestampString = "578333436.489393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.116406"
+            timestampString = "578333436.489473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "showSpellInfo(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,7 +362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.116526"
+            timestampString = "578333436.489524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.116621"
+            timestampString = "578333436.489571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.117067"
+            timestampString = "578333436.489694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.11716"
+            timestampString = "578333436.489742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.117241"
+            timestampString = "578333436.4897881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.117287"
+            timestampString = "578333436.489834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "14"
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.290283"
+            timestampString = "578333436.489996"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "removeProp(p:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -714,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.290713"
+            timestampString = "578333436.490468"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1592"
-            endingLineNumber = "1592"
+            startingLineNumber = "1586"
+            endingLineNumber = "1586"
             landmarkName = "setPlayerPart(roles:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,11 +730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.290862"
+            timestampString = "578333436.490525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "724"
-            endingLineNumber = "724"
+            startingLineNumber = "718"
+            endingLineNumber = "718"
             landmarkName = "roundStart()"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,7 +746,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.290995"
+            timestampString = "578333436.490568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "451"
@@ -762,12 +762,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.2910891"
+            timestampString = "578333436.490607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1393"
-            endingLineNumber = "1393"
-            landmarkName = "showOrder()"
+            startingLineNumber = "1387"
+            endingLineNumber = "1387"
+            landmarkName = "hideOrder()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -810,7 +810,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.291255"
+            timestampString = "578333436.490676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "192"
@@ -826,12 +826,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.291355"
+            timestampString = "578333436.490715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "925"
-            endingLineNumber = "925"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "919"
+            endingLineNumber = "919"
+            landmarkName = "moveBack(unit:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -858,7 +858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/char/UIEvil.swift"
-            timestampString = "576858588.122633"
+            timestampString = "578332885.584709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -890,7 +890,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/char/UIEvil.swift"
-            timestampString = "576858588.123311"
+            timestampString = "578332885.585026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -922,7 +922,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.291634"
+            timestampString = "578333436.490817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -970,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.291855"
+            timestampString = "578333436.490886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1173"
-            endingLineNumber = "1173"
+            startingLineNumber = "1167"
+            endingLineNumber = "1167"
             landmarkName = "showAvailableUnits(selectObject:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,7 +986,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.499765"
+            timestampString = "578333436.490929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
@@ -1018,7 +1018,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.499863"
+            timestampString = "578333436.490985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
@@ -1034,23 +1034,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.499907"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
-            landmarkName = "isAttackReturnBack(t:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.499949"
+            timestampString = "578333436.491025"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "482"
@@ -1065,8 +1049,24 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "GoD/story/spell/Spell.swift"
+            timestampString = "578333436.491063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "isAttackReturnBack(t:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.292178"
+            timestampString = "578333436.491101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "648"
@@ -1082,11 +1082,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.292334"
+            timestampString = "578333436.49114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "667"
-            endingLineNumber = "667"
+            startingLineNumber = "661"
+            endingLineNumber = "661"
             landmarkName = "defeat()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1130,43 +1130,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.292573"
+            timestampString = "578333436.491207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1907"
-            endingLineNumber = "1907"
-            landmarkName = "cleanSummonSeats()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.292694"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1681"
-            endingLineNumber = "1681"
-            landmarkName = "createPlayerPartUnit(c:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.2929161"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1920"
-            endingLineNumber = "1920"
+            startingLineNumber = "1901"
+            endingLineNumber = "1901"
             landmarkName = "showMinionsList()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1178,7 +1146,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.293053"
+            timestampString = "578333436.4912471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1675"
+            endingLineNumber = "1675"
+            landmarkName = "createPlayerPartUnit(c:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/battle/Battle.swift"
+            timestampString = "578333436.491285"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1914"
+            endingLineNumber = "1914"
+            landmarkName = "showMinionsList()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/battle/Battle.swift"
+            timestampString = "578333436.491323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -1194,11 +1194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/welcome/SelectImage.swift"
-            timestampString = "578245899.293157"
+            timestampString = "578333436.491364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "create(image:name:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1210,11 +1210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/welcome/SelectImage.swift"
-            timestampString = "578245899.293224"
+            timestampString = "578333436.4914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "showImages()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1226,11 +1226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.12863"
+            timestampString = "578333436.4914351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "loadSpells()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1242,7 +1242,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.128719"
+            timestampString = "578333436.49147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -1258,7 +1258,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.128775"
+            timestampString = "578333436.491504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -1274,11 +1274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/RolePanel.swift"
-            timestampString = "576858588.128824"
+            timestampString = "578333436.491538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "loadSpells()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1322,7 +1322,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/AcientRoadSelection.swift"
-            timestampString = "576858588.129118"
+            timestampString = "578333436.491603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -1338,11 +1338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/AcientRoadSelection.swift"
-            timestampString = "576858588.129213"
+            timestampString = "578333436.491644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "selected"
             landmarkType = "24">
          </BreakpointContent>
@@ -1482,7 +1482,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/AcientRoadSelection.swift"
-            timestampString = "576858588.129975"
+            timestampString = "578333436.4917819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -1498,7 +1498,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/panel/AcientRoadSelection.swift"
-            timestampString = "576858588.1300319"
+            timestampString = "578333436.491823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -1674,7 +1674,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.294307"
+            timestampString = "578333436.491982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
@@ -1690,12 +1690,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.294475"
+            timestampString = "578333436.492023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1263"
-            endingLineNumber = "1263"
-            landmarkName = "showItemPanel()"
+            startingLineNumber = "1257"
+            endingLineNumber = "1257"
+            landmarkName = "showSpellCards()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1786,7 +1786,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.502254"
+            timestampString = "578333436.492128"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
@@ -1834,7 +1834,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.294937"
+            timestampString = "578333436.492196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -1865,24 +1865,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GoD/story/prop/Loot.swift"
-            timestampString = "577901180.199093"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "loot(role:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.295207"
+            timestampString = "578333436.492251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
@@ -1898,7 +1882,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.295325"
+            timestampString = "578333436.49229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -2090,7 +2074,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.2958831"
+            timestampString = "578333436.4925129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
@@ -2330,7 +2314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.296636"
+            timestampString = "578333436.4931279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "632"
@@ -2346,12 +2330,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.296735"
+            timestampString = "578333436.493178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "918"
+            endingLineNumber = "918"
+            landmarkName = "moveBack(unit:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2362,7 +2346,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.296806"
+            timestampString = "578333436.4932179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -2378,11 +2362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.296896"
+            timestampString = "578333436.493257"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1807"
-            endingLineNumber = "1807"
+            startingLineNumber = "1801"
+            endingLineNumber = "1801"
             landmarkName = "removeFromPart(unit:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2410,7 +2394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.504464"
+            timestampString = "578333436.493312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "191"
@@ -2442,7 +2426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.504596"
+            timestampString = "578333436.493368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
@@ -2458,11 +2442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "577515798.504656"
+            timestampString = "578333436.493405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "493"
-            endingLineNumber = "493"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "isAttackReturnBack(t:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2490,12 +2474,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.297235"
+            timestampString = "578333436.493457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "815"
-            endingLineNumber = "815"
-            landmarkName = "silenceUnit(unit:)"
+            startingLineNumber = "809"
+            endingLineNumber = "809"
+            landmarkName = "createBG()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2586,11 +2570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.546841"
+            timestampString = "578333436.4935631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "debugger(_:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2618,7 +2602,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.29778"
+            timestampString = "578333436.493898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
@@ -2634,7 +2618,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.297998"
+            timestampString = "578333436.493944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
@@ -2650,7 +2634,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.2981941"
+            timestampString = "578333436.4939851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "499"
@@ -2698,7 +2682,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.298371"
+            timestampString = "578333436.494024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "498"
@@ -2778,11 +2762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.298699"
+            timestampString = "578333436.494095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1069"
-            endingLineNumber = "1069"
+            startingLineNumber = "1063"
+            endingLineNumber = "1063"
             landmarkName = "execOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2794,11 +2778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.2988009"
+            timestampString = "578333436.494135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1075"
-            endingLineNumber = "1075"
+            startingLineNumber = "1069"
+            endingLineNumber = "1069"
             landmarkName = "execOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2858,12 +2842,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.298951"
+            timestampString = "578333436.494187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1046"
-            endingLineNumber = "1046"
-            landmarkName = "cdSpell(spell:)"
+            startingLineNumber = "1040"
+            endingLineNumber = "1040"
+            landmarkName = "speak(text:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2874,7 +2858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299065"
+            timestampString = "578333436.494228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "551"
@@ -2890,7 +2874,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299165"
+            timestampString = "578333436.494264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "552"
@@ -2906,11 +2890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299268"
+            timestampString = "578333436.494303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1024"
-            endingLineNumber = "1024"
+            startingLineNumber = "1018"
+            endingLineNumber = "1018"
             landmarkName = "moveEnd()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2938,7 +2922,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299445"
+            timestampString = "578333436.4943579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "619"
@@ -2954,11 +2938,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/prop/Loot.swift"
-            timestampString = "577901180.201403"
+            timestampString = "578333436.4944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "getGoodSpell(id:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3002,7 +2986,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/char/UIEvil.swift"
-            timestampString = "576858588.151945"
+            timestampString = "578332885.590392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -3098,7 +3082,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299876"
+            timestampString = "578333436.494673"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
@@ -3114,7 +3098,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.299983"
+            timestampString = "578333436.494742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
@@ -3130,11 +3114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.300094"
+            timestampString = "578333436.494801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
+            startingLineNumber = "996"
+            endingLineNumber = "996"
             landmarkName = "castAction()"
             landmarkType = "9">
          </BreakpointContent>
@@ -3562,13 +3546,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.300864"
+            timestampString = "578333436.495276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1019"
-            endingLineNumber = "1019"
-            landmarkName = "castAction()"
-            landmarkType = "9">
+            startingLineNumber = "1013"
+            endingLineNumber = "1013"
+            landmarkName = "moveEnd()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3578,7 +3562,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.300948"
+            timestampString = "578333436.49534"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "450"
@@ -3610,11 +3594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.30106"
+            timestampString = "578333436.4954211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1067"
-            endingLineNumber = "1067"
+            startingLineNumber = "1061"
+            endingLineNumber = "1061"
             landmarkName = "execOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3626,11 +3610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.301165"
+            timestampString = "578333436.495479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1074"
-            endingLineNumber = "1074"
+            startingLineNumber = "1068"
+            endingLineNumber = "1068"
             landmarkName = "execOrder()"
             landmarkType = "7">
             <Locations>
@@ -3674,11 +3658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.3012691"
+            timestampString = "578333436.4955389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "lostMoney(num:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3706,7 +3690,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.301459"
+            timestampString = "578333436.495943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "516"
@@ -3754,11 +3738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/battle/Battle.swift"
-            timestampString = "578245899.301657"
+            timestampString = "578333436.496056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1064"
-            endingLineNumber = "1064"
+            startingLineNumber = "1058"
+            endingLineNumber = "1058"
             landmarkName = "execOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3786,7 +3770,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.548296"
+            timestampString = "578333436.496145"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "365"
@@ -3802,7 +3786,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.5487"
+            timestampString = "578333436.496549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "371"
@@ -3818,7 +3802,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.548999"
+            timestampString = "578333436.49692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "372"
@@ -3834,11 +3818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.301977"
+            timestampString = "578333436.497399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3850,11 +3834,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.302106"
+            timestampString = "578333436.497753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3866,11 +3850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.302259"
+            timestampString = "578333436.498044"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3898,7 +3882,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.31428"
+            timestampString = "578330552.815861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -3930,11 +3914,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.302606"
+            timestampString = "578333436.498386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
             landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3946,7 +3930,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.31475"
+            timestampString = "578330552.816174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -3962,7 +3946,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.31507"
+            timestampString = "578330552.816407"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "132"
@@ -3978,7 +3962,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/prop/Outfit.swift"
-            timestampString = "577901180.207226"
+            timestampString = "578328981.397828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "266"
@@ -3994,7 +3978,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/prop/Outfit.swift"
-            timestampString = "577901180.20732"
+            timestampString = "578328981.397874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -4010,7 +3994,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/prop/Outfit.swift"
-            timestampString = "577901180.207379"
+            timestampString = "578328981.397909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -4026,7 +4010,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/prop/Outfit.swift"
-            timestampString = "577901180.2074341"
+            timestampString = "578328981.3979419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
@@ -4042,11 +4026,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.302814"
+            timestampString = "578333436.498857"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4058,11 +4042,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.302896"
+            timestampString = "578333436.499176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4074,7 +4058,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/ui/stage/MyStage.swift"
-            timestampString = "578245899.3029799"
+            timestampString = "578333436.4994659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -4090,7 +4074,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.315719"
+            timestampString = "578330552.816726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -4106,7 +4090,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.315925"
+            timestampString = "578330552.816927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -4122,7 +4106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.3161221"
+            timestampString = "578330552.81721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -4138,11 +4122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/system/welcome/SelectDocument.swift"
-            timestampString = "578245899.303169"
+            timestampString = "578333436.499583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "create()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4154,43 +4138,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.550427"
+            timestampString = "578333436.499912"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
+            landmarkName = "loadRoles()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/Game.swift"
+            timestampString = "578333436.50019"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "loadRoles()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/Game.swift"
+            timestampString = "578333436.50043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "386"
             endingLineNumber = "386"
-            landmarkName = "loadRoles()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.550759"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
-            landmarkName = "loadRoles()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.551101"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
             landmarkName = "saveRoles(roles:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4202,7 +4186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/Game.swift"
-            timestampString = "578036303.551402"
+            timestampString = "578333436.500668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "364"
@@ -4218,7 +4202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.317402"
+            timestampString = "578330552.818922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -4234,7 +4218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.317682"
+            timestampString = "578330552.819232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -4266,11 +4250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.303416"
+            timestampString = "578333436.500952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4282,11 +4266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.303485"
+            timestampString = "578333436.5011801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4298,7 +4282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.318024"
+            timestampString = "578330552.8196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -4314,7 +4298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.318249"
+            timestampString = "578330552.819865"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -4330,11 +4314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.303594"
+            timestampString = "578333436.501426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4346,7 +4330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Unit.swift"
-            timestampString = "578033579.31858"
+            timestampString = "578330552.820086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
@@ -4362,11 +4346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/character/Character.swift"
-            timestampString = "578245899.303688"
+            timestampString = "578333436.501662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4378,39 +4362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "578034453.236784"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "getAttack(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "578034459.292279"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "physicalDamage(from:to:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GoD/story/spell/Spell.swift"
-            timestampString = "578034548.562775"
+            timestampString = "578333436.501882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "213"
@@ -4425,12 +4377,252 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GoD/system/welcome/SelectDocument.swift"
-            timestampString = "578245899.3038009"
+            filePath = "GoD/story/spell/Spell.swift"
+            timestampString = "578333436.5019259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "physicalDamage(from:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/spell/Spell.swift"
+            timestampString = "578333436.501966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "getAttack(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/welcome/SelectDocument.swift"
+            timestampString = "578333436.5020061"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/welcome/SelectDocument.swift"
+            timestampString = "578333436.502229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/Game.swift"
+            timestampString = "578333436.502443"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "remove(doc:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/welcome/SelectDocument.swift"
+            timestampString = "578333436.502736"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/welcome/CreationFlow.swift"
+            timestampString = "578333436.502995"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "create()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/character/Unit.swift"
+            timestampString = "578330552.821056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "init(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/spell/Spell.swift"
+            timestampString = "578333436.503076"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "physicalDamage(from:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/spell/Spell.swift"
+            timestampString = "578333436.503127"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "getDefRate(from:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/panel/ItemPanel.swift"
+            timestampString = "578330988.002088"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/stage/MyStage.swift"
+            timestampString = "578333436.503201"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/welcome/SelectDocument.swift"
+            timestampString = "578333436.50325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "create()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/stage/MyStage.swift"
+            timestampString = "578333436.503494"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/stage/MyStage.swift"
+            timestampString = "578333436.503545"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "touchesBegan(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/system/ui/stage/MyStage.swift"
+            timestampString = "578333436.503592"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>

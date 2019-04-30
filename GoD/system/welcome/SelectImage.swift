@@ -56,14 +56,22 @@ class SelectImage:UIPanel {
 //            Game.instance.pictureActor1.getCell(9, 3, 3, 4),
 //            Game.instance.picturePeople1.getCell(0, 3, 3, 4),
 //            Game.instance.picturePeople1.getCell(3, 3, 3, 4),
-            SKTexture(imageNamed: "role_1"),
-            SKTexture(imageNamed: "role_2"),
-            SKTexture(imageNamed: "role_3"),
-            SKTexture(imageNamed: "role_4"),
-            SKTexture(imageNamed: "role_5"),
-            SKTexture(imageNamed: "role_6"),
-            SKTexture(imageNamed: "role_7"),
-            SKTexture(imageNamed: "role_8")
+//            SKTexture(imageNamed: "role_1"),
+//            SKTexture(imageNamed: "role_2"),
+//            SKTexture(imageNamed: "role_3"),
+//            SKTexture(imageNamed: "role_4"),
+//            SKTexture(imageNamed: "role_5"),
+//            SKTexture(imageNamed: "role_6"),
+//            SKTexture(imageNamed: "role_7"),
+//            SKTexture(imageNamed: "role_8")
+            "role_1",
+            "role_2",
+            "role_3",
+            "role_4",
+            "role_5",
+            "role_6",
+            "role_7",
+            "role_8",
         ]
         _names = ["塞西", "洛丝丽娅", "莫贝尔", "弑羽", "安瑟玛薇", "狄菲" , "夜薇", "入凡"]
         showImages()
@@ -96,7 +104,7 @@ class SelectImage:UIPanel {
         super.init(coder: aDecoder)
     }
     var _listBox = SKSpriteNode()
-    var _images = Array<SKTexture>()
+    var _images = Array<String>()
     var _names = Array<String>()
     var _lastSelectedComponent = ImageComponent()
 }
@@ -113,8 +121,9 @@ class ImageComponent:SelectableComponent {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    func create(image:SKTexture, name:String) {
-        let images:Array<SKTexture> = [image.getCell(0, 0), image.getCell(1, 0), image.getCell(2, 0)]
+    func create(image:String, name:String) {
+        let i = SKTexture(imageNamed: image)
+        let images:Array<SKTexture> = [i.getCell(0, 0), i.getCell(1, 0), i.getCell(2, 0)]
 //        let i0 = SKAction.setTexture(images[0])
 ////        let i1 = SKAction.setTexture(images[1])
 //        let i2 = SKAction.setTexture(images[2])
@@ -129,8 +138,9 @@ class ImageComponent:SelectableComponent {
         role.size = CGSize(width: cellSize * 1.25, height: cellSize * 1.25)
 //        role.run(r)
         addChild(role)
-        _image = image
-        
+        _image = i
+        _imgUrl = image
+        _name = name
         let nl = Label()
         nl.text = name
         nl.align = "center"
@@ -140,7 +150,8 @@ class ImageComponent:SelectableComponent {
         addChild(nl)
     }
     var _image:SKTexture!
-    
+    var _imgUrl = ""
+    var _name = ""
     override var selected: Bool {
         set {
             _selected = newValue

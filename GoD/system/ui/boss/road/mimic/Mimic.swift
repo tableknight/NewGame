@@ -22,7 +22,7 @@ class Mimic:Boss {
         levelTo(level: level)
         _extensions.health *= 2
         _extensions.hp = _extensions.health
-        
+        _rhythm = 25
         _spellsInuse = [BossAttack(),BossAttack(),BossAttack(),LineAttack(), FireBreath(), ThunderArray(), LifeDraw()]
     }
     required init(from decoder: Decoder) throws {

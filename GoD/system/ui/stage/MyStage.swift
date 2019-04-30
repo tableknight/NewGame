@@ -63,8 +63,10 @@ class MyStage: SKSpriteNode {
                 char._key = "doc\(Game.roles.count)"
                 let roleDoc = RoleDocument()
                 roleDoc._name = char._name
+                roleDoc._pro = char._pro
                 roleDoc._level = char._level.toInt()
                 roleDoc._key = char._key
+                roleDoc._imgUrl = char._imgUrl
                 Game.roles.append(roleDoc)
             }
             Game.save(c: char, key: char._key)

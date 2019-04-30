@@ -177,7 +177,7 @@ struct Position {
     static let SOUTH:Int = 3
 }
 struct Mode {
-    static let debug = true
+    static let debug = false
     static let nocd = false
 }
 struct Cell {
@@ -372,6 +372,15 @@ class Game {
             return try? JSONDecoder().decode(Character.self, from: data)
         }
         return nil
+    }
+    static func remove(doc:RoleDocument) {
+        let us = UserDefaults.standard
+        us.removeObject(forKey: doc._key)
+        let index = Game.roles.index(of: doc)
+        if nil !=  index {
+            Game.roles.remove(at: index!)
+        }
+        Game.saveRoles(roles: Game.roles)
     }
     static func saveRoles(roles:Array<RoleDocument>) {
         if let data = try? JSONEncoder().encode(roles) {

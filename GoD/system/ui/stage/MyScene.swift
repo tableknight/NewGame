@@ -620,11 +620,18 @@ class Chest:UIItem {
     }
     private func loot() {
         let l = Loot()
-        let list = l.loot(level: Game.instance.curStage._curScene._level)
+        l.loot(level: Game.instance.curStage._curScene._level)
+        let list = l.getList()
         let p = LootPanel()
         p.create(props: list)
         p.confirmAction = self.confirmAction
         Game.instance.curStage.showPanel(p)
+        let char = Game.instance.char!
+        let roles = [char] + char.getReadyMinions()
+        for c in roles {
+            let exp = l.getExp(selfLevel: c._level, enemyLevel: Game.instance.curStage._curScene._level) * 10
+            c.expUp(up: exp)
+        }
     }
     private var _x = 0
     var _triggered = false

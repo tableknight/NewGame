@@ -192,8 +192,9 @@ class Spell:Core, IDisplay, ISelectTarget {
         let brk = from.getBreak()
         let odef = to.getDefence() * (1 - brk * 0.01)
 //        let base =
-        let r = atan(level * 0.05) + 0.2
-        var def = (odef / atan(odef / level / 2)) / (level * 8) * r
+//        let r = atan(level * 0.05) + 0.2
+//        var def = (odef / atan(odef / level / 2)) / (level * 8) * r
+        var def = odef / (100 + level * 2)
         if def > 0.85 {
             def = 0.85
         }

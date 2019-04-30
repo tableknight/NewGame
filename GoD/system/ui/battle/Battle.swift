@@ -645,20 +645,14 @@ class Battle: SKSpriteNode {
             return
         }
         let l = Loot()
-        let ms = _char.getReadyMinions()
+        let ms = [_char] + _char.getReadyMinions()
         for u in _evilsOrg {
-            if _char._level - u._unit._level <= 5 {
-                l.loot(role: u._unit)
-                let exp = l.getExp(level: u._unit._level)
-                _char.expUp(up: exp)
+            for r in ms {
+                let exp = l.getExp(selfLevel: r._level, enemyLevel: u._unit._level)
+                r.expUp(up: exp)
             }
-//            debug("\(_char._name)获得了\(exp.toInt())点经验。")
-            for m in ms {
-                if m._extensions.hp > 0 && m._level - u._unit._level <= 5 {
-                    let ep = l.getExp(level: u._unit._level)
-                    m.expUp(up: ep)
-//                    debug("\(m._name)获得了\(ep.toInt())点经验。")
-                }
+            if abs(_char._level - u._unit._level) <= 5 {
+                l.loot(level: u._unit._level)
             }
         }
         victory = true

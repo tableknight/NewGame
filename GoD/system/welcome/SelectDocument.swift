@@ -12,6 +12,7 @@ class SelectDocument: UIPanel {
         let touchPoint = touches.first?.location(in: self)
         if nil != _selectedDc && _selectedDc.contains(touchPoint!){
             go()
+            return
         }
         for dc in _dcLayer.children {
             if dc.contains(touchPoint!) {
@@ -36,7 +37,17 @@ class SelectDocument: UIPanel {
             return
         }
         
-        if nil == _selectedDc {
+        if _delButton.contains(touchPoint!) {
+            if nil == _selectedDc {
+                return
+            }
+            Game.remove(doc: _selectedDc._doc)
+            reload()
+            _selectedDc = nil
+            return
+        }
+        
+        if nil != _selectedDc {
             if _nextButton.contains(touchPoint!) {
                 go()
                 return
@@ -60,6 +71,19 @@ class SelectDocument: UIPanel {
         stage.loadScene(scene: scene)
         stage.createMenu()
         _gameScene!.addChild(stage)
+    }
+    private func reload() {
+        _dcLayer.removeAllChildren()
+        let roles = Game.loadRoles()
+        if roles != nil {
+            _roleDocs = roles!
+            Game.roles = _roleDocs
+        } else {
+            return
+        }
+        
+        showDocs()
+        showCreationButton()
     }
     override func create() {
         createCloseButton()
@@ -88,15 +112,20 @@ class SelectDocument: UIPanel {
             return
         }
         showDocs()
+        showCreationButton()
     }
     
     func showDocs() {
+        if _roleDocs.count < 1 {
+            return
+        }
         let row1x = -cellSize * 2
         let row2x = cellSize * 1.5
         let startY = cellSize * 3
         for i in 0..._roleDocs.count - 1 {
             let rd = _roleDocs[i]
             let dc = DocComponent()
+            dc._imgUrl = rd._imgUrl
             dc._doc = rd
             dc.create(doc: rd)
             if i % 2 == 0 {
@@ -107,6 +136,13 @@ class SelectDocument: UIPanel {
             let y = Int(i / 2)
             dc.yAxis = startY - y.toFloat() * cellSize * 1.5
             _dcLayer.addChild(dc)
+        }
+    }
+    private func showCreationButton() {
+        if _roleDocs.count < 8 {
+            _prevButton.isHidden = false
+        } else {
+            _prevButton.isHidden = true
         }
     }
     internal var _delButton = Button()
@@ -132,6 +168,7 @@ class DocComponent:SelectableComponent {
         addChild(_background)
     }
     var _doc:RoleDocument!
+    var _imgUrl = ""
     func create(doc:RoleDocument) {
         createBg()
         let m = doc
@@ -139,7 +176,7 @@ class DocComponent:SelectableComponent {
 //        let gap = cellSize * 0.25
 //        let startX = -cellSize * 3.5
         
-        let img = SKSpriteNode(texture: SKTexture(imageNamed: "test_role").getCell(1, 0))
+        let img = SKSpriteNode(texture: SKTexture(imageNamed: _imgUrl).getCell(1, 0))
         img.position.x = -cellSize * 1.5
         img.position.y = 0
         img.anchorPoint = CGPoint(x: 0, y: 1)
@@ -164,7 +201,7 @@ class DocComponent:SelectableComponent {
         addChild(level)
         
         let race = Label()
-        race.text = "lv.\(m._level)[人类]"
+        race.text = "lv.\(m._level)[\(m._pro)]"
         race.fontSize = 20
         race.position.x = level.position.x
         race.position.y = level.position.y - level.fontSize - 6

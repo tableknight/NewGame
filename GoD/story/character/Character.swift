@@ -22,10 +22,10 @@ class Character: Creature {
 //        _img = Data.instance
     }
     override func create(level: CGFloat = 1) {
-        staminaChange(value: 15)
-        strengthChange(value: 15)
-        agilityChange(value: 15)
-        intellectChange(value: 15)
+        staminaChange(value: 25)
+        strengthChange(value: 25)
+        agilityChange(value: 25)
+        intellectChange(value: 25)
         _extensions.hp = _extensions.health
 //        _spells = [TurnAttack(), FeignAttack()]
         _level = level
@@ -121,8 +121,9 @@ class Character: Creature {
         if p is Item {
             if nil != i {
 //                let itm = _props[i!] as! Item
-                if p._count > 1 {
-                    p._count -= 1
+                p._count -= 1
+                if p._count > 0 {
+                    
                 } else {
                     _props.remove(at: i!)
                 }
@@ -223,6 +224,7 @@ class Character: Creature {
     var _levelPoint = 5
     var _money = 0
     var _key = ""
+    var _pro = ""
     
     private enum CodingKeys: String, CodingKey {
         case _dungeonLevel
@@ -253,6 +255,7 @@ class Character: Creature {
         case marks
         case instruments
         case _key
+        case _pro
     }
     
     required init(from decoder: Decoder) throws {
@@ -275,6 +278,7 @@ class Character: Creature {
         _levelPoint = try values.decode(Int.self, forKey: ._levelPoint)
         _money = try values.decode(Int.self, forKey: ._money)
         _key = try values.decode(String.self, forKey: ._key)
+        _pro = try values.decode(String.self, forKey: ._pro)
 //        let cls:Array<String> = try values.decode(Array.self, forKey: ._propsClass)
         let marks:Array<MagicMark> = try values.decode(Array.self, forKey: .marks)
         let instruments:Array<Instrument> = try values.decode(Array.self, forKey: .instruments)
@@ -355,6 +359,7 @@ class Character: Creature {
         try container.encode(_levelPoint, forKey: ._levelPoint)
         try container.encode(_money, forKey: ._money)
         try container.encode(_key, forKey: ._key)
+        try container.encode(_pro, forKey: ._pro)
         var weapons = Array<Weapon>()
         var armors = Array<Armor>()
         var items = Array<Item>()

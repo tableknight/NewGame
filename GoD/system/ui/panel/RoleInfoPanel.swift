@@ -95,7 +95,7 @@ class RoleInfoPanel:SKSpriteNode {
         let to = Creature()
         to._level = 0
         
-        let isMain = char.isMainChar
+        let isMain = char is Character
         
         let startX = -cellSize * 6.5
         let startY = cellSize * 2.5
@@ -122,6 +122,9 @@ class RoleInfoPanel:SKSpriteNode {
         
         let race = Label()
         race.text = EvilType.getTypeLabel(type: char._race)
+        if isMain {
+            race.text = (char as! Character)._pro
+        }
         race.align = "left"
         race.fontSize = 13
         race.position.x = startX + cellSize * 1.2 + firstGap + 3

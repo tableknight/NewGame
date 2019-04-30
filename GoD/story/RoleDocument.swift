@@ -12,7 +12,8 @@ class RoleDocument:NSObject, Codable {
         super.init()
     }
     var _name = ""
-    var _level = 0
+    var _pro = ""
     var _imgUrl = ""
     var _key = ""
+    var _level = 0
 }

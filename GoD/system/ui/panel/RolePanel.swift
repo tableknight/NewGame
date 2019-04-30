@@ -154,7 +154,11 @@ class RolePanel:UIPanel {
         _propertyLayer.addChild(lv)
         
         let race = Label()
-        race.text = EvilType.getTypeLabel(type: unit._race)
+        if unit is Character {
+            race.text = (unit as! Character)._pro
+        } else {
+            race.text = EvilType.getTypeLabel(type: unit._race)
+        }
         race.fontSize = 20
         race.position.x = lv.position.x
         race.position.y = lv.position.y - 24

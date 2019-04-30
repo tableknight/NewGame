@@ -57,7 +57,11 @@ class AcientRoadSelection:UIPanel {
     override func create() {
         createCloseButton()
         _pageSize = 16
-         _dungeonLevel  = 40
+        
+         _dungeonLevel  = Game.instance.char._dungeonLevel
+        if Mode.debug {
+            _dungeonLevel = 99
+        }
         if _dungeonLevel > _pageSize {
             createPageButtons()
         }
