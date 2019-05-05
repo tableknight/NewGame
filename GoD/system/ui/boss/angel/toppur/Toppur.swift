@@ -48,7 +48,7 @@ class ToppurServant:BossMinion {
         _extensions.health *= 2
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [LineAttack(), RecoveryFromAttack()]
+        _spellsInuse = [LineAttack(), LeeAttack()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

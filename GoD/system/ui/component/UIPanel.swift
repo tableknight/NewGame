@@ -29,7 +29,7 @@ class UIPanel:SKSpriteNode {
     internal func createLabel() {
         let t = Label()
         t.align = "left"
-        t.fontSize = cellSize * 0.25
+        t.fontSize = 20
         //        t.text = "传送：再次点击已选择的层数。"
         t.position.x = -_standardWidth * 0.5
         t.position.y = _standardHeight * 0.5 + cellSize * 0.5
@@ -56,7 +56,7 @@ class UIPanel:SKSpriteNode {
     
     func createCloseButton() {
         _closeButton.text = "关闭"
-        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.5
+        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.65
         _closeButton.position.x = _standardWidth * 0.5 - cellSize * 1.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)
@@ -65,7 +65,7 @@ class UIPanel:SKSpriteNode {
     func createPageButtons() {
         _nextButton.text = "下一页"
         _nextButton.position.x = _closeButton.position.x
-        _nextButton.position.y = -_closeButton.position.y + cellSize * 0.5
+        _nextButton.position.y = -_closeButton.position.y + cellSize * 0.65
         _nextButton.zPosition = self.zPosition + 2
         addChild(_nextButton)
         

@@ -20,19 +20,29 @@ class UIEvil: UIUnit {
         let stage = Game.instance.curStage!
         let sc = stage._curScene!
         let char = Game.instance.char!
-        var enimies = Array<Creature>()
+        var enemies = Array<Creature>()
         
-        let enemyCount = seed(min: 1, max: sc._level < 10 ? 2 : 4)
-        for _ in 0...enemyCount {
-            let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
-            let level = Core().d20() ? 1 : sc._level
-            e.create(level: level)
-            enimies.append(e)
+        let thisOne = sc.getMonsterByIndex(index: _thisType)
+        thisOne.create(level: Core().d20() ? 1 : sc._level)
+        enemies.append(thisOne)
+        
+        var nums = [1,1,1,2,2,2,3,3,3,3,3,4,4,4]
+        if sc._level < 10 {
+            nums = [1,1,1,2,2,2,2,2,3]
         }
-        stage.hideScene()
+        let enemyCount = nums.one() - 1
+        if enemyCount > 0 {
+            for _ in 1...enemyCount {
+                let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
+                let level = Core().d20() ? 1 : sc._level
+                e.create(level: level)
+                enemies.append(e)
+            }
+        }
+//        stage.hideScene()
         let b = Battle()
         let roles = [char] + char.getReadyMinions()
-        b.setEnemyPart(minions: enimies)
+        b.setEnemyPart(minions: enemies)
         b.setPlayerPart(roles: roles)
         b.zPosition = MyStage.UI_TOPEST_Z
         let this = self

@@ -49,17 +49,17 @@ class SelecProfession:UIPanel {
     override func create() {
         createCloseButton()
         createPageButtons()
-        _label.text = "选择职业"
+        _label.text = "抉择：选择职业"
         _closeButton.text = "返回"
         _prevButton.text = "上一步"
         _nextButton.text = "下一步"
         
         _infos = [
-            ["骑士", "成为一名骑士，你将会获得6点属性成长、可同时使用2个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、盾牌、灵魂石和左右法戒。", 6, true, true, false, 1, 2, [LineAttack()]],
-            ["傀儡师", "成为一名儡师，你将会获得4点属性成长、可同时使用2个技能、可配置3个随从跟随战斗，并且可以装备武器、饰品、灵魂石和左右法戒。", 4, true, false, false, 3, 2, [ScreamLoud()]],
-            ["使徒", "成为一名使徒，你将会获得4点属性成长、可同时使用3个技能、可配置2个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 4, true, false, true, 2, 3, [Heal()]],
-            ["巫师", "成为一名巫师，你将会获得5点属性成长、可同时使用3个技能、可配置1个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 5, true, false, true, 1, 3, [LowlevelFlame()]],
-            ["刺客", "成为一名刺客，你将会获得7点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 7, false, false, false, 2, 2, [FireFist()]],
+            ["骑士", "成为一名骑士，你将会获得6点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备武器、饰品、盾牌、魔印、灵魂石和左右法戒。", 6, true, true, true, 2, 2, [LineAttack()]],
+            ["傀儡师", "成为一名儡师，你将会获得4点属性成长、可同时使用2个技能、可配置4个随从跟随战斗，并且可以装备武器、饰品、灵魂石和左右法戒。", 4, true, false, false, 4, 2, [ScreamLoud()]],
+            ["使徒", "成为一名使徒，你将会获得4点属性成长、可同时使用3个技能、可配置3个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 4, true, false, true, 3, 3, [Heal()]],
+            ["巫师", "成为一名巫师，你将会获得5点属性成长、可同时使用3个技能、可配置2个随从跟随战斗，并且可以装备武器、饰品、魔印、灵魂石和左右法戒。", 5, true, false, true, 2, 3, [LowlevelFlame()]],
+            ["刺客", "成为一名刺客，你将会获得7点属性成长、可同时使用3个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 7, false, false, false, 2, 3, [FireFist()]],
 //            ["", "成为一个武道家，你将会获得6点属性成长、可同时使用2个技能、可配置2个随从跟随战斗，并且可以装备饰品、灵魂石和左右法戒。", 6, false, false, false, 2, 2, []]
         ]
         createProComponent()
@@ -91,7 +91,7 @@ class SelecProfession:UIPanel {
         for i in 0..._infos.count - 1 {
             let pb = ProButton()
             pb.text = _infos[i][0] as! String
-            pb.yAxis = -cellSize * 2.25
+            pb.yAxis = -cellSize * 2.45
             pb.xAxis = -cellSize * 3.75 + pb.width * i.toFloat()
             pb.zPosition = self.zPosition + 3
             pb.index = i

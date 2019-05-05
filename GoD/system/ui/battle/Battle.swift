@@ -257,10 +257,10 @@ class Battle: SKSpriteNode {
         let x1 = -c * 2
         let x2:CGFloat = 0
         let x3 = c * 2
-        let y1 = c * 4
-        let y2 = c * 2
-        let y3 = -c * 2
-        let y4 = -c * 4
+        let y1 = c * 5
+        let y2 = c * 3
+        let y3 = -c * 1
+        let y4 = -c * 3
         
         let s:CGFloat = 0
         
@@ -344,7 +344,8 @@ class Battle: SKSpriteNode {
 //        _roundLabel.position.x = -cellSize * 7.5
 //        _roundLabel.position.y = cellSize * 4 - 10
 //        addChild(_roundLabel)
-        roundStart()
+        setTimeout(delay: 1, completion: roundStart)
+//        roundStart()
     }
     internal var _roundLabel = Label()
     internal func defaultOrderAttack() {
@@ -898,7 +899,7 @@ class Battle: SKSpriteNode {
         s.create(text: text, size: size)
         s.position.x = x
         s.position.y = y
-        s.zPosition = MyStage.UI_LAYER_Z
+        s.zPosition = self.zPosition + 1
         s.hide()
         addChild(s)
         _orders.append(s)
@@ -982,8 +983,14 @@ class Battle: SKSpriteNode {
             }
         }
     }
-    //行动结束后释放的法术或者道具只能存在一个
     internal func moveEnd() {
+        if hasFinished() {
+            return
+        }
+        if _curRole.isDead() {
+            moveStart()
+            return
+        }
         let spells = _curRole._unit._spellsInuse + _curRole._unit._spellsHidden
         let castSpells = Array<Spell>()
         for spell in spells {
@@ -997,6 +1004,7 @@ class Battle: SKSpriteNode {
 //            debug("i \(i)")
             if i < spells.count {
                 let s = spells[i]
+                _selectedSpell = s
                 if s.hasAfterMoveAction {
                     s._battle = self
                     s.findTarget()
@@ -1399,6 +1407,7 @@ class Battle: SKSpriteNode {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.zPosition = MyScene.MASK_LAYER_Z + 1
     }
 //    func setEvilsBySeat(evils:Array<Creature>) {
 //        //        var ps = [BUnit.RLT,BUnit.RLM,BUnit.RLB,BUnit.RRT,BUnit.RRM,BUnit.RRB]
@@ -1985,75 +1994,4 @@ class Battle: SKSpriteNode {
     var _selectedItem:Item?
     var _specialEvents = Array<String>()
     var isFinalChallenge = false
-}
-
-class BattleSpellIcon1:SKSpriteNode {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        let rect = CGRect(x: -cellSize * 0.75, y: -cellSize * 0.75, width: cellSize * 1.5, height: cellSize * 1.5)
-        bg = SKShapeNode(rect: rect, cornerRadius: 4)
-        bg.fillColor = UIColor.black
-        bg.zPosition = 40
-        addChild(bg)
-        
-        let cooldownBG = SKShapeNode(rect: rect, cornerRadius: 4)
-        cooldownBG.fillColor = UIColor.black
-        cooldownBG.alpha = 0.55
-        cooldownBG.isHidden = true
-        cooldownBG.zPosition = 41
-        addChild(cooldownBG)
-        
-        let cdNum = Label()
-        cdNum.fontSize = 24
-        cdNum.isHidden = true
-        cdNum.zPosition = 42
-        cdNum.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        addChild(cdNum)
-        
-        _cdNum = cdNum
-        _cdBg = cooldownBG
-    }
-    internal var bg:SKShapeNode!
-    internal var _spell:Spell!
-    var spell:Spell {
-        set {
-            _spell = newValue
-            let l = Label()
-            l.text = _spell._name
-            l.fontSize = 14
-            l.position.y = -cellSize * 0.5 - 6
-            l.zPosition = 40
-            addChild(l)
-            bg.strokeColor = QualityColor.getColor(_spell._quality)
-        }
-        get {
-            return _spell
-        }
-    }
-    
-    internal var _cooldown = 0
-    internal var _cdNum = Label()
-    internal var _cdBg = SKShapeNode()
-    var coolDown:Int {
-        set {
-            _cooldown = newValue
-            if newValue > 0 {
-                _cdBg.isHidden = false
-                _cdNum.isHidden = false
-                _cdNum.text = "\(newValue)"
-                bg.strokeColor = UIColor.gray
-            } else {
-                _cdBg.isHidden = true
-                _cdNum.isHidden = true
-                bg.strokeColor = UIColor.white
-            }
-        }
-        get {
-            return _cooldown
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 }

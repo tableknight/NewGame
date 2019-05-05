@@ -85,6 +85,7 @@ class CreationFlow:SKSpriteNode {
             e._seat = BUnit.BBM
             e._pro = role![0] as! String
             e._name = selectImage._lastSelectedComponent._name
+            e._money = 12000
             scene.setRole(x: 2, y: 1, role: e)
             if minion != nil {
                 minion!._seat = BUnit.BTM

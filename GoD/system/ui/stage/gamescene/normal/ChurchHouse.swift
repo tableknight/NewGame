@@ -121,10 +121,10 @@ class ChurchHouse: InnerHouse {
         if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
             let cc = CenterCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 10, y: 9, char: char)
                 char.faceSouth()
-            }, completion: {})
+            })
         }
     }
     override func create() {

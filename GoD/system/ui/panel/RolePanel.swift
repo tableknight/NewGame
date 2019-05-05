@@ -84,24 +84,24 @@ class RolePanel:UIPanel {
                         return
                     }
                     //如果点到了跟其他随从一样的位置，则取代那个随从
-                    for m in char._minions {
-                        if m._seat == sn._seat {
-                            _unit._seat = sn._seat
-                            m._seat = BUnit.STAND_BY
-                            for _sn in _seatNodes {
-                                _sn.color = SeatNode.UNSELECTED_COLOR
-                            }
-                            sn.color = UIColor.white
-                            return
-                        }
-                    }
+//                    for m in char._minions {
+//                        if m._seat == sn._seat {
+//                            _unit._seat = sn._seat
+//                            m._seat = BUnit.STAND_BY
+//                            for _sn in _seatNodes {
+//                                _sn.color = SeatNode.UNSELECTED_COLOR
+//                            }
+//                            sn.color = UIColor.white
+//                            return
+//                        }
+//                    }
                     //如果是没有任何单位占据的位置，则判断是否合法
-                    if _unit._level > char._level {
-                        debug("无法控制超过自己等级的c随从！")
+                    if _unit._level > char._level + 3 {
+                        debug("这个随从过于强大！")
                         return
                     }
                     if (char.getReadyMinions().count >= char._minionsCount) && _unit._seat == BUnit.STAND_BY {
-                        debug("c作战随从已达上限！")
+                        debug("作战随从已达上限！")
                         return
                     }
                     for snc in _seatNodes {

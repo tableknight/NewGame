@@ -190,7 +190,7 @@ class Unit:Core {
         if Mode.debug {
             return level * level
         }
-        return level * level * level * CGFloat(sqrt(Double(level))) * level * 0.01
+        return 100 * level + level * level * level * level * 0.5
     }
     
     func strengthChange(value: CGFloat) {
@@ -198,10 +198,10 @@ class Unit:Core {
         _extensions.attack += value * 2
         _extensions.defence += value * 0
         _extensions.speed += value * 0.5
-        _extensions.accuracy += value * 0.1
+        _extensions.accuracy += value * 0.2
         _extensions.avoid += value * 0
-        _extensions.critical += value * 0.1
-        _extensions.spirit += value * -0.5
+        _extensions.critical += value * 0.2
+        _extensions.spirit += value * -0.3
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 0
@@ -215,9 +215,9 @@ class Unit:Core {
         _extensions.defence += value * 1.4
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * 0
+        _extensions.avoid += value * -0.2
         _extensions.critical += value * 0
-        _extensions.spirit += value * -0.5
+        _extensions.spirit += value * -0.3
         _extensions.health += value * 4
         _extensions.hp += value * 4
         _extensions.mp += value * 0
@@ -231,7 +231,7 @@ class Unit:Core {
         _extensions.defence += value * 0.3
         _extensions.speed += value * 2
         _extensions.accuracy += value * 0.4
-        _extensions.avoid += value * 0.3
+        _extensions.avoid += value * 0.6
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 1
@@ -247,7 +247,7 @@ class Unit:Core {
         _extensions.defence += value * 0.3
         _extensions.speed += value * 0.2
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * 0.1
+        _extensions.avoid += value * 0.2
         _extensions.critical += value * 0
         _extensions.spirit += value * 2
         _extensions.health += value * 0.5

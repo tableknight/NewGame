@@ -100,6 +100,7 @@ class MinionsList:UIPanel {
     }
     
     override func pageReload() {
+        _minionLayer.removeAllChildren()
         _minions = _char._minions
         if _minions.count <= 3 {
             _minionLayer.removeAllChildren()
@@ -209,6 +210,10 @@ class MinionComponent:SKSpriteNode {
                 }
                 let char = Game.instance.char!
                 if sn._seat == char._seat {
+                    return
+                }
+                if _minion._level > char._level + 3 {
+                    debug("这个随从过于强大！")
                     return
                 }
                 if (char.getReadyMinions().count >= char._minionsCount) && _minion._seat == BUnit.STAND_BY {

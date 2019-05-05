@@ -80,9 +80,9 @@ class CenterCamping: StandScene {
             let ec = NorthCamping()
             //            let char = Game.instance.curStage._curScene._role!
             let char = self._role!
-            Game.instance.curStage.switchScene(next: ec, afterCreation: {
+            Game.instance.curStage.switchScene(next: ec, completion: {
                 ec.setRole(x: 10, y: 11, char: char)
-            }, completion: {})
+            })
         } else
         if pos.x == 0 && pos.y == 5 {
 //            showMsg(text: "west")
@@ -91,29 +91,29 @@ class CenterCamping: StandScene {
             let ec = EastCamping()
 //            let char = Game.instance.curStage._curScene._role!
             let char = self._role!
-            Game.instance.curStage.switchScene(next: ec, afterCreation: {
+            Game.instance.curStage.switchScene(next: ec, completion: {
                 ec.setRole(x: 0, y: 5, char: char)
-            }, completion: {})
+            })
         } else
         if pos.x == 11 && pos.y == 2 {
             let ec = SelfHome()
             //            let char = Game.instance.curStage._curScene._role!
             let char = self._role!
-            Game.instance.curStage.switchScene(next: ec, afterCreation: {
+            Game.instance.curStage.switchScene(next: ec, completion: {
                 ec.setRole(x: 6, y: 7, char: char)
-            }, completion: {})
+            })
         } else
         if pos.x == 3 && pos.y == 3 {
             let store = GeneralStore()
             let char = self._role!
-            Game.instance.curStage.switchScene(next: store, afterCreation: {
+            Game.instance.curStage.switchScene(next: store, completion: {
                 store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
             })
         } else
         if pos.x == 10 && pos.y == 9 {
             let store = OutfitStore()
             let char = self._role!
-            Game.instance.curStage.switchScene(next: store, afterCreation: {
+            Game.instance.curStage.switchScene(next: store, completion: {
                 store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
             })
         }

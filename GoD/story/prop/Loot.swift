@@ -108,12 +108,12 @@ class Loot: Core {
     func loot(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 25 * lucky  {
+        if chance < 35 * lucky  {
             let a = lootArmor(level: level)
             _props.append(a)
         }
         chance = seed().toFloat()
-        if chance < 25 * lucky {
+        if chance < 35 * lucky {
             let w = lootWeapon(level: level)
             _props.append(w)
         }
@@ -123,9 +123,9 @@ class Loot: Core {
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 15 * lucky {
+        if chance < 35 * lucky {
             let s = getSacred()
-            if nil != s {
+            if nil != s && s!._level <= level + 5 {
                 _props.append(s!)
             }
         }
@@ -143,9 +143,8 @@ class Loot: Core {
           return 0
         }
         let lRate = 1 + (enemyLevel - selfLevel) * 0.1
-        let l = enemyLevel + 1
-        let exp =  l * l * atan(10.toFloat() + l * 0.1) * lRate
-        return exp
+        let range = seed(min: 80, max: 121).toFloat() * 0.01
+        return (100 + enemyLevel * 2.5) * lRate * range
     }
     var _normalSpellArray = [0,1,2,3,4,5,6,7,8,9]
     
@@ -284,7 +283,7 @@ class Loot: Core {
         case 0:
             return Lighting()
         case 1:
-            return Lighting() //
+            return LeeAttack() //
         case 2:
             return ProtectFromGod()
         case 3:
@@ -338,7 +337,7 @@ class Loot: Core {
         case 27:
             return LifeFlow()
         case 28:
-            return RecoveryFromAttack()
+            return LeeAttack()
         default:
             return Lighting()
         }

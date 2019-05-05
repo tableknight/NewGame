@@ -10,8 +10,8 @@ import SpriteKit
 class BlackCat: Natrue {
     override init() {
         super.init()
-        _stars.strength = 1.4
-        _stars.stamina = 1.1
+        _stars.strength = 1.1
+        _stars.stamina = 1.5
         _stars.agility = 2.1
         _stars.intellect = 1.1
         _name = "奇奇"

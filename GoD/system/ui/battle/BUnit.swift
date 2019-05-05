@@ -577,7 +577,7 @@ class BUnit: SKSpriteNode {
             completion()
         }
     }
-    func showValue(value:CGFloat, isCritical:Bool = false, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
+    func showValue(value:CGFloat, criticalFromSpell:Bool = true, critical:Bool = false, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
         if sheildEvilExpel(value: value) {
             showText(text: "BLOCK") {
@@ -600,9 +600,9 @@ class BUnit: SKSpriteNode {
             }
             return
         }
-        var beCritical = isCritical
-        if !beCritical {
-            beCritical = _battle._selectedSpell.beCritical
+        var beCritical = _battle._selectedSpell.beCritical
+        if value > 0 || !criticalFromSpell {
+            beCritical = critical
         }
 //        if isCritical {
 //            showText(text: "Critical", color: UIColor.red) {
@@ -632,7 +632,7 @@ class BUnit: SKSpriteNode {
         
         let valueText = addLabel()
 //        valueText.isHidden = false
-        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.35)
+        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.55)
         var color = textColor
         var text = "\(value.toInt())";
         if value > 0 {
@@ -640,9 +640,7 @@ class BUnit: SKSpriteNode {
             text = "+\(value.toInt())"
         }
         if beCritical {
-//            valueText.fontSize = 18
-//            color = DamageColor.NORMAL
-            text = "CRITICAL"
+            text = "Bow!"
         }
         if swordExorcist(value: value) {
             text = "KILL"
@@ -701,7 +699,7 @@ class BUnit: SKSpriteNode {
         }
         let valueText = addLabel(fontSize: 20)
 //        _valueText.isHidden = false
-        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.35)
+        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.55)
         valueText.text = text
         valueText.fontColor = color
         let v = CGVector(dx: 0, dy: _charSize * 0.5)
@@ -1184,7 +1182,7 @@ class BUnit: SKSpriteNode {
         }
         return def
     }
-    func getCritical(t:BUnit) -> CGFloat {
+    func getCritical() -> CGFloat {
         var ctl = _unit._extensions.critical + _extensions.critical
         if hasSpell(spell: BloodThirsty()) {
             ctl += _unit._level

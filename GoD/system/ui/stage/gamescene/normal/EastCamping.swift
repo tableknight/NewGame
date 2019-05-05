@@ -38,7 +38,7 @@ class EastCamping: StandScene {
             stage._curDialog?._confirmAction = {
                 let rp = BlackWaterTown()
                 stage.removeDialog(dlg: stage._curDialog!)
-                stage.switchScene(next: rp, afterCreation: {
+                stage.switchScene(next: rp, completion: {
                     rp.setRole(x: 4, y: 4, char: self._role)
                 })
             }
@@ -55,18 +55,18 @@ class EastCamping: StandScene {
         if pos.x == 0 && pos.y == 5 {
             let cc = CenterCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 12, y: 3, char: char)
 //                cc._role.faceWest()
-            }, completion: {})
+            })
         }
         if pos.x == 5 && pos.y == 2 {
             let cc = MagicHouse()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 5, y: 9, char: char)
                 //                cc._role.faceWest()
-            }, completion: {})
+            })
         }
     }
     override func create() {

@@ -19,6 +19,15 @@ class SpellBook:Item {
             _name = "\(newValue._name)之书"
             _description = "使用后习得法术[\(newValue._name)]，\(newValue._description)"
             _quality = newValue._quality
+            if _quality == Quality.NORMAL {
+                price = 18
+            } else if _quality == Quality.GOOD {
+                price = 48
+            } else if _quality == Quality.RARE {
+                price = 108
+            } else if _quality == Quality.SACRED {
+                price = 144
+            }
         }
         get {
             return _spell

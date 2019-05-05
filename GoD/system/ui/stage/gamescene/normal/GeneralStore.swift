@@ -30,15 +30,15 @@ class GeneralStore: InnerHouse {
             let role = getNextCellItem(x: 3, y: 5) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                text: "今天c需要点什么呢？",
-                name: "莱莉娅",
+                text: "今天需要点什么呢？",
+                name: "杂货铺的艾莉娅",
                 action: {
                     let dlg = stage._curDialog!
                     dlg.addConfirmButton()
                     dlg._confirmAction = {
                         stage.removeDialog(dlg: dlg)
                         let sp = SellingPanel()
-                        sp._goodsList = [TheWitchsTear(), TownScroll(), BlastScroll(), SealScroll(), Potion(), GodTownScroll(), DeathTownScroll()]
+                        sp._goodsList = [TownScroll(), SealScroll(), Potion(), GodTownScroll(), DeathTownScroll()]
                         sp.create()
                         stage.showPanel(sp)
                     }
@@ -66,10 +66,10 @@ class GeneralStore: InnerHouse {
         if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
             let cc = CenterCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 3, y: 3, char: char)
                 char.faceSouth()
-            }, completion: {})
+            })
         }
     }
     override func create() {

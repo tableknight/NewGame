@@ -133,7 +133,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     var _level:CGFloat = 1
     var _tear = 0
     var _speakings = Array<String>()
-    internal var beCritical = false
+    var beCritical = false
     private enum CodingKeys: String, CodingKey {
         case _canBeTargetPlayer
         case _canBeTargetSelf
@@ -194,7 +194,8 @@ class Spell:Core, IDisplay, ISelectTarget {
 //        let base =
 //        let r = atan(level * 0.05) + 0.2
 //        var def = (odef / atan(odef / level / 2)) / (level * 8) * r
-        var def = odef / (100 + level * 2)
+        let rate = level * 0.01 + 1
+        var def = odef / (100 * rate + level * 3)
         if def > 0.85 {
             def = 0.85
         }
@@ -596,9 +597,10 @@ class Spell:Core, IDisplay, ISelectTarget {
                 return
             }
         }
-        let ctl = _battle._curRole.getCritical(t:to)
+        let ctl = _battle._curRole.getCritical() - to._unit._level
         if seed().toFloat() < ctl {
             beCritical = true
+            return
         }
         beCritical = false
     }

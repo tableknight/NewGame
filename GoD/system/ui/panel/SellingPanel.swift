@@ -35,14 +35,34 @@ class SellingPanel: UIPanel {
         if _buyButton.contains(touchPoint!) {
             if nil != _lastSelectedIcon && _goodsBox.contains(_lastSelectedIcon) {
                 let goods = _lastSelectedIcon as! SellingItemIcon
-                if goods.price > _char._money {
-                    showMsg(text: "金币不足以支付。")
-                    return
+                if _priceType == 1 {
+                    let props = Game.instance.char._props
+                    var t = TheWitchsTear()
+                    t._count = 0
+                    for p in props {
+                        if p is TheWitchsTear {
+                            t = p as! TheWitchsTear
+                            break
+                        }
+                    }
+                    if t._count < goods.tear {
+                        showMsg(text: "眼泪数量不足以支付。")
+                        return
+                    }
+                    t._count -= goods.tear
+                    _char.addProp(p: goods._displayItemType as! Prop)
+                    pageReload()
+                    createPropList()
+                } else {
+                    if goods.price > _char._money {
+                        showMsg(text: "金币不足以支付。")
+                        return
+                    }
+                    _char.lostMoney(num: goods.price)
+                    _char.addProp(p: goods._displayItemType as! Prop)
+                    pageReload()
+                    reshowPlayerMoney()
                 }
-                _char.lostMoney(num: goods.price)
-                _char.addProp(p: goods._displayItemType as! Prop)
-                pageReload()
-                reshowPlayerMoney()
                 return
             }
         }
@@ -112,6 +132,7 @@ class SellingPanel: UIPanel {
         addChild(_sellingBoxBackground)
     }
     func createPropList() {
+        _propBox.removeAllChildren()
         let props = getProps()
         //        let startX:CGFloat = 0
         let startX = cellSize * 0.25
@@ -147,7 +168,11 @@ class SellingPanel: UIPanel {
             sii._displayItemType = _goodsList[i]
             sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
             sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()
-            sii.price = _goodsList[i].sellingPrice
+            if _priceType == 1 {
+                sii.tear = _goodsList[i]._price
+            } else {
+                sii.price = _goodsList[i].sellingPrice
+            }
             sii.zPosition = self.zPosition + 3
             sii.quality = _goodsList[i]._quality
             _goodsBox.addChild(sii)
@@ -199,6 +224,7 @@ class SellingPanel: UIPanel {
     private var _buyButton = Button()
     private var _goldlabel = Label()
     var _goodsList = Array<Prop>()
+    var _priceType = 0
 }
 
 class SellingItemIcon: PropIcon {
@@ -223,6 +249,16 @@ class SellingItemIcon: PropIcon {
             return _price
         }
     }
+    var tear:Int {
+        set {
+            _tear = newValue
+            _priceLabel.text = "\(_tear)T"
+        }
+        get {
+            return _tear
+        }
+    }
+    private var _tear = 0
     private var _price = 0
     private var _priceLabel = Label()
 }

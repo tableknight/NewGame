@@ -30,7 +30,7 @@ class QiWave:Physical, HandSkill {
                 let damage = self.physicalDamage(t)
                 if !self.hasPhysicalEvent(t: t, completion: completion) {
                     t.actionAttacked {
-                        t.showValue(value: damage)
+                        t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                     }
                 }
             }

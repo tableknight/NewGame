@@ -150,8 +150,12 @@ class Dungeon: MyScene {
         addGround(x: _portalNext.x, y: _portalNext.y, item: next)
     }
     internal func createTreasureBoxes() {
-        let count = seed(min: 0, max: 3)
-        for _ in 0...count {
+        let list = [1,1,1,1,0,0,0,2,2,3]
+        let count = list.one()
+        if count == 0 {
+            return
+        }
+        for _ in 1...count {
             let index = seed(max: _visiblePoints.count)
             let point = _visiblePoints[index]
             _visiblePoints.remove(at: index)

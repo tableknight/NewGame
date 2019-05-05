@@ -36,11 +36,11 @@ class SelfHome: InnerHouse {
                 let char = Game.instance.curStage._curScene._role!
                 char.actionHealed {
                     char._unit._extensions.hp = char._unit._extensions.health
+                    Game.instance.curStage.setBarValue()
                 }
                 for m in Game.instance.char._minions {
                     m._extensions.hp = m._extensions.health
                 }
-                
                 return true
             }
         }
@@ -52,9 +52,9 @@ class SelfHome: InnerHouse {
         if pos.x == 6 && pos.y == halfSize * 2 - 1 {
             let cc = CenterCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 11, y: 2, char: char)
-            }, completion: {})
+            })
         }
     }
     override func create() {

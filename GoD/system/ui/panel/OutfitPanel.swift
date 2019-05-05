@@ -79,8 +79,8 @@ class OutfitPanel: UIPanel {
                 return
             }
             let outfit = _lastSelectedIcon._displayItemType as! Outfit
-            if outfit._level > _char._level {
-                showMsg(text: "你暂时无法使用这件比你更强大的装备。")
+            if outfit._level > _char._level + 3 {
+                showMsg(text: "暂时无法使用这件装备。")
                 return
             }
             if _char.hasWeapon && _lastSelectedIcon._displayItemType is Weapon {

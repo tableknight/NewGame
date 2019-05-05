@@ -88,7 +88,7 @@ class BossRoad: AcientRoad {
             if _index < _floorSize {
                 let nextScene = getSelfScene()
                 nextScene._index = self._index + 1
-                stage.switchScene(next: nextScene, afterCreation: {
+                stage.switchScene(next: nextScene, completion: {
                     nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
                 })
             } else {

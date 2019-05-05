@@ -195,7 +195,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = DemonTownPortal()
+        let bs = SecretMeadow()
         bs.create()
         
         
@@ -205,29 +205,56 @@ class GameScene: SKScene {
         let e = Emily()
         e.create(level: e._level)
         e.addMoney(num: 1000)
-        e._spellsInuse = [LineAttack()]
+        e._spellsInuse = [LineAttack(), ThunderArray(), FireRain()]
         let bow = Bow()
         bow.create(level: 1)
         e.addProp(p: bow)
         
         
-        bs.setRole(x: 5, y: 7, role: e)
-//        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
+//        bs.setRole(x: 5, y: 7, role: e)
+        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
 //        
-//        let gt = GodTownScroll()
-//        gt._count = 10
-//        e.addProp(p: gt)
-//        
+        let gt = SealScroll()
+        gt._count = 10
+        e.addProp(p: gt)
+//
         let ggg = TownScroll()
         ggg._count = 10
         e.addProp(p: ggg)
 //
-//        let po = Potion()
-//        po._count = 10
-//        e.addProp(p: po)
+        let po = Potion()
+        po._count = 10
+        e.addProp(p: po)
+        e._minionsCount = 1
+        e._dungeonLevel = 99
+        
+//        let r1 = HellBaron()
+//        r1.create(level: 1)
+//        e._minions.append(r1)
+//
+//        let r2 = DarkNinja()
+//        r2.create(level: 1)
+//        e._minions.append(r2)
+//
+//        let r3 = HellNight()
+//        r3.create(level: 1)
+//        e._minions.append(r3)
+//
+//        let r4 = ForestGuard()
+//        r4.create(level: 1)
+//        e._minions.append(r4)
+        
+        
+        e.addProp(p: LevelUpScroll())
+        e._spellsInuse = [FireRain(), Refresh()]
+        let rs = [e] + e._minions
+        for r in rs {
+//            r._extensions.spirit = 300
+//            r._spellsInuse = [FireRain(), Refresh()]
+        }
         
     }
     

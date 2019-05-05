@@ -4,7 +4,6 @@
 //
 //  Created by kai chen on 2018/4/9.
 //  Copyright © 2018年 Chen. All rights reserved.
-// not used
 
 import SpriteKit
 class RoleList:UIPanel {
@@ -38,7 +37,7 @@ class RoleList:UIPanel {
         addChild(_listBox)
         createCloseButton()
         _closeButton.xAxis = cellSize * 1.5
-        _closeButton.yAxis = cellSize * 3
+        _closeButton.yAxis = cellSize * 3.15
         _list = list
         showList()
     }

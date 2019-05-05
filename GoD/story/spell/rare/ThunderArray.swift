@@ -50,7 +50,7 @@ class ThunderArray:Magical {
     private func attack() {
         findTarget()
         let t = _battle._selectedTarget
-        if nil == t {
+        if _battle._enemyPart.count < 1 || nil == t {
             debug("no target")
             return
         }

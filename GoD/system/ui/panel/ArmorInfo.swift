@@ -138,7 +138,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             let spellName = Label()
             let mark = armor as! MagicMark
             spellName.text = "[\(mark._spell._name)]"
-            spellName.fontSize = name.fontSize * 0.8
+            spellName.fontSize = 18
             spellName.position.x = startX
             spellName.position.y = lastY - gap
             lastY = spellName.position.y - spellName.fontSize
@@ -175,9 +175,9 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             spellName.position.x = startX
             spellName.position.y = lastY - gap
             spellName.fontColor = QualityColor.getColor(ins._spell._quality)
-            spellName.fontSize = 16
+            spellName.fontSize = 18
             spellName.text = "[\(ins._spell._name)]"
-            lastY = lastY - gap - 16
+            lastY = lastY - gap - 18
             _displayHeight += 30
             addChild(spellName)
             _insSpellName = spellName.text!

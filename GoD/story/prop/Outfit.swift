@@ -24,18 +24,18 @@ class Outfit:Prop {
 //        for i in _all {
 //            allAttrs.append(getAttrById(id: i))
 //        }
-        for i in 0...cls.count - 1 {
-            let tp = NSClassFromString(cls[i])
-            for a in allAttrs {
-                if tp == type(of: a) {
-                    a._value = _attrs[i]._value
-                    a._name = _attrs[i]._name
-                    _attrs[i] = a
-                    break
+        if cls.count > 0 {
+            for i in 0...cls.count - 1 {
+                let tp = NSClassFromString(cls[i])
+                for a in allAttrs {
+                    if tp == type(of: a) {
+                        a._value = _attrs[i]._value
+                        a._name = _attrs[i]._name
+                        _attrs[i] = a
+                        break
+                    }
                 }
             }
-//            _attrs[0] = _attrs[0] as! NSClassFromString(cls[i])
-//            cls[i]
         }
         
     }

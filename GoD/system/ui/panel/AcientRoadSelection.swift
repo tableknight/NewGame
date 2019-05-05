@@ -30,6 +30,13 @@ class AcientRoadSelection:UIPanel {
             return
         }
         
+//        if _selectedRoad != nil {
+//            let floorLevel = _selectedRoad!._floor
+//            let stage = Game.instance.curStage!
+//            stage.removePanel(self)
+//            stage.enterFloor(floor: floorLevel.toFloat())
+//        }
+        
         for c in _roadBox.children {
             if c.contains(touchPoint!) {
                 let rc = c as! RoadComponent
@@ -62,9 +69,9 @@ class AcientRoadSelection:UIPanel {
         if Mode.debug {
             _dungeonLevel = 99
         }
-        if _dungeonLevel > _pageSize {
-            createPageButtons()
-        }
+//        if _dungeonLevel > _pageSize {
+//        }
+        createPageButtons()
         pageReload()
         _label.text = "双击选择前往的层数。"
     }
@@ -111,7 +118,7 @@ class RoadComponent: SKSpriteNode {
         addChild(_border)
         let label = Label()
         label.text = "远古之路 第\(floor)层"
-        label.fontSize = 24
+        label.fontSize = 28
         label.position.x = cellSize * 0.5
         label.position.y = -6
         addChild(label)

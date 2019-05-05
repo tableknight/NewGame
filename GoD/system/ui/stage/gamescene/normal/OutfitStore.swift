@@ -63,7 +63,7 @@ class OutfitStore: InnerHouse {
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
                              text: "你想的，你要的，你求的，我全都有，看看吗？",
-                             name: "武器商人", action: {
+                             name: "神秘商人", action: {
                                 
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -104,7 +104,7 @@ class OutfitStore: InnerHouse {
                                     let l = Loot()
                                     
                                     sp._goodsList = []
-                                    for i in 0...3 {
+                                    for i in 0...4 {
                                         let w = l.getArmorById(id: i)
                                         w.create(level:level)
                                         sp._goodsList.append(w)
@@ -120,7 +120,7 @@ class OutfitStore: InnerHouse {
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
                              text: "我喜欢在夜晚交易，你呢？",
-                             name: "防具商人", action: {
+                             name: "神秘商人", action: {
                                 
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -160,10 +160,10 @@ class OutfitStore: InnerHouse {
         if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
             let cc = CenterCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 10, y: 9, char: char)
                 char.faceSouth()
-            }, completion: {})
+            })
         }
     }
     override func create() {

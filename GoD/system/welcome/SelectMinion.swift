@@ -60,7 +60,7 @@ class SelectMinion:UIPanel {
         _closeButton.text = "返回"
         _prevButton.text = "上一步"
         _nextButton.text = "创建角色"
-        _label.text = "选择一个随从跟随作战。"
+        _label.text = "抉择：选择一个随从跟随作战。"
         addChild(_minionLayer)
         
         var minions = Array<Creature>()

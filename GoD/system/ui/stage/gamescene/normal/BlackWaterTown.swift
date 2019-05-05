@@ -33,7 +33,7 @@ class BlackWaterTown: StandScene {
             stage._curDialog?._confirmAction = {
                 let rp = EastCamping()
                 stage.removeDialog(dlg: stage._curDialog!)
-                stage.switchScene(next: rp, afterCreation: {
+                stage.switchScene(next: rp, completion: {
                     rp.setRole(x: 8, y: 4, char: self._role)
                 })
             }
@@ -53,10 +53,10 @@ class BlackWaterTown: StandScene {
             _portalMark.run(fade) {
                 let cc = DemonTownPortal()
                 let char = self._role!
-                Game.instance.curStage.switchScene(next: cc, afterCreation: {
+                Game.instance.curStage.switchScene(next: cc, completion: {
                     cc.setRole(x: 6, y: 5, char: char)
                     char.faceSouth()
-                }, completion: {})
+                })
             }
         }
     }

@@ -17,7 +17,7 @@ class WindPunish: Magical {
     override init() {
         super.init()
         isWater = true
-        _name = "风的惩罚"
+        _name = "风之惩戒"
         _description = "对目标和身后目标造成精神60%的冰冷伤害"
         _rate = 0.6
         _quality = Quality.GOOD

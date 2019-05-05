@@ -39,6 +39,7 @@ class MagicHouse: InnerHouse {
                                 dlg._confirmAction = {
                                     stage.removeDialog(dlg: dlg)
                                     let sp = SellingPanel()
+                                    sp._priceType = 1
                                     sp._goodsList = [RandomSacredSpell()]
                                     sp.create()
                                     stage.showPanel(sp)
@@ -58,6 +59,7 @@ class MagicHouse: InnerHouse {
                                 dlg._confirmAction = {
                                     stage.removeDialog(dlg: dlg)
                                     let sp = SellingPanel()
+                                    sp._priceType = 1
                                     sp._goodsList = self._sellingBooks
                                     
                                     sp.create()
@@ -87,10 +89,10 @@ class MagicHouse: InnerHouse {
         if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
             let cc = EastCamping()
             let char = _role!
-            Game.instance.curStage.switchScene(next: cc, afterCreation: {
+            Game.instance.curStage.switchScene(next: cc, completion: {
                 cc.setRole(x: 5, y: 2, char: char)
                 char.faceSouth()
-            }, completion: {})
+            })
         }
     }
     override func create() {
@@ -146,13 +148,13 @@ class MagicHouse: InnerHouse {
             let b = SpellBook()
             let s = self.seed(max: 3)
             var spell = l.getNormalSpell(id: l._normalSpellArray.one())
-            b.price = 36
+            b.price = 6
             if 1 == s {
                 spell = l.getGoodSpell(id: l._goodSpellArray.one())
-                b.price = 96
+                b.price = 16
             } else if 2 == s {
                 spell = l.getRareSpell(id: l._rareSpellArray.one())
-                b.price = 216
+                b.price = 36
             }
             b.spell = spell
             list.append(b)

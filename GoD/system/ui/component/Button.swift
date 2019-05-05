@@ -11,14 +11,14 @@ class Button:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         zPosition = UIStage.UILAYER
-        _bg = createBackground(width: cellSize * 1.5, height: cellSize * 0.5)
+        _bg = createBackground(width: cellSize * 1.5, height: cellSize * 0.65)
         _width = cellSize * 1.5
         addChild(_bg)
         _label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         _label.fontColor = UIColor.white
-        _label.position.y = -cellSize * 0.1
+        _label.position.y = -10
         _label.position.x = cellSize * 0.75
-        _label.fontSize = cellSize * 0.25
+        _label.fontSize = 20
         _label.align = "center"
         addChild(_label)
     }
@@ -41,10 +41,10 @@ class Button:SKSpriteNode {
         set {
             _selected = newValue
             if newValue {
-                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+//                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
                 _bg.lineWidth = Game.SELECTED_STROKE_WIDTH
             } else {
-                _bg.strokeColor = Game.UNSELECTED_STROKE_COLOR
+//                _bg.strokeColor = Game.UNSELECTED_STROKE_COLOR
                 _bg.lineWidth = Game.UNSELECTED_STROKE_WIDTH
             }
         }

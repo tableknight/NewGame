@@ -136,9 +136,9 @@ class SpellPanel:UIPanel {
         _pageSize = 24
         createCloseButton()
         showSpellsInuse()
-        if Game.instance.char._spells.count > _pageSize {
-            createPageButtons()
-        }
+//        if Game.instance.char._spells.count > _pageSize {
+//        }
+        createPageButtons()
         showSpellsUnused()
         addChild(_spellBoxUnused)
         addChild(_spellBoxInuse)
@@ -211,11 +211,12 @@ class SpellPanel:UIPanel {
         }
     }
     private func getPageEnd() -> Int {
-        let pages = Game.instance.char._spells.count / _pageSize
+        let spells = getSpellUnused()
+        let pages = spells.count / _pageSize
         if pages >= _curPage {
             return _curPage * _pageSize
         }
-        return Game.instance.char._spells.count
+        return spells.count
     }
     override func pageReload() {
         _spellBoxUnused.removeAllChildren()

@@ -27,10 +27,12 @@ class Lighting: Passive {
         }
         let t = _battle._selectedTarget!
         let damage = thunderDamage(t)
-        if !hadSpecialAction(t:t, completion: completion) {
-            t.actionAttacked {
-                t.showValue(value: damage) {
-                    completion()
+        c.showText(text: "Lighting") {
+            if !self.hadSpecialAction(t:t, completion: completion) {
+                t.actionAttacked {
+                    t.showValue(value: damage) {
+                        completion()
+                    }
                 }
             }
         }

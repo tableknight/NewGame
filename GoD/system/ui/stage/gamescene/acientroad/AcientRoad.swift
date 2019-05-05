@@ -26,6 +26,8 @@ class AcientRoad: Dungeon {
         }
     }
     override func create() {
+        let s = _level < 10 ? 4 : 7
+        _floorSize = seed(min: 1, max: s)
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
@@ -119,7 +121,7 @@ class AcientRoad: Dungeon {
             e.create(level: _level)
             enimies.append(e)
         }
-        stage.hideScene()
+//        stage.hideScene()
         let b = Battle()
         let roles = [char] + char.getReadyMinions()
         b.setEnemyPart(minions: enimies)
@@ -151,7 +153,6 @@ class AcientRoad: Dungeon {
     internal var _index:Int = 1
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _floorSize = seed(min: 1, max: 7)
         _index = Game.instance.curStage.getSceneIndex()
 //        debug("current _floorSize \(_floorSize)")
 //        debug("current index \(_index)")

@@ -61,7 +61,7 @@ class Attack: Physical {
                             let rate = 1 + (c.getFirePower() - t.getFireResistance()) * 0.01
                             let fireDamage = damage * 0.3 * rate
                             
-                            t.showValue(value: fireDamage, isCritical: false, textColor: ElementColor.getColor(Element.FIRE)) {
+                            t.showValue(value: fireDamage, textColor: ElementColor.getColor(Element.FIRE)) {
                                 this.attackMore(completion: completion)
                             }
                         })

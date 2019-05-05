@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -289,6 +289,7 @@
 		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
+		09738A85227F3281009AF2EE /* LeeAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A84227F3281009AF2EE /* LeeAttack.swift */; };
 		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
 		097EC6C9226A07C600B9407A /* DemonTownPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonTownPortal.swift */; };
 		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
@@ -682,6 +683,7 @@
 		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
+		09738A84227F3281009AF2EE /* LeeAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeeAttack.swift; sourceTree = "<group>"; };
 		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
 		097EC6C8226A07C600B9407A /* DemonTownPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonTownPortal.swift; sourceTree = "<group>"; };
 		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
@@ -1136,6 +1138,7 @@
 				090FEAB921BB9B2A004276BB /* Taunt.swift */,
 				094E68CB21E064C500414583 /* ShootTwo.swift */,
 				0922C94E22243834002DC201 /* DancingDragon.swift */,
+				09738A84227F3281009AF2EE /* LeeAttack.swift */,
 			);
 			path = rare;
 			sourceTree = "<group>";
@@ -1805,7 +1808,7 @@
 				};
 			};
 			buildConfigurationList = 090FE9F221BB983E004276BB /* Build configuration list for PBXProject "GoD" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2119,6 +2122,7 @@
 				090FEBA921BB9B2B004276BB /* Refresh.swift in Sources */,
 				090FEB7021BB9B2B004276BB /* Stamina.swift in Sources */,
 				09C66CCD2212FBDA00E1C153 /* AttackHard.swift in Sources */,
+				09738A85227F3281009AF2EE /* LeeAttack.swift in Sources */,
 				09C66C9021FD571B00E1C153 /* IFace.swift in Sources */,
 				090FEBA721BB9B2B004276BB /* Reborn.swift in Sources */,
 				090FEBCA21BB9B2B004276BB /* IceFist.swift in Sources */,
@@ -2392,16 +2396,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DWG8SW45K5;
 				INFOPLIST_FILE = GoD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD;
+				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD.iPhone1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2409,16 +2417,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DWG8SW45K5;
 				INFOPLIST_FILE = GoD/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD;
+				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD.iPhone1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -55,10 +55,11 @@ class MyStage: SKSpriteNode {
             op.create()
             showPanel(op)
             return
-        } else if _quitButton.contains(touchPoint!) && _quitButton.visible {
+        } else if _saveButton.contains(touchPoint!) && _saveButton.visible {
 //            Game.save(c: Game.instance.char!, key: "char")
 //            self.removeFromParent()
             let char = Game.instance.char!
+            var roles = Game.roles
             if char._key.isEmpty {
                 char._key = "doc\(Game.roles.count)"
                 let roleDoc = RoleDocument()
@@ -67,11 +68,25 @@ class MyStage: SKSpriteNode {
                 roleDoc._level = char._level.toInt()
                 roleDoc._key = char._key
                 roleDoc._imgUrl = char._imgUrl
-                Game.roles.append(roleDoc)
+                roles.append(roleDoc)
+            } else {
+                for c in roles {
+                    if c._key == char._key {
+                        c._level = char._level.toInt()
+                        break
+                    }
+                }
             }
             Game.save(c: char, key: char._key)
-            Game.saveRoles(roles: Game.roles)
-            showMsg(text: "保存成功！")
+            Game.saveRoles(roles: roles)
+            showSceneMask()
+            _sceneChangeMask.alpha = 0.65
+            cancelMove = true
+            setTimeout(delay: 2, completion: {
+                showMsg(text: "保存成功！")
+                self._sceneChangeMask.isHidden = true
+                self.cancelMove = false
+            })
         }
     }
     func loadScene(scene:MyScene) {
@@ -81,14 +96,59 @@ class MyStage: SKSpriteNode {
     }
     func createMenu() {
         let y = -cellSize * 6.5
-        let size:CGFloat = cellSize * 0.4
-        let x = cellSize * 2
-        _charButton = createMenuButtons(x: -cellSize * 2.5 + x, y: y, size: size, text: "角色")
-        _outfitButton = createMenuButtons(x: -cellSize * 1.5 + x, y: y, size: size, text: "装备")
-        _itemButton = createMenuButtons(x: -cellSize * 0.5 + x , y: y, size: size, text: "物品")
-        _spellButton = createMenuButtons(x: cellSize * 0.5 + x, y: y, size: size, text: "法术")
-        _minionButton = createMenuButtons(x: cellSize * 1.5 + x, y: y, size: size, text: "随从")
-        _quitButton = createMenuButtons(x: -cellSize * 3.3, y: -cellSize * 6.3, size: cellSize * 0.6, text: "保存退出")
+        let size:CGFloat = cellSize * 0.45
+        let x = cellSize * 3.5
+        let gap = size + cellSize * 0.5
+        _charButton = createMenuButtons(x: x, y: y, size: size, text: "角色")
+        _outfitButton = createMenuButtons(x: x - gap, y: y, size: size, text: "装备")
+        _itemButton = createMenuButtons(x: x - gap * 2 , y: y, size: size, text: "物品")
+        _spellButton = createMenuButtons(x: x - gap * 3, y: y, size: size, text: "法术")
+        _minionButton = createMenuButtons(x: x - gap * 4, y: y, size: size, text: "随从")
+//        _quitButton = createMenuButtons(x: -x, y: -cellSize * 6.3, size: cellSize * 0.6, text: "保存")
+        let bounds = UIScreen.main.bounds.size
+        let padding = cellSize * 0.25
+        _quitButton.text = "退出"
+        _quitButton.yAxis = bounds.height - padding
+        _quitButton.xAxis = -bounds.width + padding
+        addChild(_quitButton)
+        _uiComponentList.append(_quitButton)
+        _saveButton.text = "保存"
+        _saveButton.yAxis = bounds.height - padding
+        _saveButton.xAxis = bounds.width - padding - _saveButton.width
+        addChild(_saveButton)
+        _uiComponentList.append(_saveButton)
+        
+//        let roleImage = Game.instance.char._img.getNode(1, 0)
+//        roleImage.position.x = -bounds.width + padding + 12
+//        roleImage.position.y = -bounds.height + padding + 28
+//        addChild(roleImage)
+        
+        
+        let hpbar = HBar()
+        hpbar.create(width: bounds.width * 0.35, height: 10, value: 1, color: UIColor.red)
+        hpbar.position.y = -bounds.height + padding + 30
+        hpbar.position.x = -bounds.width + padding
+        addChild(hpbar)
+        _uiComponentList.append(hpbar)
+        _hpbar = hpbar
+        
+        let expbar = HBar()
+        expbar.create(width: bounds.width * 0.45, height: 10, value: 1, color: UIColor.green)
+        expbar.position.y = -bounds.height + padding + 10
+        expbar.position.x = hpbar.position.x
+//        expbar.position.x = bounds.width * 0.5 - padding
+        addChild(expbar)
+        _uiComponentList.append(expbar)
+        _expbar = expbar
+        
+        setBarValue()
+    }
+    private var _hpbar = HBar()
+    private var _expbar = HBar()
+    func setBarValue() {
+        let role = _curScene._role!
+        _hpbar.setBar(value: role.getHp() / role.getHealth())
+        _expbar.setBar(value: role._unit._exp / role._unit.expNext())
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -140,25 +200,41 @@ class MyStage: SKSpriteNode {
         }
         return nil
     }
+    var cancelMove = false
     func addBattle(_ b:Battle) {
         if nil != childNode(withName: "battle") {
             debug("battle exist! error")
             return
         }
+        cancelMove = true
         hideUI()
         hideScene()
-        addChild(b)
+        showSceneMask()
+        _showingLabel.text = "进入战斗"
+        _showingLabel.isHidden = false
+        setTimeout(delay: 1, completion: {
+            self._showingLabel.isHidden = true
+            self._sceneChangeMask.isHidden = true
+            self.addChild(b)
+            b.zPosition = MyScene.MASK_LAYER_Z + 2
+        })
     }
     func removeBattle(_ b:Battle) {
+        cancelMove = false
         b.removeFromParent()
         showUI()
         showScene()
+        setBarValue()
     }
     func hideScene() {
-        _curScene.isHidden = true
+//        _curScene.isHidden = true
+        _curScene.alpha = 0.25
+        _curScene._nameLabel.isHidden = true
     }
     func showScene() {
-        _curScene.isHidden = false
+//        _curScene.isHidden = false
+        _curScene.alpha = 1
+        _curScene._nameLabel.isHidden = false
     }
     func showDialog(img:SKTexture, text:String, name:String, action:@escaping () -> Void = {}) {
         if nil != _curDialog {
@@ -186,11 +262,13 @@ class MyStage: SKSpriteNode {
         _sceneChangeMask.alpha = 1
     }
     //进入以创建场景设置角色用completion事件 进入未初始化地图用afterCreation
-    func switchScene(next:MyScene, afterCreation:@escaping () -> Void = {},  completion:@escaping () -> Void = {}) {
+    func switchScene(next:MyScene, completion:@escaping () -> Void = {}) {
         if !loaded {
             return
         }
         showSceneMask()
+        _showingLabel.text = next._name
+        _showingLabel.isHidden = false
         loaded = false
         _curScene.removeFromParent()
         _curScene._role.removeFromParent()
@@ -202,14 +280,15 @@ class MyStage: SKSpriteNode {
             let out = SKAction.fadeOut(withDuration: TimeInterval(1))
             if !next.initialized {
                 next.create()
-                afterCreation()
             }
             //        return
             //            let go = SKAction.sequence([wait, out])
             this.loadScene(scene: next)
+            self._showingLabel.isHidden = true
+            completion()
             
             this._sceneChangeMask.run(out) {
-                completion()
+                self._sceneChangeMask.isHidden = true
                 this.loaded = true
             }
         })
@@ -219,7 +298,7 @@ class MyStage: SKSpriteNode {
         let char = _curScene._role!
         if 0 == floor {
             let scene = CenterCamping()
-            switchScene(next: scene, afterCreation: {
+            switchScene(next: scene, completion: {
                 scene.setRole(x: 5, y: 7, char: char)
                 char.faceSouth()
             })
@@ -228,7 +307,7 @@ class MyStage: SKSpriteNode {
             let  scene = floor > 6 ? ar.getSceneById(id: ar.sceneList.one()) : ar.getSceneById(id: floor.toInt())
             scene._level = floor
             saveScene(scene: scene)
-            switchScene(next: scene, afterCreation: {
+            switchScene(next: scene, completion: {
                 scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
                 char.faceSouth()
             })
@@ -237,21 +316,32 @@ class MyStage: SKSpriteNode {
     func gohome() {
         let char = _curScene._role!
         let scene = SelfHome()
-        switchScene(next: scene, afterCreation: {
+        switchScene(next: scene, completion: {
             scene.setRole(x: 2, y: 1, char: char)
             char.faceSouth()
         })
     }
     private var _sceneChangeMask = SKSpriteNode()
+    private var _showingLabel = Label()
     private func createSceneChangeMask() {
-        let cover = createBackground(width: cellSize * 13, height: cellSize * 12)
+        let screenBounds:CGSize = UIScreen.main.bounds.size
+        let cover = createBackground(width: screenBounds.width * 2, height: screenBounds.height * 2)
         cover.fillColor = UIColor.black
         cover.position.x = 0
         cover.position.y = 0
+        cover.lineWidth = 0
         _sceneChangeMask.addChild(cover)
         _sceneChangeMask.isHidden = true
         _sceneChangeMask.zPosition = MyScene.MASK_LAYER_Z
         addChild(_sceneChangeMask)
+        
+        _showingLabel.isHidden = true
+        _showingLabel.fontSize = 36
+        _showingLabel.align = "center"
+        _showingLabel.zPosition = _sceneChangeMask.zPosition + 1
+        _showingLabel.position.y = 18
+        addChild(_showingLabel)
+        
     }
     func getSceneIndex() -> Int {
         return _scenes.count + 1
@@ -269,7 +359,8 @@ class MyStage: SKSpriteNode {
     var _outfitButton:RoundButton!
     var _spellButton:RoundButton!
     var _minionButton:RoundButton!
-    var _quitButton:RoundButton!
+    var _quitButton = Button()
+    var _saveButton = Button()
     var _uiComponentList:Array<SKSpriteNode> = []
     var _scenes = Array<AcientRoad>()
     var _curPanel:UIPanel?

@@ -42,7 +42,7 @@ class SelectImage:UIPanel {
     override func create() {
         createCloseButton()
         createPageButtons()
-        _label.text = "选择角色形象"
+        _label.text = "抉择：选择角色形象"
         _closeButton.text = "返回"
         _prevButton.text = "上一步"
         _prevButton.isHidden = true

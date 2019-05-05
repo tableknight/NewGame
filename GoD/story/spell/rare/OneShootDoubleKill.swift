@@ -49,8 +49,8 @@ class OneShootDoubleKill: Physical, BowSkill {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                t.actionAttacked(defend: t.isDefend) {
-                    t.showValue(value: damage) {
+                t.actionAttacked() {
+                    t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical) {
                         completion()
                     }
                 }

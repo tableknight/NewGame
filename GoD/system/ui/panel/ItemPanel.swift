@@ -69,6 +69,7 @@ class ItemPanel: UIPanel {
                                 let unit = rl._lastSelected!._unit
                                 item.use(target: unit!)
                                 rl._lastSelected!.reload()
+                                Game.instance.curStage.setBarValue()
                             }
                         }
                         rl.closeAction = {

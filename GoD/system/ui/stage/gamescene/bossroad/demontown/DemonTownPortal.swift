@@ -78,32 +78,32 @@ class DemonTownPortal: Maze {
         let char = _role!
         if pos.x == 1 && pos.y == 1 {
             let nextScene = CityOfDesire()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         } else if pos.x == 1 && pos.y == 5 {
             let nextScene = CityOfSorrow()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         } else if pos.x == 1 && pos.y == 10 {
             let nextScene = CityOfLethe()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         } else if pos.x == 11 && pos.y == 1 {
             let nextScene = CityOfFail()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         } else if pos.x == 11 && pos.y == 5 {
             let nextScene = CityOfSin()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         } else if pos.x == 11 && pos.y == 10 {
             let nextScene = CityOfDeath()
-            stage.switchScene(next: nextScene, afterCreation: {
+            stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
         }

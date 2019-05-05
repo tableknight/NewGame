@@ -73,7 +73,7 @@ class LootPanel:UIPanel {
     
     override func createCloseButton() {
         _closeButton.text = "确定"
-        _closeButton.position.y = _standardHeight * 0.25 + cellSize * 0.5
+        _closeButton.position.y = _standardHeight * 0.25 + cellSize * 0.65
         _closeButton.position.x = _standardWidth * 0.25 - cellSize * 0.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)

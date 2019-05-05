@@ -62,7 +62,7 @@ class MicaluServant1:BossMinion {
         _extensions.health *= 2
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [Bitslap(), RecoveryFromAttack()]
+        _spellsInuse = [Bitslap(), LeeAttack()]
     }
 }
 class MicaluServant2:BossMinion {

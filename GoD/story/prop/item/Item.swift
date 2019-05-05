@@ -243,11 +243,11 @@ class TownScroll:Item {
     }
     override func use() {
         removeFromChar()
-        showMsg(text: _description)
+//        showMsg(text: _description)
         let c = CenterCamping()
         let char = Game.instance.curStage._curScene._role!
 //        let stage = Game.instance.
-        Game.instance.curStage.switchScene(next: c, afterCreation: {
+        Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 5, y: 7, char: char)
         })
     }
@@ -273,7 +273,7 @@ class GodTownScroll:TownScroll {
         let c = SnowLanding1()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
-        Game.instance.curStage.switchScene(next: c, afterCreation: {
+        Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 7, y: 7, char: char)
         })
     }
@@ -299,7 +299,7 @@ class DeathTownScroll:TownScroll {
         let c = CenterCamping()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
-        Game.instance.curStage.switchScene(next: c, afterCreation: {
+        Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 5, y: 7, char: char)
         })
     }
@@ -404,7 +404,7 @@ class RandomSacredSpell:Item {
         super.init()
         usable = true
         usableInBattle = false
-        price = 180
+        price = 48
         _name = "法术?"
         _description = "获得一个随机的神之技"
         _quality = Quality.SACRED
@@ -422,6 +422,31 @@ class RandomSacredSpell:Item {
         let book = SpellBook()
         book.spell = l.getSacredSpell(id: l._sacredSpellArray.one())
         char.addProp(p: book)
+    }
+    var armorId:Int = 0
+}
+
+class LevelUpScroll:Item {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = false
+        price = 180
+        _name = "升级卷轴"
+        _description = "画所有单位s等级提升1"
+        _quality = Quality.SACRED
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    override func use() {
+        let r = [Game.instance.char] + Game.instance.char._minions
+        for c in r {
+            c.levelup()
+        }
     }
     var armorId:Int = 0
 }

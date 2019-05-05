@@ -35,7 +35,7 @@ class ShootAll: Physical, BowSkill {
         if !hadSpecialAction(t: t) {
             if !hasMissed(target: t) {
                 t.actionAttacked {
-                    t.showValue(value: damage)
+                    t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                 }
             }
         }

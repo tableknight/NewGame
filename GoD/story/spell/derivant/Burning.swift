@@ -17,7 +17,7 @@ class Burning:Derivant {
         let damage = s.getBurningDamage(unit: _target)
 //        let damage = -self._target.getHealth()
         if !hadSpecialAction(t: _target, completion: completion) {
-            self._target.showValue(value: damage) {
+            self._target.showValue(value: damage, criticalFromSpell: false) {
                 completion()
             }
 //            self._target.actionAttacked {

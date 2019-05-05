@@ -22,7 +22,7 @@ class Instrument: Weapon {
     
         createSpell()
         
-        _description = "[" + _spell._name + "]"
+//        _description = "[" + _spell._name + "]"
         createPrice()
         _price *= 4
         _sellingPrice *= 4
@@ -37,7 +37,7 @@ class Instrument: Weapon {
         } else if _quality == Quality.RARE {
             _spell = l.getRareSpell(id: seed(to: l.rareSpellCount))
         } else {
-            _spell = l.getSacredSpell(id: l.sacredSpellCount)
+            _spell = l.getSacredSpell(id: seed(to: l.sacredSpellCount))
         }
     }
     override func create() {

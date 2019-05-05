@@ -52,7 +52,7 @@ class SelectItems: UIPanel {
         
     }
     override func create() {
-        _label.text = "使用：最多可以选择三件物品。"
+        _label.text = "抉择：最多可以选择两件物品。"
         _pageSize = 30
         createCloseButton()
         createPageButtons()

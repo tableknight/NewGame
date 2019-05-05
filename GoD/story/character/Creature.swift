@@ -142,8 +142,8 @@ class Creature: Unit {
         _exp += up
         let en = expNext()
         if _exp >= en {
+            _exp = _exp - en
             levelup()
-            _exp = 0
         }
     }
     func isClose() -> Bool {

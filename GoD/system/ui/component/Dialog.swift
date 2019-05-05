@@ -50,14 +50,14 @@ class Dialog: SKSpriteNode {
         addChild(name)
         
         _closeButton.position.x = cellSize * 4
-        _closeButton.position.y = cellSize * 0.75
+        _closeButton.position.y = cellSize * 0.95
         _closeButton.text = "关闭"
         addChild(_closeButton)
     }
     
     func addConfirmButton() {
         _confirmButton.position.x = _closeButton.xAxis
-        _confirmButton.position.y = _closeButton.yAxis - cellSize * 3
+        _confirmButton.position.y = _closeButton.yAxis - cellSize * 3.2
         _confirmButton.text = "确定"
         _confirmButton._bg.removeFromParent()
         addChild(_confirmButton)

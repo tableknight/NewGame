@@ -30,5 +30,7 @@ class Refresh: Magical {
         self._timeleft = 5
         _battle.hideOrder()
         _battle.showOrder()
+        _battle.hideCancel()
+        _battle.cancelTouch = false
     }
 }

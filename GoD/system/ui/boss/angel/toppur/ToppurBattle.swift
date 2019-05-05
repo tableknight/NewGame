@@ -25,7 +25,7 @@ class ToppurBattle: BossBattle {
                 } else if sd < 70 {
                     _selectedSpell = LineAttack()
                 } else if sd < 90 {
-                    _selectedSpell = RecoveryFromAttack()
+                    _selectedSpell = LeeAttack()
                 } else {
                     _selectedSpell = BossAttack()
                 }
@@ -110,7 +110,7 @@ class LineAttack: Physical {
     }
     override init() {
         super.init()
-        _name = "顺劈斩"
+        _name = "行斩"
         _description = "对目标同一行单位造成攻击55%的物理伤害"
         _rate = 0.55
         _quality = Quality.GOOD
@@ -132,7 +132,7 @@ class LineAttack: Physical {
                 if !self.hadSpecialAction(t: t) {
                     if !self.hasMissed(target: t) {
                         t.actionAttacked {
-                            t.showValue(value: damage)
+                            t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                         }
                     }
                 }
@@ -145,37 +145,3 @@ class LineAttack: Physical {
     }
 }
 
-class RecoveryFromAttack:Physical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "吸血攻击"
-        _description = "对目标造成攻击100%的物理伤害，并恢复50%的生命值"
-        _quality = Quality.RARE
-        _cooldown = 4
-    }
-    override func cast(completion:@escaping () -> Void) {
-        let c = _battle._curRole
-        let t = _battle._selectedTarget!
-        let damage = physicalDamage(t)
-        c.actionAttack {
-            if !self.hadSpecialAction(t: t, completion: completion) {
-                if !self.hasMissed(target: t, completion: completion) {
-                    t.actionAttacked {
-                        t.showValue(value: damage) {
-                            completion()
-                        }
-                        setTimeout(delay: 1, completion: {
-                            c.showValue(value: abs(damage * 0.5))
-                        })
-                    }
-                }
-            }
-        }
-    }
-}

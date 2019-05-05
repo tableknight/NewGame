@@ -44,8 +44,9 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _nameLabel.position.x = -halfSize * cellSize
-        _nameLabel.position.y = halfSize * cellSize + cellSize * 3.5
+        _nameLabel.position.x = 0
+        _nameLabel.position.y = UIScreen.main.bounds.size.height - cellSize * 0.75
+        _nameLabel.align = "center"
         _nameLabel.fontSize = 24
         addChild(_nameLabel)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
@@ -74,7 +75,9 @@ class MyScene: SKSpriteNode, IInitialize {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
-        
+        if Game.instance.curStage.cancelMove {
+            return
+        }
         if !_isMoving {
             _direction = calDirection(touchPoint: touchPoint!)
             move(touchPoint!)
@@ -179,7 +182,7 @@ class MyScene: SKSpriteNode, IInitialize {
                 debug("no face direction in func move")
         }
         let cgv = CGVector(dx: point.x, dy: point.y)
-        let mv = SKAction.move(by: cgv, duration: TimeInterval(Game.FRAME_SIZE * 2))
+        let mv = SKAction.move(by: cgv, duration: TimeInterval(0.5))
         let this = self
         _isMoving = true
         _role.run(mv, completion: {
@@ -497,7 +500,9 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     func getRandomMonterCellItem() -> UIEvil {
         let ue = UIEvil()
-        let ranMon = getMonsterByIndex(index: _monsterEnum.one())
+        let index = _monsterEnum.one()
+        let ranMon = getMonsterByIndex(index: index)
+        ue._thisType = index
         ue.setTexture(ranMon._img)
         let face = [NORTH,SOUTH,EAST,WEST].one()
         if face == NORTH {
@@ -621,7 +626,10 @@ class Chest:UIItem {
     private func loot() {
         let l = Loot()
         l.loot(level: Game.instance.curStage._curScene._level)
-        let list = l.getList()
+        var list = l.getList()
+        if list.count == 0 {
+            list.append(TheWitchsTear())
+        }
         let p = LootPanel()
         p.create(props: list)
         p.confirmAction = self.confirmAction
