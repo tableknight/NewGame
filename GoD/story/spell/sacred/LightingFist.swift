@@ -18,10 +18,10 @@ class LightingFist:Physical, HandSkill {
     override init() {
         super.init()
         _name = "闪雷破"
-        _description = "对目标造成攻击65%的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
+        _description = "对目标造成攻击85%的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
         _quality = Quality.SACRED
         _cooldown = 2
-        _rate = 0.65
+        _rate = 0.85
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
@@ -32,8 +32,8 @@ class LightingFist:Physical, HandSkill {
                     t.showValue(value: damage)
                     let thunderDamage = self.thunderFactor(from: self._battle._curRole, to: t) * damage * 0.35
                     setTimeout(delay: 0.5, completion: {
-                        t.showValue(value: thunderDamage, textColor: DamageColor.THUNFER) {
-                            if self.d5() {
+                        t.showValue(value: thunderDamage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
+                            if self.d5() && !t.isDead() {
                                 t.showText(text: "TR -10") {
                                     completion()
                                 }

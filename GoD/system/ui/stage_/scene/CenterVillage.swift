@@ -255,7 +255,7 @@ class CenterVillage: UIScene {
             getItemByName(name: "item142").removeSpeak()
             if char._name != "冒险者" || char._level > 10 {
                 let text = "嗨，你好啊，\(char._name)！"
-                stage.showDialog(img: Game.instance.picturePeople1.getCell(7, 4), text: text, name: "村长维拉")
+                _ = stage.showDialog(img: Game.instance.picturePeople1.getCell(7, 4), text: text, name: "村长维拉")
                 return
             }
             let text = "嚯！新的冒险者，欢迎来到\(CenterVillage.VILLAGE_NAME)，我是村长，还没有决定做什么事情呢吧，总之，你可以先去村子西边的冒险者工会去看看。"

@@ -18,8 +18,8 @@ class WindPunish: Magical {
         super.init()
         isWater = true
         _name = "风之惩戒"
-        _description = "对目标和身后目标造成精神60%的冰冷伤害"
-        _rate = 0.6
+        _description = "对目标和身后目标造成精神75%的冰冷伤害"
+        _rate = 0.75
         _quality = Quality.GOOD
         _cooldown = 1
     }
@@ -39,9 +39,9 @@ class WindPunish: Magical {
             let tb = self._battle.getUnitBySeat(seat: seat)
             if nil != tb {
                 let damage = self.waterDamage(tb!)
-                if !self.hadSpecialAction(t: tb!, completion: {}) {
+                if !self.hadSpecialAction(t: tb!) {
                     tb!.actionAttacked {
-                        tb!.showValue(value: damage)
+                        tb!.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                     }
                 }
             }

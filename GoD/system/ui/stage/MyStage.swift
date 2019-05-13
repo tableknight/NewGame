@@ -58,36 +58,17 @@ class MyStage: SKSpriteNode {
         } else if _saveButton.contains(touchPoint!) && _saveButton.visible {
 //            Game.save(c: Game.instance.char!, key: "char")
 //            self.removeFromParent()
-            let char = Game.instance.char!
-            var roles = Game.roles
-            if char._key.isEmpty {
-                char._key = "doc\(Game.roles.count)"
-                let roleDoc = RoleDocument()
-                roleDoc._name = char._name
-                roleDoc._pro = char._pro
-                roleDoc._level = char._level.toInt()
-                roleDoc._key = char._key
-                roleDoc._imgUrl = char._imgUrl
-                roles.append(roleDoc)
-            } else {
-                for c in roles {
-                    if c._key == char._key {
-                        c._level = char._level.toInt()
-                        break
-                    }
-                }
-            }
-            Game.save(c: char, key: char._key)
-            Game.saveRoles(roles: roles)
-            showSceneMask()
-            _sceneChangeMask.alpha = 0.65
-            cancelMove = true
-            setTimeout(delay: 2, completion: {
-                showMsg(text: "保存成功！")
-                self._sceneChangeMask.isHidden = true
-                self.cancelMove = false
-            })
+            Game.saving()
+            return
+        } else if _quitButton.contains(touchPoint!) && _quitButton.visible {
+            self.removeFromParent()
+            let welcome = Welcome()
+            welcome.create()
+            welcome._gameScene = Game.instance.scene
+            Game.instance.scene.addChild(welcome)
+            return
         }
+        _curScene.touch(touchPoint: touchPoint)
     }
     func loadScene(scene:MyScene) {
         addChild(scene)
@@ -105,16 +86,59 @@ class MyStage: SKSpriteNode {
         _spellButton = createMenuButtons(x: x - gap * 3, y: y, size: size, text: "法术")
         _minionButton = createMenuButtons(x: x - gap * 4, y: y, size: size, text: "随从")
 //        _quitButton = createMenuButtons(x: -x, y: -cellSize * 6.3, size: cellSize * 0.6, text: "保存")
+        /*
+        SE
+        320x568
+        640x1136
+        
+        
+        6(S)／7／8
+        375x667
+        750x1334
+        
+        
+        6(S)+／7+／8+
+        414x736
+        1080x1920
+        
+        
+        X(S)
+        375x812
+        1125x2436
+        
+        
+        XR
+        414x896
+        828x1792
+        
+        
+        XS Max
+        414x896
+        1242x2688
+ */
         let bounds = UIScreen.main.bounds.size
+        var rate:CGFloat = 1
+        if bounds.width == 375 && bounds.height == 667 { //iphone8
+            rate = 1
+        } else if bounds.width == 414 && bounds.height == 736 { //iphone8s
+            rate = 0.9
+        } else if bounds.width == 414 && bounds.height == 896 { //iphone xr xsmax
+            rate = 0.72
+        } else if bounds.width == 375 && bounds.height == 812 { //iphone x
+            rate = 0.78
+        }
+        let w = bounds.width * rate
+        let h = bounds.height * rate
+        
         let padding = cellSize * 0.25
         _quitButton.text = "退出"
-        _quitButton.yAxis = bounds.height - padding
-        _quitButton.xAxis = -bounds.width + padding
+        _quitButton.yAxis = h - padding
+        _quitButton.xAxis = -w + padding
         addChild(_quitButton)
         _uiComponentList.append(_quitButton)
         _saveButton.text = "保存"
-        _saveButton.yAxis = bounds.height - padding
-        _saveButton.xAxis = bounds.width - padding - _saveButton.width
+        _saveButton.yAxis = h - padding
+        _saveButton.xAxis = w - padding - _saveButton.width
         addChild(_saveButton)
         _uiComponentList.append(_saveButton)
         
@@ -125,17 +149,19 @@ class MyStage: SKSpriteNode {
         
         
         let hpbar = HBar()
-        hpbar.create(width: bounds.width * 0.35, height: 10, value: 1, color: UIColor.red)
-        hpbar.position.y = -bounds.height + padding + 30
-        hpbar.position.x = -bounds.width + padding
+        hpbar.create(width: w * 0.35, height: 10, value: 1, color: UIColor.red)
+        hpbar.position.y = -h + padding + 30
+        hpbar.position.x = -w + padding
         addChild(hpbar)
+        hpbar.zPosition = MyStage.UI_LAYER_Z
         _uiComponentList.append(hpbar)
         _hpbar = hpbar
         
         let expbar = HBar()
-        expbar.create(width: bounds.width * 0.45, height: 10, value: 1, color: UIColor.green)
-        expbar.position.y = -bounds.height + padding + 10
+        expbar.create(width: w * 0.45, height: 10, value: 1, color: UIColor.green)
+        expbar.position.y = -h + padding + 10
         expbar.position.x = hpbar.position.x
+        expbar.zPosition = MyStage.UI_LAYER_Z
 //        expbar.position.x = bounds.width * 0.5 - padding
         addChild(expbar)
         _uiComponentList.append(expbar)
@@ -272,6 +298,7 @@ class MyStage: SKSpriteNode {
         loaded = false
         _curScene.removeFromParent()
         _curScene._role.removeFromParent()
+        cancelMove = true
         //        return
         let this = self
         setTimeout(delay: 1, completion: {
@@ -290,6 +317,7 @@ class MyStage: SKSpriteNode {
             this._sceneChangeMask.run(out) {
                 self._sceneChangeMask.isHidden = true
                 this.loaded = true
+                self.cancelMove = false
             }
         })
     }
@@ -321,7 +349,7 @@ class MyStage: SKSpriteNode {
             char.faceSouth()
         })
     }
-    private var _sceneChangeMask = SKSpriteNode()
+    var _sceneChangeMask = SKSpriteNode()
     private var _showingLabel = Label()
     private func createSceneChangeMask() {
         let screenBounds:CGSize = UIScreen.main.bounds.size
@@ -341,6 +369,14 @@ class MyStage: SKSpriteNode {
         _showingLabel.zPosition = _sceneChangeMask.zPosition + 1
         _showingLabel.position.y = 18
         addChild(_showingLabel)
+        
+//        let bg = createBackground(width: screenBounds.width * 2, height: screenBounds.height * 2)
+//        bg.fillColor = UIColor.black
+//        bg.position.x = 0
+//        bg.position.y = 0
+//        bg.lineWidth = 0
+//        bg.zPosition = 0
+//        addChild(bg)
         
     }
     func getSceneIndex() -> Int {

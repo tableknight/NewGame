@@ -186,11 +186,12 @@ class Unit:Core {
     var _physical = Magic(damage: 0, resistance: 0)
     
     func expNext() -> CGFloat {
-        let level = _level + 2
-        if Mode.debug {
-            return level * level
-        }
-        return 100 * level + level * level * level * level * 0.5
+        return 100
+//        let level = _level + 2
+//        if Mode.debug {
+//            return level * level
+//        }
+//        return 100 * level + level * level * level * level * 0.35
     }
     
     func strengthChange(value: CGFloat) {
@@ -234,8 +235,8 @@ class Unit:Core {
         _extensions.avoid += value * 0.6
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
-        _extensions.health += value * 1
-        _extensions.hp += value * 1
+        _extensions.health += value * 2
+        _extensions.hp += value * 2
         _extensions.mp += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
@@ -250,8 +251,8 @@ class Unit:Core {
         _extensions.avoid += value * 0.2
         _extensions.critical += value * 0
         _extensions.spirit += value * 2
-        _extensions.health += value * 0.5
-        _extensions.hp += value * 0.5
+        _extensions.health += value * 1
+        _extensions.hp += value * 1
         _extensions.mp += value * 3
         if _extensions.hp < 1 {
             _extensions.hp = 1

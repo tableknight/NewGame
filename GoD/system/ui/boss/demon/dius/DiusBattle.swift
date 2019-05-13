@@ -81,40 +81,7 @@ class ExposeWeakness: Passive, BossOnly {
         }
     }
 }
-class BallLighting: Magical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "球状闪电"
-        _description = "对目标及相邻单位造成精神55%的雷电伤害"
-        _rate = 0.55
-        _cooldown = 2
-        isThunder = true
-        _quality = Quality.RARE
-    }
-    override func cast(completion: @escaping () -> Void) {
-        let ts = _battle._selectedTargets
-        _battle._curRole.actionCast {
-            for t in ts {
-                let damage = self.thunderDamage(t)
-                if !self.hadSpecialAction(t: t) {
-                    t.showValue(value: damage)
-                }
-            }
-            setTimeout(delay: 2.5, completion: completion)
-        }
-    }
-    override func findTarget() {
-        findSingleTargetNotBlocked()
-        _battle._selectedTargets = getAdajcentUnits(target: _battle._selectedTarget!)
-        _battle._selectedTargets.append(_battle._selectedTarget!)
-    }
-}
+
 class SuperWater:Magical {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -137,7 +104,9 @@ class SuperWater:Magical {
             for t in self._battle._selectedTargets {
                 let damage = self.waterDamage(t)
                 if !self.hadSpecialAction(t: t) {
-                    t.showValue(value: damage)
+                    t.actionAttacked {
+                        t.showValue(value: damage)
+                    }
                 }
             }
             setTimeout(delay: 2.5, completion: completion)

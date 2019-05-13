@@ -116,7 +116,8 @@ class Potion:Item {
         super.init()
         usable = true
         usableInBattle = true
-        price = 5
+        _price = 4
+        _sellingPrice = 16
         _cooldown = 4
         _name = "治疗药水"
         _description = "恢复50%最大生命值"
@@ -161,7 +162,8 @@ class Potion:Item {
 class LittlePotion:Potion {
     override init() {
         super.init()
-        price = 3
+        _price = 3
+        _sellingPrice = 12
         _cooldown = 2
         _name = "治疗药水(小)"
         _description = "恢复25%最大生命值"
@@ -181,7 +183,8 @@ class SealScroll:Item {
         usable = false
         usableInBattle = true
         targetEnemy = true
-        price = 6
+        _price = 8
+        _sellingPrice = 32
         _cooldown = 0
         _name = "封印卷轴"
         _description = "对目标释放封印术"
@@ -231,7 +234,8 @@ class TownScroll:Item {
         super.init()
         usable = true
         usableInBattle = true
-        price = 6
+        _price = 6
+        _sellingPrice = 24
         _name = "传送之卷·贝"
         _description = "传送到贝拉姆村"
     }
@@ -257,7 +261,8 @@ class GodTownScroll:TownScroll {
         super.init()
         usable = true
         usableInBattle = true
-        price = 50
+        _price = 24
+        _sellingPrice = 96
         _name = "传送之卷·雪"
         _description = "传送到神域·雪之国"
     }
@@ -283,7 +288,8 @@ class DeathTownScroll:TownScroll {
         super.init()
         usable = true
         usableInBattle = true
-        price = 50
+        _price = 12
+        _sellingPrice = 48
         _name = "传送之卷·冥"
         _description = "传送到恶魔之城"
     }
@@ -342,7 +348,8 @@ class RandomWeapon:Item {
         super.init()
         usable = true
         usableInBattle = false
-        price = 25
+        _price = 48
+        _sellingPrice = 48
         _name = "武器"
         _description = "获得一个随机属性的\(_name)"
     }
@@ -373,7 +380,8 @@ class RandomArmor:Item {
         super.init()
         usable = true
         usableInBattle = false
-        price = 25
+        _price = 48
+        _sellingPrice = 48
         _name = "防具"
         _description = "获得一个随机属性的\(_name)"
     }
@@ -404,7 +412,8 @@ class RandomSacredSpell:Item {
         super.init()
         usable = true
         usableInBattle = false
-        price = 48
+        _price = 48
+        _sellingPrice = 48
         _name = "法术?"
         _description = "获得一个随机的神之技"
         _quality = Quality.SACRED

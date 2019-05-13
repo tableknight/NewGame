@@ -199,13 +199,14 @@ class PowerUp: Magical, BossOnly {
     override init() {
         super.init()
         _name = "力量增强"
-        _description = "提升目标100%的攻击力和100%的防御，持续3回合"
+        _description = "提升目标100%的攻击力和100%的防御，持续2回合"
         _quality = Quality.GOOD
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
         let status = Status()
-        status._timeleft = 3
+        status._timeleft = 2
+        status._labelText = "E"
         let attack = t.getAttack()
         let def = t.getDefence()
         t._extensions.defence += def

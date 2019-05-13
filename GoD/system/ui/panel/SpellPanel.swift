@@ -35,6 +35,9 @@ class SpellPanel:UIPanel {
         }
 //        let _char = Data.instance._char!
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
+            if nil == _lastSelectedIcon._displayItemType {
+                return
+            }
             let spell = _lastSelectedIcon._displayItemType as! Spell
             if _spellBoxInuse.contains(_lastSelectedIcon) {
                 let index = _role._spellsInuse.index(of: spell)
@@ -49,6 +52,9 @@ class SpellPanel:UIPanel {
                 } else {
                     debug("spell exist in spellpanel \(spell._name)")
                 }
+//                if spell is Passive {
+//                    (spell as! Passive).off()
+//                }
                 pageReload()
             } else {
                 if _role._spellsInuse.count < _role._spellCount {
@@ -59,6 +65,9 @@ class SpellPanel:UIPanel {
                     } else {
                         debug("_char._spells.remove failed! spellpanel")
                     }
+//                    if spell is Passive {
+//                        (spell as! Passive).on()
+//                    }
                     pageReload()
                 }
             }
@@ -292,16 +301,18 @@ class SpellInfo:SKSpriteNode, IPanelSize {
         _displayHeight = cellSize * 1.5
         let des = MultipleLabel()
         var text = _spell._description
+        var cd = _spell._cooldown
         if _spell._cooldown > 0 {
-            var cd = _spell._cooldown
             if wandFireMaster() {
                 cd -= 1
             }
+        }
+        if !(_spell is Passive) && !(_spell is Auro) {
             text += "，冷却\(cd)回合"
         }
-        if _spell._tear > 0 {
-            text += "，消耗\(TheWitchsTear.NAME)x\(_spell._tear)"
-        }
+//        if _spell._tear > 0 {
+//            text += "，消耗\(TheWitchsTear.NAME)x\(_spell._tear)"
+//        }
         des._lineCharNumber = 10
         des._fontSize = cellSize * 0.25
         des.text = text

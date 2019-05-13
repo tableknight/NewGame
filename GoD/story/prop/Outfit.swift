@@ -108,7 +108,9 @@ class Outfit:Prop {
     }
     
     func createPrice() {
-        _price = seed(min: 1, max: _level.toInt() + 1) * _quality
+        let _min = _level + 1
+        let _max = _level + 3
+        _price = seed(min: _min.toInt(), max: _max.toInt()) * _quality
         _sellingPrice = _price * 4
     }
     

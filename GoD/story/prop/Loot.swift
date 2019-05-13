@@ -44,7 +44,8 @@ class Loot: Core {
     }
     var _weaponlist = [0,1,2,3,4,5,6]
     func lootWeapon(level:CGFloat) -> Weapon {
-        let weapon = getWeaponById(id: seed(min: 0, max: 7))
+        let list = [0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6]
+        let weapon = getWeaponById(id: list.one())
         weapon.create(level: level)
         return weapon
     }
@@ -68,7 +69,8 @@ class Loot: Core {
     
     var _armorlist = [0,1,2,3,4,5]
     func lootArmor(level:CGFloat) -> Armor {
-        let armor = getArmorById(id: seed(min: 0, max: 6))
+        let list = [0,0,0,1,1,1,2,2,2,4,4,4,3,3]
+        let armor = getArmorById(id: list.one())
         armor.create(level: level)
         return armor
     }
@@ -184,10 +186,22 @@ class Loot: Core {
         }
         spells.append(LineAttack())
         spells.append(Heal())
-        spells.append(ScreamLoud())
+        spells.append(LowerSummon())
         spells.append(LowlevelFlame())
         spells.append(FireFist())
         return spells
+    }
+    func getRandomNormalSpell() -> Spell {
+        return getNormalSpell(id: seed(to: normalSpellCount))
+    }
+    func getRandomGoodSpell() -> Spell {
+        return getGoodSpell(id: seed(to: goodSpellCount))
+    }
+    func getRandomRareSpell() -> Spell {
+        return getRareSpell(id: seed(to: rareSpellCount))
+    }
+    func getRandomSacredSpell() -> Spell {
+        return getSacredSpell(id: seed(to: sacredSpellCount))
     }
     let normalSpellCount = 14
     func getNormalSpell(id:Int) -> Spell {
@@ -218,8 +232,8 @@ class Loot: Core {
             return BreakDefence()
         case 12:
             return AttackHard()
-//        case 13:
-//            return ScreamLoud()
+        case 13:
+            return ScreamLoud()
         default:
             return Cruel()
         }
@@ -258,8 +272,8 @@ class Loot: Core {
             return Vanguard()
         case 14:
             return TrueSight()
-        case 15:
-            return LowerSummon()
+//        case 15:
+//            return LowerSummon()
         case 16:
             return IceSpear()
         case 17:
@@ -268,8 +282,8 @@ class Loot: Core {
             return FlameAttack()
         case 19:
             return OathBreaker()
-//        case 20:
-//            return LineAttack()
+        case 20:
+            return WindAttack()
         case 21:
             return WindPunish()
         default:
@@ -695,7 +709,7 @@ class Loot: Core {
     func getSacred() -> Outfit? {
         let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
         if outfit._level <= _char._level + 5 {
-            if seed() <= outfit._chance {
+            if seed(max: 135) <= outfit._chance {
                 outfit.create()
                 return outfit
             }

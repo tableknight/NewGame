@@ -105,14 +105,14 @@ class ChildLizard: Natrue {
         try super.encode(to: encoder)
     }
 }
-class ForestGuard: Natrue {
+class ForestGuard: Man {
     override init() {
         super.init()
         _stars.strength = 1.1
         _stars.stamina = 1.1
         _stars.agility = 1.1
         _stars.intellect = 2.6
-        _name = "森林守卫"
+        _name = "丛林守卫"
         _imgUrl = "forest_guard"
         _img = SKTexture(imageNamed: "forest_guard")
         _spellCount = 3

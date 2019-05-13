@@ -42,7 +42,7 @@ class FireOrFired: Magical {
         if c._unit is Character {
             let char = c._unit as! Character
             if char._leftRing is ApprenticeRing || char._rightRing is ApprenticeRing {
-                chance = 60
+                chance = 40
             }
         }
         if chance < seed() {
@@ -59,7 +59,7 @@ class FireOrFired: Magical {
         } else {
             if !hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage) {
+                    t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                         completion()
                     }
                 }

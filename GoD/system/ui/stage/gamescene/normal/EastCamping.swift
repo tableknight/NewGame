@@ -29,7 +29,7 @@ class EastCamping: StandScene {
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
-        if point.x == 9 && point.y == 4 {
+        if point.x == 9 && point.y == 4 && cell == CELL_BLOCK {
             let stage = Game.instance.curStage!
             stage.showDialog(img: Game.instance.picturePeople2.getCell(10, 0),
                              text: "需要用船吗？。",
@@ -219,16 +219,8 @@ class EastCamping: StandScene {
 class Boat:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        let t = Game.instance.pictureVehicle
-        //        let house = SKSpriteNode(texture: t.getCell(1, 4, 4, 4))
-        //        let l = SKSpriteNode(texture: t.getCell(0, 4, 1, 2))
-        //        house.addChild(l)
-        //        let sha = SKSpriteNode(texture: Game.instance.sha)
-        //        sha.position.x = cellSize * 2
-        //        sha.position.y = -cellSize * 1.5
-        //        house.addChild(sha)
-        //        print("cellsize \(cellSize)")
-        setTexture(t.getCell(4, 0))
+        let t = SKTexture(imageNamed: "boat")
+        setTexture(t.getCell(1, 0))
         self.size = CGSize(width: cellSize * 2, height: cellSize * 2.5)
     }
     

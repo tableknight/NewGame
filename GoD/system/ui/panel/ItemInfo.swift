@@ -60,11 +60,7 @@ class ItemInfo:SKSpriteNode, IPanelSize {
             price.position.x = startX
             price.position.y = des.position.y - des._height - cellSize * 0.5
             price.fontSize = 16
-            if item is SpellBook {
-                price.text = "出售价格：\(item._price)泪"
-            } else {
-                price.text = "出售价格：\(item._price)G"
-            }
+            price.text = "出售价格：\(item._price)G"
             price.fontColor = UIColor.orange
             addChild(price)
             _displayHeight += price.fontSize + cellSize * 0.5

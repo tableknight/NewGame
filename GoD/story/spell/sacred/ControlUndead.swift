@@ -17,7 +17,7 @@ class ControlUndead:Magical {
     override init() {
         super.init()
         _name = "控制亡灵"
-        _description = "有一定几率控制一个地方亡灵生物"
+        _description = "有一定几率控制目标亡灵生物"
         _quality = Quality.SACRED
         _cooldown = 1
     }

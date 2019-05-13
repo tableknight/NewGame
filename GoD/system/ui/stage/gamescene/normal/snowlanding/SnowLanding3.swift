@@ -41,7 +41,7 @@ class SnowLanding3: SnowLanding {
     }
     override func create() {
         super.create()
-        let ms = _mapSet!
+//        let ms = _mapSet!
         let oa4 = Game.instance.outside_a4
         let ob = Game.instance.outside_b
         let yd:CGFloat = 0.5

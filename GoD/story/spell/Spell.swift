@@ -550,6 +550,9 @@ class Spell:Core, IDisplay, ISelectTarget {
         if target.isDefend {
             return false
         }
+        if target.hasStatus(type: Status.FREEZING) {
+            return false
+        }
         let c = _battle._curRole
         if c._unit is Character {
             let char = c._unit as! Character
@@ -589,7 +592,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         return false
     }
-    internal var CRITICAL:CGFloat = 1.6
+    internal var CRITICAL:CGFloat = 1.75
     func chargeCritical(to:BUnit) {
         if _battle._curRole.hasSpell(spell: Cruel()) {
             if to.getHp() / to.getHealth() <= 0.2 {
@@ -684,7 +687,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if seat == BUnit.TBR { return BUnit.TTR}
         if seat == BUnit.BTL { return BUnit.BBL}
         if seat == BUnit.BTM { return BUnit.BBM}
-        if seat == BUnit.TBL { return BUnit.BBL}
+        if seat == BUnit.BTR { return BUnit.BBR}
         return ""
     }
     func getUnitsInRowOf(seat:String) -> Array<String> {
@@ -881,7 +884,7 @@ class Spell:Core, IDisplay, ISelectTarget {
                 bu = unit
                 lhp = unit.getHp()
             } else {
-                if lhp > unit.getHp() {
+                if lhp > unit.getHp() && unit.getHp() < unit.getHealth() {
                     bu = unit
                     lhp = unit.getHp()
                 }

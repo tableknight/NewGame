@@ -15,11 +15,11 @@ class Heal: Magical {
         canBeTargetSelf = true
         _name = "治疗"
         _cooldown = 2
-        _description = "恢复己方目标最大生命50%的生命值"
+        _description = "恢复己方目标最大生命55%的生命值"
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let h = t.getHealth() * 0.5
+        let h = t.getHealth() * 0.55
         let c = _battle._curRole
         c.actionCast {
             t.actionHealed {

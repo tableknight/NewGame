@@ -58,17 +58,11 @@ class Attack: Physical {
 //                    t.hpChange(value: damage)
                     if c._unit._weapon is DragonSaliva {
                         setTimeout(delay: 0.5, completion: {
-                            let rate = 1 + (c.getFirePower() - t.getFireResistance()) * 0.01
+                            let rate = self.fireFactor(from: c, to: t)
                             let fireDamage = damage * 0.3 * rate
                             
-                            t.showValue(value: fireDamage, textColor: ElementColor.getColor(Element.FIRE)) {
-                                this.attackMore(completion: completion)
-                            }
+                            t.showValue(value: fireDamage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
                         })
-//                    } else {
-//                        t.showValue(value: damage) {
-//                            this.attackMore(completion: completion)
-//                        }
                     }
                     
                     var isGiantFang = false
@@ -92,8 +86,8 @@ class Attack: Physical {
                     }
                     
                     if c._unit._weapon is LazesPedicureKnife {
-                        if this.seed() < 15 {
-                            setTimeout(delay: 1, completion: {
+                        if self.d7() {
+                            setTimeout(delay: 0.5, completion: {
                                 c.showText(text: "AGILITY +1")
                                 c.agilityChange(value: 1)
                             })

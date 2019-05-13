@@ -50,7 +50,11 @@ class SellingPanel: UIPanel {
                         return
                     }
                     t._count -= goods.tear
-                    _char.addProp(p: goods._displayItemType as! Prop)
+                    if hasBuyAction {
+                        buyAction()
+                    } else {
+                        _char.addProp(p: goods._displayItemType as! Prop)
+                    }
                     pageReload()
                     createPropList()
                 } else {
@@ -59,7 +63,11 @@ class SellingPanel: UIPanel {
                         return
                     }
                     _char.lostMoney(num: goods.price)
-                    _char.addProp(p: goods._displayItemType as! Prop)
+                    if hasBuyAction {
+                        buyAction()
+                    } else {
+                        _char.addProp(p: goods._displayItemType as! Prop)
+                    }
                     pageReload()
                     reshowPlayerMoney()
                 }
@@ -169,7 +177,7 @@ class SellingPanel: UIPanel {
             sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
             sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()
             if _priceType == 1 {
-                sii.tear = _goodsList[i]._price
+                sii.tear = _goodsList[i]._sellingPrice
             } else {
                 sii.price = _goodsList[i].sellingPrice
             }
@@ -225,6 +233,8 @@ class SellingPanel: UIPanel {
     private var _goldlabel = Label()
     var _goodsList = Array<Prop>()
     var _priceType = 0
+    var hasBuyAction = false
+    var buyAction = {}
 }
 
 class SellingItemIcon: PropIcon {

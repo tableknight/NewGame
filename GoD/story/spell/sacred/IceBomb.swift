@@ -18,8 +18,8 @@ class IceBomb: Magical {
         super.init()
         isFire = true
         _name = "寒冰炸弹"
-        _description = "对目标释放寒冰炸弹，使其在下次行动前受到施法者精神50%的寒冰伤害，冰对周围单位造成一半的伤害，有一定几率使其冻结"
-        _rate = 0.5
+        _description = "对目标释放寒冰炸弹，使其在下次行动前受到施法者精神80%的寒冰伤害，冰对周围单位造成一半的伤害，有一定几率使其冻结"
+        _rate = 0.8
         _quality = Quality.SACRED
         _cooldown = 2
     }
@@ -67,7 +67,7 @@ class IceExplode:Derivant {
 //            _target.showText(text: "EXPLODE") {
                 self._target.actionAttacked {
                     self._rate = 0.5
-                    self._target.showValue(value: damage)
+                    self._target.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                 }
                 
                 setTimeout(delay: 0.5, completion: {
@@ -76,7 +76,7 @@ class IceExplode:Derivant {
                         let damage = self.waterDamage(t)
                         if !self.hadSpecialAction(t: t) {
                             t.actionAttacked {
-                                t.showValue(value: damage)
+                                t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                             }
                         }
                     }

@@ -12,8 +12,8 @@ class LowlevelFlame: Magical {
         super.init()
         isFire = true
         _name = "低阶火焰"
-        _description = "对目标造成精神55%的火焰伤害"
-        _rate = 0.55
+        _description = "对目标造成精神75%的火焰伤害"
+        _rate = 0.75
         _quality = Quality.NORMAL
         _cooldown = 0
     }
@@ -33,7 +33,7 @@ class LowlevelFlame: Magical {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-                t.showValue(value: damage) {
+                t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
                 }
             }

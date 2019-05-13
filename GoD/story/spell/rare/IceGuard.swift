@@ -10,10 +10,9 @@ import SpriteKit
 class IceGuard: Magical {
     override init() {
         super.init()
-        _tear = 1
         _quality = Quality.RARE
         _name = "寒冰护盾"
-        _description = "对自己释放护盾，提升100%防御，持续5回合，有一定几率降低攻击者10点速度"
+        _description = "对自己释放护盾，提升50%防御，持续5回合，有一定几率降低攻击者10点速度"
         targetEnemy = false
         canBeTargetSelf = true
         _cooldown = 3
@@ -22,6 +21,7 @@ class IceGuard: Magical {
         let c = _battle._curRole
         let status = Status()
         status._type = Status.ICE_GUARD
+        status._labelText = "G"
         status._timeleft = 5
         c.addStatus(status: status)
         

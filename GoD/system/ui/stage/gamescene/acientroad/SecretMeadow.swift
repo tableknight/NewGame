@@ -123,14 +123,14 @@ class GiantWasp: Man {
         try super.encode(to: encoder)
     }
 }
-class TreeSpirit: Natrue {
+class TreeSpirit: Man {
     override init() {
         super.init()
         _stars.strength = 1.0
         _stars.stamina = 2.0
         _stars.agility = 1.0
         _stars.intellect = 2.2
-        _name = "树精"
+        _name = "树妖"
         _imgUrl = "tree_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
         if d4() {

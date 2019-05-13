@@ -322,7 +322,7 @@ class OutfitPanel: UIPanel {
             _outfitSlots.append(_weapon)
         }
         if _char.hasShield {
-            _shield = createSlot(x: line2, y: _weapon.position.y)
+            _shield = createSlot(x: line2, y: _amulet.position.y - gap)
             if _char._shield != nil {
                 _shield.outfit = _char._shield
                 _shield.iconLabel = _char._shield!._name

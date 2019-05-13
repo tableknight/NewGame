@@ -40,11 +40,15 @@ class ThunderAttack: Magical {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-                t.showValue(value: damage) {
-                    t.showText(text: "TR -10") {
+                t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
+                    if t.isDead() {
                         completion()
+                    } else {
+                        t.showText(text: "TR -10") {
+                            completion()
+                        }
+                        t._elementalResistance.thunder -= 10
                     }
-                    t._elementalResistance.thunder -= 10
                 }
             }
         }

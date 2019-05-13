@@ -27,7 +27,7 @@ class IceSpear: Magical {
         c.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage) {
+                    t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER) {
                         if !t.hasStatus(type: Status.FREEZING) {
                             t.freezing()
                         }

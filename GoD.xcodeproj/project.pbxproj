@@ -290,6 +290,8 @@
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
 		09738A85227F3281009AF2EE /* LeeAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A84227F3281009AF2EE /* LeeAttack.swift */; };
+		09738A872281D2FC009AF2EE /* WindAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A862281D2FC009AF2EE /* WindAttack.swift */; };
+		09738A89228462B9009AF2EE /* BallLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A88228462B9009AF2EE /* BallLighting.swift */; };
 		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
 		097EC6C9226A07C600B9407A /* DemonTownPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonTownPortal.swift */; };
 		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
@@ -684,6 +686,8 @@
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
 		09738A84227F3281009AF2EE /* LeeAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeeAttack.swift; sourceTree = "<group>"; };
+		09738A862281D2FC009AF2EE /* WindAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindAttack.swift; sourceTree = "<group>"; };
+		09738A88228462B9009AF2EE /* BallLighting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallLighting.swift; sourceTree = "<group>"; };
 		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
 		097EC6C8226A07C600B9407A /* DemonTownPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonTownPortal.swift; sourceTree = "<group>"; };
 		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
@@ -1139,6 +1143,7 @@
 				094E68CB21E064C500414583 /* ShootTwo.swift */,
 				0922C94E22243834002DC201 /* DancingDragon.swift */,
 				09738A84227F3281009AF2EE /* LeeAttack.swift */,
+				09738A88228462B9009AF2EE /* BallLighting.swift */,
 			);
 			path = rare;
 			sourceTree = "<group>";
@@ -1164,6 +1169,7 @@
 				090FEAC421BB9B2A004276BB /* FireFist.swift */,
 				090FEAC521BB9B2A004276BB /* BloodThirty.swift */,
 				090FEAC621BB9B2A004276BB /* QuickHeal.swift */,
+				09738A862281D2FC009AF2EE /* WindAttack.swift */,
 			);
 			path = good;
 			sourceTree = "<group>";
@@ -2070,6 +2076,7 @@
 				094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */,
 				090FEC1E21BB9B2B004276BB /* Village.swift in Sources */,
 				09C66CEA221EEFE300E1C153 /* NoAction.swift in Sources */,
+				09738A872281D2FC009AF2EE /* WindAttack.swift in Sources */,
 				090FEB8A21BB9B2B004276BB /* Attribute.swift in Sources */,
 				090FEC2721BB9B2B004276BB /* RandomScene.swift in Sources */,
 				090FEBD021BB9B2B004276BB /* Disappear.swift in Sources */,
@@ -2080,6 +2087,7 @@
 				09C66CF4221EF9D400E1C153 /* BearWarrior.swift in Sources */,
 				090FEC4321BB9B2B004276BB /* SelectItems.swift in Sources */,
 				090FEC2321BB9B2B004276BB /* UIStage.swift in Sources */,
+				09738A89228462B9009AF2EE /* BallLighting.swift in Sources */,
 				090FEB7121BB9B2B004276BB /* Defence.swift in Sources */,
 				090FEBFF21BB9B2B004276BB /* UIUnit.swift in Sources */,
 				090FEBBA21BB9B2B004276BB /* ShootAll.swift in Sources */,

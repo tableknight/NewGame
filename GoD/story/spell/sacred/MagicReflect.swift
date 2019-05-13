@@ -16,7 +16,7 @@ class MagicReflect: Magical {
     }
     override init() {
         super.init()
-        _cooldown = 3
+        _cooldown = 2
         _name = "法术反射"
         _description = "对己方单位释放护盾，将下一次魔法伤害反弹施法者"
         targetEnemy = false

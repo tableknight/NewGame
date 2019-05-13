@@ -79,14 +79,21 @@ class Battle: SKSpriteNode {
                     }
                     
                     if u.isEmpty {
-                        if _char._minionsCount <= (_playerPart.count - 1) {
-                            showMsg(text: "战场随从已达上限！")
+                        if _playerPart.count >= 6 || _char.getReadyMinions().count >= _char._minionsCount {
+                            showMsg(text: "随从已达上限！")
+//                            showCancel()
                             return
                         }
                         
                         _playerUnit.showText(text: "召唤")
                         u.removeFromParent()
                         waitingForSelectSummonSeat = false
+                        for m in _char._minions {
+                            if m._seat == seat {
+                                m._seat = BUnit.STAND_BY
+                                break
+                            }
+                        }
                         _selectedMinion._seat = seat
                         let unit = createPlayerPartUnit(c: _selectedMinion)
                         cleanSummonSeats()
@@ -146,7 +153,7 @@ class Battle: SKSpriteNode {
         
         if _orderSummon.contains(s) && !_orderSummon.isHidden {
             hideOrder()
-//            showCancel()
+            showCancel()
             showMinionsList()
             //            showSummonableSeats()
             return
@@ -262,7 +269,7 @@ class Battle: SKSpriteNode {
         let y3 = -c * 1
         let y4 = -c * 3
         
-        let s:CGFloat = 0
+        let s:CGFloat = 12
         
         ttl.x = x1 + s
         ttl.y = y1
@@ -273,13 +280,13 @@ class Battle: SKSpriteNode {
         ttr.x = x3 - s
         ttr.y = y1
         
-        tbl.x = x1 + s
+        tbl.x = x1
         tbl.y = y2
         
         tbm.x = x2
         tbm.y = y2
         
-        tbr.x = x3 - s
+        tbr.x = x3
         tbr.y = y2
         
         btl.x = x1
@@ -291,13 +298,13 @@ class Battle: SKSpriteNode {
         btr.x = x3
         btr.y = y3
         
-        bbl.x = x1
+        bbl.x = x1 - s
         bbl.y = y4
         
         bbm.x = x2
         bbm.y = y4
         
-        bbr.x = x3
+        bbr.x = x3 + s
         bbr.y = y4
         
         _enemySeats[BUnit.TTL] = ttl
@@ -371,6 +378,13 @@ class Battle: SKSpriteNode {
                 }
             }
         }
+        _curRole.showStatusText()
+//        for u in _playerPart {
+//            u.showStatusText()
+//        }
+//        for u in _enemyPart {
+//            u.showStatusText()
+//        }
 //        for u in _enemyPart {
 //            for s in u._unit._spellsInuse {
 //                if s._timeleft > 0 {
@@ -502,6 +516,7 @@ class Battle: SKSpriteNode {
                 if i < castSpells.count {
                     let s = castSpells[i]
                     s._castSpell._battle = self
+//                    s._castSpell.findTarget()
                     s._castSpell.cast {
                         s._timeleft -= 1
                         if s._timeleft < 1 {
@@ -511,6 +526,7 @@ class Battle: SKSpriteNode {
                     }
                     i += 1
                 } else {
+                    self._curRole.showStatusText()
                     self.controlAction()
                 }
             }
@@ -626,7 +642,7 @@ class Battle: SKSpriteNode {
             }
             return
         }
-        debug("sensitive \(_curRole.getSensitive())")
+//        debug("sensitive \(_curRole.getSensitive())")
         if seed() < _curRole.getSensitive() {
             _selectedSpell = getSpell(u: _curRole)
             _selectedSpell._battle = self
@@ -992,37 +1008,39 @@ class Battle: SKSpriteNode {
             return
         }
         let spells = _curRole._unit._spellsInuse + _curRole._unit._spellsHidden
-        let castSpells = Array<Spell>()
+        var castSpells = Array<Spell>()
         for spell in spells {
             if spell.hasAfterMoveAction {
-                spell._battle = self
-                spell.findTarget()
+                castSpells.append(spell)
             }
         }
-        var i = 0
-        func castAction() {
-//            debug("i \(i)")
-            if i < spells.count {
-                let s = spells[i]
-                _selectedSpell = s
-                if s.hasAfterMoveAction {
-                    s._battle = self
-                    s.findTarget()
-                    s.cast {
-                        i += 1
-                        castAction()
-                    }
-                } else {
-                    i += 1
-                    castAction()
-                }
-                
-            } else {
-                self.moveStart()
-            }
+        if castSpells.count > 1 {
+            debug("castSpells count is : \(castSpells.count)")
         }
         reduceCooldown()
-        castAction()
+        if castSpells.count > 0 {
+            func castAction(index:Int) {
+                if self.hasFinished() {
+                    return
+                }
+                setTimeout(delay: 0.5, completion: {
+                    if index < castSpells.count {
+                        let spell = castSpells[index]
+                        spell._battle = self
+                        spell.findTarget()
+                        spell.cast {
+                            let next = index + 1
+                            castAction(index: next)
+                        }
+                    } else {
+                        self.moveStart()
+                    }
+                })
+            }
+            castAction(index: 0)
+        } else {
+            moveStart()
+        }
         
 //        moveStart()
 //        if nil != selectedSpell {

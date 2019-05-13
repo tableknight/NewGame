@@ -181,7 +181,7 @@ class UIPanel:SKSpriteNode {
     
     internal var _bg:SKShapeNode!
     internal var _infosDisplay = SKSpriteNode()
-    internal var _lastSelectedIcon:Icon!
+    var _lastSelectedIcon:Icon!
     internal var _label:Label!
     internal var _closeButton = Button()
     internal var _prevButton = Button()

@@ -19,7 +19,7 @@ class SpiritIntervene: Magical {
         _name = "精神干涉"
         _description = "使目标的精神变为随机的数字"
         _quality = Quality.SACRED
-        _tear = 1
+//        _tear = 1
         targetAll = true
         canBeTargetPlayer = true
         canBeTargetSelf = false

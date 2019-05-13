@@ -19,6 +19,7 @@ class Character: Creature {
 //        _setting["storageSize"] = 40
 //        _setting["bagSize"] = 24
         _seat = BUnit.LLM
+        _race = EvilType.MAN
 //        _img = Data.instance
     }
     override func create(level: CGFloat = 1) {
@@ -55,21 +56,24 @@ class Character: Creature {
         return false
     }
     func removeSpell(spell:Spell) {
-        var index = _spells.index(of: spell)
-        if index != nil {
-            _spells.remove(at: index!)
-            return
+        for i in 0..._spells.count - 1 {
+            if type(of: _spells[i]) == type(of: spell) {
+                _spells.remove(at: i)
+                return
+            }
         }
-        index = _spellsInuse.index(of: spell)
-        if index != nil {
-            _spellsInuse.remove(at: index!)
-            return
+        for i in 0..._spellsInuse.count - 1 {
+            if type(of: _spellsInuse[i]) == type(of: spell) {
+                _spellsInuse.remove(at: i)
+                return
+            }
         }
         for m in _minions {
-            index = m._spellsInuse.index(of: spell)
-            if index != nil {
-                m._spellsInuse.remove(at: index!)
-                return
+            for i in 0...m._spellsInuse.count - 1 {
+                if type(of: m._spellsInuse[i]) == type(of: spell) {
+                    m._spellsInuse.remove(at: i)
+                    return
+                }
             }
         }
     }

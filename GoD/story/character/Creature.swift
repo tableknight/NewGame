@@ -14,6 +14,7 @@ class Creature: Unit {
         case _sensitive
         case _weapon
         case _seat
+        case _quality
         case isMainChar
     }
     required init(from decoder: Decoder) throws {
@@ -24,6 +25,7 @@ class Creature: Unit {
         _sensitive = try values.decode(Int.self, forKey: ._sensitive)
         _weapon = try? values.decode(Weapon.self, forKey: ._weapon)
         _seat = try values.decode(String.self, forKey: ._seat)
+        _quality = try values.decode(Int.self, forKey: ._quality)
         isMainChar = try values.decode(Bool.self, forKey: .isMainChar)
         try super.init(from: decoder)
     }
@@ -35,6 +37,7 @@ class Creature: Unit {
         try container.encode(_sensitive, forKey: ._sensitive)
         try container.encode(_weapon, forKey: ._weapon)
         try container.encode(_seat, forKey: ._seat)
+        try container.encode(_quality, forKey: ._quality)
         try container.encode(isMainChar, forKey: .isMainChar)
         try super.encode(to: encoder)
     }

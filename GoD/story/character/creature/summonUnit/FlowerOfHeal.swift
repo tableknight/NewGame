@@ -11,7 +11,7 @@ class FlowerOfHeal: SummonUnit {
     override init() {
         super.init()
         _stars.strength = 1.3
-        _stars.stamina = 1.3
+        _stars.stamina = 1.8
         _stars.agility = 1.0
         _stars.intellect = 1.0
         _sensitive = 100

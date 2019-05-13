@@ -16,8 +16,8 @@ class DancingDragon: Physical {
     }
     override init() {
         super.init()
-        _name = "乱舞"
-        _description = "对目标造成2-4次攻击，每次造成攻击力35%的物理伤害"
+        _name = "龙之舞"
+        _description = "对目标造成2-5次攻击，每次造成攻击力35%的物理伤害"
         _rate = 0.35
         _cooldown = 2
         _quality = Quality.RARE
@@ -28,7 +28,7 @@ class DancingDragon: Physical {
         if _battle._curRole._unit._weapon is IberisHand {
             max = 6
         }
-        let times = 1 + seed(max: max)
+        let times = 1 + seed(to: max)
         _battle._curRole.actionAttack {
             for i in 0...times {
                 if i == 0 {

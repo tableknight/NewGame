@@ -21,7 +21,7 @@ class TurnAttack: Magical {
         _name = "攻击吸收"
         _description = "对己方单位释放护盾，将下一次物理伤害转化为生命回复"
         targetEnemy = false
-        _cooldown = 3
+        _cooldown = 2
         canBeTargetSelf = true
     }
     override func cast(completion:@escaping () -> Void) {

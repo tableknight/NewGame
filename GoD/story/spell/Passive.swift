@@ -19,4 +19,6 @@ class Passive: Spell {
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
     }
+//    func on(){}
+//    func off(){}
 }

@@ -17,8 +17,8 @@ class Disappear: Magical {
     override init() {
         super.init()
         _cooldown = 3
-        _name = "消失"
-        _description = "对自己释放消失，提升50点闪避，持续5回合"
+        _name = "影匿"
+        _description = "对自己释放法术，使自己融入周围影子之中，提升50点闪避，持续5回合"
         targetEnemy = false
         _quality = Quality.GOOD
         autoCast = true
@@ -28,14 +28,15 @@ class Disappear: Magical {
         
         let status = Status()
         status._type = Status.DISAPPEAR
+        status._labelText = "H"
         status._timeleft = 5
-        c.addStatus(status: status)
         c._extensions.avoid += 50
         status.timeupAction = {
             c._extensions.avoid -= 50
         }
         c.actionCast {
             c.actionBuff {
+                c.addStatus(status: status)
                 completion()
             }
         }

@@ -101,6 +101,7 @@ class MindIntervene: Physical, Curse {
                         let s = Status()
                         s._type = Status.CONFUSED
                         s._timeleft = 3
+                        s._labelText = "C"
                         t.addStatus(status: s)
                         
                     }

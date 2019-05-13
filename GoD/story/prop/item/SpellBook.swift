@@ -8,6 +8,10 @@
 
 import SpriteKit
 class SpellBook:Item {
+    static let NORMAL_SPELL_SELLING_PRICE = 6
+    static let GOOD_SPELL_SELLING_PRICE = 16
+    static let RARE_SPELL_SELLING_PRICE = 36
+    static let SACRED_SPELL_SELLING_PRICE = 48
     override init() {
         super.init()
     }
@@ -20,13 +24,17 @@ class SpellBook:Item {
             _description = "使用后习得法术[\(newValue._name)]，\(newValue._description)"
             _quality = newValue._quality
             if _quality == Quality.NORMAL {
-                price = 18
+                _price = 18
+                _sellingPrice = 6
             } else if _quality == Quality.GOOD {
-                price = 48
+                _price = 48
+                _sellingPrice = 16
             } else if _quality == Quality.RARE {
-                price = 108
+                _price = 108
+                _sellingPrice = 36
             } else if _quality == Quality.SACRED {
-                price = 144
+                _price = 144
+                _sellingPrice = 48
             }
         }
         get {

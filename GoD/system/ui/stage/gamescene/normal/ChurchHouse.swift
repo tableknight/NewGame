@@ -129,11 +129,11 @@ class ChurchHouse: InnerHouse {
     }
     override func create() {
         super.create()
-        let ic = Game.instance.inside_c
+//        let ic = Game.instance.inside_c
         let ib = Game.instance.inside_b
         let ti = Game.instance.tile_innerTown
-        let z = MyScene.ITEM_LAYER_Z + 50
-        let y:CGFloat = -1.5
+//        let z = MyScene.ITEM_LAYER_Z + 50
+//        let y:CGFloat = -1.5
         let t = ib.getCell(9, 3, 1, 2)
         let a2 = Game.instance.inside_a2
         addItem(x: 0, y: -1, item: SKSpriteNode(texture: t))

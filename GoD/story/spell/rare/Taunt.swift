@@ -18,7 +18,7 @@ class Taunt: Magical {
         super.init()
         _quality = Quality.RARE
         _name = "嘲讽"
-        _cooldown = 2
+        _cooldown = 1
 //        _rate = 0.8
         autoCast = true
         _description = "嘲讽所有敌方单位，被嘲讽单位有大概率只能对施法者发动普通攻击"
@@ -32,6 +32,7 @@ class Taunt: Magical {
                 if !this.statusMissed(baseline: 60, target: t, bossImmnue: t._unit is Boss) {
                     let s = Status()
                     s._timeleft = 1
+                    s._labelText = "T"
                     s._type = Status.TAUNTED
                     s._source = c
                     t.addStatus(status: s)

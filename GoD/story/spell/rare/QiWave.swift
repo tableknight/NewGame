@@ -17,24 +17,25 @@ class QiWave:Physical, HandSkill {
     override init() {
         super.init()
         _name = "气功波"
-        _description = "对随机2-4个目标造成攻击力75%攻击力的物理伤害"
+        _description = "对随机2-4个目标造成攻击力85%攻击力的物理伤害"
         _quality = Quality.RARE
-        _rate = 0.75
+        _rate = 0.85
         _cooldown = 2
         isClose = false
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
         _battle._curRole.actionAttack {
             for t in ts {
                 let damage = self.physicalDamage(t)
-                if !self.hasPhysicalEvent(t: t, completion: completion) {
+                if !self.hasPhysicalEvent(t: t) {
                     t.actionAttacked {
                         t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                     }
                 }
             }
-            setTimeout(delay: 2.8, completion: completion)
+            setTimeout(delay: 2.2, completion: completion)
         }
     }
     override func findTarget() {
@@ -42,7 +43,7 @@ class QiWave:Physical, HandSkill {
         var targets = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
         _battle._selectedTargets = []
         for _ in 0...max - 1 {
-            if targets.count > 1 {
+            if targets.count > 0 {
                 let index = seed(to: targets.count)
                 _battle._selectedTargets.append(targets[index])
                 targets.remove(at: index)

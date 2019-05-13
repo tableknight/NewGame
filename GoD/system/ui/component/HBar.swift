@@ -20,7 +20,11 @@ class HBar:SKSpriteNode {
     var _color:UIColor!
     func setBar(value:CGFloat = 1) {
         _bar?.removeFromParent()
-        let width = _width * value
+        var v = value
+        if value > 1 {
+            v = 1
+        }
+        let width = _width * v
         _bar = SKShapeNode(rect: CGRect(x: 0, y: -_height * 0.5, width: width, height: _height))
         _bar.fillColor = _color
         addChild(_bar)

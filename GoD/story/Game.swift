@@ -40,6 +40,14 @@ let LandFragment:Array<Array<CGFloat>> = [
     [0,0,2,1,0,2,1,2],
     [0,0,2,0,0,1,1,2],
 ]
+struct DamageType {
+    static let PHYSICAL = 1
+    static let MAGICAL = 2
+    static let FIRE = 3
+    static let WATER = 4
+    static let THUNDER = 5
+    static let FWMIXED = 34
+}
 struct Quality {
     static let NORMAL = 1
     static let GOOD = 2
@@ -134,7 +142,7 @@ struct Colors {
 struct Element {
     static let FIRE = 1
     static let WATER = 2
-    static let THUNFER = 3
+    static let THUNDER = 3
 }
 struct DamageColor {
     static let DAMAGE = UIColor.init(red: 1, green: 0.137, blue: 0.137, alpha: 1)
@@ -142,20 +150,20 @@ struct DamageColor {
     static let NORMAL = UIColor.white
     static let FIRE = UIColor.orange
     static let WATER = UIColor.init(red: 0.2, green: 0.53, blue: 1, alpha: 1)
-    static let THUNFER = UIColor.yellow
+    static let THUNDER = UIColor.yellow
 }
 struct ElementColor {
     static let FIRE = UIColor.orange
     static let WATER = UIColor.init(red: 0.2, green: 0.53, blue: 1, alpha: 1)
-    static let THUNFER = UIColor.yellow
+    static let THUNDER = UIColor.yellow
     static func getColor(_ q:Int) -> UIColor {
         switch q {
         case Element.FIRE:
             return FIRE
         case Element.WATER:
             return WATER
-        case Element.THUNFER:
-            return THUNFER
+        case Element.THUNDER:
+            return THUNDER
         default:
             return FIRE
         }
@@ -395,6 +403,41 @@ class Game {
             return try? JSONDecoder().decode(Array.self, from: data)
         }
         return nil
+    }
+    static func saving(sync: Bool = true) {
+        let char = Game.instance.char!
+        let stage = Game.instance.curStage!
+        var roles = Game.roles
+        if char._key.isEmpty {
+            char._key = "doc\(Game.roles.count)"
+            let roleDoc = RoleDocument()
+            roleDoc._name = char._name
+            roleDoc._pro = char._pro
+            roleDoc._level = char._level.toInt()
+            roleDoc._key = char._key
+            roleDoc._imgUrl = char._imgUrl
+            roles.append(roleDoc)
+        } else {
+            for c in roles {
+                if c._key == char._key {
+                    c._level = char._level.toInt()
+                    break
+                }
+            }
+        }
+        Game.save(c: char, key: char._key)
+        Game.saveRoles(roles: roles)
+        
+        if sync {
+            stage.showSceneMask()
+            stage._sceneChangeMask.alpha = 0.65
+            stage.cancelMove = true
+            setTimeout(delay: 2, completion: {
+                showMsg(text: "保存成功！")
+                stage._sceneChangeMask.isHidden = true
+                stage.cancelMove = false
+            })
+        }
     }
 //    static func saveDocument(c:Character, key:String) {
 //        if let data = try? JSONEncoder().encode(c) {

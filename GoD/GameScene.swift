@@ -12,7 +12,9 @@ import GameplayKit
 
 class GameScene: SKScene {
     override func didMove(to view: SKView) {
+        Game.instance.scene = self
 //        realScene()
+//        battle()
         homePage()
 //        let rd = RoleDocument()
 //        rd._name = "yingzi"
@@ -55,6 +57,7 @@ class GameScene: SKScene {
         welcome.create()
         welcome._gameScene = self
         addChild(welcome)
+        
     }
 //    func save1(st:Tryer) {
 //        
@@ -205,7 +208,8 @@ class GameScene: SKScene {
         let e = Emily()
         e.create(level: e._level)
         e.addMoney(num: 1000)
-        e._spellsInuse = [LineAttack(), ThunderArray(), FireRain()]
+        e._spellsInuse = [AttackPowerUp(), Reborn(), ScreamLoud(), Disappear(), FireRain()]
+        e._spells = [TruePower()]
         let bow = Bow()
         bow.create(level: 1)
         e.addProp(p: bow)
@@ -249,7 +253,7 @@ class GameScene: SKScene {
         
         
         e.addProp(p: LevelUpScroll())
-        e._spellsInuse = [FireRain(), Refresh()]
+//        e._spellsInuse = [BallLighting(), Refresh()]
         let rs = [e] + e._minions
         for r in rs {
 //            r._extensions.spirit = 300

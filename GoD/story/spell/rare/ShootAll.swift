@@ -11,9 +11,9 @@ class ShootAll: Physical, BowSkill {
     override init() {
         super.init()
         _name = "散射"
-        _description = "对所有敌方单位造成攻击40%的物理伤害"
+        _description = "对所有敌方单位造成攻击55%的物理伤害"
         isClose = false
-        _rate = 0.4
+        _rate = 0.55
         autoCast = true
         _quality = Quality.RARE
         _cooldown = 2

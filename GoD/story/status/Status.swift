@@ -17,6 +17,7 @@ class Status:Core {
     override init() {
         super.init()
     }
+    var _labelText = ""
     var _timeleft:Int = 0
     var _type:String = ""
     var _name = ""
@@ -100,6 +101,7 @@ class BurningStatus:Status {
         super.init()
         _type = Status.BURNING
 //        timeupAction = {}
+        _labelText = "B"
         _timeleft = 3
         hasBeforeMoveAction = true
     }

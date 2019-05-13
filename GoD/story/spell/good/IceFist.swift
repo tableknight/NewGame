@@ -47,7 +47,7 @@ class IceFist: Physical, HandSkill {
                     t.showValue(value: damage)
                     let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)
                     setTimeout(delay: 0.5, completion: {
-                        t.showValue(value: waterDamage, textColor: ElementColor.getColor(Element.WATER), completion: completion)
+                        t.showValue(value: waterDamage, damageType: DamageType.WATER, textColor: ElementColor.WATER, completion: completion)
                     })
                 }
             }

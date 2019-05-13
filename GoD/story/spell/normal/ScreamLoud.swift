@@ -29,19 +29,28 @@ class ScreamLoud:Magical {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
                     t.actionDebuff {
                         t.showText(text: "SCARED")
-                        let s = Status()
-                        s._timeleft = 3
-                        let atk = t.getAttack() * 0.3
-                        t._extensions.attack -= atk
-                        t._extensions.accuracy -= 30
-                        s.timeupAction = {
-                            t._extensions.attack += atk
-                            t._extensions.accuracy += 30
+                        if t.hasStatus(type: "_scared") {
+                            let s = t.getStatus(type: "_scared")
+                            s?._timeleft = 3
+                            t.showStatusText()
+                        } else {
+                            let s = Status()
+                            s._type = "_scared"
+                            s._labelText = "S"
+                            s._timeleft = 3
+                            let atk = t.getAttack() * 0.3
+                            t._extensions.attack -= atk
+                            t._extensions.accuracy -= 30
+                            s.timeupAction = {
+                                t._extensions.attack += atk
+                                t._extensions.accuracy += 30
+                            }
+                            t.addStatus(status: s)
                         }
                     }
                 }
             }
-            setTimeout(delay: 2.8, completion: completion)
+            setTimeout(delay: 2.5, completion: completion)
         }
     }
     

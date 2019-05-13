@@ -62,7 +62,7 @@ class OutfitStore: InnerHouse {
             let role = getNextCellItem(x: 4, y: 0) as! UIRole
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "你想的，你要的，你求的，我全都有，看看吗？",
+                             text: "你想的，你要的，你追求的，我全都有，看看吗？",
                              name: "神秘商人", action: {
                                 
                                 let dlg = stage._curDialog!
@@ -76,13 +76,22 @@ class OutfitStore: InnerHouse {
                                     for i in 0...6 {
                                         let w = RandomWeapon()
                                         if i == 6 {
-                                            w.price = 50
+                                            w._sellingPrice = 96
                                         }
                                         w.weaponId = i
                                         w._name = "\(l.getWeaponById(id: i)._name)?"
                                         sp._goodsList.append(w)
                                     }
                                     sp.create()
+                                    sp.hasBuyAction = true
+                                    sp.buyAction = {
+                                        let item = sp._lastSelectedIcon as! SellingItemIcon
+                                        let r = item._displayItemType as! RandomWeapon
+                                        let i = r.weaponId
+                                        let wp = l.getWeaponById(id: i)
+                                        wp.create(level: Game.instance.char._level)
+                                        Game.instance.char.addProp(p: wp)
+                                    }
                                     stage.showPanel(sp)
                                 }
             })
@@ -133,13 +142,22 @@ class OutfitStore: InnerHouse {
                                     for i in 0...3 {
                                         let a = RandomArmor()
                                         if i == 3 {
-                                            a.price = 50
+                                            a._sellingPrice = 96
                                         }
                                         a.armorId = i
                                         a._name = "\(l.getArmorById(id: i)._name)?"
                                         sp._goodsList.append(a)
                                     }
                                     sp.create()
+                                    sp.hasBuyAction = true
+                                    sp.buyAction = {
+                                        let item = sp._lastSelectedIcon as! SellingItemIcon
+                                        let r = item._displayItemType as! RandomArmor
+                                        let i = r.armorId
+                                        let ar = l.getArmorById(id: i)
+                                        ar.create(level: Game.instance.char._level)
+                                        Game.instance.char.addProp(p: ar)
+                                    }
                                     stage.showPanel(sp)
                                 }
             })

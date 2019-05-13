@@ -11,7 +11,7 @@ class MagicHouse: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.halfSize = 5
-        _name = "铁匠铺"
+        _name = "魔法屋"
         _doorX = 5
         let i4 = Game.instance.inside_a4
         let i2 = Game.instance.inside_a2
@@ -42,6 +42,14 @@ class MagicHouse: InnerHouse {
                                     sp._priceType = 1
                                     sp._goodsList = [RandomSacredSpell()]
                                     sp.create()
+                                    sp.hasBuyAction = true
+                                    sp.buyAction = {
+                                        let l = Loot()
+                                        let s = l.getSacredSpell(id: self.seed(max: l.sacredSpellCount))
+                                        let sb = SpellBook()
+                                        sb.spell = s
+                                        Game.instance.char.addProp(p: sb)
+                                    }
                                     stage.showPanel(sp)
                                 }
             })
@@ -52,7 +60,7 @@ class MagicHouse: InnerHouse {
             let stage = Game.instance.curStage!
             
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "知识是力量的源泉，书籍是知识的海洋，金钱是遨游于海洋的方舟，我这么说你明白吗？？",
+                             text: "知识是力量的源泉，书籍是知识的海洋，魔法是遨游于海洋的方舟，我这么说你明白吗？？",
                              name: "大魔法师欧德林", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
@@ -147,14 +155,11 @@ class MagicHouse: InnerHouse {
         for _ in 0...9 {
             let b = SpellBook()
             let s = self.seed(max: 3)
-            var spell = l.getNormalSpell(id: l._normalSpellArray.one())
-            b.price = 6
+            var spell = l.getRandomNormalSpell()
             if 1 == s {
-                spell = l.getGoodSpell(id: l._goodSpellArray.one())
-                b.price = 16
+                spell = l.getRandomGoodSpell()
             } else if 2 == s {
-                spell = l.getRareSpell(id: l._rareSpellArray.one())
-                b.price = 36
+                spell = l.getRandomRareSpell()
             }
             b.spell = spell
             list.append(b)

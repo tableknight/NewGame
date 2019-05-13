@@ -30,6 +30,7 @@ class FragileCurse: Magical, Curse {
                     let s = Status()
                     s._timeleft = this.getTimeleft()
                     s._type = Status.FRAGILE
+                    s._labelText = "W"
                     t.addStatus(status: s)
                     t._extensions.defence -= t._unit._extensions.defence * 0.5
                     s.timeupAction = {

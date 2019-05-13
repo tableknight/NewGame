@@ -99,9 +99,33 @@ class BUnit: SKSpriteNode {
 //        faceEast()
         addChild(_select)
         addChild(_charNode)
+        addChild(_statusLayer)
         
         createLabel()
         createHPBar()
+//        showStatus()
+    }
+    private var _statusLayer = SKSpriteNode()
+    func showStatusText() {
+        _statusLayer.removeAllChildren()
+        let startY = -_charSize * 0.5
+        let gap:CGFloat = 17
+        var i:CGFloat = 0
+        for s in _status.values {
+            if s._timeleft > 0 && !s._labelText.isEmpty {
+                createLabelText(text: s._labelText, time: s._timeleft).position.y = startY + gap * i
+                i += 1
+            }
+        }
+    }
+    private func createLabelText(text:String, time:Int) -> Label {
+        let l = Label()
+        l.text = "\(text)\(time)"
+        l.fontSize = 16
+        l.position.x = _charSize * 0.5 + 2
+        
+        _statusLayer.addChild(l)
+        return l
     }
     func createForStage() {
         hasInitialized = true
@@ -182,7 +206,7 @@ class BUnit: SKSpriteNode {
         _charTexture = unit._img
         
         if hasSpell(spell: TruePower()) {
-            strengthChange(value: 10)
+            strengthChange(value: Game.instance.char._mains.strength * 0.1)
         }
         
     }
@@ -272,7 +296,8 @@ class BUnit: SKSpriteNode {
     }
     
     func burning() {
-        if hasSpell(spell: ProtectFromGod()) {
+        if hasSpell(spell: ProtectFromGod()) || _unit is Boss {
+            showText(text: "IMMUNE")
             return
         }
         let t = self
@@ -283,6 +308,7 @@ class BUnit: SKSpriteNode {
             let s = t.getStatus(type: Status.BURNING) as! BurningStatus
             s._level += 1
             s._castSpell = spell
+            s._timeleft = 3
             t.addStatus(status: s)
         } else {
             let bs = BurningStatus()
@@ -291,7 +317,7 @@ class BUnit: SKSpriteNode {
         }
     }
     func freezing() {
-        if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) {
+        if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) || _unit is Boss {
             showText(text: "IMMUNE")
             return
         }
@@ -299,6 +325,7 @@ class BUnit: SKSpriteNode {
         let status = Status()
         status._type = Status.FREEZING
         status._timeleft = 1
+        status._labelText = "F"
         target.addStatus(status: status)
         target.isDefend = false
         target.actionFrozen(){}
@@ -434,7 +461,7 @@ class BUnit: SKSpriteNode {
         }
     }
     func actionCast(completion:@escaping () -> Void) {
-        if _unit is Boss || _unit is IFace {
+        if _unit is Boss || _unit is IFace || _unit._race != EvilType.MAN {
             let wait = SKAction.wait(forDuration: TimeInterval(1))
             let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
             let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
@@ -577,7 +604,12 @@ class BUnit: SKSpriteNode {
             completion()
         }
     }
-    func showValue(value:CGFloat, criticalFromSpell:Bool = true, critical:Bool = false, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
+    //1 physical
+    //2 magical
+    //3 fire
+    //4 water
+    //5 thunder
+    func showValue(value:CGFloat, criticalFromSpell:Bool = true, critical:Bool = false, damageType:Int = 1, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
         if sheildEvilExpel(value: value) {
             showText(text: "BLOCK") {
@@ -993,6 +1025,7 @@ class BUnit: SKSpriteNode {
             status.timeupAction()
         }
         _status[status._type] = status
+        showStatusText()
     }
     
     func getSpirit() -> CGFloat {
@@ -1211,19 +1244,19 @@ class BUnit: SKSpriteNode {
     }
     
     func getStrength() -> CGFloat {
-        let val = _unit._mains.strength
+        let val = _unit._mains.strength + _mains.strength
         return val
     }
     func getStamina() -> CGFloat {
-        let val = _unit._mains.stamina
+        let val = _unit._mains.stamina + _mains.stamina
         return val
     }
     func getAgility() -> CGFloat {
-        let val = _unit._mains.agility
+        let val = _unit._mains.agility + _mains.agility
         return val
     }
     func getIntellect() -> CGFloat {
-        let val = _unit._mains.intellect
+        let val = _unit._mains.intellect + _mains.intellect
         return val
     }
     
@@ -1247,7 +1280,7 @@ class BUnit: SKSpriteNode {
         return _unit._extensions.health + _extensions.health
     }
     func getRevenge() -> CGFloat {
-        let val = _unit._revenge
+        let val = _unit._revenge + _revenge
         return val + _revenge
     }
     func getLucky() -> CGFloat {

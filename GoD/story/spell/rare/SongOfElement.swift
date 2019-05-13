@@ -23,7 +23,7 @@ class SongOfElement:Magical {
         _battle._curRole.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: fd + wd) {
+                    t.showValue(value: fd + wd, damageType: DamageType.FWMIXED) {
                         completion()
                         if self.d9() {
                             if self.d2() {

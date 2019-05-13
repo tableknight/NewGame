@@ -28,22 +28,26 @@ class ChaosAttack:Physical {
         let sd = seed(to: 6)
         var damage:CGFloat = 0
         var color = DamageColor.DAMAGE
+        var type = DamageType.PHYSICAL
         if 1 == sd {
             damage = fireDamage(t)
             color = DamageColor.FIRE
+            type = DamageType.FIRE
         } else if 2 == sd {
             damage = waterDamage(t)
             color = DamageColor.WATER
+            type = DamageType.WATER
         } else if 0 == sd {
             damage = thunderDamage(t)
-            color = DamageColor.THUNFER
+            color = DamageColor.THUNDER
+            type = DamageType.THUNDER
         } else {
             damage = physicalDamage(t)
         }
         _battle._curRole.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage, textColor: color, completion: completion)
+                    t.showValue(value: damage, damageType: type, textColor: color, completion: completion)
                 }
             }
         }

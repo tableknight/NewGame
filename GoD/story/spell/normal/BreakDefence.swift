@@ -16,8 +16,8 @@ class BreakDefence:Physical {
     }
     override init() {
         super.init()
-        _name = "破竹"
-        _description = "对防御目标造成50%-150%攻击力的物理伤害"
+        _name = "势如破竹"
+        _description = "对防御目标造成100%-200%攻击力的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 0
     }

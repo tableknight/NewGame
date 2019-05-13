@@ -58,7 +58,7 @@ class ThunderArray:Magical {
         let damage = _damageValue
         if !hadSpecialAction(t: t!, completion: {}) {
             t!.actionAttacked {
-                t!.showValue(value: damage)
+                t!.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER)
             }
         }
     }

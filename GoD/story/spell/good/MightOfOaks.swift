@@ -18,7 +18,6 @@ class MightOfOaks: Magical {
         super.init()
         _name = "橡树之力"
         _description = "对己方目标释放橡树魔法，减少15%物理伤害，持续5回合"
-        _tear = 1
         _quality = Quality.GOOD
         targetEnemy = false
         canBeTargetSelf = true
@@ -32,6 +31,7 @@ class MightOfOaks: Magical {
                 let s = Status()
                 s._type = Status.MIGHT_OF_OAKS
                 s._timeleft = 5
+                s._labelText = "O"
                 t.addStatus(status: s)
                 completion()
             }

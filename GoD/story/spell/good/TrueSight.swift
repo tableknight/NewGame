@@ -17,7 +17,7 @@ class TrueSight:Magical {
     override init() {
         super.init()
         _name = "邪王真眼"
-        _description = "对恶魔造成精神100%的魔法伤害，对其他种族无效"
+        _description = "对恶魔造成精神200%的魔法伤害，对其他种族无效"
         _quality = Quality.GOOD
         _cooldown = 1
     }

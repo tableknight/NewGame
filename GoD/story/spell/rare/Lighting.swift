@@ -30,7 +30,7 @@ class Lighting: Passive {
         c.showText(text: "Lighting") {
             if !self.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage) {
+                    t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
                         completion()
                     }
                 }

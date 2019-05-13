@@ -46,7 +46,7 @@ class SoulLash: Magical {
             t.actionAttacked {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {
-                    if this.seed() < 25 {
+                    if this.seed() < 25 && !t.isDead() {
                         b?.silenceUnit(unit: t)
                         completion()
                     } else {

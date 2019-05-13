@@ -173,7 +173,7 @@ class DeathAttack:Physical, BossOnly {
 class AttackPowerUp: Passive {
     override init() {
         super.init()
-        _name = "力量增强"
+        _name = "增幅"
         _description = "行动结束提升15%基础攻击力"
         _quality = Quality.RARE
         hasAfterMoveAction = true
@@ -182,6 +182,7 @@ class AttackPowerUp: Passive {
         let c = _battle._curRole
         let up = c._unit._extensions.attack * 0.15
         c._extensions.attack += up
+        c.showText(text: _name)
         c.actionBuff {
             completion()
         }

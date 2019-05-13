@@ -12,7 +12,7 @@ class SelfHome: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.halfSize = 4
-        _name = "自宅"
+        _name = "民宅"
         _doorX = 6
         _roofSets = RoofSets()
         _bottomWallTexture = Game.instance.inside_a5.getCell(1, 3)

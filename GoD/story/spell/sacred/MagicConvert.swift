@@ -16,7 +16,7 @@ class MagicConvert: Magical {
     }
     override init() {
         super.init()
-        _cooldown = 3
+        _cooldown = 2
         _quality = Quality.SACRED
         _name = "法术吸收"
         _description = "对己方单位释放护盾，将下一次法术伤害转化为生命回复"

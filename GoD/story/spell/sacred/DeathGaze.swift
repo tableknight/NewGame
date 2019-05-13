@@ -18,7 +18,7 @@ class DeathGaze: Magical {
     override init() {
         super.init()
         _name = "死亡凝视"
-        _description = "对目标造成精神65%的魔法伤害，有极小概率立即杀死目标"
+        _description = "对目标造成精神65%的魔法伤害，有小概率立即杀死目标"
         _rate = 0.65
         _quality = Quality.SACRED
         _cooldown = 2

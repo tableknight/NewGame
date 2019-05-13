@@ -40,21 +40,28 @@ class MagicMark: Armor {
     }
     var _spell:Spell = Spell()
     override func create(level: CGFloat) {
-        _level = level
+        _level = 1
         createQuality()
         createSpell()
-        createPrice()
     }
     override func createQuality() {
         let _seed = seed()
         if _seed < 70 {
             _quality = Quality.NORMAL
+            _price = 6
+            _sellingPrice = 24
         } else if _seed < 90 {
             _quality = Quality.GOOD
+            _price = 18
+            _sellingPrice = 72
         } else if _seed < 96 {
             _quality = Quality.RARE
+            _price = 36
+            _sellingPrice = 144
         } else {
             _quality = Quality.SACRED
+            _price = 64
+            _sellingPrice =  256
         }
     }
     internal func createSpell() {
@@ -66,7 +73,7 @@ class MagicMark: Armor {
         } else if _quality == Quality.RARE {
             _spell = l.getRareSpell(id: seed(to: l.rareSpellCount))
         } else {
-            _spell = l.getSacredSpell(id: l.sacredSpellCount)
+            _spell = l.getSacredSpell(id: seed(to: l.sacredSpellCount))
         }
     }
     private var _spellAppended = false
@@ -83,9 +90,5 @@ class MagicMark: Armor {
             char.removeSpell(spell: _spell)
             _spellAppended = false
         }
-    }
-    override func createPrice() {
-        super.createPrice()
-        price = _price * 4
     }
 }

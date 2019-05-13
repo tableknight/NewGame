@@ -48,6 +48,7 @@ class MyScene: SKSpriteNode, IInitialize {
         _nameLabel.position.y = UIScreen.main.bounds.size.height - cellSize * 0.75
         _nameLabel.align = "center"
         _nameLabel.fontSize = 24
+        _nameLabel.zPosition = MyScene.MAP_LAYER_Z
         addChild(_nameLabel)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
         _roleLayer.zPosition = MyScene.ROLE_LAYER_Z
@@ -58,7 +59,7 @@ class MyScene: SKSpriteNode, IInitialize {
         addChild(_roleLayer)
         addChild(_itemLayer)
         addChild(_maskLayer)
-        isUserInteractionEnabled = true
+        isUserInteractionEnabled = false
         for _ in 0...25 {
             _cellEnum.append(CELL_EMPTY)
         }
@@ -73,8 +74,11 @@ class MyScene: SKSpriteNode, IInitialize {
         _towerEnum = [TOWER_MIND_POWER, TOWER_FIRE_ENERGE, TOWER_LUCKY_POWER, TOWER_SPEED_POWER, TOWER_TIME_REDUCE, TOWER_ATTACK_POWER, TOWER_DEFENCE_POWER, TOWER_WATER_ENERGE, TOWER_MAGICAL_POWER, TOWER_PHYSICAL_POWER, TOWER_THUNDER_ENERGE]
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touchPoint = touches.first?.location(in: self)
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touchPoint = touches.first?.location(in: self)
+//
+//    }
+    func touch(touchPoint:CGPoint?) {
         if Game.instance.curStage.cancelMove {
             return
         }
@@ -613,6 +617,13 @@ class Chest:UIItem {
             b.battleStart()
             b.defeatAction = {
                 self.loot()
+                let l = Loot()
+                let char = Game.instance.char!
+                let roles = [char] + char.getReadyMinions()
+                for c in roles {
+                    let exp = l.getExp(selfLevel: c._level, enemyLevel: Game.instance.curStage._curScene._level) * 10
+                    c.expUp(up: exp)
+                }
             }
             b.defeatedAction = {
                 self.confirmAction()
@@ -634,12 +645,7 @@ class Chest:UIItem {
         p.create(props: list)
         p.confirmAction = self.confirmAction
         Game.instance.curStage.showPanel(p)
-        let char = Game.instance.char!
-        let roles = [char] + char.getReadyMinions()
-        for c in roles {
-            let exp = l.getExp(selfLevel: c._level, enemyLevel: Game.instance.curStage._curScene._level) * 10
-            c.expUp(up: exp)
-        }
+        
     }
     private var _x = 0
     var _triggered = false

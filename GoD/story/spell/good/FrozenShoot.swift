@@ -33,10 +33,10 @@ class FrozenShoot: Physical, BowSkill {
             if !self.hadSpecialAction(t:t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
                     t.actionAttacked {
-                        t.showValue(value: damage) {
+                        t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER) {
                             completion()
                         }
-                        if self.d4() {
+                        if self.d3() {
                             t.freezing()
                         }
                     }

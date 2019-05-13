@@ -110,7 +110,7 @@ class LineAttack: Physical {
     }
     override init() {
         super.init()
-        _name = "行斩"
+        _name = "横扫千军"
         _description = "对目标同一行单位造成攻击55%的物理伤害"
         _rate = 0.55
         _quality = Quality.GOOD

@@ -107,11 +107,7 @@ class RolePanel:UIPanel {
                     for snc in _seatNodes {
                         snc.color = SeatNode.UNSELECTED_COLOR
                     }
-                    if _unit is Character {
-                        sn.color = SeatNode.SELECTED_COLOR
-                    } else {
-                        sn.color = UIColor.white
-                    }
+                    sn.color = UIColor.white
                     _unit._seat = sn._seat
                 }
             }

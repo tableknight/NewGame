@@ -18,8 +18,8 @@ class FireBreath: Magical {
         super.init()
         isFire = true
         _name = "火焰呼吸"
-        _description = "对目标造成精神65%的火焰伤害， 有一定几率点燃目标"
-        _rate = 0.65
+        _description = "对目标造成精神85%的火焰伤害， 有一定几率点燃目标"
+        _rate = 0.85
         _quality = Quality.NORMAL
         _cooldown = 1
     }
@@ -39,7 +39,7 @@ class FireBreath: Magical {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-                t.showValue(value: damage) {
+                t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
                     if self.d3() {
                         t.burning()

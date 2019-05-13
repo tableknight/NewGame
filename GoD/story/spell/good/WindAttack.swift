@@ -1,22 +1,21 @@
 //
-//  FireFist.swift
-//  TheWitchNight
+//  WindAttack.swift
+//  GoD
 //
-//  Created by kai chen on 2018/3/29.
-//  Copyright © 2018年 Chen. All rights reserved.
+//  Created by kai chen on 2019/5/7.
+//  Copyright © 2019 Chen. All rights reserved.
 //
 
 import SpriteKit
-class FireFist: Physical, HandSkill {
+class WindAttack: Physical {
     override init() {
         super.init()
         isClose = true
-        _name = "烈焰拳"
-        _description = "对目标造成攻击80%的火焰伤害"
-        isFire = true
+        _name = "顺风击"
+        _description = "对目标造成攻击80%的物理伤害，对身后单位造成本次伤害的一半"
         _rate = 0.8
         _quality = Quality.GOOD
-        _cooldown = 1
+        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
@@ -31,20 +30,32 @@ class FireFist: Physical, HandSkill {
     private func attack(completion:@escaping () -> Void) {
         let b = _battle!
         let t = b._selectedTarget!
-        let damage = fireDamage(t)
+        let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
+                    t.showValue(value: damage) {
                         completion()
                     }
+                }
+                let seat = self.getUnitBehindTarget(seat: t._unit._seat)
+                let tb = self._battle.getUnitBySeat(seat: seat)
+                if nil != tb {
+                    setTimeout(delay: 0.5, completion: {
+                        let d2 = damage * 0.5
+                        if !self.hadSpecialAction(t: tb!, completion: {}) {
+                            tb!.actionAttacked {
+                                tb!.showValue(value: d2)
+                            }
+                        }
+                    })
                 }
             }
         }
     }
     
     override func selectable() -> Bool {
-        return isEmptyHand()
+        return _battle._curRole._unit.isClose()
         
     }
     required init(from decoder: Decoder) throws {
@@ -54,3 +65,4 @@ class FireFist: Physical, HandSkill {
         try super.encode(to: encoder)
     }
 }
+

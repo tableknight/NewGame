@@ -56,9 +56,12 @@ class LootPanel:UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
     override func createPanelbackground() {
-        _bg = createBackground(width: _standardWidth * 0.75, height: _standardHeight * 0.5)
+        
+    }
+    private var _bgHeight:CGFloat = 0
+    func createSelfPanelbackground() {
+        _bg = createBackground(width: _standardWidth * 0.75, height: _bgHeight)
         _bg.position = CGPoint(x: 0, y: 0)
         _bg.zPosition = self.zPosition + 1
         addChild(_bg)
@@ -69,6 +72,13 @@ class LootPanel:UIPanel {
         _props = props
         createCloseButton()
         listProps()
+        if _props.count > 8 {
+            let extY = ceil(_props.count.toFloat() / 4) - 2
+            _bgHeight = _standardHeight * 0.5 + extY * cellSize * 1.25
+        } else {
+            _bgHeight = _standardHeight * 0.5
+        }
+        createSelfPanelbackground()
     }
     
     override func createCloseButton() {

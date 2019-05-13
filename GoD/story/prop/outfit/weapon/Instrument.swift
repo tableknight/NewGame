@@ -22,7 +22,6 @@ class Instrument: Weapon {
     
         createSpell()
         
-//        _description = "[" + _spell._name + "]"
         createPrice()
         _price *= 4
         _sellingPrice *= 4

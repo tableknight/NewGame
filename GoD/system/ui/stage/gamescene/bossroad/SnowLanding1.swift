@@ -25,7 +25,7 @@ class SnowLanding1: SnowLanding {
     private let CELL_ROAD = 152
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+//        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
             return true
         }

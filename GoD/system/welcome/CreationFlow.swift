@@ -63,7 +63,7 @@ class CreationFlow:SKSpriteNode {
             let image = selectImage._lastSelectedComponent._image!
             var role = selectPro._selectedRole
             if nil == role {
-                role = ["冒险者", "", 5, true, false, true, 2, 2, []]
+                role = ["冒险者", "", 5, true, false, true, 3, 2, []]
             }
             let items = selectItems._selectedItems
             let minion = selectMinion._lastSelectedComponent._minion
@@ -85,7 +85,15 @@ class CreationFlow:SKSpriteNode {
             e._seat = BUnit.BBM
             e._pro = role![0] as! String
             e._name = selectImage._lastSelectedComponent._name
+            //-------------------------------------
             e._money = 12000
+            let t = TheWitchsTear()
+            t._count = 500
+            e._props.append(t)                   //test
+            e._dungeonLevel = 99                 //data
+            let l = Loot()
+            e._spells = l.getAllSpells()
+            //-------------------------------------
             scene.setRole(x: 2, y: 1, role: e)
             if minion != nil {
                 minion!._seat = BUnit.BTM
@@ -96,6 +104,9 @@ class CreationFlow:SKSpriteNode {
             self.gameScene!.addChild(stage)
             
             self.actionCreate()
+            setTimeout(delay: 1, completion: {
+                Game.saving(sync: false)
+            })
         }
         
         _panels.append(selectImage)
