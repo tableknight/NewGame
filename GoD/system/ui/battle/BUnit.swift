@@ -395,13 +395,16 @@ class BUnit: SKSpriteNode {
     var _acting = false
     func actionAttacked(defend:Bool = false, completion:@escaping () -> Void) {
         if _acting {
-            debug("正在表演")
+//            debug("正在表演")
 //            completion()
 //            return
+            return
         }
+        _acting = true
         if (isDefend || defend) && _battle._selectedSpell is Physical {
             actionDefead {
                 completion()
+                self._acting = false
             }
             return
         }
@@ -418,7 +421,6 @@ class BUnit: SKSpriteNode {
         let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(0.8))
         let go = SKAction.sequence([move1, wait, move2])
-        let this = self
         _charNode.run(go)
         _select.run(go)
         let fadeOut = SKAction.fadeOut(withDuration: TimeInterval(0))
@@ -426,7 +428,7 @@ class BUnit: SKSpriteNode {
         let fadeWait = SKAction.wait(forDuration: TimeInterval(0.2))
         let fadeGo = SKAction.sequence([fadeOut, fadeWait, fadeIn, fadeWait, fadeOut, fadeWait, fadeIn, fadeWait, fadeOut, fadeWait, fadeIn])
         _charNode.run(fadeGo) {
-            this._acting = false
+            self._acting = false
             completion()
             if self.hasStatus(type: Status.ICE_GUARD) {
                 let c = self._battle._curRole
@@ -633,7 +635,7 @@ class BUnit: SKSpriteNode {
             return
         }
         var beCritical = _battle._selectedSpell.beCritical
-        if value > 0 || !criticalFromSpell {
+        if value > 0 || !criticalFromSpell || _battle._selectedSpell is Magical {
             beCritical = critical
         }
 //        if isCritical {

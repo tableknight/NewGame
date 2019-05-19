@@ -26,6 +26,24 @@ class Dungeon: MyScene {
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
         createTowers()
+        if seed() < 7 {
+            let tear = TheWitchsTear()
+            tear._count = seed(min: 5, max: 11)
+            _goodsList = [tear]
+            _whichItem = [true]
+            _mixedItemMoney = [false]
+            let count = seed(min: 1, max: 3)
+            let l = Loot()
+            for _ in 1...count {
+                let sb = SpellBook()
+                sb.spell = l.getRandomSacredSpell()
+                sb._sellingPrice = 68
+                _whichItem.append(false)
+                _mixedItemMoney.append(true)
+                _goodsList.append(sb)
+            }
+            createSeller()
+        }
         if self is InnerMaze {
             createWallShadow()
         }
@@ -39,7 +57,7 @@ class Dungeon: MyScene {
     }
     
     override func createMapMatrix() {
-        debug("halfsize \(halfSize)")
+//        debug("halfsize \(halfSize)")
         let wallTexture = getWallTexture()
         _mapMatrix = []
         for _ in 0...halfSize.toInt() * 2 - 1 {
@@ -247,6 +265,36 @@ class Dungeon: MyScene {
                 addItem(x: p.x, y: p.y, item: getRandomTower())
                 _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_TOWER
             }
+        }
+    }
+    
+    internal func createSeller() {
+        var points = Array<CGPoint>()
+        let maxx = halfSize.toInt() * 2 - 1
+        let maxy = halfSize.toInt() * 2 - 1
+        for y in 0...maxy {
+            for x in 0...maxx {
+                if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
+                    points.append(CGPoint(x: x, y: y))
+                }
+            }
+        }
+        let seller = UIRole()
+        seller.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
+        
+        if points.count == 1 {
+            let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())
+            item.removeFromParent()
+            addItem(x: points[0].x, y: points[0].y, item: seller)
+            _mapMatrix[points[0].y.toInt()][points[0].x.toInt()] = CELL_SELLER
+        } else if points.count > 1 {
+            let index = seed(max: points.count)
+            let p = points[index]
+            points.remove(at: index)
+            let item = getNextCellItem(x: p.x.toInt(), y: p.y.toInt())
+            item.removeFromParent()
+            addItem(x: p.x, y: p.y, item: seller)
+            _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_SELLER
         }
     }
     

@@ -44,6 +44,29 @@ class CenterCamping: StandScene {
             Game.instance.curStage.showPanel(rp)
             return true
         }
+//        if point.x == 6 && point.y == 6 {
+//            let sp = SellingPanel()
+//            let tear = TheWitchsTear()
+//            tear._count = seed(min: 5, max: 11)
+//            sp._goodsList = [tear]
+//            sp.showItemCount = true
+//            sp._whichItem = [true]
+//            sp.isMixedItems = true
+//            sp._mixedItemMoney = [false]
+//            let count = seed(min: 1, max: 3)
+//            let l = Loot()
+//            for _ in 1...count {
+//                let sb = SpellBook()
+//                sb.spell = l.getRandomSacredSpell()
+//                sb._sellingPrice = 68
+//                sp._whichItem.append(false)
+//                sp._mixedItemMoney.append(true)
+//                sp._goodsList.append(sb)
+//            }
+//            sp.create()
+//            Game.instance.curStage.showPanel(sp)
+//            return true
+//        }
         if point.x == 4 && point.y == 7 && cell == CELL_ROLE {
             let stage = Game.instance.curStage!
             stage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
@@ -127,6 +150,9 @@ class CenterCamping: StandScene {
         addItem(x: 1, y: 2, item: House2(), width: 0, height: 0)
         addItem(x: 8, y: 8, item: House1(), width: 0, height: 0)
         addItem(x: 10, y: 2, item: MyHouse(), width:0, z: MyScene.MAP_LAYER_Z)
+        
+//        addItem(x: 6, y: 6, item: SKTexture(imageNamed: "seller").getNode(1, 0))
+//        _mapMatrix[6][6] = CELL_BLOCK
 //        addItem(x: 0, y: 9, item: Stump())
 //        addItem(x: 3, y: 11, item: Stump())
 //        addItem(x: 7, y: 11, item: Stump())

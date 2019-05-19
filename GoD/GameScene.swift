@@ -198,7 +198,7 @@ class GameScene: SKScene {
     
     func realScene() {
         let stage = MyStage()
-        let bs = SecretMeadow()
+        let bs = CenterCamping()
         bs.create()
         
         
@@ -215,8 +215,8 @@ class GameScene: SKScene {
         e.addProp(p: bow)
         
         
-//        bs.setRole(x: 5, y: 7, role: e)
-        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
+        bs.setRole(x: 5, y: 7, role: e)
+//        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
@@ -234,6 +234,10 @@ class GameScene: SKScene {
         e.addProp(p: po)
         e._minionsCount = 1
         e._dungeonLevel = 99
+        
+        let t = TheWitchsTear()
+        t._count = 1000
+        e._props.append(t)
         
 //        let r1 = HellBaron()
 //        r1.create(level: 1)

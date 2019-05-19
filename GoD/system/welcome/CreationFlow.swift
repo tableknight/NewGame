@@ -86,13 +86,13 @@ class CreationFlow:SKSpriteNode {
             e._pro = role![0] as! String
             e._name = selectImage._lastSelectedComponent._name
             //-------------------------------------
-            e._money = 12000
-            let t = TheWitchsTear()
-            t._count = 500
-            e._props.append(t)                   //test
-            e._dungeonLevel = 99                 //data
-            let l = Loot()
-            e._spells = l.getAllSpells()
+//            e._money = 12000
+//            let t = TheWitchsTear()
+//            t._count = 500
+//            e._props.append(t)                   //test
+//            e._dungeonLevel = 99                 //data
+//            let l = Loot()
+//            e._spells = l.getAllSpells()
             //-------------------------------------
             scene.setRole(x: 2, y: 1, role: e)
             if minion != nil {

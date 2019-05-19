@@ -186,12 +186,11 @@ class Unit:Core {
     var _physical = Magic(damage: 0, resistance: 0)
     
     func expNext() -> CGFloat {
-        return 100
-//        let level = _level + 2
-//        if Mode.debug {
-//            return level * level
-//        }
-//        return 100 * level + level * level * level * level * 0.35
+        let level = _level + 2
+        if Mode.debug {
+            return level * level
+        }
+        return 100 * level + level * level * level * level * 0.25
     }
     
     func strengthChange(value: CGFloat) {

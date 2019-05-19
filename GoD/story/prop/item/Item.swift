@@ -97,7 +97,8 @@ class TheWitchsTear:Item {
     static let NAME = "天使之泪"
     override init() {
         super.init()
-        price = 6
+        _price = 6
+        _sellingPrice = 24
         _name = TheWitchsTear.NAME
         _level = 1
         _quality = Quality.NORMAL

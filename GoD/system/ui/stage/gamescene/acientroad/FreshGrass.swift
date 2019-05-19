@@ -97,6 +97,12 @@ class ChildLizard: Natrue {
         _imgUrl = "child_lizard"
         _img = SKTexture(imageNamed: _imgUrl)
         _spellCount = 2
+        if d4() {
+            _spellsInuse = [IceGuard()]
+        }
+        if _spellCount > 1 && d(baseRate: -50) {
+            _spellsInuse.append(QuickHeal())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -119,6 +125,12 @@ class ForestGuard: Man {
         if d2() {
             _spellsInuse = [WindPunish()]
         }
+        if _spellCount > 1 && d(baseRate: -40) {
+            _spellsInuse.append(Energetic())
+        }
+        if _spellCount > 2 && d(baseRate: -80) {
+            _spellsInuse.append(IceBomb())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -138,6 +150,13 @@ class CrazyPlant: Natrue {
         _imgUrl = "crazy_plant"
         _img = SKTexture(imageNamed: _imgUrl)
         _spellCount = 2
+        if d4() {
+            _spellsInuse = [LeeAttack()]
+        }
+        
+        if d(baseRate: -55) {
+            _spellsInuse.append(OathBreaker())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -157,6 +176,9 @@ class CowCow: Natrue {
         _imgUrl = "cow_cow"
         _img = SKTexture(imageNamed: _imgUrl)
         spell12()
+        if d3() {
+            _spellsInuse = [Taunt()]
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

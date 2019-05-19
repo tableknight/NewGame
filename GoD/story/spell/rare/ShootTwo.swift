@@ -18,9 +18,9 @@ class ShootTwo: Physical, BowSkill {
     override init() {
         super.init()
         _name = "一箭双雕"
-        _description = "对随机两个目标造成攻击60%的物理伤害"
+        _description = "对随机两个目标造成攻击75%的物理伤害"
         _quality = Quality.RARE
-        _rate = 0.6
+        _rate = 0.75
         isClose = false
         autoCast = true
     }

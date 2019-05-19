@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class NoAction: Spell {
+class NoAction: Active {
     override init() {
         super.init()
     }

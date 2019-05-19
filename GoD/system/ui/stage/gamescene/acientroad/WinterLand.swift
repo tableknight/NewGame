@@ -134,6 +134,12 @@ class SnowLady: Man {
         if d4() {
             _spellsInuse = [Disappear()]
         }
+        if _spellCount > 1 && d(baseRate: -40) {
+            _spellsInuse.append(HealAll())
+        }
+        if _spellCount > 2 && d(baseRate: -80) {
+            _spellsInuse.append(TruePower())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -154,6 +160,12 @@ class FrozenSlime: Demon {
         _imgUrl = "slime"
         _img = SKTexture(imageNamed: _imgUrl)
         _spellCount = 3
+        if d4() {
+            _spellsInuse = [Sacrifice()]
+        }
+        if _spellCount > 1 && d(baseRate: -50) {
+            _spellsInuse.append(Firelord())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -199,6 +211,9 @@ class SnowSpirit: Natrue {
         spell12()
         if d7() {
             _spellsInuse = [FrozenShoot()]
+        }
+        if _spellCount > 1 && d(baseRate: -45) {
+            _spellsInuse.append(SuperWater())
         }
     }
     required init(from decoder: Decoder) throws {

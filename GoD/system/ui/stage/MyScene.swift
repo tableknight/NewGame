@@ -21,6 +21,7 @@ class MyScene: SKSpriteNode, IInitialize {
     let CELL_PORTAL = 104
     let CELL_BOX = 105
     let CELL_BLOCK = 106
+    let CELL_SELLER = 107
     let TOWER_FIRE_ENERGE = 200
     let TOWER_WATER_ENERGE = 201
     let TOWER_THUNDER_ENERGE = 202
@@ -159,6 +160,12 @@ class MyScene: SKSpriteNode, IInitialize {
             return
         }
         
+        if nextCell == CELL_SELLER {
+            deal()
+            _isMoving = false
+            return
+        }
+        
         
         var point:CGPoint = CGPoint(x: cellSize, y: cellSize)
         switch _direction {
@@ -199,6 +206,19 @@ class MyScene: SKSpriteNode, IInitialize {
             }
             this.moveEndAction()
         })
+    }
+    internal var _goodsList = Array<Prop>()
+    internal var _whichItem = Array<Bool>()
+    internal var _mixedItemMoney = Array<Bool>()
+    internal func deal() {
+        let sp = SellingPanel()
+        sp._goodsList = _goodsList
+        sp.showItemCount = true
+        sp._whichItem = _whichItem
+        sp.isMixedItems = true
+        sp._mixedItemMoney = _mixedItemMoney
+        sp.create()
+        Game.instance.curStage.showPanel(sp)
     }
     
     internal func meetMonster(_ cell:Int, _ nextX:Int, _ nextY:Int, _ touchPoint:CGPoint) {

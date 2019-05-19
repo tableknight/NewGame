@@ -94,6 +94,14 @@ class VirulentToad: Natrue {
         _imgUrl = "green_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
         spell12()
+        if d() {
+            _spellsInuse = [AttackHard()]
+        }
+        if _spellCount > 1 {
+            if d(baseRate: -50) {
+                _spellsInuse.append(LastChance())
+            }
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -112,8 +120,19 @@ class GiantWasp: Man {
         _name = "露琪"
         _imgUrl = "luki"
         _img = SKTexture(imageNamed: _imgUrl)
+        spell13()
         if d4() {
             _spellsInuse = [Reborn()]
+        }
+        if _spellCount > 1 {
+            if d(baseRate: -40) {
+                _spellsInuse.append(Disappear())
+            }
+        }
+        if _spellCount > 2 {
+            if d(baseRate: -70) {
+                _spellsInuse.append(LeeAttack())
+            }
         }
     }
     required init(from decoder: Decoder) throws {
@@ -133,8 +152,14 @@ class TreeSpirit: Man {
         _name = "树妖"
         _imgUrl = "tree_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
+        spell12()
         if d4() {
             _spellsInuse = [FragileCurse()]
+        }
+        if _spellCount > 1 {
+            if d(baseRate: -50) {
+                _spellsInuse = [DeathGaze()]
+            }
         }
     }
     required init(from decoder: Decoder) throws {
@@ -153,7 +178,16 @@ class Python: Man {
         _stars.intellect = 1.2
         _name = "花仙子"
         _imgUrl = "flower_fairy"
+        spell13()
         _img = SKTexture(imageNamed: _imgUrl)
+        if d4() {
+            _spellsInuse = [AttackPowerUp()]
+        }
+        if _spellCount > 1 {
+            if d(baseRate: -75) {
+                _spellsInuse.append(DancingDragon())
+            }
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

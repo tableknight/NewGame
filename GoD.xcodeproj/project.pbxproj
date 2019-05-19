@@ -292,6 +292,7 @@
 		09738A85227F3281009AF2EE /* LeeAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A84227F3281009AF2EE /* LeeAttack.swift */; };
 		09738A872281D2FC009AF2EE /* WindAttack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A862281D2FC009AF2EE /* WindAttack.swift */; };
 		09738A89228462B9009AF2EE /* BallLighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A88228462B9009AF2EE /* BallLighting.swift */; };
+		09738A8B228AF909009AF2EE /* SixShooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09738A8A228AF908009AF2EE /* SixShooter.swift */; };
 		097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C6226814D000B9407A /* BlackWaterTown.swift */; };
 		097EC6C9226A07C600B9407A /* DemonTownPortal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6C8226A07C600B9407A /* DemonTownPortal.swift */; };
 		097EC6CB226B695C00B9407A /* Tryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EC6CA226B695C00B9407A /* Tryer.swift */; };
@@ -688,6 +689,7 @@
 		09738A84227F3281009AF2EE /* LeeAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeeAttack.swift; sourceTree = "<group>"; };
 		09738A862281D2FC009AF2EE /* WindAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindAttack.swift; sourceTree = "<group>"; };
 		09738A88228462B9009AF2EE /* BallLighting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallLighting.swift; sourceTree = "<group>"; };
+		09738A8A228AF908009AF2EE /* SixShooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixShooter.swift; sourceTree = "<group>"; };
 		097EC6C6226814D000B9407A /* BlackWaterTown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackWaterTown.swift; sourceTree = "<group>"; };
 		097EC6C8226A07C600B9407A /* DemonTownPortal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonTownPortal.swift; sourceTree = "<group>"; };
 		097EC6CA226B695C00B9407A /* Tryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tryer.swift; sourceTree = "<group>"; };
@@ -1115,6 +1117,7 @@
 				090FEAA221BB9B2A004276BB /* OnePunch.swift */,
 				090FEAA321BB9B2A004276BB /* SwapHealth.swift */,
 				090FEAA421BB9B2A004276BB /* MagicReflect.swift */,
+				09738A8A228AF908009AF2EE /* SixShooter.swift */,
 			);
 			path = sacred;
 			sourceTree = "<group>";
@@ -1954,6 +1957,7 @@
 				09C66CDC2215BDFE00E1C153 /* TrueSight.swift in Sources */,
 				09C66C8E21FD4EC200E1C153 /* LewisBattle.swift in Sources */,
 				090FEBE821BB9B2B004276BB /* Status.swift in Sources */,
+				09738A8B228AF909009AF2EE /* SixShooter.swift in Sources */,
 				090FEBCC21BB9B2B004276BB /* FrozenShoot.swift in Sources */,
 				090FEC3221BB9B2B004276BB /* EastOfVillage.swift in Sources */,
 				090FEB7821BB9B2B004276BB /* Spirit.swift in Sources */,

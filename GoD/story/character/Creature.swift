@@ -13,6 +13,7 @@ class Creature: Unit {
         case _spellCount
         case _sensitive
         case _weapon
+        case _weaponClass
         case _seat
         case _quality
         case isMainChar
@@ -23,10 +24,26 @@ class Creature: Unit {
         _growth = try values.decode(Mains.self, forKey: ._growth)
         _spellCount = try values.decode(Int.self, forKey: ._spellCount)
         _sensitive = try values.decode(Int.self, forKey: ._sensitive)
-        _weapon = try? values.decode(Weapon.self, forKey: ._weapon)
+        let wClass = try values.decode(String.self, forKey: ._weaponClass)
+        if !wClass.isEmpty {
+            if wClass == NSStringFromClass(type(of: Bow())) {
+                _weapon = try? values.decode(Bow.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Sword())) {
+                _weapon = try? values.decode(Sword.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Dagger())) {
+                _weapon = try? values.decode(Dagger.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Instrument())) {
+                _weapon = try? values.decode(Instrument.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Fist())) {
+                _weapon = try? values.decode(Fist.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Blunt())) {
+                _weapon = try? values.decode(Blunt.self, forKey: ._weapon)
+            } else if wClass == NSStringFromClass(type(of: Wand())) {
+                _weapon = try? values.decode(Wand.self, forKey: ._weapon)
+            }
+        }
         _seat = try values.decode(String.self, forKey: ._seat)
         _quality = try values.decode(Int.self, forKey: ._quality)
-        isMainChar = try values.decode(Bool.self, forKey: .isMainChar)
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
@@ -38,7 +55,23 @@ class Creature: Unit {
         try container.encode(_weapon, forKey: ._weapon)
         try container.encode(_seat, forKey: ._seat)
         try container.encode(_quality, forKey: ._quality)
-        try container.encode(isMainChar, forKey: .isMainChar)
+        var weaponClass = ""
+        if _weapon is Bow {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Bow))
+        } else if _weapon is Sword {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Sword))
+        } else if _weapon is Instrument {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Instrument))
+        } else if _weapon is Wand {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Wand))
+        } else if _weapon is Dagger {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Dagger))
+        } else if _weapon is Blunt {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Blunt))
+        } else if _weapon is Fist {
+            weaponClass = NSStringFromClass(type(of: _weapon as! Fist))
+        }
+        try container.encode(weaponClass, forKey: ._weaponClass)
         try super.encode(to: encoder)
     }
     override init() {
@@ -154,5 +187,8 @@ class Creature: Unit {
             return true
         }
         return _weapon!.isClose
+    }
+    func d(baseRate:Int = 45) -> Bool {
+        return seed() < baseRate + _level.toInt()
     }
 }

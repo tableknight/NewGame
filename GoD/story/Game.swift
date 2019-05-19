@@ -408,6 +408,17 @@ class Game {
         let char = Game.instance.char!
         let stage = Game.instance.curStage!
         var roles = Game.roles
+        var exist = false
+        for c in roles {
+            if c._key == char._key {
+                c._level = char._level.toInt()
+                exist = true
+                break
+            }
+        }
+        if !exist {
+            char._key = ""
+        }
         if char._key.isEmpty {
             char._key = "doc\(Game.roles.count)"
             let roleDoc = RoleDocument()
@@ -417,13 +428,6 @@ class Game {
             roleDoc._key = char._key
             roleDoc._imgUrl = char._imgUrl
             roles.append(roleDoc)
-        } else {
-            for c in roles {
-                if c._key == char._key {
-                    c._level = char._level.toInt()
-                    break
-                }
-            }
         }
         Game.save(c: char, key: char._key)
         Game.saveRoles(roles: roles)

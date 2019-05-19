@@ -299,6 +299,7 @@ class MyStage: SKSpriteNode {
         _curScene.removeFromParent()
         _curScene._role.removeFromParent()
         cancelMove = true
+        Game.saving(sync: false)
         //        return
         let this = self
         setTimeout(delay: 1, completion: {

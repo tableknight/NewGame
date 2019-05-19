@@ -17,9 +17,9 @@ class OneShootDoubleKill: Physical, BowSkill {
     override init() {
         super.init()
         _name = "穿刺射击"
-        _description = "对目标和身后单位造成攻击60%的物理伤害"
+        _description = "对目标和身后单位造成攻击85%的物理伤害"
         _quality = Quality.RARE
-        _rate = 0.6
+        _rate = 0.85
         _cooldown = 1
         isClose = false
     }
@@ -30,7 +30,7 @@ class OneShootDoubleKill: Physical, BowSkill {
         let c = b._curRole
         //        let role = c._unit
         let this = self
-        let seat = getUnitBeyondTarget(seat: t._unit._seat)
+        let seat = getUnitBehindTarget(seat: t._unit._seat)
         let ts = getTargetsBySeats(seats: [seat])
         c.actionShoot {
             this.attack(t:t) {

@@ -96,8 +96,11 @@ class DarkNinja: Man {
         _imgUrl = "dark_ninja"
         _img = SKTexture(imageNamed: _imgUrl)
         spell12()
-        if d5() {
+        if d3() {
             _spellsInuse = [Disappear()]
+        }
+        if _spellCount > 1 && d(baseRate: -40) {
+            _spellsInuse.append(WindAttack())
         }
     }
     required init(from decoder: Decoder) throws {
@@ -122,6 +125,9 @@ class HellNight: Rizen {
         if d3() {
             _spellsInuse = [BargeAbout()]
         }
+        if _spellCount > 1 && d(baseRate: -50) {
+            _spellsInuse.append(Taunt())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -142,6 +148,9 @@ class BloodQueen: Demon {
         _imgUrl = "blood_queen"
         _img = SKTexture(imageNamed: _imgUrl)
         _spellCount = 3
+        if _spellCount > 1 && d(baseRate: -60) {
+            _spellsInuse.append(DeathGaze())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -165,6 +174,9 @@ class ManWizard: Man {
         spell23()
         if d6() {
             _spellsInuse = [FrozenShoot()]
+        }
+        if _spellCount > 1 && d(baseRate: -30) {
+            _spellsInuse.append(IceSpear())
         }
     }
     required init(from decoder: Decoder) throws {

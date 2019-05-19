@@ -72,6 +72,9 @@ class BloodBat: Demon {
         if d9() {
             _spellsInuse = [VampireBlood()]
         }
+        if _spellCount > 1 && d(baseRate: -40) {
+            _spellsInuse.append(AttackPowerUp())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -95,6 +98,9 @@ class Kodagu: Demon {
         if d9() {
             _spellsInuse = [VampireBlood()]
         }
+        if _spellCount > 1 && d(baseRate: -40) {
+            _spellsInuse.append(MagicConvert())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -115,6 +121,12 @@ class EvilSpirit: Demon {
         _imgUrl = "evil_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
         spell23()
+        if d5() {
+            _spellsInuse = [FireOrFired()]
+        }
+        if _spellCount > 1 && d(baseRate: -60) {
+            _spellsInuse.append(ElementMaster())
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -137,6 +149,9 @@ class HellBaron: Natrue {
         spell13()
         if d3() {
             _spellsInuse = [LifeDraw()]
+        }
+        if _spellCount > 1 && d(baseRate: -50) {
+            _spellsInuse.append(SilenceAll())
         }
     }
     required init(from decoder: Decoder) throws {

@@ -23,10 +23,14 @@ class UIEvil: UIUnit {
         var enemies = Array<Creature>()
         
         let thisOne = sc.getMonsterByIndex(index: _thisType)
-        thisOne.create(level: Core().d20() ? 1 : sc._level)
+        if sc is BossRoad {
+            thisOne.create(level: sc._level)
+        } else {
+            thisOne.create(level: Core().d20() ? 1 : sc._level)
+        }
         enemies.append(thisOne)
         
-        var nums = [1,1,1,2,2,2,3,3,3,3,3,4,4,4]
+        var nums = [1,1,2,2,3,3,3,3,3,4,4,4,5]
         if sc._level < 10 {
             nums = [1,1,1,2,2,2,2,2,3]
         }

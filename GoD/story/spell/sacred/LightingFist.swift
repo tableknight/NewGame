@@ -32,7 +32,7 @@ class LightingFist:Physical, HandSkill {
                     t.showValue(value: damage)
                     let thunderDamage = self.thunderFactor(from: self._battle._curRole, to: t) * damage * 0.35
                     setTimeout(delay: 0.5, completion: {
-                        t.showValue(value: thunderDamage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
+                        t.showValue(value: thunderDamage, criticalFromSpell: false, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
                             if self.d5() && !t.isDead() {
                                 t.showText(text: "TR -10") {
                                     completion()

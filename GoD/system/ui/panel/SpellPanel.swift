@@ -310,6 +310,12 @@ class SpellInfo:SKSpriteNode, IPanelSize {
         if !(_spell is Passive) && !(_spell is Auro) {
             text += "，冷却\(cd)回合"
         }
+        if spell is BowSkill {
+            text += "，需要弓"
+        }
+        if spell is HandSkill {
+            text += "，需要空手"
+        }
 //        if _spell._tear > 0 {
 //            text += "，消耗\(TheWitchsTear.NAME)x\(_spell._tear)"
 //        }

@@ -18,7 +18,7 @@ class WaterCopy:Magical {
         super.init()
         _name = "水分身"
         _description = "召唤一个水分身，继承所有属性，无法攻击"
-        _quality = Quality.RARE
+        _quality = Quality.SACRED
         _cooldown = 5
         autoCast = true
     }
@@ -39,6 +39,8 @@ class WaterCopy:Magical {
             copy._extensions.avoid = c.getAvoid()
             copy._extensions.mind = c.getMind()
             copy._elementalResistance.water = 50
+            copy._rhythm = 0
+//            copy.hasAction = false
             let seats = b.getEmptySeats()
             copy._seat = seats.one()
             let u = b.addPlayerMinion(unit: copy)

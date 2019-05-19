@@ -145,6 +145,16 @@ class BoneWitch: Rizen {
         _img = SKTexture(imageNamed: _imgUrl)
         spell13()
         _spellsInuse = [FireBreath()]
+        if _spellCount > 1 {
+            if d(baseRate: -45) {
+                _spellsInuse.append(Energetic())
+            }
+        }
+        if _spellCount > 2 {
+            if d(baseRate: -75) {
+                _spellsInuse.append(FireRain())
+            }
+        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -164,6 +174,14 @@ class RedEyeDemon: Demon {
         _imgUrl = "red_eye_demon"
         _img = SKTexture(imageNamed: _imgUrl)
         spell12()
+        if d8() {
+            _spellsInuse = [ChaosAttack()]
+        }
+        if _spellCount > 1 {
+            if d(baseRate: -65) {
+                _spellsInuse.append(MagicReflect())
+            }
+        }
     }
     override func create(level: CGFloat) {
         super.create(level: level)
@@ -192,8 +210,11 @@ class DeadSpirit: Rizen {
         if d4() {
             _spellsInuse = [DeathStrike()]
         }
-        if d8() {
+        if d(baseRate: -40) {
             _spellsInuse.append(Energetic())
+        }
+        if _spellCount > 2 && d(baseRate: -65) {
+            _spellsInuse.append(BallLighting())
         }
     }
     required init(from decoder: Decoder) throws {
@@ -216,6 +237,9 @@ class WasteWalker: Rizen {
         _spellCount = 2
         if d4() {
             _spellsInuse = [Cruel()]
+        }
+        if d(baseRate: -55) {
+            _spellsInuse.append(Sacrifice())
         }
     }
     required init(from decoder: Decoder) throws {
