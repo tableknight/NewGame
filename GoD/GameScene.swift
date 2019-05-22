@@ -13,9 +13,12 @@ import GameplayKit
 class GameScene: SKScene {
     override func didMove(to view: SKView) {
         Game.instance.scene = self
-//        realScene()
+        Game.calcCellSize()
+//        let s = Game.instance.outside_b.getCell(5, 12, 2, 2).getCell(0, 1, 1, 2)
+//        addChild(SKSpriteNode(texture: s))
+        realScene()
 //        battle()
-        homePage()
+//        homePage()
 //        let rd = RoleDocument()
 //        rd._name = "yingzi"
 //        rd._key = "as"

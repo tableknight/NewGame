@@ -120,17 +120,17 @@ class Scenery:Core {
     }
     
     internal func createMovingEvils() {
-        for _ in 1..._evilCount {
-            let sed = seed(max:_evilList.count)
-            let evilId = _evilList[sed]
-            let evil = createEvilById(evilId)
-            let unit = UIUnit()
-//            unit.setTexture(evil._img)
-//            unit.setSpeed(evil._moveSpeed)
-            unit._contentUnit = evil
-            putUnitOnGround(unit)
-            _units.append(unit)
-        }
+//        for _ in 1..._evilCount {
+//            let sed = seed(max:_evilList.count)
+//            let evilId = _evilList[sed]
+//            let evil = createEvilById(evilId)
+//            let unit = UIUnit()
+////            unit.setTexture(evil._img)
+////            unit.setSpeed(evil._moveSpeed)
+//            unit._contentUnit = evil
+//            putUnitOnGround(unit)
+//            _units.append(unit)
+//        }
     }
     
     private func putUnitOnGround(_ unit:UIUnit) {

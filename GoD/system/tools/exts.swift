@@ -167,7 +167,16 @@ extension SKSpriteNode {
 extension SKTexture {
     func getCell(_ x:CGFloat, _ y:CGFloat, _ wSize:CGFloat = 1, _ hSize:CGFloat = 1) -> SKTexture {
 //        let cellSize = Game.instance.cellSize
-        let cellSize:CGFloat = 48
+        let realSize:CGFloat = Game.instance.cellSize
+        var cellSize:CGFloat = 48
+        let tnode = SKSpriteNode(texture: self)
+        let xw = tnode.size.width.toInt() % realSize.toInt()
+        if xw == 0 {
+            cellSize = realSize
+        }
+//        if self.size().width % 64 == 0 {
+//
+//        }
         let w = size().width
         let h = size().height
         let _y = h / cellSize - y - 1
@@ -177,14 +186,20 @@ extension SKTexture {
         let rect = CGRect(x: x * width, y: _y * height, width: width * wSize, height: height * hSize)
 //        let rect = CGRect(x: 1 / 3, y: 1 / 4, width: 1 / 3, height: 1 / 4)
         let node = SKSpriteNode(texture: SKTexture(rect: rect, in: self))
-//        node.size = CGSize(width: 48, height: 48)
+        node.size = CGSize(width: realSize * wSize, height: realSize * hSize)
 //        node.size.width = cellSize * 1.5
 //        node.size.height = cellSize * 1.5
         let view = SKView()
         return view.texture(from: node)!
     }
     func getNode(_ x:CGFloat, _ y:CGFloat, _ wSize:CGFloat = 1, _ hSize:CGFloat = 1) -> SKSpriteNode {
-        let cellSize:CGFloat = 48
+        let realSize:CGFloat = Game.instance.cellSize
+        var cellSize:CGFloat = 48
+        let tnode = SKSpriteNode(texture: self)
+        let xw = tnode.size.width.toInt() % realSize.toInt()
+        if xw == 0 {
+            cellSize = realSize
+        }
 //        let cellSize = Game.instance.cellSize
         let w = size().width
         let h = size().height
@@ -195,6 +210,7 @@ extension SKTexture {
         let rect = CGRect(x: x * width, y: _y * height, width: width * wSize, height: height * hSize)
         //        let rect = CGRect(x: 1 / 3, y: 1 / 4, width: 1 / 3, height: 1 / 4)
         let node = SKSpriteNode(texture: SKTexture(rect: rect, in: self))
+        node.size = CGSize(width: realSize * wSize, height: realSize * hSize)
 //        node.size = CGSize(width: 48, height: 48)
 //        node.size.width = cellSize * 1.5 * wSize
 //        node.size.height = cellSize * 1.5 * hSize

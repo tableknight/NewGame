@@ -233,7 +233,7 @@ class Game {
     static let HPBAR_COLOR = UIColor.red
     static let EXPBAR_COLOR = UIColor.green
     static let CORNER_RADIUS:CGFloat = 3
-    static let CELLSIZE:CGFloat = 72
+    static var CELLSIZE:CGFloat = 80
     static let ICON_GAP:CGFloat = 12
     static let FRAME_SIZE:CGFloat = 0.3
     static let instance = Game()
@@ -303,7 +303,7 @@ class Game {
 //        print(c)
         _size = 48
         _fontSize = _size * 0.25
-        cellSize = 48
+        cellSize = 61
     }
     func sayHello() {
         print("hello!")
@@ -462,6 +462,24 @@ class Game {
         Game.instance.stage.showLogs()
     }
     static var roles = Array<RoleDocument>()
+    static func calcCellSize() {
+        let bounds = UIScreen.main.bounds.size
+        var uiSize:CGFloat = 72
+        var imgSize:CGFloat = 48
+        if bounds.width == 375 && bounds.height == 667 { //iphone8
+            uiSize = 80
+            imgSize = 61
+        } else if bounds.width == 414 && bounds.height == 736 { //iphone8 plus
+            uiSize = 80
+            imgSize = 61
+        } else if bounds.width == 414 && bounds.height == 896 { //iphone xr xsmax
+            
+        } else if bounds.width == 375 && bounds.height == 812 { //iphone x
+            
+        }
+        Game.CELLSIZE = uiSize
+        Game.instance.cellSize = imgSize
+    }
 }
 func debugger(_ text:String) {
     print(text)
@@ -506,18 +524,7 @@ func node2texture(_ node:SKNode) -> SKTexture {
     let view = SKView()
     return view.texture(from: node)!
 }
-func createEvilById(_ id:Int) -> Creature {
-    switch id {
-    case EvilId.Mummy:
-        return Mummy()
-    case EvilId.Slime:
-        return Slime()
-    default:
-        debug("evil id not found!")
-    }
-    
-    return Creature()
-}
+
 func rand(min:Int = 0, max:Int = 101) -> Int {
     return Int(arc4random_uniform(UInt32(max + 1 - min))) + min
 }
@@ -532,8 +539,9 @@ func setTimeout(delay:CGFloat, completion: @escaping () -> Void) {
 }
 func showMsg(text:String) {
     let cellSize = Game.instance.cellSize
+    let fontSize = cellSize * 0.5
     let node = SKSpriteNode()
-    let width = (text.count * 24 + 100).toFloat()
+    let width = (text.count * fontSize.toInt() + 100).toFloat()
     let rect = CGRect(x: -width * 0.5, y: -cellSize, width: width, height: cellSize * 2)
     let bg = SKShapeNode(rect: rect, cornerRadius: 4)
     bg.fillColor = UIColor.black
@@ -545,7 +553,7 @@ func showMsg(text:String) {
     node.addChild(border)
     
     let l = Label()
-    l.fontSize = 24
+    l.fontSize = fontSize
     l.align = "center"
     l.fontColor = UIColor.white
     l.text = text
