@@ -97,6 +97,7 @@ class TheWitchsTear:Item {
     static let NAME = "天使之泪"
     override init() {
         super.init()
+        _showChar = "泪"
         _price = 6
         _sellingPrice = 24
         _name = TheWitchsTear.NAME

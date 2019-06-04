@@ -24,3 +24,4 @@ class SummonUnit: Creature {
         try super.encode(to: encoder)
     }
 }
+

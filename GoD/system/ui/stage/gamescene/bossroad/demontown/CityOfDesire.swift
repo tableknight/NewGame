@@ -22,7 +22,9 @@ class CityOfDesire: DemonTown {
         super.init(coder: aDecoder)
     }
     override func createSize() {
-        halfSize = seedFloat(min: 3, max: 6)
+//        halfSize = seedFloat(min: 3, max: 6)
+        hSize = [6,6,6,8,8,8,10,10,10].one()
+        vSize = [6,6,6,8,8,8,10,10,10].one()
 //        halfSize = 6
     }
     override func getMonsterByIndex(index: Int) -> Creature {

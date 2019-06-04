@@ -39,27 +39,7 @@ class SellingPanel: UIPanel {
                 let i = _goodsList.index(of: prop)!
                 if isMixedItems {
                     if _mixedItemMoney[i] {
-                        let props = Game.instance.char._props
-                        var t = TheWitchsTear()
-                        t._count = 0
-                        for p in props {
-                            if p is TheWitchsTear {
-                                t = p as! TheWitchsTear
-                                break
-                            }
-                        }
-                        if t._count < goods.tear {
-                            showMsg(text: "眼泪数量不足以支付。")
-                            return
-                        }
-                        t._count -= goods.tear
-                        if hasBuyAction {
-                            buyAction()
-                        } else {
-                            _char.addProp(p: goods._displayItemType as! Prop)
-                        }
-                        pageReload()
-                        createPropList()
+                        buyByTears(goods)
 
                     } else {
                         if showItemCount {
@@ -127,27 +107,7 @@ class SellingPanel: UIPanel {
                     return
                 }
                 if _priceType == 1 {
-                    let props = Game.instance.char._props
-                    var t = TheWitchsTear()
-                    t._count = 0
-                    for p in props {
-                        if p is TheWitchsTear {
-                            t = p as! TheWitchsTear
-                            break
-                        }
-                    }
-                    if t._count < goods.tear {
-                        showMsg(text: "眼泪数量不足以支付。")
-                        return
-                    }
-                    t._count -= goods.tear
-                    if hasBuyAction {
-                        buyAction()
-                    } else {
-                        _char.addProp(p: goods._displayItemType as! Prop)
-                    }
-                    pageReload()
-                    createPropList()
+                    buyByTears(goods)
                 } else {
                     if goods.price > _char._money {
                         showMsg(text: "金币不足以支付。")
@@ -167,20 +127,37 @@ class SellingPanel: UIPanel {
         }
         
         if _sellbutton.contains(touchPoint!) {
-            if nil != _lastSelectedIcon && _propBox.contains(_lastSelectedIcon) {
-                let item = _lastSelectedIcon._displayItemType as! Prop
-                _char.addMoney(num: item.price)
-                _char.removeProp(p: item)
-                
-                let pi = _lastSelectedIcon as! PropIcon
-                pi.count = item._count
-                
-                if nil == _char.hasProp(p: item) || item is Outfit {
+            for p in _propBox.children {
+                let i = p as! PropIcon
+                if i.selected {
+                    let item = i._displayItemType as! Prop
+                    _char.addMoney(num: item.price)
+                    _char.removeProp(p: item)
+                    
+//                    let pi = _lastSelectedIcon as! PropIcon
+//                    pi.count = item._count
+                    
+//                    if nil == _char.hasProp(p: item) || item is Outfit {
+//                    }
                     pageReload()
+                    reshowPlayerMoney()
                 }
-                reshowPlayerMoney()
-                return
             }
+            return
+//            if nil != _lastSelectedIcon && _propBox.contains(_lastSelectedIcon) {
+//                let item = _lastSelectedIcon._displayItemType as! Prop
+//                _char.addMoney(num: item.price)
+//                _char.removeProp(p: item)
+//
+//                let pi = _lastSelectedIcon as! PropIcon
+//                pi.count = item._count
+//
+//                if nil == _char.hasProp(p: item) || item is Outfit {
+//                    pageReload()
+//                }
+//                reshowPlayerMoney()
+//                return
+//            }
         }
         
         for node in _propBox.children {
@@ -189,9 +166,9 @@ class SellingPanel: UIPanel {
                 if icon.selected {
                     icon.selected = false
                 } else {
-                    _lastSelectedIcon?.selected = false
+//                    _lastSelectedIcon?.selected = false
+//                    _lastSelectedIcon = icon
                     icon.selected = true
-                    _lastSelectedIcon = icon
                     displayInfos(icon: icon)
                 }
             }
@@ -216,6 +193,33 @@ class SellingPanel: UIPanel {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    private func buyByTears(_ goods:SellingItemIcon) {
+        let props = Game.instance.char._props
+        var t = TheWitchsTear()
+        t._count = 0
+        for p in props {
+            if p is TheWitchsTear {
+                t = p as! TheWitchsTear
+                break
+            }
+        }
+        if t._count < goods.tear {
+            showMsg(text: "眼泪数量不足以支付。")
+            return
+        }
+        t._count -= goods.tear
+        if t._count < 1 {
+            Game.instance.char.removeProp(p: t)
+        }
+        if hasBuyAction {
+            buyAction()
+        } else {
+            _char.addProp(p: goods._displayItemType as! Prop)
+        }
+        pageReload()
+        createPropList()
     }
     
     override func createPanelbackground() {

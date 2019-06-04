@@ -65,11 +65,11 @@ class EastOfNewComersVillage: UIScene {
         let stage = Game.instance.stage!
         if stage.isUpperPoint {
             if 8 == pos {
-                let scene = MagicHouseInside()
-                stage.switchScene(next: scene, afterCreation: {
-                    scene.setPos(pos: 10)
-                    stage._char.faceNorth()
-                })
+//                let scene = MagicHouseInside()
+//                stage.switchScene(next: scene, afterCreation: {
+//                    scene.setPos(pos: 10)
+//                    stage._char.faceNorth()
+//                })
             }
         }
     }

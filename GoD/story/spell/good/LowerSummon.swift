@@ -23,26 +23,37 @@ class LowerSummon:Magical {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let seats = _battle.getEmptySeats()
         let b = _battle!
+        let seats = _battle.getEmptySeats(top: !b._curRole.playerPart)
         _battle._curRole.actionCast {
             let seat = seats.one()
             let uw = UndeadWarrior()
             uw.create(level: b._curRole._unit._level)
             uw._seat = seat
-            let bu = b.addPlayerMinion(unit: uw)
+            let bu = self._battle._curRole.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
             bu.actionSummon {
                 completion()
             }
         }
     }
     override func selectable() -> Bool {
-        if _battle._playerPart.count >= 6 {
-            return false
-        }
-        for u in _battle._playerPart {
-            if u._unit is UndeadWarrior {
+        if _battle._curRole.playerPart {
+            if _battle._playerPart.count >= 6 {
                 return false
+            }
+            for u in _battle._playerPart {
+                if u._unit is UndeadWarrior {
+                    return false
+                }
+            }
+        } else {
+            if _battle._enemyPart.count >= 6 {
+                return false
+            }
+            for u in _battle._enemyPart {
+                if u._unit is UndeadWarrior {
+                    return false
+                }
             }
         }
         return true

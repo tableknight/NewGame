@@ -147,6 +147,7 @@ class RolePanel:UIPanel {
         lv.fontSize = 22
         lv.position.x = startX + cellSize * 1.5 + gap
         lv.position.y = startY - cellSize * 0.25 - 10
+        lv.fontColor = QualityColor.getColor(unit._quality)
         _propertyLayer.addChild(lv)
         
         let race = Label()
@@ -259,7 +260,7 @@ class RolePanel:UIPanel {
         let y5 = y4 - attrHeight
         let y6 = y5 - attrHeight
         _attrStrength = addAttrLabel(x: x1, y: y1, text: "力量", value: bUnitRole.getStrength())
-        _attrStamina = addAttrLabel(x: x1, y: y2, text: "耐力", value: bUnitRole.getStamina())
+        _attrStamina = addAttrLabel(x: x1, y: y2, text: "体力", value: bUnitRole.getStamina())
         _attrAgility = addAttrLabel(x: x1, y: y3, text: "敏捷", value: bUnitRole.getAgility())
         _attrIntellect = addAttrLabel(x: x1, y: y4, text: "智力", value: bUnitRole.getIntellect())
         

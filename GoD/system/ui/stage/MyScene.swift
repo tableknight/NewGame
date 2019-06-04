@@ -101,7 +101,7 @@ class MyScene: SKSpriteNode, IInitialize {
         let nextPoint = getNextPoint()
         let nextY = nextPoint.y.toInt()
         let nextX = nextPoint.x.toInt()
-        if nextX < 0 || nextX > halfSize.toInt() * 2 || nextY < 0 || nextY > halfSize.toInt() * 2 - 1 {
+        if nextX < 0 || nextX > hSize.toInt() || nextY < 0 || nextY > vSize.toInt() - 1 {
             debug("out of matrix")
             _isMoving = false
             return
@@ -244,7 +244,7 @@ class MyScene: SKSpriteNode, IInitialize {
         return _itemLayer.childNode(withName: getItemName(CGPoint(x: x, y: y))) as! UIItem
     }
     func convertPixelToIndex(x:CGFloat, y:CGFloat) -> CGPoint {
-        return CGPoint(x: round(x / cellSize) + halfSize, y: halfSize - round(y / cellSize))
+        return CGPoint(x: round(x / cellSize) + hSize / 2, y: vSize / 2 - round(y / cellSize))
     }
     func getNextPoint() -> CGPoint {
         let position = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
@@ -262,7 +262,7 @@ class MyScene: SKSpriteNode, IInitialize {
         }
     }
     func isPointValid(point:CGPoint) -> Bool {
-        if point.x < 0 || point.y < 0 || point.x > halfSize * 2 || point.y > halfSize * 2 - 1 {
+        if point.x < 0 || point.y < 0 || point.x > hSize || point.y > vSize {
             return false
         }
         return true
@@ -349,9 +349,9 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     internal func createMap() {
         
-        _mapSet.groundHeight = halfSize
-        let start = -halfSize
-        let end = halfSize
+        _mapSet.groundHeight = vSize / 2
+        let start = -hSize / 2
+        let end = hSize / 2
         
         let yOffset:CGFloat = cellSize
         let mapStart = _mapSet.getMapPart(part: "start")
@@ -364,7 +364,7 @@ class MyScene: SKSpriteNode, IInitialize {
         _mapLayer.addChild(mapEnd)
         let wallStart = _mapSet.getWallPart(part: "start")
         wallStart.position.x = mapStart.position.x
-        wallStart.position.y = -cellSize * (halfSize + 1) + yOffset
+        wallStart.position.y = -cellSize * (vSize / 2 + 1) + yOffset
         _mapLayer.addChild(wallStart)
         
         
@@ -396,16 +396,16 @@ class MyScene: SKSpriteNode, IInitialize {
     
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (-halfSize + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         item.zPosition = MyScene.ITEM_LAYER_Z + y
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)
     }
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode, z:CGFloat = -1) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (-halfSize + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         if z == -1 {
             item.zPosition = MyScene.ITEM_LAYER_Z + y
         } else {
@@ -416,8 +416,8 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     internal func addGround(x:CGFloat, y:CGFloat, item:SKSpriteNode, z:CGFloat = -1) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (-halfSize + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         if z > -1 {
             item.zPosition = z
         } else {
@@ -435,8 +435,8 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     internal func addItem(x:CGFloat, y:CGFloat, item:SKSpriteNode, width: CGFloat = 0, height: CGFloat = 0, cell: Int = MyScene.CELL_ITEM, z:CGFloat = -1) {
         item.anchorPoint = CGPoint(x: 0, y: 0)
-        item.position.x = (-halfSize - 0.5 + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 - 0.5 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         if z == -1 {
             item.zPosition = MyScene.ITEM_LAYER_Z + y
         } else {
@@ -455,13 +455,13 @@ class MyScene: SKSpriteNode, IInitialize {
 //        }
     }
     internal func createCoord() {
-        for y in 0...halfSize.toInt() * 2 - 1 {
-            for x in 0...halfSize.toInt() * 2 {
+        for y in 0...vSize.toInt() {
+            for x in 0...hSize.toInt() {
                 let l = Label()
                 l.fontSize = 18
                 l.text = "\(x),\(y)"
-                l.position.x = (-halfSize - 0.5 + x.toFloat()) * cellSize
-                l.position.y = (halfSize + 0.5 - y.toFloat()) * cellSize
+                l.position.x = (-hSize / 2 - 0.5 + x.toFloat()) * cellSize
+                l.position.y = (vSize / 2 + 0.5 - y.toFloat()) * cellSize
                 l.align = "center"
                 l.zPosition = MyScene.ITEM_LAYER_Z
                 _itemLayer.addChild(l)
@@ -469,7 +469,7 @@ class MyScene: SKSpriteNode, IInitialize {
         }
     }
     internal func addMask(x:CGFloat, y:CGFloat) {
-        let item = SKShapeNode(rect: CGRect(x: (-halfSize + x - 0.5) * cellSize, y: (4 - y - 0.5) * cellSize, width: cellSize, height: cellSize))
+        let item = SKShapeNode(rect: CGRect(x: (-hSize / 2 + x - 0.5) * cellSize, y: (4 - y - 0.5) * cellSize, width: cellSize, height: cellSize))
 //        item.anchorPoint = CGPoint(x: 0.5, y: 0)
 //        item.position.x = (startX + x) * cellSize
 //        item.position.y = (3.5 - y) * cellSize
@@ -496,8 +496,8 @@ class MyScene: SKSpriteNode, IInitialize {
         char.faceSouth()
         _roleLayer.addChild(char)
 //        char.anchorPoint = CGPoint(x: 0.5, y: 1)
-        char.position.x = (x - halfSize) * cellSize
-        char.position.y = (halfSize - y) * cellSize
+        char.position.x = (x - hSize / 2) * cellSize
+        char.position.y = (vSize / 2 - y) * cellSize
         char.zPosition = MyScene.ROLE_LAYER_Z
         _role = char
 //        Game.instance.role = _role
@@ -506,8 +506,8 @@ class MyScene: SKSpriteNode, IInitialize {
     
     func setRole(x:CGFloat, y:CGFloat, char:BUnit) {
         _roleLayer.addChild(char)
-        char.position.x = (x - halfSize) * cellSize
-        char.position.y = (halfSize - y) * cellSize
+        char.position.x = (x - hSize / 2) * cellSize
+        char.position.y = (vSize / 2 - y) * cellSize
         char.zPosition = MyScene.ROLE_LAYER_Z
         _role = char
     }
@@ -578,13 +578,31 @@ class MyScene: SKSpriteNode, IInitialize {
             return FireEnergeTower()
         }
     }
+    internal var hSize:CGFloat {
+        set {
+            _hSize = newValue
+        }
+        get {
+            return _hSize
+        }
+    }
+    internal var vSize:CGFloat {
+        set {
+            _vSize = newValue
+        }
+        get {
+            return _vSize
+        }
+    }
 //    internal var wallShadow = SKTexture(imageNamed: "wall_deep.png")
     internal var _mapSet:GroundSets!
     internal var _mapLayer = SKSpriteNode()
     internal var _roleLayer = SKSpriteNode()
     internal var _itemLayer = SKSpriteNode()
     internal var _maskLayer = SKSpriteNode()
-    internal var halfSize:CGFloat = 6
+//    internal var halfSize:CGFloat = 6
+    internal var _hSize:CGFloat = 12
+    internal var _vSize:CGFloat = 12
     internal var _direction = 0
     internal var _isMoving = false
     internal var _nextDirection = 0

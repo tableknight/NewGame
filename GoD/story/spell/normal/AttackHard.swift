@@ -32,6 +32,7 @@ class AttackHard:Physical {
                         completion()
                     }
                 }
+                t.attacked1()
             }
         }
     }

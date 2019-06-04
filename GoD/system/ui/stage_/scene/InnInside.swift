@@ -206,7 +206,7 @@ class PropertiesExplainPanel:UIPanel {
         //        addChild(west)
         var next = createLabel(y: cellSize * 2, text: "主属性：")
         _page1.addChild(next)
-        next = createLabel(y: next.position.y - gap, text: "耐力：影响攻击、防御、精神（减少）、生命")
+        next = createLabel(y: next.position.y - gap, text: "体力：影响攻击、防御、精神（减少）、生命")
         _page1.addChild(next)
         next = createLabel(y: next.position.y - gap, text: "力量：影响攻击、速度、命中、必杀、精神（减少）、生命")
         _page1.addChild(next)

@@ -71,9 +71,21 @@ class MyStage: SKSpriteNode {
         _curScene.touch(touchPoint: touchPoint)
     }
     func loadScene(scene:MyScene) {
-        addChild(scene)
         _curScene = scene
-//        _scenes.append(scene)
+        showSceneMask()
+        _showingLabel.text = scene._name
+        _showingLabel.isHidden = false
+        cancelMove = true
+        setTimeout(delay: 1, completion: {
+            let out = SKAction.fadeOut(withDuration: TimeInterval(1))
+            self.addChild(scene)
+            self._showingLabel.isHidden = true
+            
+            self._sceneChangeMask.run(out) {
+                self._sceneChangeMask.isHidden = true
+                self.cancelMove = false
+            }
+        })
     }
     func createMenu() {
         let y = -cellSize * 6.5
@@ -311,7 +323,9 @@ class MyStage: SKSpriteNode {
             }
             //        return
             //            let go = SKAction.sequence([wait, out])
-            this.loadScene(scene: next)
+//            this.loadScene(scene: next)
+            self.addChild(next)
+            self._curScene = next
             self._showingLabel.isHidden = true
             completion()
             

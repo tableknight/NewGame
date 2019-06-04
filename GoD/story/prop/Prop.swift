@@ -43,6 +43,7 @@ class Prop:Core, IDisplay {
         case _quality
         case _count
     }
+    var _showChar = ""
     var _name:String = ""
     var _description:String = ""
     var _level:CGFloat = 1

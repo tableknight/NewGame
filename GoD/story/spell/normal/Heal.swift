@@ -13,7 +13,7 @@ class Heal: Magical {
         _quality = Quality.NORMAL
         targetEnemy = false
         canBeTargetSelf = true
-        _name = "治疗"
+        _name = "回春之术"
         _cooldown = 2
         _description = "恢复己方目标最大生命55%的生命值"
     }

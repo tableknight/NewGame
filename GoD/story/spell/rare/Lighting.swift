@@ -27,7 +27,9 @@ class Lighting: Passive {
         }
         let t = _battle._selectedTarget!
         let damage = thunderDamage(t)
-        c.showText(text: "Lighting") {
+        c.showText(text: self._name) {
+        }
+        setTimeout(delay: 1, completion: {
             if !self.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
@@ -35,7 +37,8 @@ class Lighting: Passive {
                     }
                 }
             }
-        }
+            t.lighting1()
+        })
     }
     
     override func findTarget() {

@@ -22,7 +22,9 @@ class CityOfSin: DemonTown {
         super.init(coder: aDecoder)
     }
     override func createSize() {
-        halfSize = 6
+//        halfSize = 6
+        hSize = 12
+        vSize = 12
     }
     override func getMonsterByIndex(index: Int) -> Creature {
         if index == 1 {

@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class ScreamLoud:Magical {
+class ScreamLoud:Magical, Curse {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -16,8 +16,8 @@ class ScreamLoud:Magical {
     }
     override init() {
         super.init()
-        _name = "尖啸"
-        _description = "大声的吼叫，大概率降低所有敌方目标30%防御和30点命中，持续3回合"
+        _name = "震耳发溃"
+        _description = "发出剧烈的怒吼，降低所有敌方目标30%防御和30点命中，持续3回合"
         _quality = Quality.NORMAL
         _cooldown = 1
         autoCast = true
@@ -27,8 +27,8 @@ class ScreamLoud:Magical {
         _battle._curRole.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
-                    t.actionDebuff {
-                        t.showText(text: "SCARED")
+                    t.actionWait {
+                        t.showText(text: Spell.CURSED)
                         if t.hasStatus(type: "_scared") {
                             let s = t.getStatus(type: "_scared")
                             s?._timeleft = 3
@@ -48,9 +48,10 @@ class ScreamLoud:Magical {
                             t.addStatus(status: s)
                         }
                     }
+                    t.mixed2(index: 13)
                 }
             }
-            setTimeout(delay: 2.5, completion: completion)
+            setTimeout(delay: 1.5, completion: completion)
         }
     }
     

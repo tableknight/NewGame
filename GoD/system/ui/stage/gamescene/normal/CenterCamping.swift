@@ -130,14 +130,14 @@ class CenterCamping: StandScene {
             let store = GeneralStore()
             let char = self._role!
             Game.instance.curStage.switchScene(next: store, completion: {
-                store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
+                store.setRole(x: store._doorX.toFloat(), y: self.vSize - 3, char: char)
             })
         } else
         if pos.x == 10 && pos.y == 9 {
             let store = OutfitStore()
             let char = self._role!
             Game.instance.curStage.switchScene(next: store, completion: {
-                store.setRole(x: store._doorX.toFloat(), y: self.halfSize * 2 - 3, char: char)
+                store.setRole(x: store._doorX.toFloat(), y: self.vSize - 3, char: char)
             })
         }
     }

@@ -110,24 +110,29 @@ class Loot: Core {
     func loot(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 35 * lucky  {
+        if chance < 20 * lucky  {
             let a = lootArmor(level: level)
             _props.append(a)
         }
         chance = seed().toFloat()
-        if chance < 35 * lucky {
+        if chance < 20 * lucky {
             let w = lootWeapon(level: level)
             _props.append(w)
         }
         chance = seed().toFloat()
-        if chance < 55 * lucky {
+        if chance < 50 * lucky {
             let item = getItem()
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 35 * lucky {
+        if chance < 5 * lucky {
+            let item = getSpellBook()
+            _props.append(item)
+        }
+        chance = seed().toFloat()
+        if chance < 25 * lucky {
             let s = getSacred()
-            if nil != s && s!._level <= level + 5 {
+            if nil != s && s!._level <= level + 5 && s!._level >= level - 30 {
                 _props.append(s!)
             }
         }
@@ -152,23 +157,22 @@ class Loot: Core {
     
     
     
-    func getSpellBook(role:Creature) -> Spell {
+    func getSpellBook() -> SpellBook {
         let sed = seed()
-        var spellAttay = Array<Int>()
+        var s = Spell()
         
         if sed < 50 {
-            spellAttay = _normalSpellArray
-            return getNormalSpell(id: spellAttay.one())
+            s = getRandomNormalSpell()
         } else if sed < 80 {
-            spellAttay = _goodSpellArray
-            return getGoodSpell(id: spellAttay.one())
+            s = getRandomGoodSpell()
         } else if sed < 96 {
-            spellAttay = _rareSpellArray
-            return getRareSpell(id: spellAttay.one())
+            s = getRandomRareSpell()
         } else {
-            spellAttay = _sacredSpellArray
-            return getSacredSpell(id: spellAttay.one())
+            s = getRandomSacredSpell()
         }
+        let sb = SpellBook()
+        sb.spell = s
+        return sb
     }
     func getAllSpells() -> Array<Spell> {
         var spells = Array<Spell>()
@@ -432,7 +436,7 @@ class Loot: Core {
     }
     
     func getItem() -> Item {
-        var list = [0,0,0,0,0,0]
+        var list = [0,0,0,0,0,0,0,0,0,0]
         list += [1,1,1,1,1,1]
         list += [2,2,2]
         list += [3,3]
@@ -709,7 +713,7 @@ class Loot: Core {
     func getSacred() -> Outfit? {
         let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
         if outfit._level <= _char._level + 5 {
-            if seed(max: 135) <= outfit._chance {
+            if seed(max: 150) <= outfit._chance {
                 outfit.create()
                 return outfit
             }

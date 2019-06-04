@@ -47,9 +47,9 @@ class StandScene: MyScene {
 //    }
     override func createMapMatrix() {
         _mapMatrix = []
-        for _ in 0...halfSize.toInt() * 2 - 1 {
+        for _ in 0...vSize.toInt() {
             var row:Array<Int> = []
-            for _ in 0...halfSize.toInt() * 2 {
+            for _ in 0...hSize.toInt() {
                 let cell = CELL_EMPTY
                 row.append(cell)
                 

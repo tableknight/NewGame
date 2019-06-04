@@ -15,7 +15,7 @@ class WindAttack: Physical {
         _description = "对目标造成攻击80%的物理伤害，对身后单位造成本次伤害的一半"
         _rate = 0.8
         _quality = Quality.GOOD
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
@@ -38,15 +38,17 @@ class WindAttack: Physical {
                         completion()
                     }
                 }
+                t.attacked1()
                 let seat = self.getUnitBehindTarget(seat: t._unit._seat)
                 let tb = self._battle.getUnitBySeat(seat: seat)
                 if nil != tb {
-                    setTimeout(delay: 0.5, completion: {
+                    setTimeout(delay: 0.25, completion: {
                         let d2 = damage * 0.5
                         if !self.hadSpecialAction(t: tb!, completion: {}) {
                             tb!.actionAttacked {
                                 tb!.showValue(value: d2)
                             }
+                            tb!.attacked1()
                         }
                     })
                 }

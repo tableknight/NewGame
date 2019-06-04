@@ -70,20 +70,20 @@ class LootPanel:UIPanel {
     
     func create(props:Array<Prop>) {
         _props = props
+        _bgHeight = _standardHeight * 0.5 + cellSize * 1.35
         createCloseButton()
         listProps()
-        if _props.count > 8 {
-            let extY = ceil(_props.count.toFloat() / 4) - 2
-            _bgHeight = _standardHeight * 0.5 + extY * cellSize * 1.25
-        } else {
-            _bgHeight = _standardHeight * 0.5
-        }
+//        let extY = ceil(_props.count.toFloat() / 4) - 2
+//        if _props.count > 8 {
+//        } else {
+//            _bgHeight = _standardHeight * 0.5
+//        }
         createSelfPanelbackground()
     }
     
     override func createCloseButton() {
         _closeButton.text = "确定"
-        _closeButton.position.y = _standardHeight * 0.25 + cellSize * 0.65
+        _closeButton.position.y = _bgHeight * 0.5 + cellSize * 0.65
         _closeButton.position.x = _standardWidth * 0.25 - cellSize * 0.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)
@@ -101,7 +101,7 @@ class LootPanel:UIPanel {
     private var _discardButton = Button()
     private func listProps() {
         let startX = -cellSize * 2.5
-        let startY = cellSize * 1.25
+        let startY = _bgHeight * 0.5 - cellSize * 0.5
         let gap = cellSize * 1.25
         var i = 0
         for p in _props {

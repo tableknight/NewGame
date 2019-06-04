@@ -61,6 +61,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         _nameText = name.text!
         
         var width:CGFloat = 100 + (nameText.count * 24).toFloat()
+        _displayWidth = width
         _displayHeight = cellSize
         if width < cellSize * 3 {
             width = cellSize * 3
@@ -161,6 +162,9 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             _displayHeight += des.fontSize + gap
             addChild(des)
             _desText = des.text!
+            if _desText.count.toFloat() * des.fontSize > width {
+                _displayWidth = _desText.count.toFloat() * des.fontSize + 10
+            }
             
 //            let desWidth = 100 + (armor._description.count * 18).toFloat()
 //            if desWidth > width {
@@ -195,7 +199,7 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             _displayHeight += price.fontSize + gap * 2
             _priceText = price.text!
         }
-        _displayWidth = width
+        
         let bg = createBackground(width: _displayWidth, height: _displayHeight)
         bg.position.x = _displayWidth * 0.5
         bg.position.y = -_displayHeight * 0.5

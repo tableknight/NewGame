@@ -28,20 +28,31 @@ class SummonFlower: Magical {
         _battle._curRole.actionCast {
             let flower = FlowerOfHeal()
             flower.create(level: _curRole._unit._level)
-            flower._seat = b.getEmptySeats().one()
-            let bu = b.addPlayerMinion(unit: flower)
+            flower._seat = b.getEmptySeats(top: !b._curRole.playerPart).one()
+            let bu = b._curRole.playerPart ? b.addPlayerMinion(unit: flower) : b.addEnemy(unit: flower)
             bu.actionSummon {
                 completion()
             }
         }
     }
     override func selectable() -> Bool {
-        if _battle._playerPart.count >= 6 {
-            return false
-        }
-        for u in _battle._playerPart {
-            if u._unit is FlowerOfHeal {
+        if _battle._curRole.playerPart {
+            if _battle._playerPart.count >= 6 {
                 return false
+            }
+            for u in _battle._playerPart {
+                if u._unit is FlowerOfHeal {
+                    return false
+                }
+            }
+        } else {
+            if _battle._enemyPart.count >= 6 {
+                return false
+            }
+            for u in _battle._enemyPart {
+                if u._unit is FlowerOfHeal {
+                    return false
+                }
             }
         }
         return true

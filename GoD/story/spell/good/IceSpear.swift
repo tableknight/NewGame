@@ -15,11 +15,12 @@ class IceSpear: Magical {
         _description = "对目标造成精神30%的冰冷伤害，冻结目标，如果目标已冻结，则造成4倍伤害"
         _rate = 0.3
         _quality = Quality.GOOD
-        _cooldown = 1
+        _cooldown = 0
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
+        _rate = 0.3
         if t.hasStatus(type: Status.FREEZING) {
             _rate = 1.2
         }
@@ -34,6 +35,7 @@ class IceSpear: Magical {
                         completion()
                     }
                 }
+                t.water3()
             }
         }
     }

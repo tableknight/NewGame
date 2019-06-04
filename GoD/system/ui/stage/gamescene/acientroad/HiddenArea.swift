@@ -19,8 +19,8 @@ class HiddenArea: AcientRoad, InnerMaze {
     }
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (-halfSize + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         item.zPosition = MyScene.ITEM_LAYER_Z + y
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)

@@ -14,25 +14,16 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         Game.instance.scene = self
         Game.calcCellSize()
-//        let s = Game.instance.outside_b.getCell(5, 12, 2, 2).getCell(0, 1, 1, 2)
-//        addChild(SKSpriteNode(texture: s))
-        realScene()
-//        battle()
-//        homePage()
-//        let rd = RoleDocument()
-//        rd._name = "yingzi"
-//        rd._key = "as"
-//        rd._level = 10
-//        
-////        var rs = Roles()
-////        rs.chars.append(rs)
-//        save(b: [rd])
-//        
-//        if let r = load() {
-//            print(r)
-//        } else {
-//            print(rd)
-//        }
+//        let lighting = Game.instance.pictureThunder1.getNode(0, 1, 1, 2)
+//        lighting.size = CGSize(width: 70 * 2, height: 70 * 4)
+//        lighting.anchorPoint = CGPoint(x: 0.5, y: 0)
+////        lighting.zPosition = _charNode.zPosition + 20
+//        addChild(lighting)
+//        realScene()
+//        setTimeout(delay: 30, completion: {
+//            self.battle()
+//        })
+        homePage()
     }
 //    func getTryer() -> Tryer? {
 //        let us = UserDefaults.standard
@@ -160,7 +151,7 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = Battle()
+        let b = IssBattle()
         var es = Array<Creature>()
 //        let role = UndeadWarrior()
 //        role.create(level: 50)
@@ -183,11 +174,35 @@ class GameScene: SKScene {
 //        t._seat = BUnit.TTM
 //        es.append(t)
 //        //        b.setEvils(evils: es)
-        let r = HellBaron()
+//        let r = HellNight()
+//        r.create(level: 1)
+//        es.append(r)
+//        let r1 = GiantWasp()
+//        r1.create(level: 1)
+//        es.append(r1)
+        var r = WoodenDummy()
         r.create(level: 1)
         es.append(r)
+        r = WoodenDummy()
+        r.create(level: 1)
+        es.append(r)
+        r = WoodenDummy()
+        r.create(level: 1)
+        es.append(r)
+        r = WoodenDummy()
+        r.create(level: 1)
+        es.append(r)
+        r = WoodenDummy()
+        r.create(level: 1)
+        es.append(r)
+        for c in es {
+//            c._spellsInuse = [ThunderArray()]
+        }
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
+        char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
+//        let cs:Array<Creature> = [char]
+//        char._spellsInuse = [SummonFlower()]
         let cs:Array<Creature> = [char] + char.getReadyMinions()
 //        for u in cs {
 //            u._elementalResistance.fire += 70
@@ -211,11 +226,11 @@ class GameScene: SKScene {
         let e = Emily()
         e.create(level: e._level)
         e.addMoney(num: 1000)
-        e._spellsInuse = [AttackPowerUp(), Reborn(), ScreamLoud(), Disappear(), FireRain()]
-        e._spells = [TruePower()]
-        let bow = Bow()
-        bow.create(level: 1)
-        e.addProp(p: bow)
+        e._spellsInuse = [LowlevelFlame(), FireOrFired(), FireRain(), FireBreath()]
+//        e._spells = [TruePower()]
+//        let bow = Bow()
+//        bow.create(level: 1)
+//        e.addProp(p: bow)
         
         
         bs.setRole(x: 5, y: 7, role: e)
@@ -224,24 +239,24 @@ class GameScene: SKScene {
         stage.createMenu()
         addChild(stage)
 //        
-        let gt = SealScroll()
-        gt._count = 10
-        e.addProp(p: gt)
-//
-        let ggg = TownScroll()
-        ggg._count = 10
-        e.addProp(p: ggg)
-//
+//        let gt = SealScroll()
+//        gt._count = 10
+//        e.addProp(p: gt)
+////
+//        let ggg = TownScroll()
+//        ggg._count = 10
+//        e.addProp(p: ggg)
+////
         let po = Potion()
         po._count = 10
         e.addProp(p: po)
-        e._minionsCount = 1
-        e._dungeonLevel = 99
-        
+//        e._minionsCount = 1
+//        e._dungeonLevel = 99
+//
         let t = TheWitchsTear()
         t._count = 1000
         e._props.append(t)
-        
+        e.addProp(p: Loot().getSpellBook())
 //        let r1 = HellBaron()
 //        r1.create(level: 1)
 //        e._minions.append(r1)
@@ -334,9 +349,9 @@ class GameScene: SKScene {
         
         var str = "{fullName:\"\(ai._nameText)\","
         str.append("name:\"\(item._name)\",")
-        str.append("speed:\"\(spd)\",")
-        str.append("attrs:\(ai._attrTexts),")
-        str.append("spell:\"\(spell)\",")
+//        str.append("speed:\"\(spd)\",")
+//        str.append("attrs:\(ai._attrTexts),")
+//        str.append("spell:\"\(spell)\",")
         str.append("description:\"\(ai._desText)\",")
         str.append("price:\"\(ai._priceText)\",")
         str.append("},")

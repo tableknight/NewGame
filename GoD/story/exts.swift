@@ -169,10 +169,12 @@ extension SKTexture {
 //        let cellSize = Game.instance.cellSize
         let realSize:CGFloat = Game.instance.cellSize
         var cellSize:CGFloat = 48
-        let tnode = SKSpriteNode(texture: self)
-        let xw = tnode.size.width.toInt() % realSize.toInt()
-        if xw == 0 {
-            cellSize = realSize
+        if realSize != cellSize {
+            let tnode = SKSpriteNode(texture: self)
+            let xw = tnode.size.width.toInt() % realSize.toInt()
+            if xw == 0 {
+                cellSize = realSize
+            }
         }
 //        if self.size().width % 64 == 0 {
 //
@@ -195,10 +197,12 @@ extension SKTexture {
     func getNode(_ x:CGFloat, _ y:CGFloat, _ wSize:CGFloat = 1, _ hSize:CGFloat = 1) -> SKSpriteNode {
         let realSize:CGFloat = Game.instance.cellSize
         var cellSize:CGFloat = 48
-        let tnode = SKSpriteNode(texture: self)
-        let xw = tnode.size.width.toInt() % realSize.toInt()
-        if xw == 0 {
-            cellSize = realSize
+        if realSize != cellSize {
+            let tnode = SKSpriteNode(texture: self)
+            let xw = tnode.size.width.toInt() % realSize.toInt()
+            if xw == 0 {
+                cellSize = realSize
+            }
         }
 //        let cellSize = Game.instance.cellSize
         let w = size().width

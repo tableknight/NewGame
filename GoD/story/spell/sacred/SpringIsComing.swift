@@ -29,7 +29,7 @@ class SpringIsComing:Magical {
             t.actionBuff {
                 completion()
                 let s = Status()
-                s._labelText = "L"
+//                s._labelText = "L"
                 s._type = "seed_of_life"
                 s.hasBeforeMoveAction = true
                 let spell = SeedOfLife()

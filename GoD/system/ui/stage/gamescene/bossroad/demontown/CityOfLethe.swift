@@ -22,7 +22,9 @@ class CityOfLethe: DemonTown {
         super.init(coder: aDecoder)
     }
     override func createSize() {
-        halfSize = seedFloat(min: 5, max: 7)
+//        halfSize = seedFloat(min: 5, max: 7)
+        hSize = [10,10,12,12].one()
+        vSize = [10,10,12,12].one()
     }
     override func getMonsterByIndex(index: Int) -> Creature {
         if index == 1 {

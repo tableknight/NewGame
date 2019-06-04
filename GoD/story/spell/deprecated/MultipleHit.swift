@@ -18,7 +18,7 @@ class MultipleHit: Physical {
         super.init()
         isClose = true
         _quality = Quality.GOOD
-        _cooldown = 2
+        _cooldown = 1
         _rate = 0.25
         _name = "连击"
         _description = "对同一目标造成2-6次伤害，每次造成攻击25%的物理伤害"
@@ -47,6 +47,7 @@ class MultipleHit: Physical {
                             self.attack(time: time - 1, completion: completion)
                         }
                     }
+                    t.attacked1()
                 }
             }
         }

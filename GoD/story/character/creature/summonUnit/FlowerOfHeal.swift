@@ -37,7 +37,7 @@ class HealOfFlower: Magical {
     override init() {
         super.init()
         _quality = Quality.SACRED
-        _name = "花语"
+        _name = ""
         _description = "恢复相邻单位15%最大生命。"
     }
     override func cast(completion: @escaping () -> Void) {

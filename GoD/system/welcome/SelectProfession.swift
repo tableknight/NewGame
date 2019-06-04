@@ -78,7 +78,7 @@ class SelecProfession:UIPanel {
                   spellCount: _infos[_index][7] as! Int,
                   spells: _infos[_index][8] as! Array<Spell>
         )
-        pc.xAxis = -72 * 3.75
+        pc.xAxis = -cellSize * 3.75
         pc.yAxis = cellSize * 3.25
         pc.zPosition = self.zPosition + 3
         addChild(pc)

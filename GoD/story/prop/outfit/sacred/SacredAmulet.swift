@@ -51,7 +51,7 @@ class MedalOfCourage:Amulet {
     override init() {
         super.init()
         _name = "勇气勋章"
-        _description = "最下面写着一行小字，二等功J·R"
+        _description = "献给最有勇气的冒险者"
         _level = 5
         _chance = 100
         _quality = Quality.SACRED

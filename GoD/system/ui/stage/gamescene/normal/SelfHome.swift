@@ -11,7 +11,8 @@ import SpriteKit
 class SelfHome: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.halfSize = 4
+        hSize = 8
+        vSize = 8
         _name = "民宅"
         _doorX = 6
         _roofSets = RoofSets()
@@ -49,7 +50,7 @@ class SelfHome: InnerHouse {
     
     override func moveEndAction() {
         let pos = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
-        if pos.x == 6 && pos.y == halfSize * 2 - 1 {
+        if pos.x == 6 && pos.y == vSize - 1 {
             let cc = CenterCamping()
             let char = _role!
             Game.instance.curStage.switchScene(next: cc, completion: {

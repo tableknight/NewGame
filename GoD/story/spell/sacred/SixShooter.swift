@@ -20,7 +20,7 @@ class SixShooter: Physical, BowSkill {
         _description = "进行六次快速射击，第一支箭造成攻击力100%的物理伤害，后续伤害每次递减18%"
         _rate = 1
         _quality = Quality.SACRED
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -41,8 +41,8 @@ class SixShooter: Physical, BowSkill {
                     if !self.hadSpecialAction(t: t) {
                         if !self.hasMissed(target: t) {
                             t.actionAttacked {
-                                t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                             }
+                            t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                         }
                     }
                 })

@@ -44,6 +44,11 @@ class MagicMark: Armor {
         createQuality()
         createSpell()
     }
+    override func create() {
+        _level = 1
+        createQuality()
+        createSpell()
+    }
     override func createQuality() {
         let _seed = seed()
         if _seed < 70 {

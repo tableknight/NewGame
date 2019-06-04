@@ -44,12 +44,15 @@ class IceFist: Physical, HandSkill {
             if !hasMissed(target: t, completion: completion) {
                 let attechment = c.getHp() * -0.15
                 t.actionAttacked(defend: t.isDefend) {
-                    t.showValue(value: damage)
+                    t.showValue(value: damage) {
+                        completion()
+                    }
                     let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)
                     setTimeout(delay: 0.5, completion: {
-                        t.showValue(value: waterDamage, damageType: DamageType.WATER, textColor: ElementColor.WATER, completion: completion)
+                        t.showValue(value: waterDamage, criticalFromSpell: false, damageType: DamageType.WATER, textColor: ElementColor.WATER, completion:{})
                     })
                 }
+                t.attacked1()
             }
         }
     }

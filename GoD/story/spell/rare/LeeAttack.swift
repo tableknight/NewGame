@@ -35,6 +35,7 @@ class LeeAttack:Physical {
                             c.showValue(value: abs(damage * 0.5))
                         })
                     }
+                    t.attacked1()
                 }
             }
         }

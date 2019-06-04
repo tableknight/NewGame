@@ -18,8 +18,8 @@ class FireOrFired: Magical {
         super.init()
         isFire = true
         _name = "玩火"
-        _description = "对目标造成精神110%的火焰伤害或者燃烧自己25%当前生命值"
-        _rate = 1.1
+        _description = "对目标造成精神125%的火焰伤害或者燃烧自己25%当前生命值"
+        _rate = 1.25
         _quality = Quality.RARE
         _cooldown = 1
     }
@@ -56,6 +56,7 @@ class FireOrFired: Magical {
                     completion()
                 }
             }
+            c.flame1(index: 4, line: 1)
         } else {
             if !hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
@@ -63,6 +64,7 @@ class FireOrFired: Magical {
                         completion()
                     }
                 }
+                t.flame1(index: 4, line: 1)
             }
         }
     }

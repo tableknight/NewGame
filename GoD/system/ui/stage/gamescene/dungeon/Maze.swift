@@ -21,7 +21,8 @@ class Maze: Dungeon {
     }
     
     override func createSize() {
-        halfSize = 6
+        hSize = 12
+        vSize = 12
     }
     
     override func create() {
@@ -36,18 +37,18 @@ class Maze: Dungeon {
     override func createMapMatrix() {
         let wallTexture = getWallTexture()
         _mapMatrix = []
-        for _ in 0...halfSize.toInt() * 2 - 1 {
+        for _ in 0...vSize.toInt() {
             var row:Array<Int> = []
-            for _ in 0...halfSize.toInt() * 2 {
+            for _ in 0...hSize.toInt() {
                 row.append(CELL_EMPTY)
             }
             _mapMatrix.append(row)
         }
         var index = 0
-        for y in 0...halfSize.toInt() * 2 - 1 {
+        for y in 0...vSize.toInt() {
             var row:Array<Int> = []
             //            let xd = y / 3 % 2 == 0 ? 0 : 1
-            for x in 0...halfSize.toInt() * 2 {
+            for x in 0...hSize.toInt() {
                 if y % 3 == 0 {
                     if x % 3 == 0 {
                         let landFragment:Array<CGFloat> = _fragment[index]
@@ -58,7 +59,7 @@ class Maze: Dungeon {
                                 if i % 2 == 0 {
                                     let x0 = x.toFloat() + landFragment[i]
                                     let y0 = y.toFloat() + landFragment[i + 1]
-                                    if x0 <= halfSize * 2 && y0 <= halfSize * 2 - 1 {
+                                    if x0 <= hSize && y0 <= vSize {
                                         let wall = UIItem()
                                         wall.setTexture(wallTexture)
                                         addWall(x: x0, y: y0, item: wall)

@@ -10,7 +10,8 @@ import SpriteKit
 class ChurchHouse: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.halfSize = 5
+        hSize = 10
+        vSize = 10
         _name = "铁匠铺"
         _doorX = 5
         let i4 = Game.instance.inside_a4
@@ -118,7 +119,7 @@ class ChurchHouse: InnerHouse {
     
     override func moveEndAction() {
         let pos = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
-        if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
+        if pos.x == _doorX.toFloat() && pos.y == vSize {
             let cc = CenterCamping()
             let char = _role!
             Game.instance.curStage.switchScene(next: cc, completion: {

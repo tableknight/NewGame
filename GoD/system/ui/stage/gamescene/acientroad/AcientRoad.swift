@@ -26,8 +26,7 @@ class AcientRoad: Dungeon {
         }
     }
     override func create() {
-        let s = _level < 10 ? 4 : 7
-        _floorSize = seed(min: 1, max: s)
+        _floorSize = seed(min: 1, max: 7)
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
@@ -111,6 +110,7 @@ class AcientRoad: Dungeon {
 //        stage.saveScene(scene: scene)
 //    }
     func triggerEvent() {
+        
         let stage = Game.instance.curStage!
         let char = Game.instance.char!
         var enimies = Array<Creature>()
@@ -122,17 +122,19 @@ class AcientRoad: Dungeon {
             enimies.append(e)
         }
 //        stage.hideScene()
-        let b = Battle()
+        var b = Battle()
+        if _level == 10 {
+            b = IssBattle()
+        }
         let roles = [char] + char.getReadyMinions()
         b.setEnemyPart(minions: enimies)
         b.setPlayerPart(roles: roles)
         b.zPosition = MyStage.UI_TOPEST_Z
-        let this = self
         b.defeatedAction = {
-            this.defeatedAction()
+            self.defeatedAction()
         }
         b.lootPanelConfirmAction = {
-            this.defeatAction()
+            self.defeatAction()
         }
         stage.addBattle(b)
         b.battleStart()

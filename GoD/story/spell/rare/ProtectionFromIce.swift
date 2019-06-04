@@ -41,4 +41,7 @@ class ProtectionFromIce: Magical {
         }
         
     }
+    override func findTarget() {
+        findSingleTargetNotBlocked()
+    }
 }

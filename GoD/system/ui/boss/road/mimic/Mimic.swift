@@ -20,7 +20,7 @@ class Mimic:Boss {
         _growth.agility = seedFloat(min: 10, max: 31) * 0.1
         _growth.intellect = seedFloat(min: 10, max: 31) * 0.1
         levelTo(level: level)
-        _extensions.health *= 2
+        _extensions.health *= 3
         _extensions.hp = _extensions.health
         _rhythm = 25
         _spellsInuse = [BossAttack(),BossAttack(),BossAttack(),LineAttack(), FireBreath(), ThunderArray(), LifeDraw()]

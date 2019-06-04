@@ -40,6 +40,7 @@ class FireFist: Physical, HandSkill {
                     }
                 }
             }
+            t.attacked1()
         }
     }
     

@@ -20,7 +20,7 @@ class SoulLash: Magical {
         _description = "对目标造成精神80%的魔法伤害，有一定几率静默目标"
         _rate = 0.8
         _quality = Quality.SACRED
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -55,6 +55,7 @@ class SoulLash: Magical {
                 }
                 
             }
+            t.mixed2(index: 4)
         }
     }
     override func findTarget() {

@@ -23,15 +23,20 @@ class ControlUndead:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
+        let b = _battle!
         _battle._curRole.actionCast {
             if t._unit._race == EvilType.RISEN {
                 if self.d4() {
                     t.actionDebuff {
                         t.removeFromBattle()
                         t.removeFromParent()
-                        let seats = self._battle.getEmptySeats()
+                        let seats = self._battle.getEmptySeats(top: !b._curRole.playerPart)
                         t._unit._seat = seats.one()
-                        self._battle.addPlayerMinion(bUnit: t)
+                        if b._curRole.playerPart {
+                            b.addPlayerMinion(bUnit: t)
+                        } else {
+                            b.addEnemy(bUnit: t)
+                        }
                         completion()
                     }
                 } else {
@@ -48,5 +53,20 @@ class ControlUndead:Magical {
     }
     override func selectable() -> Bool {
         return _battle._playerPart.count < 6
+    }
+    override func findTarget() {
+        findTargetPartAll()
+        let ts = _battle._selectedTargets
+        var rs = Array<BUnit>()
+        for t in ts {
+            if t._unit._race == EvilType.RISEN {
+                rs.append(t)
+            }
+        }
+        if rs.count < 1 {
+            _battle._selectedTarget = ts.one()
+        } else {
+            _battle._selectedTarget = rs.one()
+        }
     }
 }

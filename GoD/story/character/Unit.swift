@@ -195,7 +195,7 @@ class Unit:Core {
     
     func strengthChange(value: CGFloat) {
         _mains.strength += value
-        _extensions.attack += value * 2
+        _extensions.attack += value * 2.2
         _extensions.defence += value * 0
         _extensions.speed += value * 0.5
         _extensions.accuracy += value * 0.2
@@ -211,8 +211,8 @@ class Unit:Core {
     }
     func staminaChange(value: CGFloat) {
         _mains.stamina += value
-        _extensions.attack += value * 1
-        _extensions.defence += value * 1.4
+        _extensions.attack += value * 0.2
+        _extensions.defence += value * 1.1
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
         _extensions.avoid += value * -0.2
@@ -227,11 +227,11 @@ class Unit:Core {
     }
     func agilityChange(value: CGFloat) {
         _mains.agility += value
-        _extensions.attack += value * 0.5
-        _extensions.defence += value * 0.3
+        _extensions.attack += value * 1
+        _extensions.defence += value * 0.2
         _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.4
-        _extensions.avoid += value * 0.6
+        _extensions.accuracy += value * 0.5
+        _extensions.avoid += value * 0.65
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 2

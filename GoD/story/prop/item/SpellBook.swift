@@ -14,6 +14,7 @@ class SpellBook:Item {
     static let SACRED_SPELL_SELLING_PRICE = 48
     override init() {
         super.init()
+        _showChar = "书"
     }
     
     private var _spell:Spell!

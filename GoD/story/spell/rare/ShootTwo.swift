@@ -23,6 +23,7 @@ class ShootTwo: Physical, BowSkill {
         _rate = 0.75
         isClose = false
         autoCast = true
+        _cooldown = 1
     }
     
     override func cast(completion:@escaping () -> Void) {

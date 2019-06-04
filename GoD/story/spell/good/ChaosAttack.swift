@@ -29,6 +29,7 @@ class ChaosAttack:Physical {
         var damage:CGFloat = 0
         var color = DamageColor.DAMAGE
         var type = DamageType.PHYSICAL
+        var cfs = false
         if 1 == sd {
             damage = fireDamage(t)
             color = DamageColor.FIRE
@@ -43,12 +44,14 @@ class ChaosAttack:Physical {
             type = DamageType.THUNDER
         } else {
             damage = physicalDamage(t)
+            cfs = true
         }
         _battle._curRole.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.actionAttacked {
-                    t.showValue(value: damage, damageType: type, textColor: color, completion: completion)
+                    t.showValue(value: damage, criticalFromSpell: cfs, damageType: type, textColor: color, completion: completion)
                 }
+                t.attacked2()
             }
         }
     }

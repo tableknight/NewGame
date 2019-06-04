@@ -23,10 +23,10 @@ class Character: Creature {
 //        _img = Data.instance
     }
     override func create(level: CGFloat = 1) {
-        staminaChange(value: 25)
-        strengthChange(value: 25)
-        agilityChange(value: 25)
-        intellectChange(value: 25)
+        staminaChange(value: 20)
+        strengthChange(value: 20)
+        agilityChange(value: 20)
+        intellectChange(value: 20)
         _extensions.hp = _extensions.health
 //        _spells = [TurnAttack(), FeignAttack()]
         _level = level
@@ -56,23 +56,29 @@ class Character: Creature {
         return false
     }
     func removeSpell(spell:Spell) {
-        for i in 0..._spells.count - 1 {
-            if type(of: _spells[i]) == type(of: spell) {
-                _spells.remove(at: i)
-                return
+        if _spells.count > 0 {
+            for i in 0..._spells.count - 1 {
+                if type(of: _spells[i]) == type(of: spell) {
+                    _spells.remove(at: i)
+                    return
+                }
             }
         }
-        for i in 0..._spellsInuse.count - 1 {
-            if type(of: _spellsInuse[i]) == type(of: spell) {
-                _spellsInuse.remove(at: i)
-                return
+        if _spellsInuse.count > 0 {
+            for i in 0..._spellsInuse.count - 1 {
+                if type(of: _spellsInuse[i]) == type(of: spell) {
+                    _spellsInuse.remove(at: i)
+                    return
+                }
             }
         }
         for m in _minions {
-            for i in 0...m._spellsInuse.count - 1 {
-                if type(of: m._spellsInuse[i]) == type(of: spell) {
-                    m._spellsInuse.remove(at: i)
-                    return
+            if m._spellsInuse.count > 0 {
+                for i in 0...m._spellsInuse.count - 1 {
+                    if type(of: m._spellsInuse[i]) == type(of: spell) {
+                        m._spellsInuse.remove(at: i)
+                        return
+                    }
                 }
             }
         }

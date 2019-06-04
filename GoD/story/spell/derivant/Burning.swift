@@ -20,6 +20,7 @@ class Burning:Derivant {
             self._target.showValue(value: damage, criticalFromSpell: false) {
                 completion()
             }
+            self._target.flame1(index: 0, line: 0)
 //            self._target.actionAttacked {
 //            }
         }

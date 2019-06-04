@@ -61,6 +61,7 @@ class Status:Core {
     static let DOMINATE = "dominate"
     static let BURNING = "burning"
     static let INFECTED = "infected"
+    static let PETRIFY = "petrify"
     
     static let FIRE_ENERGE = "fire_energe"
     static let WATER_ENERGE = "water_energe"

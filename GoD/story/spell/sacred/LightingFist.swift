@@ -44,6 +44,7 @@ class LightingFist:Physical, HandSkill {
                         }
                     })
                 }
+                t.attacked2()
             }
         }
     }

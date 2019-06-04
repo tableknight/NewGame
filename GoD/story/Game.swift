@@ -298,6 +298,14 @@ class Game {
     var pictureActor3 = SKTexture(imageNamed: "Actor3.png")
     var picturePeople1 = SKTexture(imageNamed: "People1.png")
     var pictureChest = SKTexture(imageNamed: "Chest.png")
+    var pictureThunder1 = SKTexture(imageNamed: "Thunder1")
+    var pictureFlame1 = SKTexture(imageNamed: "flame1")
+    var pictureFlame2 = SKTexture(imageNamed: "flame2")
+    var pictureAttacked1 = SKTexture(imageNamed: "attacked1")
+    var pictureWater1 = SKTexture(imageNamed: "water1")
+    var pictureWater2 = SKTexture(imageNamed: "water2")
+    var pictureWater3 = SKTexture(imageNamed: "water3")
+    var pictureMixed = SKTexture(imageNamed: "mixed")
     private init() {
 //        c += 1;
 //        print(c)
@@ -420,7 +428,7 @@ class Game {
             char._key = ""
         }
         if char._key.isEmpty {
-            char._key = "doc\(Game.roles.count)"
+            char._key = "doc\(Date().timeIntervalSince1970)"
             let roleDoc = RoleDocument()
             roleDoc._name = char._name
             roleDoc._pro = char._pro
@@ -468,10 +476,10 @@ class Game {
         var imgSize:CGFloat = 48
         if bounds.width == 375 && bounds.height == 667 { //iphone8
             uiSize = 80
-            imgSize = 61
+            imgSize = 58
         } else if bounds.width == 414 && bounds.height == 736 { //iphone8 plus
             uiSize = 80
-            imgSize = 61
+            imgSize = 58
         } else if bounds.width == 414 && bounds.height == 896 { //iphone xr xsmax
             
         } else if bounds.width == 375 && bounds.height == 812 { //iphone x

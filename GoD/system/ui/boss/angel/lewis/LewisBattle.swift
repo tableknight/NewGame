@@ -61,7 +61,7 @@ class LewisBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 41
         var es = Array<Creature>()
         for _ in 0...2 {
             let lm = LewisMinion()

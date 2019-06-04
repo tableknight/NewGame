@@ -18,8 +18,8 @@ class FireBreath: Magical {
         super.init()
         isFire = true
         _name = "火焰呼吸"
-        _description = "对目标造成精神85%的火焰伤害， 有一定几率点燃目标"
-        _rate = 0.85
+        _description = "对目标造成精神55%的火焰伤害， 有一定几率点燃目标"
+        _rate = 0.55
         _quality = Quality.NORMAL
         _cooldown = 1
     }
@@ -46,6 +46,7 @@ class FireBreath: Magical {
                     }
                 }
             }
+            t.flame1(index: 4)
         }
     }
 }

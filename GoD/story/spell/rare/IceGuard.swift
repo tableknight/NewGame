@@ -16,20 +16,24 @@ class IceGuard: Magical {
         targetEnemy = false
         canBeTargetSelf = true
         _cooldown = 3
+        autoCast = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let status = Status()
-        status._type = Status.ICE_GUARD
-        status._labelText = "G"
-        status._timeleft = 5
-        c.addStatus(status: status)
         
         c.actionCast {
             c.actionBuff {
                 completion()
+                let status = Status()
+                status._type = Status.ICE_GUARD
+                status._labelText = "G"
+                status._timeleft = 5
+                c.addStatus(status: status)
             }
         }
+        
+    }
+    override func findTarget() {
         
     }
     required init(from decoder: Decoder) throws {

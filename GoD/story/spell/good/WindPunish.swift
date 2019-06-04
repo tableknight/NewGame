@@ -17,7 +17,7 @@ class WindPunish: Magical {
     override init() {
         super.init()
         isWater = true
-        _name = "风之惩戒"
+        _name = "双龙卷风"
         _description = "对目标和身后目标造成精神75%的冰冷伤害"
         _rate = 0.75
         _quality = Quality.GOOD
@@ -34,6 +34,7 @@ class WindPunish: Magical {
                         completion()
                     }
                 }
+                t.water2()
             }
             let seat = self.getUnitBehindTarget(seat: t._unit._seat)
             let tb = self._battle.getUnitBySeat(seat: seat)
@@ -43,6 +44,7 @@ class WindPunish: Magical {
                     tb!.actionAttacked {
                         tb!.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                     }
+                    tb!.water2()
                 }
             }
         }

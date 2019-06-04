@@ -33,6 +33,7 @@ class FeignAttack: Physical {
                         completion()
                     }
                 }
+                t.attacked1()
             } else {
                 t.showMiss {
                     completion()

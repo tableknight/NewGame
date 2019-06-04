@@ -17,7 +17,7 @@ class FireRain: Magical {
     override init() {
         super.init()
         isFire = true
-        _name = "火雨"
+        _name = "天崩地裂"
         autoCast = true
         targetEnemy = true
         _description = "对所有敌方目标造成精神35%的火焰伤害，有小概率点燃目标"
@@ -48,6 +48,7 @@ class FireRain: Magical {
                         t.burning()
                     }
                 }
+                t.flame2(index: 1, line: 1)
             }
         }
         setTimeout(delay: 2.5, completion: completion)

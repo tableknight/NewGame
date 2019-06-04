@@ -27,7 +27,7 @@ class IceBomb: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            t.actionDebuff {
+            t.actionWait {
                 let s = Status()
                 let spell = IceExplode()
                 spell._caster = c
@@ -40,6 +40,7 @@ class IceBomb: Magical {
                 t.addStatus(status: s)
                 completion()
             }
+            t.mixed1(index: 10)
         }
     }
     
@@ -69,6 +70,7 @@ class IceExplode:Derivant {
                     self._rate = 0.5
                     self._target.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                 }
+            self._target.mixed1(index: 8)
                 
                 setTimeout(delay: 0.5, completion: {
                     for t in ts {
@@ -78,6 +80,7 @@ class IceExplode:Derivant {
                             t.actionAttacked {
                                 t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                             }
+                            t.mixed1(index: 9)
                         }
                     }
                 })

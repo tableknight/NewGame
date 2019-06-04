@@ -181,7 +181,7 @@ class BloodBlade:Sword {
         _description = "生命值越低，攻击力越高"
         _level = 25
         _chance = 25
-        price = 55
+        price = 86
         _quality = Quality.SACRED
     }
     override func create() {

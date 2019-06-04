@@ -21,7 +21,7 @@ class DeathGaze: Magical {
         _description = "对目标造成精神65%的魔法伤害，有小概率立即杀死目标"
         _rate = 0.65
         _quality = Quality.SACRED
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -62,6 +62,7 @@ class DeathGaze: Magical {
                 }
                 
             }
+            t.mixed2(index: 3)
         }
     }
     

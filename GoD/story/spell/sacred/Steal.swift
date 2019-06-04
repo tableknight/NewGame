@@ -17,7 +17,7 @@ class Steal: Physical, HandSkill {
     override init() {
         super.init()
         _name = "行窃"
-        _description = "对目标和自己造成攻击50%的物理伤害，或者偷取目标1耐力，1力量，1敏捷，1智力"
+        _description = "对目标和自己造成攻击50%的物理伤害，或者偷取目标1体力，1力量，1敏捷，1智力"
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 0.5
@@ -39,6 +39,7 @@ class Steal: Physical, HandSkill {
                             }
                         })
                     })
+                    t.attacked2()
                 } else {
                     setTimeout(delay: 1, completion: {
                         t.showText(text: "STOLEN") {

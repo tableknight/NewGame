@@ -50,6 +50,7 @@ class BossAttack: Physical {
                             completion()
                         }
                     }
+                    t.attacked1()
                 }
             }
         }

@@ -283,11 +283,11 @@ class CenterVillage: UIScene {
                 }
             }
         } else if 8 == pos {
-            let scene = NorthOfNewComersVillage()
-            stage.switchScene(next: scene, afterCreation: {
-                stage._char.faceNorth()
-                scene.setPos(pos: 13)
-            })
+//            let scene = NorthOfNewComersVillage()
+//            stage.switchScene(next: scene, afterCreation: {
+//                stage._char.faceNorth()
+//                scene.setPos(pos: 13)
+//            })
         } else if 17 == pos {
             let scene = WitheredLane()
             stage.switchScene(next: scene, afterCreation: {

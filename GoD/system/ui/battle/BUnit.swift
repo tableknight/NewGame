@@ -210,6 +210,9 @@ class BUnit: SKSpriteNode {
         }
         
     }
+    func setImg(img:SKTexture) {
+        _charNode.texture = img
+    }
     var _charTexture = SKTexture()
     var _charNode = SKSpriteNode()
     func faceSouth() {
@@ -315,6 +318,7 @@ class BUnit: SKSpriteNode {
             bs._castSpell = spell
             t.addStatus(status: bs)
         }
+        showStatusText()
     }
     func freezing() {
         if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) || _unit is Boss {
@@ -329,6 +333,20 @@ class BUnit: SKSpriteNode {
         target.addStatus(status: status)
         target.isDefend = false
         target.actionFrozen(){}
+    }
+    
+    func petrify() {
+        if hasSpell(spell: ProtectFromGod()) || _unit is Boss || hasStatus(type: Status.IMMUNE) {
+            showText(text: "IMMUNE")
+            return
+        }
+        let target = self
+        let status = Status()
+        status._type = Status.PETRIFY
+        status._timeleft = 3
+        status._labelText = "P"
+        target.addStatus(status: status)
+        target.isDefend = false
     }
     
     func actionAttack(completion:@escaping () -> Void) {
@@ -613,6 +631,9 @@ class BUnit: SKSpriteNode {
     //5 thunder
     func showValue(value:CGFloat, criticalFromSpell:Bool = true, critical:Bool = false, damageType:Int = 1, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
+        if hasStatus(type: Status.PETRIFY) && value < 0 {
+            value = seed(min: 0, max: 6).toFloat() * 0.01 * value
+        }
         if sheildEvilExpel(value: value) {
             showText(text: "BLOCK") {
                 completion()
@@ -674,7 +695,8 @@ class BUnit: SKSpriteNode {
             text = "+\(value.toInt())"
         }
         if beCritical {
-            text = "Bow!"
+            text = "Ouch!"
+//            valueText.fontSize *= 2
         }
         if swordExorcist(value: value) {
             text = "KILL"
@@ -1020,6 +1042,7 @@ class BUnit: SKSpriteNode {
     
     func removeStatus(type:String) {
         _status.removeValue(forKey: type)
+        showStatusText()
     }
     func addStatus(status:Status) {
         if hasStatus(type: status._type) {

@@ -20,7 +20,7 @@ class QiWave:Physical, HandSkill {
         _description = "对随机2-4个目标造成攻击力85%攻击力的物理伤害"
         _quality = Quality.RARE
         _rate = 0.85
-        _cooldown = 2
+        _cooldown = 1
         isClose = false
         autoCast = true
     }
@@ -33,6 +33,7 @@ class QiWave:Physical, HandSkill {
                     t.actionAttacked {
                         t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                     }
+                    t.attacked2()
                 }
             }
             setTimeout(delay: 2.2, completion: completion)

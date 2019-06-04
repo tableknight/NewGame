@@ -47,10 +47,11 @@ class Attack: Physical {
         if c.hasSpell(spell: TruePower()) {
             _damageValue *= 1.3
         }
-        let this = self
+//        let this = self
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
+                t.attacked1()
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()

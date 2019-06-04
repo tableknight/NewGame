@@ -649,9 +649,9 @@ class AttrLabel:SKSpriteNode {
     var editable:Bool {
         set {
             if newValue {
-                _bg.strokeColor = QualityColor.RARE
+                _bg.strokeColor = QualityColor.GOOD
                 _bg.lineWidth = 2
-                _label.fontColor = QualityColor.RARE
+                _label.fontColor = QualityColor.GOOD
             } else {
                 _bg.strokeColor = UIColor.white
                 _bg.lineWidth = 1

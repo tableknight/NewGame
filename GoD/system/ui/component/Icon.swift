@@ -81,6 +81,21 @@ class Icon:SKSpriteNode {
         }
     }
     
+    var _displayItemType:IDisplay! {
+        set {
+            displayItemType = newValue
+            if newValue is Prop {
+                let p = newValue as! Prop
+                if !p._showChar.isEmpty {
+                    _iconLabel.text = p._showChar
+                }
+            }
+        }
+        get {
+            return displayItemType
+        }
+    }
+    
     internal var _iconLabel = Label()
     internal var _selected:Bool = false
     internal var _background = SKShapeNode()
@@ -89,7 +104,7 @@ class Icon:SKSpriteNode {
     internal var _prop:Prop?
     internal var _quality:Int = 1
     internal var _color:UIColor = UIColor.white
-    var _displayItemType:IDisplay!
+    var displayItemType:IDisplay!
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

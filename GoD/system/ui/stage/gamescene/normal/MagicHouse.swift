@@ -10,7 +10,9 @@ import SpriteKit
 class MagicHouse: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.halfSize = 5
+//        self.halfSize = 5
+        hSize = 10
+        vSize = 10
         _name = "魔法屋"
         _doorX = 5
         let i4 = Game.instance.inside_a4
@@ -94,7 +96,7 @@ class MagicHouse: InnerHouse {
             setTimeout(delay: 1, completion: i.triggerEvent)
             return
         }
-        if pos.x == _doorX.toFloat() && pos.y == halfSize * 2 - 1 {
+        if pos.x == _doorX.toFloat() && pos.y == vSize - 1 {
             let cc = EastCamping()
             let char = _role!
             Game.instance.curStage.switchScene(next: cc, completion: {

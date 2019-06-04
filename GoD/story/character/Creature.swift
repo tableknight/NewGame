@@ -110,7 +110,8 @@ class Creature: Unit {
         }
     }
     func createQuality() {
-        let sed = seed()
+        let l = _level.toInt()
+        let sed = seed(to: 100 + l / 5)
         if sed < 50 {
             _quality = Quality.NORMAL
         } else if sed < 80 {
@@ -131,6 +132,25 @@ class Creature: Unit {
         levelTo(level: level)
         _extensions.hp = _extensions.health
         magicSensitive()
+        let l = _level.toInt()
+        if _level > 25 {
+            _elementalPower.fire = seed(to: l).toFloat()
+            _elementalPower.water = seed(to: l).toFloat()
+            _elementalPower.thunder = seed(to: l).toFloat()
+        }
+        if _level > 50 {
+            _elementalResistance.fire = seed(to: l).toFloat()
+            _elementalResistance.water = seed(to: l).toFloat()
+            _elementalResistance.thunder = seed(to: l).toFloat()
+        }
+        if _level > 75 {
+            _rhythm = seed(to: 15).toFloat() + 5
+            _revenge = seed(to: 15).toFloat() + 5
+            _break = seed(to: 15).toFloat() + 5
+        }
+        if _level > 90 {
+            _spellsInuse.append([MagicConvert(), AttackReturnBack(), MagicReflect(), TurnAttack()].one())
+        }
     }
     func spell12() {
         _spellCount = seed(min: 1, max: 3)

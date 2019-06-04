@@ -43,6 +43,7 @@ class Bitslap: Physical {
                     completion()
                 }
             })
+            t.attacked1()
         }
     }
     

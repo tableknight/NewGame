@@ -29,6 +29,7 @@ class WaterCopy:Magical {
             let copy = SummonUnit()
             copy._level = c._unit._level
             copy._img = c._unit._img
+            
             copy._spellsInuse = [NoAction()]
             copy._extensions.health = c.getHealth()
             copy._extensions.hp = c.getHp()
@@ -41,10 +42,14 @@ class WaterCopy:Magical {
             copy._elementalResistance.water = 50
             copy._rhythm = 0
 //            copy.hasAction = false
-            let seats = b.getEmptySeats()
+            let seats = b.getEmptySeats(top: !b._curRole.playerPart)
             copy._seat = seats.one()
-            let u = b.addPlayerMinion(unit: copy)
-            u.alpha = 0.75
+            let u = b._curRole.playerPart ? b.addPlayerMinion(unit: copy) : b.addEnemy(unit: copy)
+            if c._unit is Boss {
+                u.setImg(img: c._unit._img)
+                u._charNode.size = CGSize(width: u._charSize, height: u._charSize)
+            }
+            u._charNode.alpha = 0.75
             u.actionSummon {
                 completion()
             }

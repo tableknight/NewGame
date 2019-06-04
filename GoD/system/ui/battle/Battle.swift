@@ -88,10 +88,21 @@ class Battle: SKSpriteNode {
                         _playerUnit.showText(text: "召唤")
                         u.removeFromParent()
                         waitingForSelectSummonSeat = false
+                        var seatedMinions = Array<Creature>()
                         for m in _char._minions {
                             if m._seat == seat {
                                 m._seat = BUnit.STAND_BY
                                 break
+                            }
+                            if m._seat != BUnit.STAND_BY {
+                                seatedMinions.append(m)
+                            }
+                        }
+                        if seatedMinions.count > _char._minionsCount {
+                            for m in _char._minions {
+                                if m._seat != BUnit.STAND_BY && m._extensions.hp < 1 {
+                                    m._seat = BUnit.STAND_BY
+                                }
                             }
                         }
                         _selectedMinion._seat = seat
@@ -565,6 +576,11 @@ class Battle: SKSpriteNode {
             return
         }
         
+        if this._curRole.hasStatus(type: Status.PETRIFY) {
+            this.moveEnd()
+            return
+        }
+        
         if _curRole.hasStatus(type: Status.TAUNTED) {
             this._selectedSpell = Attack()
             this._selectedSpell._battle = self
@@ -579,6 +595,8 @@ class Battle: SKSpriteNode {
                 return
             }
         }
+        
+        
         
         if _curRole._unit is SummonUnit {
             //            _selectedSpell = _curRole._unit._spellsInuse[0]
@@ -657,6 +675,7 @@ class Battle: SKSpriteNode {
     }
     var victory = false
     var lootPanelConfirmAction = {}
+    internal var expRate:CGFloat = 1
     internal func defeat() {
         if victory {
             return
@@ -665,7 +684,7 @@ class Battle: SKSpriteNode {
         let ms = [_char] + _char.getReadyMinions()
         for u in _evilsOrg {
             for r in ms {
-                let exp = l.getExp(selfLevel: r._level, enemyLevel: u._unit._level)
+                let exp = l.getExp(selfLevel: r._level, enemyLevel: u._unit._level) * expRate
                 r.expUp(up: exp)
             }
             if abs(_char._level - u._unit._level) <= 5 {
@@ -673,7 +692,7 @@ class Battle: SKSpriteNode {
             }
         }
         victory = true
-        let list = l.getList()
+        let list = l.getList() + specialLoot()
         
         fadeOutBattle()
         
@@ -687,6 +706,10 @@ class Battle: SKSpriteNode {
         } else {
             self.lootPanelConfirmAction()
         }
+    }
+    internal func specialLoot() -> Array<Prop> {
+        let p = Array<Prop>()
+        return p
     }
     internal func defeated() {
         victory = false
@@ -1278,6 +1301,8 @@ class Battle: SKSpriteNode {
             } else {
                 this.waitingForSelectItemTarget = true
                 this.showAvailableUnits(selectObject: item)
+                self.hideOrder()
+                self.showCancel()
             }
             this._selectedItem = item
 //            item?.useInBattle()
@@ -1806,18 +1831,33 @@ class Battle: SKSpriteNode {
         }
     }
     
-    func getEmptySeats() -> Array<String> {
-        var ps = [BUnit.BTL,BUnit.BTM,BUnit.BTR,BUnit.BBL,BUnit.BBM,BUnit.BBR]
+    func getEmptySeats(top:Bool = false) -> Array<String> {
         var seats = Array<String>()
-        for i in 0...ps.count - 1 {
-            for u in _playerPart {
-                if u._unit._seat == ps[i] {
-                    ps[i] = "e"
-                    //                    ps.remove(at: i)
+        if top {
+            var ps = [BUnit.TTL, BUnit.TTM, BUnit.TTR, BUnit.TBL, BUnit.TBM, BUnit.TBR]
+            for i in 0...ps.count - 1 {
+                for u in _enemyPart {
+                    if u._unit._seat == ps[i] {
+                        ps[i] = "e"
+                        //                    ps.remove(at: i)
+                    }
+                }
+                if ps[i] != "e" {
+                    seats.append(ps[i])
                 }
             }
-            if ps[i] != "e" {
-                seats.append(ps[i])
+        } else {
+            var ps = [BUnit.BTL,BUnit.BTM,BUnit.BTR,BUnit.BBL,BUnit.BBM,BUnit.BBR]
+            for i in 0...ps.count - 1 {
+                for u in _playerPart {
+                    if u._unit._seat == ps[i] {
+                        ps[i] = "e"
+                        //                    ps.remove(at: i)
+                    }
+                }
+                if ps[i] != "e" {
+                    seats.append(ps[i])
+                }
             }
         }
         

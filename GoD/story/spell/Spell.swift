@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Spell:Core, IDisplay, ISelectTarget {
+    static let CURSED = "Cursed"
     func getInfosDisplay() -> IPanelSize {
         return ItemInfo()
     }
@@ -580,6 +581,7 @@ class Spell:Core, IDisplay, ISelectTarget {
                                     completion()
                                 }
                             }
+                            c.attacked1()
                         }
                     }
                 } else {
@@ -800,7 +802,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     }
     
     internal func statusMissed(baseline:CGFloat, target:BUnit, bossImmnue:Bool = false, completion:@escaping () -> Void = {}) -> Bool {
-        if bossImmnue || target.hasStatus(type: Status.IMMUNE) {
+        if (target._unit is Boss && bossImmnue) || target.hasStatus(type: Status.IMMUNE) {
             target.showText(text: "IMMUNE") {
                 completion()
             }
@@ -810,7 +812,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         let c = _battle._curRole
         let fromMind = c.getMind()
         let toMind = target.getMind()
-        let rate:CGFloat = 1 + (fromMind - toMind) * 0.01
+        let rate:CGFloat = 1 + (fromMind - toMind) * 0.01 + (c._unit._level - target._unit._level) * 0.01
         let bound = baseline * rate
         if sed < bound {
             return false

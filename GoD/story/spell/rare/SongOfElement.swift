@@ -13,7 +13,7 @@ class SongOfElement:Magical {
         _name = "冰火吐息"
         _description = "对目标造成精神40%的冰火混合伤害，有小概率点燃或冰冻目标"
         _quality = Quality.RARE
-        _cooldown = 2
+        _cooldown = 1
         _rate = 0.4
     }
     override func cast(completion: @escaping () -> Void) {
@@ -34,6 +34,7 @@ class SongOfElement:Magical {
                         }
                     }
                 }
+                t.mixed1(index: 8)
             }
         }
     }

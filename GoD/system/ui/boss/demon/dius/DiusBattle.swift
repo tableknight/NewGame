@@ -105,8 +105,9 @@ class SuperWater:Magical {
                 let damage = self.waterDamage(t)
                 if !self.hadSpecialAction(t: t) {
                     t.actionAttacked {
-                        t.showValue(value: damage)
+                        t.showValue(value: damage, criticalFromSpell: false, critical: false, damageType: DamageType.WATER, textColor: DamageColor.WATER)
                     }
+                    t.water1(index: 4)
                 }
             }
             setTimeout(delay: 2.5, completion: completion)
@@ -144,6 +145,8 @@ class FireExplode:Magical {
                         t.burning()
                     }
                 }
+                t.flame3()
+                
             }
         }
     }

@@ -41,18 +41,33 @@ class OutfitPanel: UIPanel {
             }
         }
         if _char.hasWeapon {
-            outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!)
+            if outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
+                return
+            }
         }
-        outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!)
+        if outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!) {
+            return
+        }
         if _char.hasShield {
-            outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!)
+            if outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!) {
+                return
+            }
         }
-        outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!)
-        outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!)
+        if outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!) {
+            return
+        }
         if _char.hasMark {
-            outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!)
+            if outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!) {
+                return
+            }
         }
-        outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!)
+        if outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        _selectedSlot = nil
         
 //        if _weapon.contains(touchPoint!) {
 //            if nil != _weapon.outfit {
@@ -222,13 +237,13 @@ class OutfitPanel: UIPanel {
         addChild(_propBox)
         createPropList()
     }
-    private func outfitOff(slot:OutfitSlot, callback: @escaping () -> Void, touchPoint:CGPoint) {
+    private func outfitOff(slot:OutfitSlot, callback: @escaping () -> Void, touchPoint:CGPoint) -> Bool {
         if slot.contains(touchPoint) {
             if nil != slot.outfit {
                 if nil == _selectedSlot || slot != _selectedSlot {
                     displayInfos(icon: slot)
                     _selectedSlot = slot
-                    return
+                    return true
                 } else {
                     slot.outfit?.off()
                     _char.addProp(p: slot.outfit!)
@@ -237,12 +252,11 @@ class OutfitPanel: UIPanel {
                     callback()
                     pageReload()
                     slot.iconLabel = ""
-                    return
+                    return true
                 }
             }
-        } else {
-//            _selectedSlot = nil
         }
+        return false
     }
     func getOutfits() -> Array<Outfit> {
         var outfits = Array<Outfit>()

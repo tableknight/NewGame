@@ -18,7 +18,7 @@ class ThunderAttack: Magical {
     override init() {
         super.init()
         isThunder = true
-        _name = "雷击"
+        _name = "闪电"
         _description = "对目标造成精神80%的雷电伤害，降低目标10点雷电抗性"
         _rate = 0.8
         _quality = Quality.NORMAL
@@ -40,7 +40,7 @@ class ThunderAttack: Magical {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
-                t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
+                t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
                     if t.isDead() {
                         completion()
                     } else {
@@ -51,6 +51,7 @@ class ThunderAttack: Magical {
                     }
                 }
             }
+            t.lighting1()
         }
     }
 }

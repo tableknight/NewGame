@@ -114,7 +114,7 @@ class LineAttack: Physical {
         _description = "对目标同一行单位造成攻击55%的物理伤害"
         _rate = 0.55
         _quality = Quality.GOOD
-        _cooldown = 2
+        _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -134,6 +134,7 @@ class LineAttack: Physical {
                         t.actionAttacked {
                             t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                         }
+                        t.attacked1()
                     }
                 }
             }

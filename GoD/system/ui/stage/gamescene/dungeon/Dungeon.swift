@@ -53,24 +53,28 @@ class Dungeon: MyScene {
     }
     
     func createSize() {
-        halfSize = seedFloat(min: 3, max: 7)
+//        halfSize = seedFloat(min: 3, max: 7)
+        hSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
+        vSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
+//        hSize = seed(min: 6, max: 13).toFloat()
+//        vSize = seed(min: 6, max: 13).toFloat()
     }
     
     override func createMapMatrix() {
 //        debug("halfsize \(halfSize)")
         let wallTexture = getWallTexture()
         _mapMatrix = []
-        for _ in 0...halfSize.toInt() * 2 - 1 {
+        for _ in 0...vSize.toInt() - 1 {
             var row:Array<Int> = []
-            for _ in 0...halfSize.toInt() * 2 {
+            for _ in 0...hSize.toInt() {
                 row.append(CELL_EMPTY)
             }
             _mapMatrix.append(row)
         }
-        for y in 0...halfSize.toInt() * 2 - 1 {
+        for y in 0...vSize.toInt() - 1 {
             var row:Array<Int> = []
 //            let xd = y / 3 % 2 == 0 ? 0 : 1
-            for x in 0...halfSize.toInt() * 2 {
+            for x in 0...hSize.toInt() {
                 if y % 3 == 0 {
                     if x % 3 == 0 {
                         let landFragment = LandFragment.one()
@@ -78,7 +82,7 @@ class Dungeon: MyScene {
                             if i % 2 == 0 {
                                 let x0 = x.toFloat() + landFragment[i]
                                 let y0 = y.toFloat() + landFragment[i + 1]
-                                if x0 <= halfSize * 2 && y0 <= halfSize * 2 - 1 {
+                                if x0 <= hSize && y0 <= vSize - 1 {
                                     let wall = UIItem()
                                     wall.setTexture(wallTexture)
                                     addWall(x: x0, y: y0, item: wall)
@@ -102,8 +106,8 @@ class Dungeon: MyScene {
             createPortals()
             return
         }
-        let maxx = halfSize * 2
-        let maxy = halfSize * 2 - 1
+        let maxx = hSize
+        let maxy = vSize - 1
         var connected = false
         var checkedPoints = Array<CGPoint>()
         func isPointPortal(_ x:CGFloat, _ y:CGFloat) {
@@ -193,13 +197,13 @@ class Dungeon: MyScene {
     internal var _wallPoints = Array<CGPoint>()
     internal func findVisiblePoints() -> Array<CGPoint> {
         var points = Array<CGPoint>()
-        for y in 0...halfSize.toInt() * 2 - 1 {
-            for x in 0...halfSize.toInt() * 2 {
+        for y in 0...vSize.toInt() - 1 {
+            for x in 0...hSize.toInt() {
                 let cell = _mapMatrix[y][x]
                 if cell == CELL_EMPTY {
-                    if y.toFloat() == halfSize * 2 - 1 {
+                    if y.toFloat() == vSize - 1{
                         points.append(CGPoint(x: x, y: y))
-                    } else if y.toFloat() < halfSize * 2 - 1 {
+                    } else if y.toFloat() < vSize {
                         if _mapMatrix[y + 1][x] == CELL_EMPTY {
                             points.append(CGPoint(x: x, y: y))
                         }
@@ -219,7 +223,7 @@ class Dungeon: MyScene {
             if CELL_TOWER == _mapMatrix[p.y.toInt()][p.x.toInt()] {
                 continue
             }
-            if p.x.toInt() < halfSize.toInt() * 2 - 1 {
+            if p.x < hSize {
                 if CELL_EMPTY == _mapMatrix[p.y.toInt()][p.x.toInt() + 1] {
                     addShadow(x: p.x, y: p.y)
                 }
@@ -234,14 +238,15 @@ class Dungeon: MyScene {
     
     internal func addShadow(x:CGFloat, y:CGFloat) {
         let shadow = SKSpriteNode(texture: _wall_shadow)
+        shadow.size = CGSize(width: cellSize * 0.25, height: cellSize)
         addGround(x: x + 1, y: y, item: shadow)
-        shadow.xAxis = shadow.xAxis - 18
+        shadow.xAxis = shadow.xAxis - cellSize / 3 - 1
     }
     
     internal func createTowers() {
         var points = Array<CGPoint>()
-        let maxx = halfSize.toInt() * 2 - 1
-        let maxy = halfSize.toInt() * 2 - 1
+        let maxx = hSize.toInt() - 1
+        let maxy = vSize.toInt() - 1
         for y in 0...maxy {
             for x in 0...maxx {
                 if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
@@ -270,8 +275,8 @@ class Dungeon: MyScene {
     
     internal func createSeller() {
         var points = Array<CGPoint>()
-        let maxx = halfSize.toInt() * 2 - 1
-        let maxy = halfSize.toInt() * 2 - 1
+        let maxx = hSize.toInt() - 1
+        let maxy = vSize.toInt() - 1
         for y in 0...maxy {
             for x in 0...maxx {
                 if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
@@ -353,8 +358,8 @@ class Dungeon: MyScene {
     
     internal func addWall(x:CGFloat, y:CGFloat, item:SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
-        item.position.x = (-halfSize + x) * cellSize
-        item.position.y = (halfSize - 0.5 - y) * cellSize
+        item.position.x = (-hSize / 2 + x) * cellSize
+        item.position.y = (vSize / 2 - 0.5 - y) * cellSize
         item.zPosition = MyScene.ITEM_LAYER_Z + y
         item.name = getItemName(CGPoint(x: x, y: y))
         _itemLayer.addChild(item)

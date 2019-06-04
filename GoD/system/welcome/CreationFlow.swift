@@ -68,7 +68,7 @@ class CreationFlow:SKSpriteNode {
             let items = selectItems._selectedItems
             let minion = selectMinion._lastSelectedComponent._minion
             let stage = MyStage()
-            let scene = SelfHome()
+            let scene = SecretMeadow()
             scene.create()
             let e = Character()
             e.create(level: 1)
@@ -86,6 +86,9 @@ class CreationFlow:SKSpriteNode {
             e._pro = role![0] as! String
             e._name = selectImage._lastSelectedComponent._name
             //-------------------------------------
+//            let mm = MagicMark()
+//            mm.create(level: 1)
+//            e._props.append(mm)
 //            e._money = 12000
 //            let t = TheWitchsTear()
 //            t._count = 500
@@ -94,7 +97,7 @@ class CreationFlow:SKSpriteNode {
 //            let l = Loot()
 //            e._spells = l.getAllSpells()
             //-------------------------------------
-            scene.setRole(x: 2, y: 1, role: e)
+            scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
             if minion != nil {
                 minion!._seat = BUnit.BTM
                 e._minions = [minion!]

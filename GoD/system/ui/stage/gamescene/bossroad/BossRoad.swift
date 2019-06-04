@@ -10,7 +10,9 @@ import SpriteKit
 class BossRoad: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        halfSize = seedFloat(min: 3, max: 7)
+//        halfSize = seedFloat(min: 3, max: 7)
+        hSize = [8,8,10,10,12,12].one()
+        vSize = [8,8,10,10,12,12].one()
         _itemEnum = [1,1,1,1,2,2,2,2,3]
         _monsterEnum = [1,2,3,4]
         let oa4 = Game.instance.outside_a4
@@ -33,7 +35,9 @@ class BossRoad: AcientRoad {
     
     override func create() {
         if _floorSize >= _index {
-            halfSize = 6
+//            halfSize = 6
+            vSize = 12
+            hSize = 12
         }
         super.create()
         _nameLabel.text = "\(_name) \(_index)"
@@ -116,9 +120,9 @@ class BossRoad: AcientRoad {
     func createPortalPoints() {
         var xs = Array<Int>()
         var ys = Array<Int>()
-        for i in 0...halfSize.toInt() * 2 {
+        for i in 0...hSize.toInt() {
             xs.append(i)
-            if i != halfSize.toInt() * 2 {
+            if i != vSize.toInt() {
                 ys.append(i)
             }
         }

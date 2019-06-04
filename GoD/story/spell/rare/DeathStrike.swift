@@ -18,7 +18,7 @@ class DeathStrike: Magical {
         super.init()
         _quality = Quality.RARE
         _name = "死亡冲击"
-        _cooldown = 2
+        _cooldown = 1
         _rate = 0.6
         _description = "对目标造成精神60%的魔法伤害，每次偷取目标10点精神"
         targetEnemy = true
@@ -33,13 +33,14 @@ class DeathStrike: Magical {
             if !this.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage) {
-                        t.showText(text:"SPIRIT -10", color: Colors.STATUS_CHANGE)
-                        c.showText(text:"SPIRIT +10", color: Colors.STATUS_CHANGE, completion: completion)
+                        t.showText(text:"ST -10", color: Colors.STATUS_CHANGE)
+                        c.showText(text:"ST +10", color: Colors.STATUS_CHANGE, completion: completion)
                     }
                     t._extensions.spirit -= 10
                     c._extensions.spirit += 10
                     
                 }
+                t.mixed2(index: 16)
             }
         }
     }

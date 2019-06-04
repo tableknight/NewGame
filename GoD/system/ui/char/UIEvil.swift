@@ -38,7 +38,8 @@ class UIEvil: UIUnit {
         if enemyCount > 0 {
             for _ in 1...enemyCount {
                 let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
-                let level = Core().d20() ? 1 : sc._level
+                let l = sc._level
+                let level = Core().d20() ? 1 : [l > 1 ? l - 1 : 1, l , l + 1].one()
                 e.create(level: level)
                 enemies.append(e)
             }

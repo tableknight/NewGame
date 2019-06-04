@@ -40,6 +40,7 @@ class LifeDraw: Magical {
                     }
                 })
             }
+            t.mixed2(index: 2)
         }
     }
     required init(from decoder: Decoder) throws {

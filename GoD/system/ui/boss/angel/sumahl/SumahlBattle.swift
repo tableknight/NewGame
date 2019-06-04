@@ -34,7 +34,7 @@ class SumahlBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = 64
         var es = Array<Creature>()
         
         let mx1 = SumahlServant1()
@@ -156,7 +156,7 @@ class SilenceAll: Magical, Curse {
     override init() {
         super.init()
         _name = "群体静默"
-        _description = "对敌方所有单位释放诅咒术，令其有50%的几率静默"
+        _description = "对敌方所有单位释放诅咒术，令其有一定几率静默"
         _quality = Quality.SACRED
         _cooldown = 1
         autoCast = true
@@ -167,9 +167,10 @@ class SilenceAll: Magical, Curse {
         c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 50, target: t, completion: {}) {
-                    t.actionDebuff {
+                    t.actionWait {
                         self._battle.silenceUnit(unit: t)
                     }
+                    t.mixed2(index: 16)
                 }
             }
             setTimeout(delay: 3.5, completion: completion)
@@ -247,6 +248,7 @@ class LifeFlow: Magical {
                             completion()
                         }
                     }
+                    t.mixed2(index: 16)
                 }
             }
             
