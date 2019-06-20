@@ -10,8 +10,8 @@ import SpriteKit
 class DarkCrow: Natrue {
     override init() {
         super.init()
-        _stars.strength = 1.8
-        _stars.stamina = 1.9
+        _stars.strength = 1.5
+        _stars.stamina = 1.3
         _stars.agility = 1.0
         _stars.intellect = 0.6
         _name = "阿福"

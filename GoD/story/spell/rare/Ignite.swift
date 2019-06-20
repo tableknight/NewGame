@@ -19,7 +19,7 @@ class Ignite: Magical {
         isFire = true
         _name = "引爆"
         _description = "引爆所有点燃目标，每层燃烧效果造成精神50%的火焰伤害"
-        _quality = Quality.SACRED
+        _quality = Quality.RARE
         _cooldown = 0
         autoCast = true
         _rate = 0.5

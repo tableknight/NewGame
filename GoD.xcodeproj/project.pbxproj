@@ -287,6 +287,7 @@
 		092C0CB422A6A9F60084D15D /* IssThePuppet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB322A6A9F60084D15D /* IssThePuppet.swift */; };
 		092C0CB622A6AA6E0084D15D /* IssBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB522A6AA6E0084D15D /* IssBattle.swift */; };
 		092C0CB822A6AB840084D15D /* ControlWind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB722A6AB840084D15D /* ControlWind.swift */; };
+		092C0CBA22AFD7070084D15D /* Predict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB922AFD7070084D15D /* Predict.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -696,6 +697,7 @@
 		092C0CB322A6A9F60084D15D /* IssThePuppet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssThePuppet.swift; sourceTree = "<group>"; };
 		092C0CB522A6AA6E0084D15D /* IssBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssBattle.swift; sourceTree = "<group>"; };
 		092C0CB722A6AB840084D15D /* ControlWind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlWind.swift; sourceTree = "<group>"; };
+		092C0CB922AFD7070084D15D /* Predict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predict.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1155,6 +1157,8 @@
 				09C66CC82212F48800E1C153 /* QiWave.swift */,
 				090FEAA921BB9B2A004276BB /* Firelord.swift */,
 				090FEAAA21BB9B2A004276BB /* ShootAll.swift */,
+				09738A94229A6C35009AF2EE /* Blizzard.swift */,
+				09738A92229A6061009AF2EE /* Ignite.swift */,
 				090FEAAB21BB9B2A004276BB /* DeathStrike.swift */,
 				090FEAAC21BB9B2A004276BB /* IceGuard.swift */,
 				090FEAAD21BB9B2A004276BB /* ThunderArray.swift */,
@@ -1181,9 +1185,13 @@
 			isa = PBXGroup;
 			children = (
 				09C66CD32213040100E1C153 /* ChaosAttack.swift */,
+				092C0CB922AFD7070084D15D /* Predict.swift */,
+				09738A96229A6F20009AF2EE /* ElementDestory.swift */,
 				09C66CEF221EF7D000E1C153 /* DragonBlood.swift */,
 				090FEABB21BB9B2A004276BB /* IceFist.swift */,
+				09738A98229A7638009AF2EE /* SetTimeBack.swift */,
 				09C66CEB221EF15C00E1C153 /* IceSpear.swift */,
+				09738A8C22990DA6009AF2EE /* BurningAll.swift */,
 				09C66CE322184CDE00E1C153 /* LowerSummon.swift */,
 				090FEABC21BB9B2A004276BB /* PriceOfBlood.swift */,
 				0922C95F223D41EE002DC201 /* WindPunish.swift */,
@@ -1208,6 +1216,9 @@
 			children = (
 				09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */,
 				09C66CCA2212F9F200E1C153 /* BreakDefence.swift */,
+				092C0CB722A6AB840084D15D /* ControlWind.swift */,
+				092C0CAE229ED2420084D15D /* Petrify.swift */,
+				09738A8E229910C8009AF2EE /* Burn.swift */,
 				09C66CCE2212FD6C00E1C153 /* ScreamLoud.swift */,
 				090FEAC821BB9B2A004276BB /* Strong.swift */,
 				09C66CCC2212FBDA00E1C153 /* AttackHard.swift */,
@@ -1628,14 +1639,6 @@
 		09C66C8A21FD49EF00E1C153 /* newSpell */ = {
 			isa = PBXGroup;
 			children = (
-				09738A8C22990DA6009AF2EE /* BurningAll.swift */,
-				09738A8E229910C8009AF2EE /* Burn.swift */,
-				09738A92229A6061009AF2EE /* Ignite.swift */,
-				09738A94229A6C35009AF2EE /* Blizzard.swift */,
-				09738A96229A6F20009AF2EE /* ElementDestory.swift */,
-				09738A98229A7638009AF2EE /* SetTimeBack.swift */,
-				092C0CAE229ED2420084D15D /* Petrify.swift */,
-				092C0CB722A6AB840084D15D /* ControlWind.swift */,
 			);
 			path = newSpell;
 			sourceTree = "<group>";
@@ -1933,6 +1936,7 @@
 				090FEC4621BB9B2B004276BB /* SelectSpell.swift in Sources */,
 				09C66CC222106F5A00E1C153 /* IceBomb.swift in Sources */,
 				09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */,
+				092C0CBA22AFD7070084D15D /* Predict.swift in Sources */,
 				090FEBBF21BB9B2B004276BB /* FragileCurse.swift in Sources */,
 				0922C97D2253AA92002DC201 /* Maze.swift in Sources */,
 				090FEB9821BB9B2B004276BB /* Python.swift in Sources */,

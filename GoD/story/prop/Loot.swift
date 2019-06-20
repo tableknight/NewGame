@@ -125,7 +125,7 @@ class Loot: Core {
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 5 * lucky {
+        if chance < 3 * lucky {
             let item = getSpellBook()
             _props.append(item)
         }
@@ -190,9 +190,9 @@ class Loot: Core {
         }
         spells.append(LineAttack())
         spells.append(Heal())
-        spells.append(LowerSummon())
-        spells.append(LowlevelFlame())
-        spells.append(FireFist())
+//        spells.append(LowerSummon())
+        spells.append(Predict())
+        spells.append(Petrify())
         return spells
     }
     func getRandomNormalSpell() -> Spell {
@@ -207,7 +207,7 @@ class Loot: Core {
     func getRandomSacredSpell() -> Spell {
         return getSacredSpell(id: seed(to: sacredSpellCount))
     }
-    let normalSpellCount = 14
+    let normalSpellCount = 16
     func getNormalSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -230,28 +230,32 @@ class Loot: Core {
             return Energetic()
         case 9:
             return ThunderAttack()
-//        case 10:
-//            return LowlevelFlame()
+        case 10:
+            return LowlevelFlame()
         case 11:
             return BreakDefence()
         case 12:
             return AttackHard()
         case 13:
             return ScreamLoud()
+        case 14:
+            return Burn()
+        case 15:
+            return ControlWind()
         default:
             return Cruel()
         }
     }
     var _goodSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11]
-    let goodSpellCount = 22
+    let goodSpellCount = 25
     func getGoodSpell(id:Int) -> Spell {
         switch id {
         case 0:
             return BloodThirsty()
         case 1:
             return BloodThirsty() //多余
-//        case 2:
-//            return FireFist()
+        case 2:
+            return FireFist()
         case 3:
             return FrozenShoot()
         case 4:
@@ -276,8 +280,8 @@ class Loot: Core {
             return Vanguard()
         case 14:
             return TrueSight()
-//        case 15:
-//            return LowerSummon()
+        case 15:
+            return LowerSummon()
         case 16:
             return IceSpear()
         case 17:
@@ -290,12 +294,18 @@ class Loot: Core {
             return WindAttack()
         case 21:
             return WindPunish()
+        case 22:
+            return BurningAll()
+        case 23:
+            return ElementDestory()
+        case 24:
+            return SetTimeBack()
         default:
             return BloodThirsty()
         }
     }
     var _rareSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    let rareSpellCount = 29
+    let rareSpellCount = 31
     func getRareSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -356,6 +366,10 @@ class Loot: Core {
             return LifeFlow()
         case 28:
             return LeeAttack()
+        case 29:
+            return Ignite()
+        case 30:
+            return Blizzard()
         default:
             return Lighting()
         }
