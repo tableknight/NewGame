@@ -19,11 +19,24 @@ class GameScene: SKScene {
 //        lighting.anchorPoint = CGPoint(x: 0.5, y: 0)
 ////        lighting.zPosition = _charNode.zPosition + 20
 //        addChild(lighting)
-//        realScene()
+        realScene()
 //        setTimeout(delay: 30, completion: {
 //            self.battle()
 //        })
-        homePage()
+//        homePage()
+//        for _ in 0...4 {
+//            let s = HellBaron()
+//            s.create(level: 1)
+//            Game.instance.char._minions.append(s)
+//        }
+//        for _ in 0...9 {
+//            let s = HellBaron()
+//            s.create(level: 1)
+//            Game.instance.char._storedMinions.append(s)
+//        }
+//        let m = MinionTradingPanel()
+//        m.create()
+//        Game.instance.curStage.showPanel(m)
     }
 //    func getTryer() -> Tryer? {
 //        let us = UserDefaults.standard
@@ -243,9 +256,9 @@ class GameScene: SKScene {
 //        gt._count = 10
 //        e.addProp(p: gt)
 ////
-//        let ggg = TownScroll()
-//        ggg._count = 10
-//        e.addProp(p: ggg)
+        let ggg = TownScroll()
+        ggg._count = 10
+        e.addProp(p: ggg)
 ////
         let po = Potion()
         po._count = 10

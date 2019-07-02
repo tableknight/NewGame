@@ -288,6 +288,8 @@
 		092C0CB622A6AA6E0084D15D /* IssBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB522A6AA6E0084D15D /* IssBattle.swift */; };
 		092C0CB822A6AB840084D15D /* ControlWind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB722A6AB840084D15D /* ControlWind.swift */; };
 		092C0CBA22AFD7070084D15D /* Predict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB922AFD7070084D15D /* Predict.swift */; };
+		092C0CBC22BE6FAA0084D15D /* MinionTradingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */; };
+		092C0CBE22CA2A330084D15D /* MinionHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBD22CA2A330084D15D /* MinionHouse.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -698,6 +700,8 @@
 		092C0CB522A6AA6E0084D15D /* IssBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssBattle.swift; sourceTree = "<group>"; };
 		092C0CB722A6AB840084D15D /* ControlWind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlWind.swift; sourceTree = "<group>"; };
 		092C0CB922AFD7070084D15D /* Predict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predict.swift; sourceTree = "<group>"; };
+		092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionTradingPanel.swift; sourceTree = "<group>"; };
+		092C0CBD22CA2A330084D15D /* MinionHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionHouse.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1350,6 +1354,7 @@
 				09C6BF7D21C523DE0003C7F1 /* SelectableComponent.swift */,
 				09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */,
 				094E68CF21E203EE00414583 /* SellingPanel.swift */,
+				092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1757,6 +1762,7 @@
 				09C6BF9521D7867D0003C7F1 /* EastCamping.swift */,
 				09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */,
 				09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */,
+				092C0CBD22CA2A330084D15D /* MinionHouse.swift */,
 				0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */,
 				094E68CD21E1C8CD00414583 /* GeneralStore.swift */,
 				094E68D121E37E6700414583 /* OutfitStore.swift */,
@@ -1997,6 +2003,7 @@
 				094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */,
 				090FEB9921BB9B2B004276BB /* GiantWasp.swift in Sources */,
 				090FEC4421BB9B2B004276BB /* SelectImage.swift in Sources */,
+				092C0CBC22BE6FAA0084D15D /* MinionTradingPanel.swift in Sources */,
 				090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */,
 				09C66CCB2212F9F200E1C153 /* BreakDefence.swift in Sources */,
 				090FEBCF21BB9B2B004276BB /* MightOfOaks.swift in Sources */,
@@ -2093,6 +2100,7 @@
 				090FEB6221BB9B2B004276BB /* SacredSword.swift in Sources */,
 				090FEB9521BB9B2B004276BB /* Race.swift in Sources */,
 				090FEBC021BB9B2B004276BB /* ProtectionFromIce.swift in Sources */,
+				092C0CBE22CA2A330084D15D /* MinionHouse.swift in Sources */,
 				09738A91229A5DFA009AF2EE /* WoodenDummy.swift in Sources */,
 				090FEC1521BB9B2B004276BB /* UICell.swift in Sources */,
 				090FEC0F21BB9B2B004276BB /* UIPanel.swift in Sources */,

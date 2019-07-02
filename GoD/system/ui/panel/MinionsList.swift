@@ -174,6 +174,9 @@ class MinionsList:UIPanel {
     
     func showMinions(_ minions:Array<Creature>) {
         let size = minions.count - 1
+        if size < 0 {
+            return
+        }
         let startY = _standardHeight * 0.5 - _standardGap
         for i in 0...size {
             let y = i % 3

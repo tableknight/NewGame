@@ -26,9 +26,10 @@ class MyStage: SKSpriteNode {
         let touchPoint = touches.first?.location(in: self)
         if _minionButton.contains(touchPoint!) && !_minionButton.isHidden {
             let c = Game.instance.char
-            if (c?._minions.count)! < 1 {
-                return
-            }
+//            if (c?._minions.count)! < 1 {
+//                showMsg(text: "没有携带随从的灵魂")
+//                return
+//            }
             let ml = MinionsList()
             ml.create(minions: (c?._minions)!)
             showPanel(ml)
@@ -138,6 +139,8 @@ class MyStage: SKSpriteNode {
             rate = 0.72
         } else if bounds.width == 375 && bounds.height == 812 { //iphone x
             rate = 0.78
+        } else if bounds.width == 320 && bounds.height == 568 { //iphone x
+            rate = 1
         }
         let w = bounds.width * rate
         let h = bounds.height * rate

@@ -26,21 +26,61 @@ class AcientRoad: Dungeon {
         }
     }
     override func create() {
-        _floorSize = seed(min: 1, max: 7)
+        if _index <= 1 {
+            _floorSize = seed(min: 1, max: 7)
+            _bossFloor = seed(min: 1, max: _floorSize)
+        } else {
+            _floorSize = Game.instance.curStage._scenes[0]._floorSize
+            _bossFloor = Game.instance.curStage._scenes[0]._bossFloor
+        }
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
     }
-    override func hasAction(cell:Int, touchPoint:CGPoint) -> Bool {
-//        let nextPoint = getNextPoint()
-//        let nextY = nextPoint.y.toInt()
-//        let nextX = nextPoint.x.toInt()
-//        if cell == CELL_TOWER {
-//            let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
-//            
-//        }
-        return false
+    internal var _bossFloor = 0
+    override func createBoss() {
+        if _level == 10 {
+            _bossImg = "Iss"
+            _bossBattle = IssBattle()
+            addBoss()
+        }
     }
+    internal func addBoss() {
+        if _index != _bossFloor {
+            return
+        }
+        var points = Array<CGPoint>()
+        let maxx = hSize.toInt() - 1
+        let maxy = vSize.toInt() - 1
+        for y in 0...maxy {
+            for x in 0...maxx {
+                if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
+                    points.append(CGPoint(x: x, y: y))
+                }
+            }
+        }
+        //        let seller = UIRole()
+        //        seller.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
+        
+        let boss = SKSpriteNode(imageNamed: _bossImg)
+        boss.size = CGSize(width: cellSize * 1.5, height: cellSize * 1.5)
+        
+        
+        let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())
+        item.removeFromParent()
+        addItem(x: points[0].x, y: points[0].y, item: boss)
+        _mapMatrix[points[0].y.toInt()][points[0].x.toInt()] = CELL_BOSS
+    }
+//    override func hasAction(cell:Int, touchPoint:CGPoint) -> Bool {
+////        let nextPoint = getNextPoint()
+////        let nextY = nextPoint.y.toInt()
+////        let nextX = nextPoint.x.toInt()
+////        if cell == CELL_TOWER {
+////            let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
+////            
+////        }
+//        return false
+//    }
     internal var _floorSize:Int = 0
     var _id:Int = 0
     override func moveEndAction() {
@@ -123,9 +163,9 @@ class AcientRoad: Dungeon {
         }
 //        stage.hideScene()
         var b = Battle()
-        if _level == 10 {
-            b = IssBattle()
-        }
+//        if _level == 10 {
+//            b = IssBattle()
+//        }
         let roles = [char] + char.getReadyMinions()
         b.setEnemyPart(minions: enimies)
         b.setPlayerPart(roles: roles)

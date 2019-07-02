@@ -56,7 +56,7 @@ class UIPanel:SKSpriteNode {
     
     func createCloseButton() {
         _closeButton.text = "关闭"
-        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.65
+        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.7
         _closeButton.position.x = _standardWidth * 0.5 - cellSize * 1.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)

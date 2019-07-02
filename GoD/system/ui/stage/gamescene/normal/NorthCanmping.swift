@@ -40,6 +40,14 @@ class NorthCamping: StandScene {
                 //                cc._role.faceWest()
                 char.faceSouth()
             })
+        } else if pos.x == 1 && pos.y == 7 {
+            let cc = MinionHouse()
+            let char = _role!
+            Game.instance.curStage.switchScene(next: cc, completion: {
+                cc.setRole(x: 4, y: 7, char: char)
+                //                cc._role.faceWest()
+                char.faceSouth()
+            })
         }
     }
     override func create() {

@@ -16,14 +16,14 @@ class BreakDefence:Physical {
     }
     override init() {
         super.init()
-        _name = "势如破竹"
+        _name = "崩击"
         _description = "对防御目标造成100%-200%攻击力的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 0
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        _rate = seed(min: 50, max: 150).toFloat() * 0.01
+        _rate = seed(min: 100, max: 200).toFloat() * 0.01
         _battle._curRole.actionAttack {
             if t.isDefend {
                 let damage = self.physicalDamage(t)

@@ -178,7 +178,7 @@ class Character: Creature {
         _level += 1
         _extensions.hp = _extensions.health
         Game.instance.curStage.setBarValue()
-        Game.instance.curStage._curScene._role.speak(text: "LEVEL UP!")
+//        Game.instance.curStage._curScene._role.speak(text: "LEVEL UP!")
     }
     
     override func levelTo(level: CGFloat) {

@@ -472,6 +472,7 @@ class Game {
     static var roles = Array<RoleDocument>()
     static func calcCellSize() {
         let bounds = UIScreen.main.bounds.size
+        
         var uiSize:CGFloat = 72
         var imgSize:CGFloat = 48
         if bounds.width == 375 && bounds.height == 667 { //iphone8
@@ -484,6 +485,9 @@ class Game {
             
         } else if bounds.width == 375 && bounds.height == 812 { //iphone x
             
+        } else if bounds.width == 320 && bounds.height == 568 { //iphone 5s
+            uiSize = 86
+            imgSize = 54
         }
         Game.CELLSIZE = uiSize
         Game.instance.cellSize = imgSize

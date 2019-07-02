@@ -188,9 +188,9 @@ class Loot: Core {
         for i in 0...sacredSpellCount - 1 {
             spells.append(getSacredSpell(id: i))
         }
-        spells.append(LineAttack())
+        spells.append(BreakDefence())
         spells.append(Heal())
-//        spells.append(LowerSummon())
+        spells.append(FireFist())
         spells.append(Predict())
         spells.append(Petrify())
         return spells
@@ -232,8 +232,8 @@ class Loot: Core {
             return ThunderAttack()
         case 10:
             return LowlevelFlame()
-        case 11:
-            return BreakDefence()
+//        case 11:
+//            return BreakDefence()
         case 12:
             return AttackHard()
         case 13:
@@ -253,9 +253,9 @@ class Loot: Core {
         case 0:
             return BloodThirsty()
         case 1:
-            return BloodThirsty() //多余
-        case 2:
-            return FireFist()
+            return LineAttack()
+//        case 2:
+//            return FireFist()
         case 3:
             return FrozenShoot()
         case 4:

@@ -22,6 +22,7 @@ class MyScene: SKSpriteNode, IInitialize {
     let CELL_BOX = 105
     let CELL_BLOCK = 106
     let CELL_SELLER = 107
+    let CELL_BOSS = 108
     let TOWER_FIRE_ENERGE = 200
     let TOWER_WATER_ENERGE = 201
     let TOWER_THUNDER_ENERGE = 202

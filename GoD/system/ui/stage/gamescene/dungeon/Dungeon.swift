@@ -18,6 +18,21 @@ class Dungeon: MyScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
+        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        
+        if cell == CELL_BOSS {
+            let i = Game.instance
+            _bossBattle.setEnemyPart(minions: [])
+            _bossBattle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
+            i.curStage.addBattle(_bossBattle)
+            _bossBattle.battleStart()
+            return true
+            
+            
+        }
+        return false
+    }
     override func create() {
         createSize()
 //        halfSize = 3
@@ -44,6 +59,7 @@ class Dungeon: MyScene {
             }
             createSeller()
         }
+        createBoss()
         if self is InnerMaze {
             createWallShadow()
         }
@@ -302,6 +318,12 @@ class Dungeon: MyScene {
             _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_SELLER
         }
     }
+    internal var _bossImg = ""
+    internal var _bossBattle:Battle!
+    internal func createBoss() {
+        
+    }
+    
     
     internal func createEnemy() {
         for p in _visiblePoints {

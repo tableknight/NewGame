@@ -457,7 +457,9 @@ class LevelUpScroll:Item {
         let r = [Game.instance.char] + Game.instance.char._minions
         for c in r {
             c.levelup()
+            
         }
+        Game.instance.char._dungeonLevel += 1
     }
     var armorId:Int = 0
 }
