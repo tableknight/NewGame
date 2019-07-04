@@ -41,8 +41,12 @@ class FireBreath: Magical {
             t.actionAttacked {
                 t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
-                    if self.d3() {
+                    if t.ifRingIs(FireCore()) {
                         t.burning()
+                    } else {
+                        if self.d3() {
+                            t.burning()
+                        }
                     }
                 }
             }

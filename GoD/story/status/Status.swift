@@ -18,7 +18,7 @@ class Status:Core {
         super.init()
     }
     var _labelText = ""
-    var _timeleft:Int = 0
+    var _timeleft:Int = 3
     var _type:String = ""
     var _name = ""
     var _description = ""

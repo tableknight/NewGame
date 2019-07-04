@@ -44,8 +44,12 @@ class FireRain: Magical {
             if !hadSpecialAction(t:t) {
                 t.actionAttacked {
                     t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
-                    if self.d8() {
+                    if t.ifRingIs(FireCore()) {
                         t.burning()
+                    } else {
+                        if self.d8() {
+                            t.burning()
+                        }
                     }
                 }
                 t.flame2(index: 1, line: 1)

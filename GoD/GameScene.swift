@@ -20,9 +20,9 @@ class GameScene: SKScene {
 ////        lighting.zPosition = _charNode.zPosition + 20
 //        addChild(lighting)
         realScene()
-//        setTimeout(delay: 30, completion: {
-//            self.battle()
-//        })
+        setTimeout(delay: 100, completion: {
+            self.battle()
+        })
 //        homePage()
 //        for _ in 0...4 {
 //            let s = HellBaron()
@@ -164,64 +164,19 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = IssBattle()
+        let b = FireSpiritBattle()
         var es = Array<Creature>()
-//        let role = UndeadWarrior()
-//        role.create(level: 50)
-//        es.append(role)
-//        let r2 = UndeadMinion1()
-//        r2.create(level: 50)
-//        es.append(r2)
-//        for _ in 0...2 {
-//            let c = GiantWasp()
-//            c.create(level: 45)
-////            es.append(c)
-//        }
-////        es[0]._seat = BUnit.TBL
-////        es[1]._seat = BUnit.TBM
-////        es[2]._seat = BUnit.TBR
-////        es[3]._seat = BUnit.TBM
-////        es[4]._seat = BUnit.TBR
-//        let t = Lewis()
-//        t.create(level: 46)
-//        t._seat = BUnit.TTM
-//        es.append(t)
-//        //        b.setEvils(evils: es)
-//        let r = HellNight()
-//        r.create(level: 1)
-//        es.append(r)
-//        let r1 = GiantWasp()
-//        r1.create(level: 1)
-//        es.append(r1)
-        var r = WoodenDummy()
-        r.create(level: 1)
-        es.append(r)
-        r = WoodenDummy()
-        r.create(level: 1)
-        es.append(r)
-        r = WoodenDummy()
-        r.create(level: 1)
-        es.append(r)
-        r = WoodenDummy()
-        r.create(level: 1)
-        es.append(r)
-        r = WoodenDummy()
-        r.create(level: 1)
-        es.append(r)
-        for c in es {
-//            c._spellsInuse = [ThunderArray()]
-        }
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
+        
+        
+        
+        
+        
+        
         char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
-//        let cs:Array<Creature> = [char]
-//        char._spellsInuse = [SummonFlower()]
         let cs:Array<Creature> = [char] + char.getReadyMinions()
-//        for u in cs {
-//            u._elementalResistance.fire += 70
-//        }
         b.setPlayerPart(roles: cs)
-//        Game.instance.char._spellsInuse = [BearFriend()]
         
         Game.instance.curStage.addBattle(b)
         b.battleStart()
@@ -239,12 +194,14 @@ class GameScene: SKScene {
         let e = Emily()
         e.create(level: e._level)
         e.addMoney(num: 1000)
-        e._spellsInuse = [LowlevelFlame(), FireOrFired(), FireRain(), FireBreath()]
 //        e._spells = [TruePower()]
 //        let bow = Bow()
 //        bow.create(level: 1)
 //        e.addProp(p: bow)
-        
+        let sn = SnowLady()
+        sn.create(level: 1)
+        sn._seat = BUnit.BTR
+        e._minions.append(sn)
         
         bs.setRole(x: 5, y: 7, role: e)
 //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)

@@ -497,6 +497,7 @@ class Battle: SKSpriteNode {
             setTimeout(delay: delay, completion: self.createAction)
         }
     }
+    
     func getSpell(u:BUnit) -> Spell {
         var sps = Array<Spell>()
         for s in u.getActiveSpell() {

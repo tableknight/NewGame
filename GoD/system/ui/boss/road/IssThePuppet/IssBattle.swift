@@ -71,7 +71,9 @@ class IssBattle: BossBattle {
             list.append(head)
         }
         
-        return list
+        let l = Loot()
+        l.loot(level: 25)
+        return list + l.getList()
     }
 }
 

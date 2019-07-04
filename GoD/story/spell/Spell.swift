@@ -865,6 +865,13 @@ class Spell:Core, IDisplay, ISelectTarget {
             }
         }
     }
+    internal func findTargetChar() {
+        for u in _battle._playerPart {
+            if u._unit is Character {
+                _battle._selectedTarget = u
+            }
+        }
+    }
     internal func getRandomLeftUnit() -> BUnit {
         return _battle._leftRoles[seed(max: _battle._leftRoles.count)]
     }

@@ -193,6 +193,12 @@ class Loot: Core {
         spells.append(FireFist())
         spells.append(Predict())
         spells.append(Petrify())
+        ///未收录 ------
+        spells.append(LavaExplode())
+        spells.append(Combustion())
+        spells.append(BurningOut())
+        spells.append(BurnHeart())
+        //--------------
         return spells
     }
     func getRandomNormalSpell() -> Spell {

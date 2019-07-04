@@ -290,6 +290,14 @@
 		092C0CBA22AFD7070084D15D /* Predict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB922AFD7070084D15D /* Predict.swift */; };
 		092C0CBC22BE6FAA0084D15D /* MinionTradingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */; };
 		092C0CBE22CA2A330084D15D /* MinionHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBD22CA2A330084D15D /* MinionHouse.swift */; };
+		092C0CC122CE1EA90084D15D /* FireSpirit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC022CE1EA90084D15D /* FireSpirit.swift */; };
+		092C0CC322CE1EBB0084D15D /* FireSpiritBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC222CE1EBB0084D15D /* FireSpiritBattle.swift */; };
+		092C0CC522CE24080084D15D /* LavaExplode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC422CE24080084D15D /* LavaExplode.swift */; };
+		092C0CC722CE27260084D15D /* Combustion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC622CE27260084D15D /* Combustion.swift */; };
+		092C0CC922CE29060084D15D /* BurnHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC822CE29060084D15D /* BurnHeart.swift */; };
+		092C0CCB22CE2AB60084D15D /* BurningOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CCA22CE2AB60084D15D /* BurningOut.swift */; };
+		092C0CCD22CE2E2E0084D15D /* FireCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CCC22CE2E2E0084D15D /* FireCore.swift */; };
+		092C0CCF22CE32700084D15D /* FireMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CCE22CE32700084D15D /* FireMark.swift */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
 		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
@@ -702,6 +710,14 @@
 		092C0CB922AFD7070084D15D /* Predict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predict.swift; sourceTree = "<group>"; };
 		092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionTradingPanel.swift; sourceTree = "<group>"; };
 		092C0CBD22CA2A330084D15D /* MinionHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionHouse.swift; sourceTree = "<group>"; };
+		092C0CC022CE1EA90084D15D /* FireSpirit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSpirit.swift; sourceTree = "<group>"; };
+		092C0CC222CE1EBB0084D15D /* FireSpiritBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSpiritBattle.swift; sourceTree = "<group>"; };
+		092C0CC422CE24080084D15D /* LavaExplode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LavaExplode.swift; sourceTree = "<group>"; };
+		092C0CC622CE27260084D15D /* Combustion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combustion.swift; sourceTree = "<group>"; };
+		092C0CC822CE29060084D15D /* BurnHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurnHeart.swift; sourceTree = "<group>"; };
+		092C0CCA22CE2AB60084D15D /* BurningOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurningOut.swift; sourceTree = "<group>"; };
+		092C0CCC22CE2E2E0084D15D /* FireCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireCore.swift; sourceTree = "<group>"; };
+		092C0CCE22CE32700084D15D /* FireMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireMark.swift; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
 		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
@@ -1582,6 +1598,21 @@
 			path = IssThePuppet;
 			sourceTree = "<group>";
 		};
+		092C0CBF22CE1E7E0084D15D /* FireSpirit */ = {
+			isa = PBXGroup;
+			children = (
+				092C0CC022CE1EA90084D15D /* FireSpirit.swift */,
+				092C0CC222CE1EBB0084D15D /* FireSpiritBattle.swift */,
+				092C0CC422CE24080084D15D /* LavaExplode.swift */,
+				092C0CC622CE27260084D15D /* Combustion.swift */,
+				092C0CC822CE29060084D15D /* BurnHeart.swift */,
+				092C0CCA22CE2AB60084D15D /* BurningOut.swift */,
+				092C0CCC22CE2E2E0084D15D /* FireCore.swift */,
+				092C0CCE22CE32700084D15D /* FireMark.swift */,
+			);
+			path = FireSpirit;
+			sourceTree = "<group>";
+		};
 		09C66C7021F0B78B00E1C153 /* boss */ = {
 			isa = PBXGroup;
 			children = (
@@ -1727,6 +1758,7 @@
 		09C66CBB2210615700E1C153 /* road */ = {
 			isa = PBXGroup;
 			children = (
+				092C0CBF22CE1E7E0084D15D /* FireSpirit */,
 				092C0CB222A6A9D30084D15D /* IssThePuppet */,
 				0922C977224FAB69002DC201 /* mimic */,
 				09C66CBC2210616000E1C153 /* wizard */,
@@ -1993,15 +2025,18 @@
 				090FEBE721BB9B2B004276BB /* Structure.swift in Sources */,
 				090FEBDB21BB9B2B004276BB /* Energetic.swift in Sources */,
 				090FEBE421BB9B2B004276BB /* Spell.swift in Sources */,
+				092C0CCD22CE2E2E0084D15D /* FireCore.swift in Sources */,
 				0922C9562234D992002DC201 /* MoringPalace.swift in Sources */,
 				09C66C7521F0B88300E1C153 /* Toppur.swift in Sources */,
 				090FEBD521BB9B2B004276BB /* QuickHeal.swift in Sources */,
 				090FEB6D21BB9B2B004276BB /* Armor.swift in Sources */,
 				090FEBF521BB9B2B004276BB /* MyStage.swift in Sources */,
+				092C0CCF22CE32700084D15D /* FireMark.swift in Sources */,
 				090FEB9621BB9B2B004276BB /* Rizen.swift in Sources */,
 				090FEBF921BB9B2B004276BB /* SpellCard.swift in Sources */,
 				094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */,
 				090FEB9921BB9B2B004276BB /* GiantWasp.swift in Sources */,
+				092C0CC722CE27260084D15D /* Combustion.swift in Sources */,
 				090FEC4421BB9B2B004276BB /* SelectImage.swift in Sources */,
 				092C0CBC22BE6FAA0084D15D /* MinionTradingPanel.swift in Sources */,
 				090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */,
@@ -2040,6 +2075,7 @@
 				090FEBBC21BB9B2B004276BB /* IceGuard.swift in Sources */,
 				090FEA0321BB983E004276BB /* GameViewController.swift in Sources */,
 				090FEBED21BB9B2B004276BB /* Core.swift in Sources */,
+				092C0CCB22CE2AB60084D15D /* BurningOut.swift in Sources */,
 				090FEB5C21BB9B2B004276BB /* SacredWand.swift in Sources */,
 				090FEB6921BB9B2B004276BB /* Ring.swift in Sources */,
 				09C66CD62215B50E00E1C153 /* SongOfElement.swift in Sources */,
@@ -2163,9 +2199,11 @@
 				090FEC3621BB9B2B004276BB /* StartValley.swift in Sources */,
 				09C66CF0221EF7D000E1C153 /* DragonBlood.swift in Sources */,
 				090FEC0021BB9B2B004276BB /* SpellPanel.swift in Sources */,
+				092C0CC322CE1EBB0084D15D /* FireSpiritBattle.swift in Sources */,
 				090FEBC821BB9B2B004276BB /* FireOrFired.swift in Sources */,
 				090FEBFA21BB9B2B004276BB /* Card.swift in Sources */,
 				09738A97229A6F20009AF2EE /* ElementDestory.swift in Sources */,
+				092C0CC922CE29060084D15D /* BurnHeart.swift in Sources */,
 				090FEC3F21BB9B2B004276BB /* exts.swift in Sources */,
 				090FEBB021BB9B2B004276BB /* Steal.swift in Sources */,
 				09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */,
@@ -2227,11 +2265,13 @@
 				090FEB8621BB9B2B004276BB /* Speed.swift in Sources */,
 				090FEC3021BB9B2B004276BB /* MagicHouseInside.swift in Sources */,
 				090FEB7C21BB9B2B004276BB /* Revenge.swift in Sources */,
+				092C0CC122CE1EA90084D15D /* FireSpirit.swift in Sources */,
 				090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */,
 				090FEBE921BB9B2B004276BB /* Item.swift in Sources */,
 				0922C96A2248BEF1002DC201 /* CityOfFail.swift in Sources */,
 				090FEC0B21BB9B2B004276BB /* MinionsList.swift in Sources */,
 				09C66CAB220D786000E1C153 /* Pitheron.swift in Sources */,
+				092C0CC522CE24080084D15D /* LavaExplode.swift in Sources */,
 				090FEC0D21BB9B2B004276BB /* HBar.swift in Sources */,
 				090FEBFC21BB9B2B004276BB /* UIEvil.swift in Sources */,
 				090FEC1421BB9B2B004276BB /* Dialog.swift in Sources */,

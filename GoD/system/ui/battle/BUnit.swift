@@ -1267,7 +1267,24 @@ class BUnit: SKSpriteNode {
         }
         return ctl
     }
-    
+    func ifRingIs(_ ring:Ring) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._leftRing != nil {
+                if type(of: c._leftRing) == type(of: ring) {
+                    return true
+                }
+            }
+            if c._rightRing != nil {
+                if type(of: c._rightRing) == type(of: ring) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
     func getStrength() -> CGFloat {
         let val = _unit._mains.strength + _mains.strength
         return val

@@ -141,8 +141,12 @@ class FireExplode:Magical {
                     t.showValue(value: damage) {
                         completion()
                     }
-                    if self.d7() {
+                    if t.ifRingIs(FireCore()) {
                         t.burning()
+                    } else {
+                        if self.d7() {
+                            t.burning()
+                        }
                     }
                 }
                 t.flame3()

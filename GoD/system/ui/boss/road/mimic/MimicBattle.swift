@@ -36,5 +36,11 @@ class MimicBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     var _level:CGFloat = 1
+    
+    override func specialLoot() -> Array<Prop> {
+        let l = Loot()
+        l.loot(level: _level)
+        return l.getList()
+    }
 }
 
