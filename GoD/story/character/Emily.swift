@@ -20,7 +20,7 @@ class Emily:Character {
 //        strengthChange(value: 30)
 //        agilityChange(value: 20)
 //        intellectChange(value: 5)
-        _level = 1
+//        _level = 1
 //        self.levelTo(level: _level)
 //        let bow = Bow()
 //        bow.create(level: 100)
@@ -39,14 +39,14 @@ class Emily:Character {
 //            }
 //        }
 //        _spellsInuse = [ShootAll()]
-        let _minionlevel:CGFloat = _level
-        _spellCount = 2
-        _minionsCount = 2
-        let blackCat = BlackCat()
-        blackCat.create(level: _minionlevel)
-        blackCat._spellCount = 1
-        blackCat._spellsInuse = []
-        _minions.append(blackCat)
+//        let _minionlevel:CGFloat = _level
+//        _spellCount = 2
+//        _minionsCount = 2
+//        let blackCat = BlackCat()
+//        blackCat.create(level: _minionlevel)
+//        blackCat._spellCount = 1
+//        blackCat._spellsInuse = []
+//        _minions.append(blackCat)
 //        let darkCrow = DarkCrow()
 //        darkCrow.create(level: _minionlevel)
 ////        darkCrow.levelup()
@@ -71,7 +71,7 @@ class Emily:Character {
         
         
 //        darkCrow._seat = BUnit.BTM
-        blackCat._seat = BUnit.BTL
+//        blackCat._seat = BUnit.BTL
 //        bq._seat = BUnit.BBR
         
         

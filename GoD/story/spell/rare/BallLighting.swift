@@ -19,7 +19,7 @@ class BallLighting: Magical {
         _name = "球状闪电"
         _description = "对中心单位造成85%雷电伤害，外层单位受到递减的雷电伤害"
         _rate = 0.85
-        _cooldown = 1
+        _cooldown = 2
         isThunder = true
         _quality = Quality.RARE
         autoCast = true

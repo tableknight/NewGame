@@ -19,7 +19,7 @@ class ThunderArray:Magical {
         super.init()
         _quality = Quality.RARE
         _name = "雷击阵"
-        _cooldown = 1
+        _cooldown = 2
         _description = "随机造成2-5次雷电伤害，单次伤害为精神的40%"
         isThunder = true
         autoCast = true

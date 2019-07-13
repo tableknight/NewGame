@@ -33,14 +33,16 @@ class WaterCopy:Magical {
             copy._spellsInuse = [NoAction()]
             copy._extensions.health = c.getHealth()
             copy._extensions.hp = c.getHp()
-            copy._extensions.defence = c.getDefence()
-            copy._extensions.attack = c.getAttack()
-            copy._extensions.spirit = c.getSpirit()
-            copy._extensions.speed = c.getSpeed()
-            copy._extensions.avoid = c.getAvoid()
-            copy._extensions.mind = c.getMind()
+            copy._extensions.defence = c._unit._extensions.defence
+            copy._extensions.attack = c._unit._extensions.attack
+            copy._extensions.spirit = c._unit._extensions.spirit
+            copy._extensions.speed = c._unit._extensions.speed
+            copy._extensions.avoid = c._unit._extensions.avoid
+            copy._extensions.mind = c._unit._extensions.mind
             copy._elementalResistance.water = 50
+            copy._sensitive = c._unit._sensitive
             copy._rhythm = 0
+            copy._name = "水分身"
 //            copy.hasAction = false
             let seats = b.getEmptySeats(top: !b._curRole.playerPart)
             copy._seat = seats.one()
@@ -49,7 +51,7 @@ class WaterCopy:Magical {
                 u.setImg(img: c._unit._img)
                 u._charNode.size = CGSize(width: u._charSize, height: u._charSize)
             }
-            u._charNode.alpha = 0.75
+            u.alpha = 0.85
             u.actionSummon {
                 completion()
             }

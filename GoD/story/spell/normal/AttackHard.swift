@@ -24,9 +24,9 @@ class AttackHard:Physical {
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
+        let damage = self.physicalDamage(t)
         _battle._curRole.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
-                let damage = self.physicalDamage(t)
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()

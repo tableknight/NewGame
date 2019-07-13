@@ -144,6 +144,7 @@ class Unit:Core {
         speed: 0,
         accuracy: 100,
         critical: 15,
+        destroy: 0,
         avoid: 15,
         spirit: 0,
         hp: 0,
@@ -230,7 +231,7 @@ class Unit:Core {
         _extensions.attack += value * 1
         _extensions.defence += value * 0.2
         _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.5
+        _extensions.accuracy += value * 0.8
         _extensions.avoid += value * 0.8
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0

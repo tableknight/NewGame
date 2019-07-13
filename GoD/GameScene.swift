@@ -11,6 +11,7 @@ import GameplayKit
 
 
 class GameScene: SKScene {
+    var _b = Button()
     override func didMove(to view: SKView) {
         Game.instance.scene = self
         Game.calcCellSize()
@@ -20,9 +21,16 @@ class GameScene: SKScene {
 ////        lighting.zPosition = _charNode.zPosition + 20
 //        addChild(lighting)
         realScene()
-        setTimeout(delay: 100, completion: {
-            self.battle()
-        })
+        
+        
+        
+        let b = Button()
+        b.text = "aa"
+        b.zPosition = 1024
+        addChild(b)
+        _b = b
+        
+
 //        homePage()
 //        for _ in 0...4 {
 //            let s = HellBaron()
@@ -164,17 +172,22 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = FireSpiritBattle()
+        let b = RobberBattle()
         var es = Array<Creature>()
+        
+        
+//        let p = CowCow()
+//        p.create(level: 1)
+//        es.append(p)
         b.setEnemyPart(minions: es)
+        
+        
+        
+        
         let char = Game.instance.char!
-        
-        
-        
-        
-        
-        
-        char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
+//        char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
+//        char._spellsInuse = [FireFist(), IceFist(), DancingDragon()]
+//        let cs:Array<Creature> = [char]
         let cs:Array<Creature> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         
@@ -198,17 +211,66 @@ class GameScene: SKScene {
 //        let bow = Bow()
 //        bow.create(level: 1)
 //        e.addProp(p: bow)
-        let sn = SnowLady()
-        sn.create(level: 1)
-        sn._seat = BUnit.BTR
-        e._minions.append(sn)
+        
         
         bs.setRole(x: 5, y: 7, role: e)
 //        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
-//        
+        
+        e._level = 50
+        
+        let aa = HellNight()
+        aa.create(level: e._level)
+        aa._seat = BUnit.BTL
+        e._minions.append(aa)
+        
+        let sn = SnowLady()
+        sn.create(level: e._level)
+        sn._seat = BUnit.BTR
+        e._minions.append(sn)
+        
+        e.strengthChange(value: 80)
+        e.agilityChange(value: 80)
+        e.staminaChange(value: 70)
+        e.intellectChange(value: 0)
+        
+        e._dungeonLevel = 46
+        e._spellCount = 3
+        
+        e.hasShield = true
+        e.hasMark = true
+        
+        let w = Sword()
+        w.create(level: e._level)
+        e.addProp(p: w)
+        
+        let r = Ring()
+        r.create(level: e._level)
+        e.addProp(p: r)
+        
+        let r2 = Ring()
+        r2.create(level: e._level)
+        e.addProp(p: r2)
+        
+        let a = Amulet()
+        a.create(level: e._level)
+        e.addProp(p: a)
+        
+        let cm = CreationMatrix()
+        cm.create()
+        e.addProp(p: cm)
+        
+        let s = Shield()
+        s.create(level: e._level)
+        e.addProp(p: s)
+        e.addProp(p: WordlessBook())
+        e.addProp(p: ThiefPocket())
+        e.addProp(p: TearCluster())
+        e._spellsInuse = [ThunderArray(), BallLighting(), FireRain()]
+//
+        
 //        let gt = SealScroll()
 //        gt._count = 10
 //        e.addProp(p: gt)
@@ -359,6 +421,10 @@ class GameScene: SKScene {
 //        }
 //
 //        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        let touchPoint = touches.first?.location(in: self)
+        if _b.contains(touchPoint!) {
+            battle()
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

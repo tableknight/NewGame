@@ -18,6 +18,7 @@ struct Extensions:Codable {
     var speed:CGFloat
     var accuracy:CGFloat
     var critical:CGFloat
+    var destroy:CGFloat
     var avoid:CGFloat
     var spirit:CGFloat
     var hp:CGFloat

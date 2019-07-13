@@ -356,6 +356,17 @@ class Battle: SKSpriteNode {
                 s._timeleft = 0
             }
         }
+        if _char._weapon is CreationMatrix {
+            var ss:Array<Spell> = []
+            for s in _char._spellsInuse {
+                if s is Active {
+                    ss.append(s)
+                }
+            }
+            if ss.count > 0 {
+                _creationMatrixSpell = ss.one()
+            }
+        }
         
 //        _roundLabel.fontSize = 18
 //        _roundLabel.align = "left"
@@ -473,8 +484,12 @@ class Battle: SKSpriteNode {
         if hasFinished() {
             return
         }
+        //行动开始 重制技能判定
+        for i in 0...spellDecision.count - 1 {
+            spellDecision[i] = false
+        }
         if _roleAll.count <= 0 {
-            debug("roleAll empty")
+//            debug("roleAll empty")
             roundEnd()
             roundStart()
             return
@@ -580,6 +595,15 @@ class Battle: SKSpriteNode {
         if this._curRole.hasStatus(type: Status.PETRIFY) {
             this.moveEnd()
             return
+        }
+        
+        if this._curRole.hasStatus(type: Status.NERVOUS_POISON) {
+            if seed() < 33 {
+                self._curRole.showText(text: "POISON") {
+                    this.moveEnd()
+                }
+                return
+            }
         }
         
         if _curRole.hasStatus(type: Status.TAUNTED) {
@@ -811,7 +835,7 @@ class Battle: SKSpriteNode {
             let unit = _roleAll[index]
             _curRole = unit
             _roleAll.remove(at: index)
-            debug("行为混乱")
+//            debug("行为混乱")
             completion()
         } else {
             createCurRole {
@@ -1081,6 +1105,9 @@ class Battle: SKSpriteNode {
     }
     internal func cdSpell(spell:Spell) {
         if Mode.nocd {
+            return
+        }
+        if spell == _creationMatrixSpell {
             return
         }
         if spell._cooldown > 0 {
@@ -1571,6 +1598,10 @@ class Battle: SKSpriteNode {
     internal var _playerSeats = Dictionary<String, CGPoint>()
     func setEnemyPart(minions:Array<Creature>) {
         for m in minions {
+            debug(m._name)
+            for s in m._spellsInuse {
+                debug(s._name)
+            }
             let bUnit = BUnit()
             bUnit.setUnit(unit: m)
             bUnit._battle = self
@@ -1877,13 +1908,13 @@ class Battle: SKSpriteNode {
             let index = _enemyPart.index(of: unit)
             if nil != index {
                 _enemyPart.remove(at: index!)
-                debug("removeFromPart index nil2")
+//                debug("removeFromPart index nil2")
             }
         }
         let index = _roleAll.index(of: unit)
         if nil != index {
             _roleAll.remove(at: index!)
-            debug("removeFromPart index nil3")
+//            debug("removeFromPart index nil3")
         }
     }
     
@@ -2051,6 +2082,10 @@ class Battle: SKSpriteNode {
     var _curRole:BUnit = BUnit()
     var _playerUnit:BUnit = BUnit()
     var _selectedItem:Item?
-    var _specialEvents = Array<String>()
-    var isFinalChallenge = false
+//    var _specialEvents:Array<String> = [false]
+//    var isFinalChallenge = false
+    //0 判定是否是荆棘反伤
+    var spellDecision:Array<Bool> = [false]
+    //创世之矩技能
+    var _creationMatrixSpell:Spell?
 }

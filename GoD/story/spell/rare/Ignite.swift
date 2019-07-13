@@ -36,6 +36,7 @@ class Ignite: Magical {
                         t.showValue(value: damage, criticalFromSpell: false, critical: false, damageType: DamageType.FIRE, textColor: DamageColor.FIRE)
                     }
                     t.removeStatus(type: Status.BURNING)
+                    t.flame1(index: 0, line: 2)
                 }
             }
             setTimeout(delay: 1.5, completion: completion)

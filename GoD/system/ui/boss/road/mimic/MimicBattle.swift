@@ -27,7 +27,7 @@ class MimicBattle: BossBattle {
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
-        
+//        _level = 10
         let t = Mimic()
         t.create(level: _level)
         t._seat = BUnit.TTM

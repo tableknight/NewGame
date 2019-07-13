@@ -192,7 +192,7 @@ class Creature: Unit {
         _level += 1
         _leftPoint += 1
         _extensions.hp = _extensions.health
-        Game.instance.curStage._curScene._role.speak(text: "LEVEL UP!")
+//        Game.instance.curStage._curScene._role.speak(text: "LEVEL UP!")
     }
     
     func expUp(up:CGFloat) {

@@ -186,7 +186,7 @@ class IceBeast: Natrue {
         _imgUrl = "ice_beast"
         _img = SKTexture(imageNamed: _imgUrl)
         _spellCount = 1
-        if d7() {
+        if d3() {
             _spellsInuse = [QuickHeal()]
         }
     }

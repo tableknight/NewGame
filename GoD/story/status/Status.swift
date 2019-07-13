@@ -75,6 +75,8 @@ class Status:Core {
     static let LUCKY_POWER = "lucky_power"
     static let SPEED_POWER = "speed_power"
     static let ICE_BOMB = "ice_bomb"
+    static let MAKE_EVERYTHING_RIGHT = "make_everything_right"
+    static let NERVOUS_POISON = "nervous_poison"
     
     var hasBeforeMoveAction = false
     var _castSpell:Spell!
@@ -108,7 +110,11 @@ class BurningStatus:Status {
     }
     var _level:CGFloat = 1
     func getBurningDamage(unit:BUnit) -> CGFloat {
-        let damage = unit.getHealth() * 0.05
+        var rate:CGFloat = 0.05
+        if unit._unit is Boss {
+            rate = 0.015
+        }
+        let damage = unit.getHealth() * rate
         return -damage * _level
     }
     required init(from decoder: Decoder) throws {

@@ -62,6 +62,7 @@ struct EvilType {
     static let DEMON = 4
     static let NATURE = 5
     static let FINAL = 6
+    static let GIANT = 7
     static func getTypeLabel(type:Int) -> String {
         switch type {
         case EvilType.RISEN:
@@ -74,6 +75,8 @@ struct EvilType {
             return "生灵"
         case EvilType.DEMON:
             return "恶魔"
+        case EvilType.GIANT:
+            return "巨人"
         default:
             return "人类"
         }

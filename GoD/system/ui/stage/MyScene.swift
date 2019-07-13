@@ -655,7 +655,7 @@ class Chest:UIItem {
             Game.instance.curStage.addBattle(b)
             b.battleStart()
             b.defeatAction = {
-                self.loot()
+//                self.loot()
                 let l = Loot()
                 let char = Game.instance.char!
                 let roles = [char] + char.getReadyMinions()
@@ -663,6 +663,7 @@ class Chest:UIItem {
                     let exp = l.getExp(selfLevel: c._level, enemyLevel: Game.instance.curStage._curScene._level) * 10
                     c.expUp(up: exp)
                 }
+                self.confirmAction()
             }
             b.defeatedAction = {
                 self.confirmAction()

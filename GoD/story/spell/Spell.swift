@@ -178,14 +178,24 @@ class Spell:Core, IDisplay, ISelectTarget {
         completion()
     }
     func physicalDamage(_ to:BUnit) -> CGFloat {
+        if _battle._curRole.getAttack() < 1 {
+            _damageValue = 0
+            return 0
+        }
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.DEFENCE {
+                _damageValue = 0
                 return 0
             }
         }
         let from = _battle._curRole
         _damageValue = physicalDamage(from: from, to: to)
+        if isPhysical && to.hasSpell(spell: Thorny()) {
+            if _battle._curRole._unit.isClose() {
+                _battle.spellDecision[0] = true
+            }
+        }
         return _damageValue
     }
     func getDefRate(from: BUnit, to:BUnit) -> CGFloat {
@@ -241,7 +251,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         damage = specialDamage(damage: damage, to: to, from: from)
         chargeCritical(to: to)
         if beCritical {
-            damage *= CRITICAL
+            damage *= getDestroy(from: from)
         }
         
         if to.hasStatus(type: Status.MIGHT_OF_OAKS) {
@@ -251,6 +261,9 @@ class Spell:Core, IDisplay, ISelectTarget {
         _damageValue = damageControl(damage)
         return -_damageValue
     }
+    internal func getDestroy(from: BUnit) -> CGFloat {
+        return 1.6 + from.getDestroy() * 0.01
+    }
     internal func getSelfSpirit() -> CGFloat {
         return _battle._curRole.getSpirit()
     }
@@ -259,6 +272,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.SPIRIT {
+                _damageValue = 0
                 return 0
             } else {
                 def = 0
@@ -286,6 +300,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.FIRE {
+                _damageValue = 0
                 return 0
             }
         }
@@ -326,6 +341,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.WATER {
+                _damageValue = 0
                 return 0
             }
         }
@@ -348,6 +364,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         if to._unit is Dius {
             let d = to._unit as! Dius
             if d._wwakness != Dius.THUNDER {
+                _damageValue = 0
                 return 0
             }
         }
@@ -385,13 +402,16 @@ class Spell:Core, IDisplay, ISelectTarget {
         return d
     }
     internal func raceFactor(to:BUnit, from:BUnit) -> CGFloat {
+        if from.ifSoulIs(GiantSoul()) || to.ifSoulIs(GiantSoul()) {
+            return 1
+        }
         var factor:CGFloat = 1
         
-        if from.hasSpell(spell: Dominate()) {
+        if from.hasSpell(spell: Dominate()) || from.hasTeamStatus(type: Status.MAKE_EVERYTHING_RIGHT) {
             return 1.15
         }
         
-        if to.hasSpell(spell: Dominate()) {
+        if to.hasSpell(spell: Dominate()) || to.hasTeamStatus(type: Status.MAKE_EVERYTHING_RIGHT) {
             return 0.85
         }
         
@@ -486,6 +506,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             let damage = _damageValue
             if t.hasStatus(type: Status.ATTACK_RETURN_BACK) {
                 t.removeStatus(type: Status.ATTACK_RETURN_BACK)
+                _battle.spellDecision[0] = false
                 c.actionAttacked {
 //                    c.hpChange(value: damage)
                     c.showValue(value: damage) {
@@ -517,6 +538,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             if t.hasStatus(type: Status.TURN_ATTACK) {
 //                let c = _battle._curRole
 //                t.hpChange(value: -damage)
+                _battle.spellDecision[0] = false
                 t.showValue(value: -damage) {
                     completion()
                 }
@@ -570,7 +592,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             value = 5
         }
         if sed > value {
-            target.showText(text: "Miss") {
+            target.showMiss() {
                 //发动复仇
                 if this.isClose && target._unit.isClose() && this.seed() < target.getRevenge().toInt() {
                     let damage = this.physicalDamage(from: target, to: c)
@@ -904,9 +926,46 @@ class Spell:Core, IDisplay, ISelectTarget {
         return bu
     }
     
-    func burningOne(t: BUnit) {
+    internal func findRandomTargetInLineFirst() {
+        var ts:Array<BUnit> = []
+        if _battle._curRole.playerPart {
+            let t1 = _battle.getUnitBySeat(seat: BUnit.TBL)
+            if nil != t1 {
+                ts.append(t1!)
+            }
+            let t2 = _battle.getUnitBySeat(seat: BUnit.TBM)
+            if nil != t2 {
+                ts.append(t2!)
+            }
+            let t3 = _battle.getUnitBySeat(seat: BUnit.TBR)
+            if nil != t3 {
+                ts.append(t3!)
+            }
+
+        } else {
+            
+            let t1 = _battle.getUnitBySeat(seat: BUnit.BTL)
+            if nil != t1 {
+                ts.append(t1!)
+            }
+            let t2 = _battle.getUnitBySeat(seat: BUnit.BTM)
+            if nil != t2 {
+                ts.append(t2!)
+            }
+            let t3 = _battle.getUnitBySeat(seat: BUnit.BTR)
+            if nil != t3 {
+                ts.append(t3!)
+            }
+        }
+        
+        if ts.count < 1 {
+            findSingleTargetNotBlocked()
+        } else {
+            _battle._selectedTarget = ts.one()
+        }
         
     }
+    
     
 //    func findTargetInALine() {
 //        var list = Array<String>()

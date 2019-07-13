@@ -173,6 +173,10 @@ class ItemPanel: UIPanel {
         moneyLabel.zPosition = _label.zPosition
         moneyLabel.fontSize = _label.fontSize
         addChild(moneyLabel)
+        _labelMoney = moneyLabel
+    }
+    func reshowMoney() {
+        _labelMoney.text = "金钱：\(_char._money)G"
     }
     func createPropList() {
         let props = getPropsCountMoreThan1()
@@ -217,6 +221,7 @@ class ItemPanel: UIPanel {
         createPropList()
     }
     private var _propBox = SKSpriteNode()
+    private var _labelMoney:Label!
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.zPosition = MyStage.UI_PANEL_Z

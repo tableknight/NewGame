@@ -162,7 +162,7 @@ class AcientRoad: Dungeon {
             enimies.append(e)
         }
 //        stage.hideScene()
-        var b = Battle()
+        let b = Battle()
 //        if _level == 10 {
 //            b = IssBattle()
 //        }

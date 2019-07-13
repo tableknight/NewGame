@@ -102,6 +102,7 @@ extension BUnit {
             an.removeFromParent()
         }
     }
+    //渐隐
     func mixed1(index:CGFloat = 4) {
         let an = Game.instance.pictureMixed.getNode(index, 0)
         an.size = CGSize(width: _charSize * 1.5, height: _charSize * 1.5)
@@ -114,6 +115,7 @@ extension BUnit {
             an.removeFromParent()
         }
     }
+    //轮转
     func mixed2(index:CGFloat = 2) {
         let an = Game.instance.pictureMixed.getNode(index, 0)
         an.size = CGSize(width: _charSize * 1.5, height: _charSize * 1.5)

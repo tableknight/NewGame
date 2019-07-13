@@ -434,7 +434,6 @@ class RandomSacredSpell:Item {
         book.spell = l.getSacredSpell(id: l._sacredSpellArray.one())
         char.addProp(p: book)
     }
-    var armorId:Int = 0
 }
 
 class LevelUpScroll:Item {

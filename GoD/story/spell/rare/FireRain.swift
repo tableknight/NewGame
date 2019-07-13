@@ -23,7 +23,7 @@ class FireRain: Magical {
         _description = "对所有敌方目标造成精神35%的火焰伤害，有小概率点燃目标"
         _quality = Quality.RARE
         _rate = 0.35
-        _cooldown = 1
+        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -37,10 +37,8 @@ class FireRain: Magical {
     
     func attack(completion:@escaping () -> Void) {
         let ts = _battle._selectedTargets
-        for i in 0...ts.count - 1 {
-            let t = ts[i]
-            _damageValue = fireDamage(t)
-            let damage = _damageValue
+        for t in ts {
+            let damage = fireDamage(t)
             if !hadSpecialAction(t:t) {
                 t.actionAttacked {
                     t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)

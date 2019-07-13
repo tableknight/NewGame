@@ -42,11 +42,12 @@ class BUnit: SKSpriteNode {
     var _stage:MyStage!
     var specialUnit = false
     static var STAND_BY = "standby"
-    private var _select = SKSpriteNode()
-    private var _selectTexture = SKTexture(imageNamed: "select.png")
+    var _select = SKSpriteNode()
+    var _selectTexture = SKTexture(imageNamed: "select.png")
     var hasInitialized = false
     var isDefend = false
     var _speed: CGFloat = 0
+    var _acting = false
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _stage = Game.instance.curStage
@@ -299,8 +300,10 @@ class BUnit: SKSpriteNode {
     }
     
     func burning() {
-        if hasSpell(spell: ProtectFromGod()) || _unit is Boss {
-            showText(text: "IMMUNE")
+        if hasSpell(spell: ProtectFromGod()) {
+            setTimeout(delay: 0.5, completion: {
+                self.showText(text: "IMMUNE")
+            })
             return
         }
         let t = self
@@ -322,7 +325,9 @@ class BUnit: SKSpriteNode {
     }
     func freezing() {
         if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) || _unit is Boss {
-            showText(text: "IMMUNE")
+            setTimeout(delay: 0.5, completion: {
+                self.showText(text: "IMMUNE")
+            })
             return
         }
         let target = self
@@ -349,182 +354,7 @@ class BUnit: SKSpriteNode {
         target.isDefend = false
     }
     
-    func actionAttack(completion:@escaping () -> Void) {
-        if _unit._weapon is Bow {
-            actionShoot(completion: completion)
-            return
-        }
-        let range = _charSize * 0.5
-        var v = CGVector(dx: 0, dy: range)
-        var v2 = CGVector(dx: 0, dy: -range)
-        if !playerPart {
-            v = CGVector(dx: 0, dy: -range)
-            v2 = CGVector(dx: 0, dy: range)
-        }
-        let move1 = SKAction.move(by: v, duration: 0)
-        let move2 = SKAction.move(by: v2, duration: 0)
-        let wait = SKAction.wait(forDuration: TimeInterval(0.15))
-        let go = SKAction.sequence([wait, move1, wait, move2])
-        _select.run(go)
-        _charNode.run(go, completion: {
-            completion()
-        })
-    }
-    func actionWait(_ time:CGFloat = 1, completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(time))
-        _charNode.run(wait, completion: completion)
-    }
-    func actionBuff(completion:@escaping () -> Void) {
-        auroUp(x: 2)
-        let this = self
-        setTimeout(delay: 0.2, completion: {
-            this.auroUp(x: 2)
-        })
-        setTimeout(delay: 0.4, completion: {
-            this.auroUp(x: 2)
-        })
-        setTimeout(delay: 0.6, completion: {
-            this.auroUp(x: 2)
-        })
-        setTimeout(delay: 0.8, completion: {
-            this.auroUp(x: 2) {
-                completion()
-            }
-        })
-    }
-    func actionDebuff(completion:@escaping () -> Void) {
-        auroDown()
-        let this = self
-        setTimeout(delay: 0.2, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.4, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.6, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.8, completion: {
-            this.auroDown() {
-                completion()
-            }
-        })
-    }
-    var _acting = false
-    func actionAttacked(defend:Bool = false, completion:@escaping () -> Void) {
-        if _acting {
-//            debug("正在表演")
-//            completion()
-//            return
-            return
-        }
-        _acting = true
-        if (isDefend || defend) && _battle._selectedSpell is Physical {
-            actionDefead {
-                completion()
-                self._acting = false
-            }
-            return
-        }
-        _acting = true
-        let d = _charSize * 0.12
-        var v = CGVector(dx: 0, dy: -d)
-        var v2 = CGVector(dx: 0, dy: d)
-        if !playerPart {
-            v = CGVector(dx: 0, dy: d)
-            v2 = CGVector(dx: 0, dy: -d)
-        }
-//        let w = SKAction.wait(forDuration: TimeInterval(2))
-        let move1 = SKAction.move(by: v, duration: 0)
-        let move2 = SKAction.move(by: v2, duration: 0)
-        let wait = SKAction.wait(forDuration: TimeInterval(0.8))
-        let go = SKAction.sequence([move1, wait, move2])
-        _charNode.run(go)
-        _select.run(go)
-        let fadeOut = SKAction.fadeOut(withDuration: TimeInterval(0))
-        let fadeIn = SKAction.fadeIn(withDuration: TimeInterval(0))
-        let fadeWait = SKAction.wait(forDuration: TimeInterval(0.2))
-        let fadeGo = SKAction.sequence([fadeOut, fadeWait, fadeIn, fadeWait, fadeOut, fadeWait, fadeIn, fadeWait, fadeOut, fadeWait, fadeIn])
-        _charNode.run(fadeGo) {
-            self._acting = false
-            completion()
-            if self.hasStatus(type: Status.ICE_GUARD) {
-                let c = self._battle._curRole
-                if Core().d5() {
-                    c.showText(text: "SPEED -10")
-                }
-            }
-        }
-    }
-    func actionDefead(completion:@escaping () -> Void) {
-        let d = _charSize * 0.05
-        var v = CGVector(dx: 0, dy: -d)
-        var v2 = CGVector(dx: 0, dy: d)
-        if !playerPart {
-            v = CGVector(dx: 0, dy: d)
-            v2 = CGVector(dx: 0, dy: -d)
-        }
-//        let w = SKAction.wait(forDuration: TimeInterval(2))
-        let move1 = SKAction.move(by: v, duration: 0)
-        let move2 = SKAction.move(by: v2, duration: 0)
-        let wait = SKAction.wait(forDuration: TimeInterval(0.05))
-        let go = SKAction.sequence([move1, wait, move2])
-        _charNode.run(go, completion: completion)
-    }
-    func actionSpark(completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(0.25))
-        let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
-        let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
-        let go = SKAction.sequence([wait,fadeout,fadein,fadeout,fadein,fadeout,fadein])
-        _charNode.run(go) {
-            completion()
-        }
-    }
-    func actionCast(completion:@escaping () -> Void) {
-        if _unit is Boss || _unit is IFace || _unit._race != EvilType.MAN {
-            let wait = SKAction.wait(forDuration: TimeInterval(1))
-            let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
-            let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
-            let go = SKAction.sequence([wait,fadeout,fadein,fadeout,fadein,fadeout,fadein])
-//            let go = SKAction.sequence([wait, fadeout, SKAction.wait(forDuration: TimeInterval(0.5))])
-            _charNode.run(go) {
-                completion()
-//                self._charNode.run(fadein)
-//                setTimeout(delay: 1, completion: {
-//                })
-            }
-        } else {
-            let wt1 = SKAction.wait(forDuration: TimeInterval(0.5))
-            let wt = SKAction.wait(forDuration: TimeInterval(0.1))
-            let n = SKAction.setTexture(_charTexture.getCell(0, 3))
-            let w = SKAction.setTexture(_charTexture.getCell(0, 1))
-            let s = SKAction.setTexture(_charTexture.getCell(0, 0))
-            let e = SKAction.setTexture(_charTexture.getCell(0, 2))
-            var go = SKAction.sequence([wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt1])
-            if !playerPart {
-                go = SKAction.sequence([wt, e, wt, n, wt, w, wt, s, wt, e, wt, n, wt, w, wt, s, wt1])
-            }
-            _charNode.run(go) {
-                completion()
-            }
-        }
-    }
-    func actionAvoid(completion:@escaping () -> Void) {
-        let d = cellSize * 0.3
-        var v = CGVector(dx: 0, dy: -d)
-        var v2 = CGVector(dx: 0, dy: d)
-        if !playerPart {
-            v = CGVector(dx: 0, dy: d)
-            v2 = CGVector(dx: 0, dy: -d)
-        }
-        //        let w = SKAction.wait(forDuration: TimeInterval(2))
-        let move1 = SKAction.move(by: v, duration: 0)
-        let move2 = SKAction.move(by: v2, duration: 0)
-        let wait = SKAction.wait(forDuration: TimeInterval(0.8))
-        let go = SKAction.sequence([move1, wait, move2])
-        _charNode.run(go, completion: completion)
-        _select.run(go)
-    }
+    
     //被选择的单位效果
     func setSelectedMode() {
         _select.texture = _selectTexture.getCell(0, 0)
@@ -685,6 +515,12 @@ class BUnit: SKSpriteNode {
             }
         }
         
+        if _battle.spellDecision[0] {
+            _battle._curRole.showValuePure(value: value * 0.2)
+            value = value * 0.8
+            _battle.spellDecision[0] = false
+        }
+        
         let valueText = addLabel()
 //        valueText.isHidden = false
         valueText.position.y = _charSize * (playerPart ? 0.35 : 0.55)
@@ -742,6 +578,36 @@ class BUnit: SKSpriteNode {
                         s._timeleft = 5
                         this.addStatus(status: s)
                     }
+                }
+            }
+        }
+        
+        hpChange(value: value)
+    }
+    func showValuePure(value: CGFloat) {
+        let valueText = addLabel()
+        valueText.position.y = _charSize * (playerPart ? 0.35 : 0.55)
+        var color = DamageColor.DAMAGE
+        var text = "\(value.toInt())";
+        if value > 0 {
+            color = DamageColor.HEAL
+            text = "+\(value.toInt())"
+        }
+        valueText.text = text
+        valueText.fontColor = color
+        let v = CGVector(dx: 0, dy: _charSize * 0.5)
+        let move = SKAction.move(by: v, duration: TimeInterval(0.25))
+        let wait = SKAction.wait(forDuration: TimeInterval(1))
+        let go = SKAction.sequence([move, wait])
+        let this = self
+        valueText.run(go) {
+            valueText.removeFromParent()
+        }
+        setTimeout(delay: 0.5) {
+            if this.isDead() {
+                this.removeFromBattle()
+                this.actionDead {
+                    this.removeFromParent()
                 }
             }
         }
@@ -866,106 +732,7 @@ class BUnit: SKSpriteNode {
 //            this._battle.removeFromPart(unit: this)
 //        }
     }
-    func actionDead(completion:@escaping () -> Void) {
-        let wait = SKAction.fadeAlpha(to: 0, duration: TimeInterval(0.75))
-        _charNode.run(wait, completion: completion)
-    }
-    func actionSummon(completion:@escaping () -> Void) {
-        _charNode.alpha = 0
-        let wait = SKAction.fadeAlpha(to: 1, duration: TimeInterval(0.75))
-        _charNode.run(wait, completion: completion)
-    }
-    func actionRecall(completion:@escaping () -> Void) {
-        let wait = SKAction.fadeAlpha(to: 0, duration: TimeInterval(0.75))
-        _charNode.run(wait, completion: completion)
-    }
-    func actionFrozen(completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
-        _charNode.run(wait, completion: completion)
-    }
-    func actionCursed(completion:@escaping () -> Void) {
-        actionDebuff {
-            completion()
-        }
-    }
-    func actionUnfreeze(completion:@escaping () -> Void) {
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
-        _charNode.run(wait, completion: completion)
-    }
-    func auroUp(x:CGFloat = 1, completion:@escaping () -> Void = {}) {
-        let node = SKSpriteNode(texture: _selectTexture.getCell(x, 1))
-        node.zPosition = 80
-        node.position.y = -cellSize * 0.25
-        addChild(node)
-        let move = SKAction.moveBy(x: 0, y: cellSize * 0.75, duration: TimeInterval(0.5))
-        node.run(move) {
-            node.removeFromParent()
-            completion()
-        }
-    }
-    func actionHealed(completion:@escaping () -> Void) {
-        auroUp()
-        let this = self
-        setTimeout(delay: 0.2, completion: {
-            this.auroUp()
-        })
-        setTimeout(delay: 0.4, completion: {
-            this.auroUp()
-        })
-        setTimeout(delay: 0.6, completion: {
-            this.auroUp()
-        })
-        setTimeout(delay: 0.8, completion: {
-            this.auroUp() {
-                completion()
-            }
-        })
-    }
-    private func auroDown(x:CGFloat = 0, completion:@escaping () -> Void = {}) {
-        let node = SKSpriteNode(texture: _selectTexture.getCell(x, 1))
-        node.zPosition = 80
-        node.position.y = cellSize * 0.5
-        addChild(node)
-        let move = SKAction.moveBy(x: 0, y: -cellSize * 0.5, duration: TimeInterval(0.5))
-        node.run(move) {
-            node.removeFromParent()
-            completion()
-        }
-    }
-    func actionSealed(completion:@escaping () -> Void) {
-        auroDown()
-        let this = self
-        setTimeout(delay: 0.2, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.4, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.6, completion: {
-            this.auroDown()
-        })
-        setTimeout(delay: 0.8, completion: {
-            this.auroDown() {
-                completion()
-            }
-        })
-    }
-    func actionShoot(completion:@escaping () -> Void) {
-        let d = cellSize * 0.3
-        var v = CGVector(dx: 0, dy: -d)
-        var v2 = CGVector(dx: 0, dy: d)
-        if !playerPart {
-            v = CGVector(dx: 0, dy: d)
-            v2 = CGVector(dx: 0, dy: -d)
-        }
-        //        let w = SKAction.wait(forDuration: TimeInterval(2))
-        let move1 = SKAction.move(by: v, duration: 0)
-        let move2 = SKAction.move(by: v2, duration: 0)
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
-        let go = SKAction.sequence([move1, wait, move2])
-        _charNode.run(go, completion: completion)
-        _select.run(go)
-    }
+    
     func isDead() -> Bool {
         if _unit._extensions.hp <= 0 {
             return true
@@ -996,6 +763,24 @@ class BUnit: SKSpriteNode {
                 return true
             }
         }
+        return false
+    }
+    
+    func hasTeamStatus(type:String) -> Bool {
+        if playerPart {
+            for u in _battle._playerPart {
+                if u.hasStatus(type: type) {
+                    return true
+                }
+            }
+        } else {
+            for u in _battle._enemyPart {
+                if u.hasStatus(type: type) {
+                    return true
+                }
+            }
+        }
+        
         return false
     }
     
@@ -1046,227 +831,15 @@ class BUnit: SKSpriteNode {
     }
     func addStatus(status:Status) {
         if hasStatus(type: status._type) {
+            let s = getStatus(type: status._type)!
+            s.timeupAction()
             removeStatus(type: status._type)
-            status.timeupAction()
         }
         _status[status._type] = status
         showStatusText()
     }
     
-    func getSpirit() -> CGFloat {
-        var spirit = _unit._extensions.spirit + _extensions.spirit
-        
-        if hasSpell(spell: Energetic()) {
-            if spirit > 0 {
-                spirit *= 1.2
-            } else {
-                spirit *= 0.8
-            }
-        }
-        
-        for s in _status.values {
-            if s._type == Status.DEATH_STRIKE_UP {
-                spirit += 10
-            } else if s._type == Status.DEATH_STRIKE_DOWN {
-                spirit -= 10
-            }
-        }
-        return spirit
-    }
-    func getFirePower() -> CGFloat {
-        var val = _unit._elementalPower.fire
-//        if hasStatus(type: Status.FIRE_LORD) {
-//            val += 20
-//        }
-        if hasAuro(auro: Firelord()) {
-            val += 20
-        }
-        
-        if _unit is Character && _stage.hasTowerStatus(status: FireEnerge()) {
-            val += 50
-        }
-        
-        return val + _elementalPower.fire + _elemental.damage
-    }
-    func getWaterPower() -> CGFloat {
-        var val = _unit._elementalPower.water
-        if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
-            val += 50
-        }
-        return val + _elementalPower.water + _elemental.damage
-    }
-    func getThunderPower() -> CGFloat {
-        var val = _unit._elementalPower.thunder
-        if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
-            val += 50
-        }
-        return val + _elementalPower.thunder + _elemental.damage
-    }
-    func getFireResistance() -> CGFloat {
-        var val = _unit._elementalResistance.fire
-//        if hasStatus(type: Status.FIRE_LORD) {
-//            val += 20
-//        }
-        if hasAuro(auro: Firelord()) {
-            val += 20
-        }
-        
-        if _unit is Character && _stage.hasTowerStatus(status: FireEnerge()) {
-            val += 50
-        }
-        
-        return val + _elementalResistance.fire + _elemental.resistance
-    }
-    func getWaterResistance() -> CGFloat {
-        var val = _unit._elementalResistance.water
-        if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
-            val += 50
-        }
-        return val + _elementalResistance.water + _elemental.resistance
-    }
-    func getThunderResistance() -> CGFloat {
-        var val = _unit._elementalResistance.thunder
-        if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
-            val += 50
-        }
-        return val + _elementalResistance.thunder + _elemental.resistance
-    }
     
-    func getMagicalDamage() -> CGFloat {
-        let val = _unit._magical.damage
-        
-        return val + _magical.damage
-    }
-    
-    func getMagicalResistance() -> CGFloat {
-        let val = _unit._magical.resistance
-        
-        return val + _magical.resistance
-    }
-    
-    func getPhysicalDamage() -> CGFloat {
-        let val = _unit._physical.damage
-        
-        return val + _physical.damage
-    }
-    
-    func getPhysicalResistance() -> CGFloat {
-        let val = _unit._physical.resistance
-        
-        return val + _physical.resistance
-    }
-    
-    func getAccuracy() -> CGFloat {
-        var acc = _unit._extensions.accuracy + _extensions.accuracy
-        if hasSpell(spell: BargeAbout()) {
-            acc -= 100
-        }
-        if hasSpell(spell: Sacrifice()) {
-            acc += 50
-        }
-        if hasAuro(auro: Focus()) {
-            acc += 20
-        }
-        if _unit is Character && _stage.hasTowerStatus(status: SpeedPower()) {
-            acc += 25
-        }
-        return acc
-    }
-    func getAvoid() -> CGFloat {
-        var avd = _unit._extensions.avoid + _extensions.avoid
-        if hasSpell(spell: DancingOnIce()) {
-            avd += 100
-        }
-        if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
-            avd += 25
-        }
-        
-        return avd
-    }
-    func getSpeed() -> CGFloat {
-        var speed = _unit._extensions.speed + _extensions.speed
-        if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
-            speed += 50
-        }
-        return speed
-    }
-    func getAttack() -> CGFloat {
-//        let atk = sqrt(_unit._extensions.attack) * 12
-        if hasSpell(spell: MagicSword()) {
-            return getSpirit()
-        }
-        var atk = _unit._extensions.attack + _extensions.attack
-        if hasSpell(spell: OnePunch()) {
-            atk += getDefence()
-        }
-        
-        if hasSpell(spell: Bellicose()) {
-            atk *= 1.3
-        }
-        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
-            atk += 50
-        }
-        if _unit is Character {
-            let char = _unit as! Character
-            if char._weapon is BloodBlade {
-                let rate = getHp() / getHealth()
-                let plus = char._weapon!.getAttack() * (1 - rate)
-                atk += plus
-            }
-        }
-        return atk
-    }
-    func getDefence() -> CGFloat {
-        var def = _unit._extensions.defence + _extensions.defence
-        if hasSpell(spell: DancingOnIce()) {
-            return 0
-        }
-        if hasSpell(spell: Sacrifice()) {
-            def *= 0.5
-        }
-        var rate:CGFloat = 1
-//        if hasStatus(type: Status.FRAGILE) {
-//            rate = 0.5
-//        }
-        if hasSpell(spell: Strong()) {
-            rate += 0.2
-        }
-        if hasStatus(type: Status.ICE_GUARD) {
-            rate += 0.1
-        }
-        def *= rate
-        if _unit is Character && _stage.hasTowerStatus(status: DefencePower()) {
-            def += 50
-        }
-        return def
-    }
-    func getCritical() -> CGFloat {
-        var ctl = _unit._extensions.critical + _extensions.critical
-        if hasSpell(spell: BloodThirsty()) {
-            ctl += _unit._level
-        }
-        if hasSpell(spell: BargeAbout()) {
-            ctl += 100
-        }
-        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
-            ctl += 25
-        }
-        return ctl
-    }
-    
-    func getCriticalForShow() -> CGFloat {
-        var ctl = _unit._extensions.critical
-        if hasSpell(spell: BloodThirsty()) {
-            ctl += _unit._level
-        }
-        if hasSpell(spell: BargeAbout()) {
-            ctl += 100
-        }
-        if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
-            ctl += 25
-        }
-        return ctl
-    }
     func ifRingIs(_ ring:Ring) -> Bool {
         if !(_unit is Character) {
             return false
@@ -1285,75 +858,21 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func getStrength() -> CGFloat {
-        let val = _unit._mains.strength + _mains.strength
-        return val
-    }
-    func getStamina() -> CGFloat {
-        let val = _unit._mains.stamina + _mains.stamina
-        return val
-    }
-    func getAgility() -> CGFloat {
-        let val = _unit._mains.agility + _mains.agility
-        return val
-    }
-    func getIntellect() -> CGFloat {
-        let val = _unit._mains.intellect + _mains.intellect
-        return val
-    }
     
-    func getMind() -> CGFloat {
-        var mind = _unit._extensions.mind + _extensions.mind
-        if _unit is Character && _stage.hasTowerStatus(status: MindPower()) {
-            mind += 25
+    func ifSoulIs(_ soul: SoulStone) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._soulStone != nil {
+                if type(of: c._soulStone) == type(of: soul) {
+                    return true
+                }
+            }
         }
-        return mind
+        return false
     }
     
-    func getBreak() -> CGFloat {
-        let val = _unit._break
-        return val + _break
-    }
-    
-    func getHp() -> CGFloat {
-        return _unit._extensions.hp
-    }
-    func getHealth() -> CGFloat {
-        return _unit._extensions.health + _extensions.health
-    }
-    func getRevenge() -> CGFloat {
-        let val = _unit._revenge + _revenge
-        return val + _revenge
-    }
-    func getLucky() -> CGFloat {
-        var val = _unit._lucky
-        if _unit is Character && _stage.hasTowerStatus(status: LuckyPower()) {
-            val += 25
-        }
-        
-        return val
-    }
-    
-    func getRace() -> Int {
-        if _race != -1 {
-            return _race
-        }
-        
-        return _unit._race
-    }
-    
-    func getRhythm() -> CGFloat {
-        let val = _unit._rhythm
-        return val + _rhythm
-    }
-    func getChaos() -> CGFloat {
-        let val = _unit._chaos
-        return val + _chaos
-    }
-    func getSensitive() -> Int {
-        let val = _unit._sensitive
-        return val + _sensitive
-    }
     private var _speakNode = SKSpriteNode()
     func speak(text:String, autoRemove:Bool = true, duration:CGFloat = 3) {
         let node = SKSpriteNode()
@@ -1436,6 +955,7 @@ class BUnit: SKSpriteNode {
         speed: 0,
         accuracy: 0,
         critical: 0,
+        destroy: 0,
         avoid: 0,
         spirit: 0,
         hp: 0,
@@ -1470,10 +990,10 @@ class BUnit: SKSpriteNode {
         _extensions.attack += value * 2
         _extensions.defence += value * 0
         _extensions.speed += value * 0.5
-        _extensions.accuracy += value * 0.1
+        _extensions.accuracy += value * 0.2
         _extensions.avoid += value * 0
-        _extensions.critical += value * 0.1
-        _extensions.spirit += value * -0.5
+        _extensions.critical += value * 0.2
+        _extensions.spirit += value * -0.2
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 0
@@ -1483,13 +1003,13 @@ class BUnit: SKSpriteNode {
     }
     func staminaChange(value: CGFloat) {
         _mains.stamina += value
-        _extensions.attack += value * 1
-        _extensions.defence += value * 1
+        _extensions.attack += value * 0.1
+        _extensions.defence += value * 1.1
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * 0
+        _extensions.avoid += value * -0.2
         _extensions.critical += value * 0
-        _extensions.spirit += value * -0.5
+        _extensions.spirit += value * -0.4
         _extensions.health += value * 4
         _extensions.hp += value * 4
         _extensions.mp += value * 0
@@ -1499,15 +1019,15 @@ class BUnit: SKSpriteNode {
     }
     func agilityChange(value: CGFloat) {
         _mains.agility += value
-        _extensions.attack += value * 0.5
-        _extensions.defence += value * 0.5
+        _extensions.attack += value * 1
+        _extensions.defence += value * 0.2
         _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.4
-        _extensions.avoid += value * 0.2
+        _extensions.accuracy += value * 0.5
+        _extensions.avoid += value * 0.8
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
-        _extensions.health += value * 1
-        _extensions.hp += value * 1
+        _extensions.health += value * 2
+        _extensions.hp += value * 2
         _extensions.mp += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
@@ -1519,11 +1039,11 @@ class BUnit: SKSpriteNode {
         _extensions.defence += value * 0.3
         _extensions.speed += value * 0.2
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * 0.1
+        _extensions.avoid += value * 0.2
         _extensions.critical += value * 0
-        _extensions.spirit += value * 3
-        _extensions.health += value * 0.5
-        _extensions.hp += value * 0.5
+        _extensions.spirit += value * 2
+        _extensions.health += value * 1
+        _extensions.hp += value * 1
         _extensions.mp += value * 3
         if _extensions.hp < 1 {
             _extensions.hp = 1
