@@ -130,7 +130,7 @@ class Loot: Core {
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 25 * lucky {
+        if chance < 15 * lucky {
             let s = getSacred()
             if nil != s && s!._level <= level + 5 && s!._level >= level - 30 {
                 _props.append(s!)
@@ -146,8 +146,8 @@ class Loot: Core {
 //    }
     
     func getExp(selfLevel:CGFloat, enemyLevel:CGFloat) -> CGFloat {
-        if abs(selfLevel - enemyLevel) > 5 {
-          return 0
+        if selfLevel - enemyLevel > 5 {
+          return 1
         }
         let lRate = 1 + (enemyLevel - selfLevel) * 0.1
         let range = seed(min: 80, max: 121).toFloat() * 0.01
@@ -161,9 +161,9 @@ class Loot: Core {
         let sed = seed()
         var s = Spell()
         
-        if sed < 50 {
+        if sed < 40 {
             s = getRandomNormalSpell()
-        } else if sed < 80 {
+        } else if sed < 70 {
             s = getRandomGoodSpell()
         } else if sed < 96 {
             s = getRandomRareSpell()
@@ -188,11 +188,12 @@ class Loot: Core {
         for i in 0...sacredSpellCount - 1 {
             spells.append(getSacredSpell(id: i))
         }
-        spells.append(BreakDefence())
+//        spells.append(BreakDefence())
         spells.append(Heal())
         spells.append(FireFist())
         spells.append(Predict())
         spells.append(Petrify())
+        spells.append(LowlevelFlame())
         ///未收录 ------
         spells.append(LavaExplode())
         spells.append(Combustion())
@@ -213,7 +214,7 @@ class Loot: Core {
     func getRandomSacredSpell() -> Spell {
         return getSacredSpell(id: seed(to: sacredSpellCount))
     }
-    let normalSpellCount = 16
+    let normalSpellCount = 20
     func getNormalSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -226,8 +227,8 @@ class Loot: Core {
             return FeignAttack()
         case 4:
             return FireBreath()
-//        case 5:
-//            return Heal() //职业初始技能专属
+        case 5:
+            return ToughHeart()
         case 6:
             return Focus()
         case 7:
@@ -236,10 +237,10 @@ class Loot: Core {
             return Energetic()
         case 9:
             return ThunderAttack()
-        case 10:
-            return LowlevelFlame()
-//        case 11:
-//            return BreakDefence()
+//        case 10:
+//            return LowlevelFlame()
+        case 11:
+            return BreakDefence()
         case 12:
             return AttackHard()
         case 13:
@@ -248,6 +249,14 @@ class Loot: Core {
             return Burn()
         case 15:
             return ControlWind()
+        case 16:
+            return SharpStone()
+        case 17:
+            return SkyAndLand()
+        case 18:
+            return Powerful()
+        case 19:
+            return ChaosCore()
         default:
             return Cruel()
         }
@@ -381,7 +390,7 @@ class Loot: Core {
         }
     }
     var _sacredSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-    let sacredSpellCount = 33
+    let sacredSpellCount = 34
     func getSacredSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -450,6 +459,8 @@ class Loot: Core {
             return SilenceAll()
         case 32:
             return SixShooter()
+        case 33:
+            return Zealot()
         default:
             return VampireBlood()
         }
@@ -463,6 +474,7 @@ class Loot: Core {
         list += [4]
         return getItemByid(id: list.one())
     }
+    var _maxItemNumber = 11
     func getItemByid(id: Int) -> Item {
         if 0 == id {
             return TheWitchsTear()
@@ -490,6 +502,18 @@ class Loot: Core {
         
         if 7 == id {
             return RandomSacredSpell()
+        }
+        
+        if 8 == id {
+            return TransportScroll()
+        }
+        
+        if 9 == id {
+            return LevelUpScroll()
+        }
+        
+        if 10 == id {
+            return PsychicScroll()
         }
         
         return TheWitchsTear()

@@ -40,7 +40,7 @@ class SpellPanel:UIPanel {
             }
             let spell = _lastSelectedIcon._displayItemType as! Spell
             if _spellBoxInuse.contains(_lastSelectedIcon) {
-                let index = _role._spellsInuse.index(of: spell)
+                let index = _role._spellsInuse.firstIndex(of: spell)
                 if nil != index {
                     _role._spellsInuse.remove(at: index!)
                 } else {
@@ -58,7 +58,7 @@ class SpellPanel:UIPanel {
                 pageReload()
             } else {
                 if _role._spellsInuse.count < _role._spellCount {
-                    let index = _char._spells.index(of: spell)
+                    let index = _char._spells.firstIndex(of: spell)
                     if nil != index {
                         _char._spells.remove(at: index!)
                         _role._spellsInuse.append(spell)

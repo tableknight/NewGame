@@ -22,7 +22,7 @@ class BaseScene: UIScene {
     override func createGround(start:Int, end:Int) {
         let node = SKSpriteNode()
 //        var _end = 15
-        for i in 0...1 {
+//        for i in 0...1 {
 //            var groundTexture = _groundSets.__gc
 //            var wallTexture = _groundSets.wallConnect()
 //            if 0 == i {
@@ -59,7 +59,7 @@ class BaseScene: UIScene {
 //            node.addChild(sha)
             
             
-        }
+//        }
         //        addChild(node)
         let t = node.toTexture()
         //        node.removeFromParent()

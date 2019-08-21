@@ -10,10 +10,10 @@ import SpriteKit
 class ShootAll: Physical, BowSkill {
     override init() {
         super.init()
-        _name = "散射"
-        _description = "对所有敌方单位造成攻击55%的物理伤害"
+        _name = "万箭齐发"
+        _description = "对所有敌方单位造成攻击65%的物理伤害"
         isClose = false
-        _rate = 0.55
+        _rate = 0.65
         autoCast = true
         _quality = Quality.RARE
         _cooldown = 2
@@ -25,7 +25,7 @@ class ShootAll: Physical, BowSkill {
             for t in this._battle._selectedTargets {
                 this.attack(t: t)
             }
-            setTimeout(delay: 1.5, completion: completion)
+            setTimeout(delay: 2.2, completion: completion)
         }
     }
     

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import GoD
+//@testable import GoD
 
 class GoDTests: XCTestCase {
 

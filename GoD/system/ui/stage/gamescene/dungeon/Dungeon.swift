@@ -19,7 +19,10 @@ class Dungeon: MyScene {
         super.init(coder: aDecoder)
     }
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+//        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        let nextPoint = getNextPoint()
+        let nextY = nextPoint.y.toInt()
+        let nextX = nextPoint.x.toInt()
         
         if cell == CELL_BOSS {
             let i = Game.instance
@@ -27,6 +30,12 @@ class Dungeon: MyScene {
             _bossBattle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
             i.curStage.addBattle(_bossBattle)
             _bossBattle.battleStart()
+            
+            let boss = getNextCellItem(x: nextX, y: nextY)
+            _bossBattle.defeatAction = {
+                self._mapMatrix[nextY][nextX] = self.CELL_EMPTY
+                boss.removeFromParent()
+            }
             return true
             
             
@@ -41,20 +50,22 @@ class Dungeon: MyScene {
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
         createTowers()
-        if seed() < 7 {
+        if seed() < 700 {
             let tear = TheWitchsTear()
             tear._count = seed(min: 5, max: 11)
+            tear.countless = false
             _goodsList = [tear]
-            _whichItem = [true]
-            _mixedItemMoney = [false]
+//            _whichItem = [true]
+//            _mixedItemMoney = [false]
             let count = seed(min: 1, max: 3)
             let l = Loot()
             for _ in 1...count {
                 let sb = SpellBook()
                 sb.spell = l.getRandomSacredSpell()
-                sb._sellingPrice = 68
-                _whichItem.append(false)
-                _mixedItemMoney.append(true)
+                sb._storePrice = 68
+                sb._priceType = 1
+//                _whichItem.append(false)
+//                _mixedItemMoney.append(true)
                 _goodsList.append(sb)
             }
             createSeller()
@@ -153,7 +164,7 @@ class Dungeon: MyScene {
                 }
             }
             for p in points {
-                if checkedPoints.index(of: p) == nil {
+                if checkedPoints.firstIndex(of: p) == nil {
                     if p.x == _portalNext.x && p.y == _portalNext.y {
                         connected = true
                     } else {

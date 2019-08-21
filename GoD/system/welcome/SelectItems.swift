@@ -36,7 +36,7 @@ class SelectItems: UIPanel {
                 if pi.selected {
                     pi.selected = false
                     let prop = pi._displayItemType as! Prop
-                    let index = _selectedItems.index(of: prop)
+                    let index = _selectedItems.firstIndex(of: prop)
                     _selectedItems.remove(at: index!)
                 } else {
                     if _selectedItems.count < 2 {
@@ -94,18 +94,20 @@ class SelectItems: UIPanel {
         ps.append(ts)
         
         let potion = Potion()
-        potion._count = 5
+        potion._count = Mode.debug ? 100 : 5
         ps.append(potion)
         
         let st = SealScroll()
-        st._count = 2
+        st._count = Mode.debug ? 100 : 2
         ps.append(st)
         
         let tear = TheWitchsTear()
-        tear._count = 5
+        tear._count = Mode.debug ? 100 : 5
         ps.append(tear)
         
-        
+        let ts2 = TransportScroll()
+        ts2._count = Mode.debug ? 100 : 3
+        ps.append(ts2)
         
         return ps
     }

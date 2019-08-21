@@ -254,7 +254,7 @@ class UIScene:SKSpriteNode {
     }
     
     internal func removeEvent(x:Int) {
-        let index = eventIn.index(of: x)
+        let index = eventIn.firstIndex(of: x)
         if index != nil {
             eventIn.remove(at: index!)
         }

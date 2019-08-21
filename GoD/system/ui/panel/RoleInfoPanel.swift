@@ -19,7 +19,7 @@ class RoleInfoPanel:SKSpriteNode {
             return
         } else if _prevButton.contains(touchPoint!) {
             let ms = Game.instance._char._minions
-            let index = ms.index(of: _unit)
+            let index = ms.firstIndex(of: _unit)
             if nil == index || 0 == index {
                 return
             }
@@ -31,7 +31,7 @@ class RoleInfoPanel:SKSpriteNode {
             return
         } else if _nextButton.contains(touchPoint!) {
             let ms = Game.instance._char._minions
-            let index = ms.index(of: _unit)
+            let index = ms.firstIndex(of: _unit)
             if nil == index || ms.count - 1 <= index! {
                 return
             }

@@ -188,7 +188,7 @@ struct Position {
     static let SOUTH:Int = 3
 }
 struct Mode {
-    static let debug = false
+    static var debug = false
     static let nocd = false
 }
 struct Cell {
@@ -395,7 +395,7 @@ class Game {
     static func remove(doc:RoleDocument) {
         let us = UserDefaults.standard
         us.removeObject(forKey: doc._key)
-        let index = Game.roles.index(of: doc)
+        let index = Game.roles.firstIndex(of: doc)
         if nil !=  index {
             Game.roles.remove(at: index!)
         }

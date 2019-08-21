@@ -39,10 +39,7 @@ class SoulLash: Magical {
         _damageValue = magicalDamage(t)
         let damage = _damageValue
         let this = self
-        if hadSpecialAction(t:t, completion: completion) {
-            
-        } else {
-            
+        if !hadSpecialAction(t:t, completion: completion) {
             t.actionAttacked {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {

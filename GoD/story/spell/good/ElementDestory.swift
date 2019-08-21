@@ -51,7 +51,7 @@ class ElementDestory:Magical, Curse {
                     }
                 }
             }
-            setTimeout(delay: 1.5, completion: completion)
+            setTimeout(delay: 2.1, completion: completion)
         }
     }
     

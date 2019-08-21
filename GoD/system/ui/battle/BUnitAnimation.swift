@@ -103,7 +103,7 @@ extension BUnit {
         }
     }
     //渐隐
-    func mixed1(index:CGFloat = 4) {
+    func mixed1(index:CGFloat = 4, completion:@escaping () -> Void = {}) {
         let an = Game.instance.pictureMixed.getNode(index, 0)
         an.size = CGSize(width: _charSize * 1.5, height: _charSize * 1.5)
         an.zPosition = _charNode.zPosition + 20
@@ -113,10 +113,11 @@ extension BUnit {
         addChild(an)
         an.run(SKAction.sequence([fi, fo])) {
             an.removeFromParent()
+            completion()
         }
     }
     //轮转
-    func mixed2(index:CGFloat = 2) {
+    func mixed2(index:CGFloat = 2, completion:@escaping () -> Void = {}) {
         let an = Game.instance.pictureMixed.getNode(index, 0)
         an.size = CGSize(width: _charSize * 1.5, height: _charSize * 1.5)
         an.zPosition = _charNode.zPosition + 20
@@ -125,6 +126,7 @@ extension BUnit {
         addChild(an)
         an.run(SKAction.sequence([r, fo])) {
             an.removeFromParent()
+            completion()
         }
     }
     func water2() {

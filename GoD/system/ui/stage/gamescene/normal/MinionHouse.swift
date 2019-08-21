@@ -34,7 +34,7 @@ class MinionHouse: InnerHouse {
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         
-        if [CELL_BLOCK,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
+        if [CELL_BLOCK,CELL_ROAD,CELL_DOOR].firstIndex(of: cell) != nil{
             return true
         }
         if cell == CELL_ROLE && point.x == 4 && point.y == 0 {

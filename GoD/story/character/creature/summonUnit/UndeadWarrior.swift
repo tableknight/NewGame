@@ -27,6 +27,26 @@ class UndeadWarrior: SummonUnit {
     }
 }
 
+class MummyMinion: SummonUnit {
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    override init() {
+        super.init()
+        _stars.strength = 1.1
+        _stars.stamina = 1.1
+        _stars.agility = 1.2
+        _stars.intellect = 1.9
+        _name = "木乃伊"
+        _race = EvilType.RISEN
+        _img = SKTexture(imageNamed: "mummy")
+        _spellsInuse = [ReduceLife(), HorribleImage()]
+    }
+}
+
 class UndeadWitch: SummonUnit {
     override init() {
         super.init()
@@ -38,6 +58,25 @@ class UndeadWitch: SummonUnit {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
         _spellsInuse = [IceSpear(), FireBreath()]
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+class UndeadMinion: SummonUnit {
+    override init() {
+        super.init()
+        _stars.strength = 2.2
+        _stars.stamina = 1.6
+        _stars.agility = 1.1
+        _stars.intellect = 0.8
+        _name = "亡灵仆从"
+        _race = EvilType.RISEN
+        _img = SKTexture(imageNamed: "undead_minion_2")
+        _spellsInuse = [LineAttack()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

@@ -27,6 +27,6 @@ class Lucky: Attribute {
         unit._lucky -= _value
     }
     override func create(level: CGFloat) {
-        _value = seed(min: 1, max: 11).toFloat()
+        lowLevelValue(level: level)
     }
 }

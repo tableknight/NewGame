@@ -23,8 +23,8 @@ class Instrument: Weapon {
         createSpell()
         
         createPrice()
-        _price *= 4
-        _sellingPrice *= 4
+        _price *= 2
+        _storePrice *= 2
         
     }
     internal func createSpell() {

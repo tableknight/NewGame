@@ -21,11 +21,6 @@ class FlowerOfHeal: SummonUnit {
         _race = EvilType.NATURE
         _last = 5
     }
-    override func create(level: CGFloat) {
-        _level = level
-        levelTo(level: level)
-        _extensions.hp = _extensions.health
-    }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

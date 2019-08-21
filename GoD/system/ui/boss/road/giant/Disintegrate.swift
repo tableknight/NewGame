@@ -33,7 +33,9 @@ class Disintegrate: Magical, BossOnly {
                 }
             }
             c.hpChange(value: -1 - c.getHp())
-            setTimeout(delay: 2.2, completion: completion)
+            setTimeout(delay: 2.2, completion: {
+                self._battle.defeat()
+            })
         }
     }
     

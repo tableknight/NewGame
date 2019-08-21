@@ -12,9 +12,9 @@ class Blunt: Weapon {
         super.init()
         _name = "钝器"
         _outfitName = "钝器"
-        _attackSpeed = seed(min: 80, max: 110).toFloat() * 0.01
-        _selfAttrs = [ATTACK_BASE, CRITICAL]
-        removeAttrId(id: CRITICAL)
+        _attackSpeed = seed(min: 70, max: 100).toFloat() * 0.01
+        _selfAttrs = [ATTACK_BASE, STAMINA]
+        removeAttrId(id: STAMINA)
     }
     override func createSelfAttrs() {
         super.createSelfAttrs()

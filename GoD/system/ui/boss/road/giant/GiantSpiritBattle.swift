@@ -35,7 +35,7 @@ class GiantSpiritBattle: BossBattle {
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
-        let l:CGFloat = 33
+        let l:CGFloat = GiantSpirit.LEVEL
         let t = GiantSpirit()
         t.create(level: l)
         t._seat = BUnit.TTM
@@ -47,14 +47,27 @@ class GiantSpiritBattle: BossBattle {
         var list = Array<Prop>()
         let lucky = _char._lucky * 0.01 + 1
         
-        if seedFloat() < lucky * 25 {
+        if seedFloat() < lucky * 40 {
             let i = GiantSoul()
             i.create()
             list.append(i)
         }
+        if seedFloat() < lucky * 25 {
+            let i = VerdasTear()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = DellarsGoldenRing()
+            i.create()
+            list.append(i)
+        }
+
+
         
         let l = Loot()
-        l.loot(level: 25)
+        l.loot(level: GiantSpirit.LEVEL)
         return list + l.getList()
     }
 }

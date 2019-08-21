@@ -87,4 +87,13 @@ class Attribute: Core {
         }
         _value = seed(min: min, max: max).toFloat()
     }
+    func lowLevelValue(level:CGFloat) {
+        if level < 20 {
+            _value = seed(min: 1, max: 4).toFloat()
+        } else if level < 50 {
+            _value = seed(min: 3, max: 8).toFloat()
+        } else {
+            _value = seed(min: 6, max: 13).toFloat()
+        }
+    }
 }

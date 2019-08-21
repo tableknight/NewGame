@@ -23,6 +23,10 @@ class Refresh: Magical {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
+        if !(_battle._curRole._unit is Character) {
+            completion()
+            return
+        }
         let ss = _battle._curRole._unit._spellsInuse
         for s in ss {
             s._timeleft = 0

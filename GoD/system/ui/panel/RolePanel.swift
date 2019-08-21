@@ -178,67 +178,79 @@ class RolePanel:UIPanel {
         if unit is Character {
             colorLight = SeatNode.SELECTED_COLOR
         }
-        
-        _btl = getSeatNode()
-        _btl.position.y = startY
-        _btl.position.x = lv.position.x + cellSize * 2.25
-        _btl._seat = BUnit.BTL
-        if unit._seat == BUnit.BTL {
-            _btl.color = colorLight
+        if unit is Character {
+            
+            _btl = getSeatNode()
+            _btl.position.y = startY
+            _btl.position.x = lv.position.x + cellSize * 2.25
+            _btl._seat = BUnit.BTL
+            if unit._seat == BUnit.BTL {
+                _btl.color = colorLight
+            }
+            _propertyLayer.addChild(_btl)
+            
+            _btm = getSeatNode()
+            _btm.position.y = startY
+            _btm.position.x = _btl.position.x + _btl.size.width + seatGap
+            _btm._seat = BUnit.BTM
+            if unit._seat == BUnit.BTM {
+                _btm.color = colorLight
+            }
+            _propertyLayer.addChild(_btm)
+            
+            _btr = getSeatNode()
+            _btr.position.y = startY
+            _btr.position.x = _btm.position.x + _btl.size.width + seatGap
+            _btr._seat = BUnit.BTR
+            if unit._seat == BUnit.BTR {
+                _btr.color = colorLight
+            }
+            _propertyLayer.addChild(_btr)
+            
+            _bbl = getSeatNode()
+            _bbl.position.y = _btl.position.y - _btl.size.height - seatGap
+            _bbl.position.x = _btl.position.x
+            _bbl._seat = BUnit.BBL
+            if unit._seat == BUnit.BBL {
+                _bbl.color = colorLight
+            }
+            _propertyLayer.addChild(_bbl)
+            
+            _bbm = getSeatNode()
+            _bbm.position.y = _btl.position.y - _btl.size.height - seatGap
+            _bbm.position.x = _btm.position.x
+            _bbm._seat = BUnit.BBM
+            if unit._seat == BUnit.BBM {
+                _bbm.color = colorLight
+            }
+            _propertyLayer.addChild(_bbm)
+            
+            _bbr = getSeatNode()
+            _bbr.position.y = _btl.position.y - _btl.size.height - seatGap
+            _bbr.position.x = _btr.position.x
+            _bbr._seat = BUnit.BBR
+            if unit._seat == BUnit.BBR {
+                _bbr.color = colorLight
+            }
+            _propertyLayer.addChild(_bbr)
+            
+            _seatNodes.append(_btl)
+            _seatNodes.append(_btm)
+            _seatNodes.append(_btr)
+            _seatNodes.append(_bbl)
+            _seatNodes.append(_bbm)
+            _seatNodes.append(_bbr)
+        } else {
+            let gap:CGFloat = 10
+            var b = createStarBar(value: unit._stars.strength, color: QualityColor.NORMAL, y: startY - 8)
+            b = createStarBar(value: unit._growth.strength, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: unit._stars.stamina, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: unit._growth.stamina, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: unit._stars.agility, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: unit._growth.agility, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: unit._stars.intellect, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: unit._growth.intellect, color: QualityColor.GOOD, y: b.yAxis - gap)
         }
-        _propertyLayer.addChild(_btl)
-        
-        _btm = getSeatNode()
-        _btm.position.y = startY
-        _btm.position.x = _btl.position.x + _btl.size.width + seatGap
-        _btm._seat = BUnit.BTM
-        if unit._seat == BUnit.BTM {
-            _btm.color = colorLight
-        }
-        _propertyLayer.addChild(_btm)
-        
-        _btr = getSeatNode()
-        _btr.position.y = startY
-        _btr.position.x = _btm.position.x + _btl.size.width + seatGap
-        _btr._seat = BUnit.BTR
-        if unit._seat == BUnit.BTR {
-            _btr.color = colorLight
-        }
-        _propertyLayer.addChild(_btr)
-        
-        _bbl = getSeatNode()
-        _bbl.position.y = _btl.position.y - _btl.size.height - seatGap
-        _bbl.position.x = _btl.position.x
-        _bbl._seat = BUnit.BBL
-        if unit._seat == BUnit.BBL {
-            _bbl.color = colorLight
-        }
-        _propertyLayer.addChild(_bbl)
-        
-        _bbm = getSeatNode()
-        _bbm.position.y = _btl.position.y - _btl.size.height - seatGap
-        _bbm.position.x = _btm.position.x
-        _bbm._seat = BUnit.BBM
-        if unit._seat == BUnit.BBM {
-            _bbm.color = colorLight
-        }
-        _propertyLayer.addChild(_bbm)
-        
-        _bbr = getSeatNode()
-        _bbr.position.y = _btl.position.y - _btl.size.height - seatGap
-        _bbr.position.x = _btr.position.x
-        _bbr._seat = BUnit.BBR
-        if unit._seat == BUnit.BBR {
-            _bbr.color = colorLight
-        }
-        _propertyLayer.addChild(_bbr)
-        
-        _seatNodes.append(_btl)
-        _seatNodes.append(_btm)
-        _seatNodes.append(_btr)
-        _seatNodes.append(_bbl)
-        _seatNodes.append(_bbm)
-        _seatNodes.append(_bbr)
         
 //        let strength = AttrLabel()
 //        strength.position.x = startX
@@ -407,6 +419,16 @@ class RolePanel:UIPanel {
     private func getSeatNode(color:UIColor = UIColor.lightGray) -> SeatNode {
 
         return SeatNode()
+    }
+    
+    private func createStarBar(value:CGFloat, color:UIColor, y:CGFloat) -> HBar {
+        let bar = HBar()
+        let w = value / 3 * (cellSize * 3)
+        bar.create(width: w, height: 5, value: 1, color: color)
+        bar.position.y = y
+        bar.position.x = cellSize * 0.5
+        _propertyLayer.addChild(bar)
+        return bar
     }
     
     private func showSpellInfo(_ si:SpellIcon) {

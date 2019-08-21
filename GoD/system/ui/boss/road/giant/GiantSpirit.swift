@@ -8,6 +8,8 @@
 
 import SpriteKit
 class GiantSpirit:Boss {
+    static let LEVEL:CGFloat = 30
+    static let IMG = "GiantSpirit"
     override init() {
         super.init()
         _name = "巨人之魂"

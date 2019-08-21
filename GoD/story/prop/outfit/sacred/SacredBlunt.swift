@@ -38,7 +38,7 @@ class GiantFang:Blunt {
     override init() {
         super.init()
         _name = "巨牙"
-        _description = "攻击吸血"
+        _description = "普通攻击吸血"
         _level = 42
         _chance = 60
         _quality = Quality.SACRED
@@ -117,7 +117,7 @@ class IdyllssHand:Blunt {
     override init() {
         super.init()
         _name = "埃迪斯之手"
-        _description = "普通攻击有一定几率造成两次伤害"
+        _description = "普通攻击有一定几率攻击两次"
         _level = 71
         _chance = 5
         _quality = Quality.SACRED

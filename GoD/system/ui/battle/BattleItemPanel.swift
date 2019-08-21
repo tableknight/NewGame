@@ -65,6 +65,7 @@ class BattleItemPanel: UIPanel {
             let start = getPageStart(end)
             
             for i in start...end - 1 {
+                props[i]._battle = self._battle
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6
@@ -72,7 +73,7 @@ class BattleItemPanel: UIPanel {
                 icon.count = props[i]._count
                 icon.iconLabel = props[i]._name
                 icon._displayItemType = props[i]
-                icon.timeleft = (props[i] as! Item)._timeleft
+                icon.timeleft = props[i]._timeleft
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -81,19 +82,20 @@ class BattleItemPanel: UIPanel {
         }
     }
     
-    private func getPropsInBattle() -> Array<Prop> {
-        var ps = Array<Prop>()
+    private func getPropsInBattle() -> Array<Item> {
+        var ps = Array<Item>()
         for p in _char._props {
             if p is SealScroll {
                 if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
                     
                 } else {
-                    ps.append(p)
+                    ps.append((p as! Item))
                 }
             } else if p is Item {
                 let item = p as! Item
-                if item._count > 0 && item.usableInBattle {
-                    ps.append(p)
+                item._battle = _battle
+                if item._count > 0 && item.usableInBattle && item.selectable() {
+                    ps.append(item)
                 }
             }
         }

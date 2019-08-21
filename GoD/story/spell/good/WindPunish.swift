@@ -49,7 +49,9 @@ class WindPunish: Magical {
             }
         }
     }
-    
+    override func findTarget() {
+        findRandomTargetInLineFirst()
+    }
 }
 
 

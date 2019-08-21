@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Spell:Core, IDisplay, ISelectTarget {
-    static let CURSED = "Cursed"
+    static let CURSED = "CURSED"
     func getInfosDisplay() -> IPanelSize {
         return ItemInfo()
     }
@@ -124,6 +124,7 @@ class Spell:Core, IDisplay, ISelectTarget {
     var autoCast = false
     var isMultiple = false
     var hasAfterMoveAction = false
+    var hasRevenge = false
     var _cooldown = 0
     var _timeleft = 0
     var _battle:Battle!
@@ -225,7 +226,13 @@ class Spell:Core, IDisplay, ISelectTarget {
         return from.getAttack()
     }
     func levelFactor(_ from: BUnit, _ to:BUnit) -> CGFloat {
-        return 1 + (from._unit._level / to._unit._level) * 0.05
+        if from._unit is Boss || from._unit is BossMinion {
+            return 1
+        }
+        if to._unit is Boss || to._unit is BossMinion {
+            return 1
+        }
+        return 1 + (from._unit._level - to._unit._level) * 0.15
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
         let atk = self.getAttack(from: from)
@@ -284,6 +291,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         var damage = atk - def
         damage *= (1 + (from.getMagicalDamage() - to.getMagicalResistance()) * 0.01) * levelFactor(from, to)
+        damage *= magicFactor(from: from, to: to)
         
         if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: MagicalPower()) {
             damage *= 1.5
@@ -310,7 +318,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             damage = from.getAttack()
         }
         damage *= fireFactor(from: from, to: to) * levelFactor(from, to)
-        
+        damage *= magicFactor(from: from, to: to)
         if !isMultiple && isFire {
             if from._unit is Character {
                 let char = from._unit as! Character
@@ -355,6 +363,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
 //        let x = from.getWaterPower() - to.getWaterResistance()
         damage *= waterFactor(from: from, to: to) * levelFactor(from, to)
+        damage *= magicFactor(from: from, to: to)
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
         _damageValue = -damageControl(damage)
@@ -378,6 +387,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
 //        let x = from.getThunderPower() - to.getThunderResistance()
         damage *= thunderFactor(from: from, to: to) * levelFactor(from, to)
+        damage *= magicFactor(from: from, to: to)
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
@@ -400,6 +410,10 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
         
         return d
+    }
+    internal func magicFactor(from:BUnit, to:BUnit) -> CGFloat {
+//        var f:CGFloat = 1
+        return 1 + from.getMagicalDamage() * 0.01 - to.getMagicalResistance() * 0.01
     }
     internal func raceFactor(to:BUnit, from:BUnit) -> CGFloat {
         if from.ifSoulIs(GiantSoul()) || to.ifSoulIs(GiantSoul()) {
@@ -594,7 +608,8 @@ class Spell:Core, IDisplay, ISelectTarget {
         if sed > value {
             target.showMiss() {
                 //发动复仇
-                if this.isClose && target._unit.isClose() && this.seed() < target.getRevenge().toInt() {
+                if self.isClose && target._unit.isClose() && c._unit.isClose() && this.seed() < target.getRevenge().toInt() {
+                    self.hasRevenge = true
                     let damage = this.physicalDamage(from: target, to: c)
                     target.showText(text: "复仇") {
                         target.actionAttack {
@@ -624,7 +639,7 @@ class Spell:Core, IDisplay, ISelectTarget {
                 return
             }
         }
-        let ctl = _battle._curRole.getCritical() - to._unit._level
+        let ctl = _battle._curRole.getCritical() - to.getAgility()
         if seed().toFloat() < ctl {
             beCritical = true
             return

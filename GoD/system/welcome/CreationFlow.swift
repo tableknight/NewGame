@@ -86,17 +86,27 @@ class CreationFlow:SKSpriteNode {
             e._pro = role![0] as! String
             e._name = selectImage._lastSelectedComponent._name
             //-------------------------------------
-//            let mm = MagicMark()
-//            mm.create(level: 1)
-//            e._props.append(mm)
-//            e._money = 12000
-//            let t = TheWitchsTear()
-//            t._count = 500
-//            e._props.append(t)                   //test
-//            e._dungeonLevel = 99                 //data
-//            let l = Loot()
-//            e._spells = l.getAllSpells()
-            e._props.append(LevelUpScroll())
+            if Mode.debug {
+                let ps = PsychicScroll()
+                ps._count = 100
+                e._props.append(ps)
+                let s = TownScroll()
+                s._count = 100
+                e._props.append(s)
+                //            let mm = MagicMark()
+                //            mm.create(level: 1)
+                //            e._props.append(mm)
+                            e._money = 12000
+                            let t = TheWitchsTear()
+                            t._count = 500
+                            e._props.append(t)                   //test
+                //            e._dungeonLevel = 99                 //data
+                //            let l = Loot()
+                //            e._spells = l.getAllSpells()
+                e._props.append(LevelUpScroll())
+                e._spells.append(Zealot())
+                e._spells.append(SixShooter())
+            }
             //-------------------------------------
             scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
             if minion != nil {

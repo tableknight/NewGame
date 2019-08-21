@@ -8,6 +8,8 @@
 
 import SpriteKit
 class Item:Prop, ISelectTarget {
+    static let TYPE_TEAR = 1
+    static let TYPE_GOLD = 0
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -57,10 +59,15 @@ class Item:Prop, ISelectTarget {
     var _canBeTargetPlayer = true
     var _canBeTargetSelf = true
     var _isClose = false
+    var autoCast = false
+    
     
     func use() {}
     func use(target:Creature) {}
     func use(unit: BUnit, completion:@escaping () -> Void) {}
+    func selectable() -> Bool {
+        return true
+    }
     
     override init() {
         super.init()
@@ -99,7 +106,7 @@ class TheWitchsTear:Item {
         super.init()
         _showChar = "泪"
         _price = 6
-        _sellingPrice = 24
+        _storePrice = 24
         _name = TheWitchsTear.NAME
         _level = 1
         _quality = Quality.NORMAL
@@ -119,7 +126,7 @@ class Potion:Item {
         usable = true
         usableInBattle = true
         _price = 4
-        _sellingPrice = 16
+        _storePrice = 16
         _cooldown = 4
         _name = "治疗药水"
         _description = "恢复50%最大生命值"
@@ -165,7 +172,7 @@ class LittlePotion:Potion {
     override init() {
         super.init()
         _price = 3
-        _sellingPrice = 12
+        _storePrice = 12
         _cooldown = 2
         _name = "治疗药水(小)"
         _description = "恢复25%最大生命值"
@@ -186,7 +193,7 @@ class SealScroll:Item {
         usableInBattle = true
         targetEnemy = true
         _price = 8
-        _sellingPrice = 32
+        _storePrice = 32
         _cooldown = 0
         _name = "封印卷轴"
         _description = "对目标释放封印术"
@@ -204,7 +211,7 @@ class SealScroll:Item {
         removeFromChar()
         c.showText(text: "封印") {
             unit.actionSealed {
-                let chance = this.seed(max: unit.getHealth().toInt())
+                let chance = this.seed(max: unit.getHealth().toInt()) * unit._unit._quality / 2
                 if Mode.debug || chance > unit.getHp().toInt() {
                     if char._minions.count >= 6 {
                         showMsg(text: "随从位已满！")
@@ -237,8 +244,9 @@ class TownScroll:Item {
         usable = true
         usableInBattle = true
         _price = 6
-        _sellingPrice = 24
-        _name = "传送之卷·贝"
+        _storePrice = 24
+        autoCast = true
+        _name = "传送卷轴·贝"
         _description = "传送到贝拉姆村"
     }
     required init(from decoder: Decoder) throws {
@@ -264,8 +272,8 @@ class GodTownScroll:TownScroll {
         usable = true
         usableInBattle = true
         _price = 24
-        _sellingPrice = 96
-        _name = "传送之卷·雪"
+        _storePrice = 96
+        _name = "传送卷轴·雪"
         _description = "传送到神域·雪之国"
     }
     required init(from decoder: Decoder) throws {
@@ -291,8 +299,8 @@ class DeathTownScroll:TownScroll {
         usable = true
         usableInBattle = true
         _price = 12
-        _sellingPrice = 48
-        _name = "传送之卷·冥"
+        _storePrice = 48
+        _name = "传送卷轴·冥"
         _description = "传送到恶魔之城"
     }
     required init(from decoder: Decoder) throws {
@@ -304,11 +312,11 @@ class DeathTownScroll:TownScroll {
     override func use() {
         removeFromChar()
         showMsg(text: _description)
-        let c = CenterCamping()
+        let c = DemonTownPortal()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
         Game.instance.curStage.switchScene(next: c, completion: {
-            c.setRole(x: 5, y: 7, char: char)
+            c.setRole(x: 6, y: 5, char: char)
         })
     }
 }
@@ -345,13 +353,50 @@ class BlastScroll:Item {
     }
 }
 
+class TransportScroll:Item {
+    override init() {
+        super.init()
+        usable = true
+        usableInBattle = false
+        price = 12
+        _name = "穿梭卷轴"
+        _description = "越过当前障碍物，只能在远古之路使用"
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    override func use() {
+        let stage = Game.instance.curStage!
+        let scene = Game.instance.curStage._curScene!
+        
+        if !(scene is AcientRoad) {
+            showMsg(text: "这里无法使用")
+            return
+        }
+        if stage._curPanel != nil {
+            stage.removePanel(stage._curPanel!)
+        }
+        
+        let ar = scene as! AcientRoad
+        if !ar.transport() {
+            showMsg(text: "穿梭失败！")
+            return
+        }
+        removeFromChar()
+        
+    }
+}
+
 class RandomWeapon:Item {
     override init() {
         super.init()
         usable = true
         usableInBattle = false
         _price = 48
-        _sellingPrice = 48
+        _storePrice = 48
         _name = "武器"
         _description = "获得一个随机属性的\(_name)"
     }
@@ -383,7 +428,7 @@ class RandomArmor:Item {
         usable = true
         usableInBattle = false
         _price = 48
-        _sellingPrice = 48
+        _storePrice = 48
         _name = "防具"
         _description = "获得一个随机属性的\(_name)"
     }
@@ -415,7 +460,8 @@ class RandomSacredSpell:Item {
         usable = true
         usableInBattle = false
         _price = 48
-        _sellingPrice = 48
+        _storePrice = 48
+        _priceType = 1
         _name = "法术?"
         _description = "获得一个随机的神之技"
         _quality = Quality.SACRED
@@ -453,7 +499,7 @@ class LevelUpScroll:Item {
         try super.encode(to: encoder)
     }
     override func use() {
-        let r = [Game.instance.char] + Game.instance.char._minions
+        let r:Array<Creature> = [Game.instance.char] + Game.instance.char._minions
         for c in r {
             c.levelup()
             

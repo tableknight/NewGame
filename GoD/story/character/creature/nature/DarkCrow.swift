@@ -18,8 +18,17 @@ class DarkCrow: Natrue {
         _imgUrl = "afu"
         _img = SKTexture(imageNamed: _imgUrl)
     }
-    override func createQuality() {
+    override func create(level: CGFloat) {
+        _level = level
         _quality = Quality.NORMAL
+        _growth.stamina = _stars.stamina
+        _growth.strength = _stars.strength
+        _growth.agility = _stars.agility
+        _growth.intellect = _stars.intellect
+        levelTo(level: level)
+        _extensions.hp = _extensions.health
+        magicSensitive()
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

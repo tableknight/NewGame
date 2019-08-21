@@ -53,7 +53,7 @@ class IberisBattle: BossBattle {
                 if unit._speed >= _speedLine {
                     _roleAll.append(_enemyPart[0])
                     _roleAll.append(unit)
-                    all.remove(at: all.index(of: unit)!)
+                    all.remove(at: all.firstIndex(of: unit)!)
                 } else {
                     if nil != unit._unit._weapon {
                         unit._speed += unit.getSpeed() * unit._unit._weapon!._attackSpeed

@@ -39,7 +39,7 @@ class BlackWaterTown: StandScene {
             }
             return true
         }
-        if [CELL_BLOCK,CELL_ITEM].index(of: cell) != nil{
+        if [CELL_BLOCK,CELL_ITEM].firstIndex(of: cell) != nil{
             return true
         }
         return false
@@ -126,7 +126,7 @@ class BlackWaterTown: StandScene {
         _portalMark.alpha = 0
         
         let oc = Game.instance.outside_c
-        let paller = oc.getCell(1, 1, 1, 2)
+//        let paller = oc.getCell(1, 1, 1, 2)
         
         addItem(x: 8.5, y: 7.5, item: oc.getNode(1, 1, 1, 2))
         addItem(x: 8.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))

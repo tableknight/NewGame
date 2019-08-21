@@ -24,14 +24,15 @@ class NervousPoison: Magical {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
-        let status = Status()
-        status._type = Status.NERVOUS_POISON
-        status._labelText = "P"
-        status._timeleft = 3
+//        let status = Status()
+//        status._type = Status.NERVOUS_POISON
+//        status._labelText = "P"
+//        status._timeleft = 3
         c.actionCast {
             if !self.statusMissed(baseline: 85, target: t, completion: completion) {
                 t.actionDebuff {
-                    t.addStatus(status: status)
+//                    t.addStatus(status: status)
+                    t.poisoning()
                     completion()
                 }
             }

@@ -17,6 +17,9 @@ class HiddenArea: AcientRoad, InnerMaze {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    override func createFloorSize() -> Int {
+        return 6
+    }
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
         item.position.x = (-hSize / 2 + x) * cellSize

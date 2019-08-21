@@ -70,7 +70,7 @@ class MinionTradingPanel: UIPanel {
                     }
                     u.selected = false
                     let m = u._unit!
-                    let index = _char._storedMinions.index(of: m)
+                    let index = _char._storedMinions.firstIndex(of: m)
                     _char._storedMinions.remove(at: index!)
                     _char._minions.insert(m, at: 0)
                     _curRightPage = 1
@@ -96,7 +96,7 @@ class MinionTradingPanel: UIPanel {
                     }
                     u.selected = false
                     let m = u._unit!
-                    let index = _char._minions.index(of: m)
+                    let index = _char._minions.firstIndex(of: m)
                     _char._minions.remove(at: index!)
                     _char._storedMinions.insert(m, at: 0)
                     showRight()

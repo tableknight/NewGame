@@ -27,7 +27,7 @@ class AcientRoad: Dungeon {
     }
     override func create() {
         if _index <= 1 {
-            _floorSize = seed(min: 1, max: 7)
+            _floorSize = createFloorSize()
             _bossFloor = seed(min: 1, max: _floorSize)
         } else {
             _floorSize = Game.instance.curStage._scenes[0]._floorSize
@@ -37,13 +37,39 @@ class AcientRoad: Dungeon {
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
     }
+    func createFloorSize() -> Int {
+        let sed = seed(min: 1, max: 7)
+        return sed
+    }
     internal var _bossFloor = 0
     override func createBoss() {
+        let c = Core()
         if _level == 10 {
             _bossImg = "Iss"
             _bossBattle = IssBattle()
             addBoss()
+        } else if _level == FireSpirit.LEVEL && (c.d2() || Mode.debug) {
+            _bossImg = FireSpirit.IMG
+            _bossBattle = FireSpiritBattle()
+            addBoss()
+        } else if _level == GiantSpirit.LEVEL && (c.d3() || Mode.debug) {
+            _bossImg = GiantSpirit.IMG
+            _bossBattle = GiantSpiritBattle()
+            addBoss()
+        } else if _level == AssassinMaster.LEVEL && (c.d4() || Mode.debug) {
+            _bossImg = AssassinMaster.IMG
+            _bossBattle = AssassinBattle()
+            addBoss()
+        } else if _level == GraveRobber.LEVEL && (c.d3() || Mode.debug) {
+            _bossImg = GraveRobber.IMG
+            _bossBattle = RobberBattle()
+            addBoss()
+        } else if _level == FearGhost.LEVEL && (c.d5() || Mode.debug) {
+            _bossImg = FearGhost.IMG
+            _bossBattle = GhostBattle()
+            addBoss()
         }
+        
     }
     internal func addBoss() {
         if _index != _bossFloor {
@@ -62,7 +88,8 @@ class AcientRoad: Dungeon {
         //        let seller = UIRole()
         //        seller.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
         
-        let boss = SKSpriteNode(imageNamed: _bossImg)
+        let boss = UIItem()
+        boss.setTexture(SKTexture(imageNamed: _bossImg))
         boss.size = CGSize(width: cellSize * 1.5, height: cellSize * 1.5)
         
         
@@ -390,6 +417,36 @@ class AcientRoad: Dungeon {
                 _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_EMPTY
                 return true
             }
+        }
+        return false
+    }
+    func transport() -> Bool {
+        var point:CGPoint!
+        let position = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
+        switch _direction {
+            case NORTH:
+                point = CGPoint(x: position.x, y: position.y - 2)
+            case SOUTH:
+                point = CGPoint(x: position.x, y: position.y + 2)
+            case WEST:
+                point = CGPoint(x: position.x - 2, y: position.y)
+            case EAST:
+                point = CGPoint(x: position.x + 2, y: position.y)
+            default:
+                return false
+        }
+        let dx = point.x.toInt()
+        let dy = point.y.toInt()
+        if isPointValid(point: point) && _mapMatrix[dy][dx] == CELL_EMPTY {
+            let fo = SKAction.fadeOut(withDuration: TimeInterval(0.5))
+            let fi = SKAction.fadeIn(withDuration: TimeInterval(0.5))
+            _role.run(fo) {
+                self._role.position.x = (point.x - self.hSize / 2) * self.cellSize
+                self._role.position.y = (self.vSize / 2 - point.y) * self.cellSize
+                self._role.run(fi)
+            }
+            
+            return true
         }
         return false
     }

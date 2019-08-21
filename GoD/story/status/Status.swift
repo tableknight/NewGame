@@ -77,6 +77,7 @@ class Status:Core {
     static let ICE_BOMB = "ice_bomb"
     static let MAKE_EVERYTHING_RIGHT = "make_everything_right"
     static let NERVOUS_POISON = "nervous_poison"
+    static let SOUL_SLAY = "soul_slay"
     
     var hasBeforeMoveAction = false
     var _castSpell:Spell!

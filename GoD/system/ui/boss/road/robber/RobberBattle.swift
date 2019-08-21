@@ -31,7 +31,7 @@ class RobberBattle: BossBattle {
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
-        let l:CGFloat = 47
+        let l:CGFloat = GraveRobber.LEVEL
         let t = GraveRobber()
         t.create(level: l)
         t._seat = BUnit.TTM
@@ -54,19 +54,30 @@ class RobberBattle: BossBattle {
         let lucky = _char._lucky * 0.01 + 1
         
         if seedFloat() < lucky * 35 {
-            let mark = FireMark()
+            let mark = ThiefPocket()
             mark.create()
             list.append(mark)
         }
         
         if seedFloat() < lucky * 25 {
-            let i = FireCore()
+            let i = TearCluster()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = WordlessBook()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 8 {
+            let i = CreationMatrix()
             i.create()
             list.append(i)
         }
         
         let l = Loot()
-        l.loot(level: 47)
+        l.loot(level: GraveRobber.LEVEL)
         return list + l.getList()
     }
 }

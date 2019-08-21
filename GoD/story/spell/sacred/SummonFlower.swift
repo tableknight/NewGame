@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class SummonFlower: Magical {
+class SummonFlower: Magical, SummonSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

@@ -25,7 +25,7 @@ class LootPanel:UIPanel {
                 let icon = u as! PropIcon
                 if icon.selected {
                     let p = icon._displayItemType as! Prop
-                    let index = _props.index(of: p)
+                    let index = _props.firstIndex(of: p)
                     _props.remove(at: index!)
                 }
             }

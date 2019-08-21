@@ -15,7 +15,7 @@ class IssThePuppet:Boss {
     }
     override func create(level: CGFloat) {
         _quality = Quality.SACRED
-        _growth.stamina = 1.8
+        _growth.stamina = 2.5
         _growth.strength = 2.1
         _growth.agility = 1.8
         _growth.intellect = 2.6

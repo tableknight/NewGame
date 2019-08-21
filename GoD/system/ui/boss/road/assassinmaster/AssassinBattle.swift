@@ -35,7 +35,7 @@ class AssassinBattle: BossBattle {
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
-        let l:CGFloat = 41
+        let l:CGFloat = AssassinMaster.LEVEL
         let t = AssassinMaster()
         t.create(level: l)
         t._seat = BUnit.TTM
@@ -65,8 +65,26 @@ class AssassinBattle: BossBattle {
             list.append(i)
         }
         
+        if seedFloat() < lucky * 20 {
+            let i = EternityNight()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 20 {
+            let i = Hawkeye()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Accident()
+            i.create()
+            list.append(i)
+        }
+        
         let l = Loot()
-        l.loot(level: 41)
+        l.loot(level: AssassinMaster.LEVEL)
         return list + l.getList()
     }
     override func addEnemy(bUnit: BUnit) {
@@ -95,7 +113,7 @@ class CopyUnit:BUnit {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func showValue(value: CGFloat, criticalFromSpell: Bool, critical: Bool, damageType: Int, textColor: UIColor, completion: @escaping () -> Void) {
-        super.showValue(value: value * 3, damageType: damageType, textColor: textColor, completion: completion)
+    override func showValue(value: CGFloat, source:BUnit? = nil, criticalFromSpell: Bool, critical: Bool, damageType: Int, textColor: UIColor, completion: @escaping () -> Void) {
+        super.showValue(value: value * 3, source: source, damageType: damageType, textColor: textColor, completion: completion)
     }
 }

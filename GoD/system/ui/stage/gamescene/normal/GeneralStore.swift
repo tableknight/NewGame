@@ -40,7 +40,7 @@ class GeneralStore: InnerHouse {
                     dlg._confirmAction = {
                         stage.removeDialog(dlg: dlg)
                         let sp = SellingPanel()
-                        sp._goodsList = [TownScroll(), SealScroll(), Potion(), GodTownScroll(), DeathTownScroll()]
+                        sp._goodsList = [TownScroll(), SealScroll(), Potion(), GodTownScroll(), DeathTownScroll() ,TransportScroll()]
                         sp.create()
                         stage.showPanel(sp)
                     }

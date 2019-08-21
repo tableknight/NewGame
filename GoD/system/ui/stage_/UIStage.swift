@@ -575,7 +575,7 @@ class UIStage:SKSpriteNode {
             _lastBattleItem.removeFromParent()
             let x = round(abs(_curScene.position.x) / cellSize).toInt() + 1
             if _curScene.evilIn.contains(x) {
-                let index = _curScene.evilIn.index(of: x)
+                let index = _curScene.evilIn.firstIndex(of: x)
                 if nil != index {
                     _curScene.evilIn.remove(at: index!)
                 }

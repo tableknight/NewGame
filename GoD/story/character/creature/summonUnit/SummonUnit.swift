@@ -15,7 +15,7 @@ class SummonUnit: Creature {
     var _last = 0
     var canBeControl = false
     internal func createPropValue() -> CGFloat {
-        return seed(min: 10, max: 20).toFloat() * 0.1
+        return seed(min: 10, max: 21).toFloat() * 0.1
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

@@ -44,7 +44,7 @@ class EastCamping: StandScene {
             }
             return true
         }
-        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
+        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].firstIndex(of: cell) != nil{
             return true
         }
         return false
@@ -171,6 +171,8 @@ class EastCamping: StandScene {
             [6, 9],
             [7, 9],
             [8, 9],
+            [3, 7],
+            [6, 7]
         ]
         let treePoint:Array<Array<CGFloat>> = [
             [0, 3],

@@ -10,6 +10,8 @@ import SpriteKit
 class NoAction: Active {
     override init() {
         super.init()
+        _name = ""
+        autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
         completion()

@@ -19,7 +19,7 @@ class ScreamLoud:Magical, Curse {
         _name = "震耳发溃"
         _description = "发出剧烈的怒吼，降低所有敌方目标30%防御和30点命中，持续3回合"
         _quality = Quality.NORMAL
-        _cooldown = 1
+        _cooldown = 2
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {

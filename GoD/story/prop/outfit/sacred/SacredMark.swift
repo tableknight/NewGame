@@ -135,6 +135,7 @@ class MoltenFire:MagicMark {
         _level = 48
         _chance = 30
         _quality = Quality.SACRED
+        price = 420
     }
     override func create() {
         createSpell()

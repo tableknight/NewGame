@@ -54,19 +54,19 @@ class MagicMark: Armor {
         if _seed < 70 {
             _quality = Quality.NORMAL
             _price = 6
-            _sellingPrice = 24
+            _storePrice = 24
         } else if _seed < 90 {
             _quality = Quality.GOOD
             _price = 18
-            _sellingPrice = 72
+            _storePrice = 72
         } else if _seed < 96 {
             _quality = Quality.RARE
             _price = 36
-            _sellingPrice = 144
+            _storePrice = 144
         } else {
             _quality = Quality.SACRED
             _price = 64
-            _sellingPrice =  256
+            _storePrice =  256
         }
     }
     internal func createSpell() {

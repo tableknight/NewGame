@@ -19,22 +19,21 @@ class Attack: Physical {
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
+        let t = b._selectedTarget!
         let c = b._curRole
         setTimeout(delay: 0.25, completion: {
             c.actionAttack {
                 self.attack {
-                    completion()
+                    if !t.isDead() && c.ifWeaponIs(IdyllssHand()) && self.d7() {
+                        self.attack {
+                            completion()
+                        }
+                    } else {
+                        completion()
+                    }
                 }
             }
         })
-//        if c._unit is Character {
-//        } else {
-//            c.actionAttack {
-//                self.attack {
-//                    completion()
-//                }
-//            }
-//        }
     }
     
     private func attack(completion:@escaping () -> Void) {
@@ -51,13 +50,15 @@ class Attack: Physical {
         let damage = _damageValue
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                t.attacked1()
+                if c._unit.isClose() {
+                    t.attacked1()
+                }
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()
                     }
 //                    t.hpChange(value: damage)
-                    if c._unit._weapon is DragonSaliva {
+                    if c.ifWeaponIs(DragonSaliva()) {
                         setTimeout(delay: 0.5, completion: {
                             let rate = self.fireFactor(from: c, to: t)
                             let fireDamage = damage * 0.3 * rate
@@ -67,17 +68,14 @@ class Attack: Physical {
                     }
                     
                     var isGiantFang = false
-                    if c._unit._weapon is GiantFang {
+                    if c.ifWeaponIs(GiantFang()) {
                         isGiantFang = true
                     }
                     
                     if c.hasSpell(spell: VampireBlood()) || isGiantFang {
                         var recoveryFactor:CGFloat = isGiantFang ? 0.2 : 0.3
-                        if c._unit is Character {
-                            let char = c._unit as! Character
-                            if char._amulet is FangOfVampire {
-                                recoveryFactor *= 2
-                            }
+                        if c.ifAmuletIs(FangOfVampire()) {
+                            recoveryFactor *= 2
                         }
                         let d = abs(damage * recoveryFactor)
                         setTimeout(delay: 0.5, completion: {
@@ -99,33 +97,33 @@ class Attack: Physical {
         }
     }
     
-    func attackMore(completion:@escaping () -> Void) {
-        let b = _battle!
-        let t = b._selectedTarget!
-        let c = b._curRole
-        
-        if !(c._unit._weapon is IdyllssHand) {
-            completion()
-            return
-        }
-        
-        if t.isDead() {
-            completion()
-            return
-        }
-        
-        if seed() < 15 {
-            let this = self
-            c.showText(text:"IDYLLS POWER")
-            c.actionAttack {
-                this.attack {
-                    completion()
-                }
-            }
-            return
-        }
-        
-        completion()
-    }
+//    func attackMore(completion:@escaping () -> Void) {
+//        let b = _battle!
+//        let t = b._selectedTarget!
+//        let c = b._curRole
+//
+//        if !(c._unit._weapon is IdyllssHand) {
+//            completion()
+//            return
+//        }
+//
+//        if t.isDead() {
+//            completion()
+//            return
+//        }
+//
+//        if seed() < 15 {
+//            let this = self
+//            c.showText(text:"IDYLLS POWER")
+//            c.actionAttack {
+//                this.attack {
+//                    completion()
+//                }
+//            }
+//            return
+//        }
+//
+//        completion()
+//    }
     
 }

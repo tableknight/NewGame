@@ -48,13 +48,13 @@ class LewisBattle: BossBattle {
         for u in _enemyPart {
             posArray.append(u._unit._seat)
         }
-        if posArray.index(of: BUnit.TBL) == nil {
+        if posArray.firstIndex(of: BUnit.TBL) == nil {
             return BUnit.TBL
         }
-        if posArray.index(of: BUnit.TBM) == nil {
+        if posArray.firstIndex(of: BUnit.TBM) == nil {
             return BUnit.TBM
         }
-        if posArray.index(of: BUnit.TBR) == nil {
+        if posArray.firstIndex(of: BUnit.TBR) == nil {
             return BUnit.TBR
         }
         return ""
@@ -260,6 +260,7 @@ class OathBreaker:Magical, Curse {
                         t.showText(text: "BREAK")
                         let s = Status()
                         s._timeleft = 3
+                        s._labelText = "B"
                         let def = t.getDefence() * 0.5
                         t._extensions.defence -= def
                         s.timeupAction = {

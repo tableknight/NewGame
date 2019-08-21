@@ -16,7 +16,7 @@ class ReduceLife: Magical {
     }
     override init() {
         super.init()
-        _name = "寿尽"
+        _name = "折寿"
         _description = "对目标造成精神120%的精神伤害"
         _rate = 1.2
         _quality = Quality.NORMAL

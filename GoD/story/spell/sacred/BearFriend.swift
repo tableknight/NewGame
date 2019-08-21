@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class BearFriend:Magical {
+class BearFriend:Magical, SummonSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

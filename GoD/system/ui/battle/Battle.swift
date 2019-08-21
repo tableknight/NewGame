@@ -643,7 +643,7 @@ class Battle: SKSpriteNode {
         
         if _curRole.hasStatus(type: Status.CONFUSED) {
             var all = _playerPart + _enemyPart
-            let index = all.index(of: _curRole)
+            let index = all.firstIndex(of: _curRole)
             all.remove(at: index!)
             _selectedSpell = Attack()
             _selectedSpell._battle = self
@@ -706,13 +706,13 @@ class Battle: SKSpriteNode {
             return
         }
         let l = Loot()
-        let ms = [_char] + _char.getReadyMinions()
+        let ms:Array<Creature> = [_char] + _char.getReadyMinions()
         for u in _evilsOrg {
             for r in ms {
                 let exp = l.getExp(selfLevel: r._level, enemyLevel: u._unit._level) * expRate
                 r.expUp(up: exp)
             }
-            if abs(_char._level - u._unit._level) <= 5 {
+            if _char._level - u._unit._level <= 5 {
                 l.loot(level: u._unit._level)
             }
         }
@@ -809,7 +809,7 @@ class Battle: SKSpriteNode {
                 }
                 if unit._speed >= _speedLine {
                     _roleAll.append(unit)
-                    all.remove(at: all.index(of: unit)!)
+                    all.remove(at: all.firstIndex(of: unit)!)
                 }
             }
         }
@@ -867,7 +867,7 @@ class Battle: SKSpriteNode {
             unit.showText(text: "IMMUNE")
         } else {
             unit.showText(text: "SILENCED")
-            let index = _roleAll.index(of: unit)
+            let index = _roleAll.firstIndex(of: unit)
             if nil != index {
                 _roleAll.remove(at: index!)
             } else {
@@ -902,7 +902,7 @@ class Battle: SKSpriteNode {
 //        _orderRecall = createMenuButton(x: hw + 190, y: hh + 20, size: 20, text: "召回")
 //        _orderCancel = createMenuButton(x: -hw - 30, y: hh + 30, size: 30, text: "取消")
         
-        let y = -cellSize * 6.5
+        let y = -cellSize * 5.5
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
@@ -925,7 +925,7 @@ class Battle: SKSpriteNode {
     internal var _spellsButton = Array<SpellRoundButton>()
     internal func createRoleSpellsButton() {
         _spellsButton = []
-        let y = -cellSize * 6.5
+        let y = -cellSize * 5.5
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.5
         let gap = size + cellSize * 0.5
@@ -1136,9 +1136,15 @@ class Battle: SKSpriteNode {
         let delay:CGFloat = 0
         setTimeout(delay: delay, completion: {
             if self._selectedSpell is Attack {
-                self._selectedSpell.cast {
-                    self.cdSpell(spell: self._selectedSpell)
+                let t = self._selectedTarget
+                if nil != t && t!.isDead() {
                     self.moveEnd()
+                    debug("\(t!._unit._name) is dead! in attack cast in battle! 1142")
+                } else {
+                    self._selectedSpell.cast {
+                        self.cdSpell(spell: self._selectedSpell)
+                        self.moveEnd()
+                    }
                 }
             } else {
                 self._curRole.showText(text: self._selectedSpell._name) {
@@ -1229,7 +1235,7 @@ class Battle: SKSpriteNode {
         if selectObject.targetAll {
             _availableEvils = _enemyPart + _playerPart
             if !selectObject.canBeTargetSelf {
-                let index = _availableEvils.index(of: _curRole)
+                let index = _availableEvils.firstIndex(of: _curRole)
                 _availableEvils.remove(at: index!)
             }
             for unit in _availableEvils {
@@ -1316,9 +1322,8 @@ class Battle: SKSpriteNode {
         let bip = BattleItemPanel()
         bip._battle = self
         bip.create()
-        let this = self
         bip.closeAction = {
-            this.cancelButtonClicked()
+            self.cancelButtonClicked()
         }
         bip.selectAction = {
             let item = bip.selectedItem!
@@ -1326,13 +1331,17 @@ class Battle: SKSpriteNode {
             if item is TownScroll {
                 Game.instance.curStage.removeBattle(self)
                 item.use()
+            } else if item.autoCast {
+                item.use(unit: self._curRole, completion: self.moveEnd)
+                self.hideOrder()
+                self.hideCancel()
             } else {
-                this.waitingForSelectItemTarget = true
-                this.showAvailableUnits(selectObject: item)
+                self.waitingForSelectItemTarget = true
+                self.showAvailableUnits(selectObject: item)
                 self.hideOrder()
                 self.showCancel()
             }
-            this._selectedItem = item
+            self._selectedItem = item
 //            item?.useInBattle()
         }
         addChild(bip)
@@ -1898,20 +1907,20 @@ class Battle: SKSpriteNode {
     
     func removeFromPart(unit:BUnit) {
         if unit.playerPart {
-            let index = _playerPart.index(of: unit)
+            let index = _playerPart.firstIndex(of: unit)
             if nil != index {
                 _playerPart.remove(at: index!)
             } else {
                 debug("removeFromPart index nil1")
             }
         } else {
-            let index = _enemyPart.index(of: unit)
+            let index = _enemyPart.firstIndex(of: unit)
             if nil != index {
                 _enemyPart.remove(at: index!)
 //                debug("removeFromPart index nil2")
             }
         }
-        let index = _roleAll.index(of: unit)
+        let index = _roleAll.firstIndex(of: unit)
         if nil != index {
             _roleAll.remove(at: index!)
 //            debug("removeFromPart index nil3")
@@ -1955,7 +1964,7 @@ class Battle: SKSpriteNode {
     internal func showSummonableSeats(selectAll:Bool = true) {
         cleanSummonSeats()
         var ps = [BUnit.BTL,BUnit.BTM,BUnit.BTR,BUnit.BBL,BUnit.BBM,BUnit.BBR]
-        let index = ps.index(of: _char._seat)
+        let index = ps.firstIndex(of: _char._seat)
         if nil == index {
             debug("error showSummonableSeats")
         }
@@ -1967,7 +1976,7 @@ class Battle: SKSpriteNode {
         }
         
         for s in ps {
-            if existUnitSeats.index(of: s) != nil {
+            if existUnitSeats.firstIndex(of: s) != nil {
                 if selectAll {
                     let unit = findUnitBySeat(part: _playerPart, seat: s)
                     unit?.setSelectableMode()
@@ -2028,7 +2037,7 @@ class Battle: SKSpriteNode {
     
     internal func showRecallMinions() {
         for u in _playerPart {
-            if _char._minions.index(of: u._unit) != nil {
+            if _char._minions.firstIndex(of: u._unit) != nil {
                 u.setSelectableMode()
             }
         }

@@ -23,10 +23,11 @@ class Character: Creature {
 //        _img = Data.instance
     }
     override func create(level: CGFloat = 1) {
-        staminaChange(value: 25)
-        strengthChange(value: 25)
-        agilityChange(value: 25)
-        intellectChange(value: 25)
+        let val:CGFloat = 20
+        staminaChange(value: val)
+        strengthChange(value: val)
+        agilityChange(value: val)
+        intellectChange(value: val)
         _extensions.hp = _extensions.health
 //        _spells = [TurnAttack(), FeignAttack()]
         _level = level
@@ -127,7 +128,7 @@ class Character: Creature {
     }
     
     func removeProp(p:Prop) {
-        let i = _props.index(of: p)
+        let i = _props.firstIndex(of: p)
         if p is Item {
             if nil != i {
 //                let itm = _props[i!] as! Item
@@ -145,18 +146,18 @@ class Character: Creature {
         }
     }
     func hasProp(p:Prop) -> Prop? {
-        let i = _props.index(of: p)
+        let i = _props.firstIndex(of: p)
         if nil != i {
             return _props[i!]
         }
         return nil
     }
     func discardProp(p:Prop) {
-        let i = _props.index(of: p)
+        let i = _props.firstIndex(of: p)
         _props.remove(at: i!)
     }
     func removeStorage(p:Prop) {
-        let i = _props.index(of: p)
+        let i = _props.firstIndex(of: p)
         if p is Item {
             if nil != i {
                 //                let itm = _props[i!] as! Item
@@ -266,6 +267,12 @@ class Character: Creature {
         case spellBooksClass
         case marks
         case instruments
+        case daggers
+        case swords
+        case blunts
+        case wands
+        case bows
+        case fists
         case amulets
         case shields
         case rings
@@ -298,7 +305,12 @@ class Character: Creature {
 //        let cls:Array<String> = try values.decode(Array.self, forKey: ._propsClass)
         let marks:Array<MagicMark> = try values.decode(Array.self, forKey: .marks)
         let instruments:Array<Instrument> = try values.decode(Array.self, forKey: .instruments)
-        let weapons:Array<Weapon> = try values.decode(Array.self, forKey: .weapons)
+        let swords:Array<Sword> = try values.decode(Array.self, forKey: .swords)
+        let blunts:Array<Blunt> = try values.decode(Array.self, forKey: .blunts)
+        let wands:Array<Wand> = try values.decode(Array.self, forKey: .wands)
+        let bows:Array<Bow> = try values.decode(Array.self, forKey: .bows)
+        let fists:Array<Fist> = try values.decode(Array.self, forKey: .fists)
+        let daggers:Array<Dagger> = try values.decode(Array.self, forKey: .daggers)
 //        let weaponsClass:Array<String> = try values.decode(Array.self, forKey: .weaponsClass)
 //        let armors:Array<Armor> = try values.decode(Array.self, forKey: .armors)
 //        let armorsClass:Array<String> = try values.decode(Array.self, forKey: .armorsClass)
@@ -324,12 +336,12 @@ class Character: Creature {
             allArmors.append(l.getArmorById(id: i))
         }
         var allItems = Array<Item>()
-        for i in 0...7 {
+        for i in 0...l._maxItemNumber {
             allItems.append(l.getItemByid(id: i))
         }
         if itemsClass.count > 0 {
             for i in 0...itemsClass.count - 1 {
-                let tp = NSClassFromString(itemsClass[i])
+                let tp:AnyClass? = NSClassFromString(itemsClass[i])
                 for a in allItems {
                     if tp == type(of: a) {
                         a._count = items[i]._count
@@ -349,10 +361,22 @@ class Character: Creature {
         for i in instruments {
             _props.append(i)
         }
-        for w in weapons {
+        for w in swords {
             _props.append(w)
         }
-        for a in amulets {
+        for w in bows {
+            _props.append(w)
+        }
+        for w in fists {
+            _props.append(w)
+        }
+        for w in wands {
+            _props.append(w)
+        }
+        for w in daggers {
+            _props.append(w)
+        }
+        for a in blunts {
             _props.append(a)
         }
         for a in rings {
@@ -362,6 +386,9 @@ class Character: Creature {
             _props.append(a)
         }
         for a in soulstones {
+            _props.append(a)
+        }
+        for a in amulets {
             _props.append(a)
         }
         
@@ -387,7 +414,7 @@ class Character: Creature {
         try container.encode(_money, forKey: ._money)
         try container.encode(_key, forKey: ._key)
         try container.encode(_pro, forKey: ._pro)
-        var weapons = Array<Weapon>()
+//        var weapons = Array<Weapon>()
 //        var armors = Array<Armor>()
         var items = Array<Item>()
         var spellBooks = Array<SpellBook>()
@@ -396,21 +423,39 @@ class Character: Creature {
         var itemClassNames = Array<String>()
         var spellBookClassNames = Array<String>()
         var marks = Array<MagicMark>()
-        var instrments = Array<Instrument>()
         
         var amulets = Array<Amulet>()
         var shields = Array<Shield>()
         var rings = Array<Ring>()
         var soulstones = Array<SoulStone>()
         
+        //weapon
+        var instrments = Array<Instrument>()
+        var swords = Array<Sword>()
+        var daggers = Array<Dagger>()
+//        var instrments = Array<Instrument>()
+        var bows = Array<Bow>()
+        var wands = Array<Wand>()
+        var blunts = Array<Blunt>()
+        var fists = Array<Fist>()
+        
         for i in _props {
             if i is MagicMark {
                 marks.append(i as! MagicMark)
             } else if i is Instrument {
                 instrments.append(i as! Instrument)
-            } else if i is Weapon {
-//                weaponClassNames.append(NSStringFromClass(type(of: i)))
-                weapons.append(i as! Weapon)
+            } else if i is Sword {
+                swords.append(i as! Sword)
+            } else if i is Dagger {
+                daggers.append(i as! Dagger)
+            } else if i is Bow {
+                bows.append(i as! Bow)
+            } else if i is Wand {
+                wands.append(i as! Wand)
+            } else if i is Blunt {
+                blunts.append(i as! Blunt)
+            } else if i is Fist {
+                fists.append(i as! Fist)
             } else if i is Amulet {
                 amulets.append(i as! Amulet)
             } else if i is Shield {
@@ -431,14 +476,20 @@ class Character: Creature {
         try container.encode(rings, forKey: .rings)
         try container.encode(shields, forKey: .shields)
         try container.encode(soulstones, forKey: .soulstones)
-        try container.encode(weapons, forKey: .weapons)
+        try container.encode(marks, forKey: .marks)
+        
+        try container.encode(swords, forKey: .swords)
+        try container.encode(daggers, forKey: .daggers)
+        try container.encode(blunts, forKey: .blunts)
+        try container.encode(wands, forKey: .wands)
+        try container.encode(bows, forKey: .bows)
+        try container.encode(fists, forKey: .fists)
 //        try container.encode(weaponClassNames, forKey: .weaponsClass)
 //        try container.encode(armors, forKey: .armors)
 //        try container.encode(armorClassNames, forKey: .armorsClass)
         try container.encode(items, forKey: .items)
         try container.encode(itemClassNames, forKey: .itemsClass)
         try container.encode(spellBooks, forKey: .spellBooks)
-        try container.encode(marks, forKey: .marks)
         try container.encode(instrments, forKey: .instruments)
         try super.encode(to: encoder)
     }

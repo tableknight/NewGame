@@ -13,7 +13,7 @@ class ThiefPocket: Item {
         usable = true
         usableInBattle = false
         _price = 1
-        _sellingPrice = 1
+        _storePrice = 1
         _name = "盗墓人的财宝"
         _description = "获得一大笔不菲的金币"
         _quality = Quality.GOOD

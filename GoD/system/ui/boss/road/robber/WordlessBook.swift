@@ -13,7 +13,7 @@ class WordlessBook: Item {
         usable = true
         usableInBattle = false
         _price = 448
-        _sellingPrice = 448
+        _storePrice = 448
         _name = "无字天书"
         _description = "获得一个随机的神之技"
         _quality = Quality.SACRED

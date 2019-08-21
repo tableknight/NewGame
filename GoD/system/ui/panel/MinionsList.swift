@@ -58,7 +58,7 @@ class MinionsList:UIPanel {
                 _discardButton.selected = false
                 _lastSelectedComponent.removeFromParent()
                 let char = Game.instance.char!
-                let index = char._minions.index(of: _lastSelectedComponent._minion)
+                let index = char._minions.firstIndex(of: _lastSelectedComponent._minion)
                 if nil != index {
                     char._minions.remove(at: index!)
                 }

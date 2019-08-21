@@ -26,16 +26,16 @@ class SpellBook:Item {
             _quality = newValue._quality
             if _quality == Quality.NORMAL {
                 _price = 18
-                _sellingPrice = 6
+                _storePrice = 6
             } else if _quality == Quality.GOOD {
                 _price = 48
-                _sellingPrice = 16
+                _storePrice = 16
             } else if _quality == Quality.RARE {
                 _price = 108
-                _sellingPrice = 36
+                _storePrice = 36
             } else if _quality == Quality.SACRED {
                 _price = 144
-                _sellingPrice = 48
+                _storePrice = 48
             }
         }
         get {

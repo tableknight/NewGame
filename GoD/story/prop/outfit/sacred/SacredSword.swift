@@ -227,7 +227,7 @@ class ElementalSword:Sword {
     override func off() {
         if nil != _spell {
             let c = Game.instance.char!
-            let i = c._spellsHidden.index(of: _spell)
+            let i = c._spellsHidden.firstIndex(of: _spell)
             c._spellsHidden.remove(at: i!)
         }
     }

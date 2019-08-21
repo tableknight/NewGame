@@ -15,20 +15,20 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         Game.instance.scene = self
         Game.calcCellSize()
+        Mode.debug = true
 //        let lighting = Game.instance.pictureThunder1.getNode(0, 1, 1, 2)
 //        lighting.size = CGSize(width: 70 * 2, height: 70 * 4)
 //        lighting.anchorPoint = CGPoint(x: 0.5, y: 0)
 ////        lighting.zPosition = _charNode.zPosition + 20
 //        addChild(lighting)
+        
         realScene()
-        
-        
-        
-        let b = Button()
-        b.text = "aa"
-        b.zPosition = 1024
-        addChild(b)
-        _b = b
+//
+//        let b = Button()
+//        b.text = "aa"
+//        b.zPosition = 1024
+//        addChild(b)
+//        _b = b
         
 
 //        homePage()
@@ -172,21 +172,54 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = RobberBattle()
+        let b = GiantSpiritBattle()
         var es = Array<Creature>()
         
         
 //        let p = CowCow()
-//        p.create(level: 1)
+//        p.create(level: 47)
+//        p._sensitive = 100
+//
+//        p._spellsInuse = [DancingDragon()]
 //        es.append(p)
+        
+//        for _ in 0...4 {
+//            let p1 = CowCow()
+//            p1.create(level: 1)
+//            p1._sensitive = 100
+//
+//            p1._spellsInuse = [NoAction()]
+//            es.append(p1)
+//        }
+        
         b.setEnemyPart(minions: es)
         
+//
+//        for s in b._enemyPart {
+//            s._unit._extensions.speed = 1
+////            let status = Status()
+////            status._type = Status.TURN_ATTACK
+////            status._timeleft = 5
+////            s.addStatus(status: status)
+//        }
         
         
         
         let char = Game.instance.char!
+//        char._extensions.attack = 300
+//        char._extensions.spirit = 300
 //        char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
-//        char._spellsInuse = [FireFist(), IceFist(), DancingDragon()]
+//        char._spellsInuse = [Zealot(), FireRain(), SuperWater(), SixShooter()]
+//        char._revenge = 40
+        char._extensions.spirit = 2000
+        char._extensions.hp = 10000
+        char._extensions.health = 10000
+        char._spellsInuse = [LowlevelFlame()]
+        
+//        let sb = Bow()
+//        sb.create(level: 10)
+//        char._weapon = sb
+        
 //        let cs:Array<Creature> = [char]
         let cs:Array<Creature> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
@@ -219,24 +252,25 @@ class GameScene: SKScene {
         stage.createMenu()
         addChild(stage)
         
-        e._level = 50
+        e._level = 1
         
         let aa = HellNight()
         aa.create(level: e._level)
-        aa._seat = BUnit.BTL
+//        aa._seat = BUnit.BTL
         e._minions.append(aa)
+        for _ in 0...4 {
+            let sn = SnowLady()
+            sn.create(level: e._level)
+//            sn._seat = BUnit.BTR
+            e._minions.append(sn)
+        }
         
-        let sn = SnowLady()
-        sn.create(level: e._level)
-        sn._seat = BUnit.BTR
-        e._minions.append(sn)
+//        e.strengthChange(value: 100)
+//        e.agilityChange(value: 70)
+//        e.staminaChange(value: 60)
+//        e.intellectChange(value: 0)
         
-        e.strengthChange(value: 80)
-        e.agilityChange(value: 80)
-        e.staminaChange(value: 70)
-        e.intellectChange(value: 0)
-        
-        e._dungeonLevel = 46
+        e._dungeonLevel = e._level.toInt()
         e._spellCount = 3
         
         e.hasShield = true
@@ -246,13 +280,20 @@ class GameScene: SKScene {
         w.create(level: e._level)
         e.addProp(p: w)
         
-        let r = Ring()
-        r.create(level: e._level)
+        let r = RingOfDeath()
+        r.create()
         e.addProp(p: r)
         
-        let r2 = Ring()
-        r2.create(level: e._level)
-        e.addProp(p: r2)
+        let tss = TransportScroll()
+        tss._count = 10
+        e._props.append(tss)
+        
+        for _ in 0...1 {
+            
+            let r2 = Ring()
+            r2.create(level: e._level)
+            e.addProp(p: r2)
+        }
         
         let a = Amulet()
         a.create(level: e._level)
@@ -268,7 +309,7 @@ class GameScene: SKScene {
         e.addProp(p: WordlessBook())
         e.addProp(p: ThiefPocket())
         e.addProp(p: TearCluster())
-        e._spellsInuse = [ThunderArray(), BallLighting(), FireRain()]
+        e._spellsInuse = [SummonFlower()]
 //
         
 //        let gt = SealScroll()
@@ -285,6 +326,11 @@ class GameScene: SKScene {
 //        e._minionsCount = 1
 //        e._dungeonLevel = 99
 //
+        
+        let bow = Bow()
+        bow.create(level: e._level)
+        e.addProp(p: bow)
+        
         let t = TheWitchsTear()
         t._count = 1000
         e._props.append(t)
@@ -308,11 +354,11 @@ class GameScene: SKScene {
         
         e.addProp(p: LevelUpScroll())
 //        e._spellsInuse = [BallLighting(), Refresh()]
-        let rs = [e] + e._minions
-        for r in rs {
-//            r._extensions.spirit = 300
-//            r._spellsInuse = [FireRain(), Refresh()]
-        }
+//        let rs = [e] + e._minions
+//        for r in rs {
+////            r._extensions.spirit = 300
+////            r._spellsInuse = [FireRain(), Refresh()]
+//        }
         
     }
     
@@ -346,7 +392,7 @@ class GameScene: SKScene {
         str.append("handSkill:\(spell is HandSkill ? "true" : "false"),")
         str.append("bowSkill:\(spell is BowSkill ? "true" : "false"),")
         str.append("curse:\(spell is Curse ? "true" : "false"),")
-        str.append("summon:\(spell is Summon ? "true" : "false"),")
+        str.append("summon:\(spell is SummonSkill ? "true" : "false"),")
         str.append("close:\(spell.isClose ? "true" : "false")")
         str.append("},")
         debug(str)
@@ -357,14 +403,14 @@ class GameScene: SKScene {
         ai.create(armor: item)
         
         var spd = "攻速 "
-        var spell = ""
+//        var spell = ""
         if item is Sword {
             spd += "较快"
         } else if item is Dagger {
             spd += "很快"
         } else if item is Instrument {
             spd += "一般"
-            spell = "随机神之技"
+//            spell = "随机神之技"
         } else if item is Blunt {
             spd += "很慢"
         } else if item is Bow {
@@ -376,7 +422,7 @@ class GameScene: SKScene {
         }
         
         if item is MagicMark {
-            spell = "随机神之技"
+//            spell = "随机神之技"
         }
         
         var str = "{fullName:\"\(ai._nameText)\","

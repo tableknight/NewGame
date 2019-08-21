@@ -56,6 +56,10 @@ class WindAttack: Physical {
         }
     }
     
+    override func findTarget() {
+        findRandomTargetInLineFirst()
+    }
+    
     override func selectable() -> Bool {
         return _battle._curRole._unit.isClose()
         

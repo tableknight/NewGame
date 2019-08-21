@@ -13,7 +13,7 @@ class TearCluster: Item {
         usable = true
         usableInBattle = false
         _price = 1
-        _sellingPrice = 1
+        _storePrice = 1
         _name = "眼泪精华"
         _description = "一块大的眼泪晶体。可以获得若干个天使之泪"
         _quality = Quality.RARE

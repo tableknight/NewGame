@@ -37,12 +37,12 @@ class RoleList:UIPanel {
         addChild(_listBox)
         createCloseButton()
         _closeButton.xAxis = cellSize * 1.5
-        _closeButton.yAxis = cellSize * 3.15
+        _closeButton.yAxis = cellSize * 3.95
         _list = list
         showList()
     }
     override func createPanelbackground() {
-        _bg = createBackground(width: _standardWidth * 0.75, height: cellSize * 5)
+        _bg = createBackground(width: _standardWidth * 0.75, height: cellSize * 6.5)
         _bg.position = CGPoint(x: 0, y: 0)
         _bg.strokeColor = UIColor.white
         _bg.zPosition = self.zPosition + 1
@@ -50,7 +50,7 @@ class RoleList:UIPanel {
     }
     private func showList() {
         let startX = cellSize * 0.25 - cellSize * 3
-        let startY = cellSize * 2.125
+        let startY = cellSize * 3
         let width = cellSize * 3
         let height = cellSize * 1.5
         var i = 0

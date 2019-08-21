@@ -23,7 +23,6 @@ extension Array {
         return self[index]
     }
     
-    
 }
 extension UIPanel {
     override var cellSize:CGFloat {

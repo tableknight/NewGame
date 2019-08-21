@@ -91,7 +91,7 @@ class CenterCamping: StandScene {
             hb2.triggerEvent()
             return true
         }
-        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].index(of: cell) != nil{
+        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].firstIndex(of: cell) != nil{
             return true
         }
         return false
@@ -150,7 +150,10 @@ class CenterCamping: StandScene {
         addItem(x: 1, y: 2, item: House2(), width: 0, height: 0)
         addItem(x: 8, y: 8, item: House1(), width: 0, height: 0)
         addItem(x: 10, y: 2, item: MyHouse(), width:0, z: MyScene.MAP_LAYER_Z)
-        
+//        let r1 = UIRole()
+//        r1.create(roleNode: SKTexture(imageNamed: "Tanold").getNode(1, 3))
+//        addItem(x: 0, y: 10, item: r1)
+//        _mapMatrix[10][0] = CELL_ROLE
 //        addItem(x: 6, y: 6, item: SKTexture(imageNamed: "seller").getNode(1, 0))
 //        _mapMatrix[6][6] = CELL_BLOCK
 //        addItem(x: 0, y: 9, item: Stump())
@@ -377,6 +380,8 @@ class CenterCamping: StandScene {
         hb2._text = "铁匠铺"
         addItem(x: 11, y: 9, item: hb2)
         _mapMatrix[9][11] = CELL_BOARD
+        
+        
         
 //        addItem(x: 1, y: 10, item: House3(), width: 0, height: 0)
         

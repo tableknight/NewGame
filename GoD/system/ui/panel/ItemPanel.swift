@@ -63,7 +63,7 @@ class ItemPanel: UIPanel {
                         let ml = [_char] + _char._minions
                         rl._parentNode = self
                         self.isHidden = true
-                        rl.create(list: ml)
+                        rl.create(list: ml as! Array<Creature>)
                         rl.selectAction = {
                             if item._count > 0 {
                                 let unit = rl._lastSelected!._unit

@@ -49,26 +49,33 @@ class Prop:Core, IDisplay {
     var _level:CGFloat = 1
     var _img = SKTexture()
     var _price = 0
-    var _sellingPrice = 0
+    var _storePrice = 0
+    var _priceRate = 0.25
     var _type = ""
     var _count = 1
     var _quality = Quality.NORMAL
+    var _priceType = 0
+    var countless = true
     var initialized = false
     func create() {}
     func create(level:CGFloat) {}
     var sellingPrice:Int {
         set {
-            _sellingPrice = newValue
+            _storePrice = newValue
             _price = newValue / 2
         }
         get {
-            return _sellingPrice
+            return _storePrice
         }
     }
     var price:Int {
         set {
-            _price = newValue
-            _sellingPrice = newValue * 2
+            if _quality == Quality.SACRED {
+                _price = (newValue.toFloat() * 0.4).toInt()
+            } else {
+                _price = newValue
+            }
+            _storePrice = _price * 2
         }
         get {
             return _price

@@ -23,7 +23,7 @@ class ShadowCopy:Magical, BossOnly {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
+//        let b = _battle!
         let c = _battle._curRole
         c.actionCast {
             self.copyCast()

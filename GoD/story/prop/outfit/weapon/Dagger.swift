@@ -13,8 +13,9 @@ class Dagger: Weapon {
         _name = "匕首"
         _outfitName = "匕首"
         _attackSpeed = seed(min: 120, max: 150).toFloat() * 0.01
-        _selfAttrs = [ATTACK, AVOID]
+        _selfAttrs = [ATTACK, AVOID, INTELLECT]
         removeAttrId(id: AVOID)
+        removeAttrId(id: INTELLECT)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

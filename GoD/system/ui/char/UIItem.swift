@@ -186,9 +186,9 @@ class Gate:UIItem {
 //    }
     override func triggerEvent() {
         
-        let sc = Game.instance.curStage._curScene!
+//        let sc = Game.instance.curStage._curScene!
         let char = Game.instance.char!
-        var enimies = Array<Creature>()
+        let enimies = Array<Creature>()
         
         let enemyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
         for _ in 0...enemyCount {

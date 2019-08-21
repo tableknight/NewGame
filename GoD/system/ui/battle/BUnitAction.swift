@@ -9,8 +9,16 @@
 import SpriteKit
 extension BUnit {
     func actionAttack(completion:@escaping () -> Void) {
+        if _attackActing {
+//            completion()
+            return
+        }
+        _attackActing = true
         if _unit._weapon is Bow {
-            actionShoot(completion: completion)
+            actionShoot(completion: {
+                self._attackActing = false
+                completion()
+            })
             return
         }
         let range = _charSize * 0.5
@@ -26,6 +34,7 @@ extension BUnit {
         let go = SKAction.sequence([wait, move1, wait, move2])
         _select.run(go)
         _charNode.run(go, completion: {
+            self._attackActing = false
             completion()
         })
     }
@@ -80,8 +89,8 @@ extension BUnit {
         _acting = true
         if (isDefend || defend) && _battle._selectedSpell is Physical {
             actionDefead {
-                completion()
                 self._acting = false
+                completion()
             }
             return
         }
@@ -168,7 +177,12 @@ extension BUnit {
             }
         }
     }
+    
     func actionAvoid(completion:@escaping () -> Void) {
+        if _avoidActing {
+            return
+        }
+        _avoidActing = true
         let d = cellSize * 0.3
         var v = CGVector(dx: 0, dy: -d)
         var v2 = CGVector(dx: 0, dy: d)
@@ -181,7 +195,10 @@ extension BUnit {
         let move2 = SKAction.move(by: v2, duration: 0)
         let wait = SKAction.wait(forDuration: TimeInterval(0.8))
         let go = SKAction.sequence([move1, wait, move2])
-        _charNode.run(go, completion: completion)
+        _charNode.run(go, completion: {
+            self._avoidActing = false
+            completion()
+        })
         _select.run(go)
     }
     func actionDead(completion:@escaping () -> Void) {

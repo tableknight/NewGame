@@ -263,13 +263,20 @@ extension BUnit {
         return _unit._extensions.health + _extensions.health
     }
     func getRevenge() -> CGFloat {
-        let val = _unit._revenge + _revenge
+        var val = _unit._revenge + _revenge
+        if hasSpell(spell: ChaosCore()) {
+            val += ChaosCore.VALUE
+        }
         return val + _revenge
     }
     func getLucky() -> CGFloat {
         var val = _unit._lucky
         if _unit is Character && _stage.hasTowerStatus(status: LuckyPower()) {
             val += 25
+        }
+        
+        if hasSpell(spell: ToughHeart()) {
+            val += ToughHeart.VALUE
         }
         
         return val

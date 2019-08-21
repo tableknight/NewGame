@@ -26,8 +26,8 @@ class SnowLanding2: SnowLanding {
     }
     private let CELL_ROLE = 151
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
-        if [CELL_BLOCK,CELL_ROLE].index(of: cell) != nil{
+//        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        if [CELL_BLOCK,CELL_ROLE].firstIndex(of: cell) != nil{
             return true
         }
         return false
@@ -39,7 +39,7 @@ class SnowLanding2: SnowLanding {
     override func create() {
         super.create()
         let ms = _mapSet!
-        let s = Game.instance.outside_a5.getCell(7, 5)
+//        let s = Game.instance.outside_a5.getCell(7, 5)
         let oa4 = Game.instance.outside_a4
         let ob = Game.instance.outside_b
         addGround(x: 2, y: 7.25, item: oa4.getNode(6, 14, 1, 2))

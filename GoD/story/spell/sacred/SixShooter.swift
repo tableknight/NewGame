@@ -16,11 +16,12 @@ class SixShooter: Physical, BowSkill {
     }
     override init() {
         super.init()
-        _name = "六连发"
+        _name = "乱射"
         _description = "进行六次快速射击，第一支箭造成攻击力100%的物理伤害，后续伤害每次递减18%"
         _rate = 1
         _quality = Quality.SACRED
         _cooldown = 2
+        autoCast = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
@@ -38,11 +39,12 @@ class SixShooter: Physical, BowSkill {
                         self._rate *= 0.82
                     }
                     let damage = self.physicalDamage(t)
+                    let crtl = self.beCritical
                     if !self.hadSpecialAction(t: t) {
                         if !self.hasMissed(target: t) {
                             t.actionAttacked {
                             }
-                            t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
+                            t.showValue(value: damage, criticalFromSpell: false, critical: crtl)
                         }
                     }
                 })

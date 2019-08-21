@@ -34,7 +34,7 @@ class MagicConvert: Magical {
         
         let c = _battle._curRole
         c.actionCast {
-            t.actionBuff {
+            t.mixed1(index: 16) {
                 completion()
             }
         }

@@ -78,7 +78,7 @@ class OutfitStore: InnerHouse {
                                     for i in 0...6 {
                                         let w = RandomWeapon()
                                         if i == 6 {
-                                            w._sellingPrice = 96
+                                            w._storePrice = 96
                                         }
                                         w.weaponId = i
                                         w._name = "\(l.getWeaponById(id: i)._name)?"
@@ -144,7 +144,7 @@ class OutfitStore: InnerHouse {
                                     for i in 0...3 {
                                         let a = RandomArmor()
                                         if i == 3 {
-                                            a._sellingPrice = 96
+                                            a._storePrice = 96
                                         }
                                         a.armorId = i
                                         a._name = "\(l.getArmorById(id: i)._name)?"

@@ -209,16 +209,21 @@ class MyScene: SKSpriteNode, IInitialize {
         })
     }
     internal var _goodsList = Array<Prop>()
-    internal var _whichItem = Array<Bool>()
-    internal var _mixedItemMoney = Array<Bool>()
+//    internal var _whichItem = Array<Bool>()
+//    internal var _mixedItemMoney = Array<Bool>()
     internal func deal() {
         let sp = SellingPanel()
         sp._goodsList = _goodsList
-        sp.showItemCount = true
-        sp._whichItem = _whichItem
-        sp.isMixedItems = true
-        sp._mixedItemMoney = _mixedItemMoney
+//        sp.showItemCount = true
+//        sp._whichItem = _whichItem
+//        sp.isMixedItems = true
+//        sp._mixedItemMoney = _mixedItemMoney
         sp.create()
+//        sp.buyAction
+//        sp.hasBuyAction = true
+//        sp.buyAction = {
+//            sp.createGoodsList()
+//        }
         Game.instance.curStage.showPanel(sp)
     }
     
@@ -233,10 +238,6 @@ class MyScene: SKSpriteNode, IInitialize {
             mon.defeatAction = {
                 this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
                 mon.removeFromParent()
-//                let wait = SKAction.fadeOut(withDuration: TimeInterval(1.5))
-//                mon.run(wait) {
-//                    mon.removeFromParent()
-//                }
             }
         }
     }
@@ -263,7 +264,7 @@ class MyScene: SKSpriteNode, IInitialize {
         }
     }
     func isPointValid(point:CGPoint) -> Bool {
-        if point.x < 0 || point.y < 0 || point.x > hSize || point.y > vSize {
+        if point.x < 0 || point.y < 0 || point.x > hSize || point.y >= vSize {
             return false
         }
         return true
@@ -320,26 +321,6 @@ class MyScene: SKSpriteNode, IInitialize {
         if nil != mask {
             mask?.removeFromParent()
         }
-    }
-    internal func getAcentPoints(point:CGPoint) -> Array<CGPoint> {
-        var points = Array<CGPoint>()
-        let northPoint = CGPoint(x: point.x, y: point.y - 1)
-        if isPointValid(point: northPoint) {
-            points.append(northPoint)
-        }
-        let southPoint = CGPoint(x: point.x, y: point.y + 1)
-        if isPointValid(point: southPoint) {
-            points.append(southPoint)
-        }
-        let westPoint = CGPoint(x: point.x - 1, y: point.y)
-        if isPointValid(point: westPoint) {
-            points.append(westPoint)
-        }
-        let eastPoint = CGPoint(x: point.x + 1, y: point.y)
-        if isPointValid(point: eastPoint) {
-            points.append(eastPoint)
-        }
-        return points
     }
     internal func createGround() {
 //        let map = SKSpriteNode(imageNamed: "meadow")

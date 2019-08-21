@@ -211,6 +211,7 @@ class HolySacrifice: Physical {
                                 completion()
                             }
                         }
+                        t.attacked1()
                     }
                 }
             }

@@ -142,7 +142,12 @@ class PropIcon: Icon {
     }
     var count:Int {
         set {
-            if newValue > 1 {
+            var showCount = false
+            if displayItemType is Item {
+                let item = displayItemType as! Item
+                showCount = !item.countless
+            }
+            if newValue > 1 || showCount {
                 _label.removeFromParent()
                 addChild(_label)
                 _label.text = "\(newValue)"

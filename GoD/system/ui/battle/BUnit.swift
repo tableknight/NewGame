@@ -48,6 +48,8 @@ class BUnit: SKSpriteNode {
     var isDefend = false
     var _speed: CGFloat = 0
     var _acting = false
+    var _avoidActing = false
+    var _attackActing = false
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _stage = Game.instance.curStage
@@ -209,6 +211,15 @@ class BUnit: SKSpriteNode {
         if hasSpell(spell: TruePower()) {
             strengthChange(value: Game.instance.char._mains.strength * 0.1)
         }
+        if hasSpell(spell: Powerful()) {
+            strengthChange(value: Powerful.VALUE)
+        }
+        if hasSpell(spell: SkyAndLand()) {
+            intellectChange(value: SkyAndLand.VALUE)
+        }
+        if hasSpell(spell: SharpStone()) {
+            agilityChange(value: SharpStone.VALUE)
+        }
         
     }
     func setImg(img:SKTexture) {
@@ -297,6 +308,14 @@ class BUnit: SKSpriteNode {
         let move2 = SKAction.setTexture(_charTexture.getCell(2, y))
         let go = SKAction.sequence([move1, _wait, move2, _wait, move1, _wait, move2, _wait])
         _charNode.run(go)
+    }
+    
+    func poisoning() {
+        let status = Status()
+        status._type = Status.NERVOUS_POISON
+        status._labelText = "P"
+        status._timeleft = 3
+        addStatus(status: status)
     }
     
     func burning() {
@@ -408,7 +427,7 @@ class BUnit: SKSpriteNode {
             }
             return
         }
-        let index = _battle._roleAll.index(of: self)
+        let index = _battle._roleAll.firstIndex(of: self)
         if nil != index {
             _battle._roleAll.remove(at: index!)
         }
@@ -459,48 +478,68 @@ class BUnit: SKSpriteNode {
     //3 fire
     //4 water
     //5 thunder
-    func showValue(value:CGFloat, criticalFromSpell:Bool = true, critical:Bool = false, damageType:Int = 1, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
+    func showValue(value:CGFloat, source:BUnit? = nil, criticalFromSpell:Bool = true, critical:Bool = false, damageType:Int = 1, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
+        let s = (source == nil ? _battle._curRole : source)!
+        if value < 0 && self._unit._race == EvilType.RISEN {
+            if s.ifWeaponIs(TheExorcist()) && seed() < 15 {
+                self.showText(text: "EXORCISED") {
+                    self.actionDead {
+                        self.die()
+                        completion()
+                    }
+                }
+                return
+            }
+        }
+        if value < 0 && ifShieldIs(EvilExpel()) && seed() < 15 {
+            showText(text: "BLOCK") {
+                completion()
+                return
+            }
+        }
+        if value > 0 && hasStatus(type: Status.SOUL_SLAY) {
+            showText(text: "SLAY") {
+                completion()
+            }
+            return
+        }
+        if value < 0 && ifShieldIs(Accident()) && damageType == 2 {
+            var us = Array<BUnit>()
+            for u in _battle._playerPart {
+                if !(u._unit is Character) {
+                    us.append(u)
+                }
+            }
+            if us.count > 0 {
+                self.showText(text: "SHIFT") {
+                    let one = us.one()
+                    one.showValue(value: value) {
+                        completion()
+                    }
+                }
+                return
+            }
+        }
+        
+        if value < 0 && _unit._race == EvilType.RISEN && s.ifWeaponIs(HolyPower()) {
+            value *= 2
+        }
+        if value > 0 {
+            if ifRingIs(RingOfDeath()) {
+                value *= 1.5
+            }
+            if ifSoulIs(HeartOfTarrasque()) {
+                value *= 2
+            }
+        }
         if hasStatus(type: Status.PETRIFY) && value < 0 {
             value = seed(min: 0, max: 6).toFloat() * 0.01 * value
         }
-        if sheildEvilExpel(value: value) {
-            showText(text: "BLOCK") {
-                completion()
-            }
-            return
-        }
-        if shieldAccident(value: value, completion: {}) {
-            showText(text: "SHIFT")
-            var targets = Array<BUnit>()
-            for u in _battle._leftRoles {
-                if !(u._unit is Character) {
-                    targets.append(u)
-                }
-            }
-            let t = targets.one()
-//            t.hpChange(value: value)
-            t.showValue(value: value) {
-                completion()
-            }
-            return
-        }
+
         var beCritical = _battle._selectedSpell.beCritical
         if value > 0 || !criticalFromSpell || _battle._selectedSpell is Magical {
             beCritical = critical
-        }
-//        if isCritical {
-//            showText(text: "Critical", color: UIColor.red) {
-//                completion()
-//            }
-//            return
-//        }
-        
-        if amuletJadeHeart() {
-            value *= 0.85
-        }
-        if markOfHeaven(value: value) {
-            value *= 0.85
         }
         
         if hasStatus(type: Status.PROTECTION_FROM_ICE) {
@@ -521,27 +560,20 @@ class BUnit: SKSpriteNode {
             _battle.spellDecision[0] = false
         }
         
+        
         let valueText = addLabel()
 //        valueText.isHidden = false
         valueText.position.y = _charSize * (playerPart ? 0.35 : 0.55)
         var color = textColor
-        var text = "\(value.toInt())";
+        var text = "\(value.toInt())"
         if value > 0 {
             color = DamageColor.HEAL
             text = "+\(value.toInt())"
         }
         if beCritical {
-            text = "Ouch!"
+//            text = "Ouch!"
+            text = "\(value.toInt())!"
 //            valueText.fontSize *= 2
-        }
-        if swordExorcist(value: value) {
-            text = "KILL"
-            color = DamageColor.NORMAL
-            _unit._extensions.hp = 0
-        }
-        if amuletMadelOfHero(value: value) {
-            color = DamageColor.NORMAL
-            text = "STAND"
         }
         valueText.text = text
         valueText.fontColor = color
@@ -553,22 +585,31 @@ class BUnit: SKSpriteNode {
         valueText.run(go) {
             valueText.removeFromParent()
         }
+        if hasStatus(type: "_mess_ghost") {
+            let s = _battle._selectedSpell
+            if s is Magical && !s.isFire && !s.isWater && !s.isThunder {
+                setTimeout(delay: 0.5, completion: {
+                    if !self.isDead() {
+                        self.showValuePure(value: value)
+                        self.hpChange(value: value)
+                    }
+                })
+            }
+        }
         setTimeout(delay: 0.5) {
-            if this.isDead() {
-                this.removeFromBattle()
-                this.actionDead {
-                    this.removeFromParent()
+            if self.isDead() {
+                self.actionDead {
+                    self.die()
                     completion()
-                    //                    if !this._battle.hasFinished() {
-                    //                    }
                 }
             } else {
-                completion()
-                if this.shieldFrancisFace() {
-                    if this.seed() < 10 {
-                        this.showText(text: "CRITICAL +5")
-                        this._extensions.critical += 5
+                
+                if self.ifShieldIs(FrancisFace()) && self.seed() < 10 {
+                    this.showText(text: "CRITICAL +5") {
+                        completion()
                     }
+                    this._extensions.critical += 5
+                    return
                 }
                 if this.markMightOfOaks() {
                     if this.seed() < 10 {
@@ -579,6 +620,7 @@ class BUnit: SKSpriteNode {
                         this.addStatus(status: s)
                     }
                 }
+                completion()
             }
         }
         
@@ -626,7 +668,7 @@ class BUnit: SKSpriteNode {
         valueText.fontColor = color
         let v = CGVector(dx: 0, dy: _charSize * 0.5)
         let move = SKAction.move(by: v, duration: TimeInterval(0.25))
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
+        let wait = SKAction.wait(forDuration: TimeInterval(0.5))
         let go = SKAction.sequence([move, wait])
 //        let this = self
         valueText.run(go) {
@@ -694,25 +736,7 @@ class BUnit: SKSpriteNode {
         return false
     }
     func hpChange(value:CGFloat) {
-        if sheildEvilExpel(value: value) {
-            return
-        }
-        if shieldAccident(value: value, completion: {}) {
-            return
-        }
-        if isSwordExorcist {
-            return
-        }
-        if amuletMadelOfHero(value: value) {
-            return
-        }
-        var hp = value
-        if amuletJadeHeart() {
-            hp *= 0.85
-        }
-        if markOfHeaven(value: value) {
-            hp *= 0.85
-        }
+        let hp = value
         _unit._extensions.hp += hp
         if _unit._extensions.hp > _unit._extensions.health {
             _unit._extensions.hp = _unit._extensions.health
@@ -866,6 +890,47 @@ class BUnit: SKSpriteNode {
             let c = _unit as! Character
             if c._soulStone != nil {
                 if type(of: c._soulStone) == type(of: soul) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func ifAmuletIs(_ amulet: Amulet) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._amulet != nil {
+                if type(of: c._amulet) == type(of: amulet) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func ifWeaponIs(_ weapon: Weapon) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._weapon != nil {
+                if type(of: c._weapon) == type(of: weapon) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    func ifShieldIs(_ shield: Shield) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._shield != nil {
+                if type(of: c._shield) == type(of: shield) {
                     return true
                 }
             }

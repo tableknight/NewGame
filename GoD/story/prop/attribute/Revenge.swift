@@ -27,6 +27,6 @@ class Revenge: Attribute {
         unit._revenge -= _value
     }
     override func create(level: CGFloat) {
-        _value = seed(min: 1, max: 11).toFloat()
+        lowLevelValue(level: level)
     }
 }

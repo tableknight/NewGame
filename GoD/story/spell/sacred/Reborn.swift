@@ -20,20 +20,14 @@ class Reborn: Passive {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         _rate = 0.1
-        if c._unit is Character {
-            let char = c._unit as! Character
-            if char._soulStone is HeartOfTarrasque {
-                _rate = 0.2
-            }
+        if c.ifSoulIs(HeartOfTarrasque()) {
+            _rate = 0.2
         }
+
         let h = c.getHealth() * _rate
-//        c.hpChange(value: h)
         c.showValue(value: h) {
             completion()
         }
-//        setTimeout(delay: 1, completion: {
-//        })
-    
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

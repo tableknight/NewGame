@@ -156,6 +156,7 @@ class MagicHouse: InnerHouse {
         var list = Array<SpellBook>()
         for _ in 0...9 {
             let b = SpellBook()
+            b._priceType = 1
             let s = self.seed(max: 3)
             var spell = l.getRandomNormalSpell()
             if 1 == s {

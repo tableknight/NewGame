@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class HighLevelSummon:Magical {
+class HighLevelSummon:Magical, SummonSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

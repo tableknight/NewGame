@@ -8,6 +8,8 @@
 
 import SpriteKit
 class GraveRobber:Boss {
+    static let LEVEL:CGFloat = 47
+    static let IMG = "GraveRobber"
     override init() {
         super.init()
         _name = "盗墓者"

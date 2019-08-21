@@ -5,7 +5,7 @@
 //  Created by kai chen on 2019/5/5.
 //  Copyright © 2019 Chen. All rights reserved.
 //
-
+import SpriteKit
 class LeeAttack:Physical {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -28,11 +28,14 @@ class LeeAttack:Physical {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
                     t.actionAttacked {
-                        t.showValue(value: damage) {
-                            completion()
-                        }
+                        t.showValue(value: damage)
+                        setTimeout(delay: 1.25, completion: completion)
                         setTimeout(delay: 1, completion: {
-                            c.showValue(value: abs(damage * 0.5))
+                            var rate:CGFloat = 0.5
+                            if c.ifAmuletIs(FangOfVampire()) {
+                                rate = 1
+                            }
+                            c.showValue(value: abs(damage * rate))
                         })
                     }
                     t.attacked1()

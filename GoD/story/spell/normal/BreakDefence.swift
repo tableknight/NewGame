@@ -17,7 +17,7 @@ class BreakDefence:Physical {
     override init() {
         super.init()
         _name = "崩击"
-        _description = "对防御目标造成100%-200%攻击力的物理伤害"
+        _description = "破防，并对其造成100%-200%攻击力的物理伤害，需要近战"
         _quality = Quality.NORMAL
         _cooldown = 0
     }
@@ -26,9 +26,10 @@ class BreakDefence:Physical {
         _rate = seed(min: 100, max: 200).toFloat() * 0.01
         _battle._curRole.actionAttack {
             if t.isDefend {
+                t.isDefend = false
                 let damage = self.physicalDamage(t)
                 t.isDefend = false
-                if !self.hasPhysicalEvent(t: t, completion: completion) {
+                if !self.hadSpecialAction(t: t, completion: completion) {
                     t.actionAttacked {
                         t.showValue(value: damage) {
                             completion()
@@ -42,6 +43,10 @@ class BreakDefence:Physical {
                 }
             }
         }
+    }
+    
+    override func selectable() -> Bool {
+        return _battle._curRole._unit.isClose()
     }
     
 }

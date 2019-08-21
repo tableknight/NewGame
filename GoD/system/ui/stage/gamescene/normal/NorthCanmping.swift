@@ -23,7 +23,7 @@ class NorthCamping: StandScene {
         createMap()
     }
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+//        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if CELL_ITEM == cell {
             return true
         }

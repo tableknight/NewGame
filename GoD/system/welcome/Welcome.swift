@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Welcome: UIPanel {
+class Welcome: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         if _selectRoleButton.contains(touchPoint!) {
@@ -26,10 +26,17 @@ class Welcome: UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func create() {
+    func create() {
         _selectRoleButton.zPosition = self.zPosition + 2
         _selectRoleButton.xAxis = -cellSize * 0.75
+        _selectRoleButton.yAxis = -cellSize * 6
         _selectRoleButton.text = "选择角色"
+        let bounds = UIScreen.main.bounds.size
+        let rate:CGFloat = 2
+        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "Fountain"))
+        bg.size = CGSize(width: bounds.height * 1.3 * rate, height: bounds.height * rate)
+        bg.position.x = -bounds.width
+        addChild(bg)
         addChild(_selectRoleButton)
     }
     internal var _selectRoleButton = Button()

@@ -40,7 +40,7 @@ class SpiritIntervene: Magical {
     
     override func findTarget() {
         var all = _battle._playerPart + _battle._enemyPart
-        all.remove(at: all.index(of: _battle._curRole)!)
+        all.remove(at: all.firstIndex(of: _battle._curRole)!)
         _battle._selectedTarget = all.one()
     }
     

@@ -11,11 +11,13 @@ class Outfit:Prop {
     private enum CodingKeys: String, CodingKey {
         case _attrs
         case _attrsClass
+        case _outfitName
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let values = try decoder.container(keyedBy: CodingKeys.self)
         _attrs = try values.decode(Array.self, forKey: ._attrs)
+        _outfitName = try values.decode(String.self, forKey: ._outfitName)
         let cls:Array<String> = try values.decode(Array.self, forKey: ._attrsClass)
         let allAttrs = [SpiritBase(), AttackAttributeBase(), Agility(),Chaos(),Stamina(),Defence(),Break(),Rhythm(),Health(),WaterResistance(),FireResistance(),
                         ThunderResistance(),Spirit(),ThunderPower(),Strength(),Intellect(),Revenge(),AttackAttribute(),
@@ -26,7 +28,7 @@ class Outfit:Prop {
 //        }
         if cls.count > 0 {
             for i in 0...cls.count - 1 {
-                let tp = NSClassFromString(cls[i])
+                let tp:AnyClass? = NSClassFromString(cls[i])
                 for a in allAttrs {
                     if tp == type(of: a) {
                         a._value = _attrs[i]._value
@@ -42,6 +44,7 @@ class Outfit:Prop {
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_attrs, forKey: ._attrs)
+        try container.encode(_outfitName, forKey: ._outfitName)
         var classNames = Array<String>()
         for i in _attrs {
             classNames.append(NSStringFromClass(type(of: i)))
@@ -111,7 +114,7 @@ class Outfit:Prop {
         let _min = _level + 1
         let _max = _level + 3
         _price = seed(min: _min.toInt(), max: _max.toInt()) * _quality
-        _sellingPrice = _price * 4
+        _storePrice = _price * 4
     }
     
     func createQuality() {
@@ -131,7 +134,7 @@ class Outfit:Prop {
     func createSelfAttrs() {
         for id in _selfAttrs {
             let a = getAttrById(id: id)
-            let index = _all.index(of: id)
+            let index = _all.firstIndex(of: id)
             if nil != index {
                 _all.remove(at: index!)
             }
@@ -259,7 +262,7 @@ class Outfit:Prop {
         }
     }
     internal func removeAttrId(id:Int) {
-        let index = _all.index(of: id)
+        let index = _all.firstIndex(of: id)
         if nil != index {
             _all.remove(at: index!)
         }

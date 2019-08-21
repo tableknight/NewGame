@@ -44,8 +44,8 @@ class LazesPedicureKnife:Dagger {
     }
     override func create() {
         createSelfAttrs()
+        createAttr(attrId: AGILITY, value: 10, remove: true)
         createAttr(attrId: ACCURACY, value: 15, remove: true)
-        createAttr(attrId: AVOID, value: 15, remove: true)
         createAttr(attrId: LUCKY, value: 15, remove: true)
         _attrCount = 2
         createAttrs()

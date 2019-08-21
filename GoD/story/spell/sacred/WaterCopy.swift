@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class WaterCopy:Magical {
+class WaterCopy:Magical, SummonSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

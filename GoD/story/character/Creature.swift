@@ -94,14 +94,14 @@ class Creature: Unit {
     var hasAction = true
     func beMore() -> Bool {
         let sed = seed(max: 100)
-        if _quality >= Int(sed / 25) {
+        if sed < _quality * 20 {
             return true
         }
         
         return false
     }
     func extraProperty(value: CGFloat) -> CGFloat {
-        let size = seed(max: Int(value * 10))
+        let size = seed(min: Int(value.toInt() * 2 * _quality), max: Int(value * 20))
         let v = CGFloat(size) * 0.01
         if beMore() {
             return v
@@ -111,7 +111,7 @@ class Creature: Unit {
     }
     func createQuality() {
         let l = _level.toInt()
-        let sed = seed(to: 100 + l / 5)
+        let sed = seed(to: 100 + l / 2)
         if sed < 50 {
             _quality = Quality.NORMAL
         } else if sed < 80 {
@@ -148,8 +148,13 @@ class Creature: Unit {
             _revenge = seed(to: 15).toFloat() + 5
             _break = seed(to: 15).toFloat() + 5
         }
-        if _level > 90 {
-            _spellsInuse.append([MagicConvert(), AttackReturnBack(), MagicReflect(), TurnAttack()].one())
+        if _spellCount > _spellsInuse.count && d4() {
+            let l = Loot()
+            let spells = [l.getRandomNormalSpell(), l.getRandomGoodSpell(), l.getRandomRareSpell(), l.getRandomSacredSpell()]
+            let spell = spells.one()
+            if !(spell is BowSkill) && !(spell is HandSkill) {
+                _spellsInuse.append(spell)
+            }
         }
     }
     func spell12() {

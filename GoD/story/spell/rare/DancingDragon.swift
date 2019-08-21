@@ -19,10 +19,11 @@ class DancingDragon: Physical {
         _name = "乱舞"
         _description = "对目标造成2-5次攻击，每次造成攻击力35%的物理伤害"
         _rate = 0.35
-        _cooldown = 1
+        _cooldown = 0
         _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
+        hasRevenge = false
         let t = _battle._selectedTarget!
         var max = 3
         if _battle._curRole._unit._weapon is IberisHand {
@@ -49,7 +50,14 @@ class DancingDragon: Physical {
                     })
                 }
             }
-            setTimeout(delay: 1.5 + times.toFloat() * 0.25, completion: completion)
+            setTimeout(delay: 1.5 + times.toFloat() * 0.25, completion: {
+//                debug("revenge \(self.hasRevenge)")
+                if !self.hasRevenge {
+                    completion()
+                } else {
+                    setTimeout(delay: 2.25, completion: completion)
+                }
+            })
         }
     }
 }
