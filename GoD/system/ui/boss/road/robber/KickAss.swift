@@ -32,7 +32,7 @@ class KickAss:Physical {
                         completion()
                     }
                 }
-                t.attacked1()
+                t.blow()
             }
         }
     }

@@ -29,7 +29,7 @@ class BurningAll: Magical, Curse {
         c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t) {
-                    t.actionDebuff {
+                    t.light3() {
                         t.burning()
                     }
                 }

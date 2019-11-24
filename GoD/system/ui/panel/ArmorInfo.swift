@@ -121,6 +121,9 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         
         if armor._attrs.count > 0 {
             for i in 0...armor._attrs.count - 1 {
+                if armor._attrs[i]._hidden {
+                    continue
+                }
                 let label = Label()
                 label.fontSize = name.fontSize * 0.7
                 //                label.fontName = ""
@@ -162,14 +165,23 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             _displayHeight += des.fontSize + gap
             addChild(des)
             _desText = des.text!
-            if _desText.count.toFloat() * des.fontSize > width {
-                _displayWidth = _desText.count.toFloat() * des.fontSize + 10
+            let desWidth = _desText.count.toFloat() * 20
+            if desWidth > width {
+                _displayWidth = desWidth + 10
             }
-            
-//            let desWidth = 100 + (armor._description.count * 18).toFloat()
-//            if desWidth > width {
-//                width = desWidth
-//            }
+        }
+        
+        if armor._unique {
+            let spellName = Label()
+            spellName.align = "left"
+            spellName.position.x = startX
+            spellName.position.y = lastY - gap
+            spellName.fontColor = QualityColor.getColor(Quality.RARE)
+            spellName.fontSize = 18
+            spellName.text = "装备唯一"
+            lastY = lastY - gap - 18
+            _displayHeight += 30
+            addChild(spellName)
         }
         
         if armor is Instrument {

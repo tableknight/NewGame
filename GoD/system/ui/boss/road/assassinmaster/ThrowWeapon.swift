@@ -28,6 +28,7 @@ class ThrowWeapon: Physical, BossOnly {
                 t.actionAttacked {
                     t.showValue(value: damage)
                 }
+                t.hit2()
                 let ts = self.getUnitBehindTarget(seat: t._unit._seat)
                 let t2 = b.getUnitBySeat(seat: ts)
                 if nil != t2 {
@@ -36,6 +37,7 @@ class ThrowWeapon: Physical, BossOnly {
                     if !self.hasPhysicalEvent(t: t2!) {
                         t2!.showValue(value: d2)
                     }
+                    t2?.hit2()
                 }
             }
             setTimeout(delay: 2.1, completion: completion)

@@ -8,6 +8,7 @@
 
 import SpriteKit
 class SummonUnit: Creature {
+    static let POWERUP_RATE:CGFloat = 1.5
     override init() {
         super.init()
         _spellsInuse = [BossAttack()]

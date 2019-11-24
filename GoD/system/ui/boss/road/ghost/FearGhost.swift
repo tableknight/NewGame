@@ -13,19 +13,23 @@ class FearGhost:Boss {
     override init() {
         super.init()
         _name = "恐怖镜像"
-        _img = SKTexture(imageNamed: "FearGhost")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 1.8
         _growth.strength = 1
         _growth.agility = 2.7
         _growth.intellect = 2.8
+        _level = FearGhost.LEVEL
+        _race = EvilType.RISEN
+        _img = SKTexture(imageNamed: "FearGhost")
+        _imgUrl = "FearGhost"
+        _spellsInuse = [DarkFall(), MessGhost(), SoulReaping(), SoulLash(), LifeDraw(), SoulSlay()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
         _extensions.mind = 100
-        _spellsInuse = [DarkFall(), MessGhost(), SoulReaping(), SoulLash(), LifeDraw(), SoulSlay()]
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

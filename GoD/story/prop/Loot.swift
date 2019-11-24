@@ -107,25 +107,44 @@ class Loot: Core {
 //        }
 //        externalLootAction()
 //    }
+    func lootInBossRoad(level:CGFloat) {
+        var chance = seed().toFloat()
+        let lucky = _char._lucky * 0.01 + 1
+        if chance < 6 * lucky  {
+            _props.append(GiantPotion())
+        }
+        chance = seed().toFloat()
+        if chance < 3 * lucky {
+            _props.append(PsychicScroll())
+        }
+        chance = seed().toFloat()
+        if chance < 12 * lucky {
+            _props.append(GodTownScroll())
+        }
+        chance = seed().toFloat()
+        if chance < 12 * lucky {
+            _props.append(DeathTownScroll())
+        }
+    }
     func loot(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 20 * lucky  {
+        if chance < 15 * lucky  {
             let a = lootArmor(level: level)
             _props.append(a)
         }
         chance = seed().toFloat()
-        if chance < 20 * lucky {
+        if chance < 15 * lucky {
             let w = lootWeapon(level: level)
             _props.append(w)
         }
         chance = seed().toFloat()
-        if chance < 50 * lucky {
+        if chance < 35 * lucky {
             let item = getItem()
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 3 * lucky {
+        if chance < 4 * lucky {
             let item = getSpellBook()
             _props.append(item)
         }
@@ -145,13 +164,21 @@ class Loot: Core {
 //
 //    }
     
-    func getExp(selfLevel:CGFloat, enemyLevel:CGFloat) -> CGFloat {
+    func getExp(selfUnit:BUnit, enemyLevel:CGFloat) -> CGFloat {
+        let selfLevel = selfUnit._unit._level
         if selfLevel - enemyLevel > 5 {
           return 1
         }
         let lRate = 1 + (enemyLevel - selfLevel) * 0.1
         let range = seed(min: 80, max: 121).toFloat() * 0.01
-        return (100 + enemyLevel * 2.5) * lRate * range
+        var val = (100 + enemyLevel * 2.5) * lRate * range
+        if selfUnit.ringIs(RingFromElder.EFFECTION) {
+            val *= 1.25
+        }
+        if selfUnit.hasSpell(spell: VeryEcperienced()) {
+            val *= 1.5
+        }
+        return val
     }
     var _normalSpellArray = [0,1,2,3,4,5,6,7,8,9]
     
@@ -214,7 +241,7 @@ class Loot: Core {
     func getRandomSacredSpell() -> Spell {
         return getSacredSpell(id: seed(to: sacredSpellCount))
     }
-    let normalSpellCount = 20
+    let normalSpellCount = 22
     func getNormalSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -257,12 +284,16 @@ class Loot: Core {
             return Powerful()
         case 19:
             return ChaosCore()
+        case 20:
+            return PoisonCurse()
+        case 21:
+            return ColdWind()
         default:
             return Cruel()
         }
     }
     var _goodSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11]
-    let goodSpellCount = 25
+    let goodSpellCount = 26
     func getGoodSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -315,6 +346,8 @@ class Loot: Core {
             return ElementDestory()
         case 24:
             return SetTimeBack()
+        case 25:
+            return AsShadow()
         default:
             return BloodThirsty()
         }
@@ -389,8 +422,7 @@ class Loot: Core {
             return Lighting()
         }
     }
-    var _sacredSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-    let sacredSpellCount = 34
+    let sacredSpellCount = 35
     func getSacredSpell(id:Int) -> Spell {
         switch id {
         case 0:
@@ -461,6 +493,8 @@ class Loot: Core {
             return SixShooter()
         case 33:
             return Zealot()
+        case 34:
+            return VeryEcperienced()
         default:
             return VampireBlood()
         }
@@ -472,6 +506,8 @@ class Loot: Core {
         list += [2,2,2]
         list += [3,3]
         list += [4]
+        list += [5]
+        list += [6]
         return getItemByid(id: list.one())
     }
     var _maxItemNumber = 11
@@ -594,7 +630,7 @@ class Loot: Core {
             return TrueLie()
         }
     }
-    var _sacredRings = [1,2,3,4,5,6,7]
+    var _sacredRings = [1,2,3,4,5,6,7,8,9,10]
     func getSacredRing(id:Int) -> Ring {
         switch id {
         case 1:
@@ -611,6 +647,12 @@ class Loot: Core {
             return DellarsGoldenRing()
         case 7:
             return LuckyRing()
+        case 8:
+            return RingFromElder()
+        case 9:
+            return RingOfReborn()
+        case 10:
+            return FireCore()
         default:
             return LuckyRing()
         }
@@ -621,20 +663,32 @@ class Loot: Core {
         case 1:
             return HeartOfSwamp()
         case 2:
-            return PandoraHearts()
+            return PandoraHeart()
         case 3:
             return HeartOfTarrasque()
         default:
             return HeartOfSwamp()
         }
     }
-    var _sacredInstruments = [1,2]
+    var _sacredInstruments = [1,2,3,4,5,6,7,8]
     func getSacredInstrument(id:Int) -> Instrument {
         switch id {
         case 1:
             return TheMonatNotes()
         case 2:
             return NoPants()
+        case 3:
+            return CreationMatrix()
+        case 4:
+            return TheSurvive()
+        case 5:
+            return TheDeath()
+        case 6:
+            return TheSurpass()
+        case 7:
+            return TheFear()
+        case 8:
+            return TheAbandon()
         default:
             return TheMonatNotes()
         }
@@ -667,6 +721,8 @@ class Loot: Core {
             return HolyPower()
         case 5:
             return IdyllssHand()
+        case 6:
+            return BansMechanArm()
         default:
             return IberisThignbone()
         }
@@ -692,7 +748,7 @@ class Loot: Core {
             return PuppetMark()
         }
     }
-    var _sacredBows = [1,2,3,4]
+    var _sacredBows = [1,2,3,4,5,6]
     func getSacredBow(id:Int) -> Bow {
         switch id {
         case 1:
@@ -703,8 +759,29 @@ class Loot: Core {
             return Skylark()
         case 4:
             return SoundOfWind()
+        case 5:
+            return Aonena()
+        case 6:
+            return FollowOn()
         default:
             return Hawkeye()
+        }
+    }
+    var _sacredFists = [1,2,3,4,5]
+    func getSacredFist(id:Int) -> Fist {
+        switch id {
+        case 1:
+            return FingerBone()
+        case 2:
+            return LiosHold()
+        case 3:
+            return DragonClaw()
+        case 4:
+            return NilSeal()
+        case 5:
+            return DeepCold()
+        default:
+            return FingerBone()
         }
     }
     var _sacredEarrings = [1,2,3,4]
@@ -748,6 +825,8 @@ class Loot: Core {
             return getSacredBow(id:_sacredBows.one())
         case 12:
             return getSacredEarring(id:_sacredEarrings.one())
+        case 13:
+            return getSacredFist(id: _sacredFists.one())
         default:
             return getSacredSword(id:_sacredSwords.one())
         }

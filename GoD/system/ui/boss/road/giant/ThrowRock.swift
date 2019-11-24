@@ -33,6 +33,7 @@ class ThrowRock: Magical, BossOnly {
                         completion()
                     }
                 }
+                t.hit2()
             }
         }
     }

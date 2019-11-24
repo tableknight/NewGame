@@ -8,17 +8,23 @@
 
 import SpriteKit
 class Sumahl:Boss {
+    static let LEVEL:CGFloat = 64
     override init() {
         super.init()
         _name = "苏玛尔"
-        _img = SKTexture(imageNamed: "Sumahl")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 3.5
         _growth.strength = 1.5
         _growth.agility = 2.8
         _growth.intellect = 3.5
+        _race = EvilType.ANGEL
+        _level = Sumahl.LEVEL
+        _img = SKTexture(imageNamed: "Sumahl")
+        _imgUrl = "Sumahl"
+        _spellsInuse = [MindIntervene(), HealAll(), SilenceAll()]
+    }
+    override func create(level: CGFloat) {
+        
         levelTo(level: level)
         _extensions.health *= 3
         _extensions.hp = _extensions.health
@@ -35,8 +41,8 @@ class Sumahl:Boss {
 class SumahlServant1:BossMinion {
     override init() {
         super.init()
-        _name = "蜜雪"
-        _img = SKTexture(imageNamed: "Misheal")
+        _name = "溶露"
+        _img = SKTexture(imageNamed: "anki")
     }
     override func create(level: CGFloat) {
         _quality = Quality.NORMAL

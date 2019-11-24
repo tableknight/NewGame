@@ -14,19 +14,19 @@ class IberisBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func createAI() {
-        if _curRole._unit is Boss {
-            _selectedSpell = _curRole._unit._spellsInuse.one()
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
-    }
+//    override func createAI() {
+//        if _curRole._unit is Boss {
+//            _selectedSpell = _curRole._unit._spellsInuse.one()
+//            _selectedSpell._battle = self
+//            _selectedSpell.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
+//    }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 50
+        let level:CGFloat = Iberis.LEVEL
         var es = Array<Creature>()
         
         let t = Iberis()
@@ -84,9 +84,53 @@ class IberisBattle: BossBattle {
             completion()
         }
     }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 35 {
+            let i = IberisHand()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = DeepCold()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = TrueLie()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = FireMark()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = MoltenFire()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = LavaCrystal()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Iberis.LEVEL)
+        return list + l.getList()
+    }
 }
 
-class FlameAttack: Physical {
+class FlameAttack: Physical, CloseSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -95,11 +139,11 @@ class FlameAttack: Physical {
     }
     override init() {
         super.init()
-        _name = "烈焰轰击"
+        _name = "炙炎暴击"
         isFire = true
-        _description = "对目标造成攻击60%的火焰伤害，点燃目标"
+        _description = "对目标造成攻击60%的火焰伤害，点燃目标，如果目标已被点燃，则造成双倍攻击"
         _rate = 0.6
-        _cooldown = 1
+        _cooldown = 3
         _quality = Quality.GOOD
     }
     override func cast(completion: @escaping () -> Void) {
@@ -108,19 +152,28 @@ class FlameAttack: Physical {
 //        if t.hasStatus(type: Status.BURNING) {
 //            _rate = 0.8
 //        }
+        if t.hasStatus(type: Status.BURNING) {
+            _rate = 1.2
+        }
+        let damage = self.fireDamage(t)
         c.actionAttack {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
-                    let damage = self.fireDamage(t)
                     t.actionAttacked {
                         t.showValue(value: damage) {
                             completion()
                         }
-                        t.burning()
+                        if !t.hasStatus(type: Status.BURNING) {
+                            t.burning()
+                        }
                     }
                 }
             }
         }
+    }
+    
+    override func selectable() -> Bool {
+        return _battle._curRole._unit.isClose()
     }
 }
 
@@ -199,7 +252,7 @@ class ElementPowerUp:Magical {
                 c._elementalResistance.water -= 50
                 c._elementalResistance.thunder -= 50
             }
-            c.actionBuff {
+            c.cure1f() {
                 completion()
             }
         }

@@ -9,22 +9,26 @@
 
 import SpriteKit
 class Francis:Boss {
+    static let LEVEL:CGFloat = 48
     override init() {
+        
         super.init()
         _name = "弗朗西斯"
-        _img = SKTexture(imageNamed: "Francis")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 3
         _growth.strength = 2.5
         _growth.agility = 1.8
         _growth.intellect = 3
+        _race = EvilType.DEMON
+        _level = Francis.LEVEL
+        _img = SKTexture(imageNamed: "Francis")
+        _spellsInuse = [SummonServant(), Nova()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 3
         _extensions.hp = _extensions.health
         
-        _spellsInuse = []
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

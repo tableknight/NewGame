@@ -56,10 +56,18 @@ class Character: Creature {
         }
         return false
     }
+    func hasSpellHidden(spell:Spell) -> Bool {
+        for s in _spellsHidden {
+            if s._name == spell._name {
+                return true
+            }
+        }
+        return false
+    }
     func removeSpell(spell:Spell) {
         if _spells.count > 0 {
             for i in 0..._spells.count - 1 {
-                if type(of: _spells[i]) == type(of: spell) {
+                if _spells[i]._name == spell._name {
                     _spells.remove(at: i)
                     return
                 }
@@ -67,7 +75,7 @@ class Character: Creature {
         }
         if _spellsInuse.count > 0 {
             for i in 0..._spellsInuse.count - 1 {
-                if type(of: _spellsInuse[i]) == type(of: spell) {
+                if _spellsInuse[i]._name == spell._name {
                     _spellsInuse.remove(at: i)
                     return
                 }
@@ -76,10 +84,20 @@ class Character: Creature {
         for m in _minions {
             if m._spellsInuse.count > 0 {
                 for i in 0...m._spellsInuse.count - 1 {
-                    if type(of: m._spellsInuse[i]) == type(of: spell) {
+                    if m._spellsInuse[i]._name == spell._name {
                         m._spellsInuse.remove(at: i)
                         return
                     }
+                }
+            }
+        }
+    }
+    func removeSpellHidden(spell:Spell) {
+        if _spellsHidden.count > 0 {
+            for i in 0..._spellsHidden.count - 1 {
+                if _spellsHidden[i]._name == spell._name {
+                    _spellsHidden.remove(at: i)
+                    return
                 }
             }
         }
@@ -279,8 +297,16 @@ class Character: Creature {
         case soulstones
         case _key
         case _pro
+//        case RingOfReborn
+//        case PandoraHeart
+//        case PuppetMaster
+//        case PuppetMark
+//        case TheEye
+//        case TrueLie
+//        case RingOfDead
+//        case IdlirWeddingRing
     }
-    
+
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -292,16 +318,32 @@ class Character: Creature {
         hasEarring = try values.decode(Bool.self, forKey: .hasEarring)
         hasWeapon = try values.decode(Bool.self, forKey: .hasWeapon)
         hasMark = try values.decode(Bool.self, forKey: .hasMark)
+        
+        
         _amulet = try? values.decode(Amulet.self, forKey: ._amulet)
+//        if _amulet?._effection == TrueLie.EFFECTION {
+//            _amulet = try? values.decode(TrueLie.self, forKey: ._amulet)
+//        }
         _leftRing = try? values.decode(Ring.self, forKey: ._leftRing)
         _rightRing = try? values.decode(Ring.self, forKey: ._rightRing)
         _shield = try? values.decode(Shield.self, forKey: ._shield)
         _magicMark = try? values.decode(MagicMark.self, forKey: ._magicMark)
+//        if _magicMark?._effection == TheEye.EFFECTION {
+//            _magicMark = try? values.decode(TheEye.self, forKey: ._magicMark)
+//        } else if _magicMark?._effection == PuppetMark.EFFECTION {
+//            _magicMark = try? values.decode(PuppetMark.self, forKey: ._magicMark)
+//        }
         _soulStone = try? values.decode(SoulStone.self, forKey: ._soulStone)
+//        if _soulStone?._effection == PandoraHeart.EFFECTION {
+//            _soulStone = try? values.decode(PandoraHeart.self, forKey: ._soulStone)
+//        }
+        
         _levelPoint = try values.decode(Int.self, forKey: ._levelPoint)
         _money = try values.decode(Int.self, forKey: ._money)
         _key = try values.decode(String.self, forKey: ._key)
         _pro = try values.decode(String.self, forKey: ._pro)
+        
+        
 //        let cls:Array<String> = try values.decode(Array.self, forKey: ._propsClass)
         let marks:Array<MagicMark> = try values.decode(Array.self, forKey: .marks)
         let instruments:Array<Instrument> = try values.decode(Array.self, forKey: .instruments)
@@ -319,12 +361,51 @@ class Character: Creature {
         let spellBooks:Array<SpellBook> = try values.decode(Array.self, forKey: .spellBooks)
         let amulets:Array<Amulet> = try values.decode(Array.self, forKey: .amulets)
         let rings:Array<Ring> = try values.decode(Array.self, forKey: .rings)
+        
+//        let ringOfDeads:Array<RingOfDead> = try values.decode(Array.self, forKey: .RingOfDead)
+//        let idlirWeddingRings:Array<IdlirWeddingRing> = try values.decode(Array.self, forKey: .IdlirWeddingRing)
+//        let ringOfReborns:Array<RingOfReborn> = try values.decode(Array.self, forKey: .RingOfReborn)
+//        let pandoraHearts:Array<PandoraHeart> = try values.decode(Array.self, forKey: .PandoraHeart)
+//        let puppetMasters:Array<PuppetMaster> = try values.decode(Array.self, forKey: .PuppetMaster)
+//        let theEyes:Array<TheEye> = try values.decode(Array.self, forKey: .TheEye)
+//        let puppetMarks:Array<PuppetMark> = try values.decode(Array.self, forKey: .PuppetMark)
+//        let trueLies:Array<TrueLie> = try values.decode(Array.self, forKey: .TrueLie)
+        
         let shields:Array<Shield> = try values.decode(Array.self, forKey: .shields)
         let soulstones:Array<SoulStone> = try values.decode(Array.self, forKey: .soulstones)
 //        let spellBooksClass:Array<String> = try values.decode(Array.self, forKey: .spellBooksClass)
         
 //        let allProps = [Wand(),Bow(),Blunt(),Sword(),Instrument(),Fist(),Dagger(),
 //                        MagicMark(), SoulStone(), Shield(), Ring(), EarRing(), Amulet()]
+        
+        //sacred left ring replace
+//        if(_leftRing?._effection == RingOfReborn.EFFECTION) {
+//            _leftRing = try? values.decode(RingOfReborn.self, forKey: ._leftRing)
+//        } else if (_leftRing?._effection == RingOfDead.EFFECTION) {
+//            _leftRing = try? values.decode(RingOfDead.self, forKey: ._leftRing)
+//        } else if (_leftRing?._effection == IdlirWeddingRing.EFFECTION) {
+//            _leftRing = try? values.decode(IdlirWeddingRing.self, forKey: ._leftRing)
+//        } else if (_leftRing?._effection == ApprenticeRing.EFFECTION) {
+//           _leftRing = try? values.decode(ApprenticeRing.self, forKey: ._leftRing)
+//        } else if (_leftRing?._effection == RingOfDeath.EFFECTION) {
+//           _leftRing = try? values.decode(RingOfDeath.self, forKey: ._leftRing)
+//        } else if (_leftRing?._effection == RingFromElder.EFFECTION) {
+//            _leftRing = try? values.decode(RingFromElder.self, forKey: ._leftRing)
+//        }
+//        if(_rightRing?._effection == RingOfReborn.EFFECTION) {
+//            _rightRing = try? values.decode(RingOfReborn.self, forKey: ._leftRing)
+//        } else if (_rightRing?._effection == RingOfDead.EFFECTION) {
+//            _rightRing = try? values.decode(RingOfDead.self, forKey: ._leftRing)
+//        } else if (_rightRing?._effection == IdlirWeddingRing.EFFECTION) {
+//            _rightRing = try? values.decode(IdlirWeddingRing.self, forKey: ._leftRing)
+//        } else if (_rightRing?._effection == ApprenticeRing.EFFECTION) {
+//           _rightRing = try? values.decode(ApprenticeRing.self, forKey: ._leftRing)
+//        } else if (_rightRing?._effection == RingOfDeath.EFFECTION) {
+//           _rightRing = try? values.decode(RingOfDeath.self, forKey: ._leftRing)
+//        } else if (_rightRing?._effection == RingFromElder.EFFECTION) {
+//            _rightRing = try? values.decode(RingFromElder.self, forKey: ._leftRing)
+//        }
+        
         _props = []
         let l = Loot()
         var allWeapons = Array<Weapon>()
@@ -355,6 +436,12 @@ class Character: Creature {
         for s in spellBooks {
             _props.append(s)
         }
+//        for m in puppetMarks {
+//            _props.append(m)
+//        }
+//        for m in theEyes {
+//            _props.append(m)
+//        }
         for m in marks {
             _props.append(m)
         }
@@ -370,6 +457,9 @@ class Character: Creature {
         for w in fists {
             _props.append(w)
         }
+//        for w in puppetMasters {
+//            _props.append(w)
+//        }
         for w in wands {
             _props.append(w)
         }
@@ -379,15 +469,30 @@ class Character: Creature {
         for a in blunts {
             _props.append(a)
         }
+//        for a in ringOfReborns {
+//            _props.append(a)
+//        }
+//        for a in ringOfDeads {
+//            _props.append(a)
+//        }
+//        for a in idlirWeddingRings {
+//            _props.append(a)
+//        }
         for a in rings {
             _props.append(a)
         }
         for a in shields {
             _props.append(a)
         }
+//        for a in pandoraHearts {
+//            _props.append(a)
+//        }
         for a in soulstones {
             _props.append(a)
         }
+//        for a in trueLies {
+//            _props.append(a)
+//        }
         for a in amulets {
             _props.append(a)
         }
@@ -439,7 +544,40 @@ class Character: Creature {
         var blunts = Array<Blunt>()
         var fists = Array<Fist>()
         
+//        var ringOfReborns = Array<RingOfReborn>()
+//        var pandoraHearts = Array<PandoraHeart>()
+//        var puppetMasters = Array<PuppetMaster>()
+//        var puppetMarks = Array<PuppetMark>()
+//        var theEyes = Array<TheEye>()
+//        var trueLies = Array<TrueLie>()
+//        var ringOfDeads = Array<RingOfDead>()
+//        var idlirWeddingRings = Array<IdlirWeddingRing>()
+        
         for i in _props {
+//            if i is IdlirWeddingRing {
+//                idlirWeddingRings.append(i as! IdlirWeddingRing)
+//            } else
+//            if i is RingOfDead {
+//                ringOfDeads.append(i as! RingOfDead)
+//            } else
+//            if i is TrueLie {
+//                trueLies.append(i as! TrueLie)
+//            } else
+//            if i is PuppetMark {
+//                puppetMarks.append(i as! PuppetMark)
+//            } else
+//            if i is TheEye {
+//                theEyes.append(i as! TheEye)
+//            } else
+//            if i is PuppetMaster {
+//                puppetMasters.append(i as! PuppetMaster)
+//            } else
+//            if i is PandoraHeart {
+//                pandoraHearts.append(i as! PandoraHeart)
+//            } else
+//            if i is RingOfReborn {
+//                ringOfReborns.append(i as! RingOfReborn)
+//            } else
             if i is MagicMark {
                 marks.append(i as! MagicMark)
             } else if i is Instrument {
@@ -472,6 +610,15 @@ class Character: Creature {
                 items.append(i as! Item)
             }
         }
+//        try container.encode(ringOfDeads, forKey: .RingOfDead)
+//        try container.encode(idlirWeddingRings, forKey: .IdlirWeddingRing)
+//        try container.encode(trueLies, forKey: .TrueLie)
+//        try container.encode(theEyes, forKey: .TheEye)
+//        try container.encode(puppetMarks, forKey: .PuppetMark)
+//        try container.encode(ringOfReborns, forKey: .RingOfReborn)
+//        try container.encode(pandoraHearts, forKey: .PandoraHeart)
+//        try container.encode(puppetMasters, forKey: .PuppetMaster)
+        
         try container.encode(amulets, forKey: .amulets)
         try container.encode(rings, forKey: .rings)
         try container.encode(shields, forKey: .shields)

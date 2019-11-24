@@ -34,7 +34,7 @@ class TurnAttack: Magical {
         
         let c = _battle._curRole
         c.actionCast {
-            t.mixed1(index: 16) {
+            t.mixed2(index: 16) {
                 completion()
             }
         }

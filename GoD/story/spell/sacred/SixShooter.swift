@@ -16,8 +16,8 @@ class SixShooter: Physical, BowSkill {
     }
     override init() {
         super.init()
-        _name = "乱射"
-        _description = "进行六次快速射击，第一支箭造成攻击力100%的物理伤害，后续伤害每次递减18%"
+        _name = "炮决"
+        _description = "进行六次快速射击，第一支箭造成攻击力100%的物理伤害，后续伤害递减18%"
         _rate = 1
         _quality = Quality.SACRED
         _cooldown = 2
@@ -44,6 +44,7 @@ class SixShooter: Physical, BowSkill {
                         if !self.hasMissed(target: t) {
                             t.actionAttacked {
                             }
+                            t.hit2()
                             t.showValue(value: damage, criticalFromSpell: false, critical: crtl)
                         }
                     }

@@ -21,6 +21,7 @@ class BossMinion: Creature {
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
     }
+    var _createForBattle = false
 //    override func extraProperty(value: CGFloat) -> CGFloat {
 //        return 0
 //    }

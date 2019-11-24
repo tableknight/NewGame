@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class BreakDefence:Physical {
+class BreakDefence:Physical, CloseSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -17,7 +17,7 @@ class BreakDefence:Physical {
     override init() {
         super.init()
         _name = "崩击"
-        _description = "破防，并对其造成100%-200%攻击力的物理伤害，需要近战"
+        _description = "破防，并对其造成100%-200%攻击力的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 0
     }
@@ -35,7 +35,8 @@ class BreakDefence:Physical {
                             completion()
                         }
                     }
-                    t.attacked1()
+//                    t.attacked1()
+                    t.hit2()
                 }
             } else {
                 t.showMiss {
@@ -47,6 +48,17 @@ class BreakDefence:Physical {
     
     override func selectable() -> Bool {
         return _battle._curRole._unit.isClose()
+    }
+    
+    override func findTarget() {
+        let ts = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
+        for t in ts {
+            if t.isDefend {
+                _battle._selectedTarget = t
+                return
+            }
+        }
+        _battle._selectedTarget = ts.one()
     }
     
 }

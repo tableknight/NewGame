@@ -10,7 +10,7 @@ import SpriteKit
 class Button:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        zPosition = UIStage.UILAYER
+        zPosition = MyScene.UI_LAYER_Z
         _bg = createBackground(width: cellSize * 1.5, height: cellSize * 0.65)
         _width = cellSize * 1.5
         addChild(_bg)
@@ -73,7 +73,7 @@ class RectButton:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         //        let rect = SKShapeNode(
-        zPosition = UIStage.UILAYER
+        zPosition = MyScene.UI_LAYER_Z
         let bg = SKShapeNode(rect: CGRect(x: -cellSize * 0.5, y: -cellSize * 0.5, width: cellSize, height: cellSize), cornerRadius: 2)
         bg.fillColor = QualityColor.RARE
         //        addChild(bg)

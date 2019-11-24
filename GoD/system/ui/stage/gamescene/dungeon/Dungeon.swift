@@ -19,13 +19,14 @@ class Dungeon: MyScene {
         super.init(coder: aDecoder)
     }
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-//        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         let nextPoint = getNextPoint()
         let nextY = nextPoint.y.toInt()
         let nextX = nextPoint.x.toInt()
         
-        if cell == CELL_BOSS {
+        if cell == CELL_BOSS && nextPoint.x == point.x && nextPoint.y == point.y {
             let i = Game.instance
+            _bossBattle = getBossByIndex()
             _bossBattle.setEnemyPart(minions: [])
             _bossBattle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
             i.curStage.addBattle(_bossBattle)
@@ -37,20 +38,20 @@ class Dungeon: MyScene {
                 boss.removeFromParent()
             }
             return true
-            
-            
+        } else if cell == CELL_BOSS {
+            return true
         }
         return false
     }
     override func create() {
         createSize()
 //        halfSize = 3
-        _nameLabel.text = "恶魔之城"
+        _nameLabel.text = "黄昏之城"
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
         createTowers()
-        if seed() < 700 {
+        if seed() < 10 {
             let tear = TheWitchsTear()
             tear._count = seed(min: 5, max: 11)
             tear.countless = false
@@ -68,6 +69,31 @@ class Dungeon: MyScene {
 //                _mixedItemMoney.append(true)
                 _goodsList.append(sb)
             }
+            if seed() < 50 {
+                let expBook = ExpBook()
+                expBook._count = seed(min: 1, max: 4)
+                _goodsList.append(expBook)
+            }
+            if seed() < 75 {
+                let gp = GiantPotion()
+                gp._count = seed(min: 1, max: 5)
+                _goodsList.append(gp)
+            }
+            if seed() < 25 {
+                let ps = PsychicScroll()
+                ps._count = 1
+                _goodsList.append(ps)
+            }
+            if seed() < 35 {
+                let ps = GodTownScroll()
+                ps._count = seed(min: 1, max: 3)
+                _goodsList.append(ps)
+            }
+            if seed() < 35 {
+                let ps = DeathTownScroll()
+                ps._count = seed(min: 1, max: 3)
+                _goodsList.append(ps)
+            }
             createSeller()
         }
         createBoss()
@@ -81,10 +107,12 @@ class Dungeon: MyScene {
     
     func createSize() {
 //        halfSize = seedFloat(min: 3, max: 7)
-        hSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
-        vSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
+//        hSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
+//        vSize = [6,6,6,6,8,8,8,8,10,10,10,10,10,12,12,12,12].one()
 //        hSize = seed(min: 6, max: 13).toFloat()
 //        vSize = seed(min: 6, max: 13).toFloat()
+        hSize = 12
+        vSize = 12
     }
     
     override func createMapMatrix() {
@@ -199,7 +227,7 @@ class Dungeon: MyScene {
         addGround(x: _portalNext.x, y: _portalNext.y, item: next)
     }
     internal func createTreasureBoxes() {
-        let list = [1,1,1,1,0,0,0,2,2,3]
+        let list = [1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,2,2,3]
         let count = list.one()
         if count == 0 {
             return
@@ -247,7 +275,7 @@ class Dungeon: MyScene {
 //        let t = _wall_shadow
         let t2 = Game.instance.inside_a5.getCell(0,0)
         for p in _wallPoints {
-            if CELL_TOWER == _mapMatrix[p.y.toInt()][p.x.toInt()] {
+            if CELL_TOWER == _mapMatrix[p.y.toInt()][p.x.toInt()] || CELL_SELLER == _mapMatrix[p.y.toInt()][p.x.toInt()] {
                 continue
             }
             if p.x < hSize {
@@ -358,6 +386,28 @@ class Dungeon: MyScene {
         default:
             return WasteWalker()
         }
+    }
+    internal var _bossIndex = 0
+    internal func getBossByIndex() -> Battle {
+        if 1 == _bossIndex {
+            return IssBattle()
+        }
+        if 2 == _bossIndex {
+            return FireSpiritBattle()
+        }
+        if 3 == _bossIndex {
+            return GiantSpiritBattle()
+        }
+        if 4 == _bossIndex {
+            return AssassinBattle()
+        }
+        if 5 == _bossIndex {
+            return RobberBattle()
+        }
+        if 6 == _bossIndex {
+            return GhostBattle()
+        }
+        return IssBattle()
     }
     
     internal func m(_ x:Int, _ y:Int) -> Int {

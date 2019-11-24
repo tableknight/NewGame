@@ -26,6 +26,9 @@ class Creature: Unit {
         _sensitive = try values.decode(Int.self, forKey: ._sensitive)
         let wClass = try values.decode(String.self, forKey: ._weaponClass)
         if !wClass.isEmpty {
+            if wClass == NSStringFromClass(type(of: PuppetMaster())) {
+              _weapon = try? values.decode(PuppetMaster.self, forKey: ._weapon)
+            } else 
             if wClass == NSStringFromClass(type(of: Bow())) {
                 _weapon = try? values.decode(Bow.self, forKey: ._weapon)
             } else if wClass == NSStringFromClass(type(of: Sword())) {
@@ -101,7 +104,7 @@ class Creature: Unit {
         return false
     }
     func extraProperty(value: CGFloat) -> CGFloat {
-        let size = seed(min: Int(value.toInt() * 2 * _quality), max: Int(value * 20))
+        let size = seed(min: Int(value.toInt() * _quality), max: Int(value.toInt() * _quality * 5))
         let v = CGFloat(size) * 0.01
         if beMore() {
             return v
@@ -148,11 +151,11 @@ class Creature: Unit {
             _revenge = seed(to: 15).toFloat() + 5
             _break = seed(to: 15).toFloat() + 5
         }
-        if _spellCount > _spellsInuse.count && d4() {
+        if _spellCount > _spellsInuse.count && d3() {
             let l = Loot()
             let spells = [l.getRandomNormalSpell(), l.getRandomGoodSpell(), l.getRandomRareSpell(), l.getRandomSacredSpell()]
             let spell = spells.one()
-            if !(spell is BowSkill) && !(spell is HandSkill) {
+            if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
                 _spellsInuse.append(spell)
             }
         }

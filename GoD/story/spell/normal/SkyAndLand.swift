@@ -8,11 +8,11 @@
 
 import SpriteKit
 class SkyAndLand: Passive {
-    static let VALUE:CGFloat = 25
+    static let VALUE:CGFloat = 15
     override init() {
         super.init()
         _name = "法天象地"
-        _description = "提升25点智力"
+        _description = "提升15点智力"
         _quality = Quality.NORMAL
         
     }

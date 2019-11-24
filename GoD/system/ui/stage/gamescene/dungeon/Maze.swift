@@ -51,23 +51,26 @@ class Maze: Dungeon {
             for x in 0...hSize.toInt() {
                 if y % 3 == 0 {
                     if x % 3 == 0 {
-                        let landFragment:Array<CGFloat> = _fragment[index]
-                        debug("index \(index)")
-                        index += 1
-                        if landFragment.count > 0 {
-                            for i in 0...landFragment.count - 1 {
-                                if i % 2 == 0 {
-                                    let x0 = x.toFloat() + landFragment[i]
-                                    let y0 = y.toFloat() + landFragment[i + 1]
-                                    if x0 <= hSize && y0 <= vSize {
-                                        let wall = UIItem()
-                                        wall.setTexture(wallTexture)
-                                        addWall(x: x0, y: y0, item: wall)
-                                        _mapMatrix[y0.toInt()][x0.toInt()] = CELL_ITEM
+                        if index < _fragment.count {
+                            let landFragment:Array<CGFloat> = _fragment[index]
+                            debug("index \(index)")
+                            index += 1
+                            if landFragment.count > 0 {
+                                for i in 0...landFragment.count - 1 {
+                                    if i % 2 == 0 {
+                                        let x0 = x.toFloat() + landFragment[i]
+                                        let y0 = y.toFloat() + landFragment[i + 1]
+                                        if x0 <= hSize && y0 <= vSize {
+                                            let wall = UIItem()
+                                            wall.setTexture(wallTexture)
+                                            addWall(x: x0, y: y0, item: wall)
+                                            _mapMatrix[y0.toInt()][x0.toInt()] = CELL_ITEM
+                                        }
                                     }
                                 }
                             }
                         }
+                        
                     }
                 }
                 row.append(CELL_EMPTY)

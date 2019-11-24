@@ -25,6 +25,14 @@ class SelectDocument: UIPanel {
             }
         }
         
+        if _closeButton.contains(touchPoint!) {
+            self.removeFromParent()
+            let welcome = Welcome()
+            welcome.create()
+            welcome._gameScene = Game.instance.scene
+            Game.instance.scene.addChild(welcome)
+        }
+        
         if _prevButton.contains(touchPoint!) {
             self.removeFromParent()
             let flow = CreationFlow()

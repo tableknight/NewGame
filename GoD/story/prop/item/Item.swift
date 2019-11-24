@@ -45,6 +45,15 @@ class Item:Prop, ISelectTarget {
         }
     }
     
+    var canBeTargetSummonUnit: Bool {
+        set {
+            _canBeTargetSummonUnit = newValue
+        }
+        get {
+            return _canBeTargetSummonUnit
+        }
+    }
+    
     var isClose: Bool {
         set {
             _isClose = newValue
@@ -58,6 +67,7 @@ class Item:Prop, ISelectTarget {
     var _isTargetEnemy = false
     var _canBeTargetPlayer = true
     var _canBeTargetSelf = true
+    var _canBeTargetSummonUnit = true
     var _isClose = false
     var autoCast = false
     
@@ -128,6 +138,8 @@ class Potion:Item {
         _price = 4
         _storePrice = 16
         _cooldown = 4
+        _showChar = "药"
+        _quality = Quality.GOOD
         _name = "治疗药水"
         _description = "恢复50%最大生命值"
     }
@@ -145,26 +157,18 @@ class Potion:Item {
         if target._extensions.hp >= target._extensions.health {
             target._extensions.hp = target._extensions.health
         }
-//        Game.instance._char.removeProp(p: self)
     }
     
     override func use(unit: BUnit, completion: @escaping () -> Void) {
-        if (unit.getHp() >= unit.getHealth()) || _count <= 0 {
-            return
-        }
-        _timeleft = _cooldown
-        let this = self
         _battle._curRole.showText(text: _name) {
-            unit.actionHealed {
-                let change = unit.getHealth() * this._rate
-//                unit.hpChange(value: change)
+            unit.cure1f() {
+                let change = unit.getHealth() * self._rate
                 unit.showValue(value: change) {
                     completion()
                 }
             }
         }
         removeFromChar()
-//        completion()
     }
 }
 
@@ -175,8 +179,28 @@ class LittlePotion:Potion {
         _storePrice = 12
         _cooldown = 2
         _name = "治疗药水(小)"
+        _quality = Quality.NORMAL
         _description = "恢复25%最大生命值"
         _rate = 0.25
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+class GiantPotion:Potion {
+    override init() {
+        super.init()
+        _price = 36
+        _storePrice = 144
+        _cooldown = 2
+        _name = "巨人药水"
+        _quality = Quality.RARE
+        _description = "恢复100%最大生命值"
+        _rate = 1
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -192,6 +216,7 @@ class SealScroll:Item {
         usable = false
         usableInBattle = true
         targetEnemy = true
+        canBeTargetSummonUnit = false
         _price = 8
         _storePrice = 32
         _cooldown = 0
@@ -247,6 +272,7 @@ class TownScroll:Item {
         _storePrice = 24
         autoCast = true
         _name = "传送卷轴·贝"
+        _showChar = "贝"
         _description = "传送到贝拉姆村"
     }
     required init(from decoder: Decoder) throws {
@@ -274,6 +300,7 @@ class GodTownScroll:TownScroll {
         _price = 24
         _storePrice = 96
         _name = "传送卷轴·雪"
+        _showChar = "雪"
         _description = "传送到神域·雪之国"
     }
     required init(from decoder: Decoder) throws {
@@ -284,8 +311,8 @@ class GodTownScroll:TownScroll {
     }
     override func use() {
         removeFromChar()
-        showMsg(text: _description)
-        let c = SnowLanding1()
+//        showMsg(text: _description)
+        let c = SnowLandingHome()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
         Game.instance.curStage.switchScene(next: c, completion: {
@@ -301,7 +328,8 @@ class DeathTownScroll:TownScroll {
         _price = 12
         _storePrice = 48
         _name = "传送卷轴·冥"
-        _description = "传送到恶魔之城"
+        _showChar = "冥"
+        _description = "传送到黄昏之城"
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -311,7 +339,7 @@ class DeathTownScroll:TownScroll {
     }
     override func use() {
         removeFromChar()
-        showMsg(text: _description)
+//        showMsg(text: _description)
         let c = DemonTownPortal()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
@@ -358,7 +386,7 @@ class TransportScroll:Item {
         super.init()
         usable = true
         usableInBattle = false
-        price = 12
+        price = 56
         _name = "穿梭卷轴"
         _description = "越过当前障碍物，只能在远古之路使用"
     }
@@ -372,7 +400,7 @@ class TransportScroll:Item {
         let stage = Game.instance.curStage!
         let scene = Game.instance.curStage._curScene!
         
-        if !(scene is AcientRoad) {
+        if !(scene is AcientRoad) || scene is BossRoad {
             showMsg(text: "这里无法使用")
             return
         }
@@ -477,7 +505,7 @@ class RandomSacredSpell:Item {
         let l = Loot()
         let char = Game.instance.char!
         let book = SpellBook()
-        book.spell = l.getSacredSpell(id: l._sacredSpellArray.one())
+        book.spell = l.getRandomSacredSpell()
         char.addProp(p: book)
     }
 }

@@ -18,7 +18,7 @@ class Sacre: Physical {
         super.init()
         isClose = true
         _name = "恐吓"
-        _description = "降低目标100%防御"
+        _description = "降低目标100%护甲"
         _quality = Quality.NORMAL
         _cooldown = 1
     }

@@ -28,7 +28,7 @@ class PriceOfBlood: Physical {
         let atk = -c.getHp() * 0.25
         let damage = atk * (1 - def) * (c._unit._level / t._unit._level)
         let this = self
-        setTimeout(delay: 1, completion: {
+        setTimeout(delay: 0.25, completion: {
             c.showValue(value: atk) {
                 c.actionAttack {
                     if !this.hadSpecialAction(t:t, completion: completion) {
@@ -38,11 +38,12 @@ class PriceOfBlood: Physical {
                                     completion()
                                 }
                             })
+                            t.claw()
                         }
                     }
                     
                 }
-                t.attacked1()
+                
             }
         })
     }

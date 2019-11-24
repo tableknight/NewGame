@@ -34,7 +34,7 @@ class SumahlBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 64
+        let level:CGFloat = Sumahl.LEVEL
         var es = Array<Creature>()
         
         let mx1 = SumahlServant1()
@@ -73,6 +73,50 @@ class SumahlBattle: BossBattle {
     }
     override func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
+    }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 5 {
+            let i = FireMaster()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = TrueLie()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = NilSeal()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = PandoraHeart()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = DragonSlayer()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = CreationMatrix()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Sumahl.LEVEL)
+        return list + l.getList()
     }
 }
 
@@ -113,146 +157,4 @@ class MindIntervene: Physical, Curse {
         findSingleTargetNotBlocked()
     }
 }
-class HealAll: Magical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "群体治疗"
-        _quality = Quality.SACRED
-        _description = "恢复所有己方单位25%的最大生命"
-        _cooldown = 3
-        autoCast = true
-        targetEnemy = false
-    }
-    override func cast(completion: @escaping () -> Void) {
-        let c = _battle._curRole
-        let ts = _battle._selectedTargets
-        c.actionCast {
-            for t in ts {
-                t.actionHealed {
-                    let value = t.getHealth() * 0.25
-                    t.showValue(value: value)
-                }
-            }
-            setTimeout(delay: 2.5, completion: completion)
-        }
-    }
-    override func findTarget() {
-        findTargetPartAll()
-    }
-}
-class SilenceAll: Magical, Curse {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "群体静默"
-        _description = "对敌方所有单位释放诅咒术，令其有一定几率静默"
-        _quality = Quality.SACRED
-        _cooldown = 1
-        autoCast = true
-    }
-    override func cast(completion: @escaping () -> Void) {
-        let c = _battle._curRole
-        let ts = _battle._selectedTargets
-        c.actionCast {
-            for t in ts {
-                if !self.statusMissed(baseline: 50, target: t, completion: {}) {
-                    t.actionWait {
-                        self._battle.silenceUnit(unit: t)
-                    }
-                    t.mixed2(index: 16)
-                }
-            }
-            setTimeout(delay: 3.5, completion: completion)
-        }
-    }
-    override func findTarget() {
-        findTargetPartAll()
-    }
-}
-class HolySacrifice: Physical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "神圣牺牲"
-        _description = "牺牲15%当前生命，作为额外攻击。对目标造成攻击100%的物理伤害"
-        _quality = Quality.RARE
-        _cooldown = 1
-    }
-    override func getAttack(from: BUnit) -> CGFloat {
-        return from.getAttack() + _battle._curRole.getHp() * 0.15
-    }
-    override func cast(completion: @escaping () -> Void) {
-        let c = _battle._curRole
-        let t = _battle._selectedTarget!
-        let selfDamage = -c.getHp() * 0.15
-        let damage = physicalDamage(t)
-        c.showValue(value: selfDamage) {
-            c.actionAttack {
-                if !self.hadSpecialAction(t: t, completion: completion) {
-                    if !self.hasMissed(target: t, completion: completion) {
-                        t.actionAttacked {
-                            t.showValue(value: damage) {
-                                completion()
-                            }
-                        }
-                        t.attacked1()
-                    }
-                }
-            }
-            
-        }
-    }
-}
-class LifeFlow: Magical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "生命分涌"
-        _description = "牺牲15%当前生命，作为额外精神。对目标造成精神100%的魔法伤害"
-        _quality = Quality.RARE
-        _cooldown = 1
-    }
-    override func getSelfSpirit() -> CGFloat {
-        return _battle._curRole.getSpirit() + _battle._curRole.getHp() * 0.15
-    }
-    override func cast(completion: @escaping () -> Void) {
-        let c = _battle._curRole
-        let t = _battle._selectedTarget!
-        let selfDamage = -c.getHp() * 0.15
-        let damage = magicalDamage(t)
-        c.showValue(value: selfDamage) {
-            c.actionCast {
-                if !self.hadSpecialAction(t: t, completion: completion) {
-                    t.actionAttacked {
-                        t.showValue(value: damage) {
-                            completion()
-                        }
-                    }
-                    t.mixed2(index: 16)
-                }
-            }
-            
-        }
-    }
-}
+

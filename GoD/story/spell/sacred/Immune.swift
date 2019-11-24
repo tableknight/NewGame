@@ -22,6 +22,7 @@ class Immune: Magical {
         _name = "免疫"
         _description = "目标在本回合内，免疫所有控制和诅咒"
         targetAll = true
+        canBeTargetSelf = true
         _quality = Quality.SACRED
         _cooldown = 3
     }
@@ -36,7 +37,7 @@ class Immune: Magical {
         }
         t.addStatus(status: status)
         c.actionCast {
-            t.actionBuff {
+            t.stateUp2() {
                 completion()
             }
         }

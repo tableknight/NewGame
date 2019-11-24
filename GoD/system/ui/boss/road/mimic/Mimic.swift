@@ -11,19 +11,22 @@ class Mimic:Boss {
     override init() {
         super.init()
         _name = "宝箱怪"
+        _quality = Quality.SACRED
+        _race = EvilType.DEMON
+        _growth.stamina = seedFloat(min: 15, max: 31) * 0.1
+        _growth.strength = seedFloat(min: 15, max: 31) * 0.1
+        _growth.agility = seedFloat(min: 15, max: 31) * 0.1
+        _growth.intellect = seedFloat(min: 15, max: 31) * 0.1
         _img = SKTexture(imageNamed: "Mimic")
+        _spellsInuse = [LineAttack(), FireBreath(), ThunderArray(), LifeDraw(), LeeAttack()]
     }
     override func create(level: CGFloat) {
-        _quality = Quality.SACRED
-        _growth.stamina = seedFloat(min: 10, max: 31) * 0.1
-        _growth.strength = seedFloat(min: 10, max: 31) * 0.1
-        _growth.agility = seedFloat(min: 10, max: 31) * 0.1
-        _growth.intellect = seedFloat(min: 10, max: 31) * 0.1
+        
         levelTo(level: level)
-        _extensions.health *= 3
+        _extensions.health *= 4
         _extensions.hp = _extensions.health
         _rhythm = 25
-        _spellsInuse = [BossAttack(),BossAttack(),BossAttack(),LineAttack(), FireBreath(), ThunderArray(), LifeDraw()]
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

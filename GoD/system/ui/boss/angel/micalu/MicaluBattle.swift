@@ -37,11 +37,13 @@ class MicaluBattle: BossBattle {
         let ms1 = MicaluServant1()
         ms1.create(level: level)
         ms1._seat = BUnit.TBL
+        ms1._createForBattle = true
         es.append(ms1)
         
         let ms2 = MicaluServant2()
         ms2.create(level: level)
         ms2._seat = BUnit.TBR
+        ms2._createForBattle = true
         es.append(ms2)
         
         let t = Micalu()
@@ -53,6 +55,38 @@ class MicaluBattle: BossBattle {
     }
     override func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
+    }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 50 {
+            let i = MarkOfHeaven()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = FangOfVampire()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = VerdasTear()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 12 {
+            let i = TheExorcist()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Micalu.LEVEL)
+        return list + l.getList()
     }
 }
 

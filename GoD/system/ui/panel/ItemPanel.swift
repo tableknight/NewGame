@@ -5,7 +5,7 @@
 ////  Created by kai chen on 2018/4/15.
 ////  Copyright © 2018年 Chen. All rights reserved.
 ////
-//
+//  confirmed
 import SpriteKit
 class ItemPanel: UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,7 +58,7 @@ class ItemPanel: UIPanel {
                     if !item.usable {
                         return
                     }
-                    if item is Potion {
+                    if item is Potion || item is ExpBook {
                         let rl = RoleList()
                         let ml = [_char] + _char._minions
                         rl._parentNode = self
@@ -94,63 +94,6 @@ class ItemPanel: UIPanel {
                 }
             }
         }
-//        if _lastSelectedIcon.contains(touchPoint!) {
-//            if _lastSelectedIcon._displayItemType is SpellBook {
-//                let spellBook = _lastSelectedIcon._displayItemType as! SpellBook
-//                if !_char.hasSpell(spell: spellBook.spell) {
-//                    _char._spells.append(spellBook.spell)
-//                    _char.removeProp(p: spellBook)
-////                    showMsg(text: "你学会了技能[\(spellBook._name)]！")
-//                    debug("你学会了技能[\(spellBook._name)]！")
-//                    _lastSelectedIcon = Icon()
-//                    pageReload()
-//                    return
-//                }
-//            }
-//            let item = _lastSelectedIcon._displayItemType as! Item
-//            if !item.usable {
-//                return
-//            }
-//            if item is Potion {
-//                let rl = RoleList()
-//                let ml = [_char] + _char._minions
-//                rl._parentNode = self
-//                self.isHidden = true
-//                rl.create(list: ml)
-//                rl.selectAction = {
-//                    if item._count > 0 {
-//                        let unit = rl._lastSelected!._unit
-//                        item.use(target: unit!)
-//                        rl._lastSelected!.reload()
-//                        item.reduce()
-//                    }
-//                }
-//                let this = self
-//                rl.closeAction = {
-//                    this.pageReload()
-//                    this.isHidden = false
-//                }
-//                Game.instance.curStage.showPanel(rl)
-//                return
-//            }
-////            if item is SpellBook {
-////                let book = item as! SpellBook
-////
-////            }
-//            //else
-//            if item is TownScroll {
-//                Game.instance.curStage.removePanel(self)
-//            }
-//            item.use(target: _char)
-//            _lastSelectedIcon = Icon()
-//            pageReload()
-//            return
-//        }
-//        let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
-//        if !rlt {
-//            _lastSelectedIcon.selected = false
-//            _lastSelectedIcon = Icon(quality: 1)
-//        }
 
     }
     private var _discardButton = Button()
@@ -234,7 +177,7 @@ class ItemPanel: UIPanel {
 class PropComponent:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        zPosition = UIStage.PANEL_LAYER
+        zPosition = MyScene.UI_LAYER_Z
         self.size = CGSize(width: cellSize, height: cellSize)
         let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: -cellSize * 0.5, y: -cellSize * 0.5), size: self.size), cornerRadius: 2 )
         bg.fillColor = UIColor.black

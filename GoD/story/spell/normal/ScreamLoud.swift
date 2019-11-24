@@ -17,7 +17,7 @@ class ScreamLoud:Magical, Curse {
     override init() {
         super.init()
         _name = "震耳发溃"
-        _description = "发出剧烈的怒吼，降低所有敌方目标30%防御和30点命中，持续3回合"
+        _description = "发出剧烈的怒吼，降低所有敌方目标30%护甲和30点命中，持续3回合"
         _quality = Quality.NORMAL
         _cooldown = 2
         autoCast = true
@@ -28,7 +28,7 @@ class ScreamLoud:Magical, Curse {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
                     t.actionWait {
-                        t.showText(text: Spell.CURSED)
+//                        t.showText(text: Spell.CURSED)
                         if t.hasStatus(type: "_scared") {
                             let s = t.getStatus(type: "_scared")
                             s?._timeleft = 3

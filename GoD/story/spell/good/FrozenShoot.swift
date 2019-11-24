@@ -40,6 +40,7 @@ class FrozenShoot: Physical, BowSkill {
                             t.freezing()
                         }
                     }
+                    t.hitIce()
                 }
             }
         }

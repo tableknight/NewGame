@@ -29,19 +29,21 @@ class LavaExplode: Magical {
         let damage = fireDamage(t)
         c.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
-                t.flame1(index: 0, line: 1)
+                t.magic2t()
                 t.actionAttacked {
                     t.showValue(value: damage, criticalFromSpell: false, critical: false, damageType: DamageType.FIRE, textColor: DamageColor.FIRE, completion: {})
                     if t.isDead() {
                         completion()
                     } else {
-                        setTimeout(delay: 0.5, completion: {
-                            if t.hasStatus(type: Status.BURNING) {
+                        if t.hasStatus(type: Status.BURNING) {
+                            setTimeout(delay: 0.5, completion: {
                                 let s = t.getStatus(type: Status.BURNING) as! BurningStatus
                                 let d = s._level * t.getHealth() * 0.05
                                 t.showValue(value: -d, criticalFromSpell: false, critical: false, damageType: DamageType.FIRE, textColor: DamageColor.FIRE, completion: completion)
-                            }
-                        })
+                            })
+                        } else {
+                            completion()
+                        }
                     }
                 }
             }

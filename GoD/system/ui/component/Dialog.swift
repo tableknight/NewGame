@@ -16,6 +16,8 @@ class Dialog: SKSpriteNode {
             _nextAction()
         } else if _confirmButton.contains(touchPoint!) {
             _confirmAction()
+        } else if _battleButton.contains(touchPoint!) {
+            _battleAction()
         }
     }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -53,6 +55,8 @@ class Dialog: SKSpriteNode {
         _closeButton.position.y = cellSize * 0.95
         _closeButton.text = "关闭"
         addChild(_closeButton)
+        
+        addBattleButton()
     }
     
     func addConfirmButton() {
@@ -69,6 +73,13 @@ class Dialog: SKSpriteNode {
         _nextButton._bg.removeFromParent()
         _nextButton.text = "继续"
         addChild(_nextButton)
+    }
+    
+    func addBattleButton() {
+        _battleButton.position.x = _closeButton.xAxis - _closeButton.width - cellSize * 0.25
+        _battleButton.position.y = _closeButton.yAxis
+        _battleButton.text = "战斗"
+        addChild(_battleButton)
     }
     
     var text:String {
@@ -98,8 +109,10 @@ class Dialog: SKSpriteNode {
     var _closeButton = Button()
     var _confirmButton = Button()
     var _nextButton = Button()
+    var _battleButton = Button()
     var _textlabel = MultipleLabel()
     var _nextAction = {}
     var _confirmAction = {}
+    var _battleAction = {}
     var _name = ""
 }

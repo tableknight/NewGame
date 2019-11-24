@@ -8,21 +8,26 @@
 
 import SpriteKit
 class IssThePuppet:Boss {
+    static let LEVEL:CGFloat = 10
     override init() {
         super.init()
         _name = "艾斯斯"
-        _img = SKTexture(imageNamed: "Iss")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 2.5
         _growth.strength = 2.1
         _growth.agility = 1.8
         _growth.intellect = 2.6
+        _level = IssThePuppet.LEVEL
+        _race = EvilType.RISEN
+        _img = SKTexture(imageNamed: "Iss")
+        _imgUrl = "Iss"
+        _spellsInuse = [ControlUndead(), SetTimeBack(), LowerSummon(), SummonFlower(), WaterCopy(), HighLevelSummon()]
+    }
+    override func create(level: CGFloat) {
+        
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        _spellsInuse = []
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

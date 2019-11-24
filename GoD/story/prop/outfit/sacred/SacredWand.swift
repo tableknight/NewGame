@@ -31,6 +31,7 @@ class LightingRod:Wand {
     }
 }
 class FireMaster:Wand {
+    static let EFFECTION = "fire_master"
     override init() {
         super.init()
         _name = "驭火者"
@@ -38,6 +39,7 @@ class FireMaster:Wand {
         _level = 51
         _chance = 15
         _quality = Quality.SACRED
+        _effection = FireMaster.EFFECTION
         price = 1120
     }
     override func create() {
@@ -56,6 +58,7 @@ class FireMaster:Wand {
     }
 }
 class WitchWand:Wand {
+    static let EFFECTION = "witch_wand"
     override init() {
         super.init()
         _name = "巫毒法杖"
@@ -63,6 +66,7 @@ class WitchWand:Wand {
         _level = 63
         _chance = 35
         _quality = Quality.SACRED
+        _effection = WitchWand.EFFECTION
         price = 1442
     }
     override func create() {
@@ -82,6 +86,7 @@ class WitchWand:Wand {
     }
 }
 class PuppetMaster:Wand {
+    static let EFFECTION = "puppet_master"
     override init() {
         super.init()
         _name = "大傀儡师"
@@ -89,6 +94,7 @@ class PuppetMaster:Wand {
         _level = 76
         _chance = 2
         _quality = Quality.SACRED
+        _effection = PuppetMaster.EFFECTION
         price = 3440
     }
     override func create() {
@@ -100,19 +106,19 @@ class PuppetMaster:Wand {
         _attrCount = 3
         createAttrs()
     }
-    override func on() {
-        super.on()
-        Game.instance._char._minionsCount += 1
-    }
-    override func off() {
-        super.off()
-        let char =  Game.instance.char!
-        char._minionsCount -= 1
-        let minions = char.getReadyMinions()
-        if minions.count > char._minionsCount {
-            minions[0]._seat = BUnit.STAND_BY
-        }
-    }
+//    override func on() {
+//        super.on()
+//        Game.instance.char._minionsCount += 1
+//    }
+//    override func off() {
+//        super.off()
+//        let char =  Game.instance.char!
+//        char._minionsCount -= 1
+//        let minions = char.getReadyMinions()
+//        if minions.count > char._minionsCount {
+//            minions[0]._seat = BUnit.STAND_BY
+//        }
+//    }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

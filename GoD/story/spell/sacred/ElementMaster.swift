@@ -45,6 +45,7 @@ class ElementMaster:Passive {
         } else {
             
         }
+        c.mixed2(index: 13)
         c.showText(text: text) {
             completion()
         }

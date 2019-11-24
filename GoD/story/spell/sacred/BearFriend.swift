@@ -25,9 +25,18 @@ class BearFriend:Magical, SummonSkill {
     override func cast(completion: @escaping () -> Void) {
         let seats = _battle.getEmptySeats()
         let b = _battle!
-        _battle._curRole.actionCast {
+        let c = _battle._curRole
+        c.actionCast {
             let seat = seats.one()
             let uw = BearWarrior()
+            if c.weaponIs(TheSurvive.EFFECTION) {
+                uw._mains.stamina *= SummonUnit.POWERUP_RATE
+                uw._mains.strength *= SummonUnit.POWERUP_RATE
+                uw._mains.agility *= SummonUnit.POWERUP_RATE
+                uw._mains.intellect *= SummonUnit.POWERUP_RATE
+            } else if c.weaponIs(TheSurpass.EFFECTION) {
+                           uw._spellsInuse.append(Game.instance.char._weapon!._spell)
+                       }
             uw.create(level: b._curRole._unit._level)
             uw._seat = seat
             let bu = b.addPlayerMinion(unit: uw)

@@ -4,7 +4,7 @@
 //
 //  Created by kai chen on 2018/4/12.
 //  Copyright © 2018年 Chen. All rights reserved.
-//
+//  confirmed
 
 
 import SpriteKit
@@ -152,7 +152,7 @@ class RolePanel:UIPanel {
         
         let race = Label()
         if unit is Character {
-            race.text = (unit as! Character)._pro
+            race.text = "[\(EvilType.getTypeLabel(type: unit._race))]\((unit as! Character)._pro)"
         } else {
             race.text = EvilType.getTypeLabel(type: unit._race)
         }
@@ -272,7 +272,7 @@ class RolePanel:UIPanel {
         let y5 = y4 - attrHeight
         let y6 = y5 - attrHeight
         _attrStrength = addAttrLabel(x: x1, y: y1, text: "力量", value: bUnitRole.getStrength())
-        _attrStamina = addAttrLabel(x: x1, y: y2, text: "体力", value: bUnitRole.getStamina())
+        _attrStamina = addAttrLabel(x: x1, y: y2, text: "防御", value: bUnitRole.getStamina())
         _attrAgility = addAttrLabel(x: x1, y: y3, text: "敏捷", value: bUnitRole.getAgility())
         _attrIntellect = addAttrLabel(x: x1, y: y4, text: "智力", value: bUnitRole.getIntellect())
         
@@ -289,7 +289,7 @@ class RolePanel:UIPanel {
         if bUnitRole.hasSpell(spell: OnePunch()) || bUnitRole.hasSpell(spell: DancingOnIce()) {
             def = 0
         }
-        _attrDefence = addAttrLabel(x: x2, y: y2, text: "防御", value: def)
+        _attrDefence = addAttrLabel(x: x2, y: y2, text: "护甲", value: def)
         _attrSpeed = addAttrLabel(x: x2, y: y3, text: "速度", value: bUnitRole.getSpeed())
         _attrSpirit = addAttrLabel(x: x2, y: y4, text: "精神", value: bUnitRole.getSpirit())
         _attrHealth = addAttrLabel(x: x2, y: y5, text: "生命", value: bUnitRole.getHealth())
@@ -423,7 +423,7 @@ class RolePanel:UIPanel {
     
     private func createStarBar(value:CGFloat, color:UIColor, y:CGFloat) -> HBar {
         let bar = HBar()
-        let w = value / 3 * (cellSize * 3)
+        let w = value / 3 * (cellSize * 2.5)
         bar.create(width: w, height: 5, value: 1, color: color)
         bar.position.y = y
         bar.position.x = cellSize * 0.5

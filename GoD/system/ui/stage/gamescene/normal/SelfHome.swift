@@ -32,16 +32,36 @@ class SelfHome: InnerHouse {
         
         if cell == CELL_ITEM {
             if point.x == 4 && point.y == 1 {
-                let item = getNextCellItem(x: 4, y: 1)
-                item.speak(text: "欢迎回家！")
                 let char = Game.instance.curStage._curScene._role!
-                char.actionHealed {
-                    char._unit._extensions.hp = char._unit._extensions.health
-                    Game.instance.curStage.setBarValue()
-                }
                 for m in Game.instance.char._minions {
                     m._extensions.hp = m._extensions.health
                 }
+                char.recovery1f() {
+                    char._unit._extensions.hp = char.getHealth()
+                    Game.instance.curStage.setBarValue()
+                }
+                
+                let stage = Game.instance.curStage!
+                stage.showDialog(img: SKTexture(imageNamed: "family").getCell(1, 0), text: "欢迎回家！", name: "小美")
+                let dlg = stage._curDialog!
+                let item = getNextCellItem(x: 4, y: 1)
+                dlg._battleAction = {
+                    stage.removeDialog(dlg: dlg)
+                    let battle = MiTyanBattle()
+                    battle.setEnemyPart(minions: Array<Creature>())
+                    let i = Game.instance
+                    battle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
+                    stage.addBattle(battle)
+                    battle.battleStart()
+                    battle.defeatAction = {
+                        item.speak(text: "你真厉害！")
+                    }
+                    battle.defeatedAction = {
+                        item.speak(text: "下次加油！")
+                    }
+                }
+                
+                
                 return true
             }
         }

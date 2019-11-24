@@ -5,7 +5,7 @@
 ////  Created by kai chen on 2018/4/15.
 ////  Copyright © 2018年 Chen. All rights reserved.
 ////
-//
+//  confirmed
 import SpriteKit
 class OutfitPanel: UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -151,27 +151,42 @@ class OutfitPanel: UIPanel {
             }
             if _lastSelectedIcon._displayItemType is Ring {
                 let ring = _lastSelectedIcon._displayItemType as! Ring
-                if _char._leftRing != nil && _char._rightRing != nil {
-                    _char._leftRing!.off()
+                if ring._unique && ring._effection == _char._leftRing?._effection {
+                    _char._leftRing?.off()
                     _char.addProp(p: _char._leftRing!)
                     _char._leftRing = ring
                     _leftRing.outfit = ring
                     _leftRing.iconLabel = ring._name
                     _leftRing.quality = ring._quality
-                } else
-                if _char._leftRing == nil {
-                    _char._leftRing = ring
-                    _leftRing.outfit = ring
-                    _leftRing.iconLabel = ring._name
-                    _leftRing.quality = ring._quality
-                } else if _char._rightRing == nil {
+                } else if ring._unique && ring._effection == _char._rightRing?._effection {
+                    _char._rightRing?.off()
+                    _char.addProp(p: _char._rightRing!)
                     _char._rightRing = ring
                     _rightRing.outfit = ring
                     _rightRing.iconLabel = ring._name
                     _rightRing.quality = ring._quality
-                } else {
-                    debug("ring on error in itempanel")
-                }
+                } else  if _char._leftRing != nil && _char._rightRing != nil {
+                   _char._leftRing!.off()
+                   _char.addProp(p: _char._leftRing!)
+                   _char._leftRing = ring
+                   _leftRing.outfit = ring
+                   _leftRing.iconLabel = ring._name
+                   _leftRing.quality = ring._quality
+               } else
+               if _char._leftRing == nil {
+                   _char._leftRing = ring
+                   _leftRing.outfit = ring
+                   _leftRing.iconLabel = ring._name
+                   _leftRing.quality = ring._quality
+               } else if _char._rightRing == nil {
+                   _char._rightRing = ring
+                   _rightRing.outfit = ring
+                   _rightRing.iconLabel = ring._name
+                   _rightRing.quality = ring._quality
+               } else {
+                   debug("ring on error in itempanel")
+               }
+                
                 _char.removeProp(p: ring)
                 ring.on()
                 

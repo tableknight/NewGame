@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class IceFist: Physical, HandSkill {
+class IceFist: HandSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -18,19 +18,21 @@ class IceFist: Physical, HandSkill {
         super.init()
         isClose = true
         _name = "碎冰拳"
-        _description = "对目标造成60%攻击力的伤害，附加当前生命15%的寒冰伤害"
+        _description = "对目标造成敏捷160%的物理伤害，附加当前生命15%的寒冰伤害"
         isWater = true
-        _rate = 0.6
+        _rate = 1.6
         _quality = Quality.GOOD
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
         let c = b._curRole
-        let this = self
+        let t = b._selectedTarget!
         c.actionAttack {
-            this.attack {
-                completion()
+            t.special3() {
+                self.attack {
+                    completion()
+                }
             }
         }
     }
@@ -42,17 +44,16 @@ class IceFist: Physical, HandSkill {
         let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                let attechment = c.getHp() * -0.15
+                let attechment = (c.weaponIs(LiosHold.EFFECTION) ? c.getHealth() : c.getHp()) * -0.15
                 t.actionAttacked(defend: t.isDefend) {
-                    t.showValue(value: damage) {
-                        completion()
-                    }
+                    t.showValue(value: damage)
                     let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)
                     setTimeout(delay: 0.5, completion: {
                         t.showValue(value: waterDamage, criticalFromSpell: false, damageType: DamageType.WATER, textColor: ElementColor.WATER, completion:{})
+                        completion()
                     })
                 }
-                t.attacked1()
+//                t.attacked1()
             }
         }
     }

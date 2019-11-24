@@ -27,7 +27,7 @@ class MightOfOaks: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            t.actionBuff {
+            t.cure1f() {
                 let s = Status()
                 s._type = Status.MIGHT_OF_OAKS
                 s._timeleft = 5

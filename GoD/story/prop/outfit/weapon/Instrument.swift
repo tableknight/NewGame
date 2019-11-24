@@ -42,48 +42,56 @@ class Instrument: Weapon {
     override func create() {
         create(level: _level)
     }
-    var _spellAppended = false
-    var _spell = Spell()
-    private func getName() -> String {
-        let names = ["颌骨","水晶","灵珠","魔首"]
-        return names.one()
-    }
-    override func on() {
-        let char = Game.instance.char!
-        if !(char.hasSpell(spell: _spell)) {
-            char._spells.append(_spell)
-            _spellAppended = true
-        }
-    }
-    override func off() {
-        if _spellAppended {
-            let char = Game.instance.char!
-            char.removeSpell(spell: _spell)
-            _spellAppended = false
-        }
-    }
-    private enum CodingKeys: String, CodingKey {
-        case _spellAppended
-        case _spell
-    }
     required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        let s = try values.decode(String.self, forKey: ._spell)
-        let l = Loot()
-        let allSpells = l.getAllSpells()
-        for spell in allSpells {
-            if NSClassFromString(s) == type(of: spell) {
-                _spell = spell
-                break
-            }
-        }
-        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(_spellAppended, forKey: ._spellAppended)
-        try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
     }
+//    var _spellAppended = false
+//    var _spell = Spell()
+//    private func getName() -> String {
+//        let names = ["颌骨","水晶","灵珠","魔首"]
+//        return names.one()
+//    }
+//    override func on() {
+//        super.on()
+//        let char = Game.instance.char!
+//        if !(char.hasSpell(spell: _spell)) {
+//            char._spells.append(_spell)
+//            _spellAppended = true
+//        }
+//    }
+//    override func off() {
+//        super.off()
+//        if _spellAppended {
+//            let char = Game.instance.char!
+//            char.removeSpell(spell: _spell)
+//            _spellAppended = false
+//        }
+//    }
+//    private enum CodingKeys: String, CodingKey {
+//        case _spellAppended
+//        case _spell
+//    }
+//    required init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        let s = try values.decode(String.self, forKey: ._spell)
+//        let l = Loot()
+//        let allSpells = l.getAllSpells()
+//        for spell in allSpells {
+//            if NSClassFromString(s) == type(of: spell) {
+//                _spell = spell
+//                break
+//            }
+//        }
+//        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(_spellAppended, forKey: ._spellAppended)
+//        try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
+//    }
 }

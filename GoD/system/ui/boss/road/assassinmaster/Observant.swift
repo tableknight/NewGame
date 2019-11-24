@@ -37,7 +37,7 @@ class Observant: Magical {
             c._extensions.destroy -= 100
         }
         c.actionCast {
-            c.actionBuff {
+            c.howl() {
                 c.addStatus(status: status)
                 completion()
             }

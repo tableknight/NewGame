@@ -11,7 +11,7 @@ class MenuButton:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
 //        let rect = SKShapeNode(
-        zPosition = UIStage.UILAYER
+        zPosition = MyScene.UI_LAYER_Z
         let bg = SKShapeNode(rect: CGRect(x: -cellSize * 0.5, y: -cellSize * 0.375, width: cellSize, height: cellSize * 0.75), cornerRadius:2)
         bg.fillColor = UIColor.black
 //        addChild(bg)
@@ -39,7 +39,7 @@ class RoundButton:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         //        let rect = SKShapeNode(
-        zPosition = UIStage.UILAYER
+        zPosition = MyScene.UI_LAYER_Z
         _label.fontSize = 20
         _label.align = "center"
         _label.position.y = _label.fontSize * 0.5

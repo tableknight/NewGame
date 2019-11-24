@@ -29,7 +29,7 @@ class FlashPowder: Magical {
         c.actionShoot {
             for t in ts {
                 if !self.hasMissed(target: t) {
-                    t.actionDebuff {
+                    t.hit1() {
                         let status = Status()
                         status._type = "_flash_powder"
                         status._labelText = "F"

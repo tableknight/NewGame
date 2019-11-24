@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Iberis:Boss {
+    static let LEVEL:CGFloat = 50
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -17,19 +18,23 @@ class Iberis:Boss {
     override init() {
         super.init()
         _name = "伊比利斯"
-        _img = SKTexture(imageNamed: "Iberis")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 2.5
         _growth.strength = 3
         _growth.agility = 2.5
         _growth.intellect = 2
+        _race = EvilType.DEMON
+        _level = Iberis.LEVEL
+        _img = SKTexture(imageNamed: "Iberis")
+        _imgUrl = "Iberis"
+        _spellsInuse = [DancingDragon(), FlameAttack(), ElementPowerUp()]
+    }
+    override func create(level: CGFloat) {
+        
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [ChopChop(), FlameAttack(), ElementPowerUp()]
         for _ in 0...3 {
             _spellsInuse.append(BossAttack())
         }

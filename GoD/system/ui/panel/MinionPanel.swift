@@ -12,7 +12,6 @@ class MinionPanel:SKSpriteNode {
         let touchPoint = touches.first?.location(in: self)
 //        let char = Data.instance._char!
         if _closeButton.contains(touchPoint!) {
-            close()
             return
 //        } else if _llt.contains(touchPoint!) {
 //            setRoleSeat(seat: BUnit.LLT, _llt)
@@ -122,7 +121,7 @@ class MinionPanel:SKSpriteNode {
         let stamina = AttrLabel()
         stamina.position.x = strength.position.x + xWidth
         stamina.position.y = firstLineY
-        stamina.text = "体力"
+        stamina.text = "防御"
         stamina.value = bChar.getStamina().toInt()
         stamina.background = more
         addChild(stamina)
@@ -184,7 +183,7 @@ class MinionPanel:SKSpriteNode {
         let defence = AttrLabel()
         defence.position.x = attack.position.x + xWidth
         defence.position.y = secondLineY
-        defence.text = "防御"
+        defence.text = "护甲"
         defence.value = def
         addChild(defence)
         
@@ -341,9 +340,6 @@ class MinionPanel:SKSpriteNode {
         _closeButton = btn
     }
     
-    private func close() {
-        Game.instance.stage.closeMinionPanel(panel: self)
-    }
     
 //    private func setRoleSeat(seat:String, _ node:SKSpriteNode) {
 //        let color = UIColor.lightGray

@@ -41,7 +41,7 @@ class FireBreath: Magical {
             t.actionAttacked {
                 t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
-                    if t.ifRingIs(FireCore()) {
+                    if t.ringIs(FireCore.EFFECTION) {
                         t.burning()
                     } else {
                         if self.d3() {
@@ -50,7 +50,7 @@ class FireBreath: Magical {
                     }
                 }
             }
-            t.flame1(index: 4)
+            t.breath()
         }
     }
 }

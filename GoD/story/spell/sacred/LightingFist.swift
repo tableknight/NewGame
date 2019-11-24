@@ -8,7 +8,7 @@
 
 
 import SpriteKit
-class LightingFist:Physical, HandSkill {
+class LightingFist:HandSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -17,34 +17,35 @@ class LightingFist:Physical, HandSkill {
     }
     override init() {
         super.init()
-        _name = "闪雷破"
-        _description = "对目标造成攻击85%的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
+        _name = "雷光拳"
+        _description = "对目标造成敏捷185%的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
         _quality = Quality.SACRED
-        _cooldown = 2
-        _rate = 0.85
+        _cooldown = 1
+        _rate = 1.85
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        _battle._curRole.actionAttack {
+        let c = _battle._curRole
+        c.actionAttack {
             let damage = self.physicalDamage(t)
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage)
-                    let thunderDamage = self.thunderFactor(from: self._battle._curRole, to: t) * damage * 0.35
+                    let thunderDamage = self.thunderFactor(from: c, to: t) * damage * 0.35
                     setTimeout(delay: 0.5, completion: {
                         t.showValue(value: thunderDamage, criticalFromSpell: false, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER) {
+                            
                             if self.d5() && !t.isDead() {
                                 t.showText(text: "TR -10") {
-                                    completion()
+                                    
                                 }
                                 t._elementalResistance.thunder -= 10
-                            } else {
-                                completion()
                             }
                         }
+                        completion()
                     })
                 }
-                t.attacked2()
+                t.hitThunder()
             }
         }
     }

@@ -23,12 +23,12 @@ class SoulStone: Armor {
     override func on() {
         super.on()
 //        _backup = Data.instance._char._race
-        Game.instance._char._race = _race
+        Game.instance.char._race = _race
     }
     
     override func off() {
         super.off()
-        let c = Game.instance._char!
+        let c = Game.instance.char!
 //        c._race = _backup
         if c._leftRing is RingOfDead || c._rightRing is RingOfDead {
             c._race = EvilType.RISEN

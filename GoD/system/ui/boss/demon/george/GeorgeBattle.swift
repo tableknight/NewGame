@@ -25,7 +25,7 @@ class GeorgeBattle: BossBattle {
 //    }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 61
+        let level:CGFloat = George.LEVEL
         var es = Array<Creature>()
         
         let s1 = GeorgeServant1()
@@ -47,6 +47,45 @@ class GeorgeBattle: BossBattle {
     }
     override func getSpellAttack() -> Spell {
         return GeorgeAttack()
+    }
+    
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 95 {
+            let i = FangOfVampire()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = PandoraHeart()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = RingOfReborn()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = TheEye()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = SoundOfWind()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: George.LEVEL)
+        return list + l.getList()
     }
 }
 

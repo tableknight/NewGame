@@ -8,51 +8,99 @@
 
 import SpriteKit
 import GameplayKit
-
+import AVFoundation
 
 class GameScene: SKScene {
     var _b = Button()
     override func didMove(to view: SKView) {
+        self.backgroundColor = UIColor.black
         Game.instance.scene = self
         Game.calcCellSize()
-        Mode.debug = true
-//        let lighting = Game.instance.pictureThunder1.getNode(0, 1, 1, 2)
-//        lighting.size = CGSize(width: 70 * 2, height: 70 * 4)
-//        lighting.anchorPoint = CGPoint(x: 0.5, y: 0)
-////        lighting.zPosition = _charNode.zPosition + 20
-//        addChild(lighting)
+//                homePage()
+//        printBoss()
         
+//        Mode.debug = true
+//        Mode.nocd = true
+//        Mode.nodefence = true
+        Mode.showdungeonall = true
+//        Mode.showbossall = true
+////
         realScene()
+//        let e = Game.instance.char!
+//        e.addProp(p: DeathTownScroll())
+//        e._spellsInuse = [FireFist(), IceFist(), QiWave(), LightingFist()]
+//        let ts = TheSurvive()
+//        ts.create()
+//        e.addProp(p: ts)
+//        let td = TheDeath()
+//        td.create()
+//        e.addProp(p: td)
+//        let tsp = TheSurpass()
+//        tsp.create()
+//        e.addProp(p: tsp)
+//        let ror = RingOfReborn()
+//        ror.create()
+//        e.addProp(p: ror)
+//        let eod = EyeOfDius()
+//        eod.create()
+//        e.addProp(p: eod)
 //
-//        let b = Button()
-//        b.text = "aa"
-//        b.zPosition = 1024
-//        addChild(b)
-//        _b = b
+//        let s = IdlirWeddingRing()
+//        s.create()
+//        e.addProp(p: s)
+//
+//        let s11 = IdlirWeddingRing()
+//        s11.create()
+//        e.addProp(p: s11)
+//
+//        let s1 = FingerBone()
+//        s1.create()
+//        e.addProp(p: s1)
+//
+//        addItem(outfit: PuppetMaster())
+//        addItem(outfit: RingOfDead())
+//        addItem(outfit: AssassinsSword())
+//        addItem(outfit: VerdasTear())
+//        addItem(outfit: DeepCold())
+//        addItem(outfit: NilSeal())
+//        addItem(outfit: DragonClaw())
+//        addItem(outfit: FollowOn())
+//        addItem(outfit: BansMechanArm())
+//        addItem(outfit: TrueLie())
+//        addItem(outfit: PuppetMark())
         
+        
+//        Model.startNoActionBattle(role: e)
+//        battle()
 
-//        homePage()
-//        for _ in 0...4 {
-//            let s = HellBaron()
-//            s.create(level: 1)
-//            Game.instance.char._minions.append(s)
-//        }
-//        for _ in 0...9 {
-//            let s = HellBaron()
-//            s.create(level: 1)
-//            Game.instance.char._storedMinions.append(s)
-//        }
-//        let m = MinionTradingPanel()
-//        m.create()
-//        Game.instance.curStage.showPanel(m)
+//        playSound("Dungeon1")
     }
-//    func getTryer() -> Tryer? {
-//        let us = UserDefaults.standard
-//        if let data = us.data(forKey: "tryer1") {
-//            return try? JSONDecoder().decode(Tryer.self, from: data)
-//        }
-//        return nil
-//    }
+    var audioPlayer:AVAudioPlayer = AVAudioPlayer()
+    func playSound(_ fileName: String) {
+        
+        let session = AVAudioSession.sharedInstance()
+        do{
+            try session.setActive(true)
+            try session.setCategory(AVAudioSession.Category.playback)
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+                    
+            let path = Bundle.main.path(forResource: fileName, ofType: "mp3")
+            let soudUrl = URL(fileURLWithPath: path!)
+            try audioPlayer = AVAudioPlayer(contentsOf: soudUrl)
+            audioPlayer.prepareToPlay()
+            audioPlayer.volume = 1.0
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.play()
+        } catch {
+            print("video file \(fileName) play failed!")
+            print(error)
+        }
+    }
+    func addItem(outfit:Outfit) {
+        outfit.create()
+        Game.instance.char.addProp(p: outfit)
+    }
+    var _layer = SKSpriteNode()
     func load() -> Array<RoleDocument>? {
         let us = UserDefaults.standard
         if let data = us.data(forKey: "bow") {
@@ -74,20 +122,6 @@ class GameScene: SKScene {
         addChild(welcome)
         
     }
-//    func save1(st:Tryer) {
-//        
-//        if let data = try? JSONEncoder().encode(st) {
-//            
-//            let us = UserDefaults.standard
-//            
-//            us.set(data, forKey: "tryer1")
-//            us.synchronize()
-//        }
-//    }
-
-//    private var label : SKLabelNode?
-//    private var spinnyNode : SKShapeNode?
-    
     func addOutfit() {
         for _ in 0...30 {
             let sword = Ring()
@@ -172,55 +206,10 @@ class GameScene: SKScene {
     }
     
     func battle() {
-        let b = GiantSpiritBattle()
-        var es = Array<Creature>()
-        
-        
-//        let p = CowCow()
-//        p.create(level: 47)
-//        p._sensitive = 100
-//
-//        p._spellsInuse = [DancingDragon()]
-//        es.append(p)
-        
-//        for _ in 0...4 {
-//            let p1 = CowCow()
-//            p1.create(level: 1)
-//            p1._sensitive = 100
-//
-//            p1._spellsInuse = [NoAction()]
-//            es.append(p1)
-//        }
-        
+        let b = IssBattle()
+        let es = Array<Creature>()
         b.setEnemyPart(minions: es)
-        
-//
-//        for s in b._enemyPart {
-//            s._unit._extensions.speed = 1
-////            let status = Status()
-////            status._type = Status.TURN_ATTACK
-////            status._timeleft = 5
-////            s.addStatus(status: status)
-//        }
-        
-        
-        
         let char = Game.instance.char!
-//        char._extensions.attack = 300
-//        char._extensions.spirit = 300
-//        char._spellsInuse = [LowerSummon(), WaterCopy(), HighLevelSummon()]
-//        char._spellsInuse = [Zealot(), FireRain(), SuperWater(), SixShooter()]
-//        char._revenge = 40
-        char._extensions.spirit = 2000
-        char._extensions.hp = 10000
-        char._extensions.health = 10000
-        char._spellsInuse = [LowlevelFlame()]
-        
-//        let sb = Bow()
-//        sb.create(level: 10)
-//        char._weapon = sb
-        
-//        let cs:Array<Creature> = [char]
         let cs:Array<Creature> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         
@@ -238,51 +227,52 @@ class GameScene: SKScene {
         
         
         let e = Emily()
+        e._level = 100
         e.create(level: e._level)
         e.addMoney(num: 1000)
-//        e._spells = [TruePower()]
-//        let bow = Bow()
-//        bow.create(level: 1)
-//        e.addProp(p: bow)
+        
+        for _ in 1...e._level.toInt() {
+            e.strengthChange(value: 1)
+            e.staminaChange(value: 1)
+            e.agilityChange(value: 3)
+//            e.staminaChange(value: 1)
+//            e.intellectChange(value: 4)
+        }
         
         
         bs.setRole(x: 5, y: 7, role: e)
-//        bs.setRole(x: bs._portalPrev.x, y: bs._portalPrev.y, role: e)
         stage.loadScene(scene: bs)
         stage.createMenu()
         addChild(stage)
         
-        e._level = 1
+        
         
         let aa = HellNight()
         aa.create(level: e._level)
 //        aa._seat = BUnit.BTL
         e._minions.append(aa)
         for _ in 0...4 {
-            let sn = SnowLady()
+            let sn = HellNight()
             sn.create(level: e._level)
 //            sn._seat = BUnit.BTR
             e._minions.append(sn)
         }
         
-//        e.strengthChange(value: 100)
-//        e.agilityChange(value: 70)
-//        e.staminaChange(value: 60)
-//        e.intellectChange(value: 0)
-        
         e._dungeonLevel = e._level.toInt()
         e._spellCount = 3
+        
+        //prop below
         
         e.hasShield = true
         e.hasMark = true
         
-        let w = Sword()
-        w.create(level: e._level)
-        e.addProp(p: w)
-        
-        let r = RingOfDeath()
-        r.create()
-        e.addProp(p: r)
+//        let w = Sword()
+//        w.create(level: e._level)
+//        e.addProp(p: w)
+//
+//        let r = RingOfDeath()
+//        r.create()
+//        e.addProp(p: r)
         
         let tss = TransportScroll()
         tss._count = 10
@@ -295,27 +285,25 @@ class GameScene: SKScene {
             e.addProp(p: r2)
         }
         
-        let a = Amulet()
-        a.create(level: e._level)
-        e.addProp(p: a)
+//        let a = Amulet()
+//        a.create(level: e._level)
+//        e.addProp(p: a)
+//
+//        let cm = CreationMatrix()
+//        cm.create()
+//        e.addProp(p: cm)
+//
+//        let s = Shield()
+//        s.create(level: e._level)
+//        e.addProp(p: s)
         
-        let cm = CreationMatrix()
-        cm.create()
-        e.addProp(p: cm)
-        
-        let s = Shield()
-        s.create(level: e._level)
-        e.addProp(p: s)
         e.addProp(p: WordlessBook())
         e.addProp(p: ThiefPocket())
         e.addProp(p: TearCluster())
-        e._spellsInuse = [SummonFlower()]
-//
-        
-//        let gt = SealScroll()
-//        gt._count = 10
-//        e.addProp(p: gt)
-////
+        e._spellsInuse = [SixShooter(), DancingDragon(), SuperWater(), FireRain()]
+        let eb = ExpBook()
+        eb._count = 26
+        e.addProp(p: eb)
         let ggg = TownScroll()
         ggg._count = 10
         e.addProp(p: ggg)
@@ -323,43 +311,15 @@ class GameScene: SKScene {
         let po = Potion()
         po._count = 10
         e.addProp(p: po)
-//        e._minionsCount = 1
-//        e._dungeonLevel = 99
-//
+        let st = GodTownScroll()
+        st._count = 10
+        e.addProp(p: st)
         
-        let bow = Bow()
-        bow.create(level: e._level)
-        e.addProp(p: bow)
-        
-        let t = TheWitchsTear()
-        t._count = 1000
-        e._props.append(t)
-        e.addProp(p: Loot().getSpellBook())
-//        let r1 = HellBaron()
-//        r1.create(level: 1)
-//        e._minions.append(r1)
-//
-//        let r2 = DarkNinja()
-//        r2.create(level: 1)
-//        e._minions.append(r2)
-//
-//        let r3 = HellNight()
-//        r3.create(level: 1)
-//        e._minions.append(r3)
-//
-//        let r4 = ForestGuard()
-//        r4.create(level: 1)
-//        e._minions.append(r4)
-        
+//        let bow = Bow()
+//        bow.create(level: e._level)
+//        e.addProp(p: bow)
         
         e.addProp(p: LevelUpScroll())
-//        e._spellsInuse = [BallLighting(), Refresh()]
-//        let rs = [e] + e._minions
-//        for r in rs {
-////            r._extensions.spirit = 300
-////            r._spellsInuse = [FireRain(), Refresh()]
-//        }
-        
     }
     
     private func startNewGame() {
@@ -377,7 +337,7 @@ class GameScene: SKScene {
         addChild(flow)
     }
     
-    func echoSpell(spell:Spell) {
+    func printSpell(spell:Spell) -> String {
         var str = "{name:\"\(spell._name)\","
         str.append("description:\"\(spell._description)\",")
         str.append("quality:\"\(spell._quality)\",")
@@ -395,8 +355,32 @@ class GameScene: SKScene {
         str.append("summon:\(spell is SummonSkill ? "true" : "false"),")
         str.append("close:\(spell.isClose ? "true" : "false")")
         str.append("},")
+        return str
+    }
+    
+    func printBossSpell(spell:Spell) -> String {
+        var str = "{name:\"\(spell._name)\","
+        str.append("description:\"\(spell._description)\",")
+        str.append("quality:\"\(spell._quality)\",")
+        str.append("cooldown:\"\(spell._cooldown)\"")
+        str.append("},")
+        return str
+    }
+    
+    func printBoss(boss:Boss) {
+        var str = "{name:\"\(boss._name)\","
+        str.append("level:\(boss._level),")
+        str.append("image:\"\(boss._imgUrl)\",")
+        str.append("race:\"\(EvilType.getTypeLabel(type: boss._race))\",")
+        str.append("stars:\"\(boss._growth.strength),\(boss._growth.stamina),\(boss._growth.agility),\(boss._growth.intellect)\",")
+        str.append("spells:[")
+        for s in boss._spellsInuse {
+            str.append(printBossSpell(spell: s))
+        }
+        str.append("]},")
         debug(str)
     }
+    
     
     func echoOutfit(item:Outfit) {
         let ai = ArmorInfo()
@@ -436,6 +420,25 @@ class GameScene: SKScene {
         debug(str)
     }
     
+    func printBoss() {
+        let road = [FearGhost(), GraveRobber(), AssassinMaster(), GiantSpirit(), FireSpirit(), IssThePuppet(), Mimic()]
+        let demon = [Idlir(), George(), Umisa(), Iberis(), Pitheron(), Dius(), Francis()]
+        let angel = [Lewis(), Sumahl(), Micalu(), Toppur()]
+        let npc = [Suvya()]
+        
+//        for b in npc {
+//            printBoss(boss: b)
+//        }
+        for b in road {
+            printBoss(boss: b)
+        }
+//        for b in demon {
+//            printBoss(boss: b)
+//        }
+//        for b in road {
+//            printBoss(boss: b)
+//        }
+    }
     
     func touchDown(atPoint pos : CGPoint) {
 //        if let n = self.spinnyNode?.copy() as! SKShapeNode? {

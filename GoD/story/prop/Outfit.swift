@@ -8,20 +8,29 @@
 
 import SpriteKit
 class Outfit:Prop {
+    static let TYPE_MAGIC_MARK = "magic_mark"
+    static let TYPE_INSTRUMENT = "instrument"
     private enum CodingKeys: String, CodingKey {
         case _attrs
         case _attrsClass
         case _outfitName
+        case _unique
+        case _effection
+        case _spellAppended
+        case _spell
+        case _originalImage
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let values = try decoder.container(keyedBy: CodingKeys.self)
         _attrs = try values.decode(Array.self, forKey: ._attrs)
         _outfitName = try values.decode(String.self, forKey: ._outfitName)
+        _effection = try values.decode(String.self, forKey: ._effection)
+        _unique = try values.decode(Bool.self, forKey: ._unique)
         let cls:Array<String> = try values.decode(Array.self, forKey: ._attrsClass)
         let allAttrs = [SpiritBase(), AttackAttributeBase(), Agility(),Chaos(),Stamina(),Defence(),Break(),Rhythm(),Health(),WaterResistance(),FireResistance(),
                         ThunderResistance(),Spirit(),ThunderPower(),Strength(),Intellect(),Revenge(),AttackAttribute(),
-                        Avoid(),Accuracy(),FirePower(),WaterPower(),ElementalPower(),Critical(),Speed(),Mind(),MagicalDamage(),Lucky(),ElementalResistance()]
+                        Avoid(),Accuracy(),FirePower(),WaterPower(),ElementalPower(),Critical(),Speed(),Mind(),MagicalDamage(),Lucky(),ElementalResistance(), Destroy(), HealthByRate()]
 //        var allAttrs = Array<Attribute>()
 //        for i in _all {
 //            allAttrs.append(getAttrById(id: i))
@@ -33,6 +42,8 @@ class Outfit:Prop {
                     if tp == type(of: a) {
                         a._value = _attrs[i]._value
                         a._name = _attrs[i]._name
+                        a._reserve1 = _attrs[i]._reserve1
+                        a._hidden = _attrs[i]._hidden
                         _attrs[i] = a
                         break
                     }
@@ -40,16 +51,44 @@ class Outfit:Prop {
             }
         }
         
+        let s = try? values.decode(String.self, forKey: ._spell)
+        if nil != s {
+            let l = Loot()
+            let allSpells = l.getAllSpells()
+            for spell in allSpells {
+                if NSClassFromString(s!) == type(of: spell) {
+                    _spell = spell
+                    break
+                }
+            }
+            _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+        }
+        
+        if _effection == IdlirWeddingRing.EFFECTION {
+            _originalImage = try values.decode(String.self, forKey: ._originalImage)
+        }
+        
     }
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_attrs, forKey: ._attrs)
         try container.encode(_outfitName, forKey: ._outfitName)
+        try container.encode(_effection, forKey: ._effection)
+        try container.encode(_unique, forKey: ._unique)
         var classNames = Array<String>()
         for i in _attrs {
             classNames.append(NSStringFromClass(type(of: i)))
         }
         try container.encode(classNames, forKey: ._attrsClass)
+        if nil != _spell {
+            try container.encode(_spellAppended, forKey: ._spellAppended)
+            try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
+        }
+        
+        if _effection == IdlirWeddingRing.EFFECTION {
+            try container.encode(_originalImage, forKey: ._originalImage)
+        }
+        
         try super.encode(to: encoder)
     }
     override init() {
@@ -142,12 +181,15 @@ class Outfit:Prop {
             _attrs.append(a)
         }
     }
-    func createAttr(attrId:Int, value:CGFloat = 0, remove:Bool = false) {
+    func createAttr(attrId:Int, value:CGFloat = 0, remove:Bool = false, hidden:Bool = false) {
         let attr = getAttrById(id: attrId)
         if value != 0 {
             attr._value = value
         } else {
             attr.create(level: _level)
+        }
+        if hidden {
+            attr._hidden = true
         }
         _attrs.append(attr)
         if remove {
@@ -197,6 +239,8 @@ class Outfit:Prop {
     var ATTACK_BASE = 26
     var SPIRIT_BASE = 27
     var MAGICAL_POWER = 28
+    var DESTROY = 29
+    var HEALTH_BY_RATE = 30
     internal func getAttrById(id:Int) -> Attribute {
         switch id {
         case STAMINA:
@@ -257,6 +301,10 @@ class Outfit:Prop {
             return SpiritBase()
         case MAGICAL_POWER:
             return MagicalDamage()
+        case DESTROY:
+            return Destroy()
+        case HEALTH_BY_RATE:
+            return HealthByRate()
         default:
             return Attribute()
         }
@@ -267,14 +315,83 @@ class Outfit:Prop {
             _all.remove(at: index!)
         }
     }
+    internal var _originalImage:String = ""
     func on() {
+        let char = Game.instance.char!
         for a in _attrs {
-            a.on(unit: Game.instance.char)
+            a.on(unit: char)
+        }
+        
+        if _type == Outfit.TYPE_MAGIC_MARK || _type == Outfit.TYPE_INSTRUMENT || _effection == RingOfReborn.EFFECTION || _effection == PandoraHeart.EFFECTION {
+            if !(char.hasSpell(spell: _spell)) {
+                char._spells.append(_spell)
+                _spellAppended = true
+            }
+        }
+        
+        if _effection == TrueLie.EFFECTION || _effection == TheEye.EFFECTION {
+            char._spellCount += 1
+        } else if _effection == PuppetMark.EFFECTION {
+            char._spellCount -= 1
+            if char._spellsInuse.count > char._spellCount {
+                let spell = char._spellsInuse.popLast()!
+                char._spells.append(spell)
+            }
+            char._minionsCount += 1
+        } else if _effection == IdlirWeddingRing.EFFECTION {
+            _originalImage = Game.instance.char._imgUrl
+            let t = SKTexture(imageNamed: "idlir_bride.png")
+            char._img = t
+            Game.instance.curStage._curScene._role._charTexture = t
+        } else if _effection == RingOfDead.EFFECTION {
+            char._race = EvilType.RISEN
+        } else if _effection == PuppetMaster.EFFECTION {
+            char._minionsCount += 1
         }
     }
     func off() {
+        let c = Game.instance.char!
         for a in _attrs {
-            a.off(unit: Game.instance.char)
+            a.off(unit: c)
+        }
+        
+        if _type == Outfit.TYPE_MAGIC_MARK || _type == Outfit.TYPE_INSTRUMENT || _effection == RingOfReborn.EFFECTION || _effection == PandoraHeart.EFFECTION {
+            if _spellAppended {
+                let char = Game.instance.char!
+                char.removeSpell(spell: _spell)
+                _spellAppended = false
+            }
+        }
+        
+        if _effection == TrueLie.EFFECTION || _effection == TheEye.EFFECTION {
+            if c._spellsInuse.count >= c._spellCount {
+                let last = c._spellsInuse.popLast()
+                c._spells.append(last!)
+            }
+            c._spellCount -= 1
+        } else if _effection == PuppetMark.EFFECTION {
+            c._minionsCount -= 1
+            let minions = c.getReadyMinions()
+            if minions.count > c._minionsCount {
+                minions[0]._seat = BUnit.STAND_BY
+            }
+            c._spellCount += 1
+        } else if _effection == IdlirWeddingRing.EFFECTION {
+            let t = SKTexture(imageNamed: _originalImage)
+            c._img = t
+            Game.instance.curStage._curScene._role._charTexture = t
+        } else if _effection == RingOfDead.EFFECTION {
+            if nil != c._soulStone {
+               c._race = c._soulStone!._race
+            } else {
+                c._race = EvilType.MAN
+            }
+        } else if _effection == PuppetMaster.EFFECTION {
+            c._minionsCount -= 1
+            let minions = c.getReadyMinions()
+            if minions.count > c._minionsCount {
+                minions[0]._seat = BUnit.STAND_BY
+            }
         }
     }
     
@@ -285,4 +402,8 @@ class Outfit:Prop {
     var isRandom = false
     var _chance:Int = 0
     var _outfitName = ""
+    var _unique = false
+    var _effection = ""
+    var _spell:Spell!
+    var _spellAppended = false
 }

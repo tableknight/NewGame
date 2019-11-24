@@ -107,7 +107,7 @@ class Predict: Magical {
         }
         c.actionCast {
             c.showText(text: speak)
-            c.actionBuff {
+            c.cure3t() {
                 c.addStatus(status: status)
                 completion()
             }

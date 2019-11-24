@@ -30,6 +30,7 @@ class SoulSlay: Physical {
         let damage = physicalDamage(t)
         c.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
+                t.darkness1f()
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()

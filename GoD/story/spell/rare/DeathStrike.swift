@@ -40,7 +40,8 @@ class DeathStrike: Magical {
                     c._extensions.spirit += 10
                     
                 }
-                t.mixed2(index: 16)
+//                t.mixed2(index: 16)
+                t.darkness1f()
             }
         }
     }

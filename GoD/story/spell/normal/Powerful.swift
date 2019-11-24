@@ -8,11 +8,11 @@
 
 import SpriteKit
 class Powerful: Passive {
-    static let VALUE:CGFloat = 25
+    static let VALUE:CGFloat = 15
     override init() {
         super.init()
         _name = "内生力量"
-        _description = "提升25点力量"
+        _description = "提升15点力量"
         _quality = Quality.NORMAL
         
     }

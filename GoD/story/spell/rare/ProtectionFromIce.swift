@@ -35,7 +35,7 @@ class ProtectionFromIce: Magical {
         
         let c = _battle._curRole
         c.actionCast {
-            t.actionBuff {
+            t.magic1f() {
                 completion()
             }
         }

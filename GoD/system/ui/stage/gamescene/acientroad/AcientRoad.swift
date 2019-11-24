@@ -30,8 +30,12 @@ class AcientRoad: Dungeon {
             _floorSize = createFloorSize()
             _bossFloor = seed(min: 1, max: _floorSize)
         } else {
-            _floorSize = Game.instance.curStage._scenes[0]._floorSize
-            _bossFloor = Game.instance.curStage._scenes[0]._bossFloor
+            let scenes = Game.instance.curStage._scenes
+            //bossroad用不到
+            if scenes.count > 0 {
+                _floorSize = scenes[0]._floorSize
+                _bossFloor = scenes[0]._bossFloor
+            }
         }
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
@@ -42,35 +46,43 @@ class AcientRoad: Dungeon {
         return sed
     }
     internal var _bossFloor = 0
+    
     override func createBoss() {
         let c = Core()
         if _level == 10 {
             _bossImg = "Iss"
-            _bossBattle = IssBattle()
+//            _bossBattle = IssBattle()
+            _bossIndex = 1
             addBoss()
-        } else if _level == FireSpirit.LEVEL && (c.d2() || Mode.debug) {
+        } else if _level == FireSpirit.LEVEL && (c.d2() || Mode.showbossall) {
             _bossImg = FireSpirit.IMG
-            _bossBattle = FireSpiritBattle()
+//            _bossBattle = FireSpiritBattle()
+            _bossIndex = 2
             addBoss()
-        } else if _level == GiantSpirit.LEVEL && (c.d3() || Mode.debug) {
+        } else if _level == GiantSpirit.LEVEL && (c.d3() || Mode.showbossall) {
             _bossImg = GiantSpirit.IMG
-            _bossBattle = GiantSpiritBattle()
+//            _bossBattle = GiantSpiritBattle()
+            _bossIndex = 3
             addBoss()
-        } else if _level == AssassinMaster.LEVEL && (c.d4() || Mode.debug) {
+        } else if _level == AssassinMaster.LEVEL && (c.d4() || Mode.showbossall) {
             _bossImg = AssassinMaster.IMG
-            _bossBattle = AssassinBattle()
+//            _bossBattle = AssassinBattle()
+            _bossIndex = 4
             addBoss()
-        } else if _level == GraveRobber.LEVEL && (c.d3() || Mode.debug) {
+        } else if _level == GraveRobber.LEVEL && (c.d3() || Mode.showbossall) {
             _bossImg = GraveRobber.IMG
-            _bossBattle = RobberBattle()
+//            _bossBattle = RobberBattle()
+            _bossIndex = 5
             addBoss()
-        } else if _level == FearGhost.LEVEL && (c.d5() || Mode.debug) {
+        } else if _level == FearGhost.LEVEL && (c.d5() || Mode.showbossall) {
             _bossImg = FearGhost.IMG
-            _bossBattle = GhostBattle()
+//            _bossBattle = GhostBattle()
+            _bossIndex = 6
             addBoss()
         }
         
     }
+    
     internal func addBoss() {
         if _index != _bossFloor {
             return
@@ -79,7 +91,7 @@ class AcientRoad: Dungeon {
         let maxx = hSize.toInt() - 1
         let maxy = vSize.toInt() - 1
         for y in 0...maxy {
-            for x in 0...maxx {
+            for x in 1...maxx {
                 if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
                     points.append(CGPoint(x: x, y: y))
                 }
@@ -90,7 +102,7 @@ class AcientRoad: Dungeon {
         
         let boss = UIItem()
         boss.setTexture(SKTexture(imageNamed: _bossImg))
-        boss.size = CGSize(width: cellSize * 1.5, height: cellSize * 1.5)
+        boss.size = CGSize(width: cellSize * 2, height: cellSize * 2)
         
         
         let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())

@@ -11,7 +11,7 @@ class SoulReaping: Magical {
     override init() {
         super.init()
         _name = "灵魂收割"
-        _description = "对所有地方单位造成精神50%的魔法伤害，偷去每个受伤单位15点精神"
+        _description = "对所有敌方单位造成精神50%的魔法伤害，偷取每个受伤单位15点精神"
         _rate = 0.5
         _quality = Quality.SACRED
         _cooldown = 3
@@ -25,6 +25,7 @@ class SoulReaping: Magical {
                 let damage = self.magicalDamage(t)
                 if !self.hasPhysicalEvent(t: t) {
                     i += 1
+                    t.darkness4fifth()
                     t.actionAttacked {
                         t.showValue(value: damage)
                         setTimeout(delay: 0.5, completion: {

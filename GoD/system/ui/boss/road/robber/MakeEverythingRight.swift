@@ -25,18 +25,24 @@ class MakeEverythingRight: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        
-        let status = Status()
-        status._type = Status.MAKE_EVERYTHING_RIGHT
-        status._labelText = "E"
-        status._timeleft = 4
+        let ts = _battle._selectedTargets
         c.actionCast {
-            c.actionBuff {
-                c.addStatus(status: status)
-                completion()
+            for t in ts {
+                let status = Status()
+                status._type = Status.MAKE_EVERYTHING_RIGHT
+                status._labelText = "E"
+                status._timeleft = 4
+            
+                t.magic1f() {
+                    t.addStatus(status: status)
+                    
+                }
             }
+            
         }
+        setTimeout(delay: 1.5, completion: completion)
     }
     override func findTarget() {
+        findTargetPartAll()
     }
 }

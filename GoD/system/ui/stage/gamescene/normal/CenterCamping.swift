@@ -79,6 +79,24 @@ class CenterCamping: StandScene {
                 stage.removeDialog(dlg: stage._curDialog!)
                 stage.showPanel(rp)
             }
+            
+            let dlg = stage._curDialog!
+//            let item = getNextCellItem(x: 4, y: 1)
+            dlg._battleAction = {
+                stage.removeDialog(dlg: dlg)
+                let battle = SuvyaBattle()
+                battle.setEnemyPart(minions: Array<Creature>())
+                let i = Game.instance
+                battle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
+                stage.addBattle(battle)
+                battle.battleStart()
+                battle.defeatAction = {
+//                    item.speak(text: "你真厉害！")
+                }
+                battle.defeatedAction = {
+//                    item.speak(text: "下次加油！")
+                }
+            }
             return true
         }
         let hb1 = getNextCellItem(x: 4, y: 3)

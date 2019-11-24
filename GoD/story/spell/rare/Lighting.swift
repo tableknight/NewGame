@@ -37,7 +37,14 @@ class Lighting: Passive {
                     }
                 }
             }
-            t.lighting1()
+            let sd = self.seed()
+            if sd < 33 {
+                t.thunder4s()
+            } else if sd < 66 {
+                t.thunder1f()
+            } else {
+                t.thunder1s()
+            }
         })
     }
     

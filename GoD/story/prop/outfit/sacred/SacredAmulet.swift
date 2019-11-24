@@ -8,37 +8,39 @@
 
 import SpriteKit
 class TrueLie: Amulet {
+    static let EFFECTION = "true_lie"
     override init() {
         super.init()
         _name = "真实的谎言"
-        _description = "获得一个额外的技能栏"
-        _level = 68
+        _description = "获得一个额外的技能卡槽"
+        _level = 48
         _chance = 5
         _quality = Quality.SACRED
-        price = 1689
+        _effection = TrueLie.EFFECTION
+        price = 889
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: AVOID, value: 35, remove: true)
-        createAttr(attrId: REVENGE, value: seedFloat(min: 15, max: 21), remove: true)
-        createAttr(attrId: SPIRIT, value: seedFloat(min: 50, max: 81), remove: true)
+        createAttr(attrId: AVOID, value: 30, remove: true)
+        createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 21), remove: true)
+        createAttr(attrId: SPIRIT, value: seedFloat(min: 30, max: 61), remove: true)
         _attrCount = 2
         createAttrs()
     }
-    override func on() {
-        super.on()
-        Game.instance.char._spellCount += 1
-    }
-    
-    override func off() {
-        super.off()
-        let c = Game.instance.char!
-        if c._spellsInuse.count >= c._spellCount {
-            let last = c._spellsInuse.popLast()
-            c._spells.append(last!)
-        }
-        c._spellCount -= 1
-    }
+//    override func on() {
+//        super.on()
+//        Game.instance.char._spellCount += 1
+//    }
+//    
+//    override func off() {
+//        super.off()
+//        let c = Game.instance.char!
+//        if c._spellsInuse.count >= c._spellCount {
+//            let last = c._spellsInuse.popLast()
+//            c._spells.append(last!)
+//        }
+//        c._spellCount -= 1
+//    }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -76,6 +78,7 @@ class MedalOfCourage:Amulet {
 }
 
 class FangOfVampire:Amulet {
+    static let EFFECTION = "fang_of_vampire"
     override init() {
         super.init()
         _name = "吸血鬼獠牙"
@@ -83,6 +86,7 @@ class FangOfVampire:Amulet {
         _level = 35
         _chance = 75
         _quality = Quality.SACRED
+        _effection = FangOfVampire.EFFECTION
         price = 229
     }
     
@@ -171,6 +175,7 @@ class Sparkling:Amulet {
     }
 }
 class MedalOfHero:Amulet {
+    static let EFFECTION = "medal_of_hero"
     override init() {
         super.init()
         _name = "英雄勋章"
@@ -178,6 +183,7 @@ class MedalOfHero:Amulet {
         _level = 18
         _chance = 60
         _quality = Quality.SACRED
+        _effection = MedalOfHero.EFFECTION
         price = 186
     }
     override func create() {
@@ -196,6 +202,7 @@ class MedalOfHero:Amulet {
     }
 }
 class JadeHeart:Amulet {
+    static let EFFECTION = "jade_heart"
     override init() {
         super.init()
         _name = "翡翠之心"
@@ -203,6 +210,7 @@ class JadeHeart:Amulet {
         _level = 43
         _chance = 20
         _quality = Quality.SACRED
+        _effection = JadeHeart.EFFECTION
         price = 654
     }
     override func create() {

@@ -27,9 +27,9 @@ class CutThroat: Physical {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: d) {
-                        t.showText(text: "SEALED") {
-                            completion()
-                        }
+//                        t.showText(text: "SEALED") {
+//                            completion()
+//                        }
                     }
                     for s in t._unit._spellsInuse {
                         if s is Active {
@@ -37,7 +37,7 @@ class CutThroat: Physical {
                         }
                     }
                 }
-                t.attacked1()
+                t.darkness1s()
             }
         }
     }

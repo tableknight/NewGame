@@ -107,6 +107,7 @@ class CreationFlow:SKSpriteNode {
                 e._spells.append(Zealot())
                 e._spells.append(SixShooter())
             }
+            e._props.append(LevelUpScroll())
             //-------------------------------------
             scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
             if minion != nil {

@@ -27,17 +27,20 @@ class SetTimeBack:Magical, Curse {
         _battle._curRole.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
-                    t.actionDebuff {
-                        t.showText(text: Spell.CURSED)
-                        for s in t._unit._spellsInuse {
-                            if s._timeleft > 0 {
-                                s._timeleft += 2
+                    setTimeout(delay: self.seed(to: 5).toFloat() / 10, completion: {
+                        t.sonic() {
+    //                        t.showText(text: Spell.CURSED)
+                            for s in t._unit._spellsInuse {
+                                if s._timeleft > 0 {
+                                    s._timeleft += 2
+                                }
                             }
                         }
-                    }
+                    })
+                    
                 }
             }
-            setTimeout(delay: 1.5, completion: completion)
+            setTimeout(delay: 1.8, completion: completion)
         }
     }
     

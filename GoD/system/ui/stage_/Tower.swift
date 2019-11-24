@@ -17,7 +17,7 @@ class Tower:UIItem {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    internal var _triggered = false
+    var _triggered = false
     var _text = ""
     var _towerName = ""
     func showDialog() {
@@ -273,7 +273,7 @@ class DefencePower:Status {
         super.init()
         _type = Status.DEFENCE_POWER
         _name = "守护之神"
-        _description = "提升50点防御和25点闪避。"
+        _description = "提升50点护甲和25点闪避。"
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

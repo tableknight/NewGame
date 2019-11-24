@@ -7,20 +7,25 @@
 //
 
 import SpriteKit
-class FireFist: Physical, HandSkill {
+class FireFist:HandSkill {
     override init() {
         super.init()
         isClose = true
         _name = "烈焰拳"
-        _description = "对目标造成攻击80%的火焰伤害"
+        _description = "对目标造成敏捷100%的火焰伤害"
         isFire = true
-        _rate = 0.8
+        _rate = 1.0
         _quality = Quality.GOOD
-        _cooldown = 1
+        _cooldown = 2
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
         let c = b._curRole
+        if c.weaponIs(DragonClaw.EFFECTION) {
+            _cooldown = 0
+        } else {
+            _cooldown = 2
+        }
         c.actionAttack {
             self.attack {
                 completion()
@@ -40,7 +45,7 @@ class FireFist: Physical, HandSkill {
                     }
                 }
             }
-            t.attacked1()
+            t.hitSpecial2()
         }
     }
     

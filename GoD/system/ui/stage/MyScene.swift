@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 class MyScene: SKSpriteNode, IInitialize {
     static let MAP_LAYER_Z:CGFloat = 10
+    static let UI_LAYER_Z:CGFloat = 108
     static let ROLE_LAYER_Z:CGFloat = 50
     static let ITEM_LAYER_Z:CGFloat = 100
     static let MASK_LAYER_Z:CGFloat = 1150
@@ -84,6 +85,7 @@ class MyScene: SKSpriteNode, IInitialize {
         if Game.instance.curStage.cancelMove {
             return
         }
+        
         if !_isMoving {
             _direction = calDirection(touchPoint: touchPoint!)
             move(touchPoint!)
@@ -97,6 +99,180 @@ class MyScene: SKSpriteNode, IInitialize {
     }
     internal func moveEndAction() {
         
+    }
+//    func moveNorth() {
+//        if _isMoving {
+//            return
+//        }
+//        _direction = NORTH
+//        let nextPoint = getNextPoint()
+//        let nextY = nextPoint.y.toInt()
+//        let nextX = nextPoint.x.toInt()
+//        if nextX < 0 || nextX > hSize.toInt() || nextY < 0 || nextY > vSize.toInt() - 1 {
+//            debug("out of matrix")
+//            _isMoving = false
+//            return
+//        }
+//        let nextCell = _mapMatrix[nextY][nextX]
+//        
+//        if CELL_EMPTY == nextCell || CELL_PORTAL == nextCell {
+//            let point = CGPoint(x: 0, y: cellSize)
+//            _role.moveNorth()
+//            let cgv = CGVector(dx: point.x, dy: point.y)
+//            let mv = SKAction.move(by: cgv, duration: TimeInterval(0.5))
+//            _isMoving = true
+//            _role.run(mv, completion: {
+//                self._isMoving = false
+//                self.moveEndAction()
+//            })
+//        }
+//    }
+    func moveTo() {
+        if _isMoving {
+            moreMoving = true
+            return
+        }
+//        _direction = SOUTH
+        let nextPoint = getNextPoint()
+        let nextY = nextPoint.y.toInt()
+        let nextX = nextPoint.x.toInt()
+        if nextX < 0 || nextX > hSize.toInt() || nextY < 0 || nextY > vSize.toInt() - 1 {
+            debug("out of matrix")
+            _isMoving = false
+            return
+        }
+        let nextCell = _mapMatrix[nextY][nextX]
+        
+        if CELL_EMPTY == nextCell || CELL_PORTAL == nextCell {
+            var point:CGPoint = CGPoint(x: cellSize, y: cellSize)
+            switch _direction {
+                case NORTH:
+                    _role.moveNorth()
+                    point = CGPoint(x: 0, y: cellSize)
+                    break
+                case SOUTH:
+                    _role.moveSouth()
+                    point = CGPoint(x: 0, y: -cellSize)
+                    break
+                case WEST:
+                    _role.moveWest()
+                    point = CGPoint(x: -cellSize, y: 0)
+                    break
+                case EAST:
+                    _role.moveEast()
+                    point = CGPoint(x: cellSize, y: 0)
+                    break
+                default:
+                    debug("no face direction in func move")
+            }
+            let cgv = CGVector(dx: point.x, dy: point.y)
+            let mv = SKAction.move(by: cgv, duration: TimeInterval(0.5))
+            _isMoving = true
+            _role.run(mv, completion: {
+                self._isMoving = false
+                self.moveEndAction()
+                if self.moreMoving {
+                    self.moveTo()
+                    self.moreMoving = false
+                }
+            })
+            return
+        }
+        if CELL_EMPTY != nextCell && CELL_PORTAL != nextCell {
+            switch _direction {
+            case NORTH:
+                _role.faceNorth()
+                break
+            case SOUTH:
+                _role.faceSouth()
+                break
+            case WEST:
+                _role.faceWest()
+                break
+            case EAST:
+                _role.faceEast()
+                break
+            default:
+                debug("no face direction in func move")
+            }
+        }
+    }
+//    func moveEast() {
+//        if _isMoving {
+//            return
+//        }
+//        _direction = EAST
+//        let nextPoint = getNextPoint()
+//        let nextY = nextPoint.y.toInt()
+//        let nextX = nextPoint.x.toInt()
+//        if nextX < 0 || nextX > hSize.toInt() || nextY < 0 || nextY > vSize.toInt() - 1 {
+//            debug("out of matrix")
+//            _isMoving = false
+//            return
+//        }
+//        let nextCell = _mapMatrix[nextY][nextX]
+//
+//        if CELL_EMPTY == nextCell || CELL_PORTAL == nextCell {
+//            let point = CGPoint(x: cellSize, y: 0)
+//            _role.moveEast()
+//            let cgv = CGVector(dx: point.x, dy: point.y)
+//            let mv = SKAction.move(by: cgv, duration: TimeInterval(0.5))
+//            _isMoving = true
+//            _role.run(mv, completion: {
+//                self._isMoving = false
+//                self.moveEndAction()
+//            })
+//        }
+//    }
+    func confirmEvent() {
+        let nextPoint = getNextPoint()
+        let nextY = nextPoint.y.toInt()
+        let nextX = nextPoint.x.toInt()
+        let nextCell = _mapMatrix[nextY][nextX]
+        
+        let touchPoint = getNextPixelPoint()
+        
+        if hasAction(cell: nextCell, touchPoint: touchPoint) {
+            
+            _isMoving = false
+            return
+        }
+        
+        if nextCell == CELL_BOX {
+            let box = getNextCellItem(x: nextX, y: nextY) as! Chest
+            if box.contains(touchPoint) {
+                box.triggerEvent()
+            }
+            _isMoving = false
+            return
+        } else
+        if nextCell == CELL_TOWER {
+            let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
+            if tower.contains(touchPoint) {
+                if !tower._triggered {
+                    tower.triggerEvent()
+                    self._role.stateUp2()
+                }
+            }
+            _isMoving = false
+            return
+        } else
+        if nextCell == CELL_MONSTER {
+            meetMonster(nextCell, nextX, nextY, touchPoint)
+            _isMoving = false
+            return
+        }
+        
+        if nextCell == CELL_ITEM {
+            _isMoving = false
+            return
+        }
+        
+        if nextCell == CELL_SELLER {
+            deal()
+            _isMoving = false
+            return
+        }
     }
     func move(_ touchPoint:CGPoint) {
         let nextPoint = getNextPoint()
@@ -145,7 +321,10 @@ class MyScene: SKSpriteNode, IInitialize {
         if nextCell == CELL_TOWER {
             let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
             if tower.contains(touchPoint) {
-                tower.triggerEvent()
+                if !tower._triggered {
+                    tower.triggerEvent()
+                    self._role.stateUp2()
+                }
             }
             _isMoving = false
             return
@@ -171,22 +350,18 @@ class MyScene: SKSpriteNode, IInitialize {
         var point:CGPoint = CGPoint(x: cellSize, y: cellSize)
         switch _direction {
             case NORTH:
-//                _role.faceNorth()
                 _role.moveNorth()
                 point = CGPoint(x: 0, y: cellSize)
                 break
             case SOUTH:
-//                _role.faceSouth()
                 _role.moveSouth()
                 point = CGPoint(x: 0, y: -cellSize)
                 break
             case WEST:
-//                _role.faceWest()
                 _role.moveWest()
                 point = CGPoint(x: -cellSize, y: 0)
                 break
             case EAST:
-//                _role.faceEast()
                 _role.moveEast()
                 point = CGPoint(x: cellSize, y: 0)
                 break
@@ -259,6 +434,24 @@ class MyScene: SKSpriteNode, IInitialize {
             return CGPoint(x: position.x - 1, y: position.y)
         case EAST:
             return CGPoint(x: position.x + 1, y: position.y)
+        default:
+            return position
+        }
+    }
+    func getNextPixelPoint() -> CGPoint {
+        let position = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
+        let x = _role.position.x
+        let y = _role.position.y
+        let gap = cellSize * 1
+        switch _direction {
+        case NORTH:
+            return CGPoint(x: x, y: y + gap)
+        case SOUTH:
+            return CGPoint(x: x, y: y - gap)
+        case WEST:
+            return CGPoint(x: x - gap, y: y)
+        case EAST:
+            return CGPoint(x: x + gap, y: y)
         default:
             return position
         }
@@ -587,6 +780,7 @@ class MyScene: SKSpriteNode, IInitialize {
     internal var _vSize:CGFloat = 12
     internal var _direction = 0
     internal var _isMoving = false
+    var moreMoving = false
     internal var _nextDirection = 0
     internal var _portalPrev:CGPoint!
     internal var _portalNext:CGPoint!
@@ -638,11 +832,11 @@ class Chest:UIItem {
             b.defeatAction = {
 //                self.loot()
                 let l = Loot()
-                let char = Game.instance.char!
-                let roles = [char] + char.getReadyMinions()
+//                let char = Game.instance.char!
+                let roles = b._playerPart
                 for c in roles {
-                    let exp = l.getExp(selfLevel: c._level, enemyLevel: Game.instance.curStage._curScene._level) * 10
-                    c.expUp(up: exp)
+                    let exp = l.getExp(selfUnit: c, enemyLevel: Game.instance.curStage._curScene._level) * 10
+                    c._unit.expUp(up: exp)
                 }
                 self.confirmAction()
             }

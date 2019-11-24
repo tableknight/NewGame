@@ -46,7 +46,7 @@ struct DamageType {
     static let FIRE = 3
     static let WATER = 4
     static let THUNDER = 5
-    static let FWMIXED = 34
+    static let FWMIXED = 34 //冰火混合
 }
 struct Quality {
     static let NORMAL = 1
@@ -151,6 +151,7 @@ struct DamageColor {
     static let DAMAGE = UIColor.init(red: 1, green: 0.137, blue: 0.137, alpha: 1)
     static let HEAL = UIColor.green
     static let NORMAL = UIColor.white
+    static let MAGICAL = UIColor.init(red: 1, green: 0.137, blue: 0.137, alpha: 1)
     static let FIRE = UIColor.orange
     static let WATER = UIColor.init(red: 0.2, green: 0.53, blue: 1, alpha: 1)
     static let THUNDER = UIColor.yellow
@@ -186,10 +187,6 @@ struct Position {
     static let WEST:Int = 2
     static let EAST:Int = 1
     static let SOUTH:Int = 3
-}
-struct Mode {
-    static var debug = false
-    static let nocd = false
 }
 struct Cell {
     static func pot() -> SKTexture {
@@ -240,7 +237,7 @@ class Game {
     static let ICON_GAP:CGFloat = 12
     static let FRAME_SIZE:CGFloat = 0.3
     static let instance = Game()
-    var stage:UIStage!
+//    var stage:UIStage!
     var scene:GameScene!
     var role:BUnit!
     var char:Character!
@@ -307,11 +304,10 @@ class Game {
     var pictureAttacked1 = SKTexture(imageNamed: "attacked1")
     var pictureWater1 = SKTexture(imageNamed: "water1")
     var pictureWater2 = SKTexture(imageNamed: "water2")
-    var pictureWater3 = SKTexture(imageNamed: "water3")
+    var pictureWater3 = SKTexture(imageNamed: "water3_m")
     var pictureMixed = SKTexture(imageNamed: "mixed")
     private init() {
 //        c += 1;
-//        print(c)
         _size = 48
         _fontSize = _size * 0.25
         cellSize = 61
@@ -360,7 +356,7 @@ class Game {
         }
 
     }
-    var _char:Character!
+//    var _char:Character!
     static func createCloseButton() -> Button {
         let btn = Button()
         btn.text = "关闭"
@@ -469,8 +465,6 @@ class Game {
 //        return nil
 //    }
     static func log(text:String) {
-        Game.instance.logs.append(text)
-        Game.instance.stage.showLogs()
     }
     static var roles = Array<RoleDocument>()
     static func calcCellSize() {
@@ -495,9 +489,7 @@ class Game {
         Game.CELLSIZE = uiSize
         Game.instance.cellSize = imgSize
     }
-}
-func debugger(_ text:String) {
-    print(text)
+    
 }
 func debug(_ text:String) {
     print(text)

@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Steal: Physical, HandSkill {
+class Steal: HandSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -17,7 +17,7 @@ class Steal: Physical, HandSkill {
     override init() {
         super.init()
         _name = "行窃"
-        _description = "对目标和自己造成攻击50%的物理伤害，或者偷取目标1体力，1力量，1敏捷，1智力"
+        _description = "对目标和自己造成敏捷50%的物理伤害，或者偷取目标1防御，1力量，1敏捷，1智力"
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 0.5
@@ -39,12 +39,16 @@ class Steal: Physical, HandSkill {
                             }
                         })
                     })
-                    t.attacked2()
+                    t.howl()
                 } else {
                     setTimeout(delay: 1, completion: {
                         t.showText(text: "STOLEN") {
                             completion()
                         }
+                        setTimeout(delay: 1, completion: {
+                            c.showText(text: "HAHA")
+                        })
+                        
                     })
                     t.strengthChange(value: -1)
                     t.staminaChange(value: -1)

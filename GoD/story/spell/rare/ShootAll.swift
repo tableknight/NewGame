@@ -37,6 +37,7 @@ class ShootAll: Physical, BowSkill {
                 t.actionAttacked {
                     t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                 }
+                t.hit2()
             }
         }
         

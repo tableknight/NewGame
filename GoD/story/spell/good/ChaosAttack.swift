@@ -51,7 +51,7 @@ class ChaosAttack:Physical {
                 t.actionAttacked {
                     t.showValue(value: damage, criticalFromSpell: cfs, damageType: type, textColor: color, completion: completion)
                 }
-                t.attacked2()
+                t.darkness4fifth()
             }
         }
     }

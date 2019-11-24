@@ -34,7 +34,10 @@ class SpiritIntervene: Magical {
             let max = ro._extensions.spirit.toInt()
             let change = this.seed(min: 0, max: max).toFloat()
             t._extensions.spirit = change - t._unit._extensions.spirit
-            t.showText(text: "SPIRIT \(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
+            t.sonic() {
+                t.showText(text: "\(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
+            }
+            
         }
     }
     

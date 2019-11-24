@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Hawkeye:Bow {
+    static let EFFECTION = "hawk_eye"
     override init() {
         super.init()
         _name = "鹰眼"
@@ -15,6 +16,7 @@ class Hawkeye:Bow {
         _level = 33
         _chance = 50
         _quality = Quality.SACRED
+        _effection = Hawkeye.EFFECTION
         price = 235
     }
     override func create() {
@@ -33,6 +35,7 @@ class Hawkeye:Bow {
     }
 }
 class Boreas:Bow {
+    static let EFFECTION = "boreas"
     override init() {
         super.init()
         _name = "北风之神"
@@ -40,6 +43,7 @@ class Boreas:Bow {
         _level = 55
         _chance = 100
         _quality = Quality.SACRED
+        _effection = Boreas.EFFECTION
         price = 455
     }
     override func create() {
@@ -63,7 +67,7 @@ class Skylark:Bow {
     override init() {
         super.init()
         _name = "云雀"
-        _description = "射箭的声音像云雀的叫声"
+        _description = "射箭时发出云雀般的声音"
         _level = 11
         _chance = 100
         _quality = Quality.SACRED
@@ -84,15 +88,39 @@ class Skylark:Bow {
     }
 }
 
-class SoundOfWind:Bow {
+class Aonena:Bow {
     override init() {
         super.init()
-        _name = "风声"
-        _description = "像风一样灵巧"
+        _name = "艾欧妮娜"
+        _description = "王国一等弓箭手之弓"
+        _level = 24
+        _chance = 55
+        _quality = Quality.SACRED
+        price = 148
+    }
+    override func create() {
+        createSelfAttrs()
+        _attrCount = 6
+        createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+class SoundOfWind:Bow {
+    
+    override init() {
+        super.init()
+        _name = "丧钟"
+        _description = ""
         _level = 66
         _chance = 30
         _quality = Quality.SACRED
-        price = 677
+        price = 1677
     }
     override func create() {
         createAttr(attrId: ATTACK_BASE)
@@ -101,6 +129,32 @@ class SoundOfWind:Bow {
         createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 51), remove: true)
         createAttr(attrId: INTELLECT, value: seedFloat(min: 30, max: 51), remove: true)
         createAttr(attrId: AVOID, value: seedFloat(min: 30, max: 51), remove: true)
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+class FollowOn:Bow {
+    static let EFFECTION = "follow_on"
+    override init() {
+        super.init()
+        _name = "追击"
+        _description = "你的随从会攻击你上一个攻击的的目标"
+        _level = 36
+        _chance = 30
+        _quality = Quality.SACRED
+        _effection = FollowOn.EFFECTION
+        price = 400
+    }
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: ACCURACY, remove: true)
+        _attrCount = seed(min: 3, max: 6)
+        createAttrs()
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

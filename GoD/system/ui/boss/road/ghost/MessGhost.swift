@@ -11,7 +11,7 @@ class MessGhost: Magical {
     override init() {
         super.init()
         _name = "鬼影重重"
-        _description = "被诅咒的目标会收到两次法术伤害"
+        _description = "被诅咒的目标会双倍的魔法伤害"
         _quality = Quality.RARE
         _cooldown = 3
     }

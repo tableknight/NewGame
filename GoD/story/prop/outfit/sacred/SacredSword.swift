@@ -88,6 +88,7 @@ class NewSword: Sword {
     }
 }
 class DragonSlayer: Sword {
+    static let EFFECTION = "dragon_slayer"
     override init() {
         super.init()
         _name = "屠龙者"
@@ -95,6 +96,7 @@ class DragonSlayer: Sword {
         _level = 65
         _chance = 15
         _quality = Quality.SACRED
+        _effection = DragonSlayer.EFFECTION
         price = 851
     }
     
@@ -102,9 +104,9 @@ class DragonSlayer: Sword {
         createSelfAttrs()
         createAttr(attrId: STAMINA, value: 50)
         removeAttrId(id: STAMINA)
-        createAttr(attrId: CRITICAL, value: 25)
+        createAttr(attrId: CRITICAL, value: 45)
         removeAttrId(id: CRITICAL)
-        createAttr(attrId: REVENGE,value: 15)
+        createAttr(attrId: REVENGE,value: 25)
         removeAttrId(id: REVENGE)
         _attrCount = 3
         createAttrs()
@@ -117,13 +119,15 @@ class DragonSlayer: Sword {
     }
 }
 class DragonSaliva: Sword {
+    static let EFFECTION = "dragon_saliva"
     override init() {
         super.init()
         _name = "龙涎剑"
-        _description = "普通攻击附带30%的火焰伤害。"
+        _description = "攻击附带30%的火焰伤害。"
         _level = 81
         _chance = 10
         _quality = Quality.SACRED
+        _effection = DragonSaliva.EFFECTION
         price = 1882
     }
     override func create() {
@@ -148,6 +152,7 @@ class DragonSaliva: Sword {
     }
 }
 class TheExorcist:Sword {
+    static let EFFECTION = "the_exoricist"
     static let CHANCE:Int = 35
     override init() {
         super.init()
@@ -156,6 +161,7 @@ class TheExorcist:Sword {
         _level = 35
         _chance = 35
         price = 124
+        _effection = TheExorcist.EFFECTION
         _quality = Quality.SACRED
     }
     override func create() {
@@ -175,6 +181,7 @@ class TheExorcist:Sword {
     }
 }
 class BloodBlade:Sword {
+    static let EFFECTION = "blood_blade"
     override init() {
         super.init()
         _name = "血刃"
@@ -182,6 +189,7 @@ class BloodBlade:Sword {
         _level = 25
         _chance = 25
         price = 86
+        _effection = BloodBlade.EFFECTION
         _quality = Quality.SACRED
     }
     override func create() {
@@ -200,6 +208,7 @@ class BloodBlade:Sword {
     }
 }
 class ElementalSword:Sword {
+    static let EFFECTION = "elemental_sword"
     override init() {
         super.init()
         _name = "元素剑"
@@ -207,6 +216,7 @@ class ElementalSword:Sword {
         _level = 38
         _chance = 15
         price = 542
+        _effection = ElementalSword.EFFECTION
         _quality = Quality.SACRED
     }
     override func create() {
@@ -216,21 +226,7 @@ class ElementalSword:Sword {
         _attrCount = 3
         createAttrs()
     }
-    private var _spell:Spell!
-    override func on() {
-        let c = Game.instance.char!
-        if !c.hasSpell(spell: ElementMaster()) {
-            _spell = ElementMaster()
-            c._spellsHidden.append(_spell)
-        }
-    }
-    override func off() {
-        if nil != _spell {
-            let c = Game.instance.char!
-            let i = c._spellsHidden.firstIndex(of: _spell)
-            c._spellsHidden.remove(at: i!)
-        }
-    }
+    
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -239,6 +235,7 @@ class ElementalSword:Sword {
     }
 }
 class IberisHand:Sword {
+    static let EFFECTION = "iberis_hand"
     override init() {
         super.init()
         _name = "伊比利斯之舞"
@@ -246,6 +243,7 @@ class IberisHand:Sword {
         _level = 42
         _chance = 15
         _quality = Quality.SACRED
+        _effection = IberisHand.EFFECTION
         price = 448
     }
     override func create() {
@@ -265,3 +263,39 @@ class IberisHand:Sword {
     }
 }
 
+class AssassinsSword:Sword {
+    override init() {
+        super.init()
+        _name = "刺客之刃"
+        _description = "提升50点必杀和50点毁灭"
+        _level = 41
+        _chance = 15
+        _quality = Quality.SACRED
+        price = 420
+    }
+    override func create() {
+        createAttr(attrId: ATTACK_BASE)
+        createAttr(attrId: CRITICAL, value: 50, remove: true, hidden: true)
+        createAttr(attrId: DESTROY, value: 50, remove: true, hidden: true)
+        createAttr(attrId: AGILITY, value: seedFloat(min: 25, max: 31), remove: true)
+        createAttr(attrId: ACCURACY, value: seedFloat(min: 25, max: 31), remove: true)
+        createAttr(attrId: AVOID, value: seedFloat(min: 25, max: 31), remove: true)
+        createAttr(attrId: LUCKY, value: seedFloat(min: 25, max: 31), remove: true)
+    }
+    override func on() {
+        super.on()
+//        Game.instance.char._extensions.critical += 50
+//        Game.instance.char._extensions.destroy += 50
+    }
+    override func off() {
+        super.off()
+//        Game.instance.char._extensions.critical -= 50
+//        Game.instance.char._extensions.destroy -= 50
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}

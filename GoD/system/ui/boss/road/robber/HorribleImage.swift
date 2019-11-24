@@ -18,7 +18,7 @@ class HorribleImage: Magical {
         super.init()
         _cooldown = 3
         _name = "恐怖怪像"
-        _description = "降低所有目标50%防御和50%精神"
+        _description = "降低所有目标50%护甲和50%精神"
         _quality = Quality.RARE
         autoCast = true
     }
@@ -40,7 +40,7 @@ class HorribleImage: Magical {
                     t._extensions.defence += v2
                 }
                 if !self.statusMissed(baseline: 55, target: t) {
-                    t.actionDebuff {
+                    t.stateSleepf() {
                         t.addStatus(status: status)
                     }
                 }

@@ -26,7 +26,7 @@ class SpringIsComing:Magical {
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
         _battle._curRole.actionCast {
-            t.actionBuff {
+            t.recovery1f {
                 completion()
                 let s = Status()
 //                s._labelText = "L"

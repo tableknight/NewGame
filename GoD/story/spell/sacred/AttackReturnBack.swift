@@ -26,7 +26,7 @@ class AttackReturnBack: Magical {
         status._timeleft = 2
         t.addStatus(status: status)
         c.actionCast {
-            t.mixed1(index: 16) {
+            t.mixed2(index: 16) {
                 completion()
             }
         }

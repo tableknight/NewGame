@@ -28,6 +28,7 @@ class TreadEarth: Physical, BossOnly {
         let c = _battle._curRole
         let ts = _battle._selectedTargets
         c.actionShoot {
+            c.earth5()
             for t in ts {
                 let damage = self.physicalDamage(t)
                 if !self.hasPhysicalEvent(t: t) {

@@ -19,7 +19,7 @@ class DancingDragon: Physical {
         _name = "乱舞"
         _description = "对目标造成2-5次攻击，每次造成攻击力35%的物理伤害"
         _rate = 0.35
-        _cooldown = 0
+        _cooldown = 2
         _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
@@ -31,6 +31,7 @@ class DancingDragon: Physical {
         }
         let times = 1 + seed(to: max)
         _battle._curRole.actionAttack {
+            t.clawSpecial1()
             for i in 0...times {
                 if i == 0 {
                     let damage = self.physicalDamage(t)
@@ -59,5 +60,8 @@ class DancingDragon: Physical {
                 }
             })
         }
+    }
+    override func selectable() -> Bool {
+        return _battle._curRole._unit.isClose()
     }
 }

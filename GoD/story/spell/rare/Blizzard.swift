@@ -26,17 +26,17 @@ class Blizzard: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            t.mixed1(index: 13) {
+            t.cure3t() {
                 t.freezing()
                 completion()
             }
             let ts = self.getAdajcentUnits(target: t)
             if ts.count < 1 {
             } else {
-                setTimeout(delay: 0.5, completion: {
+                setTimeout(delay: 0.25, completion: {
                     for u in ts {
                         if !self.statusMissed(baseline: 50, target: u) {
-                            u.mixed1(index: 13) {
+                            u.cure3t() {
                                 u.freezing()
                             }
                         }

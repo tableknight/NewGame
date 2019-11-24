@@ -8,22 +8,25 @@
 
 import SpriteKit
 class Lewis:Boss {
+    static let LEVEL:CGFloat = 41
     override init() {
         super.init()
         _name = "路易斯"
-        _img = SKTexture(imageNamed: "Lewis")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 3
         _growth.strength = 2.5
         _growth.agility = 1.8
         _growth.intellect = 3
+        _race = EvilType.ANGEL
+        _level = Lewis.LEVEL
+        _spellsInuse = [HandOfGod(), PowerUp(), OathBreaker(), SoulWatch()]
+        _img = SKTexture(imageNamed: "Lewis")
+        _imgUrl = "Lewis"
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 5
         _extensions.hp = _extensions.health
-        
-        _spellsInuse = []
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

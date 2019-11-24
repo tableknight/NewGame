@@ -10,13 +10,13 @@ import SpriteKit
 class FlowerOfHeal: SummonUnit {
     override init() {
         super.init()
-        _stars.strength = 1.3
+        _stars.strength = 0.8
         _stars.stamina = 1.8
-        _stars.agility = 1.0
-        _stars.intellect = 1.0
+        _stars.agility = 0.8
+        _stars.intellect = 2.5
         _sensitive = 100
         _name = "治疗之花"
-        _img = SKTexture(imageNamed: "13000013.png")
+        _img = SKTexture(imageNamed: "heal_flower.png")
         _spellsInuse = [HealOfFlower()]
         _race = EvilType.NATURE
         _last = 5

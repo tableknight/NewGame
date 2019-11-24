@@ -28,7 +28,7 @@ class DiusBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 33
+        let level:CGFloat = Dius.LEVEL
         var es = Array<Creature>()
         
         let t = Dius()
@@ -37,6 +37,56 @@ class DiusBattle: BossBattle {
         es.append(t)
         
         super.setEnemyPart(minions: es)
+    }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 55 {
+            let i = VerdasTear()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = EyeOfDius()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Hawkeye()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = FollowOn()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheSurvive()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheDeath()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheAbandon()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Dius.LEVEL)
+        return list + l.getList()
     }
 }
 class ExposeWeakness: Passive, BossOnly {
@@ -58,7 +108,7 @@ class ExposeWeakness: Passive, BossOnly {
         var text = ""
         _weakness = seed(max: 5)
         if Dius.DEFENCE == _weakness {
-            text = "防御弱化"
+            text = "护甲弱化"
         } else if Dius.SPIRIT == _weakness {
             text = "精神弱化"
         } else if Dius.FIRE == _weakness {
@@ -76,47 +126,14 @@ class ExposeWeakness: Passive, BossOnly {
 //        if _weakness > 4 {
 //            _weakness = 0
 //        }
+        _battle._curRole.sonic()
         _battle._curRole.showText(text: text) {
             completion()
         }
     }
 }
 
-class SuperWater:Magical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "超级洪流"
-        _description = "对所有敌方目标造成精神45%的寒冰伤害"
-        _rate = 0.45
-        _cooldown = 3
-        isWater = true
-        _quality = Quality.RARE
-        autoCast = true
-    }
-    override func cast(completion: @escaping () -> Void) {
-        _battle._curRole.actionCast {
-            for t in self._battle._selectedTargets {
-                let damage = self.waterDamage(t)
-                if !self.hadSpecialAction(t: t) {
-                    t.actionAttacked {
-                        t.showValue(value: damage, criticalFromSpell: false, critical: false, damageType: DamageType.WATER, textColor: DamageColor.WATER)
-                    }
-                    t.water1(index: 4)
-                }
-            }
-            setTimeout(delay: 2.5, completion: completion)
-        }
-    }
-    override func findTarget() {
-        findtargetAll()
-    }
-}
+
 class FireExplode:Magical {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -141,7 +158,7 @@ class FireExplode:Magical {
                     t.showValue(value: damage) {
                         completion()
                     }
-                    if t.ifRingIs(FireCore()) {
+                    if t.ringIs(FireCore.EFFECTION) {
                         t.burning()
                     } else {
                         if self.d7() {
@@ -149,7 +166,7 @@ class FireExplode:Magical {
                         }
                     }
                 }
-                t.flame3()
+                t.fire3f()
                 
             }
         }

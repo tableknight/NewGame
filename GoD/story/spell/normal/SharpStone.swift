@@ -8,11 +8,11 @@
 
 import SpriteKit
 class SharpStone: Passive {
-    static let VALUE:CGFloat = 25
+    static let VALUE:CGFloat = 15
     override init() {
         super.init()
         _name = "精石为开"
-        _description = "提升25点敏捷"
+        _description = "提升15点敏捷"
         _quality = Quality.NORMAL
         
     }

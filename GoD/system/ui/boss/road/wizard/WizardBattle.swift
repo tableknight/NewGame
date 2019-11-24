@@ -14,15 +14,6 @@ class WizardBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    //    override func createAI() {
-    //        if _curRole._unit is Boss {
-    //            _selectedSpell._battle = self
-    //            _selectedSpell.findTarget()
-    //            execOrder()
-    //        } else {
-    //            super.createAI()
-    //        }
-    //    }
     
     override func setEnemyPart(minions: Array<Creature>) {
         let level:CGFloat = 50
@@ -65,7 +56,6 @@ class FireMatrix:Magical {
                 u._elementalPower.fire -= 20
                 u._elementalResistance.fire -= 20
                 s.timeupAction = {
-                    debugger("time up")
                     u._elementalPower.fire += 20
                     u._elementalResistance.fire += 20
                 }

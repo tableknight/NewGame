@@ -13,18 +13,22 @@ class GiantSpirit:Boss {
     override init() {
         super.init()
         _name = "巨人之魂"
-        _img = SKTexture(imageNamed: "GiantSpirit")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 3.2
         _growth.strength = 2.6
         _growth.agility = 1.6
         _growth.intellect = 1.2
-        levelTo(level: level)
-        _extensions.health *= 5
-        _extensions.hp = _extensions.health
+        _race = EvilType.GIANT
+        _level = GiantSpirit.LEVEL
+        _img = SKTexture(imageNamed: "GiantSpirit")
+        _imgUrl = "GiantSpirit"
         _spellsInuse = [Thorny(), TreadEarth(), TakeRest(), ThrowRock(), BeingTired()]
+    }
+    override func create(level: CGFloat) {
+        levelTo(level: level)
+        _extensions.health *= 6.5
+        _extensions.hp = _extensions.health
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

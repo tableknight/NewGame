@@ -35,7 +35,7 @@ class Disappear: Magical {
             c._extensions.avoid -= 50
         }
         c.actionCast {
-            c.actionBuff {
+            c.revival1f() {
                 c.addStatus(status: status)
                 completion()
             }

@@ -7,8 +7,19 @@
 //
 
 import SpriteKit
-protocol HandSkill {
-    
+class HandSkill:Physical {
+    override init() {
+        super.init()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    override func getAttack(from: BUnit) -> CGFloat {
+        return from.getAgility()
+    }
 }
 protocol BowSkill {
     
@@ -21,6 +32,10 @@ protocol BossOnly {
     
 }
 protocol SummonSkill {
+    
+    
+}
+protocol CloseSkill {
     
 }
 

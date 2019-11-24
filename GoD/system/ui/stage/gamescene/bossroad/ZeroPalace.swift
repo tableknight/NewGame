@@ -17,7 +17,7 @@ class ZeroPalace: MorningPalace {
         }
         _name = "零·宫"
         _floorSize = 8
-        _level = 36
+        _level = Micalu.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

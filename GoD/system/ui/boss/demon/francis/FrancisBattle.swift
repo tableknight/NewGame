@@ -30,7 +30,7 @@ class FrancisBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 48
+        let level:CGFloat = Francis.LEVEL
         var es = Array<Creature>()
         
         let t = Francis()
@@ -39,6 +39,56 @@ class FrancisBattle: BossBattle {
         es.append(t)
         
         super.setEnemyPart(minions: es)
+    }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 10 {
+            let i = FireMark()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = MoltenFire()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = LavaCrystal()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = FrancisFace()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Accident()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheFear()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheSurpass()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Francis.LEVEL)
+        return list + l.getList()
     }
 }
 
@@ -109,7 +159,7 @@ class Nova: Magical, BossOnly {
     override init() {
         super.init()
         _name = "冲击波"
-        _description = "对所有敌方目标造成精神200%的魔法伤害"
+        _description = "当佛朗西斯集齐了他的军队，那么就轮到他发挥真正实力的时候了，对所有敌方目标造成精神200%的魔法伤害"
         _rate = 2
         _quality = Quality.SACRED
     }
@@ -123,6 +173,7 @@ class Nova: Magical, BossOnly {
                     t.actionAttacked {
                         t.showValue(value: damage)
                     }
+                    t.hit1()
                 }
             }
             setTimeout(delay: 3.5, completion: completion)
@@ -183,9 +234,7 @@ class AttackPowerUp: Passive {
         let up = c._unit._extensions.attack * 0.15
         c._extensions.attack += up
         c.showText(text: _name)
-        c.actionBuff {
-            completion()
-        }
+        c.mixed2(index: 13, completion: completion)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -199,7 +248,7 @@ class Reinforce: Magical {
     override init() {
         super.init()
         _name = "强化"
-        _description = "提升目标60%的基础攻击力和基础防御力，持续2回合"
+        _description = "提升目标60%的基础攻击力和基础护甲，持续2回合"
         targetEnemy = false
         _quality = Quality.RARE
         canBeTargetSelf = true
@@ -208,7 +257,7 @@ class Reinforce: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            t.actionBuff {
+            t.stateUp2() {
                 let s = Status()
                 let atk = t._unit._extensions.attack * 0.6
                 let def = t._unit._extensions.defence * 0.6
@@ -220,9 +269,7 @@ class Reinforce: Magical {
                     t._extensions.defence -= def
                 }
                 t.addStatus(status: s)
-                t.showText(text: "POWER UP") {
-                    completion()
-                }
+                completion()
             }
         }
     }
@@ -267,6 +314,7 @@ class SoulExtract: Magical {
                         }
                     }
                 }
+                t.darkness5()
             }
         }
     }

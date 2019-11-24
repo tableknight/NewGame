@@ -16,21 +16,23 @@ class TrueSight:Magical {
     }
     override init() {
         super.init()
-        _name = "邪王真眼"
+        _name = "恶魔炸弹"
         _description = "对恶魔造成精神200%的魔法伤害，对其他种族无效"
         _quality = Quality.GOOD
         _cooldown = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let damage = t._unit is Demon ? magicalDamage(t) : 0
+        let damage = t._unit._race == EvilType.DEMON ? magicalDamage(t) : 0
         _battle._curRole.actionCast {
+            t.stateDown3s()
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()
                     }
                 }
+                
             }
         }
     }

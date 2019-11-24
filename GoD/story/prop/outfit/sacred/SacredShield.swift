@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Faceless:Shield {
+    static let EFFECTION = "faceless"
     override init() {
         super.init()
         _name = "无面者"
@@ -15,6 +16,7 @@ class Faceless:Shield {
         _level = 30
         _chance = 30
         _quality = Quality.SACRED
+        _effection = Faceless.EFFECTION
         price = 305
     }
     override func create() {
@@ -23,37 +25,14 @@ class Faceless:Shield {
         _attrCount = 4
         createAttrs()
     }
-    var _spellAppended = false
-    var _spell:Spell = FacelessSpell()
-    private enum CodingKeys: String, CodingKey {
-        case _spellAppended
-        case _spell
-    }
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
-        _spell = try values.decode(Spell.self, forKey: ._spell)
+
+   required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(_spellAppended, forKey: ._spellAppended)
-        try container.encode(_spell, forKey: ._spell)
         try super.encode(to: encoder)
     }
-    override func on() {
-        let char = Game.instance.char!
-        char._spellsHidden.append(_spell)
-    }
-    override func off() {
-        let char = Game.instance.char!
-        for i in 0...char._spellsHidden.count - 1 {
-            if type(of: char._spellsHidden[i]) == type(of: _spell) {
-                char._spellsHidden.remove(at: i)
-                return
-            }
-        }
-    }
+
 }
 
 import SpriteKit
@@ -94,6 +73,7 @@ class FacelessSpell: Passive {
 
 
 class Accident:Shield {
+    static let EFFECTION = "accident"
     override init() {
         super.init()
         _name = "无妄之灾"
@@ -101,6 +81,7 @@ class Accident:Shield {
         _level = 42
         _chance = 20
         _quality = Quality.SACRED
+        _effection = Accident.EFFECTION
         price = 388
     }
     override func create() {
@@ -120,6 +101,7 @@ class Accident:Shield {
     }
 }
 class FrancisFace:Shield {
+    static let EFFECTION = "francis_face"
     override init() {
         super.init()
         _name = "佛朗西斯的面容"
@@ -127,6 +109,7 @@ class FrancisFace:Shield {
         _level = 40
         _chance = 25
         _quality = Quality.SACRED
+        _effection = FrancisFace.EFFECTION
         price = 422
     }
     override func create() {
@@ -146,6 +129,7 @@ class FrancisFace:Shield {
     }
 }
 class EvilExpel:Shield {
+    static let EFFECTION = "evil_expel"
     override init() {
         super.init()
         _name = "辟邪"
@@ -153,6 +137,7 @@ class EvilExpel:Shield {
         _level = 23
         _chance = 50
         _quality = Quality.SACRED
+        _effection = EvilExpel.EFFECTION
         price = 228
     }
     override func create() {

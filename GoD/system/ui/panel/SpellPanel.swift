@@ -7,7 +7,7 @@
 //  let spellPanel = SpellPanel()
 //  spellPanel.create(role:Creature)
 //  stage.addChild(spellPanel)
-//
+//  confirmed
 
 import SpriteKit
 
@@ -42,6 +42,7 @@ class SpellPanel:UIPanel {
             if _spellBoxInuse.contains(_lastSelectedIcon) {
                 let index = _role._spellsInuse.firstIndex(of: spell)
                 if nil != index {
+                    loseProperty(spell)
                     _role._spellsInuse.remove(at: index!)
                 } else {
                     debug("remove spell in use failed!")
@@ -62,6 +63,7 @@ class SpellPanel:UIPanel {
                     if nil != index {
                         _char._spells.remove(at: index!)
                         _role._spellsInuse.append(spell)
+                        addProperty(spell)
                     } else {
                         debug("_char._spells.remove failed! spellpanel")
                     }
@@ -81,6 +83,36 @@ class SpellPanel:UIPanel {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }
+    private func loseProperty(_ spell:Spell) {
+        if spell is TruePower {
+            _role.strengthChange(value: -_role._mains.strength * 0.1)
+        } else
+        if spell is Powerful {
+            _role.strengthChange(value: -Powerful.VALUE)
+        } else
+        if spell is SkyAndLand {
+            _role.intellectChange(value: -SkyAndLand.VALUE)
+        } else
+        if spell is SharpStone {
+            _role.agilityChange(value: -SharpStone.VALUE)
+        }
+
+    }
+    private func addProperty(_ spell:Spell) {
+        if spell is TruePower {
+            _role.strengthChange(value: _role._mains.strength * 0.1)
+        } else
+            if spell is Powerful {
+                _role.strengthChange(value: Powerful.VALUE)
+            } else
+                if spell is SkyAndLand {
+                    _role.intellectChange(value: SkyAndLand.VALUE)
+                } else
+                    if spell is SharpStone {
+                        _role.agilityChange(value: SharpStone.VALUE)
+        }
+    }
+
     override func createPanelbackground() {
         let height = cellSize * 1.5
         let spellsInuse = createBackground(width: _standardWidth, height: height)
@@ -98,8 +130,8 @@ class SpellPanel:UIPanel {
     var _role:Creature!
     
     func instrumentMonatNotes() -> Bool {
-        if Game.instance._char._weapon is TheMonatNotes {
-            let mn = Game.instance._char._weapon as! TheMonatNotes
+        if Game.instance.char._weapon is TheMonatNotes {
+            let mn = Game.instance.char._weapon as! TheMonatNotes
             if mn._spellAppended {
                 return true
             }
@@ -108,9 +140,9 @@ class SpellPanel:UIPanel {
     }
     func getSpellWhichFromMonatNotes() -> Array<Spell> {
         var spells = Array<Spell>()
-        let _char = Game.instance._char!
+        let _char = Game.instance.char!
         let mn = _char._weapon as! TheMonatNotes
-        for s in Game.instance._char._spells {
+        for s in Game.instance.char._spells {
             if s == mn._spell {
                 spells.append(s)
             }
@@ -312,9 +344,11 @@ class SpellInfo:SKSpriteNode, IPanelSize {
         }
         if spell is BowSkill {
             text += "，需要弓"
-        }
+        } else
         if spell is HandSkill {
-            text += "，需要空手"
+            text += "，需要空手或拳套"
+        } else if spell is CloseSkill {
+            text += "，需要近战"
         }
 //        if _spell._tear > 0 {
 //            text += "，消耗\(TheWitchsTear.NAME)x\(_spell._tear)"

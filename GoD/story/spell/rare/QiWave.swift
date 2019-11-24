@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class QiWave:Physical, HandSkill {
+class QiWave:HandSkill {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -16,10 +16,10 @@ class QiWave:Physical, HandSkill {
     }
     override init() {
         super.init()
-        _name = "气功波"
-        _description = "对随机2-4个目标造成攻击力85%攻击力的物理伤害"
+        _name = "气功破"
+        _description = "对随机2-4个目标造成敏捷195%攻击力的物理伤害"
         _quality = Quality.RARE
-        _rate = 0.85
+        _rate = 1.95
         _cooldown = 2
         isClose = false
         autoCast = true
@@ -29,19 +29,23 @@ class QiWave:Physical, HandSkill {
         _battle._curRole.actionAttack {
             for t in ts {
                 let damage = self.physicalDamage(t)
+                t.gun1f() {}
                 if !self.hasPhysicalEvent(t: t) {
                     t.actionAttacked {
                         t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
                     }
-                    t.attacked2()
+//                    t.attacked2()
                 }
+                
+                
             }
             setTimeout(delay: 2.2, completion: completion)
         }
     }
     override func findTarget() {
-        let max = seed(min: 2, max: 5)
-        var targets = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
+        let c = _battle._curRole
+        let max = c.weaponIs(NilSeal.EFFECTION) ? seed(min: 3, max: 6) : seed(min: 2, max: 5)
+        var targets = c.playerPart ? _battle._enemyPart : _battle._playerPart
         _battle._selectedTargets = []
         for _ in 0...max - 1 {
             if targets.count > 0 {

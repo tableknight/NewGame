@@ -20,7 +20,7 @@ class Reborn: Passive {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         _rate = 0.1
-        if c.ifSoulIs(HeartOfTarrasque()) {
+        if c.soulstoneIs(HeartOfTarrasque.EFFECTION) {
             _rate = 0.2
         }
 

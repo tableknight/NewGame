@@ -13,32 +13,39 @@ class MagicMark: Armor {
         _name = "魔印"
         _outfitName = "魔印"
         _level = 1
-    }
-    private enum CodingKeys: String, CodingKey {
-        case _spellAppended
-        case _spell
+        _type = Outfit.TYPE_MAGIC_MARK
     }
     required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        let s = try values.decode(String.self, forKey: ._spell)
-        let l = Loot()
-        let allSpells = l.getAllSpells()
-        for spell in allSpells {
-            if NSClassFromString(s) == type(of: spell) {
-                _spell = spell
-                break
-            }
-        }
-        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(_spellAppended, forKey: ._spellAppended)
-        try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
     }
-    var _spell:Spell = Spell()
+//    private enum CodingKeys: String, CodingKey {
+//        case _spellAppended
+//        case _spell
+//    }
+//    required init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//        let s = try values.decode(String.self, forKey: ._spell)
+//        let l = Loot()
+//        let allSpells = l.getAllSpells()
+//        for spell in allSpells {
+//            if NSClassFromString(s) == type(of: spell) {
+//                _spell = spell
+//                break
+//            }
+//        }
+//        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(_spellAppended, forKey: ._spellAppended)
+//        try container.encode(NSStringFromClass(type(of: _spell)), forKey: ._spell)
+//    }
+    
     override func create(level: CGFloat) {
         _level = 1
         createQuality()
@@ -81,19 +88,19 @@ class MagicMark: Armor {
             _spell = l.getSacredSpell(id: seed(to: l.sacredSpellCount))
         }
     }
-    private var _spellAppended = false
-    override func on() {
-        let char = Game.instance.char!
-        if !(char.hasSpell(spell: _spell)) {
-            char._spells.append(_spell)
-            _spellAppended = true
-        }
-    }
-    override func off() {
-        if _spellAppended {
-            let char = Game.instance.char!
-            char.removeSpell(spell: _spell)
-            _spellAppended = false
-        }
-    }
+    
+//    override func on() {
+//        let char = Game.instance.char!
+//        if !(char.hasSpell(spell: _spell)) {
+//            char._spells.append(_spell)
+//            _spellAppended = true
+//        }
+//    }
+//    override func off() {
+//        if _spellAppended {
+//            let char = Game.instance.char!
+//            char.removeSpell(spell: _spell)
+//            _spellAppended = false
+//        }
+//    }
 }

@@ -66,7 +66,7 @@ class AcientRoadSelection:UIPanel {
         _pageSize = 16
         
          _dungeonLevel  = Game.instance.char._dungeonLevel
-        if Mode.debug {
+        if Mode.showdungeonall {
             _dungeonLevel = 99
         }
 //        if _dungeonLevel > _pageSize {

@@ -13,7 +13,7 @@ class DemonTown: BossRoad, InnerMaze {
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(2, 2, 2, 2), wall: oa4.getCell(2, 4, 2, 2))
         _monsterEnum = [1]
-        _name = "恶魔之城"
+        _name = "黄昏之城"
         _floorSize = 5
         _level = 23
     }

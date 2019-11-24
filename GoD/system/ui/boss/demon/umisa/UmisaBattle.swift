@@ -48,7 +48,7 @@ class UmisaBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 54
+        let level:CGFloat = Umisa.LEVEL
         var es = Array<Creature>()
         
         let t = Umisa()
@@ -57,6 +57,44 @@ class UmisaBattle: BossBattle {
         es.append(t)
         
         super.setEnemyPart(minions: es)
+    }
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 35 {
+            let i = RingOfDeath()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Accident()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = CreationMatrix()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = HolyPower()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Boreas()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Umisa.LEVEL)
+        return list + l.getList()
     }
 }
 class SummonCopy:Magical, BossOnly {
@@ -117,8 +155,8 @@ class CriticalBite:Physical, BossOnly {
                             }
                         }
                     }
+                    t.blow()
                     if assistant {
-                        debugger("assistant")
                         if b._enemyPart.count > 1 && !t.isDead() {
                             var es = Array<BUnit>()
                             for u in b._enemyPart {

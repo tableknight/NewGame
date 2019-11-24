@@ -17,8 +17,8 @@ class BallLighting: Magical {
     override init() {
         super.init()
         _name = "球状闪电"
-        _description = "对中心单位造成85%雷电伤害，外层单位受到递减的雷电伤害"
-        _rate = 0.85
+        _description = "对中心单位造成65%雷电伤害，外层单位受到递减的雷电伤害"
+        _rate = 0.65
         _cooldown = 2
         isThunder = true
         _quality = Quality.RARE
@@ -29,34 +29,39 @@ class BallLighting: Magical {
         let c = _battle._curRole
         let p = c.playerPart
         c.actionCast {
+            c.preSpecial3f()
             var u = b.getUnitBySeat(seat: (p ? BUnit.TBM : BUnit.BTM))
             if u != nil {
                 self.attack(u!)
             }
-            self._rate = 0.55
             u = b.getUnitBySeat(seat: (p ? BUnit.TTM : BUnit.BBM))
             if u != nil {
                 self.attack(u!)
             }
-            u = b.getUnitBySeat(seat: (p ? BUnit.TBL : BUnit.BTL))
-            if u != nil {
-                self.attack(u!)
-            }
-            u = b.getUnitBySeat(seat: (p ? BUnit.TBR : BUnit.BTR))
-            if u != nil {
-                self.attack(u!)
-            }
-            self._rate = 0.25
-            u = b.getUnitBySeat(seat: (p ? BUnit.TTL : BUnit.BBL))
-            if u != nil {
-                self.attack(u!)
-            }
-            u = b.getUnitBySeat(seat: (p ? BUnit.TTR : BUnit.BBR))
-            if u != nil {
-                self.attack(u!)
-            }
+            self._rate = 0.35
+            
+            setTimeout(delay: 0.5, completion: {
+                u = b.getUnitBySeat(seat: (p ? BUnit.TBL : BUnit.BTL))
+                if u != nil {
+                    self.attack(u!)
+                }
+                u = b.getUnitBySeat(seat: (p ? BUnit.TBR : BUnit.BTR))
+                if u != nil {
+                    self.attack(u!)
+                }
+                u = b.getUnitBySeat(seat: (p ? BUnit.TTL : BUnit.BBL))
+                if u != nil {
+                    self.attack(u!)
+                }
+                u = b.getUnitBySeat(seat: (p ? BUnit.TTR : BUnit.BBR))
+                if u != nil {
+                    self.attack(u!)
+                }
+            })
+            
             setTimeout(delay: 2.5, completion: completion)
         }
+        
     }
     private func attack(_ t:BUnit) {
         if !hadSpecialAction(t: t) {
@@ -64,7 +69,6 @@ class BallLighting: Magical {
             t.actionAttacked {
                 t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER)
             }
-            t.lighting2()
         }
     }
     override func findTarget() {

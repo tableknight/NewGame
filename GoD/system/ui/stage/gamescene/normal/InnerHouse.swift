@@ -152,14 +152,12 @@ class InnerHouse: StandScene {
             let rh = rs.roofConnectH
             rh.position.x = cellSize * i.toFloat()
             rh.position.y = cellSize * (vSize / 2 + 2.5)
-            print(rh.position.y)
             _mapLayer.addChild(rh)
             if [doorX - 1, doorX, doorX + 1].firstIndex(of: i) == nil {
                 let rh1 = rs.roofConnectH
                 rh1.zPosition = z
                 rh1.position.x = cellSize * i.toFloat()
                 rh1.position.y = -cellSize * (vSize / 2 - 0.5)
-                print(rh1.position.y)
                 _mapLayer.addChild(rh1)
             }
         }

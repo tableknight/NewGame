@@ -291,7 +291,10 @@ extension BUnit {
     }
     
     func getRhythm() -> CGFloat {
-        let val = _unit._rhythm
+        var val = _unit._rhythm
+        if hasSpell(spell: AsShadow()) {
+            val += 10
+        }
         return val + _rhythm
     }
     func getChaos() -> CGFloat {

@@ -11,23 +11,21 @@ class ElementWizard:Boss {
     override init() {
         super.init()
         _name = "元素法师"
-        _img = SKTexture(imageNamed: "element_wizard")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 1.5
         _growth.strength = 1
         _growth.agility = 1.9
         _growth.intellect = 3.5
+        _race = EvilType.MAN
+        _img = SKTexture(imageNamed: "element_wizard")
+        _spellsInuse = [FireRain(), FireMatrix(), IceBomb(), FrozenShoot()]
+        _sensitive = 75
+    }
+    override func create(level: CGFloat) {
+        
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        _spellsInuse = [FireRain(), FireMatrix(), IceBomb(), FrozenShoot()]
-        _sensitive = 75
-        //        _spellsInuse = [ChopChop(), FlameAttack(), ElementPwoerUp()]
-        //        for _ in 0...3 {
-        //            _spellsInuse.append(BossAttack())
-        //        }
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

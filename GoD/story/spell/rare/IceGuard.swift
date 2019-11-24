@@ -12,7 +12,7 @@ class IceGuard: Magical {
         super.init()
         _quality = Quality.RARE
         _name = "寒冰护盾"
-        _description = "对自己释放护盾，提升50%防御，持续5回合，有一定几率降低攻击者10点速度"
+        _description = "对自己释放护盾，提升50%护甲，持续5回合，有一定几率降低攻击者10点速度"
         targetEnemy = false
         canBeTargetSelf = true
         _cooldown = 3
@@ -22,7 +22,7 @@ class IceGuard: Magical {
         let c = _battle._curRole
         
         c.actionCast {
-            c.actionBuff {
+            c.cure2() {
                 completion()
                 let status = Status()
                 status._type = Status.ICE_GUARD

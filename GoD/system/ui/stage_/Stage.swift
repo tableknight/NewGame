@@ -191,9 +191,9 @@ class Stage:SKSpriteNode {
                     let item = _scene.getItemNode(dx, dy)
                     item.doTouch()
                 } else if weight == Block.EVIL {
-                    print("evil")
+                    debug("matrix cell is evil")
                 } else {
-                    print("point")
+                    debug("matrix cell is else")
                 }
                 return true
             }

@@ -16,14 +16,14 @@ class TakeRest: Magical, BossOnly {
     override init() {
         super.init()
         _name = "休息"
-        _description = "休息一回合，恢复5%大嘴生命"
+        _description = "休息一回合，恢复5%最大生命"
         _quality = Quality.NORMAL
         _cooldown = 1
         autoCast = true
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        c.actionWait {
+        c.recovery2f {
             let r = c.getHealth() * 0.05
             c.showValue(value: r) {
                 completion()

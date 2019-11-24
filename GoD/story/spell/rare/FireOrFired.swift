@@ -56,7 +56,8 @@ class FireOrFired: Magical {
                     completion()
                 }
             }
-            c.flame1(index: 4, line: 1)
+            c.magic2t()
+//            c.flame1(index: 4, line: 1)
         } else {
             if !hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
@@ -64,7 +65,8 @@ class FireOrFired: Magical {
                         completion()
                     }
                 }
-                t.flame1(index: 4, line: 1)
+//                t.flame1(index: 4, line: 1)
+                t.magic2t()
             }
         }
     }

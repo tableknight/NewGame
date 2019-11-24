@@ -17,7 +17,7 @@ class FragileCurse: Magical, Curse {
     override init() {
         super.init()
         _name = "虚弱诅咒"
-        _description = "降低目标100%基础防御"
+        _description = "降低目标100%基础护甲"
         _quality = Quality.RARE
     }
     override func cast(completion:@escaping () -> Void) {
@@ -25,8 +25,9 @@ class FragileCurse: Magical, Curse {
         let c = _battle._curRole
         let this = self
         c.actionCast {
-            if !this.statusMissed(baseline: 65, target: t, completion: completion) {
-                t.actionWait {
+            t.stateDown3f() {
+                if !this.statusMissed(baseline: 65, target: t, completion: completion) {
+                
                     let s = Status()
                     s._timeleft = this.getTimeleft()
                     s._type = Status.FRAGILE
@@ -38,7 +39,7 @@ class FragileCurse: Magical, Curse {
                     }
                     completion()
                 }
-                t.mixed2(index: 13)
+//                t.mixed2(index: 13)
             }
         }
     }

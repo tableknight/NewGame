@@ -26,6 +26,7 @@ class Unit:Core {
         case _lucky
         case _break
         case _revenge
+        case _destory
         case _rhythm
         case _chaos
         case _power
@@ -78,6 +79,7 @@ class Unit:Core {
         _lucky = try values.decode(CGFloat.self, forKey: ._lucky)
         _break = try values.decode(CGFloat.self, forKey: ._break)
         _revenge = try values.decode(CGFloat.self, forKey: ._revenge)
+//        _destory = try values.decode(CGFloat.self, forKey: ._destory)
         _rhythm = try values.decode(CGFloat.self, forKey: ._rhythm)
         _chaos = try values.decode(CGFloat.self, forKey: ._chaos)
         _power = try values.decode(CGFloat.self, forKey: ._power)
@@ -122,6 +124,7 @@ class Unit:Core {
         try container.encode(_break, forKey: ._break)
         try container.encode(_revenge, forKey: ._revenge)
         try container.encode(_rhythm, forKey: ._rhythm)
+//        try container.encode(_destory, forKey: ._destory)
         try container.encode(_chaos, forKey: ._chaos)
         try container.encode(_power, forKey: ._power)
         try container.encode(_elementalPower, forKey: ._elementalPower)
@@ -146,7 +149,7 @@ class Unit:Core {
         critical: 15,
         destroy: 0,
         avoid: 15,
-        spirit: 0,
+        spirit: 35,
         hp: 0,
         mp: 0,
         health: 0,
@@ -164,6 +167,7 @@ class Unit:Core {
     var _lucky:CGFloat = 5
     var _break:CGFloat = 0
     var _revenge:CGFloat = 5
+//    var _destory:CGFloat = 0
     var _rhythm:CGFloat = 5
     var _chaos:CGFloat = 0
     var _power:CGFloat = 0
@@ -190,7 +194,7 @@ class Unit:Core {
         let level = _level + 1
         let t = atan(level * 0.1)
         let at = t * t
-        return 100 * level + level * level * level * at
+        return 100 * level + level * level * level * at * 0.75
     }
     
     func strengthChange(value: CGFloat) {

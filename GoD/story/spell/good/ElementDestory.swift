@@ -27,32 +27,35 @@ class ElementDestory:Magical, Curse {
         _battle._curRole.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
-                    t.actionDebuff {
-                        t.showText(text: Spell.CURSED)
-                        if t.hasStatus(type: "_element_destory") {
-                            let s = t.getStatus(type: "_element_destory")
-                            s?._timeleft = 3
-                            t.showStatusText()
-                        } else {
-                            let s = Status()
-                            s._type = "_element_destory"
-                            s._labelText = "E"
-                            s._timeleft = 3
-                            t._elementalResistance.fire -= 30
-                            t._elementalResistance.water -= 30
-                            t._elementalResistance.thunder -= 30
-                            s.timeupAction = {
-                                t._elementalResistance.fire += 30
-                                t._elementalResistance.water += 30
-                                t._elementalResistance.thunder += 30
-                            }
-                            t.addStatus(status: s)
-                        }
-                    }
+                    self.setDown(t: t)
                 }
             }
             setTimeout(delay: 2.1, completion: completion)
         }
+    }
+    
+    private func setDown(t:BUnit) {
+        t.stateDown2() {
+        if t.hasStatus(type: "_element_destory") {
+            let s = t.getStatus(type: "_element_destory")
+            s?._timeleft = 3
+            t.showStatusText()
+        } else {
+            let s = Status()
+            s._type = "_element_destory"
+            s._labelText = "E"
+            s._timeleft = 3
+            t._elementalResistance.fire -= 30
+            t._elementalResistance.water -= 30
+            t._elementalResistance.thunder -= 30
+            s.timeupAction = {
+                t._elementalResistance.fire += 30
+                t._elementalResistance.water += 30
+                t._elementalResistance.thunder += 30
+            }
+            t.addStatus(status: s)
+        }
+    }
     }
     
     override func findTarget() {

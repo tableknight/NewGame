@@ -15,28 +15,29 @@ class IssBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func createAI() {
-        if _curRole._unit is IssThePuppet {
-            if _round % 3 == 1 {
-                _selectedSpell = [LowerSummon(), SummonFlower(), WaterCopy(), HighLevelSummon()].one()
-                _selectedSpell._battle = self
-                if !_selectedSpell.selectable() {
-                    _selectedSpell = [ControlWind(), BossAttack(), BossAttack(), BossAttack(), ControlUndead(), ElementDestory(), SetTimeBack(), BossAttack()].one()
-                }
-            } else {
-                _selectedSpell = [ControlWind(), BossAttack(), BossAttack(), BossAttack(), ControlUndead(), ElementDestory(), SetTimeBack(), BossAttack()].one()
-            }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
-    }
+//    override func createAI() {
+//        debug("\(_round)")
+//        if _curRole._unit is IssThePuppet {
+//            if _round % 3 == 1 {
+//                _selectedSpell = [LowerSummon(), SummonFlower(), WaterCopy(), HighLevelSummon()].one()
+//                _selectedSpell._battle = self
+//                if !_selectedSpell.selectable() {
+//                    _selectedSpell = [ControlWind(), ElementDestory(), SetTimeBack(), BossAttack()].one()
+//                }
+//            } else {
+//                _selectedSpell = [ControlWind(), BossAttack(), BossAttack(), BossAttack(), ControlUndead(), ElementDestory(), SetTimeBack(), BossAttack()].one()
+//            }
+//            _selectedSpell._battle = self
+//            _selectedSpell.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
+//    }
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
-        let l:CGFloat = 10
+        let l:CGFloat = IssThePuppet.LEVEL
         let t = IssThePuppet()
         t.create(level: l)
         t._seat = BUnit.TTM
@@ -72,53 +73,10 @@ class IssBattle: BossBattle {
         }
         
         let l = Loot()
-        l.loot(level: 10)
+        l.loot(level: IssThePuppet.LEVEL)
         return list + l.getList()
     }
 }
 
-class IssMark:MagicMark {
-    override init() {
-        super.init()
-        _name = "艾斯斯之印"
-        _description = "获得一个召唤系技能"
-        _level = 10
-        _chance = 75
-        _quality = Quality.SACRED
-        price = 190
-    }
-    override func create() {
-        _spell = [LowerSummon(), HighLevelSummon(), SummonFlower(), WaterCopy()].one()
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
 
-class IssHead:Instrument {
-    override init() {
-        super.init()
-        _name = "艾斯斯之颅"
-        _description = "傀儡师的头也是木头做的"
-        _level = 10
-        _chance = 10
-        _quality = Quality.SACRED
-        price = 181
-    }
-    override func create() {
-        createSelfAttrs()
-        _spell = [LowerSummon(), HighLevelSummon(), SummonFlower(), WaterCopy()].one()
-        createAttr(attrId: INTELLECT, value: 12, remove: true)
-        _attrCount = 3
-        createAttrs()
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
+

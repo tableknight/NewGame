@@ -13,9 +13,8 @@ class Fist: Weapon {
         _name = "拳套"
         _outfitName = "拳套"
         _attackSpeed = seed(min: 100, max: 130).toFloat() * 0.01
-        _selfAttrs = [ATTACK, BREAK, LUCKY]
+        _selfAttrs = [ATTACK, BREAK]
         removeAttrId(id: BREAK)
-        removeAttrId(id: LUCKY)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

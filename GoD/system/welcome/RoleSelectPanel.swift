@@ -69,19 +69,19 @@ class RoleSelectPanel:UIPanel {
             }
         }
     }
-    private func loadStage(char:Character) {
-        Game.instance._char = char
-        let bUnit = BUnit()
-        bUnit.setUnit(unit: char)
-        bUnit.createForStage()
-        let stage = UIStage()
-        stage.setChar(bUnit)
-        Game.instance.scene.addChild(stage)
-        stage.showSceneMask()
-        stage.maskFadeOut {
-            
-        }
-    }
+//    private func loadStage(char:Character) {
+//        Game.instance.char = char
+//        let bUnit = BUnit()
+//        bUnit.setUnit(unit: char)
+//        bUnit.createForStage()
+////        let stage = UIStage()
+//        stage.setChar(bUnit)
+//        Game.instance.scene.addChild(stage)
+//        stage.showSceneMask()
+//        stage.maskFadeOut {
+//            
+//        }
+//    }
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
     }

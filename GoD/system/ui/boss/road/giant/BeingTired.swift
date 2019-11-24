@@ -17,7 +17,7 @@ class BeingTired: Magical, BossOnly {
     override init() {
         super.init()
         _name = "疲倦"
-        _description = "进入疲倦状态，降低50%的防御"
+        _description = "进入疲倦状态，降低50%的护甲"
         _quality = Quality.NORMAL
         _cooldown = 3
         autoCast = true

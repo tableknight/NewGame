@@ -136,7 +136,7 @@ class EvilSpirit: Demon {
     }
 }
 
-class HellBaron: Natrue {
+class HellBaron: Demon {
     override init() {
         super.init()
         _stars.strength = 0.6

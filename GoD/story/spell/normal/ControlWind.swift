@@ -17,7 +17,7 @@ class ControlWind: Magical {
     override init() {
         super.init()
         _name = "驭风者"
-        _description = "对随机地方单位造成精神100%的冰冷伤害"
+        _description = "对随机敌方单位造成精神100%的冰冷伤害"
         _quality = Quality.NORMAL
         _cooldown = 1
         autoCast = true
@@ -43,7 +43,8 @@ class ControlWind: Magical {
                     completion()
                 }
             }
-            t.water2()
+//            t.water2()
+            t.wind4()
         }
     }
     

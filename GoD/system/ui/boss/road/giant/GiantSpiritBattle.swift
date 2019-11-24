@@ -25,6 +25,7 @@ class GiantSpiritBattle: BossBattle {
                     _selectedSpell = getSpell(u: _curRole)
                 }
             }
+//            _selectedSpell = TreadEarth()
             _selectedSpell._battle = self
             _selectedSpell.findTarget()
             execOrder()

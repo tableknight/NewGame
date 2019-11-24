@@ -24,10 +24,18 @@ class SummonFlower: Magical, SummonSkill {
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle!
-        let _curRole = _battle._curRole
+        let c = _battle._curRole
         _battle._curRole.actionCast {
             let flower = FlowerOfHeal()
-            flower.create(level: _curRole._unit._level)
+            if c.weaponIs(TheSurvive.EFFECTION) {
+                flower._mains.stamina *= SummonUnit.POWERUP_RATE
+                flower._mains.strength *= SummonUnit.POWERUP_RATE
+                flower._mains.agility *= SummonUnit.POWERUP_RATE
+                flower._mains.intellect *= SummonUnit.POWERUP_RATE
+            } else if c.weaponIs(TheSurpass.EFFECTION) {
+                flower._spellsInuse.append(Game.instance.char._weapon!._spell)
+            }
+            flower.create(level: c._unit._level)
             flower._seat = b.getEmptySeats(top: !b._curRole.playerPart).one()
             let bu = b._curRole.playerPart ? b.addPlayerMinion(unit: flower) : b.addEnemy(unit: flower)
             bu.actionSummon {

@@ -20,7 +20,7 @@ class ThunderArray:Magical {
         _quality = Quality.RARE
         _name = "雷击阵"
         _cooldown = 2
-        _description = "随机造成2-5次雷电伤害，单次伤害为精神的40%"
+        _description = "随机造成3-6次雷电伤害，单次伤害为精神的40%"
         isThunder = true
         autoCast = true
         _rate = 0.4
@@ -28,32 +28,10 @@ class ThunderArray:Magical {
     private var _step = 0
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let times = seed(min: 2, max: 6)
-//        let times = 5
-//        debug("雷电次数 \(times + 1)")
-//        let timeSpace:CGFloat = 0.25
+        let times = seed(min: 3, max: 7)
         _step = times
         c.actionCast {
             self.attack(completion: completion)
-//            if _step < 1 {
-//                completion()
-//            } else {
-//
-//            }
-//            for i in 0...times {
-////                let wait = SKAction.wait(forDuration: TimeInterval(i.toFloat() * timeSpace))
-//                c.actionWait(i.toFloat() * timeSpace) {
-//                    let ts = c.playerPart ? b._enemyPart : b._playerPart
-//                    if ts.count < 1 {
-//                        return
-//                    } else {
-//                       self._battle._selectedTarget = ts.one()
-//                    }
-//                    self.attack()
-//                }
-//            }
-//            let delay = times.toFloat() * timeSpace + 1.5
-//            setTimeout(delay: delay, completion: completion)
         }
         
     }
@@ -76,10 +54,17 @@ class ThunderArray:Magical {
         let damage = _damageValue
         if !hadSpecialAction(t: t) {
             t.actionAttacked {}
-            t.lighting1()
+            let sd = seed()
+            if sd < 33 {
+                t.thunder4s()
+            } else if sd < 66 {
+                t.thunder1f()
+            } else {
+                t.thunder1s()
+            }
             t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER)
         }
-        setTimeout(delay: 0.25) {
+        setTimeout(delay: 0.1) {
             self.attack(completion: completion)
         }
     }

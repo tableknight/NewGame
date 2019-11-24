@@ -47,6 +47,15 @@ class Spell:Core, IDisplay, ISelectTarget {
         }
     }
     
+    var canBeTargetSummonUnit: Bool {
+        set {
+            
+        }
+        get {
+            return true
+        }
+    }
+    
     var isClose: Bool {
         set {
             _isClose = newValue
@@ -226,13 +235,22 @@ class Spell:Core, IDisplay, ISelectTarget {
         return from.getAttack()
     }
     func levelFactor(_ from: BUnit, _ to:BUnit) -> CGFloat {
-        if from._unit is Boss || from._unit is BossMinion {
-            return 1
+//        if from._unit is Boss || from._unit is BossMinion {
+//            return 1
+//        }
+//        if to._unit is Boss || to._unit is BossMinion {
+//            return 1
+//        }
+        let m:CGFloat = from._unit._level > to._unit._level ? 1 : -1
+        var max = abs(from._unit._level - to._unit._level).toInt()
+        if max > 10 {
+            max = 10
         }
-        if to._unit is Boss || to._unit is BossMinion {
-            return 1
+        var rate:CGFloat = 1
+        for _ in 0...max {
+            rate = rate * (1 + m * 0.1)
         }
-        return 1 + (from._unit._level - to._unit._level) * 0.15
+        return rate
     }
     func physicalDamage(from: BUnit, to:BUnit) -> CGFloat {
         let atk = self.getAttack(from: from)
@@ -244,7 +262,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         var  damage = atk * (1 - def) * levelFactor(from, to)
         if damage < 5 {
-            return -seed(min: 0, max: 5).toFloat()
+            return -seed(min: 1, max: 5).toFloat()
         }
         if to.isDefend {
             damage = seed(min: 0, max: (damage * 0.6).toInt()).toFloat()
@@ -263,6 +281,10 @@ class Spell:Core, IDisplay, ISelectTarget {
         
         if to.hasStatus(type: Status.MIGHT_OF_OAKS) {
             damage *= 0.85
+        }
+        
+        if to.hasStatus(type: "_leading") {
+            damage *= 0.5
         }
         
         _damageValue = damageControl(damage)
@@ -416,7 +438,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         return 1 + from.getMagicalDamage() * 0.01 - to.getMagicalResistance() * 0.01
     }
     internal func raceFactor(to:BUnit, from:BUnit) -> CGFloat {
-        if from.ifSoulIs(GiantSoul()) || to.ifSoulIs(GiantSoul()) {
+        if from.soulstoneIs(GiantSoul.EFFECTION) || to.soulstoneIs(GiantSoul.EFFECTION) {
             return 1
         }
         var factor:CGFloat = 1
@@ -452,7 +474,7 @@ class Spell:Core, IDisplay, ISelectTarget {
             factor =  0.85
         }
         
-        if from._unit._weapon is HolyPower && to.getRace() == EvilType.RISEN {
+        if from.weaponIs(HolyPower.EFFECTION) && to.getRace() == EvilType.RISEN {
             factor *= 2
         }
         
@@ -575,7 +597,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         return false
     }
     func isEmptyHand() -> Bool {
-        return _battle._curRole._unit._weapon == nil
+        return _battle._curRole._unit._weapon == nil || _battle._curRole._unit._weapon is Fist
     }
     func isWeaponBow() -> Bool {
         return _battle._curRole._unit._weapon is Bow
@@ -591,11 +613,8 @@ class Spell:Core, IDisplay, ISelectTarget {
             return false
         }
         let c = _battle._curRole
-        if c._unit is Character {
-            let char = c._unit as! Character
-            if char._weapon is Hawkeye {
-                return false
-            }
+        if c.weaponIs(Hawkeye.EFFECTION) {
+            return false
         }
         let acc = getAccuracy()
         let avd = target.getAvoid()
@@ -824,7 +843,7 @@ class Spell:Core, IDisplay, ISelectTarget {
         let toMind = target.getMind()
         let bound = probability * ((fromMind - toMind) * 0.01 + 1)
         if sed < bound {
-            print("feeezing!")
+            debug("feeezing!")
             let status = Status()
             status._type = Status.FREEZING
             status._timeleft = 1
@@ -887,6 +906,18 @@ class Spell:Core, IDisplay, ISelectTarget {
             _battle._selectedTargets.append(part[secondIndex])
         }
     }
+    internal func findTargetRandom3() {
+        let part = _battle._curRole.playerPart ? _battle._enemyPart : _battle._playerPart
+        let index = seed(max: part.count)
+        _battle._selectedTargets = [part[index]]
+        if part.count > 2 {
+            var secondIndex = index
+            while(secondIndex == index) {
+                secondIndex = seed(max: part.count)
+            }
+            _battle._selectedTargets.append(part[secondIndex])
+        }
+    }
     internal func findTargetPartAll() {
         if targetEnemy {
             if _battle._curRole.playerPart {
@@ -916,11 +947,20 @@ class Spell:Core, IDisplay, ISelectTarget {
         return _battle._rightRoles[seed(max: _battle._rightRoles.count)]
     }
     internal func findHpLowestUnit() {
-        if _battle._curRole.playerPart {
-            _battle._selectedTarget = findLowesHpUnit(_battle._playerPart)
+        if targetEnemy {
+            if !_battle._curRole.playerPart {
+                _battle._selectedTarget = findLowesHpUnit(_battle._playerPart)
+            } else {
+                _battle._selectedTarget = findLowesHpUnit(_battle._enemyPart)
+            }
         } else {
-            _battle._selectedTarget = findLowesHpUnit(_battle._enemyPart)
+            if _battle._curRole.playerPart {
+                _battle._selectedTarget = findLowesHpUnit(_battle._playerPart)
+            } else {
+                _battle._selectedTarget = findLowesHpUnit(_battle._enemyPart)
+            }
         }
+        
     }
     private func findLowesHpUnit(_ bs: Array<BUnit>) -> BUnit {
         var bu = BUnit()

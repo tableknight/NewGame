@@ -38,7 +38,7 @@ class WindAttack: Physical {
                         completion()
                     }
                 }
-                t.attacked1()
+                t.blow()
                 let seat = self.getUnitBehindTarget(seat: t._unit._seat)
                 let tb = self._battle.getUnitBySeat(seat: seat)
                 if nil != tb {
@@ -48,7 +48,7 @@ class WindAttack: Physical {
                             tb!.actionAttacked {
                                 tb!.showValue(value: d2)
                             }
-                            tb!.attacked1()
+                            tb!.blow()
                         }
                     })
                 }

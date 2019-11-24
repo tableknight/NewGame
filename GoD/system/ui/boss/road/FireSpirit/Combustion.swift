@@ -27,7 +27,7 @@ class Combustion: Magical {
         let t = _battle._selectedTarget!
         c.actionCast {
             if t.hasStatus(type: Status.BURNING) {
-                t.actionDebuff {
+                t.stateDown3s() {
                     let s = t.getStatus(type: Status.BURNING) as! BurningStatus
                     s._timeleft += 3
                     t.showText(text: "COMBUST") {

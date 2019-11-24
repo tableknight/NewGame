@@ -38,10 +38,11 @@ class ToppurBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 23
+        let level:CGFloat = Toppur.LEVEL
         var es = Array<Creature>()
         for _ in 0...1 {
             let lm = ToppurServant()
+            lm._createForBattle = true
             lm.create(level: level)
             es.append(lm)
         }
@@ -55,6 +56,39 @@ class ToppurBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
+    
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 15 {
+            let i = LazesPedicureKnife()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = MarkOfOaks()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = BloodBlade()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 35 {
+            let i = EvilExpel()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Toppur.LEVEL)
+        return list + l.getList()
+    }
 }
 class FateDecision: Magical, BossOnly {
     required init(from decoder: Decoder) throws {
@@ -67,7 +101,7 @@ class FateDecision: Magical, BossOnly {
         super.init()
         //        isWater = true
         _name = "命运裁决"
-        _description = "对随机随从目标造成当前生命值75%的伤害"
+        _description = "对随机随从目标造成当前生命值50%的伤害"
         _rate = 0.8
         _quality = Quality.SACRED
         _cooldown = 2
@@ -75,7 +109,7 @@ class FateDecision: Magical, BossOnly {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
-        let damage = -t.getHp() * 0.75
+        let damage = -t.getHp() * 0.5
         c.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
@@ -83,6 +117,7 @@ class FateDecision: Magical, BossOnly {
                         completion()
                     }
                 }
+                t.special3()
             }
         }
     }
@@ -101,48 +136,5 @@ class FateDecision: Magical, BossOnly {
     }
     
 }
-class LineAttack: Physical {
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-    override init() {
-        super.init()
-        _name = "横扫千军"
-        _description = "对目标同一行单位造成攻击55%的物理伤害"
-        _rate = 0.55
-        _quality = Quality.GOOD
-        _cooldown = 1
-    }
-    override func cast(completion:@escaping () -> Void) {
-        let c = _battle._curRole
-        let ss = getUnitsInRowOf(seat: _battle._selectedTarget!._unit._seat)
-        var ts = Array<BUnit>()
-        for s in ss {
-            let u = _battle.getUnitBySeat(seat: s)
-            if u != nil {
-                ts.append(u!)
-            }
-        }
-        c.actionAttack {
-            for t in ts {
-                let damage = self.physicalDamage(t)
-                if !self.hadSpecialAction(t: t) {
-                    if !self.hasMissed(target: t) {
-                        t.actionAttacked {
-                            t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
-                        }
-                        t.attacked1()
-                    }
-                }
-            }
-            setTimeout(delay: 2.5, completion: completion)
-        }
-    }
-    override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
-    }
-}
+
 

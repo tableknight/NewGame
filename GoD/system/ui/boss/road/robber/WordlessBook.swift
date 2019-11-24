@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class WordlessBook: Item {
+class WordlessBook: MagicItem {
     override init() {
         super.init()
         usable = true
@@ -29,7 +29,7 @@ class WordlessBook: Item {
         let l = Loot()
         let char = Game.instance.char!
         let book = SpellBook()
-        book.spell = l.getSacredSpell(id: l._sacredSpellArray.one())
+        book.spell = l.getRandomSacredSpell()
         char.addProp(p: book)
     }
 }

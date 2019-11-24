@@ -17,7 +17,7 @@ class MorningPalace: BossRoad {
         }
         _name = "早·宫"
         _floorSize = 5
-        _level = 23
+        _level = Toppur.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

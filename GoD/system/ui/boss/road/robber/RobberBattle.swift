@@ -14,21 +14,21 @@ class RobberBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func createAI() {
-        if _curRole._unit is GraveRobber {
-            if seed() < 25 {
-                _selectedSpell = BossAttack()
-            } else {
-                _selectedSpell = getSpell(u: _curRole)
-            }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
-    }
-    
+//    override func createAI() {
+//        if _curRole._unit is GraveRobber {
+//            if seed() < 25 {
+//                _selectedSpell = BossAttack()
+//            } else {
+//                _selectedSpell = getSpell(u: _curRole)
+//            }
+//            _selectedSpell._battle = self
+//            _selectedSpell.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
+//    }
+//    
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
         let l:CGFloat = GraveRobber.LEVEL

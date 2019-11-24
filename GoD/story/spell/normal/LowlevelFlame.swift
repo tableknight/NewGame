@@ -37,7 +37,8 @@ class LowlevelFlame: Magical {
                     completion()
                 }
             }
-            t.flame1(index: 0)
+            t.hitFire()
+//            t.flame1(index: 0)
         }
     }
     required init(from decoder: Decoder) throws {

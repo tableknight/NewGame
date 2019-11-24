@@ -23,7 +23,7 @@ class DarkFall: Magical {
         c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 55, target: t) {
-                    t.actionDebuff {
+                    t.mixed2(index: 16) {
                         let s = Status()
                         s._type = "_dark_fall"
                         s._timeleft = 3

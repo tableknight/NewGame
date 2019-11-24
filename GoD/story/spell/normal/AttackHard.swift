@@ -17,10 +17,10 @@ class AttackHard:Physical {
     override init() {
         super.init()
         _name = "奋力一击"
-        _description = "牺牲30点命中，对目标造成攻击125%的物理伤害"
+        _description = "牺牲30点命中，对目标造成攻击165%的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 1
-        _rate = 1.25
+        _rate = 1.65
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
@@ -32,7 +32,7 @@ class AttackHard:Physical {
                         completion()
                     }
                 }
-                t.attacked1()
+                t.blow()
             }
         }
     }

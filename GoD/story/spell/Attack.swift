@@ -17,6 +17,12 @@ class Attack: Physical {
     override init() {
         super.init()
     }
+    override func findTarget() {
+        super.findTarget()
+        if _battle._playerUnit.weaponIs(FollowOn.EFFECTION) && _battle._curRole.playerPart && !_battle._curRole.isBlocked() {
+            _battle._selectedTarget = _battle._lockedTarget
+        }
+    }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle!
         let t = b._selectedTarget!
@@ -24,7 +30,7 @@ class Attack: Physical {
         setTimeout(delay: 0.25, completion: {
             c.actionAttack {
                 self.attack {
-                    if !t.isDead() && c.ifWeaponIs(IdyllssHand()) && self.d7() {
+                    if !t.isDead() && c.weaponIs(IdyllssHand.EFFECTION) && self.d7() {
                         self.attack {
                             completion()
                         }
@@ -52,29 +58,55 @@ class Attack: Physical {
             if !hasMissed(target: t, completion: completion) {
                 if c._unit.isClose() {
                     t.attacked1()
+//                    t.hit1()
+                } else {
+                    t.hit2()
                 }
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         completion()
+                        
                     }
 //                    t.hpChange(value: damage)
-                    if c.ifWeaponIs(DragonSaliva()) {
+                    if c.weaponIs(BansMechanArm.EFFECTION) {
+                        if self.d4() {
+                            let s = Status()
+                            s._timeleft = 2
+                            s._labelText = "R"
+                            s._type = BansMechanArm.EFFECTION
+                            t.addStatus(status: s)
+                        }
+                    } else if c.weaponIs(DragonSaliva.EFFECTION) {
                         setTimeout(delay: 0.5, completion: {
                             let rate = self.fireFactor(from: c, to: t)
                             let fireDamage = damage * 0.3 * rate
                             
                             t.showValue(value: fireDamage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
                         })
+                    } else
+                        if c.weaponIs(LazesPedicureKnife.EFFECTION)  {
+                        if self.d7() {
+                            setTimeout(delay: 0.5, completion: {
+                                c.showText(text: "AGILITY +1")
+                                c.agilityChange(value: 1)
+                            })
+                        }
+                    } else if c.weaponIs(DeepCold.EFFECTION) {
+                        if self.d3() {
+                            t.freezing()
+                        }
+                    } else if c.weaponIs(FollowOn.EFFECTION) {
+                        self._battle._lockedTarget = t
                     }
                     
                     var isGiantFang = false
-                    if c.ifWeaponIs(GiantFang()) {
+                    if c.weaponIs(GiantFang.EFFECTION) {
                         isGiantFang = true
                     }
                     
                     if c.hasSpell(spell: VampireBlood()) || isGiantFang {
                         var recoveryFactor:CGFloat = isGiantFang ? 0.2 : 0.3
-                        if c.ifAmuletIs(FangOfVampire()) {
+                        if c.amuletIs(FangOfVampire.EFFECTION) {
                             recoveryFactor *= 2
                         }
                         let d = abs(damage * recoveryFactor)
@@ -84,14 +116,6 @@ class Attack: Physical {
 //                        c.hpChange(value: d)
                     }
                     
-                    if c._unit._weapon is LazesPedicureKnife {
-                        if self.d7() {
-                            setTimeout(delay: 0.5, completion: {
-                                c.showText(text: "AGILITY +1")
-                                c.agilityChange(value: 1)
-                            })
-                        }
-                    }
                 }
             }
         }

@@ -61,7 +61,7 @@ class LewisBattle: BossBattle {
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 41
+        let level:CGFloat = Lewis.LEVEL
         var es = Array<Creature>()
         for _ in 0...2 {
             let lm = LewisMinion()
@@ -79,6 +79,45 @@ class LewisBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
+    
+    override func specialLoot() -> Array<Prop> {
+        var list = Array<Prop>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 5 {
+            let i = TrueLie()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = JadeHeart()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = MarkOfHeaven()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = FollowOn()
+            i.create()
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = TheFear()
+            i.create()
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Lewis.LEVEL)
+        return list + l.getList()
+    }
 }
 
 class SoulControl: Magical, BossOnly {
@@ -91,7 +130,7 @@ class SoulControl: Magical, BossOnly {
     override init() {
         super.init()
         _name = "精神控制"
-        _description = "控制一名敌方随从害"
+        _description = "控制一名敌方随从"
         _quality = Quality.SACRED
     }
     var _seat:String = ""
@@ -183,6 +222,7 @@ class HandOfGod: Physical, BossOnly {
                             }
                         }
                     }
+                    t.darkness4fifth()
                 }
             }
         }
@@ -199,7 +239,7 @@ class PowerUp: Magical, BossOnly {
     override init() {
         super.init()
         _name = "力量增强"
-        _description = "提升目标100%的攻击力和100%的防御，持续2回合"
+        _description = "提升目标100%的攻击力和100%的护甲，持续2回合"
         _quality = Quality.GOOD
     }
     override func cast(completion: @escaping () -> Void) {
@@ -217,7 +257,7 @@ class PowerUp: Magical, BossOnly {
         }
         t.addStatus(status: status)
         _battle._curRole.actionCast {
-            t.actionBuff {
+            t.revival2f() {
                 t.showText(text: "POWER UP") {
                     completion()
                 }
@@ -246,7 +286,7 @@ class OathBreaker:Magical, Curse {
     override init() {
         super.init()
         _name = "誓言·破"
-        _description = "对地方所有目标释放誓言，50%几率降低其50%防御"
+        _description = "对敌方所有单位释放誓言，50%几率降低其50%护甲"
         _quality = Quality.GOOD
         _cooldown = 1
         autoCast = true
@@ -255,9 +295,8 @@ class OathBreaker:Magical, Curse {
         let ts = _battle._selectedTargets
         _battle._curRole.actionCast {
             for t in ts {
-                t.actionDebuff {
+                t.stateSleepf() {
                     if self.d2() {
-                        t.showText(text: "BREAK")
                         let s = Status()
                         s._timeleft = 3
                         s._labelText = "B"
@@ -270,7 +309,7 @@ class OathBreaker:Magical, Curse {
                     }
                 }
             }
-            setTimeout(delay: 2.5, completion: completion)
+            setTimeout(delay: 2.3, completion: completion)
         }
     }
     override func findTarget() {

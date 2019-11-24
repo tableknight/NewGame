@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Dius:Boss {
+    static let LEVEL:CGFloat = 33
     static let DEFENCE = 0
     static let SPIRIT = 1
     static let FIRE = 2
@@ -16,14 +17,18 @@ class Dius:Boss {
     override init() {
         super.init()
         _name = "迪乌斯"
-        _img = SKTexture(imageNamed: "Dius")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 3
         _growth.strength = 3
         _growth.agility = 3
         _growth.intellect = 3
+        _race = EvilType.DEMON
+        _level = Dius.LEVEL
+        _img = SKTexture(imageNamed: "Dius")
+        _imgUrl = "Dius"
+        _spellsInuse = [ExposeWeakness(),LineAttack(), BallLighting(), SuperWater(), FireExplode()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
@@ -32,7 +37,7 @@ class Dius:Boss {
         _elementalResistance.water = 0
         _elementalResistance.thunder = 0
         
-        _spellsInuse = [ExposeWeakness()]
+        
     }
     var _wwakness = 0
     required init(from decoder: Decoder) throws {

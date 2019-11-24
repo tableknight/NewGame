@@ -17,7 +17,7 @@ class Defence: Attribute {
     }
     override init() {
         super.init()
-        _name = "防御"
+        _name = "护甲"
     }
     override func on(unit: Creature) {
         unit._extensions.defence += _value

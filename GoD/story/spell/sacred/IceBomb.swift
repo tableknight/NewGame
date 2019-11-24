@@ -40,6 +40,7 @@ class IceBomb: Magical {
                 t.addStatus(status: s)
                 completion()
             }
+//            t.water3f()
             t.mixed1(index: 10)
         }
     }
@@ -65,27 +66,25 @@ class IceExplode:Derivant {
         let ts = getAdajcentUnits(target: _target)
         let damage = self.waterDamage(self._target)
         if !self.hadSpecialAction(t: self._target) {
-//            _target.showText(text: "EXPLODE") {
-                self._target.actionAttacked {
-                    self._rate = 0.5
-                    self._target.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
-                }
-            self._target.mixed1(index: 8)
-                
-                setTimeout(delay: 0.5, completion: {
-                    for t in ts {
-                        self._rate = 0.25
-                        let damage = self.waterDamage(t)
-                        if !self.hadSpecialAction(t: t) {
-                            t.actionAttacked {
-                                t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
-                            }
-                            t.mixed1(index: 9)
-                        }
-                    }
-                })
-                setTimeout(delay: 2.5, completion: completion)
+            self._target.actionAttacked {
+                self._rate = 0.5
+                self._target.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
             }
-//        }
+            self._target.water3s()
+            
+            setTimeout(delay: 0.5, completion: {
+                for t in ts {
+                    self._rate = 0.25
+                    let damage = self.waterDamage(t)
+                    if !self.hadSpecialAction(t: t) {
+                        t.actionAttacked {
+                            t.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
+                        }
+                        t.water3s()
+                    }
+                }
+            })
+            setTimeout(delay: 2.5, completion: completion)
+        }
     }
 }

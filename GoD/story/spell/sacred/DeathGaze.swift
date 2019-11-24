@@ -62,7 +62,7 @@ class DeathGaze: Magical {
                 }
                 
             }
-            t.mixed2(index: 3)
+            t.stateDeathf()
         }
     }
     

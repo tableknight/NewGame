@@ -35,13 +35,15 @@ class IberisThignbone:Blunt {
     }
 }
 class GiantFang:Blunt {
+    static let EFFECTION = "giant_fang"
     override init() {
         super.init()
         _name = "巨牙"
-        _description = "普通攻击吸血"
+        _description = "攻击吸血"
         _level = 42
         _chance = 60
         _quality = Quality.SACRED
+        _effection = GiantFang.EFFECTION
         price = 288
     }
     override func create() {
@@ -61,6 +63,7 @@ class GiantFang:Blunt {
 }
 
 class ThorsHammer:Blunt {
+    static let EFFECTION = "thors_hammer"
     override init() {
         super.init()
         _name = "雷神之锤"
@@ -68,6 +71,7 @@ class ThorsHammer:Blunt {
         _level = 48
         _chance = 30
         _quality = Quality.SACRED
+        _effection = ThorsHammer.EFFECTION
         price = 882
     }
     override func create() {
@@ -87,6 +91,7 @@ class ThorsHammer:Blunt {
 }
 
 class HolyPower:Blunt {
+    static let EFFECTION = "holy_power"
     override init() {
         super.init()
         _name = "神圣力量"
@@ -94,6 +99,7 @@ class HolyPower:Blunt {
         _level = 65
         _chance = 35
         _quality = Quality.SACRED
+        _effection = HolyPower.EFFECTION
         price = 998
     }
     override func create() {
@@ -114,6 +120,7 @@ class HolyPower:Blunt {
 }
 
 class IdyllssHand:Blunt {
+    static let EFFECTION = "idylls_hand"
     override init() {
         super.init()
         _name = "埃迪斯之手"
@@ -121,6 +128,7 @@ class IdyllssHand:Blunt {
         _level = 71
         _chance = 5
         _quality = Quality.SACRED
+        _effection = IdyllssHand.EFFECTION
         price = 2882
     }
     override func create() {
@@ -131,6 +139,33 @@ class IdyllssHand:Blunt {
         createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 21), remove: true)
         createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 21), remove: true)
         _attrCount = 2
+        createAttrs()
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+class BansMechanArm:Blunt {
+    static let EFFECTION = "bans_mechan_arm"
+    override init() {
+        super.init()
+        _name = "班桑的机械臂"
+        _description = "降低目标生命回复"
+        _level = 22
+        _chance = 25
+        _quality = Quality.SACRED
+        _effection = BansMechanArm.EFFECTION
+        price = 215
+    }
+    override func create() {
+        createSelfAttrs()
+        createAttr(attrId: STRENGTH)
+        createAttr(attrId: CRITICAL)
+        createAttr(attrId: ACCURACY)
+        _attrCount = seed(min: 2, max: 4)
         createAttrs()
     }
     required init(from decoder: Decoder) throws {

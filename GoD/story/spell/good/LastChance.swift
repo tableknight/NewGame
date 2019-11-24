@@ -37,7 +37,7 @@ class LastChance: Physical {
                                 completion()
                             }
                         })
-                        t.attacked1()
+                        t.blow()
                     } else {
                         let heal = t.getHealth() * 0.75
                         t.showValue(value: heal) {

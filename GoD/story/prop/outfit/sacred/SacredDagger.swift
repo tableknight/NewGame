@@ -8,6 +8,7 @@
 
 import SpriteKit
 class NightBlade: Dagger {
+    static let EFFECTION = "night_blade"
     override init() {
         super.init()
         _name = "夜刃"
@@ -15,6 +16,7 @@ class NightBlade: Dagger {
         _description = "对亡灵造成的全伤害提升25%。"
         _chance = 48
         _quality = Quality.SACRED
+        _effection = NightBlade.EFFECTION
         price = 48
     }
     
@@ -33,6 +35,7 @@ class NightBlade: Dagger {
     }
 }
 class LazesPedicureKnife:Dagger {
+    static let EFFECTION = "lazes_pedicure_knife"
     override init() {
         super.init()
         _name = "拉兹的修脚刀"
@@ -40,6 +43,7 @@ class LazesPedicureKnife:Dagger {
         _level = 21
         _chance = 100
         _quality = Quality.SACRED
+        _effection = LazesPedicureKnife.EFFECTION
         price = 85
     }
     override func create() {

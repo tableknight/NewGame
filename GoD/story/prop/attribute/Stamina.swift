@@ -17,7 +17,7 @@ class Stamina: Attribute {
     }
     override init() {
         super.init()
-        _name = "体力"
+        _name = "防御"
     }
     override func on(unit: Creature) {
 //        unit._mains.stamina += _value

@@ -26,22 +26,26 @@ class ControlUndead:Magical {
         let b = _battle!
         _battle._curRole.actionCast {
             if t._unit._race == EvilType.RISEN {
-                if self.d4() {
-                    t.actionDebuff {
-                        t.removeFromBattle()
-                        t.removeFromParent()
-                        let seats = self._battle.getEmptySeats(top: !b._curRole.playerPart)
-                        t._unit._seat = seats.one()
-                        if b._curRole.playerPart {
-                            b.addPlayerMinion(bUnit: t)
-                        } else {
-                            b.addEnemy(bUnit: t)
+                t.actionDebuff {
+                    if self.d4() || Mode.debug {
+                        t.actionRecall {
+                            t.removeFromBattle()
+                            t.removeFromParent()
+                            let seats = self._battle.getEmptySeats(top: !b._curRole.playerPart)
+                            t._unit._seat = seats.one()
+                            if b._curRole.playerPart {
+                                b.addPlayerMinion(bUnit: t)
+                            } else {
+                                b.addEnemy(bUnit: t)
+                            }
+                            t.actionSummon {}
+                            completion()
                         }
-                        completion()
-                    }
-                } else {
-                    t.showMiss {
-                        completion()
+                        
+                    } else {
+                        t.showMiss {
+                            completion()
+                        }
                     }
                 }
             } else {

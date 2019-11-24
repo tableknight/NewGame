@@ -39,8 +39,12 @@ class UIEvil: UIUnit {
             for _ in 1...enemyCount {
                 let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
                 let l = sc._level
-                let level = Core().d20() ? 1 : [l > 1 ? l - 1 : 1, l , l + 1].one()
-                e.create(level: level)
+                if sc is BossRoad {
+                    e.create(level: sc._level)
+                } else {
+                    e.create(level: Core().d20() ? 1 : [l > 1 ? l - 1 : 1, l , l + 1].one())
+                }
+                
                 enemies.append(e)
             }
         }

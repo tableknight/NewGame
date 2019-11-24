@@ -30,16 +30,18 @@ class Taunt: Magical {
         c.actionCast {
             for t in ts {
                 if !this.statusMissed(baseline: 60, target: t, bossImmnue: t._unit is Boss) {
-                    let s = Status()
-                    s._timeleft = 1
-                    s._labelText = "T"
-                    s._type = Status.TAUNTED
-                    s._source = c
-                    t.addStatus(status: s)
-                    t.showText(text: "TAUNTED")
+                    t.absorbt() {
+                        let s = Status()
+                        s._timeleft = 1
+                        s._labelText = "T"
+                        s._type = Status.TAUNTED
+                        s._source = c
+                        t.addStatus(status: s)
+//                        t.showText(text: "TAUNTED")
+                    }
                 }
             }
-            setTimeout(delay: 1.5, completion: completion)
+            setTimeout(delay: 2, completion: completion)
         }
     }
     override func findTarget() {

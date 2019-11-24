@@ -13,18 +13,22 @@ class GraveRobber:Boss {
     override init() {
         super.init()
         _name = "盗墓者"
-        _img = SKTexture(imageNamed: "GraveRobber")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 1.8
         _growth.strength = 2
         _growth.agility = 2
         _growth.intellect = 2.6
+        _level = GraveRobber.LEVEL
+        _race = EvilType.MAN
+        _img = SKTexture(imageNamed: "GraveRobber")
+        _imgUrl = "GraveRobber"
+        _spellsInuse = [RobberHasMoral(), SummonMummy(), CutThroat(), MakeEverythingRight(), NervousPoison(), HorribleImage(), KickAss(), ReduceLife()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        _spellsInuse = [RobberHasMoral(), SummonMummy(), CutThroat(), MakeEverythingRight(), NervousPoison(), HorribleImage(), KickAss(), ReduceLife()]
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

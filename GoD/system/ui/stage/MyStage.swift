@@ -24,6 +24,34 @@ class MyStage: SKSpriteNode {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
+//        if !_menuButton.isHidden && _menuButton.contains(touchPoint!) {
+//            showMenu()
+//            return
+//        }
+//        if _confirmButton.contains(touchPoint!) {
+//            if _menuButton.isHidden {
+//                hideMenu()
+//            }
+//            _curScene.confirmEvent()
+//            return
+//        }
+//        if _eButton.contains(touchPoint!) {
+//            _curScene._direction = _curScene.EAST
+//            _curScene.moveTo()
+//            return
+//        } else if _sButton.contains(touchPoint!) {
+//            _curScene._direction = _curScene.SOUTH
+//            _curScene.moveTo()
+//            return
+//        } else if _nButton.contains(touchPoint!) {
+//            _curScene._direction = _curScene.NORTH
+//            _curScene.moveTo()
+//            return
+//        } else if _wButton.contains(touchPoint!) {
+//            _curScene._direction = _curScene.WEST
+//            _curScene.moveTo()
+//            return
+//        } else
         if _minionButton.contains(touchPoint!) && !_minionButton.isHidden {
             let c = Game.instance.char
 //            if (c?._minions.count)! < 1 {
@@ -88,16 +116,53 @@ class MyStage: SKSpriteNode {
             }
         })
     }
+    func showMenu() {
+        _charButton.isHidden = false
+        _outfitButton.isHidden = false
+        _itemButton.isHidden = false
+        _spellButton.isHidden = false
+        _minionButton.isHidden = false
+//        _menuButton.isHidden = true
+    }
+    func hideMenu() {
+        _charButton.isHidden = true
+        _outfitButton.isHidden = true
+        _itemButton.isHidden = true
+        _spellButton.isHidden = true
+        _minionButton.isHidden = true
+//        _menuButton.isHidden = false
+    }
     func createMenu() {
-        let y = -cellSize * 6.5
-        let size:CGFloat = cellSize * 0.45
-        let x = cellSize * 3.5
-        let gap = size + cellSize * 0.5
-        _charButton = createMenuButtons(x: x, y: y, size: size, text: "角色")
-        _outfitButton = createMenuButtons(x: x - gap, y: y, size: size, text: "装备")
-        _itemButton = createMenuButtons(x: x - gap * 2 , y: y, size: size, text: "物品")
-        _spellButton = createMenuButtons(x: x - gap * 3, y: y, size: size, text: "法术")
-        _minionButton = createMenuButtons(x: x - gap * 4, y: y, size: size, text: "随从")
+//        let y = -cellSize * 8
+        let size:CGFloat = cellSize * 0.5
+//        let operationButtonSize:CGFloat = cellSize * 0.5
+//        let x = cellSize * 2.8
+//        let gap = size + cellSize * 0.5
+//        let standardX = -cellSize * 2.75
+        let standardY = -cellSize * 6.25
+        
+//        _menuButton = createMenuButtons(x: cellSize * 1.75, y: standardY, size: size, text: "选项")
+        _charButton = createMenuButtons(x: -cellSize * 2, y: standardY, size: size, text: "角色")
+        _outfitButton = createMenuButtons(x: -cellSize * 1, y: standardY, size: size, text: "装备")
+        _itemButton = createMenuButtons(x: 0 , y: standardY, size: size, text: "物品")
+        _spellButton = createMenuButtons(x: cellSize, y: standardY, size: size, text: "法术")
+        _minionButton = createMenuButtons(x: cellSize * 2, y: standardY, size: size, text: "随从")
+//        hideMenu()
+//        let operationButtonGap:CGFloat = cellSize * 0.85
+        
+        
+//        _nButton = createMenuButtons(x: standardX, y: standardY + operationButtonGap, size: operationButtonSize, text: "N")
+//        _sButton = createMenuButtons(x: standardX, y: standardY - operationButtonGap, size: operationButtonSize, text: "S")
+//        _wButton = createMenuButtons(x: standardX - operationButtonGap, y: standardY, size: operationButtonSize, text: "W")
+//        _eButton = createMenuButtons(x: standardX + operationButtonGap, y: standardY, size: operationButtonSize, text: "E")
+//
+////        _confirmButton = createMenuButtons(x: -standardX + operationButtonGap, y: standardY, size: operationButtonSize, text: "A")
+//        _confirmButton = createMenuButtons(x: cellSize * 3, y: standardY, size: operationButtonSize * 1.25, text: "A")
+//        _uiComponentList.append(_nButton)
+//        _uiComponentList.append(_sButton)
+//        _uiComponentList.append(_wButton)
+//        _uiComponentList.append(_eButton)
+//        _uiComponentList.append(_confirmButton)
 //        _quitButton = createMenuButtons(x: -x, y: -cellSize * 6.3, size: cellSize * 0.6, text: "保存")
         /*
         SE
@@ -162,10 +227,10 @@ class MyStage: SKSpriteNode {
 //        roleImage.position.y = -bounds.height + padding + 28
 //        addChild(roleImage)
         
-        
+        let offsetY:CGFloat = cellSize * 2
         let hpbar = HBar()
         hpbar.create(width: w * 0.35, height: 10, value: 1, color: UIColor.red)
-        hpbar.position.y = -h + padding + 30
+        hpbar.position.y = h - offsetY + 30
         hpbar.position.x = -w + padding
         addChild(hpbar)
         hpbar.zPosition = MyStage.UI_LAYER_Z
@@ -174,7 +239,7 @@ class MyStage: SKSpriteNode {
         
         let expbar = HBar()
         expbar.create(width: w * 0.45, height: 10, value: 1, color: UIColor.green)
-        expbar.position.y = -h + padding + 10
+        expbar.position.y = h - offsetY + 10
         expbar.position.x = hpbar.position.x
         expbar.zPosition = MyStage.UI_LAYER_Z
 //        expbar.position.x = bounds.width * 0.5 - padding
@@ -205,11 +270,14 @@ class MyStage: SKSpriteNode {
         for ui in _uiComponentList {
             ui.hide()
         }
+        hideMenu()
+//        _menuButton.isHidden = true
     }
     func showUI() {
         for ui in _uiComponentList {
             ui.show()
         }
+        hideMenu()
     }
     func showPanel(_ panel:UIPanel) {
         panel.zPosition = MyStage.UI_PANEL_Z
@@ -406,9 +474,19 @@ class MyStage: SKSpriteNode {
     func saveScene(scene:AcientRoad) {
         _scenes.append(scene)
     }
+    func refreshCharStatusUI() {
+        self.setBarValue()
+    }
     var _curDialog:Dialog?
     var _curScene:MyScene!
+//    var _sButton:RoundButton!
+//    var _nButton:RoundButton!
+//    var _wButton:RoundButton!
+//    var _eButton:RoundButton!
+//    var _confirmButton:RoundButton!
+    var _cancelButton:RoundButton!
     var _charButton:RoundButton!
+//    var _menuButton:RoundButton!
     var _itemButton:RoundButton!
     var _outfitButton:RoundButton!
     var _spellButton:RoundButton!

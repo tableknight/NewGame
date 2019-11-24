@@ -14,16 +14,16 @@ class MimicBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func createAI() {
-        if _curRole._unit is Mimic {
-            _selectedSpell = _curRole._unit._spellsInuse.one()
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
-    }
+//    override func createAI() {
+//        if _curRole._unit is Mimic {
+//            _selectedSpell = getSpell(u: _curRole)
+//            _selectedSpell._battle = self
+//            _selectedSpell.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
+//    }
     
     override func setEnemyPart(minions: Array<Creature>) {
         var es = Array<Creature>()
@@ -39,6 +39,7 @@ class MimicBattle: BossBattle {
     
     override func specialLoot() -> Array<Prop> {
         let l = Loot()
+        l.loot(level: _level)
         l.loot(level: _level)
         return l.getList()
     }

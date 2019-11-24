@@ -24,13 +24,22 @@ class HighLevelSummon:Magical, SummonSkill {
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle!
+        let c = b._curRole
         let seats = _battle.getEmptySeats(top: !b._curRole.playerPart)
-        _battle._curRole.actionCast {
+        c.actionCast {
             let seat = seats.one()
             let uw = UndeadWitch()
+            if c.weaponIs(TheDeath.EFFECTION) {
+                uw._mains.stamina *= SummonUnit.POWERUP_RATE
+                uw._mains.strength *= SummonUnit.POWERUP_RATE
+                uw._mains.agility *= SummonUnit.POWERUP_RATE
+                uw._mains.intellect *= SummonUnit.POWERUP_RATE
+            } else if c.weaponIs(TheSurpass.EFFECTION) {
+                           uw._spellsInuse.append(Game.instance.char._weapon!._spell)
+                       }
             uw.create(level: b._curRole._unit._level)
             uw._seat = seat
-            let bu = b._curRole.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
+            let bu = c.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
             bu.actionSummon {
                 completion()
             }

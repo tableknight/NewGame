@@ -27,7 +27,7 @@ class SeedOfLife:Derivant {
         let v = (_turn < 3 ? 0.1 : 0.25) * t.getHealth()
         _turn += 1
 //        print(_turn)
-        t.actionHealed {
+        t.cure1s() {
             t.showValue(value: v) {
                 completion()
             }

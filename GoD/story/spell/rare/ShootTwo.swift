@@ -52,6 +52,7 @@ class ShootTwo: Physical, BowSkill {
                         completion()
                     }
                 }
+                t.hit2()
             }
         }
     }

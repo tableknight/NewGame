@@ -30,7 +30,7 @@ class NervousPoison: Magical {
 //        status._timeleft = 3
         c.actionCast {
             if !self.statusMissed(baseline: 85, target: t, completion: completion) {
-                t.actionDebuff {
+                t.statePoison() {
 //                    t.addStatus(status: status)
                     t.poisoning()
                     completion()

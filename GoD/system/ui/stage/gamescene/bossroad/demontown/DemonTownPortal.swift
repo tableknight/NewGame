@@ -46,6 +46,7 @@ class DemonTownPortal: Maze {
         _fragment.append([])
         _fragment.append([0,2,0,1])
         _fragment.append([])
+        _fragment.append([])
         
         super.create()
         let mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)

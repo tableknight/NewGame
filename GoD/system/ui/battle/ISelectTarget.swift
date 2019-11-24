@@ -12,5 +12,6 @@ protocol ISelectTarget {
     var targetEnemy:Bool{get}
     var canBeTargetPlayer:Bool{get}
     var canBeTargetSelf:Bool{get}
+    var canBeTargetSummonUnit:Bool{get}
     var isClose:Bool{get}
 }

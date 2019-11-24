@@ -21,6 +21,7 @@ class SongOfElement:Magical {
         let fd = fireDamage(t)
         let wd = waterDamage(t)
         _battle._curRole.actionCast {
+            t.darkness4fifth()
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: fd + wd, damageType: DamageType.FWMIXED) {
@@ -34,7 +35,7 @@ class SongOfElement:Magical {
                         }
                     }
                 }
-                t.mixed1(index: 8)
+//                t.mixed1(index: 8)
             }
         }
     }

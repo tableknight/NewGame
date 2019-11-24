@@ -26,10 +26,20 @@ class ThunderAttack: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let this = self
+        let t = _battle._selectedTarget!
         c.actionCast {
-            this.attack {
-                completion()
+            setTimeout(delay: 0.5, completion: {
+                self.attack {
+                    completion()
+                }
+            })
+            let sd = Core().seed()
+            if sd < 33 {
+                t.thunder4s()
+            } else if sd < 66 {
+                t.thunder1f()
+            } else {
+                t.thunder1s()
             }
         }
     }
@@ -51,7 +61,6 @@ class ThunderAttack: Magical {
                     }
                 }
             }
-            t.lighting1()
         }
     }
 }

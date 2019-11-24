@@ -185,6 +185,7 @@ extension SKTexture {
         let height = cellSize / h
         
         let rect = CGRect(x: x * width, y: _y * height, width: width * wSize, height: height * hSize)
+//        print(rect)
 //        let rect = CGRect(x: 1 / 3, y: 1 / 4, width: 1 / 3, height: 1 / 4)
         let node = SKSpriteNode(texture: SKTexture(rect: rect, in: self))
         node.size = CGSize(width: realSize * wSize, height: realSize * hSize)

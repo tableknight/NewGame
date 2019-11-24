@@ -34,7 +34,7 @@ class WindPunish: Magical {
                         completion()
                     }
                 }
-                t.water2()
+                t.wind4()
             }
             let seat = self.getUnitBehindTarget(seat: t._unit._seat)
             let tb = self._battle.getUnitBySeat(seat: seat)
@@ -44,7 +44,7 @@ class WindPunish: Magical {
                     tb!.actionAttacked {
                         tb!.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                     }
-                    tb!.water2()
+                    tb!.wind4()
                 }
             }
         }

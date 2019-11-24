@@ -17,7 +17,7 @@ class FireRain: Magical {
     override init() {
         super.init()
         isFire = true
-        _name = "天崩地裂"
+        _name = "耀斑"
         autoCast = true
         targetEnemy = true
         _description = "对所有敌方目标造成精神35%的火焰伤害，有小概率点燃目标"
@@ -37,23 +37,30 @@ class FireRain: Magical {
     
     func attack(completion:@escaping () -> Void) {
         let ts = _battle._selectedTargets
+        let c = _battle._curRole
         for t in ts {
             let damage = fireDamage(t)
             if !hadSpecialAction(t:t) {
-                t.actionAttacked {
-                    t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
-                    if t.ifRingIs(FireCore()) {
-                        t.burning()
-                    } else {
-                        if self.d8() {
+//                setTimeout(delay: 0.5, completion: {
+                    t.actionAttacked {
+                        t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
+                        if c.ringIs(FireCore.EFFECTION) {
                             t.burning()
+                        } else {
+                            if self.d8() {
+                                t.burning()
+                            }
                         }
                     }
-                }
-                t.flame2(index: 1, line: 1)
+//                })
+//                t.flame2(index: 1, line: 1)
+                
             }
         }
-        setTimeout(delay: 2.5, completion: completion)
+        c.light4() {
+            completion()
+        }
+//        setTimeout(delay: 2.5, completion: completion)
     }
     
     override func findTarget() {

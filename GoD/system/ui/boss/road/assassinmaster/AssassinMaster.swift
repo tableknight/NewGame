@@ -13,18 +13,22 @@ class AssassinMaster:Boss {
     override init() {
         super.init()
         _name = "刺客大师"
-        _img = SKTexture(imageNamed: "AssassinMaster")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 1.2
         _growth.strength = 3
         _growth.agility = 3
         _growth.intellect = 1.1
+        _race = EvilType.MAN
+        _level = AssassinMaster.LEVEL
+        _img = SKTexture(imageNamed: "AssassinMaster")
+        _imgUrl = "AssassinMaster"
+        _spellsInuse = [Disappear(), ThrowWeapon(), ShadowCopy(), Observant(), FlashPowder()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 5
         _extensions.hp = _extensions.health
-        _spellsInuse = [Disappear(), ThrowWeapon(), ShadowCopy(), Observant(), FlashPowder()]
+        
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

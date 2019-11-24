@@ -8,17 +8,22 @@
 
 import SpriteKit
 class Idlir:Boss {
+    static let LEVEL:CGFloat = 25
     override init() {
         super.init()
         _name = "伊德利尔"
-        _img = SKTexture(imageNamed: "Idlir")
-    }
-    override func create(level: CGFloat) {
         _quality = Quality.SACRED
         _growth.stamina = 1.5
         _growth.strength = 3
         _growth.agility = 3
         _growth.intellect = 1.5
+        _level = Idlir.LEVEL
+        _race = EvilType.DEMON
+        _img = SKTexture(imageNamed: "Idlir")
+        _imgUrl = "Idlir"
+        _spellsInuse = [MagicReflect(), MagicConvert()]
+    }
+    override func create(level: CGFloat) {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
@@ -26,8 +31,6 @@ class Idlir:Boss {
         _extensions.accuracy = 200
         _extensions.avoid = 200
         _revenge = 200
-        
-        _spellsInuse = [MagicReflect(), MagicConvert(), BossAttack(), BossAttack(), BossAttack()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

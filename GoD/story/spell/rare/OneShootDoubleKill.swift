@@ -17,11 +17,12 @@ class OneShootDoubleKill: Physical, BowSkill {
     override init() {
         super.init()
         _name = "穿刺射击"
-        _description = "对目标和身后单位造成攻击90%的物理伤害"
+        _description = "对随机目标和身后单位造成攻击90%的物理伤害"
         _quality = Quality.RARE
         _rate = 0.9
         _cooldown = 1
         isClose = false
+        autoCast = true
     }
     
     override func cast(completion:@escaping () -> Void) {
@@ -54,6 +55,7 @@ class OneShootDoubleKill: Physical, BowSkill {
                         completion()
                     }
                 }
+                t.hit1()
             }
         }
     }
