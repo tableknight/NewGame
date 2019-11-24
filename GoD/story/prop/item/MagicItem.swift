@@ -128,3 +128,39 @@ class StarStone:MagicItem {
     }
 }
 
+class SoulEssence:MagicItem {
+    override init() {
+        super.init()
+        _price = 0
+        _storePrice = _price * 4
+        _name = "灵魂精华"
+        _description = "获得一个1级的"
+        _quality = Quality.RARE
+        _level = 1
+        usable = true
+        usableInBattle = false
+    }
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+    override func use() {
+        let char = Game.instance.char!
+        if char._minions.count >= 6 {
+            showMsg(text: "不能携带更多随从！")
+            return
+        }
+        removeFromChar()
+        let c = Creature.getCreatureByClass(c: _soul)
+        c.create(level: 1)
+        char._minions.append(c)
+        
+    }
+    private var _soul:Creature!
+    func create(soul:Creature) {
+        _soul = soul
+        _description = "获得一个1级的\(soul._name)"
+    }
+}

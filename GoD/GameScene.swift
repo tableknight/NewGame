@@ -26,7 +26,10 @@ class GameScene: SKScene {
 //        Mode.showbossall = true
 ////
         realScene()
-//        let e = Game.instance.char!
+        let e = Game.instance.char!
+        let se = SoulEssence()
+        se.create(soul: DarkNinja())
+        e.addProp(p: se)
 //        e.addProp(p: DeathTownScroll())
 //        e._spellsInuse = [FireFist(), IceFist(), QiWave(), LightingFist()]
 //        let ts = TheSurvive()
@@ -47,6 +50,9 @@ class GameScene: SKScene {
 //
 //        let s = IdlirWeddingRing()
 //        s.create()
+        
+//        print(NSStringFromClass(s.classForCoder))
+//        print(NSStringFromClass(IdlirWeddingRing.classForCoder()))
 //        e.addProp(p: s)
 //
 //        let s11 = IdlirWeddingRing()

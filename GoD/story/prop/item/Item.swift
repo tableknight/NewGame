@@ -286,7 +286,8 @@ class TownScroll:Item {
 //        showMsg(text: _description)
         let c = CenterCamping()
         let char = Game.instance.curStage._curScene._role!
-//        let stage = Game.instance.
+        let stage = Game.instance.curStage
+        stage?.showUI()
         Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 5, y: 7, char: char)
         })
@@ -315,6 +316,8 @@ class GodTownScroll:TownScroll {
         let c = SnowLandingHome()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
+        let stage = Game.instance.curStage
+        stage?.showUI()
         Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 7, y: 7, char: char)
         })
@@ -343,6 +346,8 @@ class DeathTownScroll:TownScroll {
         let c = DemonTownPortal()
         let char = Game.instance.curStage._curScene._role!
         //        let stage = Game.instance.
+        let stage = Game.instance.curStage
+        stage?.showUI()
         Game.instance.curStage.switchScene(next: c, completion: {
             c.setRole(x: 6, y: 5, char: char)
         })

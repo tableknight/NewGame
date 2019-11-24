@@ -220,4 +220,10 @@ class Creature: Unit {
     func d(baseRate:Int = 45) -> Bool {
         return seed() < baseRate + _level.toInt()
     }
+    static func getCreatureByClass(c:Creature) -> Creature {
+        if c.classForCoder == DarkNinja.classForCoder() {
+            return DarkNinja()
+        }
+        return Creature()
+    }
 }

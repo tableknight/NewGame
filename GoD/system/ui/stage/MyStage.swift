@@ -270,14 +270,14 @@ class MyStage: SKSpriteNode {
         for ui in _uiComponentList {
             ui.hide()
         }
-        hideMenu()
+//        hideMenu()
 //        _menuButton.isHidden = true
     }
     func showUI() {
         for ui in _uiComponentList {
             ui.show()
         }
-        hideMenu()
+//        showMenu()
     }
     func showPanel(_ panel:UIPanel) {
         panel.zPosition = MyStage.UI_PANEL_Z
