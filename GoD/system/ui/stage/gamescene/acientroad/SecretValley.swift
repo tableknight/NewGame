@@ -92,6 +92,10 @@ class DarkNinja: Man {
         _stars.stamina = 0.8
         _stars.agility = 2.0
         _stars.intellect = 0.6
+        _natural.strength = 16
+        _natural.stamina = 11
+        _natural.agility = 21
+        _natural.intellect = 14
         _name = "黑暗忍着"
         _imgUrl = "dark_ninja"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -118,6 +122,10 @@ class HellNight: Rizen {
         _stars.stamina = 3.0
         _stars.agility = 0.5
         _stars.intellect = 0.6
+        _natural.strength = 18
+        _natural.stamina = 21
+        _natural.agility = 13
+        _natural.intellect = 17
         _name = "地狱骑士"
         _imgUrl = "hell_rider"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -144,6 +152,10 @@ class BloodQueen: Demon {
         _stars.stamina = 1.2
         _stars.agility = 1.2
         _stars.intellect = 2.6
+        _natural.strength = 21
+        _natural.stamina = 15
+        _natural.agility = 18
+        _natural.intellect = 21
         _name = "鲜血女王"
         _imgUrl = "blood_queen"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -168,6 +180,10 @@ class ManWizard: Man {
         _stars.stamina = 0.8
         _stars.agility = 2.5
         _stars.intellect = 1.9
+        _natural.strength = 16
+        _natural.stamina = 11
+        _natural.agility = 19
+        _natural.intellect = 22
         _name = "旅法师"
         _imgUrl = "wander_wizard"
         _img = SKTexture(imageNamed: _imgUrl)

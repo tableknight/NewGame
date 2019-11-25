@@ -65,6 +65,10 @@ class BloodBat: Demon {
         _stars.stamina = 2.2
         _stars.agility = 1.4
         _stars.intellect = 0.9
+        _natural.strength = 13
+        _natural.stamina = 22
+        _natural.agility = 18
+        _natural.intellect = 16
         _name = "血色蝙蝠"
         _imgUrl = "blood_bat"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -91,6 +95,10 @@ class Kodagu: Demon {
         _stars.stamina = 2.2
         _stars.agility = 0.6
         _stars.intellect = 0.6
+        _natural.strength = 22
+        _natural.stamina = 22
+        _natural.agility = 10
+        _natural.intellect = 10
         _name = "达古"
         _imgUrl = "Kodagu"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -117,6 +125,10 @@ class EvilSpirit: Demon {
         _stars.stamina = 1.5
         _stars.agility = 0.8
         _stars.intellect = 2.5
+        _natural.strength = 18
+        _natural.stamina = 11
+        _natural.agility = 11
+        _natural.intellect = 29
         _name = "邪灵"
         _imgUrl = "evil_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -143,6 +155,10 @@ class HellBaron: Demon {
         _stars.stamina = 0.6
         _stars.agility = 2.1
         _stars.intellect = 2.4
+        _natural.strength = 26
+        _natural.stamina = 21
+        _natural.agility = 11
+        _natural.intellect = 11
         _name = "地狱男爵"
         _imgUrl = "hell_baron"
         _img = SKTexture(imageNamed: _imgUrl)

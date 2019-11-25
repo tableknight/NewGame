@@ -34,7 +34,7 @@ class PandoraHeart:SoulStone {
         super.init()
         _name = "潘多拉之心"
         _description = "随机获取一个未获得的神之技"
-        _level = 55
+        _level = 40
         _race = EvilType.DEMON
         _chance = 2
         _quality = Quality.SACRED
@@ -126,7 +126,7 @@ class SoulPeace:SoulStone {
         super.init()
         _name = "灵魂碎片"
         _description = ""
-        _level = 42
+        _level = 22
         _race = EvilType.RISEN
         _chance = 40
         _quality = Quality.SACRED

@@ -23,11 +23,12 @@ class Character: Creature {
 //        _img = Data.instance
     }
     override func create(level: CGFloat = 1) {
-        let val:CGFloat = 20
+        let val:CGFloat = 15
         staminaChange(value: val)
         strengthChange(value: val)
         agilityChange(value: val)
         intellectChange(value: val)
+        _leftPoint = 20
         _extensions.hp = _extensions.health
 //        _spells = [TurnAttack(), FeignAttack()]
         _level = level

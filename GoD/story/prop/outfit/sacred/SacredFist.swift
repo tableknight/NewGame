@@ -69,7 +69,7 @@ class DragonClaw:Fist {
         super.init()
         _name = "巨龙爪"
         _description = "烈焰拳不再有冷却时间"
-        _level = 45
+        _level = 35
         _chance = DragonClaw.CHANCE
         price = 332
         _quality = Quality.SACRED
@@ -77,9 +77,7 @@ class DragonClaw:Fist {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: 30, remove: true)
-        createAttr(attrId: FIREPOWER, value: seedFloat(min: 20, max: 31), remove: true)
-        _attrCount = 3
+        _attrCount = 6
         createAttrs()
     }
     required init(from decoder: Decoder) throws {
@@ -97,7 +95,7 @@ class NilSeal:Fist {
         super.init()
         _name = "尼尔的禁锢"
         _description = "气功波增加1目标"
-        _level = 58
+        _level = 40
         _chance = NilSeal.CHANCE
         price = 660
         _quality = Quality.SACRED
@@ -105,10 +103,10 @@ class NilSeal:Fist {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: 36, remove: true)
-        createAttr(attrId: STRENGTH, value: 36, remove: true)
-        createAttr(attrId: AGILITY, value: 36, remove: true)
-        createAttr(attrId: INTELLECT, value: 36, remove: true)
+        createAttr(attrId: STAMINA, value: 25, remove: true)
+        createAttr(attrId: STRENGTH, value: 25, remove: true)
+        createAttr(attrId: AGILITY, value: 25, remove: true)
+        createAttr(attrId: INTELLECT, value: 25, remove: true)
         _attrCount = 1
         createAttrs()
     }

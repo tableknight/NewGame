@@ -90,6 +90,10 @@ class VirulentToad: Natrue {
         _stars.stamina = 2.8
         _stars.agility = 0.6
         _stars.intellect = 1.0
+        _natural.strength = 18
+        _natural.stamina = 28
+        _natural.agility = 12
+        _natural.intellect = 10
         _name = "绿精灵"
         _imgUrl = "green_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -117,6 +121,10 @@ class GiantWasp: Man {
         _stars.stamina = 0.5
         _stars.agility = 2.0
         _stars.intellect = 0.8
+        _natural.strength = 22
+        _natural.stamina = 15
+        _natural.agility = 22
+        _natural.intellect = 15
         _name = "露琪"
         _imgUrl = "luki"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -149,6 +157,10 @@ class TreeSpirit: Man {
         _stars.stamina = 2.0
         _stars.agility = 1.0
         _stars.intellect = 2.2
+        _natural.strength = 10
+        _natural.stamina = 12
+        _natural.agility = 12
+        _natural.intellect = 29
         _name = "树妖"
         _imgUrl = "tree_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -176,6 +188,10 @@ class Python: Man {
         _stars.stamina = 1.4
         _stars.agility = 1.3
         _stars.intellect = 1.2
+        _natural.strength = 28
+        _natural.stamina = 17
+        _natural.agility = 12
+        _natural.intellect = 16
         _name = "花仙子"
         _imgUrl = "flower_fairy"
         spell13()

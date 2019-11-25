@@ -8,7 +8,7 @@
 
 import SpriteKit
 class George:Boss {
-    static let LEVEL:CGFloat = 61
+    static let LEVEL:CGFloat = 39
     override init() {
         super.init()
         _name = "乔治·安顿比尔"

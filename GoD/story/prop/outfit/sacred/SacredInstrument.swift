@@ -13,7 +13,7 @@ class TheMonatNotes:Instrument {
         super.init()
         _name = "莫纳手记"
         _description = "该法器提供的技能可以使用两次"
-        _level = 52
+        _level = 29
         _chance = 10
         _quality = Quality.SACRED
         _effection = TheMonatNotes.EFFECTION
@@ -22,8 +22,8 @@ class TheMonatNotes:Instrument {
     override func create() {
         createSelfAttrs()
         createSpell()
-        createAttr(attrId: INTELLECT, value: 30, remove: true)
-        createAttr(attrId: SPEED, value: 30, remove: true)
+        createAttr(attrId: INTELLECT, value: 20, remove: true)
+        createAttr(attrId: SPEED, value: 20, remove: true)
         createAttr(attrId: FIREPOWER, value: 30, remove: true)
         createAttr(attrId: RHYTHM, value: 12, remove: true)
         _attrCount = 2
@@ -68,7 +68,7 @@ class CreationMatrix:Instrument {
         super.init()
         _name = "创世之矩"
         _description = "战斗开始时，移除一个技能的冷却时间"
-        _level = 52
+        _level = 32
         _chance = 3
         _quality = Quality.SACRED
         price = 1020
@@ -206,7 +206,7 @@ class TheSurpass:Instrument {
         super.init()
         _name = "越之书"
         _description = "赋予你的召唤物此物品所携带的法术"
-        _level = 45
+        _level = 35
         _chance = 10
         _quality = Quality.SACRED
         _effection = TheSurpass.EFFECTION
@@ -215,8 +215,8 @@ class TheSurpass:Instrument {
     override func create() {
         createSelfAttrs()
         createSpell()
-        createAttr(attrId: STAMINA, value: seedFloat(min: 25, max: 33), remove: true)
-        createAttr(attrId: INTELLECT, value: seedFloat(min: 25, max: 33), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 20, max: 26), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 20, max: 266), remove: true)
         _attrCount = 3
         createAttrs()
     }
@@ -234,7 +234,7 @@ class TheFear:Instrument {
         super.init()
         _name = "畏之书"
         _description = "移除所有召唤术的冷却世纪"
-        _level = 45
+        _level = 35
         _chance = 10
         _quality = Quality.SACRED
         _effection = TheFear.EFFECTION
@@ -243,8 +243,8 @@ class TheFear:Instrument {
     override func create() {
         createSelfAttrs()
         createSpell()
-        createAttr(attrId: STAMINA, value: seedFloat(min: 25, max: 33), remove: true)
-        createAttr(attrId: INTELLECT, value: seedFloat(min: 25, max: 33), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 20, max: 26), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 20, max: 26), remove: true)
         _attrCount = 3
         createAttrs()
     }

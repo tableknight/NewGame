@@ -36,7 +36,7 @@ class FireMaster:Wand {
         super.init()
         _name = "驭火者"
         _description = "降低所有火系法术1的冷却回合"
-        _level = 51
+        _level = 31
         _chance = 15
         _quality = Quality.SACRED
         _effection = FireMaster.EFFECTION
@@ -44,8 +44,8 @@ class FireMaster:Wand {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: 35, remove: true)
-        createAttr(attrId: INTELLECT, value: 35, remove: true)
+        createAttr(attrId: STAMINA, value: 20, remove: true)
+        createAttr(attrId: INTELLECT, value: 20, remove: true)
         createAttr(attrId: FIREPOWER, value: 35, remove: true)
         _attrCount = seed(min: 1, max: 4)
         createAttrs()
@@ -63,7 +63,7 @@ class WitchWand:Wand {
         super.init()
         _name = "巫毒法杖"
         _description = "诅咒不再有冷却时间"
-        _level = 63
+        _level = 36
         _chance = 35
         _quality = Quality.SACRED
         _effection = WitchWand.EFFECTION
@@ -71,9 +71,9 @@ class WitchWand:Wand {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: 42, remove: true)
-        createAttr(attrId: INTELLECT, value: 42, remove: true)
-        createAttr(attrId: HEALTH, value: 0, remove: true)
+        createAttr(attrId: STAMINA, value: 22, remove: true)
+        createAttr(attrId: INTELLECT, value: 22, remove: true)
+        createAttr(attrId: HEALTH, remove: true)
         createAttr(attrId: MIND, value: 42, remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
@@ -91,7 +91,7 @@ class PuppetMaster:Wand {
         super.init()
         _name = "大傀儡师"
         _description = "增加一个随从位"
-        _level = 76
+        _level = 40
         _chance = 2
         _quality = Quality.SACRED
         _effection = PuppetMaster.EFFECTION
@@ -99,10 +99,10 @@ class PuppetMaster:Wand {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: seedFloat(min: 50, max: 66), remove: true)
-        createAttr(attrId: INTELLECT, value: seedFloat(min: 50, max: 66), remove: true)
-        createAttr(attrId: MIND, value: 35, remove: true)
-        createAttr(attrId: WATERRESISTANCE, value: 35, remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: MIND, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: WATERRESISTANCE, value: seedFloat(min: 30, max: 41), remove: true)
         _attrCount = 3
         createAttrs()
     }

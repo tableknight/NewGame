@@ -8,7 +8,7 @@
 
 import SpriteKit
 class AssassinMaster:Boss {
-    static let LEVEL:CGFloat = 41
+    static let LEVEL:CGFloat = 29
     static let IMG = "AssassinMaster"
     override init() {
         super.init()

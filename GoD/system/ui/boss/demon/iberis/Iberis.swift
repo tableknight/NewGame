@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Iberis:Boss {
-    static let LEVEL:CGFloat = 50
+    static let LEVEL:CGFloat = 30
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

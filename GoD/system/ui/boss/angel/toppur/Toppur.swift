@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Toppur:Boss {
-    static let LEVEL:CGFloat = 23
+    static let LEVEL:CGFloat = 21
     static let IMG = "Toppur"
     override init() {
         super.init()

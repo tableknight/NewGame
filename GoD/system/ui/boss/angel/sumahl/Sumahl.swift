@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Sumahl:Boss {
-    static let LEVEL:CGFloat = 64
+    static let LEVEL:CGFloat = 40
     override init() {
         super.init()
         _name = "苏玛尔"

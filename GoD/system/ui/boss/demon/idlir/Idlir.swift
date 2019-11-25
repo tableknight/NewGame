@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Idlir:Boss {
-    static let LEVEL:CGFloat = 25
+    static let LEVEL:CGFloat = 13
     override init() {
         super.init()
         _name = "伊德利尔"

@@ -181,7 +181,7 @@ class Outfit:Prop {
             _attrs.append(a)
         }
     }
-    func createAttr(attrId:Int, value:CGFloat = 0, remove:Bool = false, hidden:Bool = false) {
+    func createAttr(attrId:Int, value:CGFloat = 0, remove:Bool = true, hidden:Bool = false) {
         let attr = getAttrById(id: attrId)
         if value != 0 {
             attr._value = value

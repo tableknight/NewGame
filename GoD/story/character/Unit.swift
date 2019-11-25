@@ -142,16 +142,16 @@ class Unit:Core {
     
     var _mains:Mains = Mains(stamina:0, strength: 0, agility: 0, intellect: 0)
     var _extensions:Extensions = Extensions(
-        attack: 0,
+        attack: 40,
         defence: 0,
         speed: 0,
         accuracy: 100,
         critical: 15,
         destroy: 0,
         avoid: 15,
-        spirit: 35,
-        hp: 0,
-        mp: 0,
+        spirit: 40,
+        hp: 100,
+        mp: 100,
         health: 0,
         mind: 15
     )
@@ -193,8 +193,20 @@ class Unit:Core {
     func expNext() -> CGFloat {
         let level = _level + 1
         let t = atan(level * 0.1)
-        let at = t * t
-        return 100 * level + level * level * level * at * 0.75
+        var rate:CGFloat = 0.5
+        if level < 6 {
+            
+        } else if level < 11 {
+            rate = 1
+        } else if level < 21 {
+            rate = 1.5
+        } else if level < 31 {
+            rate = 2
+        } else {
+            rate = 3
+        }
+        let at = t * t * rate
+        return 100 * level + level * level * level * at
     }
     
     func strengthChange(value: CGFloat) {
@@ -208,7 +220,7 @@ class Unit:Core {
         _extensions.spirit += value * -0.2
         _extensions.health += value * 1
         _extensions.hp += value * 1
-        _extensions.mp += value * 0
+        _extensions.mp += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
         }

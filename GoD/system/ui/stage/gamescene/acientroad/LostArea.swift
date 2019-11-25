@@ -140,6 +140,10 @@ class BoneWitch: Rizen {
         _stars.stamina = 1.0
         _stars.agility = 1.0
         _stars.intellect = 2.8
+        _natural.strength = 10
+        _natural.stamina = 15
+        _natural.agility = 15
+        _natural.intellect = 24
         _name = "白骨巫师"
         _imgUrl = "bone_wizard"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -170,6 +174,10 @@ class RedEyeDemon: Demon {
         _stars.stamina = 2.1
         _stars.agility = 2.1
         _stars.intellect = 0.6
+        _natural.strength = 21
+        _natural.stamina = 21
+        _natural.agility = 14
+        _natural.intellect = 12
         _name = "红眼恶魔"
         _imgUrl = "red_eye_demon"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -203,6 +211,10 @@ class DeadSpirit: Rizen {
         _stars.stamina = 1.0
         _stars.agility = 2.2
         _stars.intellect = 2.4
+        _natural.strength = 12
+        _natural.stamina = 21
+        _natural.agility = 16
+        _natural.intellect = 16
         _name = "死灵"
         _imgUrl = "dead_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -231,6 +243,10 @@ class WasteWalker: Rizen {
         _stars.stamina = 2.2
         _stars.agility = 1
         _stars.intellect = 0.4
+        _natural.strength = 12
+        _natural.stamina = 25
+        _natural.agility = 19
+        _natural.intellect = 19
         _name = "荒地行者"
         _imgUrl = "waste_walker"
         _img = SKTexture(imageNamed: _imgUrl)

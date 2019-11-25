@@ -93,6 +93,10 @@ class ChildLizard: Natrue {
         _stars.stamina = 1.8
         _stars.agility = 1.1
         _stars.intellect = 0.6
+        _natural.strength = 12
+        _natural.stamina = 21
+        _natural.agility = 18
+        _natural.intellect = 18
         _name = "小蜥蜴"
         _imgUrl = "child_lizard"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -118,6 +122,10 @@ class ForestGuard: Man {
         _stars.stamina = 1.1
         _stars.agility = 1.1
         _stars.intellect = 2.6
+        _natural.strength = 14
+        _natural.stamina = 16
+        _natural.agility = 22
+        _natural.intellect = 19
         _name = "丛林守卫"
         _imgUrl = "forest_guard"
         _img = SKTexture(imageNamed: "forest_guard")
@@ -146,6 +154,10 @@ class CrazyPlant: Natrue {
         _stars.stamina = 2.1
         _stars.agility = 1.4
         _stars.intellect = 0.6
+        _natural.strength = 12
+        _natural.stamina = 28
+        _natural.agility = 12
+        _natural.intellect = 18
         _name = "疯狂植物"
         _imgUrl = "crazy_plant"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -172,6 +184,10 @@ class CowCow: Natrue {
         _stars.stamina = 2.9
         _stars.agility = 0.6
         _stars.intellect = 0.6
+        _natural.strength = 18
+        _natural.stamina = 21
+        _natural.agility = 16
+        _natural.intellect = 16
         _name = "奶牛"
         _imgUrl = "cow_cow"
         _img = SKTexture(imageNamed: _imgUrl)

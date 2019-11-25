@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Dius:Boss {
-    static let LEVEL:CGFloat = 33
+    static let LEVEL:CGFloat = 19
     static let DEFENCE = 0
     static let SPIRIT = 1
     static let FIRE = 2

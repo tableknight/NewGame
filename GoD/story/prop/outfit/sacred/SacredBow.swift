@@ -40,7 +40,7 @@ class Boreas:Bow {
         super.init()
         _name = "北风之神"
         _description = "攻击力翻倍"
-        _level = 55
+        _level = 31
         _chance = 100
         _quality = Quality.SACRED
         _effection = Boreas.EFFECTION
@@ -49,10 +49,10 @@ class Boreas:Bow {
     override func create() {
         _attackSpeed = seed(min: 5, max: 9).toFloat() * 0.1
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: 35, remove: true)
-        createAttr(attrId: DEFENCE, value: 35, remove: true)
-        createAttr(attrId: THUNDERRESISTANCE, value: 35, remove: true)
-        createAttr(attrId: HEALTH, value: 35, remove: true)
+        createAttr(attrId: STRENGTH, value: 20, remove: true)
+        createAttr(attrId: DEFENCE, value: 30, remove: true)
+        createAttr(attrId: THUNDERRESISTANCE, value: 30, remove: true)
+        createAttr(attrId: HEALTH, value: 100, remove: true)
         _attrCount = 2
         createAttrs()
     }
@@ -117,18 +117,18 @@ class SoundOfWind:Bow {
         super.init()
         _name = "丧钟"
         _description = ""
-        _level = 66
+        _level = 26
         _chance = 30
         _quality = Quality.SACRED
         price = 1677
     }
     override func create() {
         createAttr(attrId: ATTACK_BASE)
-        createAttr(attrId: AGILITY, value: seedFloat(min: 30, max: 51), remove: true)
-        createAttr(attrId: STRENGTH, value: seedFloat(min: 30, max: 51), remove: true)
-        createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 51), remove: true)
-        createAttr(attrId: INTELLECT, value: seedFloat(min: 30, max: 51), remove: true)
-        createAttr(attrId: AVOID, value: seedFloat(min: 30, max: 51), remove: true)
+        createAttr(attrId: AGILITY, value: seedFloat(min: 5, max: 31), remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 5, max: 31), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 5, max: 31), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 5, max: 31), remove: true)
+        createAttr(attrId: AVOID, value: seedFloat(min: 5, max: 31), remove: true)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

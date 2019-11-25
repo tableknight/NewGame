@@ -19,7 +19,7 @@ class PuppetMark: MagicMark {
         super.init()
         _name = "傀儡印记"
         _description = "减少一个技能栏，增加一个随从位"
-        _level = 52
+        _level = 32
         _chance = 10
         _quality = Quality.SACRED
         _effection = PuppetMark.EFFECTION
@@ -77,7 +77,7 @@ class MarkOfDeathGod:MagicMark {
         super.init()
         _name = "死神印记"
         _description = "免疫即死和静默"
-        _level = 43
+        _level = 23
         _chance = 25
         _quality = Quality.SACRED
         _effection = MarkOfDeathGod.EFFECTION
@@ -143,7 +143,7 @@ class MoltenFire:MagicMark {
         super.init()
         _name = "融火"
         _description = "大幅提升火元素伤害"
-        _level = 48
+        _level = 28
         _chance = 30
         _quality = Quality.SACRED
         price = 420
@@ -165,7 +165,7 @@ class TheEye:MagicMark {
         super.init()
         _name = "撒旦之眼"
         _description = "获得一个额外的技能卡槽"
-        _level = 68
+        _level = 40
         _chance = 5
         _quality = Quality.SACRED
         _effection = TheEye.EFFECTION
@@ -204,7 +204,7 @@ class FireMark:MagicMark {
         super.init()
         _name = "火焰纹章"
         _description = "延长燃烧效果一回合"
-        _level = 43
+        _level = 33
         _chance = 27
         _quality = Quality.SACRED
         _effection = FireMark.EFFECTION

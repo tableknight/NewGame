@@ -8,7 +8,7 @@
 
 import SpriteKit
 class FearGhost:Boss {
-    static let LEVEL:CGFloat = 58
+    static let LEVEL:CGFloat = 38
     static let IMG = "FearGhost"
     override init() {
         super.init()

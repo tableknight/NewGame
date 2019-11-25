@@ -10,6 +10,8 @@ class Creature: Unit {
     private enum CodingKeys: String, CodingKey {
         case _stars
         case _growth
+        case _birth
+        case _natural
         case _spellCount
         case _sensitive
         case _weapon
@@ -21,6 +23,8 @@ class Creature: Unit {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         _stars = try values.decode(Mains.self, forKey: ._stars)
+        _natural = try values.decode(Mains.self, forKey: ._natural)
+        _birth = try values.decode(Mains.self, forKey: ._birth)
         _growth = try values.decode(Mains.self, forKey: ._growth)
         _spellCount = try values.decode(Int.self, forKey: ._spellCount)
         _sensitive = try values.decode(Int.self, forKey: ._sensitive)
@@ -53,6 +57,8 @@ class Creature: Unit {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(_stars, forKey: ._stars)
         try container.encode(_growth, forKey: ._growth)
+        try container.encode(_natural, forKey: ._natural)
+        try container.encode(_birth, forKey: ._birth)
         try container.encode(_spellCount, forKey: ._spellCount)
         try container.encode(_sensitive, forKey: ._sensitive)
         try container.encode(_weapon, forKey: ._weapon)
@@ -84,6 +90,8 @@ class Creature: Unit {
     
     var _stars:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
     var _growth:Mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
+    var _birth = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
+    var _natural = Mains(stamina: 20, strength: 20, agility: 20, intellect: 20)
     var _spellSlot:SpellSlot = SpellSlot(max: 3, min: 0)
     var _spellCount = 1
     var _moveSpeed:CGFloat = 0
@@ -104,13 +112,12 @@ class Creature: Unit {
         return false
     }
     func extraProperty(value: CGFloat) -> CGFloat {
-        let size = seed(min: Int(value.toInt() * _quality), max: Int(value.toInt() * _quality * 5))
-        let v = CGFloat(size) * 0.01
-        if beMore() {
-            return v
-        } else {
-            return -v
+        let max = (value * 10).toInt()
+        var float = seed(to: max) / 100
+        if !beMore() {
+            float *= -1
         }
+        return value + value
     }
     func createQuality() {
         let l = _level.toInt()
@@ -125,31 +132,31 @@ class Creature: Unit {
             _quality = Quality.SACRED
         }
     }
+    func createBirthValue() {
+        _birth.strength = extraProperty(value: _natural.strength)
+        _birth.stamina = extraProperty(value: _natural.stamina)
+        _birth.agility = extraProperty(value: _natural.agility)
+        _birth.intellect = extraProperty(value: _natural.intellect)
+    }
+    func createGrowthValue() {
+        _growth.stamina = extraProperty(value: _stars.stamina)
+        _growth.strength = extraProperty(value: _stars.strength)
+        _growth.agility = extraProperty(value: _stars.agility)
+        _growth.intellect = extraProperty(value: _stars.intellect)
+    }
     func create(level:CGFloat) {
         _level = level
         createQuality()
-        _growth.stamina = _stars.stamina + extraProperty(value: _stars.stamina)
-        _growth.strength = _stars.strength + extraProperty(value: _stars.strength)
-        _growth.agility = _stars.agility + extraProperty(value: _stars.agility)
-        _growth.intellect = _stars.intellect + extraProperty(value: _stars.intellect)
+        createBirthValue()
+        createGrowthValue()
         levelTo(level: level)
         _extensions.hp = _extensions.health
         magicSensitive()
         let l = _level.toInt()
-        if _level > 25 {
-            _elementalPower.fire = seed(to: l).toFloat()
-            _elementalPower.water = seed(to: l).toFloat()
-            _elementalPower.thunder = seed(to: l).toFloat()
-        }
-        if _level > 50 {
+        if _level > 30 {
             _elementalResistance.fire = seed(to: l).toFloat()
             _elementalResistance.water = seed(to: l).toFloat()
             _elementalResistance.thunder = seed(to: l).toFloat()
-        }
-        if _level > 75 {
-            _rhythm = seed(to: 15).toFloat() + 5
-            _revenge = seed(to: 15).toFloat() + 5
-            _break = seed(to: 15).toFloat() + 5
         }
         if _spellCount > _spellsInuse.count && d3() {
             let l = Loot()
@@ -173,10 +180,10 @@ class Creature: Unit {
         _sensitive = seed(min: 15, max: 56)
     }
     func levelTo(level:CGFloat) {
-        staminaChange(value: (level + 10) * _growth.stamina)
-        strengthChange(value: (level + 10) * _growth.strength)
-        agilityChange(value: (level + 10) * _growth.agility)
-        intellectChange(value: (level + 10) * _growth.intellect)
+        staminaChange(value: (level + _birth.stamina) * _growth.stamina)
+        strengthChange(value: (level + _birth.strength) * _growth.strength)
+        agilityChange(value: (level + _birth.agility) * _growth.agility)
+        intellectChange(value: (level + _birth.intellect) * _growth.intellect)
         _level = level
         for _ in 1...level.toInt() {
             let sd = seed()

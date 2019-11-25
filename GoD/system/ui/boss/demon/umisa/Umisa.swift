@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Umisa:Boss {
-    static let LEVEL:CGFloat = 54
+    static let LEVEL:CGFloat = 34
     override init() {
         super.init()
         _name = "尤弥萨"

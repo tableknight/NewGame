@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Micalu:Boss {
-    static let LEVEL:CGFloat = 36
+    static let LEVEL:CGFloat = 26
     override init() {
         super.init()
         _name = "米卡路"

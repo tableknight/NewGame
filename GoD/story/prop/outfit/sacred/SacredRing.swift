@@ -219,7 +219,7 @@ class RingOfDeath:Ring {
         super.init()
         _name = "逝者之戒"
         _description = "提升自身50%的治疗效果"
-        _level = 55
+        _level = 25
         _chance = 30
         _quality = Quality.SACRED
         _effection = RingOfDeath.EFFECTION
@@ -245,7 +245,7 @@ class RingFromElder:Ring {
         super.init()
         _name = "长者之戒"
         _description = "提升自身25%经验获取"
-        _level = 25
+        _level = 15
         _chance = 30
         _unique = true
         _quality = Quality.SACRED

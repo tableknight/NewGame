@@ -40,7 +40,7 @@ class GiantFang:Blunt {
         super.init()
         _name = "巨牙"
         _description = "攻击吸血"
-        _level = 42
+        _level = 22
         _chance = 60
         _quality = Quality.SACRED
         _effection = GiantFang.EFFECTION
@@ -48,9 +48,9 @@ class GiantFang:Blunt {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: 30, remove: true)
-        createAttr(attrId: HEALTH, value: seedFloat(min: 40, max: 66), remove: true)
-        createAttr(attrId: DEFENCE, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: STAMINA, value: 15, remove: true)
+        createAttr(attrId: HEALTH, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: DEFENCE, value: seedFloat(min: 20, max: 31), remove: true)
         _attrCount = 3
         createAttrs()
     }
@@ -68,7 +68,7 @@ class ThorsHammer:Blunt {
         super.init()
         _name = "雷神之锤"
         _description = "提升落雷伤害100%"
-        _level = 48
+        _level = 28
         _chance = 30
         _quality = Quality.SACRED
         _effection = ThorsHammer.EFFECTION
@@ -76,7 +76,7 @@ class ThorsHammer:Blunt {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: 40, remove: true)
+        createAttr(attrId: STRENGTH, value: 20, remove: true)
         createAttr(attrId: THUNDERPOWER, value: 40, remove: true)
         createAttr(attrId: THUNDERRESISTANCE, value: 40, remove: true)
         _attrCount = 3
@@ -96,7 +96,7 @@ class HolyPower:Blunt {
         super.init()
         _name = "神圣力量"
         _description = "对亡灵的伤害提升100%"
-        _level = 65
+        _level = 35
         _chance = 35
         _quality = Quality.SACRED
         _effection = HolyPower.EFFECTION
@@ -104,10 +104,10 @@ class HolyPower:Blunt {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: seedFloat(min: 40, max: 51), remove: true)
-        createAttr(attrId: STAMINA, value: seedFloat(min: 40, max: 51), remove: true)
-        createAttr(attrId: INTELLECT, value: seedFloat(min: 40, max: 51), remove: true)
-        createAttr(attrId: HEALTH, value: seedFloat(min: 80, max: 101), remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: INTELLECT, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: HEALTH, value: seedFloat(min: 80, max: 201), remove: true)
         _attrCount = 1
         createAttrs()
     }
@@ -125,7 +125,7 @@ class IdyllssHand:Blunt {
         super.init()
         _name = "埃迪斯之手"
         _description = "普通攻击有一定几率攻击两次"
-        _level = 71
+        _level = 31
         _chance = 5
         _quality = Quality.SACRED
         _effection = IdyllssHand.EFFECTION
@@ -133,11 +133,11 @@ class IdyllssHand:Blunt {
     }
     override func create() {
         createAttr(attrId: ATTACK_BASE)
-        createAttr(attrId: CRITICAL, value: 60, remove: true)
-        createAttr(attrId: STRENGTH, value: seedFloat(min: 45, max: 56), remove: true)
-        createAttr(attrId: AGILITY, value: seedFloat(min: 45, max: 56), remove: true)
-        createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 21), remove: true)
-        createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 21), remove: true)
+        createAttr(attrId: CRITICAL, value: 50, remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 15, max: 21), remove: true)
+        createAttr(attrId: AGILITY, value: seedFloat(min: 15, max: 21), remove: true)
+        createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 16), remove: true)
+        createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 16), remove: true)
         _attrCount = 2
         createAttrs()
     }
@@ -162,9 +162,9 @@ class BansMechanArm:Blunt {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH)
-        createAttr(attrId: CRITICAL)
-        createAttr(attrId: ACCURACY)
+        createAttr(attrId: STRENGTH, remove: true)
+        createAttr(attrId: CRITICAL, remove: true)
+        createAttr(attrId: ACCURACY, remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
     }

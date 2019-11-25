@@ -93,7 +93,7 @@ class DragonSlayer: Sword {
         super.init()
         _name = "屠龙者"
         _description = "对龙类造成的全伤害提升100%。"
-        _level = 65
+        _level = 40
         _chance = 15
         _quality = Quality.SACRED
         _effection = DragonSlayer.EFFECTION
@@ -102,12 +102,9 @@ class DragonSlayer: Sword {
     
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: 50)
-        removeAttrId(id: STAMINA)
-        createAttr(attrId: CRITICAL, value: 45)
-        removeAttrId(id: CRITICAL)
-        createAttr(attrId: REVENGE,value: 25)
-        removeAttrId(id: REVENGE)
+        createAttr(attrId: STAMINA)
+        createAttr(attrId: CRITICAL)
+        createAttr(attrId: REVENGE)
         _attrCount = 3
         createAttrs()
     }
@@ -124,24 +121,19 @@ class DragonSaliva: Sword {
         super.init()
         _name = "龙涎剑"
         _description = "攻击附带30%的火焰伤害。"
-        _level = 81
-        _chance = 10
+        _level = 40
+        _chance = 5
         _quality = Quality.SACRED
         _effection = DragonSaliva.EFFECTION
         price = 1882
     }
     override func create() {
         createAttr(attrId: ATTACK_BASE)
-        createAttr(attrId: STRENGTH, value: 50)
-        removeAttrId(id: STRENGTH)
-        createAttr(attrId: STAMINA, value: 50)
-        removeAttrId(id: STAMINA)
-        createAttr(attrId: AGILITY, value: 50)
-        removeAttrId(id: AGILITY)
-        createAttr(attrId: INTELLECT, value: 50)
+        createAttr(attrId: STRENGTH, value: 30)
+        createAttr(attrId: STAMINA, value: 30)
+        createAttr(attrId: AGILITY, value: 30)
+        createAttr(attrId: INTELLECT, value: 30)
         createAttr(attrId: FIREPOWER, value: 50)
-        removeAttrId(id: FIREPOWER)
-        _attrCount = 2
         createAttrs()
     }
     required init(from decoder: Decoder) throws {
@@ -158,7 +150,7 @@ class TheExorcist:Sword {
         super.init()
         _name = "驱魔剑"
         _description = "攻击亡灵时有一定几率直接杀死"
-        _level = 35
+        _level = 18
         _chance = 35
         price = 124
         _effection = TheExorcist.EFFECTION
@@ -240,7 +232,7 @@ class IberisHand:Sword {
         super.init()
         _name = "伊比利斯之舞"
         _description = "提升乱舞次数"
-        _level = 42
+        _level = 23
         _chance = 15
         _quality = Quality.SACRED
         _effection = IberisHand.EFFECTION
@@ -248,10 +240,10 @@ class IberisHand:Sword {
     }
     override func create() {
         createAttr(attrId: ATTACK_BASE)
-        createAttr(attrId: AVOID, value: 30, remove: true)
-        createAttr(attrId: ACCURACY, value: 30, remove: true)
-        createAttr(attrId: SPEED, value: 30, remove: true)
-        createAttr(attrId: CRITICAL, value: 30, remove: true)
+        createAttr(attrId: AVOID, value: 15, remove: true)
+        createAttr(attrId: ACCURACY, value: 15, remove: true)
+        createAttr(attrId: SPEED, value: 15, remove: true)
+        createAttr(attrId: CRITICAL, value: 15, remove: true)
         createAttr(attrId: REVENGE, value: seedFloat(min: 10, max: 16), remove: true)
         createAttr(attrId: RHYTHM, value: seedFloat(min: 10, max: 16), remove: true)
     }
@@ -268,7 +260,7 @@ class AssassinsSword:Sword {
         super.init()
         _name = "刺客之刃"
         _description = "提升50点必杀和50点毁灭"
-        _level = 41
+        _level = 31
         _chance = 15
         _quality = Quality.SACRED
         price = 420
@@ -277,9 +269,9 @@ class AssassinsSword:Sword {
         createAttr(attrId: ATTACK_BASE)
         createAttr(attrId: CRITICAL, value: 50, remove: true, hidden: true)
         createAttr(attrId: DESTROY, value: 50, remove: true, hidden: true)
-        createAttr(attrId: AGILITY, value: seedFloat(min: 25, max: 31), remove: true)
-        createAttr(attrId: ACCURACY, value: seedFloat(min: 25, max: 31), remove: true)
-        createAttr(attrId: AVOID, value: seedFloat(min: 25, max: 31), remove: true)
+        createAttr(attrId: AGILITY)
+        createAttr(attrId: ACCURACY)
+        createAttr(attrId: AVOID)
         createAttr(attrId: LUCKY, value: seedFloat(min: 25, max: 31), remove: true)
     }
     override func on() {

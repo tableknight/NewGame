@@ -9,7 +9,7 @@
 
 import SpriteKit
 class Francis:Boss {
-    static let LEVEL:CGFloat = 48
+    static let LEVEL:CGFloat = 24
     override init() {
         
         super.init()

@@ -13,7 +13,7 @@ class TrueLie: Amulet {
         super.init()
         _name = "真实的谎言"
         _description = "获得一个额外的技能卡槽"
-        _level = 48
+        _level = 38
         _chance = 5
         _quality = Quality.SACRED
         _effection = TrueLie.EFFECTION
@@ -92,7 +92,7 @@ class FangOfVampire:Amulet {
     
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: 25, remove: true)
+        createAttr(attrId: STRENGTH, value: 20, remove: true)
         createAttr(attrId: CRITICAL, value: 25, remove: true)
         createAttr(attrId: FIREPOWER, value: 25, remove: true)
         _attrCount = 2
@@ -207,7 +207,7 @@ class JadeHeart:Amulet {
         super.init()
         _name = "翡翠之心"
         _description = "降低来自首领的伤害"
-        _level = 43
+        _level = 33
         _chance = 20
         _quality = Quality.SACRED
         _effection = JadeHeart.EFFECTION
@@ -215,7 +215,7 @@ class JadeHeart:Amulet {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STAMINA, value: seedFloat(min: 30, max: 41), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 15, max: 21), remove: true)
         createAttr(attrId: THUNDERRESISTANCE, value: seedFloat(min: 30, max: 41), remove: true)
         createAttr(attrId: SPEED, value: seedFloat(min: 30, max: 41), remove: true)
         _attrCount = seed(min: 2, max: 4)

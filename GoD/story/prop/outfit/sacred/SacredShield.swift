@@ -78,7 +78,7 @@ class Accident:Shield {
         super.init()
         _name = "无妄之灾"
         _description = "将所有受到的法术伤害转移给队友"
-        _level = 42
+        _level = 32
         _chance = 20
         _quality = Quality.SACRED
         _effection = Accident.EFFECTION
@@ -106,7 +106,7 @@ class FrancisFace:Shield {
         super.init()
         _name = "佛朗西斯的面容"
         _description = "受到伤害时有一定几率获得5暴击"
-        _level = 40
+        _level = 20
         _chance = 25
         _quality = Quality.SACRED
         _effection = FrancisFace.EFFECTION
@@ -114,8 +114,8 @@ class FrancisFace:Shield {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: seedFloat(min: 20, max: 31), remove: true)
-        createAttr(attrId: STAMINA, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: STRENGTH, value: seedFloat(min: 10, max: 16), remove: true)
+        createAttr(attrId: STAMINA, value: seedFloat(min: 10, max: 16), remove: true)
         createAttr(attrId: AVOID, value: 20, remove: true)
         createAttr(attrId: REVENGE, value: 10, remove: true)
         _attrCount = 1

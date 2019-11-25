@@ -13,7 +13,7 @@ class VerdasTear: EarRing {
         super.init()
         _name = "维尔达之泪"
         _description = "略微降低所有法术伤害"
-        _level = 30
+        _level = 20
         _chance = 80
         _quality = Quality.SACRED
         _effection = VerdasTear.EFFECTION
@@ -66,15 +66,15 @@ class EyeOfDius: EarRing {
 //        _value = seed(min: 8, max: 12)
         _name = "迪乌斯之眼"
 //        _description = "提升\(_value)%最大生命"
-        _level = 32
+        _level = 18
         _chance = 30
         price = 168
         _quality = Quality.SACRED
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: STRENGTH, value: 20, remove: true)
-        createAttr(attrId: AGILITY, value: 20, remove: true)
+        createAttr(attrId: STRENGTH, value: 10, remove: true)
+        createAttr(attrId: AGILITY, value: 10, remove: true)
         _attrCount = 3
         createAttrs()
         let v = seedFloat(min: 8, max: 16)
@@ -127,7 +127,7 @@ class LavaCrystal: EarRing {
         super.init()
         _name = "熔岩结晶"
         _description = "提升50%单体火焰法术伤害"
-        _level = 50
+        _level = 25
         _chance = 15
         _quality = Quality.SACRED
         _effection = LavaCrystal.EFFECTION
@@ -135,9 +135,9 @@ class LavaCrystal: EarRing {
     }
     override func create() {
         createSelfAttrs()
-        createAttr(attrId: INTELLECT, value: 45, remove: true)
-        createAttr(attrId: SPIRIT, value: seedFloat(min: 60, max: 81), remove: true)
-        createAttr(attrId: STAMINA, value: -45, remove: true)
+        createAttr(attrId: INTELLECT, value: 20, remove: true)
+        createAttr(attrId: SPIRIT, value: seedFloat(min: 20, max: 31), remove: true)
+        createAttr(attrId: STAMINA, value: -seedFloat(min: 10, max: 16), remove: true)
         _attrCount = seed(min: 2, max: 4)
         createAttrs()
     }

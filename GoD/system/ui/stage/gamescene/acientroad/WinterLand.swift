@@ -127,6 +127,10 @@ class SnowLady: Man {
         _stars.stamina = 1.8
         _stars.agility = 2.0
         _stars.intellect = 0.5
+        _natural.strength = 18
+        _natural.stamina = 21
+        _natural.agility = 22
+        _natural.intellect = 11
         _name = "冰雪女妖"
         _imgUrl = "snow_lady"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -156,6 +160,10 @@ class FrozenSlime: Demon {
         _stars.stamina = 2.4
         _stars.agility = 1.5
         _stars.intellect = 0.6
+        _natural.strength = 20
+        _natural.stamina = 28
+        _natural.agility = 7
+        _natural.intellect = 10
         _name = "冰冻史莱姆"
         _imgUrl = "slime"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -182,6 +190,10 @@ class IceBeast: Natrue {
         _stars.stamina = 1.5
         _stars.agility = 1.5
         _stars.intellect = 1.5
+        _natural.strength = 12
+        _natural.stamina = 12
+        _natural.agility = 24
+        _natural.intellect = 12
         _name = "冰兽"
         _imgUrl = "ice_beast"
         _img = SKTexture(imageNamed: _imgUrl)
@@ -205,6 +217,10 @@ class SnowSpirit: Natrue {
         _stars.stamina = 0.8
         _stars.agility = 2.5
         _stars.intellect = 1.9
+        _natural.strength = 15
+        _natural.stamina = 24
+        _natural.agility = 12
+        _natural.intellect = 18
         _name = "雪精"
         _imgUrl = "snow_spirit"
         _img = SKTexture(imageNamed: _imgUrl)
