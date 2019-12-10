@@ -707,57 +707,15 @@ class BUnit: SKSpriteNode {
         removeFromParent()
     }
     func shieldAccident(value:CGFloat, completion:@escaping () -> Void) -> Bool {
-        if _unit is Character {
-            let char = _unit as! Character
-            if char._shield is Accident {
-                if value < 0 {
-                    if _battle._leftRoles.count > 2 {
-                       return true
-                    }
-                    
-                }
-            }
-        }
         return false
     }
-    internal var isSwordExorcist = false
     func swordExorcist(value:CGFloat) -> Bool {
-        isSwordExorcist = false
-        if seed() > TheExorcist.CHANCE {
-            return false
-        }
-        if _unit._race == EvilType.RISEN {
-            if _battle._curRole._unit is Character {
-                if _battle._curRole._unit._weapon is TheExorcist {
-                    if _battle._selectedSpell.isPhysical {
-                        isSwordExorcist = true
-                        return true
-                    }
-                }
-            }
-        }
         return false
     }
     func amuletMadelOfHero(value:CGFloat) -> Bool {
-        if _unit is Character {
-            let char = _unit as! Character
-            if char._amulet is MedalOfHero {
-                if value < 0 && abs(value) > getHp() {
-                    return true
-                }
-            }
-        }
         return false
     }
     func amuletJadeHeart() -> Bool {
-        if _battle._curRole._unit is PowerLord {
-            if _unit is Character {
-                let char = _unit as! Character
-                if char._amulet is JadeHeart {
-                    return true
-                }
-            }
-        }
         return false
     }
     func hpChange(value:CGFloat) {
@@ -1122,8 +1080,9 @@ class BUnit: SKSpriteNode {
         avoid: 0,
         spirit: 0,
         hp: 0,
-        mp: 0,
         health: 0,
+        mp: 0,
+        mpMax: 0,
         mind: 0
     )
     var _break:CGFloat = 0
@@ -1157,12 +1116,16 @@ class BUnit: SKSpriteNode {
         _extensions.accuracy += value * 0.2
         _extensions.avoid += value * 0
         _extensions.critical += value * 0.2
-        _extensions.spirit += value * -0.2
+        _extensions.spirit += value * -0.3
         _extensions.health += value * 1
         _extensions.hp += value * 1
-        _extensions.mp += value * 0
+        _extensions.mp += value * 1
+        _extensions.mpMax += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func staminaChange(value: CGFloat) {
@@ -1171,14 +1134,18 @@ class BUnit: SKSpriteNode {
         _extensions.defence += value * 1.1
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * -0.2
+        _extensions.avoid += value * -0.3
         _extensions.critical += value * 0
-        _extensions.spirit += value * -0.4
+        _extensions.spirit += value * -0.5
         _extensions.health += value * 4
         _extensions.hp += value * 4
         _extensions.mp += value * 0
+        _extensions.mpMax += value * 0
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func agilityChange(value: CGFloat) {
@@ -1186,15 +1153,19 @@ class BUnit: SKSpriteNode {
         _extensions.attack += value * 1
         _extensions.defence += value * 0.2
         _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.5
+        _extensions.accuracy += value * 0.8
         _extensions.avoid += value * 0.8
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 2
         _extensions.hp += value * 2
         _extensions.mp += value * 1
+        _extensions.mpMax += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func intellectChange(value: CGFloat) {
@@ -1209,8 +1180,12 @@ class BUnit: SKSpriteNode {
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 3
+        _extensions.mpMax += value * 3
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
 }

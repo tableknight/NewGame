@@ -25,6 +25,10 @@ class DarkCrow: Natrue {
         _growth.strength = _stars.strength
         _growth.agility = _stars.agility
         _growth.intellect = _stars.intellect
+        _birth.stamina = 20
+        _birth.strength = 20
+        _birth.agility = 20
+        _birth.intellect = 20
         levelTo(level: level)
         _extensions.hp = _extensions.health
         magicSensitive()

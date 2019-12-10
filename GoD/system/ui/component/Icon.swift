@@ -15,6 +15,8 @@ class Icon:SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
 //        self.anchorPoint = CGPoint(x: 0, y: 1)
         _background = createBackground(width: cellSize, height: cellSize)
+        _background.fillColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: Game.BG_ALPHA)
+//        _background.alpha = 0.55
         addChild(_background)
 //        _iconLabel.text = "封"
         _iconLabel.align = "center"

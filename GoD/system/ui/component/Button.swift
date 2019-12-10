@@ -11,14 +11,15 @@ class Button:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         zPosition = MyScene.UI_LAYER_Z
-        _bg = createBackground(width: cellSize * 1.5, height: cellSize * 0.65)
         _width = cellSize * 1.5
+        _bg = createBackground(width: _width, height: cellSize * 0.6)
         addChild(_bg)
         _label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         _label.fontColor = UIColor.white
-        _label.position.y = -10
+        _label.alpha = 0.85
+        _label.position.y = -cellSize * 0.125
         _label.position.x = cellSize * 0.75
-        _label.fontSize = 20
+        _label.fontSize = 24
         _label.align = "center"
         addChild(_label)
     }

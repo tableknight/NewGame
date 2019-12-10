@@ -273,42 +273,49 @@ class MinionComponent:SKSpriteNode {
         img.size = CGSize(width: cellSize, height: cellSize)
         addChild(img)
         
-        let roleImageBorder = SKShapeNode(rectOf: CGSize(width: size, height: size), cornerRadius: 4)
-        roleImageBorder.position.x = size * 0.5 + gap + startX
-        roleImageBorder.position.y = -size * 0.5 - gap
-        roleImageBorder.lineWidth = 1
-        roleImageBorder.strokeColor = Game.UNSELECTED_STROKE_COLOR
+//        let roleImageBorder = SKShapeNode(rectOf: CGSize(width: size, height: size), cornerRadius: 4)
+//        roleImageBorder.position.x = size * 0.5 + gap + startX
+//        roleImageBorder.position.y = -size * 0.5 - gap
+//        roleImageBorder.lineWidth = 1
+//        roleImageBorder.strokeColor = Game.UNSELECTED_STROKE_COLOR
+//
+//        addChild(roleImageBorder)
         
-        addChild(roleImageBorder)
+        let name = Label()
+        name.text = m._name
+        name.fontColor = QualityColor.getColor(m._quality)
+        name.fontSize = 24
+        name.align = "left"
+        name.position.x = size + gap * 2 + startX
+        name.position.y = -cellSize * 0.25
+        addChild(name)
         
-        let level = Label()
-        level.text = m._name
-        level.fontColor = QualityColor.getColor(m._quality)
-        level.fontSize = 24
-        level.align = "left"
-        level.position.x = size + gap * 2 + startX
-        level.position.y = -cellSize * 0.5
-        addChild(level)
-        
+        let barHeight:CGFloat = 8
         let _hpbar = HBar()
         let barWidth = cellSize * 2
-        _hpbar.create(width: barWidth, height: 12, value: m._extensions.hp / m._extensions.health, color: Game.HPBAR_COLOR)
+        _hpbar.create(width: barWidth, height: barHeight, value: m._extensions.hp / m._extensions.health, color: Game.HPBAR_COLOR)
         addChild(_hpbar)
         
+        let _mpbar = HBar()
+        _mpbar.create(width: barWidth, height: barHeight, value: m._extensions.mp / m._extensions.mpMax, color: Game.MPBAR_COLOR)
+        addChild(_mpbar)
+        
         let _expbar = HBar()
-        _expbar.create(width: barWidth, height: 10, value: m._exp / m.expNext(), color: Game.EXPBAR_COLOR)
+        _expbar.create(width: barWidth, height: barHeight, value: m._exp / m.expNext(), color: Game.EXPBAR_COLOR)
         addChild(_expbar)
         
         let race = Label()
-        race.text = "lv.\(m._level.toInt())[\(EvilType.getTypeLabel(type: minion._race))]"
+        race.text = "Lv\(m._level.toInt()) [\(EvilType.getTypeLabel(type: minion._race))]"
         race.fontSize = 20
-        race.position.x = level.position.x
-        race.position.y = level.position.y - level.fontSize - 6
+        race.position.x = name.position.x
+        race.position.y = name.position.y - name.fontSize - 6
         addChild(race)
         
-        _hpbar.position.y = race.position.y - race.fontSize - 12
-        _expbar.position.y = _hpbar.position.y - 18
+        _hpbar.position.y = race.position.y - race.fontSize - barHeight
+        _mpbar.position.y = _hpbar.position.y - barHeight - 6
+        _expbar.position.y = _mpbar.position.y - barHeight - 6
         _hpbar.position.x = size + gap * 2 + startX
+        _mpbar.position.x = _hpbar.position.x
         _expbar.position.x = _hpbar.position.x
         
         let seatGap = cellSize * 0.125

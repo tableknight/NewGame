@@ -23,13 +23,13 @@ class GameScene: SKScene {
 //        Mode.nocd = true
 //        Mode.nodefence = true
         Mode.showdungeonall = true
-//        Mode.showbossall = true
+        Mode.showbossall = true
 ////
         realScene()
-        let e = Game.instance.char!
-        let se = SoulEssence()
-        se.create(soul: DarkNinja())
-        e.addProp(p: se)
+//        let e = Game.instance.char!
+//        let se = SoulEssence()
+//        se.create(soul: DarkNinja())
+//        e.addProp(p: se)
 //        e.addProp(p: DeathTownScroll())
 //        e._spellsInuse = [FireFist(), IceFist(), QiWave(), LightingFist()]
 //        let ts = TheSurvive()

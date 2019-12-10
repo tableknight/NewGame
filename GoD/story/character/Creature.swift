@@ -113,11 +113,11 @@ class Creature: Unit {
     }
     func extraProperty(value: CGFloat) -> CGFloat {
         let max = (value * 10).toInt()
-        var float = seed(to: max) / 100
+        var float = seed(to: max).toFloat() * 0.01
         if !beMore() {
             float *= -1
         }
-        return value + value
+        return value + float
     }
     func createQuality() {
         let l = _level.toInt()
@@ -180,10 +180,10 @@ class Creature: Unit {
         _sensitive = seed(min: 15, max: 56)
     }
     func levelTo(level:CGFloat) {
-        staminaChange(value: (level + _birth.stamina) * _growth.stamina)
-        strengthChange(value: (level + _birth.strength) * _growth.strength)
-        agilityChange(value: (level + _birth.agility) * _growth.agility)
-        intellectChange(value: (level + _birth.intellect) * _growth.intellect)
+        staminaChange(value: (level - 1) * _growth.stamina + _birth.stamina)
+        strengthChange(value: (level - 1) * _growth.strength + _birth.strength)
+        agilityChange(value: (level - 1) * _growth.agility + _birth.agility)
+        intellectChange(value: (level - 1) * _growth.intellect + _birth.intellect)
         _level = level
         for _ in 1...level.toInt() {
             let sd = seed()
@@ -227,10 +227,22 @@ class Creature: Unit {
     func d(baseRate:Int = 45) -> Bool {
         return seed() < baseRate + _level.toInt()
     }
-    static func getCreatureByClass(c:Creature) -> Creature {
+    static func getCreatureByClass(c:Creature) -> Creature? {
+        if c.classForCoder == VirulentToad.classForCoder() {
+            return DarkNinja()
+        }
+        if c.classForCoder == TreeSpirit.classForCoder() {
+            return DarkNinja()
+        }
+        if c.classForCoder == Python.classForCoder() {
+            return DarkNinja()
+        }
+        if c.classForCoder == GiantWasp.classForCoder() {
+            return DarkNinja()
+        }
         if c.classForCoder == DarkNinja.classForCoder() {
             return DarkNinja()
         }
-        return Creature()
+        return nil
     }
 }

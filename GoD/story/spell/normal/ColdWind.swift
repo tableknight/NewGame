@@ -12,7 +12,7 @@ class ColdWind: Magical {
         super.init()
         isWater = true
         _name = "凛风"
-        _description = "对生命值最少的目标造成精神80%的b冰冷伤害"
+        _description = "对生命值最少的目标造成精神80%的冰冷伤害"
         _rate = 0.8
         _quality = Quality.NORMAL
         _cooldown = 1

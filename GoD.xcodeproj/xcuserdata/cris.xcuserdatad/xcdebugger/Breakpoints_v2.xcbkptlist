@@ -355,8 +355,8 @@
             timestampString = "583948835.5809211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "displayInfos(icon:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +542,8 @@
             timestampString = "583948835.581406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "displayInfos(icon:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -695,8 +695,8 @@
             timestampString = "583948835.581778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "displayInfos(icon:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1120,8 +1120,8 @@
             timestampString = "587951097.88464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "count"
             landmarkType = "24">
          </BreakpointContent>
@@ -1953,8 +1953,8 @@
             timestampString = "577515798.502748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "selectable"
             landmarkType = "24">
          </BreakpointContent>
@@ -2954,8 +2954,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "333"
             endingLineNumber = "333"
-            landmarkName = "getGoodSpell(id:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3156,8 +3156,8 @@
             timestampString = "577515798.506646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "create(text:size:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3547,8 +3547,8 @@
             timestampString = "589084134.591289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3564,8 +3564,8 @@
             timestampString = "589084134.5913531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "save(c:key:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3581,8 +3581,8 @@
             timestampString = "589084134.591395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "load(key:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3598,8 +3598,8 @@
             timestampString = "589084134.591434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "load(key:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3649,8 +3649,8 @@
             timestampString = "589084134.591525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3683,9 +3683,9 @@
             timestampString = "589084134.5915869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "init(from:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3887,8 +3887,8 @@
             timestampString = "589084134.591929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "loadRoles()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3904,8 +3904,8 @@
             timestampString = "589084134.591992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "loadRoles()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3921,8 +3921,8 @@
             timestampString = "589084134.592034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "saveRoles(roles:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3938,8 +3938,8 @@
             timestampString = "589084134.59207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "save(c:key:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3989,9 +3989,9 @@
             timestampString = "589084134.592149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "init(from:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4210,8 +4210,8 @@
             timestampString = "589084134.593436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
             landmarkName = "remove(doc:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4348,8 +4348,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "438"
             endingLineNumber = "438"
-            landmarkName = "MyStage"
-            landmarkType = "3">
+            landmarkName = "gohome()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4873,8 +4873,8 @@
             timestampString = "589084134.599869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "saving(sync:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5332,8 +5332,8 @@
             timestampString = "589084134.600983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
             landmarkName = "calcCellSize()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5349,8 +5349,8 @@
             timestampString = "589084134.6010309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "calcCellSize()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5366,8 +5366,8 @@
             timestampString = "589084134.601076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "calcCellSize()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5383,8 +5383,8 @@
             timestampString = "589084134.601122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "476"
-            endingLineNumber = "476"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
             landmarkName = "calcCellSize()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6114,8 +6114,8 @@
             timestampString = "589084134.605652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6131,8 +6131,8 @@
             timestampString = "589084134.605702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "init(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6148,8 +6148,8 @@
             timestampString = "589084134.605744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "encode(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6250,8 +6250,8 @@
             timestampString = "587951097.897926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "count"
             landmarkType = "24">
          </BreakpointContent>
@@ -7812,6 +7812,70 @@
             endingLineNumber = "235"
             landmarkName = "confirmEvent()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19DAA84F-59B1-4B7B-863A-F613E79A9D04"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/character/Creature.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "createBirthValue()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59D5AAE3-354D-428E-ACB9-01D3BBDD4C57"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/character/Creature.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "extraProperty(value:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52976102-E04B-442A-A7AA-690EF04C0932"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/character/Creature.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "createGrowthValue()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EFDCA758-338A-4528-A6EB-DEA83E8873F0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GoD/story/Game.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
+            landmarkName = "createBackground(x:y:width:height:cornerRadius:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

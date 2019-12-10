@@ -283,10 +283,12 @@ class MyStage: SKSpriteNode {
         panel.zPosition = MyStage.UI_PANEL_Z
         _curPanel = panel
         addChild(panel)
+        cancelMove = true
     }
     func removePanel(_ panel:UIPanel) {
         _curPanel = nil
         panel.removeFromParent()
+        cancelMove = false
     }
     func hasTowerStatus(status:Status) -> Bool {
         for scn in _scenes {
@@ -444,6 +446,7 @@ class MyStage: SKSpriteNode {
         cover.position.x = 0
         cover.position.y = 0
         cover.lineWidth = 0
+        cover.alpha = 1
         _sceneChangeMask.addChild(cover)
         _sceneChangeMask.isHidden = true
         _sceneChangeMask.zPosition = MyScene.MASK_LAYER_Z

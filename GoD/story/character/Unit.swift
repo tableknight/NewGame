@@ -142,17 +142,18 @@ class Unit:Core {
     
     var _mains:Mains = Mains(stamina:0, strength: 0, agility: 0, intellect: 0)
     var _extensions:Extensions = Extensions(
-        attack: 40,
-        defence: 0,
+        attack: 20,
+        defence: 20,
         speed: 0,
         accuracy: 100,
         critical: 15,
         destroy: 0,
         avoid: 15,
-        spirit: 40,
+        spirit: 20,
         hp: 100,
+        health: 100,
         mp: 100,
-        health: 0,
+        mpMax: 100,
         mind: 15
     )
     var _level:CGFloat = 1
@@ -217,12 +218,16 @@ class Unit:Core {
         _extensions.accuracy += value * 0.2
         _extensions.avoid += value * 0
         _extensions.critical += value * 0.2
-        _extensions.spirit += value * -0.2
+        _extensions.spirit += value * -0.3
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 1
+        _extensions.mpMax += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func staminaChange(value: CGFloat) {
@@ -231,14 +236,18 @@ class Unit:Core {
         _extensions.defence += value * 1.1
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * -0.2
+        _extensions.avoid += value * -0.3
         _extensions.critical += value * 0
-        _extensions.spirit += value * -0.4
+        _extensions.spirit += value * -0.5
         _extensions.health += value * 4
         _extensions.hp += value * 4
         _extensions.mp += value * 0
+        _extensions.mpMax += value * 0
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func agilityChange(value: CGFloat) {
@@ -253,8 +262,12 @@ class Unit:Core {
         _extensions.health += value * 2
         _extensions.hp += value * 2
         _extensions.mp += value * 1
+        _extensions.mpMax += value * 1
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
     func intellectChange(value: CGFloat) {
@@ -269,8 +282,12 @@ class Unit:Core {
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 3
+        _extensions.mpMax += value * 3
         if _extensions.hp < 1 {
             _extensions.hp = 1
+        }
+        if _extensions.mp < 1 {
+            _extensions.mp = 1
         }
     }
 }

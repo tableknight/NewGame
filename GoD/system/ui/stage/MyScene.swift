@@ -8,7 +8,7 @@
 //
 import Foundation
 import SpriteKit
-class MyScene: SKSpriteNode, IInitialize {
+class MyScene: SKSpriteNode {
     static let MAP_LAYER_Z:CGFloat = 10
     static let UI_LAYER_Z:CGFloat = 108
     static let ROLE_LAYER_Z:CGFloat = 50

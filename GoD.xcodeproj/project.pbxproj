@@ -74,22 +74,12 @@
 		090FEB8821BB9B2B004276BB /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA6D21BB9B2A004276BB /* Outfit.swift */; };
 		090FEB8921BB9B2B004276BB /* Prop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA6E21BB9B2A004276BB /* Prop.swift */; };
 		090FEB8A21BB9B2B004276BB /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA6F21BB9B2A004276BB /* Attribute.swift */; };
-		090FEB8B21BB9B2B004276BB /* IEvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7121BB9B2A004276BB /* IEvil.swift */; };
-		090FEB8C21BB9B2B004276BB /* IChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7221BB9B2A004276BB /* IChar.swift */; };
 		090FEB8F21BB9B2B004276BB /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7621BB9B2A004276BB /* Character.swift */; };
-		090FEB9021BB9B2B004276BB /* IUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7721BB9B2A004276BB /* IUnit.swift */; };
-		090FEB9121BB9B2B004276BB /* PowerLord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7821BB9B2A004276BB /* PowerLord.swift */; };
 		090FEB9221BB9B2B004276BB /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7921BB9B2A004276BB /* Unit.swift */; };
-		090FEB9421BB9B2B004276BB /* DeathAngelKhalil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */; };
 		090FEB9521BB9B2B004276BB /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7E21BB9B2A004276BB /* Race.swift */; };
-		090FEB9621BB9B2B004276BB /* Rizen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA7F21BB9B2A004276BB /* Rizen.swift */; };
 		090FEB9721BB9B2B004276BB /* BlackCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8121BB9B2A004276BB /* BlackCat.swift */; };
-		090FEB9821BB9B2B004276BB /* Python.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8221BB9B2A004276BB /* Python.swift */; };
-		090FEB9921BB9B2B004276BB /* GiantWasp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8321BB9B2A004276BB /* GiantWasp.swift */; };
 		090FEB9A21BB9B2B004276BB /* DarkCrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8421BB9B2A004276BB /* DarkCrow.swift */; };
-		090FEB9B21BB9B2B004276BB /* VirulentToad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8521BB9B2A004276BB /* VirulentToad.swift */; };
 		090FEB9C21BB9B2B004276BB /* Slime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8621BB9B2A004276BB /* Slime.swift */; };
-		090FEB9D21BB9B2B004276BB /* TreeSpirit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8721BB9B2A004276BB /* TreeSpirit.swift */; };
 		090FEB9E21BB9B2B004276BB /* Mummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8921BB9B2A004276BB /* Mummy.swift */; };
 		090FEB9F21BB9B2B004276BB /* SummonUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8B21BB9B2A004276BB /* SummonUnit.swift */; };
 		090FEBA021BB9B2B004276BB /* FlowerOfHeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEA8C21BB9B2A004276BB /* FlowerOfHeal.swift */; };
@@ -171,13 +161,7 @@
 		090FEBF321BB9B2B004276BB /* Battle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAEB21BB9B2A004276BB /* Battle.swift */; };
 		090FEBF521BB9B2B004276BB /* MyStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAEE21BB9B2A004276BB /* MyStage.swift */; };
 		090FEBF621BB9B2B004276BB /* MyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAEF21BB9B2A004276BB /* MyScene.swift */; };
-		090FEBF721BB9B2B004276BB /* CardSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF121BB9B2A004276BB /* CardSlot.swift */; };
-		090FEBF821BB9B2B004276BB /* EvilCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF221BB9B2A004276BB /* EvilCard.swift */; };
-		090FEBF921BB9B2B004276BB /* SpellCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF321BB9B2A004276BB /* SpellCard.swift */; };
-		090FEBFA21BB9B2B004276BB /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF421BB9B2A004276BB /* Card.swift */; };
-		090FEBFB21BB9B2B004276BB /* EvilBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF521BB9B2A004276BB /* EvilBook.swift */; };
 		090FEBFC21BB9B2B004276BB /* UIEvil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF721BB9B2A004276BB /* UIEvil.swift */; };
-		090FEBFD21BB9B2B004276BB /* PItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF821BB9B2A004276BB /* PItem.swift */; };
 		090FEBFE21BB9B2B004276BB /* UIItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAF921BB9B2A004276BB /* UIItem.swift */; };
 		090FEBFF21BB9B2B004276BB /* UIUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFA21BB9B2A004276BB /* UIUnit.swift */; };
 		090FEC0021BB9B2B004276BB /* SpellPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFC21BB9B2A004276BB /* SpellPanel.swift */; };
@@ -185,16 +169,12 @@
 		090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEAFF21BB9B2A004276BB /* LootPanel.swift */; };
 		090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0021BB9B2A004276BB /* ItemInfo.swift */; };
 		090FEC0621BB9B2B004276BB /* MinionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0221BB9B2A004276BB /* MinionPanel.swift */; };
-		090FEC0721BB9B2B004276BB /* DealingPanel_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0321BB9B2A004276BB /* DealingPanel_.swift */; };
 		090FEC0821BB9B2B004276BB /* ArmorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0421BB9B2A004276BB /* ArmorInfo.swift */; };
-		090FEC0921BB9B2B004276BB /* MinionsHousePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0521BB9B2A004276BB /* MinionsHousePanel.swift */; };
-		090FEC0A21BB9B2B004276BB /* RoleInfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0621BB9B2A004276BB /* RoleInfoPanel.swift */; };
 		090FEC0B21BB9B2B004276BB /* MinionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0721BB9B2A004276BB /* MinionsList.swift */; };
 		090FEC0C21BB9B2B004276BB /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0921BB9B2A004276BB /* Icon.swift */; };
 		090FEC0D21BB9B2B004276BB /* HBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0A21BB9B2A004276BB /* HBar.swift */; };
 		090FEC0E21BB9B2B004276BB /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0B21BB9B2A004276BB /* MenuButton.swift */; };
 		090FEC0F21BB9B2B004276BB /* UIPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0C21BB9B2A004276BB /* UIPanel.swift */; };
-		090FEC1021BB9B2B004276BB /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0D21BB9B2A004276BB /* Avatar.swift */; };
 		090FEC1121BB9B2B004276BB /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0E21BB9B2A004276BB /* Counter.swift */; };
 		090FEC1221BB9B2B004276BB /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB0F21BB9B2A004276BB /* Actor.swift */; };
 		090FEC1321BB9B2B004276BB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB1021BB9B2A004276BB /* Button.swift */; };
@@ -253,8 +233,6 @@
 		090FEC4821BB9B2B004276BB /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB4F21BB9B2B004276BB /* Label.swift */; };
 		090FEC4921BB9B2B004276BB /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEB5021BB9B2B004276BB /* test.swift */; };
 		090FEC4C21BCC418004276BB /* SecretMeadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC4B21BCC418004276BB /* SecretMeadow.swift */; };
-		090FEC4E21BCC4A6004276BB /* MyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC4D21BCC4A6004276BB /* MyItem.swift */; };
-		090FEC5021BCF0E3004276BB /* CellMonster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC4F21BCF0E3004276BB /* CellMonster.swift */; };
 		090FEC5221BE9A38004276BB /* RolePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FEC5121BE9A38004276BB /* RolePanel.swift */; };
 		0913B8BD21DCD47500FB0940 /* SceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */; };
 		0922C94B22225BEC002DC201 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94A22225BEC002DC201 /* Types.swift */; };
@@ -421,7 +399,6 @@
 		09C6BF9221D5F0510003C7F1 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9121D5F0500003C7F1 /* Border.swift */; };
 		09C6BF9421D5F1FD0003C7F1 /* AcientRoadSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */; };
 		09C6BF9621D7867D0003C7F1 /* EastCamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9521D7867D0003C7F1 /* EastCamping.swift */; };
-		09C6BF9821D7A4070003C7F1 /* IInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9721D7A4070003C7F1 /* IInitialize.swift */; };
 		09C6BF9A21DA5CCC0003C7F1 /* SelfHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */; };
 		09C6BF9C21DBA49B0003C7F1 /* RoofSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9B21DBA49B0003C7F1 /* RoofSets.swift */; };
 		09C6BF9E21DBB1F20003C7F1 /* InnerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */; };
@@ -571,22 +548,12 @@
 		090FEA6D21BB9B2A004276BB /* Outfit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
 		090FEA6E21BB9B2A004276BB /* Prop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prop.swift; sourceTree = "<group>"; };
 		090FEA6F21BB9B2A004276BB /* Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
-		090FEA7121BB9B2A004276BB /* IEvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEvil.swift; sourceTree = "<group>"; };
-		090FEA7221BB9B2A004276BB /* IChar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IChar.swift; sourceTree = "<group>"; };
 		090FEA7621BB9B2A004276BB /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
-		090FEA7721BB9B2A004276BB /* IUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IUnit.swift; sourceTree = "<group>"; };
-		090FEA7821BB9B2A004276BB /* PowerLord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerLord.swift; sourceTree = "<group>"; };
 		090FEA7921BB9B2A004276BB /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
-		090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathAngelKhalil.swift; sourceTree = "<group>"; };
 		090FEA7E21BB9B2A004276BB /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
-		090FEA7F21BB9B2A004276BB /* Rizen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rizen.swift; sourceTree = "<group>"; };
 		090FEA8121BB9B2A004276BB /* BlackCat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackCat.swift; sourceTree = "<group>"; };
-		090FEA8221BB9B2A004276BB /* Python.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Python.swift; sourceTree = "<group>"; };
-		090FEA8321BB9B2A004276BB /* GiantWasp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiantWasp.swift; sourceTree = "<group>"; };
 		090FEA8421BB9B2A004276BB /* DarkCrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkCrow.swift; sourceTree = "<group>"; };
-		090FEA8521BB9B2A004276BB /* VirulentToad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirulentToad.swift; sourceTree = "<group>"; };
 		090FEA8621BB9B2A004276BB /* Slime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slime.swift; sourceTree = "<group>"; };
-		090FEA8721BB9B2A004276BB /* TreeSpirit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeSpirit.swift; sourceTree = "<group>"; };
 		090FEA8921BB9B2A004276BB /* Mummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mummy.swift; sourceTree = "<group>"; };
 		090FEA8B21BB9B2A004276BB /* SummonUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummonUnit.swift; sourceTree = "<group>"; };
 		090FEA8C21BB9B2A004276BB /* FlowerOfHeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowerOfHeal.swift; sourceTree = "<group>"; };
@@ -668,13 +635,7 @@
 		090FEAEB21BB9B2A004276BB /* Battle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battle.swift; sourceTree = "<group>"; };
 		090FEAEE21BB9B2A004276BB /* MyStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStage.swift; sourceTree = "<group>"; };
 		090FEAEF21BB9B2A004276BB /* MyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyScene.swift; sourceTree = "<group>"; };
-		090FEAF121BB9B2A004276BB /* CardSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSlot.swift; sourceTree = "<group>"; };
-		090FEAF221BB9B2A004276BB /* EvilCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvilCard.swift; sourceTree = "<group>"; };
-		090FEAF321BB9B2A004276BB /* SpellCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellCard.swift; sourceTree = "<group>"; };
-		090FEAF421BB9B2A004276BB /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		090FEAF521BB9B2A004276BB /* EvilBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvilBook.swift; sourceTree = "<group>"; };
 		090FEAF721BB9B2A004276BB /* UIEvil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIEvil.swift; sourceTree = "<group>"; };
-		090FEAF821BB9B2A004276BB /* PItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PItem.swift; sourceTree = "<group>"; };
 		090FEAF921BB9B2A004276BB /* UIItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIItem.swift; sourceTree = "<group>"; };
 		090FEAFA21BB9B2A004276BB /* UIUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUnit.swift; sourceTree = "<group>"; };
 		090FEAFC21BB9B2A004276BB /* SpellPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpellPanel.swift; sourceTree = "<group>"; };
@@ -682,16 +643,12 @@
 		090FEAFF21BB9B2A004276BB /* LootPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LootPanel.swift; sourceTree = "<group>"; };
 		090FEB0021BB9B2A004276BB /* ItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
 		090FEB0221BB9B2A004276BB /* MinionPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinionPanel.swift; sourceTree = "<group>"; };
-		090FEB0321BB9B2A004276BB /* DealingPanel_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealingPanel_.swift; sourceTree = "<group>"; };
 		090FEB0421BB9B2A004276BB /* ArmorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmorInfo.swift; sourceTree = "<group>"; };
-		090FEB0521BB9B2A004276BB /* MinionsHousePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinionsHousePanel.swift; sourceTree = "<group>"; };
-		090FEB0621BB9B2A004276BB /* RoleInfoPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleInfoPanel.swift; sourceTree = "<group>"; };
 		090FEB0721BB9B2A004276BB /* MinionsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinionsList.swift; sourceTree = "<group>"; };
 		090FEB0921BB9B2A004276BB /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		090FEB0A21BB9B2A004276BB /* HBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBar.swift; sourceTree = "<group>"; };
 		090FEB0B21BB9B2A004276BB /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		090FEB0C21BB9B2A004276BB /* UIPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPanel.swift; sourceTree = "<group>"; };
-		090FEB0D21BB9B2A004276BB /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		090FEB0E21BB9B2A004276BB /* Counter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		090FEB0F21BB9B2A004276BB /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		090FEB1021BB9B2A004276BB /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -750,8 +707,6 @@
 		090FEB4F21BB9B2B004276BB /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		090FEB5021BB9B2B004276BB /* test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		090FEC4B21BCC418004276BB /* SecretMeadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretMeadow.swift; sourceTree = "<group>"; };
-		090FEC4D21BCC4A6004276BB /* MyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItem.swift; sourceTree = "<group>"; };
-		090FEC4F21BCF0E3004276BB /* CellMonster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMonster.swift; sourceTree = "<group>"; };
 		090FEC5121BE9A38004276BB /* RolePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePanel.swift; sourceTree = "<group>"; };
 		0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTemplate.swift; sourceTree = "<group>"; };
 		0922C94A22225BEC002DC201 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -916,7 +871,6 @@
 		09C6BF9121D5F0500003C7F1 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcientRoadSelection.swift; sourceTree = "<group>"; };
 		09C6BF9521D7867D0003C7F1 /* EastCamping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EastCamping.swift; sourceTree = "<group>"; };
-		09C6BF9721D7A4070003C7F1 /* IInitialize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IInitialize.swift; sourceTree = "<group>"; };
 		09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfHome.swift; sourceTree = "<group>"; };
 		09C6BF9B21DBA49B0003C7F1 /* RoofSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoofSets.swift; sourceTree = "<group>"; };
 		09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerHouse.swift; sourceTree = "<group>"; };
@@ -1183,11 +1137,7 @@
 			isa = PBXGroup;
 			children = (
 				090FEA7A21BB9B2A004276BB /* creature */,
-				090FEA7121BB9B2A004276BB /* IEvil.swift */,
-				090FEA7221BB9B2A004276BB /* IChar.swift */,
 				090FEA7621BB9B2A004276BB /* Character.swift */,
-				090FEA7721BB9B2A004276BB /* IUnit.swift */,
-				090FEA7821BB9B2A004276BB /* PowerLord.swift */,
 				090FEA7921BB9B2A004276BB /* Unit.swift */,
 				090FEA8D21BB9B2A004276BB /* Emily.swift */,
 				090FEA8E21BB9B2A004276BB /* Creature.swift */,
@@ -1199,9 +1149,7 @@
 		090FEA7A21BB9B2A004276BB /* creature */ = {
 			isa = PBXGroup;
 			children = (
-				090FEA7B21BB9B2A004276BB /* dominator */,
 				090FEA7E21BB9B2A004276BB /* Race.swift */,
-				090FEA7F21BB9B2A004276BB /* Rizen.swift */,
 				090FEA8021BB9B2A004276BB /* nature */,
 				090FEA8821BB9B2A004276BB /* rizen */,
 				090FEA8A21BB9B2A004276BB /* summonUnit */,
@@ -1209,24 +1157,12 @@
 			path = creature;
 			sourceTree = "<group>";
 		};
-		090FEA7B21BB9B2A004276BB /* dominator */ = {
-			isa = PBXGroup;
-			children = (
-				090FEA7D21BB9B2A004276BB /* DeathAngelKhalil.swift */,
-			);
-			path = dominator;
-			sourceTree = "<group>";
-		};
 		090FEA8021BB9B2A004276BB /* nature */ = {
 			isa = PBXGroup;
 			children = (
 				090FEA8121BB9B2A004276BB /* BlackCat.swift */,
-				090FEA8221BB9B2A004276BB /* Python.swift */,
-				090FEA8321BB9B2A004276BB /* GiantWasp.swift */,
 				090FEA8421BB9B2A004276BB /* DarkCrow.swift */,
-				090FEA8521BB9B2A004276BB /* VirulentToad.swift */,
 				090FEA8621BB9B2A004276BB /* Slime.swift */,
-				090FEA8721BB9B2A004276BB /* TreeSpirit.swift */,
 			);
 			path = nature;
 			sourceTree = "<group>";
@@ -1446,7 +1382,6 @@
 				09C66C7021F0B78B00E1C153 /* boss */,
 				090FEAE621BB9B2A004276BB /* battle */,
 				090FEAED21BB9B2A004276BB /* stage */,
-				090FEAF021BB9B2A004276BB /* card */,
 				090FEAF621BB9B2A004276BB /* char */,
 				090FEAFB21BB9B2A004276BB /* panel */,
 				090FEB0821BB9B2A004276BB /* component */,
@@ -1480,31 +1415,15 @@
 			children = (
 				090FEC4A21BCC36C004276BB /* gamescene */,
 				090FEAEE21BB9B2A004276BB /* MyStage.swift */,
-				09C6BF9721D7A4070003C7F1 /* IInitialize.swift */,
 				090FEAEF21BB9B2A004276BB /* MyScene.swift */,
-				090FEC4D21BCC4A6004276BB /* MyItem.swift */,
-				090FEC4F21BCF0E3004276BB /* CellMonster.swift */,
 			);
 			path = stage;
-			sourceTree = "<group>";
-		};
-		090FEAF021BB9B2A004276BB /* card */ = {
-			isa = PBXGroup;
-			children = (
-				090FEAF121BB9B2A004276BB /* CardSlot.swift */,
-				090FEAF221BB9B2A004276BB /* EvilCard.swift */,
-				090FEAF321BB9B2A004276BB /* SpellCard.swift */,
-				090FEAF421BB9B2A004276BB /* Card.swift */,
-				090FEAF521BB9B2A004276BB /* EvilBook.swift */,
-			);
-			path = card;
 			sourceTree = "<group>";
 		};
 		090FEAF621BB9B2A004276BB /* char */ = {
 			isa = PBXGroup;
 			children = (
 				090FEAF721BB9B2A004276BB /* UIEvil.swift */,
-				090FEAF821BB9B2A004276BB /* PItem.swift */,
 				090FEAF921BB9B2A004276BB /* UIItem.swift */,
 				090FEAFA21BB9B2A004276BB /* UIUnit.swift */,
 			);
@@ -1519,10 +1438,7 @@
 				090FEAFF21BB9B2A004276BB /* LootPanel.swift */,
 				090FEB0021BB9B2A004276BB /* ItemInfo.swift */,
 				090FEB0221BB9B2A004276BB /* MinionPanel.swift */,
-				090FEB0321BB9B2A004276BB /* DealingPanel_.swift */,
 				090FEB0421BB9B2A004276BB /* ArmorInfo.swift */,
-				090FEB0521BB9B2A004276BB /* MinionsHousePanel.swift */,
-				090FEB0621BB9B2A004276BB /* RoleInfoPanel.swift */,
 				090FEB0721BB9B2A004276BB /* MinionsList.swift */,
 				090FEC5121BE9A38004276BB /* RolePanel.swift */,
 				09C6BF7921C34DAE0003C7F1 /* OutfitPanel.swift */,
@@ -1542,7 +1458,6 @@
 				090FEB0A21BB9B2A004276BB /* HBar.swift */,
 				090FEB0B21BB9B2A004276BB /* MenuButton.swift */,
 				090FEB0C21BB9B2A004276BB /* UIPanel.swift */,
-				090FEB0D21BB9B2A004276BB /* Avatar.swift */,
 				090FEB0E21BB9B2A004276BB /* Counter.swift */,
 				090FEB0F21BB9B2A004276BB /* Actor.swift */,
 				090FEB1021BB9B2A004276BB /* Button.swift */,
@@ -2250,7 +2165,6 @@
 				092C0CBA22AFD7070084D15D /* Predict.swift in Sources */,
 				090FEBBF21BB9B2B004276BB /* FragileCurse.swift in Sources */,
 				0922C97D2253AA92002DC201 /* Maze.swift in Sources */,
-				090FEB9821BB9B2B004276BB /* Python.swift in Sources */,
 				09D17D7522D05B6D00B07EFD /* BeingTired.swift in Sources */,
 				090FEBB621BB9B2B004276BB /* MagicReflect.swift in Sources */,
 				090FEC4521BB9B2B004276BB /* RoleSelectPanel.swift in Sources */,
@@ -2277,7 +2191,6 @@
 				090FEBE321BB9B2B004276BB /* Passive.swift in Sources */,
 				0922C97B224FAC87002DC201 /* MimicBattle.swift in Sources */,
 				09C66CA3220C1C9D00E1C153 /* DiusBattle.swift in Sources */,
-				090FEBFD21BB9B2B004276BB /* PItem.swift in Sources */,
 				09D17DB322DC368600B07EFD /* SoulSlay.swift in Sources */,
 				090FEC2D21BB9B2B004276BB /* Meadow.swift in Sources */,
 				090FEB5421BB9B2B004276BB /* Sword.swift in Sources */,
@@ -2293,7 +2206,6 @@
 				097EC6CB226B695C00B9407A /* Tryer.swift in Sources */,
 				090FEC0C21BB9B2B004276BB /* Icon.swift in Sources */,
 				090FEC1821BB9B2B004276BB /* Bed.swift in Sources */,
-				090FEC4E21BCC4A6004276BB /* MyItem.swift in Sources */,
 				090FEBC921BB9B2B004276BB /* Taunt.swift in Sources */,
 				09C66CD82215B73300E1C153 /* ElementMaster.swift in Sources */,
 				09C66CE02215BFC400E1C153 /* SeedOfLife.swift in Sources */,
@@ -2317,11 +2229,8 @@
 				09D17D6322CF996C00B07EFD /* Thorny.swift in Sources */,
 				090FEBF521BB9B2B004276BB /* MyStage.swift in Sources */,
 				092C0CCF22CE32700084D15D /* FireMark.swift in Sources */,
-				090FEB9621BB9B2B004276BB /* Rizen.swift in Sources */,
-				090FEBF921BB9B2B004276BB /* SpellCard.swift in Sources */,
 				09D17DB922E08C7400B07EFD /* SoulPeace.swift in Sources */,
 				094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */,
-				090FEB9921BB9B2B004276BB /* GiantWasp.swift in Sources */,
 				09D17DAD22DB63A800B07EFD /* DarkFall.swift in Sources */,
 				092C0CC722CE27260084D15D /* Combustion.swift in Sources */,
 				090FEC4421BB9B2B004276BB /* SelectImage.swift in Sources */,
@@ -2346,7 +2255,6 @@
 				090FEB7F21BB9B2B004276BB /* Accuracy.swift in Sources */,
 				0922C96C2248C297002DC201 /* CityOfSorrow.swift in Sources */,
 				090FEB7721BB9B2B004276BB /* ThunderResistance.swift in Sources */,
-				090FEB9021BB9B2B004276BB /* IUnit.swift in Sources */,
 				090FEBAE21BB9B2B004276BB /* RaceSuperiority.swift in Sources */,
 				09D17D7E22D2FCF600B07EFD /* ShadowCopy.swift in Sources */,
 				090FEA0121BB983E004276BB /* GameScene.swift in Sources */,
@@ -2392,7 +2300,6 @@
 				09C6BF9E21DBB1F20003C7F1 /* InnerHouse.swift in Sources */,
 				090FEBB721BB9B2B004276BB /* Auro.swift in Sources */,
 				090FEB6A21BB9B2B004276BB /* Amulet.swift in Sources */,
-				090FEB9121BB9B2B004276BB /* PowerLord.swift in Sources */,
 				09C66CC72210782500E1C153 /* Derivant.swift in Sources */,
 				090FEBF021BB9B2B004276BB /* BUnit.swift in Sources */,
 				090FEC4721BB9B2B004276BB /* CreationFlow.swift in Sources */,
@@ -2401,7 +2308,6 @@
 				0960C4A72386C3D400FF30A1 /* StarPalace.swift in Sources */,
 				090FEBC221BB9B2B004276BB /* Crazy.swift in Sources */,
 				090FEB5D21BB9B2B004276BB /* SacredEarring.swift in Sources */,
-				090FEC0721BB9B2B004276BB /* DealingPanel_.swift in Sources */,
 				090FEC1621BB9B2B004276BB /* LastFloor.swift in Sources */,
 				090FEC1121BB9B2B004276BB /* Counter.swift in Sources */,
 				090FEB8421BB9B2B004276BB /* ElementalResistance.swift in Sources */,
@@ -2409,7 +2315,6 @@
 				090FEC2F21BB9B2B004276BB /* BloodSquare.swift in Sources */,
 				09D17D7822D2F84D00B07EFD /* AssassinMaster.swift in Sources */,
 				09D17D8B22D3869E00B07EFD /* GraveRobber.swift in Sources */,
-				090FEB9421BB9B2B004276BB /* DeathAngelKhalil.swift in Sources */,
 				09D17D8622D3047700B07EFD /* Escape.swift in Sources */,
 				09954DB02271FB0F0087B009 /* Welcome.swift in Sources */,
 				0933C0F323780DE200404348 /* VeryExperienced.swift in Sources */,
@@ -2431,7 +2336,6 @@
 				090FEC1221BB9B2B004276BB /* Actor.swift in Sources */,
 				09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */,
 				09C6BFA421DC8B2D0003C7F1 /* BloodAbyss.swift in Sources */,
-				090FEBF721BB9B2B004276BB /* CardSlot.swift in Sources */,
 				09D17DA422DA03CB00B07EFD /* TearCluster.swift in Sources */,
 				0922C94B22225BEC002DC201 /* Types.swift in Sources */,
 				09C66CEE221EF28B00E1C153 /* HighLevelSummon.swift in Sources */,
@@ -2455,11 +2359,9 @@
 				090FEBCD21BB9B2B004276BB /* LastChance.swift in Sources */,
 				090FEC3121BB9B2B004276BB /* NorthOfVillage.swift in Sources */,
 				0933C0E3236F184300404348 /* LineAttack.swift in Sources */,
-				09C6BF9821D7A4070003C7F1 /* IInitialize.swift in Sources */,
 				0933C0E52372EF0600404348 /* HealAll.swift in Sources */,
 				090FEC3D21BB9B2B004276BB /* UIScene.swift in Sources */,
 				090FEBBE21BB9B2B004276BB /* Lighting.swift in Sources */,
-				090FEB9B21BB9B2B004276BB /* VirulentToad.swift in Sources */,
 				090FEB7A21BB9B2B004276BB /* Strength.swift in Sources */,
 				0953ADF222F0965700BCEAFC /* ToughHeart.swift in Sources */,
 				090FEC3421BB9B2B004276BB /* WeaponsHouseInside.swift in Sources */,
@@ -2476,20 +2378,17 @@
 				09C66CD12212FF3F00E1C153 /* LightingFist.swift in Sources */,
 				090FEBFE21BB9B2B004276BB /* UIItem.swift in Sources */,
 				090FEC4C21BCC418004276BB /* SecretMeadow.swift in Sources */,
-				090FEB8C21BB9B2B004276BB /* IChar.swift in Sources */,
 				09C6BF9421D5F1FD0003C7F1 /* AcientRoadSelection.swift in Sources */,
 				094E68D021E203EE00414583 /* SellingPanel.swift in Sources */,
 				090FEB5921BB9B2B004276BB /* SacredAmulet.swift in Sources */,
 				0960C4A52386BF2B00FF30A1 /* WinterPalace.swift in Sources */,
 				09C6BF8621CBE06F0003C7F1 /* SelectProfession.swift in Sources */,
-				090FEC0A21BB9B2B004276BB /* RoleInfoPanel.swift in Sources */,
 				09D17D6122CF98A200B07EFD /* JadeSpirit.swift in Sources */,
 				090FEBAF21BB9B2B004276BB /* DeathGaze.swift in Sources */,
 				090FEBAC21BB9B2B004276BB /* SummonFlower.swift in Sources */,
 				090FEC2A21BB9B2B004276BB /* Tower.swift in Sources */,
 				090FEC4921BB9B2B004276BB /* test.swift in Sources */,
 				090FEBC521BB9B2B004276BB /* FireRain.swift in Sources */,
-				090FEC1021BB9B2B004276BB /* Avatar.swift in Sources */,
 				094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */,
 				090FEC1E21BB9B2B004276BB /* Village.swift in Sources */,
 				09C66CEA221EEFE300E1C153 /* NoAction.swift in Sources */,
@@ -2516,7 +2415,6 @@
 				09D17D9722D779E500B07EFD /* NervousPoison.swift in Sources */,
 				092C0CC322CE1EBB0084D15D /* FireSpiritBattle.swift in Sources */,
 				090FEBC821BB9B2B004276BB /* FireOrFired.swift in Sources */,
-				090FEBFA21BB9B2B004276BB /* Card.swift in Sources */,
 				09738A97229A6F20009AF2EE /* ElementDestory.swift in Sources */,
 				092C0CC922CE29060084D15D /* BurnHeart.swift in Sources */,
 				09D17D6F22D0440E00B07EFD /* ThrowRock.swift in Sources */,
@@ -2532,7 +2430,6 @@
 				090FEB9C21BB9B2B004276BB /* Slime.swift in Sources */,
 				09738A95229A6C35009AF2EE /* Blizzard.swift in Sources */,
 				090FEBC121BB9B2B004276BB /* Dominate.swift in Sources */,
-				090FEB8B21BB9B2B004276BB /* IEvil.swift in Sources */,
 				090FEC3821BB9B2B004276BB /* WitheredLane.swift in Sources */,
 				090FEC2221BB9B2B004276BB /* Scenery.swift in Sources */,
 				09D85F53236881E20035A14C /* SuperWater.swift in Sources */,
@@ -2576,10 +2473,8 @@
 				09C66CBE2210617900E1C153 /* ElementWizard.swift in Sources */,
 				09D17D9122D7705E00B07EFD /* SummonMummy.swift in Sources */,
 				090FEBA621BB9B2B004276BB /* SoulLash.swift in Sources */,
-				090FEBFB21BB9B2B004276BB /* EvilBook.swift in Sources */,
 				09D17D8022D2FF2300B07EFD /* AssassinBattle.swift in Sources */,
 				09C6BFA221DC861F0003C7F1 /* WinterLand.swift in Sources */,
-				090FEC0921BB9B2B004276BB /* MinionsHousePanel.swift in Sources */,
 				090FEBD721BB9B2B004276BB /* FeignAttack.swift in Sources */,
 				0922C97222491409002DC201 /* CityOfDeath.swift in Sources */,
 				09D85F49235F28070035A14C /* Model.swift in Sources */,
@@ -2635,7 +2530,6 @@
 				0922C96E22490CD8002DC201 /* CityOfDesire.swift in Sources */,
 				09C66CE422184CDE00E1C153 /* LowerSummon.swift in Sources */,
 				09C66CAE220D799F00E1C153 /* Iberis.swift in Sources */,
-				090FEB9D21BB9B2B004276BB /* TreeSpirit.swift in Sources */,
 				0953ADF022F0956B00BCEAFC /* SharpStone.swift in Sources */,
 				09D85F512361E4AF0035A14C /* SunBurn.swift in Sources */,
 				0922C979224FAB9C002DC201 /* Mimic.swift in Sources */,
@@ -2660,7 +2554,6 @@
 				090FEC2421BB9B2B004276BB /* BaseScene.swift in Sources */,
 				090FEB5B21BB9B2B004276BB /* SacredMark.swift in Sources */,
 				09C66CC022106A2800E1C153 /* WizardBattle.swift in Sources */,
-				090FEBF821BB9B2B004276BB /* EvilCard.swift in Sources */,
 				090FEBB421BB9B2B004276BB /* OnePunch.swift in Sources */,
 				090FEB6821BB9B2B004276BB /* Shield.swift in Sources */,
 				090FEB5721BB9B2B004276BB /* Dagger.swift in Sources */,
@@ -2673,7 +2566,6 @@
 				090FEBEC21BB9B2B004276BB /* SpellBook.swift in Sources */,
 				090FEBF621BB9B2B004276BB /* MyScene.swift in Sources */,
 				090FEC3521BB9B2B004276BB /* CenterVillage.swift in Sources */,
-				090FEC5021BCF0E3004276BB /* CellMonster.swift in Sources */,
 				09D17DB122DB6FEA00B07EFD /* SoulReaping.swift in Sources */,
 				09D17D6922CFAD0A00B07EFD /* GiantSpiritBattle.swift in Sources */,
 				09C66CDA2215BC5800E1C153 /* Vanguard.swift in Sources */,

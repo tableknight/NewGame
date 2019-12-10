@@ -86,7 +86,7 @@ class Welcome: SKSpriteNode {
                     "Oldlin",
                     "Mei_lulu","Jade","Ginly","family","boy2","boy1",
         ]
-        let angels = ["aiki","death_angel","miki","misheal","son_of_micalu1","son_of_micalu2"]
+        let angels = ["aiki","death_angel","miki","son_of_micalu1","son_of_micalu2"]
         let demons = ["blood_bat","blood_queen","crawler","death_god","dream_sucker",
                       "evil_curse","evil_spirit","george_servant1",
                       "george_servant2","angela","ayer","gerute",

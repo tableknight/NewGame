@@ -12,8 +12,9 @@ class MenuButton:SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
 //        let rect = SKShapeNode(
         zPosition = MyScene.UI_LAYER_Z
-        let bg = SKShapeNode(rect: CGRect(x: -cellSize * 0.5, y: -cellSize * 0.375, width: cellSize, height: cellSize * 0.75), cornerRadius:2)
+        let bg = SKShapeNode(rect: CGRect(x: -cellSize * 0.5, y: -cellSize * 0.375, width: cellSize, height: cellSize * 0.75), cornerRadius: 8)
         bg.fillColor = UIColor.black
+        bg.lineWidth = 0
 //        addChild(bg)
         _node.addChild(bg)
     }
@@ -40,7 +41,7 @@ class RoundButton:SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         //        let rect = SKShapeNode(
         zPosition = MyScene.UI_LAYER_Z
-        _label.fontSize = 20
+        _label.fontSize = Game.FONT_SIZE
         _label.align = "center"
         _label.position.y = _label.fontSize * 0.5
         addChild(_label)
@@ -51,9 +52,10 @@ class RoundButton:SKSpriteNode {
     
     func create(text:String, size:CGFloat) {
         let bg = SKShapeNode(circleOfRadius: size)
-        bg.fillColor = UIColor.black
-        bg.strokeColor = UIColor.lightGray
-        bg.lineWidth = 2
+        bg.fillColor = Game.BG_FILL_COLOR
+        bg.strokeColor = UIColor.white
+        bg.lineWidth = Game.UNSELECTED_STROKE_WIDTH
+        bg.alpha = Game.BG_ALPHA
         addChild(bg)
         _label.text = text
         _bg = bg

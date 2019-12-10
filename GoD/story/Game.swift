@@ -229,10 +229,14 @@ class Game {
     static let SELECTED_HIGHLIGH_COLOR = UIColor.init(red: 0.15, green: 0.87, blue: 1, alpha: 1)
     static let SELECTED_STROKE_WIDTH:CGFloat = 2
     static let UNSELECTED_STROKE_WIDTH:CGFloat = 1
-    static let UNSELECTED_STROKE_COLOR = UIColor.white
+    static let BG_ALPHA:CGFloat = 0.75
+    static let FONT_SIZE:CGFloat = 24
+    static let BG_FILL_COLOR = UIColor.black
+    static let UNSELECTED_STROKE_COLOR = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.35)
     static let HPBAR_COLOR = UIColor.red
+    static let MPBAR_COLOR = QualityColor.RARE
     static let EXPBAR_COLOR = UIColor.green
-    static let CORNER_RADIUS:CGFloat = 3
+    static let CORNER_RADIUS:CGFloat = 12
     static var CELLSIZE:CGFloat = 80
     static let ICON_GAP:CGFloat = 12
     static let FRAME_SIZE:CGFloat = 0.3
@@ -364,16 +368,16 @@ class Game {
         btn.position.y = Game.instance.cellSize * 3.5
         return btn
     }
-    static func createMask() -> SKShapeNode {
-        let width = Game.instance.screenWidth * 2
-        let height = Game.instance.screenHeight * 2
-        
-        let bg0 = SKShapeNode(rect: CGRect(x: -width * 0.5, y: -height * 0.5, width: width, height: height))
-        bg0.fillColor = UIColor.black
-        bg0.alpha = 0.65
-        bg0.lineWidth = 0
-        return bg0
-    }
+//    static func createMask() -> SKShapeNode {
+//        let width = Game.instance.screenWidth * 2
+//        let height = Game.instance.screenHeight * 2
+//        
+//        let bg0 = SKShapeNode(rect: CGRect(x: -width * 0.5, y: -height * 0.5, width: width, height: height))
+//        bg0.fillColor = UIColor.black
+//        bg0.alpha = 0.65
+//        bg0.lineWidth = 0
+//        return bg0
+//    }
     static func save(c:Character, key:String) {
         if let data = try? JSONEncoder().encode(c) {
             let us = UserDefaults.standard
@@ -585,6 +589,7 @@ func createBackground(x: CGFloat = 0, y: CGFloat = 0, width: CGFloat, height: CG
     bg.fillColor = UIColor.black
     bg.strokeColor = Game.UNSELECTED_STROKE_COLOR
     bg.lineWidth = Game.UNSELECTED_STROKE_WIDTH
+    bg.alpha = Game.BG_ALPHA
     bg.position.x = width * 0.5
     bg.position.y = -height * 0.5
 //    bg.zPosition = zPos

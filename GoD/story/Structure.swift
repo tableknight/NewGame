@@ -22,8 +22,9 @@ struct Extensions:Codable {
     var avoid:CGFloat
     var spirit:CGFloat
     var hp:CGFloat
-    var mp:CGFloat
     var health:CGFloat
+    var mp:CGFloat
+    var mpMax:CGFloat
     var mind:CGFloat
 }
 struct Elemental:Codable {

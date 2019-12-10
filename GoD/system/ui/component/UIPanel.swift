@@ -22,7 +22,7 @@ class UIPanel:SKSpriteNode {
         self.zPosition = MyStage.UI_PANEL_Z
         createPanelbackground()
         
-        createMask()
+//        createMask()
         
         createLabel()
     }
@@ -38,7 +38,8 @@ class UIPanel:SKSpriteNode {
         _label = t
     }
     internal func createMask() {
-        let _mask = Game.createMask()
+        let _mask = createBackground(width: Game.instance.screenWidth * 2, height: Game.instance.screenHeight * 2)
+        _mask.position = CGPoint(x: -Game.instance.screenWidth * 0.5, y: Game.instance.screenHeight * 0.5)
         _mask.zPosition = self.zPosition
         addChild(_mask)
     }
@@ -47,6 +48,7 @@ class UIPanel:SKSpriteNode {
         _bg = createBackground(width: _standardWidth, height: _standardHeight)
         _bg.position = CGPoint(x: 0, y: 0)
         _bg.zPosition = self.zPosition + 1
+        _bg.alpha = 0.85
         addChild(_bg)
     }
     
@@ -56,7 +58,7 @@ class UIPanel:SKSpriteNode {
     
     func createCloseButton() {
         _closeButton.text = "关闭"
-        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.7
+        _closeButton.position.y = _standardHeight * 0.5 + cellSize * 0.65
         _closeButton.position.x = _standardWidth * 0.5 - cellSize * 1.5
         _closeButton.zPosition = self.zPosition + 2
         addChild(_closeButton)
@@ -65,7 +67,7 @@ class UIPanel:SKSpriteNode {
     func createPageButtons() {
         _nextButton.text = "下一页"
         _nextButton.position.x = _closeButton.position.x
-        _nextButton.position.y = -_closeButton.position.y + cellSize * 0.65
+        _nextButton.position.y = -_closeButton.position.y + cellSize * 0.6
         _nextButton.zPosition = self.zPosition + 2
         addChild(_nextButton)
         

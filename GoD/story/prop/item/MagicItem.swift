@@ -153,7 +153,7 @@ class SoulEssence:MagicItem {
             return
         }
         removeFromChar()
-        let c = Creature.getCreatureByClass(c: _soul)
+        let c = Creature.getCreatureByClass(c: _soul)!
         c.create(level: 1)
         char._minions.append(c)
         
