@@ -229,7 +229,7 @@ class Game {
     static let SELECTED_HIGHLIGH_COLOR = UIColor.init(red: 0.15, green: 0.87, blue: 1, alpha: 1)
     static let SELECTED_STROKE_WIDTH:CGFloat = 2
     static let UNSELECTED_STROKE_WIDTH:CGFloat = 1
-    static let BG_ALPHA:CGFloat = 0.75
+    static let BG_ALPHA:CGFloat = 0.8
     static let FONT_SIZE:CGFloat = 24
     static let BG_FILL_COLOR = UIColor.black
     static let UNSELECTED_STROKE_COLOR = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.35)

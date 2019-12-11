@@ -396,11 +396,11 @@ class AcientRoad: Dungeon {
     }
     
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
-        if Core().d2() {
-            super.addWall(x: x, y: y, item: item)
-        } else {
-            addItem(x: x, y: y, item: getItemByIndex(index: _itemEnum.one()))
-        }
+        super.addWall(x: x, y: y, item: item)
+//        if Core().d2() {
+//        } else {
+//            addItem(x: x, y: y, item: getItemByIndex(index: _itemEnum.one()))
+//        }
     }
     
     override func addPortalItem() {

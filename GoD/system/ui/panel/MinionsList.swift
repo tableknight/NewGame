@@ -160,9 +160,9 @@ class MinionsList:UIPanel {
             ms = [minions[0],minions[1],minions[2]]
             createPageButtons()
             _nextButton.position.x = -cellSize * 0.75
-            _nextButton.yAxis = -_closeButton.position.y + cellSize * 0.5
+//            _nextButton.yAxis = -_closeButton.position.y + cellSize * 0.5
             _prevButton.xAxis = _nextButton.xAxis
-            _prevButton.yAxis = _nextButton.yAxis
+//            _prevButton.yAxis = _nextButton.yAxis
             _prevButton.isHidden = true
         }
         showMinions(ms)
@@ -177,14 +177,14 @@ class MinionsList:UIPanel {
         if size < 0 {
             return
         }
-        let startY = _standardHeight * 0.5 - _standardGap
+        let startY = _standardHeight * 0.5 - cellSize * 0.375
         for i in 0...size {
             let y = i % 3
             let mc = MinionComponent()
             mc.create(minion: minions[i])
             mc.position.x = 0
             mc.zPosition = self.zPosition + 5
-            mc.position.y = startY - y.toFloat() * cellSize * 2.25
+            mc.position.y = startY - y.toFloat() * cellSize * 2.125
             mc._panelMinionsList = self
             _minionLayer.addChild(mc)
             _minionComponents.append(mc)
@@ -248,8 +248,8 @@ class MinionComponent:SKSpriteNode {
     }
     
     private func createBg() {
-        let width = cellSize * 7.5
-        let height = cellSize * 2
+        let width = cellSize * 7.25
+        let height = cellSize * 1.875
         _bg = createBackground(width: width, height: height)
         _bg.position.x = 0
         addChild(_bg)
@@ -268,7 +268,7 @@ class MinionComponent:SKSpriteNode {
         
         let img = SKSpriteNode(texture: m._img.getCell(1, 0))
         img.position.x = gap * 2 + startX
-        img.position.y = -gap * 2
+        img.position.y = -gap * 1.875
         img.anchorPoint = CGPoint(x: 0, y: 1)
         img.size = CGSize(width: cellSize, height: cellSize)
         addChild(img)
@@ -284,13 +284,13 @@ class MinionComponent:SKSpriteNode {
         let name = Label()
         name.text = m._name
         name.fontColor = QualityColor.getColor(m._quality)
-        name.fontSize = 24
+        name.fontSize = 22
         name.align = "left"
         name.position.x = size + gap * 2 + startX
         name.position.y = -cellSize * 0.25
         addChild(name)
         
-        let barHeight:CGFloat = 8
+        let barHeight:CGFloat = 10
         let _hpbar = HBar()
         let barWidth = cellSize * 2
         _hpbar.create(width: barWidth, height: barHeight, value: m._extensions.hp / m._extensions.health, color: Game.HPBAR_COLOR)
@@ -306,7 +306,7 @@ class MinionComponent:SKSpriteNode {
         
         let race = Label()
         race.text = "Lv\(m._level.toInt()) [\(EvilType.getTypeLabel(type: minion._race))]"
-        race.fontSize = 20
+        race.fontSize = 18
         race.position.x = name.position.x
         race.position.y = name.position.y - name.fontSize - 6
         addChild(race)
@@ -375,7 +375,7 @@ class MinionComponent:SKSpriteNode {
 class MinionSeatNode: SeatNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.size = CGSize(width: cellSize * 0.75, height: cellSize * 0.7)
+        self.size = CGSize(width: cellSize * 0.625, height: cellSize * 0.625)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

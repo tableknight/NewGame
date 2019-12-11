@@ -24,6 +24,8 @@ class MyScene: SKSpriteNode {
     let CELL_BLOCK = 106
     let CELL_SELLER = 107
     let CELL_BOSS = 108
+    let CELL_HERB = 109
+    let CELL_ORE = 110
     let TOWER_FIRE_ENERGE = 200
     let TOWER_WATER_ENERGE = 201
     let TOWER_THUNDER_ENERGE = 202

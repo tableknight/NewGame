@@ -292,6 +292,7 @@
 		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
 		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
+		0950DFF323A1394E00F17588 /* Herb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950DFF223A1394E00F17588 /* Herb.swift */; };
 		0953ADEA22F094B500BCEAFC /* Powerful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADE922F094B500BCEAFC /* Powerful.swift */; };
 		0953ADEC22F094F300BCEAFC /* ChaosCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADEB22F094F300BCEAFC /* ChaosCore.swift */; };
 		0953ADEE22F0953500BCEAFC /* SkyAndLand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADED22F0953500BCEAFC /* SkyAndLand.swift */; };
@@ -766,6 +767,7 @@
 		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
 		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
+		0950DFF223A1394E00F17588 /* Herb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Herb.swift; sourceTree = "<group>"; };
 		0953ADE922F094B500BCEAFC /* Powerful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerful.swift; sourceTree = "<group>"; };
 		0953ADEB22F094F300BCEAFC /* ChaosCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaosCore.swift; sourceTree = "<group>"; };
 		0953ADED22F0953500BCEAFC /* SkyAndLand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyAndLand.swift; sourceTree = "<group>"; };
@@ -1361,6 +1363,7 @@
 				090FEADE21BB9B2A004276BB /* Item.swift */,
 				090FEAE121BB9B2A004276BB /* SpellBook.swift */,
 				0972F85E22FED0850017A179 /* MagicItem.swift */,
+				0950DFF223A1394E00F17588 /* Herb.swift */,
 			);
 			path = item;
 			sourceTree = "<group>";
@@ -2475,6 +2478,7 @@
 				090FEBA621BB9B2B004276BB /* SoulLash.swift in Sources */,
 				09D17D8022D2FF2300B07EFD /* AssassinBattle.swift in Sources */,
 				09C6BFA221DC861F0003C7F1 /* WinterLand.swift in Sources */,
+				0950DFF323A1394E00F17588 /* Herb.swift in Sources */,
 				090FEBD721BB9B2B004276BB /* FeignAttack.swift in Sources */,
 				0922C97222491409002DC201 /* CityOfDeath.swift in Sources */,
 				09D85F49235F28070035A14C /* Model.swift in Sources */,

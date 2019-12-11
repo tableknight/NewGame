@@ -321,8 +321,8 @@
             timestampString = "589084134.569355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "create(unit:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -372,9 +372,9 @@
             timestampString = "589084134.569567"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
-            landmarkName = "showSpellInfo(_:)"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
+            landmarkName = "createStarBar(value:color:y:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1256,9 +1256,9 @@
             timestampString = "589084134.578408"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "loadSpells()"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "create(unit:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1307,8 +1307,8 @@
             timestampString = "589084134.578554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "loadSpells()"
             landmarkType = "7">
          </BreakpointContent>
@@ -4958,8 +4958,8 @@
             timestampString = "587951097.894134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
             landmarkName = "move(_:)"
             landmarkType = "7">
             <Locations>
@@ -5009,8 +5009,8 @@
             timestampString = "587951097.894205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "MyScene"
             landmarkType = "3">
          </BreakpointContent>
@@ -5672,8 +5672,8 @@
             timestampString = "587951097.895426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "MyScene"
             landmarkType = "3">
          </BreakpointContent>
@@ -6165,8 +6165,8 @@
             timestampString = "587951097.89712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
             landmarkName = "deal()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6488,10 +6488,10 @@
             timestampString = "589084134.606433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
-            landmarkName = "createStarBar(value:color:y:)"
-            landmarkType = "7">
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "RolePanel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7776,8 +7776,8 @@
             filePath = "GoD/system/ui/stage/MyScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "moveTo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7792,8 +7792,8 @@
             filePath = "GoD/system/ui/stage/MyScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "confirmEvent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7808,8 +7808,8 @@
             filePath = "GoD/system/ui/stage/MyScene.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "confirmEvent()"
             landmarkType = "7">
          </BreakpointContent>

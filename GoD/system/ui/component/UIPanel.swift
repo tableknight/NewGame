@@ -48,7 +48,6 @@ class UIPanel:SKSpriteNode {
         _bg = createBackground(width: _standardWidth, height: _standardHeight)
         _bg.position = CGPoint(x: 0, y: 0)
         _bg.zPosition = self.zPosition + 1
-        _bg.alpha = 0.85
         addChild(_bg)
     }
     

@@ -146,7 +146,7 @@ class RolePanel:UIPanel {
         lv.text = "lv.\(unit._level.toInt())\(unit._name)"
         lv.fontSize = 22
         lv.position.x = startX + cellSize * 1.5 + gap
-        lv.position.y = startY - cellSize * 0.25 - 10
+        lv.position.y = startY
         lv.fontColor = QualityColor.getColor(unit._quality)
         _propertyLayer.addChild(lv)
         
@@ -161,16 +161,24 @@ class RolePanel:UIPanel {
         race.position.y = lv.position.y - 24
         _propertyLayer.addChild(race)
         
+        let barHeight:CGFloat = 11
+        
         let hpbar = HBar()
-        hpbar.create(width: cellSize * 2, height: 12, value: unit._extensions.hp / unit._extensions.health, color: UIColor.red)
-        hpbar.position.y = race.position.y - 32
+        hpbar.create(width: cellSize * 2, height: barHeight, value: unit._extensions.hp / unit._extensions.health, color: Game.HPBAR_COLOR)
+        hpbar.position.y = race.position.y - cellSize * 0.25 - barHeight
         hpbar.position.x = race.position.x
         _propertyLayer.addChild(hpbar)
         
+        let mpbar = HBar()
+        mpbar.create(width: cellSize * 2, height: barHeight, value: unit._extensions.mp / unit._extensions.mpMax, color: Game.MPBAR_COLOR)
+        mpbar.position.y = hpbar.position.y - cellSize * 0.25
+        mpbar.position.x = hpbar.position.x
+        _propertyLayer.addChild(mpbar)
+        
         let expbar = HBar()
-        expbar.create(width: cellSize * 2, height: 10, value: unit._exp / unit.expNext(), color: UIColor.green)
-        expbar.position.y = hpbar.position.y - 20
-        expbar.position.x = hpbar.position.x
+        expbar.create(width: cellSize * 2, height: barHeight, value: unit._exp / unit.expNext(), color: Game.EXPBAR_COLOR)
+        expbar.position.y = mpbar.position.y - cellSize * 0.25
+        expbar.position.x = mpbar.position.x
         _propertyLayer.addChild(expbar)
         
         var colorLight = UIColor.white
@@ -241,7 +249,7 @@ class RolePanel:UIPanel {
             _seatNodes.append(_bbm)
             _seatNodes.append(_bbr)
         } else {
-            let gap:CGFloat = 10
+            let gap:CGFloat = 8
             var b = createStarBar(value: unit._stars.strength, color: QualityColor.NORMAL, y: startY - 8)
             b = createStarBar(value: unit._growth.strength, color: QualityColor.GOOD, y: b.yAxis - gap)
             b = createStarBar(value: unit._stars.stamina, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
@@ -298,6 +306,7 @@ class RolePanel:UIPanel {
         _attrAvoid = addAttrLabel(x: x3, y: y2, text: "闪避", value: bUnitRole.getAvoid())
         _attrAccuracy = addAttrLabel(x: x3, y: y3, text: "命中", value: bUnitRole.getAccuracy())
         _attrMind = addAttrLabel(x: x3, y: y4, text: "念力", value: bUnitRole.getMind())
+        _attrMP = addAttrLabel(x: x3, y: y5, text: "法力", value: bUnitRole.getMpMax())
         
         
         _attrFirePower = addAttrLabel(x: x4, y: y1, text: "火", value: bUnitRole.getFirePower(), value2: bUnitRole.getFireResistance())
@@ -379,6 +388,7 @@ class RolePanel:UIPanel {
         _attrCritical.value = bChar.getCriticalForShow().toInt()
         _attrAvoid.value = bChar.getAvoid().toInt()
         _attrAccuracy.value = bChar.getAccuracy().toInt()
+        _attrMP.value = bChar.getMpMax().toInt()
 //        _attrMind.value = bChar.getMind(target: to).toInt()
 //        _attrBreak.value = bChar.getBreak().toInt()
         _attrLeftPoint.value = _unit._leftPoint
@@ -424,7 +434,7 @@ class RolePanel:UIPanel {
     private func createStarBar(value:CGFloat, color:UIColor, y:CGFloat) -> HBar {
         let bar = HBar()
         let w = value / 3 * (cellSize * 2.5)
-        bar.create(width: w, height: 5, value: 1, color: color)
+        bar.create(width: w, height: 6, value: 1, color: color)
         bar.position.y = y
         bar.position.x = cellSize * 0.5
         _propertyLayer.addChild(bar)
@@ -475,6 +485,7 @@ class RolePanel:UIPanel {
     private var _attrLucky:AttrLabel!
     private var _attrChaos:AttrLabel!
     private var _attrMind:AttrLabel!
+    private var _attrMP:AttrLabel!
     private var _attrBreak:AttrLabel!
     private var _attrRevenge:AttrLabel!
     private var _attrFirePower:AttrLabel!
@@ -497,7 +508,7 @@ class SeatNode:SKSpriteNode {
     static let UNSELECTED_COLOR = UIColor.lightGray
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        self.size = CGSize(width: cellSize * 0.7, height: cellSize * 0.7)
+        self.size = CGSize(width: cellSize * 0.625, height: cellSize * 0.625)
         self.color = SeatNode.UNSELECTED_COLOR
         self.anchorPoint = CGPoint(x: 0, y: 1)
     }
@@ -530,9 +541,9 @@ class AttrLabel:SKSpriteNode {
                 _bg.lineWidth = 2
                 _label.fontColor = QualityColor.GOOD
             } else {
-                _bg.strokeColor = UIColor.white
+                _bg.strokeColor = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.75)
                 _bg.lineWidth = 1
-                _label.fontColor = UIColor.white
+                _label.fontColor = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.75)
             }
         }
         get {
@@ -542,12 +553,10 @@ class AttrLabel:SKSpriteNode {
     var background:Bool {
         set {
             if newValue {
-                _bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -self.size.height), size: self.size), cornerRadius: 2 )
-//                _bg.fillColor = UIColor.black
+                _bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -self.size.height), size: self.size), cornerRadius: 3)
                 _bg.strokeColor = UIColor.white
                 addChild(_bg)
             } else {
-//                _bg?.removeFromParent()
                 
             }
         }

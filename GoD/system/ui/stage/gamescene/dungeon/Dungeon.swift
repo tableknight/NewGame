@@ -138,10 +138,7 @@ class Dungeon: MyScene {
                                 let x0 = x.toFloat() + landFragment[i]
                                 let y0 = y.toFloat() + landFragment[i + 1]
                                 if x0 <= hSize && y0 <= vSize - 1 {
-                                    let wall = UIItem()
-                                    wall.setTexture(wallTexture)
-                                    addWall(x: x0, y: y0, item: wall)
-                                    _mapMatrix[y0.toInt()][x0.toInt()] = CELL_ITEM
+                                    addWallCell(x: x0, y: y0, texture: wallTexture)
                                 }
                             }
                         }
@@ -151,6 +148,22 @@ class Dungeon: MyScene {
             }
             _mapMatrix.append(row)
         }
+    }
+    internal func addWallCell(x:CGFloat, y:CGFloat, texture:SKTexture) {
+        let sd = seed()
+        let item = UIItem()
+        if sd < 8 {
+            item.setTexture(getHerb())
+            addWall(x: x, y: y, item: item)
+            _mapMatrix[y.toInt()][x.toInt()] = CELL_HERB
+        } else {
+            item.setTexture(texture)
+            addWall(x: x, y: y, item: item)
+            _mapMatrix[y.toInt()][x.toInt()] = CELL_ITEM
+        }
+    }
+    internal func getHerb() -> SKTexture {
+        return DrangonRoot.IMAGE
     }
     internal func createPortals() {
         let fromIndex = seed(max: _visiblePoints.count)

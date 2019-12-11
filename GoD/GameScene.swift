@@ -26,7 +26,12 @@ class GameScene: SKScene {
         Mode.showbossall = true
 ////
         realScene()
-//        let e = Game.instance.char!
+        
+        let dr = DrangonRoot()
+        dr._count = 5
+        
+        let e = Game.instance.char!
+        e.addProp(p: dr)
 //        let se = SoulEssence()
 //        se.create(soul: DarkNinja())
 //        e.addProp(p: se)

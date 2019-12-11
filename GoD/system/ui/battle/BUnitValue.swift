@@ -247,6 +247,10 @@ extension BUnit {
         return mind
     }
     
+    func getMpMax() -> CGFloat {
+        return _unit._extensions.mpMax
+    }
+    
     func getDestroy() -> CGFloat {
         return _unit._extensions.destroy + _extensions.destroy
     }

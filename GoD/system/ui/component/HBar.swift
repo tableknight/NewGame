@@ -25,7 +25,7 @@ class HBar:SKSpriteNode {
             v = 1
         }
         let width = _width * v
-        _bar = SKShapeNode(rect: CGRect(x: 0, y: -_height * 0.5, width: width, height: _height))
+        _bar = createBackground(width: width, height: _height, cornerRadius: 3)
         _bar.fillColor = _color
         addChild(_bar)
     }
@@ -35,7 +35,8 @@ class HBar:SKSpriteNode {
         _width = width
         _height = height
         _color = color
-        let bg = SKShapeNode(rect: CGRect(x: 0, y: -_height * 0.5, width: width, height: height))
+        let bg = createBackground(width: width, height: height, cornerRadius: 3)
+//        let bg = SKShapeNode(rect: CGRect(x: 0, y: -_height * 0.5, width: width, height: height))
         bg.fillColor = UIColor.black
         bg.lineWidth = 1
         bg.strokeColor = UIColor.white
