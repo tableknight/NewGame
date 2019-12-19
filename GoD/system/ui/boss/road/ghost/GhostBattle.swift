@@ -54,37 +54,37 @@ class GhostBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 5 {
-            let i = TrueLie()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = RingOfDeath()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 50 {
-            let i = SoulPeace()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 10 {
-            let i = PandoraHeart()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: FearGhost.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = TrueLie()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = RingOfDeath()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 50 {
+//            let i = SoulPeace()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 10 {
+//            let i = PandoraHeart()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: FearGhost.LEVEL)
+//        return list + l.getList()
+//    }
 }
 

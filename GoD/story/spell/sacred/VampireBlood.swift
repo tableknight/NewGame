@@ -16,6 +16,7 @@ class VampireBlood: Passive {
     }
     override init() {
         super.init()
+        _id = Spell.VampireBlood
         _name = "吸血鬼血统"
         _description = "普通攻击回复造成伤害的20%"
         _quality = Quality.SACRED

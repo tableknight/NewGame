@@ -7,25 +7,14 @@
 //
 
 import SpriteKit
-class ItemInfo:SKSpriteNode, IPanelSize {
-//    func getDisplayNode() -> SKSpriteNode {
-//        return self
-//    }
-    
-    func getDisplayHeight() -> CGFloat {
-        return _displayHeight
-    }
-    
-    func getDisplayWidth() -> CGFloat {
-        return _displayWidth
-    }
+class ItemInfo:SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         zPosition = MyStage.UI_TOPEST_Z
     }
     
-    private var _item = Item()
+    private var _item:Item!
     func create(item:Item) {
         _item = item
         let startX = cellSize * 0.25

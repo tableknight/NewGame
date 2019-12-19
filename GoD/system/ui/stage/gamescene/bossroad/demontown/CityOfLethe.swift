@@ -12,7 +12,7 @@ class CityOfLethe: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
-        _monsterEnum = [1,2,3,4,5]
+        _monsterEnum = []
         _name = "遗忘之城"
         _floorSize = 10
         _level = 61
@@ -26,24 +26,24 @@ class CityOfLethe: DemonTown {
         hSize = [10,10,12,12].one()
         vSize = [10,10,12,12].one()
     }
-    override func getMonsterByIndex(index: Int) -> Creature {
-        if index == 1 {
-            return UndeadMinion11()
-        }
-        if index == 2 {
-            return UndeadMinion12()
-        }
-        if index == 3 {
-            return UndeadMinion13()
-        }
-        if index == 4 {
-            return UndeadMinion14()
-        }
-        if index == 5 {
-            return UndeadMinion15()
-        }
-        return UndeadMinion1()
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        if index == 1 {
+//            return UndeadMinion11()
+//        }
+//        if index == 2 {
+//            return UndeadMinion12()
+//        }
+//        if index == 3 {
+//            return UndeadMinion13()
+//        }
+//        if index == 4 {
+//            return UndeadMinion14()
+//        }
+//        if index == 5 {
+//            return UndeadMinion15()
+//        }
+//        return UndeadMinion1()
+//    }
     
     override func getSelfScene() -> BossRoad {
         return CityOfLethe()
@@ -58,7 +58,7 @@ class CityOfLethe: DemonTown {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()

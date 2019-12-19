@@ -18,7 +18,7 @@ class ElementWizard:Boss {
         _growth.intellect = 3.5
         _race = EvilType.MAN
         _img = SKTexture(imageNamed: "element_wizard")
-        _spellsInuse = [FireRain(), FireMatrix(), IceBomb(), FrozenShoot()]
+//        _spellsInuse = [FireRain(), FireMatrix(), IceBomb(), FrozenShoot()]
         _sensitive = 75
     }
     override func create(level: CGFloat) {
@@ -50,7 +50,7 @@ class MagicStudent:BossMinion {
         levelTo(level: level)
         _extensions.health *= 1.5
         _extensions.hp = _extensions.health
-        _spellsInuse = [FireOrFired(), LowlevelFlame()]
+//        _spellsInuse = [FireOrFired(), LowlevelFlame()]
         _sensitive = 65
     }
     required init(from decoder: Decoder) throws {

@@ -18,16 +18,16 @@ class SumahlBattle: BossBattle {
         if _curRole._unit is Sumahl {
             let sd = seed()
             if sd < 50 {
-                _selectedSpell = MindIntervene()
+                _selectedAction = MindIntervene()
             } else if sd < 70 {
-                _selectedSpell = HealAll()
+                _selectedAction = HealAll()
             } else if sd < 90 {
-                _selectedSpell = SilenceAll()
+                _selectedAction = SilenceAll()
             } else {
-                _selectedSpell = BossAttack()
+                _selectedAction = BossAttack()
             }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -74,50 +74,50 @@ class SumahlBattle: BossBattle {
     override func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 5 {
-            let i = FireMaster()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = TrueLie()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 10 {
-            let i = NilSeal()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = PandoraHeart()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = DragonSlayer()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = CreationMatrix()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Sumahl.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = FireMaster()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = TrueLie()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 10 {
+//            let i = NilSeal()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = PandoraHeart()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = DragonSlayer()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = CreationMatrix()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Sumahl.LEVEL)
+//        return list + l.getList()
+//    }
 }
 
 class MindIntervene: Physical, Curse {

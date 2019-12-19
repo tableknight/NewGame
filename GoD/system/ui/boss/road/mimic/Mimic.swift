@@ -18,7 +18,7 @@ class Mimic:Boss {
         _growth.agility = seedFloat(min: 15, max: 31) * 0.1
         _growth.intellect = seedFloat(min: 15, max: 31) * 0.1
         _img = SKTexture(imageNamed: "Mimic")
-        _spellsInuse = [LineAttack(), FireBreath(), ThunderArray(), LifeDraw(), LeeAttack()]
+//        _spellsInuse = [LineAttack(), FireBreath(), ThunderArray(), LifeDraw(), LeeAttack()]
     }
     override func create(level: CGFloat) {
         

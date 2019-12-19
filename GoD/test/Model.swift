@@ -15,7 +15,7 @@ class Model:NSObject {
         m._sensitive = 100
         m._extensions.avoid = 0
         m._rhythm = 0
-        m._spellsInuse = [NoAction()]
+//        m._spellsInuse = [NoAction()]
         return m
     }
     static func startNoActionBattle(role:Character) {
@@ -43,8 +43,8 @@ class Model:NSObject {
     }
     static func getRole(spells:Array<Spell> = []) -> Character {
         let e = Emily()
-        e.create(level: 25)
-        e._spellsInuse = spells
+        e.create()
+//        e._spellsInuse = spells
         Game.instance.char = e
         return e
     }
@@ -54,6 +54,6 @@ class Model:NSObject {
         bs.create()
         stage.loadScene(scene: bs)
         stage.createMenu()
-        Game.instance.scene.addChild(stage)
+        Game.instance.gameScene.addChild(stage)
     }
 }

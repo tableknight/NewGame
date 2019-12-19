@@ -10,14 +10,12 @@ import SpriteKit
 class SecretMeadow: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [11,12,13,14,15,16,17,18,19,110]
-        for _ in 0...8 {
-//            _itemEnum.append(21)
-//            _itemEnum.append(22)
-//            _itemEnum.append(23)
-            _itemEnum.append(24)
-        }
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = [
+            Creature.SnowLady,
+            Creature.IceBeast,
+            Creature.SnowSpirit,
+            Creature.SnowLady
+        ]
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
         _name = "秘境沼泽"
@@ -63,155 +61,156 @@ class SecretMeadow: AcientRoad {
         }
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return VirulentToad()
-        case 2:
-            return TreeSpirit()
-        case 3:
-            return Python()
-        case 4:
-            return GiantWasp()
-        default:
-            return TreeSpirit()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return VirulentToad()
+//        case 2:
+//            return TreeSpirit()
+//        case 3:
+//            return Python()
+//        case 4:
+//            return GiantWasp()
+//        default:
+//            return TreeSpirit()
+//        }
+//    }
     
     override func getWallTexture() -> SKTexture {
         return Game.instance.sf_outside_b.getCell(13, 2, 1, 2)
     }
     
 }
-class VirulentToad: Natrue {
-    override init() {
-        super.init()
-        _stars.strength = 1.0
-        _stars.stamina = 2.8
-        _stars.agility = 0.6
-        _stars.intellect = 1.0
-        _natural.strength = 18
-        _natural.stamina = 28
-        _natural.agility = 12
-        _natural.intellect = 10
-        _name = "绿精灵"
-        _imgUrl = "green_spirit"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell12()
-        if d() {
-            _spellsInuse = [AttackHard()]
-        }
-        if _spellCount > 1 {
-            if d(baseRate: -50) {
-                _spellsInuse.append(LastChance())
-            }
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class GiantWasp: Man {
-    override init() {
-        super.init()
-        _stars.strength = 2.2
-        _stars.stamina = 0.5
-        _stars.agility = 2.0
-        _stars.intellect = 0.8
-        _natural.strength = 22
-        _natural.stamina = 15
-        _natural.agility = 22
-        _natural.intellect = 15
-        _name = "露琪"
-        _imgUrl = "luki"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell13()
-        if d4() {
-            _spellsInuse = [Reborn()]
-        }
-        if _spellCount > 1 {
-            if d(baseRate: -40) {
-                _spellsInuse.append(Disappear())
-            }
-        }
-        if _spellCount > 2 {
-            if d(baseRate: -70) {
-                _spellsInuse.append(LeeAttack())
-            }
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class TreeSpirit: Man {
-    override init() {
-        super.init()
-        _stars.strength = 1.0
-        _stars.stamina = 2.0
-        _stars.agility = 1.0
-        _stars.intellect = 2.2
-        _natural.strength = 10
-        _natural.stamina = 12
-        _natural.agility = 12
-        _natural.intellect = 29
-        _name = "树妖"
-        _imgUrl = "tree_spirit"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell12()
-        if d4() {
-            _spellsInuse = [FragileCurse()]
-        }
-        if _spellCount > 1 {
-            if d(baseRate: -50) {
-                _spellsInuse = [DeathGaze()]
-            }
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class Python: Man {
-    override init() {
-        super.init()
-        _stars.strength = 1.5
-        _stars.stamina = 1.4
-        _stars.agility = 1.3
-        _stars.intellect = 1.2
-        _natural.strength = 28
-        _natural.stamina = 17
-        _natural.agility = 12
-        _natural.intellect = 16
-        _name = "花仙子"
-        _imgUrl = "flower_fairy"
-        spell13()
-        _img = SKTexture(imageNamed: _imgUrl)
-        if d4() {
-            _spellsInuse = [AttackPowerUp()]
-        }
-        if _spellCount > 1 {
-            if d(baseRate: -75) {
-                _spellsInuse.append(DancingDragon())
-            }
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
+//
+//class VirulentToad: Natrue {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1.0
+//        _stars.stamina = 2.8
+//        _stars.agility = 0.6
+//        _stars.intellect = 1.0
+//        _natural.strength = 18
+//        _natural.stamina = 28
+//        _natural.agility = 12
+//        _natural.intellect = 10
+//        _name = "绿精灵"
+//        _imgUrl = "green_spirit"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell12()
+////        if d() {
+////            _spellsInuse = [AttackHard()]
+////        }
+////        if _spellCount > 1 {
+////            if d(baseRate: -50) {
+////                _spellsInuse.append(LastChance())
+////            }
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class GiantWasp: Man {
+//    override init() {
+//        super.init()
+//        _stars.strength = 2.2
+//        _stars.stamina = 0.5
+//        _stars.agility = 2.0
+//        _stars.intellect = 0.8
+//        _natural.strength = 22
+//        _natural.stamina = 15
+//        _natural.agility = 22
+//        _natural.intellect = 15
+//        _name = "露琪"
+//        _imgUrl = "luki"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell13()
+////        if d4() {
+////            _spellsInuse = [Reborn()]
+////        }
+////        if _spellCount > 1 {
+////            if d(baseRate: -40) {
+////                _spellsInuse.append(Disappear())
+////            }
+////        }
+////        if _spellCount > 2 {
+////            if d(baseRate: -70) {
+////                _spellsInuse.append(LeeAttack())
+////            }
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class TreeSpirit: Man {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1.0
+//        _stars.stamina = 2.0
+//        _stars.agility = 1.0
+//        _stars.intellect = 2.2
+//        _natural.strength = 10
+//        _natural.stamina = 12
+//        _natural.agility = 12
+//        _natural.intellect = 29
+//        _name = "树妖"
+//        _imgUrl = "tree_spirit"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell12()
+////        if d4() {
+////            _spellsInuse = [FragileCurse()]
+////        }
+////        if _spellCount > 1 {
+////            if d(baseRate: -50) {
+////                _spellsInuse = [DeathGaze()]
+////            }
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class Python: Man {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1.5
+//        _stars.stamina = 1.4
+//        _stars.agility = 1.3
+//        _stars.intellect = 1.2
+//        _natural.strength = 28
+//        _natural.stamina = 17
+//        _natural.agility = 12
+//        _natural.intellect = 16
+//        _name = "花仙子"
+//        _imgUrl = "flower_fairy"
+////        spell13()
+////        _img = SKTexture(imageNamed: _imgUrl)
+////        if d4() {
+////            _spellsInuse = [AttackPowerUp()]
+////        }
+////        if _spellCount > 1 {
+////            if d(baseRate: -75) {
+////                _spellsInuse.append(DancingDragon())
+////            }
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
 
 class MI24:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

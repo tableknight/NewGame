@@ -16,6 +16,7 @@ class HolySacrifice: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.HolySacrifice
         _name = "神圣牺牲"
         _description = "牺牲15%当前生命，作为额外攻击。对目标造成攻击100%的物理伤害"
         _quality = Quality.RARE

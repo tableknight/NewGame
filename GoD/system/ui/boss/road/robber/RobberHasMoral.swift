@@ -30,11 +30,11 @@ class RobberHasMoral: Magical {
         status._type = "_robber_has_moral"
         status._labelText = "M"
         status._timeleft = 5
-        c._extensions.spirit += 50
-        c._extensions.mind += 50
+        c._valueUnit._extensions.spirit += 50
+        c._valueUnit._extensions.mind += 50
         status.timeupAction = {
-            c._extensions.spirit -= 50
-            c._extensions.mind -= 50
+            c._valueUnit._extensions.spirit -= 50
+            c._valueUnit._extensions.mind -= 50
         }
         c.actionCast {
             c.actionBuff {

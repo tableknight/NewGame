@@ -16,6 +16,7 @@ class SetTimeBack:Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.SetTimeBack
         _name = "时空逆转"
         _description = "释放可怕的诅咒，延长所有敌方技能两回合冷却时间"
         _quality = Quality.GOOD
@@ -30,11 +31,11 @@ class SetTimeBack:Magical, Curse {
                     setTimeout(delay: self.seed(to: 5).toFloat() / 10, completion: {
                         t.sonic() {
     //                        t.showText(text: Spell.CURSED)
-                            for s in t._unit._spellsInuse {
-                                if s._timeleft > 0 {
-                                    s._timeleft += 2
-                                }
-                            }
+//                            for s in t._unit._spellsInuse {
+//                                if s._timeleft > 0 {
+//                                    s._timeleft += 2
+//                                }
+//                            }
                         }
                     })
                     

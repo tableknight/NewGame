@@ -51,7 +51,7 @@ class OutfitStore: InnerHouse {
                                     sp._goodsList = []
                                     for i in 0...6 {
                                         let w = l.getWeaponById(id: i)
-                                        w.create(level:level)
+//                                        w.create(level:level)
                                         sp._goodsList.append(w)
                                     }
                                     sp.create()
@@ -76,23 +76,23 @@ class OutfitStore: InnerHouse {
                                     let l = Loot()
                                     sp._goodsList = []
                                     for i in 0...6 {
-                                        let w = RandomWeapon()
-                                        if i == 6 {
-                                            w._storePrice = 96
-                                        }
-                                        w.weaponId = i
-                                        w._name = "\(l.getWeaponById(id: i)._name)?"
-                                        sp._goodsList.append(w)
+//                                        let w = RandomWeapon()
+//                                        if i == 6 {
+//                                            w._storePrice = 96
+//                                        }
+//                                        w.weaponId = i
+//                                        w._name = "\(l.getWeaponById(id: i)._name)?"
+//                                        sp._goodsList.append(w)
                                     }
                                     sp.create()
                                     sp.hasBuyAction = true
                                     sp.buyAction = {
-                                        let item = sp._lastSelectedIcon as! SellingItemIcon
-                                        let r = item._displayItemType as! RandomWeapon
-                                        let i = r.weaponId
-                                        let wp = l.getWeaponById(id: i)
-                                        wp.create(level: Game.instance.char._level)
-                                        Game.instance.char.addProp(p: wp)
+//                                        let item = sp._lastSelectedIcon as! SellingItemIcon
+//                                        let r = item._displayItem as! RandomWeapon
+//                                        let i = r.weaponId
+//                                        let wp = l.getWeaponById(id: i)
+//                                        wp.create(level: Game.instance.char._level)
+//                                        Game.instance.char.addProp(p: wp)
                                     }
                                     stage.showPanel(sp)
                                 }
@@ -117,7 +117,7 @@ class OutfitStore: InnerHouse {
                                     sp._goodsList = []
                                     for i in 0...4 {
                                         let w = l.getArmorById(id: i)
-                                        w.create(level:level)
+//                                        w.create(level:level)
                                         sp._goodsList.append(w)
                                     }
                                     sp.create()
@@ -142,23 +142,23 @@ class OutfitStore: InnerHouse {
                                     let l = Loot()
                                     sp._goodsList = []
                                     for i in 0...3 {
-                                        let a = RandomArmor()
-                                        if i == 3 {
-                                            a._storePrice = 96
-                                        }
-                                        a.armorId = i
-                                        a._name = "\(l.getArmorById(id: i)._name)?"
-                                        sp._goodsList.append(a)
+//                                        let a = RandomArmor()
+//                                        if i == 3 {
+//                                            a._storePrice = 96
+//                                        }
+//                                        a.armorId = i
+//                                        a._name = "\(l.getArmorById(id: i)._name)?"
+//                                        sp._goodsList.append(a)
                                     }
                                     sp.create()
                                     sp.hasBuyAction = true
                                     sp.buyAction = {
                                         let item = sp._lastSelectedIcon as! SellingItemIcon
-                                        let r = item._displayItemType as! RandomArmor
-                                        let i = r.armorId
-                                        let ar = l.getArmorById(id: i)
-                                        ar.create(level: Game.instance.char._level)
-                                        Game.instance.char.addProp(p: ar)
+//                                        let r = item._displayItem as! RandomArmor
+//                                        let i = r.armorId
+//                                        let ar = l.getArmorById(id: i)
+//                                        ar.create(level: Game.instance.char._level)
+//                                        Game.instance.char.addProp(p: ar)
                                     }
                                     stage.showPanel(sp)
                                 }

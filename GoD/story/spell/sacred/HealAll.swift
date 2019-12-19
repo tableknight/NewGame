@@ -15,6 +15,7 @@ class HealAll: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.HealAll
         _name = "群体治疗"
         _quality = Quality.SACRED
         _description = "恢复所有己方单位25%的最大生命"

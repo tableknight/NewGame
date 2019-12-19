@@ -16,6 +16,7 @@ class ScreamLoud:Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.ScreamLoud
         _name = "震耳发溃"
         _description = "发出剧烈的怒吼，降低所有敌方目标30%护甲和30点命中，持续3回合"
         _quality = Quality.NORMAL
@@ -39,11 +40,11 @@ class ScreamLoud:Magical, Curse {
                             s._labelText = "S"
                             s._timeleft = 3
                             let atk = t.getAttack() * 0.3
-                            t._extensions.attack -= atk
-                            t._extensions.accuracy -= 30
+                            t._valueUnit._extensions.attack -= atk
+                            t._valueUnit._extensions.accuracy -= 30
                             s.timeupAction = {
-                                t._extensions.attack += atk
-                                t._extensions.accuracy += 30
+                                t._valueUnit._extensions.attack += atk
+                                t._valueUnit._extensions.accuracy += 30
                             }
                             t.addStatus(status: s)
                         }

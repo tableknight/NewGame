@@ -8,51 +8,25 @@
 
 import SpriteKit
 
-class ArmorInfo:SKSpriteNode, IPanelSize {
-//    func getDisplayNode() -> SKSpriteNode {
-//        return self
-//    }
-    
-    func getDisplayWidth() -> CGFloat {
-        return _displayWidth
-    }
-    
-    func getDisplayHeight() -> CGFloat {
-        return _displayHeight
-    }
+class ArmorInfo:SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         zPosition = MyStage.UI_TOPEST_Z
         
     }
     
-    private var _armor = Outfit()
-    var _displayWidth:CGFloat = 0
-    var _nameText = ""
-    var _speedText = ""
-    var _attrTexts = Array<String>()
-    var _markSpellName = ""
-    var _desText = ""
-    var _insSpellName = ""
-    var _priceText = ""
     func create(armor:Outfit) {
         _armor = armor
         let startX = cellSize * 0.25
         let startY = -cellSize * 0.25
         let gap:CGFloat = 6
         
-//        let i = SKSpriteNode(texture: Data.instance.inside_c.getCell(10, 0))
-//        i.position.x = startX
-//        i.position.y = startY - 12
-//        i.anchorPoint = CGPoint(x: 0, y: 0)
-//        addChild(i)
-        
         let name = Label()
         var nameText = armor._name
         if armor._quality == Quality.SACRED {
             nameText = armor._outfitName + " · " + armor._name
         }
-        name.text = "Lv.\(armor._level.toInt()) [\(nameText)]"
+        name.text = "Lv\(armor._level) [\(nameText)]"
         name.fontSize = 24
         name.fontColor = QualityColor.getColor(armor._quality)
         name.position.x = startX
@@ -60,45 +34,42 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
         addChild(name)
         _nameText = name.text!
         
-        var width:CGFloat = 100 + (nameText.count * 24).toFloat()
-        _displayWidth = width
+        _displayWidth = (name.text!.count.toFloat() - 3) * name.fontSize
         _displayHeight = cellSize
-        if width < cellSize * 3 {
-            width = cellSize * 3
+        if _displayWidth < cellSize * 3 {
+            _displayWidth = cellSize * 3
         }
         
-        if armor.isRandom {
-            _displayHeight = cellSize * 4
-            let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -_displayHeight), size: CGSize(width: width, height: _displayHeight)), cornerRadius: 4 )
-            bg.fillColor = UIColor.black
-            bg.lineWidth = 2
-            //        bg.glowWidth = 3
-            bg.strokeColor = UIColor.lightGray
-            _bg = bg
-            addChild(bg)
-            name.text = "[\(armor._name)??]"
-            name.fontColor = QualityColor.getColor(Quality.NORMAL)
-//            name.position.y = -cellSize * 0.75
-            
-            let des = Label()
-            des.text = "未鉴定的\(armor._name)"
-            des.fontSize = 12
-            des.fontColor = QualityColor.GOOD
-            des.align = "left"
-            des.position.x = startX
-            des.position.y = name.position.y - 25
-            addChild(des)
-            _displayHeight += 25
-            
-            return
-        }
+//        if armor.isRandom {
+//            _displayHeight = cellSize * 4
+//            let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -_displayHeight), size: CGSize(width: _displayWidth, height: _displayHeight)), cornerRadius: 4 )
+//            bg.fillColor = UIColor.black
+//            bg.lineWidth = 2
+//            //        bg.glowWidth = 3
+//            bg.strokeColor = UIColor.lightGray
+//            _bg = bg
+//            addChild(bg)
+//            name.text = "[\(armor._name)??]"
+//            name.fontColor = QualityColor.getColor(Quality.NORMAL)
+////            name.position.y = -cellSize * 0.75
+//
+//            let des = Label()
+//            des.text = "未鉴定的\(armor._name)"
+//            des.fontSize = 12
+//            des.fontColor = QualityColor.GOOD
+//            des.align = "left"
+//            des.position.x = startX
+//            des.position.y = name.position.y - 25
+//            addChild(des)
+//            _displayHeight += 25
+//
+//            return
+//        }
         
         var lastY = name.position.y - name.fontSize
-        if armor is Weapon {
-            let w = armor as! Weapon
+        if armor._attackSpeed > 0 {
             let spd = Label()
-            
-            let speedText = "\(w._attackSpeed)"
+            let speedText = "\(armor._attackSpeed)"
             var str = ""
             var i = 0
             for c in speedText {
@@ -138,17 +109,17 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             }
         }
         
-        if armor is MagicMark {
-            let spellName = Label()
-            let mark = armor as! MagicMark
-            spellName.text = "[\(mark._spell._name)]"
-            spellName.fontSize = 18
-            spellName.position.x = startX
-            spellName.position.y = lastY - gap
-            lastY = spellName.position.y - spellName.fontSize
-            _displayHeight += spellName.fontSize + gap
-            addChild(spellName)
-            _markSpellName = spellName.text!
+        if armor._type == Outfit.MagicMark {
+//            let spellName = Label()
+//            spellName.text = "[\(armor._spell._name)]"
+//            spellName.fontSize = 18
+//            spellName.position.x = startX
+//            spellName.position.y = lastY - gap
+//            spellName.fontColor = QualityColor.getColor(armor._spell._quality)
+//            lastY = spellName.position.y - spellName.fontSize
+//            _displayHeight += spellName.fontSize + gap
+//            addChild(spellName)
+//            _markSpellName = spellName.text!
         }
         
         if !armor._description.isEmpty {
@@ -165,9 +136,9 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             _displayHeight += des.fontSize + gap
             addChild(des)
             _desText = des.text!
-            let desWidth = _desText.count.toFloat() * 20
-            if desWidth > width {
-                _displayWidth = desWidth + 10
+            let desWidth = _desText.count.toFloat() * des.fontSize + cellSize * 0.5
+            if desWidth > _displayWidth {
+                _displayWidth = desWidth + cellSize * 0.25
             }
         }
         
@@ -184,15 +155,14 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
             addChild(spellName)
         }
         
-        if armor is Instrument {
-            let ins = armor as! Instrument
+        if armor._type == Outfit.Instrument {
             let spellName = Label()
             spellName.align = "left"
             spellName.position.x = startX
             spellName.position.y = lastY - gap
-            spellName.fontColor = QualityColor.getColor(ins._spell._quality)
+//            spellName.fontColor = QualityColor.getColor(armor._spell._quality)
             spellName.fontSize = 18
-            spellName.text = "[\(ins._spell._name)]"
+//            spellName.text = "[\(armor._spell._name)]"
             lastY = lastY - gap - 18
             _displayHeight += 30
             addChild(spellName)
@@ -239,6 +209,15 @@ class ArmorInfo:SKSpriteNode, IPanelSize {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    private var _armor = Outfit()
+    var _displayWidth:CGFloat = 0
+    var _nameText = ""
+    var _speedText = ""
+    var _attrTexts = Array<String>()
+    var _markSpellName = ""
+    var _desText = ""
+    var _insSpellName = ""
+    var _priceText = ""
     var _bg = SKShapeNode()
     var _displayHeight:CGFloat = 0
 }

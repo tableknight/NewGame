@@ -16,6 +16,7 @@ class Burn: Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.Burn
         isFire = true
         _name = "燃烧"
         _description = "点燃目标，如果目标已被点燃，则增加两层燃烧效果"

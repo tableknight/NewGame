@@ -16,6 +16,7 @@ class QuickHeal: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.QuickHeal
         _quality = Quality.GOOD
         targetEnemy = false
         _name = "快速治疗"

@@ -21,7 +21,7 @@ class Suvya:NPCBoss {
         _growth.strength = 1
         _growth.agility = 2
         _growth.intellect = 3
-        _spellsInuse = [Leading(), SunmmonStars(), ControlWind(), Thinking()]
+//        _spellsInuse = [Leading(), SunmmonStars(), ControlWind(), Thinking()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)
@@ -65,32 +65,32 @@ class SuvyaBattle: NPCBattle {
         es.append(t)
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let l = Loot()
-        
-        if getChange(400) {
-            let b = SpellBook()
-            b.spell = l.getRandomNormalSpell()
-            list.append(b)
-        }
-        if getChange(200) {
-            let b = SpellBook()
-            b.spell = l.getRandomGoodSpell()
-            list.append(b)
-        }
-        if getChange(100) {
-            let b = SpellBook()
-            b.spell = l.getRandomRareSpell()
-            list.append(b)
-        }
-        if getChange(50) {
-            let b = SpellBook()
-            b.spell = l.getRandomSacredSpell()
-            list.append(b)
-        }
-        return list
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let l = Loot()
+//        
+//        if getChange(400) {
+//            let b = SpellBook()
+//            b.spell = l.getRandomNormalSpell()
+//            list.append(b)
+//        }
+//        if getChange(200) {
+//            let b = SpellBook()
+//            b.spell = l.getRandomGoodSpell()
+//            list.append(b)
+//        }
+//        if getChange(100) {
+//            let b = SpellBook()
+//            b.spell = l.getRandomRareSpell()
+//            list.append(b)
+//        }
+//        if getChange(50) {
+//            let b = SpellBook()
+//            b.spell = l.getRandomSacredSpell()
+//            list.append(b)
+//        }
+//        return list
+//    }
     private func getChange(_ c:CGFloat) -> Bool {
         if _char._level > Suvya.LEVEL + 5 {
             return false
@@ -166,7 +166,7 @@ class Thinking: Magical {
                 c.showValue(value: h) {
                     completion()
                 }
-                c.intellectChange(value: 25)
+                c._valueUnit.intellectChange(value: 25)
             }
         }
     }

@@ -10,6 +10,7 @@ import SpriteKit
 class Vanguard:Passive {
     override init() {
         super.init()
+        _id = Spell.Vanguard
         _name = "急先锋"
         _description = "总是第一个出手"
         _quality = Quality.GOOD

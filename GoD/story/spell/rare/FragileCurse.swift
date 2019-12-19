@@ -16,6 +16,7 @@ class FragileCurse: Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.FragileCurse
         _name = "虚弱诅咒"
         _description = "降低目标100%基础护甲"
         _quality = Quality.RARE
@@ -33,9 +34,9 @@ class FragileCurse: Magical, Curse {
                     s._type = Status.FRAGILE
                     s._labelText = "W"
                     t.addStatus(status: s)
-                    t._extensions.defence -= t._unit._extensions.defence
+                    t._valueUnit._extensions.defence -= t._unit._extensions.defence
                     s.timeupAction = {
-                        t._extensions.defence += t._unit._extensions.defence
+                        t._valueUnit._extensions.defence += t._unit._extensions.defence
                     }
                     completion()
                 }

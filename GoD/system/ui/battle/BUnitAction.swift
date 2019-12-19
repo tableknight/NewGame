@@ -14,7 +14,7 @@ extension BUnit {
             return
         }
         _attackActing = true
-        if _unit._weapon is Bow {
+        if ifWeaponIs(Outfit.Bow) {
             actionShoot(completion: {
                 self._attackActing = false
                 completion()
@@ -87,7 +87,7 @@ extension BUnit {
             return
         }
         _attackedActing = true
-        if (isDefend || defend) && _battle._selectedSpell is Physical {
+        if (isDefend || defend) && _battle._selectedAction is Physical {
             actionDefead {
                 self._attackedActing = false
                 completion()
@@ -117,7 +117,7 @@ extension BUnit {
             self._attackedActing = false
             completion()
             let c = self._battle._curRole
-            if self.hasStatus(type: Status.ICE_GUARD) && c._unit.isClose() {
+            if self.hasStatus(type: Status.ICE_GUARD) && c.isClose() {
                 if Core().d5() {
                     c.showText(text: "SPEED -10")
                 }

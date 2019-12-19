@@ -11,6 +11,7 @@ class Bellicose: Passive {
     
     override init() {
         super.init()
+        _id = Spell.Bellicose
         _name = "战争之神"
         _description = "提升30%基础攻击力"
         _quality = Quality.NORMAL

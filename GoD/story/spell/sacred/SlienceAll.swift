@@ -15,6 +15,7 @@ class SilenceAll: Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.SilenceAll
         _name = "群体静默"
         _description = "对敌方所有单位释放诅咒术，令其有一定几率静默"
         _quality = Quality.SACRED

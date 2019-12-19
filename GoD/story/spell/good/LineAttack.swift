@@ -16,6 +16,7 @@ class LineAttack: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.LineAttack
         _name = "横扫千军"
         _description = "对目标同一行单位造成攻击55%的物理伤害"
         _rate = 0.55
@@ -48,6 +49,6 @@ class LineAttack: Physical {
         }
     }
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
     }
 }

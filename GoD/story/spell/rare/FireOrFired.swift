@@ -16,6 +16,7 @@ class FireOrFired: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.FireOrFired
         isFire = true
         _name = "玩火"
         _description = "对目标造成精神125%的火焰伤害或者燃烧自己25%当前生命值"
@@ -41,9 +42,9 @@ class FireOrFired: Magical {
         var chance = 50
         if c._unit is Character {
             let char = c._unit as! Character
-            if char._leftRing is ApprenticeRing || char._rightRing is ApprenticeRing {
-                chance = 40
-            }
+//            if char._leftRing is ApprenticeRing || char._rightRing is ApprenticeRing {
+//                chance = 40
+//            }
         }
         if chance < seed() {
             damage = c.getHp() * 0.25

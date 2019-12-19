@@ -17,6 +17,7 @@ class LightingFist:HandSkill {
     }
     override init() {
         super.init()
+        _id = Spell.LightingFist
         _name = "雷光拳"
         _description = "对目标造成敏捷185%的物理伤害，附带35%的雷电伤害，有一定几率降低目标10点雷抗"
         _quality = Quality.SACRED
@@ -39,7 +40,7 @@ class LightingFist:HandSkill {
                                 t.showText(text: "TR -10") {
                                     
                                 }
-                                t._elementalResistance.thunder -= 10
+                                t._valueUnit._elementalResistance.thunder -= 10
                             }
                         }
                         completion()

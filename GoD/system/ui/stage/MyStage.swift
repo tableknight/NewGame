@@ -93,8 +93,8 @@ class MyStage: SKSpriteNode {
             self.removeFromParent()
             let welcome = Welcome()
             welcome.create()
-            welcome._gameScene = Game.instance.scene
-            Game.instance.scene.addChild(welcome)
+            welcome._gameScene = Game.instance.gameScene
+            Game.instance.gameScene.addChild(welcome)
             return
         }
         _curScene.touch(touchPoint: touchPoint)
@@ -280,6 +280,9 @@ class MyStage: SKSpriteNode {
 //        showMenu()
     }
     func showPanel(_ panel:UIPanel) {
+        if cancelMove && !panel.isChild {
+            return
+        }
         panel.zPosition = MyStage.UI_PANEL_Z
         _curPanel = panel
         addChild(panel)
@@ -361,12 +364,14 @@ class MyStage: SKSpriteNode {
         dlg.yAxis = -cellSize * 2
         _curDialog = dlg
         action()
+        cancelMove = true
     }
     
     func removeDialog(dlg:Dialog) {
         dlg.removeFromParent()
         showUI()
         _curDialog = nil
+        cancelMove = false
     }
     func showSceneMask() {
         _sceneChangeMask.isHidden = false
@@ -377,7 +382,11 @@ class MyStage: SKSpriteNode {
         if !loaded {
             return
         }
+        if _curPanel != nil {
+            removePanel(_curPanel!)
+        }
         showSceneMask()
+        _messageNode.removeFromParent()
         _showingLabel.text = next._name
         _showingLabel.isHidden = false
         loaded = false

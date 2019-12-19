@@ -94,6 +94,7 @@ class MinionsList:UIPanel {
     func showMinionInfo(minion:Creature) {
         let rp = RolePanel()
         rp.create(unit: minion)
+        rp.isChild = true
         rp._parentPanel = self
         Game.instance.curStage.showPanel(rp)
         Game.instance.curStage.removePanel(self)

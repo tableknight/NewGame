@@ -36,18 +36,3 @@ struct Magic:Codable {
     var damage:CGFloat
     var resistance:CGFloat
 }
-struct Properties {
-    var level:CGFloat
-    var name:String
-    var race:Int
-    var exp:CGFloat
-    var expNext:CGFloat
-    var restPoint:CGFloat
-}
-struct SpellSlot {
-    var max:Int
-    var min:Int
-}
-struct Carrys {
-    var slot:Int
-}

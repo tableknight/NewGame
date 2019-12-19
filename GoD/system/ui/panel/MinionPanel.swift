@@ -56,7 +56,7 @@ class MinionPanel:SKSpriteNode {
         
         
     }
-    private var _minion = Creature()
+    private var _minion:Creature!
     func create(minion:Creature) {
         let char = minion
         _minion = minion
@@ -353,7 +353,7 @@ class MinionPanel:SKSpriteNode {
 //    }
     
     private func changeProperties(p:String) {
-        let char = _minion
+        let char = _minion!
         switch p {
         case "str":
             char.strengthChange(value: 1)

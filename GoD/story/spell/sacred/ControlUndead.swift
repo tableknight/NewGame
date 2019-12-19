@@ -16,6 +16,7 @@ class ControlUndead:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ControlUndead
         _name = "控制亡灵"
         _description = "有一定几率控制目标亡灵生物"
         _quality = Quality.SACRED
@@ -23,7 +24,7 @@ class ControlUndead:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let b = _battle!
+        let b = _battle
         _battle._curRole.actionCast {
             if t._unit._race == EvilType.RISEN {
                 t.actionDebuff {

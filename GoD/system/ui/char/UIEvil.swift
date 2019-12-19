@@ -22,7 +22,7 @@ class UIEvil: UIUnit {
         let char = Game.instance.char!
         var enemies = Array<Creature>()
         
-        let thisOne = sc.getMonsterByIndex(index: _thisType)
+        let thisOne = Creature(_thisType)
         if sc is BossRoad {
             thisOne.create(level: sc._level)
         } else {
@@ -37,7 +37,7 @@ class UIEvil: UIUnit {
         let enemyCount = nums.one() - 1
         if enemyCount > 0 {
             for _ in 1...enemyCount {
-                let e = sc.getMonsterByIndex(index: sc._monsterEnum.one())
+                let e = Creature(sc._monsterEnum.one())
                 let l = sc._level
                 if sc is BossRoad {
                     e.create(level: sc._level)
@@ -65,7 +65,7 @@ class UIEvil: UIUnit {
         b.battleStart()
     }
     var _evils = Array<Creature>()
-    var _thisType = -1
+    var _thisType = "-1"
     var defeatAction = {}
     var defeatedAction = {}
 }

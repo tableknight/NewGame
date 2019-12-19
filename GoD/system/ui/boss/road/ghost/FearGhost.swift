@@ -22,7 +22,7 @@ class FearGhost:Boss {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "FearGhost")
         _imgUrl = "FearGhost"
-        _spellsInuse = [DarkFall(), MessGhost(), SoulReaping(), SoulLash(), LifeDraw(), SoulSlay()]
+//        _spellsInuse = [DarkFall(), MessGhost(), SoulReaping(), SoulLash(), LifeDraw(), SoulSlay()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)
@@ -58,7 +58,7 @@ class Nightmare:BossMinion {
         _extensions.health *= 2
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [SoulLash(), SoulSlay(), Sacre()]
+//        _spellsInuse = [SoulLash(), SoulSlay(), Sacre()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

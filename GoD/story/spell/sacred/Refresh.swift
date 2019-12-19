@@ -16,6 +16,7 @@ class Refresh: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Refresh
         _name = "回溯"
         _description = "刷新其他技能的冷却时间"
         _quality = Quality.SACRED
@@ -30,7 +31,7 @@ class Refresh: Magical {
         _battle._curRole.mixed2(index: 13) {
             let ss = self._battle._curRole._unit._spellsInuse
             for s in ss {
-                s._timeleft = 0
+//                s._timeleft = 0
             }
             self._timeleft = 5
             self._battle.hideOrder()

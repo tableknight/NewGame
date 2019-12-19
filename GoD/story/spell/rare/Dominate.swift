@@ -10,6 +10,7 @@ import SpriteKit
 class Dominate: Passive {
     override init() {
         super.init()
+        _id = Spell.Dominate
         _name = "战场主宰"
         _description = "使自己的种族属性始终处于优势"
         _quality = Quality.RARE

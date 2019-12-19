@@ -13,7 +13,6 @@ class TallTree:UIItem {
         super.init(texture: texture, color: color, size: size)
         let tree = Game.instance.outside_b.getCell(5, 12, 1, 2)
         setTexture(tree)
-        _items = [0]
         _xSize = 1
         _ySize = 2
     }
@@ -28,7 +27,6 @@ class DeadTree:UIItem {
         super.init(texture: texture, color: color, size: size)
         let item = Game.instance.outside_b.getCell(4, 12)
         setTexture(item)
-        _items = [0]
         _xSize = 1
         _ySize = 1
     }
@@ -43,7 +41,6 @@ class Stump:UIItem {
         super.init(texture: texture, color: color, size: size)
         let item = Game.instance.outside_b.getCell(4, 11)
         setTexture(item)
-        _items = [0]
         _xSize = 1
         _ySize = 1
     }
@@ -58,7 +55,6 @@ class BigTree:UIItem {
         super.init(texture: texture, color: color, size: size)
         let item = Game.instance.outside_b.getCell(0, 15, 2, 2)
         setTexture(item)
-        _items = [0, 0]
         _xSize = 2
         _ySize = 2
     }

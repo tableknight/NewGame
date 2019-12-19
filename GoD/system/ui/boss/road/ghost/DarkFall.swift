@@ -17,7 +17,7 @@ class DarkFall: Magical {
         _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let ts = _battle._selectedTargets
         c.actionCast {
@@ -28,11 +28,11 @@ class DarkFall: Magical {
                         s._type = "_dark_fall"
                         s._timeleft = 3
                         s._labelText = "F"
-                        t._magical.damage -= 20
-                        t._magical.resistance -= 20
+                        t._valueUnit._magical.damage -= 20
+                        t._valueUnit._magical.resistance -= 20
                         s.timeupAction = {
-                            t._magical.damage += 20
-                            t._magical.resistance += 20
+                            t._valueUnit._magical.damage += 20
+                            t._valueUnit._magical.resistance += 20
                         }
                         t.addStatus(status: s)
                     }

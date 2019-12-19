@@ -10,6 +10,7 @@ import SpriteKit
 class WindAttack: Physical {
     override init() {
         super.init()
+        _id = Spell.WindAttack
         isClose = true
         _name = "顺风击"
         _description = "对目标造成攻击80%的物理伤害，对身后单位造成本次伤害的一半"
@@ -18,7 +19,7 @@ class WindAttack: Physical {
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         c.actionAttack {
             self.attack {
@@ -28,7 +29,7 @@ class WindAttack: Physical {
     }
     
     private func attack(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
@@ -61,7 +62,7 @@ class WindAttack: Physical {
     }
     
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
         
     }
     required init(from decoder: Decoder) throws {

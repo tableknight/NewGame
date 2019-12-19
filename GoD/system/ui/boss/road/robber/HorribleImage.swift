@@ -33,11 +33,11 @@ class HorribleImage: Magical {
                 status._timeleft = 3
                 let v1 = t._unit._extensions.spirit * 0.5
                 let v2 = t._unit._extensions.defence * 0.5
-                t._extensions.spirit -= v1
-                t._extensions.defence -= v2
+                t._valueUnit._extensions.spirit -= v1
+                t._valueUnit._extensions.defence -= v2
                 status.timeupAction = {
-                    t._extensions.spirit += v1
-                    t._extensions.defence += v2
+                    t._valueUnit._extensions.spirit += v1
+                    t._valueUnit._extensions.defence += v2
                 }
                 if !self.statusMissed(baseline: 55, target: t) {
                     t.stateSleepf() {

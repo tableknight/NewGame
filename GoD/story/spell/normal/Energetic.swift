@@ -11,6 +11,7 @@ class Energetic: Passive {
     
     override init() {
         super.init()
+        _id = Spell.Energetic
         _name = "精力充沛"
         _description = "提升20%基础精神"
         _quality = Quality.NORMAL

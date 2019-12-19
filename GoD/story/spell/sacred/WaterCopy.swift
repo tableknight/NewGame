@@ -16,6 +16,7 @@ class WaterCopy:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.WaterCopy
         _name = "水分身"
         _description = "召唤一个水分身，继承所有属性，无法攻击"
         _quality = Quality.SACRED
@@ -23,14 +24,14 @@ class WaterCopy:Magical {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = _battle._curRole
         c.actionCast {
             let copy = SummonUnit()
             copy._level = c._unit._level
             copy._img = c._unit._img
             
-            copy._spellsInuse = [NoAction()]
+//            copy._spellsInuse = [NoAction()]
             copy._extensions.health = c.getHealth()
             copy._extensions.hp = c.getHp()
             copy._extensions.defence = c._unit._extensions.defence
@@ -40,7 +41,7 @@ class WaterCopy:Magical {
             copy._extensions.avoid = c._unit._extensions.avoid
             copy._extensions.mind = c._unit._extensions.mind
             copy._elementalResistance.water = 50
-            copy._sensitive = c._unit._sensitive
+//            copy._sensitive = c._unit._sensitive
             copy._rhythm = 0
             copy._name = "水分身"
 //            copy.hasAction = false

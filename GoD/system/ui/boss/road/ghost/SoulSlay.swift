@@ -24,7 +24,7 @@ class SoulSlay: Physical {
         _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let t = b._selectedTarget!
         let damage = physicalDamage(t)

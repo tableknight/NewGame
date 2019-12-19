@@ -23,7 +23,7 @@ class UIItem:SKSpriteNode {
     
     var _xSize:Int = 1
     var _ySize:Int = 1
-    var _items = Array<Int>()
+    var _key = ""
     
     func triggerEvent() {
         
@@ -129,91 +129,3 @@ class PortalPrev:UIItem {
     }
 }
 
-class Gate:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.tiled_dungeons.getCell(11, 9, 3, 2))
-        _xSize = 3
-        _ySize = 2
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-//    override func triggerEvent() {
-//        let stage = Game.instance.curStage!
-////        let next = stage.getSceneById(id: seed(max: stage._sceneSize))
-////        next._level = stage._curScene._level + 1
-////        stage._scenes = [next]
-////        stage.switchScene(next: next)
-//        let sc = stage._curScene
-//
-//        let b = Battle()
-//
-//        var evs = Array<Creature>()
-//        var max = 6
-//        if Game.instance.char._dungeonLevel < 10 {
-//            max = 4
-//        }
-//        for _ in 1...max {
-//            let e = sc.getEvilById(seed(min: 0, max: 4))
-//            e.create(level: sc._level.toFloat())
-//            evs.append(e)
-//        }
-//        b.setEvils(evils: evs)
-//        let char = Game.instance.char!
-//        let roles = [char] + char.getReadyMinions()
-//
-//        b.setRoles(roles: roles)
-//        b.zPosition = UIStage.LAYER6
-//        b.battleStart()
-//        b.defeatAction = {
-//            let nextLevel = sc._level + 1
-//            let nextScene = stage.getSceneById(id: nextLevel)
-//            nextScene._level = nextLevel
-//            stage._scenes = [nextScene]
-//            stage.switchScene(next: nextScene)
-//            showMsg(text: "进入地下城第\(nextLevel)层。。")
-//            if char._dungeonLevel < nextLevel {
-//                char._dungeonLevel = nextLevel
-//            }
-//        }
-//        Game.instance.stage.addChild(b)
-//
-//        Game.instance.stage.hideUI()
-//        Game.instance.stage.hideScene()
-//    }
-    override func triggerEvent() {
-        
-//        let sc = Game.instance.curStage._curScene!
-        let char = Game.instance.char!
-        let enimies = Array<Creature>()
-        
-        let enemyCount = seed(min: 1, max: char._dungeonLevel < 10 ? 4 : 6)
-        for _ in 0...enemyCount {
-//            enimies.append(sc.getMonsterByIndex(index: sc._monsterEnum.one()))
-        }
-        
-        let b = Battle()
-        let roles = [char] + char.getReadyMinions()
-        b.setEnemyPart(minions: enimies)
-        b.setPlayerPart(roles: roles)
-        b.zPosition = MyStage.UI_TOPEST_Z
-        b.battleStart()
-        Game.instance.curStage.addBattle(b)
-//        b.defeatedAction = defeatedAction
-//        b.defeatAction = defeatAction
-        b.defeatAction = {
-//            let nextLevel = sc._level + 1
-//            let nextScene = stage.getSceneById(id: nextLevel)
-//            nextScene._level = nextLevel
-//            stage._scenes = [nextScene]
-//            stage.switchScene(next: nextScene)
-//            showMsg(text: "进入地下城第\(nextLevel)层。。")
-//            if char._dungeonLevel < nextLevel {
-//                char._dungeonLevel = nextLevel
-//            }
-        }
-    }
-}

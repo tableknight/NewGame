@@ -65,12 +65,12 @@ class AcientRoadSelection:UIPanel {
         createCloseButton()
         _pageSize = 16
         
-         _dungeonLevel  = Game.instance.char._dungeonLevel
         if Mode.showdungeonall {
-            _dungeonLevel = 99
+            _dungeonLevel = 40
+        } else {
+            _dungeonLevel  = Game.instance.char._dungeonLevel
         }
-//        if _dungeonLevel > _pageSize {
-//        }
+        
         createPageButtons()
         pageReload()
         _label.text = "双击选择前往的层数。"

@@ -18,6 +18,7 @@ class Immune: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Immune
         _tear = 1
         _name = "免疫"
         _description = "目标在本回合内，免疫所有控制和诅咒"

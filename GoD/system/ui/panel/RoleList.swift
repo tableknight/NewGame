@@ -32,7 +32,7 @@ class RoleList:UIPanel {
             }
         }
     }
-    func create(list:Array<Creature>) {
+    func create(list:Array<Unit>) {
         _listBox.zPosition = self.zPosition + 2
         addChild(_listBox)
         createCloseButton()
@@ -73,7 +73,7 @@ class RoleList:UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    private var _list = Array<Creature>()
+    private var _list = Array<Unit>()
     private var _listBox = SKSpriteNode()
     private var _curPageList = Array<RoleComponent>()
     var _lastSelected:RoleComponent?
@@ -95,7 +95,7 @@ class RoleComponent: SelectableComponent {
         super.init(coder: aDecoder)
     }
     
-    func create(unit:Creature) {
+    func create(unit:Unit) {
         _unit = unit
 //        _propertyLayer.zPosition = self.zPosition + 2
         
@@ -142,7 +142,7 @@ class RoleComponent: SelectableComponent {
     func reload() {
         _hpbar.setBar(value: _unit._extensions.hp / _unit._extensions.health)
     }
-    var _unit:Creature!
+    var _unit:Unit!
     private var _propertyLayer = SKSpriteNode()
     private var _hpbar:HBar!
 }

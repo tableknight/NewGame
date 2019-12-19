@@ -10,6 +10,7 @@ import SpriteKit
 class DragonBlood:Passive {
     override init() {
         super.init()
+        _id = Spell.DragonBlood
         _name = "龙族血统"
         _description = "有一定几率免疫火焰伤害"
         _quality = Quality.GOOD

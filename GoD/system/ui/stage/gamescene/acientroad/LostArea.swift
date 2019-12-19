@@ -10,8 +10,12 @@ import SpriteKit
 class LostArea: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [1,1,1,1,2,2,2,2,12,21,21,3,4,5,6,7,8,9]
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = [
+            Creature.BoneWitch,
+            Creature.RedEyeDemon,
+            Creature.DeadSpirit,
+            Creature.WasteWalker
+        ]
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
         _name = "失落荒地"
@@ -61,27 +65,27 @@ class LostArea: AcientRoad {
         return Game.instance.outside_b.getCell(5, 12, 1, 2)
     }
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
-        if Core().d2() {
-            super.addWall(x: x, y: y, item: item)
-        } else {
-            addItem(x: x, y: y, item: getItemByIndex(index: _itemEnum.one()))
-        }
+        super.addWall(x: x, y: y, item: item)
+//        if Core().d2() {
+//        } else {
+//            addItem(x: x, y: y, item: getItemByIndex(index: _itemEnum.one()))
+//        }
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return BoneWitch()
-        case 2:
-            return RedEyeDemon()
-        case 3:
-            return DeadSpirit()
-        case 4:
-            return WasteWalker()
-        default:
-            return WasteWalker()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return BoneWitch()
+//        case 2:
+//            return RedEyeDemon()
+//        case 3:
+//            return DeadSpirit()
+//        case 4:
+//            return WasteWalker()
+//        default:
+//            return WasteWalker()
+//        }
+//    }
 }
 class LostItem2:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -133,135 +137,136 @@ class LostItem13:UIItem {
         super.init(coder: aDecoder)
     }
 }
-class BoneWitch: Rizen {
-    override init() {
-        super.init()
-        _stars.strength = 1.0
-        _stars.stamina = 1.0
-        _stars.agility = 1.0
-        _stars.intellect = 2.8
-        _natural.strength = 10
-        _natural.stamina = 15
-        _natural.agility = 15
-        _natural.intellect = 24
-        _name = "白骨巫师"
-        _imgUrl = "bone_wizard"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell13()
-        _spellsInuse = [FireBreath()]
-        if _spellCount > 1 {
-            if d(baseRate: -45) {
-                _spellsInuse.append(Energetic())
-            }
-        }
-        if _spellCount > 2 {
-            if d(baseRate: -75) {
-                _spellsInuse.append(FireRain())
-            }
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class RedEyeDemon: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 1.0
-        _stars.stamina = 2.1
-        _stars.agility = 2.1
-        _stars.intellect = 0.6
-        _natural.strength = 21
-        _natural.stamina = 21
-        _natural.agility = 14
-        _natural.intellect = 12
-        _name = "红眼恶魔"
-        _imgUrl = "red_eye_demon"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell12()
-        if d8() {
-            _spellsInuse = [ChaosAttack()]
-        }
-        if _spellCount > 1 {
-            if d(baseRate: -65) {
-                _spellsInuse.append(MagicReflect())
-            }
-        }
-    }
-    override func create(level: CGFloat) {
-        super.create(level: level)
-        if _spellCount > 0 && aQuarter() {
-            _spellsInuse = [Strong()]
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class DeadSpirit: Rizen {
-    override init() {
-        super.init()
-        _stars.strength = 0.8
-        _stars.stamina = 1.0
-        _stars.agility = 2.2
-        _stars.intellect = 2.4
-        _natural.strength = 12
-        _natural.stamina = 21
-        _natural.agility = 16
-        _natural.intellect = 16
-        _name = "死灵"
-        _imgUrl = "dead_spirit"
-        _img = SKTexture(imageNamed: _imgUrl)
-        spell23()
-        if d4() {
-            _spellsInuse = [DeathStrike()]
-        }
-        if d(baseRate: -40) {
-            _spellsInuse.append(Energetic())
-        }
-        if _spellCount > 2 && d(baseRate: -65) {
-            _spellsInuse.append(BallLighting())
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class WasteWalker: Rizen {
-    override init() {
-        super.init()
-        _stars.strength = 2.2
-        _stars.stamina = 2.2
-        _stars.agility = 1
-        _stars.intellect = 0.4
-        _natural.strength = 12
-        _natural.stamina = 25
-        _natural.agility = 19
-        _natural.intellect = 19
-        _name = "荒地行者"
-        _imgUrl = "waste_walker"
-        _img = SKTexture(imageNamed: _imgUrl)
-        _spellCount = 2
-        if d4() {
-            _spellsInuse = [Cruel()]
-        }
-        if d(baseRate: -55) {
-            _spellsInuse.append(Sacrifice())
-        }
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
+//
+//class BoneWitch: Rizen {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1.0
+//        _stars.stamina = 1.0
+//        _stars.agility = 1.0
+//        _stars.intellect = 2.8
+//        _natural.strength = 10
+//        _natural.stamina = 15
+//        _natural.agility = 15
+//        _natural.intellect = 24
+//        _name = "白骨巫师"
+//        _imgUrl = "bone_wizard"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell13()
+////        _spellsInuse = [FireBreath()]
+////        if _spellCount > 1 {
+////            if d(baseRate: -45) {
+////                _spellsInuse.append(Energetic())
+////            }
+////        }
+////        if _spellCount > 2 {
+////            if d(baseRate: -75) {
+////                _spellsInuse.append(FireRain())
+////            }
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class RedEyeDemon: Demon {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1.0
+//        _stars.stamina = 2.1
+//        _stars.agility = 2.1
+//        _stars.intellect = 0.6
+//        _natural.strength = 21
+//        _natural.stamina = 21
+//        _natural.agility = 14
+//        _natural.intellect = 12
+//        _name = "红眼恶魔"
+//        _imgUrl = "red_eye_demon"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell12()
+////        if d8() {
+////            _spellsInuse = [ChaosAttack()]
+////        }
+////        if _spellCount > 1 {
+////            if d(baseRate: -65) {
+////                _spellsInuse.append(MagicReflect())
+////            }
+////        }
+//    }
+//    override func create(level: CGFloat) {
+//        super.create(level: level)
+//        if _spellCount > 0 && aQuarter() {
+////            _spellsInuse = [Strong()]
+//        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class DeadSpirit: Rizen {
+//    override init() {
+//        super.init()
+//        _stars.strength = 0.8
+//        _stars.stamina = 1.0
+//        _stars.agility = 2.2
+//        _stars.intellect = 2.4
+//        _natural.strength = 12
+//        _natural.stamina = 21
+//        _natural.agility = 16
+//        _natural.intellect = 16
+//        _name = "死灵"
+//        _imgUrl = "dead_spirit"
+//        _img = SKTexture(imageNamed: _imgUrl)
+////        spell23()
+////        if d4() {
+////            _spellsInuse = [DeathStrike()]
+////        }
+////        if d(baseRate: -40) {
+////            _spellsInuse.append(Energetic())
+////        }
+////        if _spellCount > 2 && d(baseRate: -65) {
+////            _spellsInuse.append(BallLighting())
+////        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class WasteWalker: Rizen {
+//    override init() {
+//        super.init()
+//        _stars.strength = 2.2
+//        _stars.stamina = 2.2
+//        _stars.agility = 1
+//        _stars.intellect = 0.4
+//        _natural.strength = 12
+//        _natural.stamina = 25
+//        _natural.agility = 19
+//        _natural.intellect = 19
+//        _name = "荒地行者"
+//        _imgUrl = "waste_walker"
+//        _img = SKTexture(imageNamed: _imgUrl)
+//        _spellCount = 2
+//        if d4() {
+////            _spellsInuse = [Cruel()]
+//        }
+//        if d(baseRate: -55) {
+////            _spellsInuse.append(Sacrifice())
+//        }
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}

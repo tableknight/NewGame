@@ -13,7 +13,7 @@ class Dungeon: MyScene {
         let oa4 = Game.instance.dungeon_a4
 //        let so4 = Game.instance.sf_outside_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -38,7 +38,10 @@ class Dungeon: MyScene {
                 boss.removeFromParent()
             }
             return true
-        } else if cell == CELL_BOSS {
+        } else if cell == CELL_HERB && nextPoint.x == point.x && nextPoint.y == point.y {
+            let item = getNextCellItem(x: nextX, y: nextY)
+            self._mapMatrix[nextY][nextX] = self.CELL_EMPTY
+            takeHerb(item)
             return true
         }
         return false
@@ -52,48 +55,48 @@ class Dungeon: MyScene {
         _visiblePoints = findVisiblePoints()
         createTowers()
         if seed() < 10 {
-            let tear = TheWitchsTear()
-            tear._count = seed(min: 5, max: 11)
-            tear.countless = false
-            _goodsList = [tear]
-//            _whichItem = [true]
-//            _mixedItemMoney = [false]
-            let count = seed(min: 1, max: 3)
-            let l = Loot()
-            for _ in 1...count {
-                let sb = SpellBook()
-                sb.spell = l.getRandomSacredSpell()
-                sb._storePrice = 68
-                sb._priceType = 1
-//                _whichItem.append(false)
-//                _mixedItemMoney.append(true)
-                _goodsList.append(sb)
-            }
-            if seed() < 50 {
-                let expBook = ExpBook()
-                expBook._count = seed(min: 1, max: 4)
-                _goodsList.append(expBook)
-            }
-            if seed() < 75 {
-                let gp = GiantPotion()
-                gp._count = seed(min: 1, max: 5)
-                _goodsList.append(gp)
-            }
-            if seed() < 25 {
-                let ps = PsychicScroll()
-                ps._count = 1
-                _goodsList.append(ps)
-            }
-            if seed() < 35 {
-                let ps = GodTownScroll()
-                ps._count = seed(min: 1, max: 3)
-                _goodsList.append(ps)
-            }
-            if seed() < 35 {
-                let ps = DeathTownScroll()
-                ps._count = seed(min: 1, max: 3)
-                _goodsList.append(ps)
-            }
+//            let tear = TheWitchsTear()
+//            tear._count = seed(min: 5, max: 11)
+//            tear.countless = false
+//            _goodsList = [tear]
+////            _whichItem = [true]
+////            _mixedItemMoney = [false]
+//            let count = seed(min: 1, max: 3)
+//            let l = Loot()
+//            for _ in 1...count {
+//                let sb = SpellBook()
+//                sb.spell = l.getRandomSacredSpell()
+//                sb._storePrice = 68
+//                sb._priceType = 1
+////                _whichItem.append(false)
+////                _mixedItemMoney.append(true)
+//                _goodsList.append(sb)
+//            }
+//            if seed() < 50 {
+//                let expBook = ExpBook()
+//                expBook._count = seed(min: 1, max: 4)
+//                _goodsList.append(expBook)
+//            }
+//            if seed() < 75 {
+//                let gp = GiantPotion()
+//                gp._count = seed(min: 1, max: 5)
+//                _goodsList.append(gp)
+//            }
+//            if seed() < 25 {
+//                let ps = PsychicScroll()
+//                ps._count = 1
+//                _goodsList.append(ps)
+//            }
+//            if seed() < 35 {
+//                let ps = GodTownScroll()
+//                ps._count = seed(min: 1, max: 3)
+//                _goodsList.append(ps)
+//            }
+//            if seed() < 35 {
+//                let ps = DeathTownScroll()
+//                ps._count = seed(min: 1, max: 3)
+//                _goodsList.append(ps)
+//            }
             createSeller()
         }
         createBoss()
@@ -149,21 +152,40 @@ class Dungeon: MyScene {
             _mapMatrix.append(row)
         }
     }
+    internal var _herbCount = 0
     internal func addWallCell(x:CGFloat, y:CGFloat, texture:SKTexture) {
         let sd = seed()
         let item = UIItem()
-        if sd < 8 {
-            item.setTexture(getHerb())
+        if sd < 6 && _herbCount < 5 {
+            let herb = _herbs.one()
+            item._key = herb
+            let data = ItemData.data[_herbs.one()]!
+            let t = Game.instance.outside_b.getCell(data.imgX, data.imgY)
+            item.setTexture(t)
             addWall(x: x, y: y, item: item)
             _mapMatrix[y.toInt()][x.toInt()] = CELL_HERB
+            _herbCount += 1
         } else {
             item.setTexture(texture)
             addWall(x: x, y: y, item: item)
             _mapMatrix[y.toInt()][x.toInt()] = CELL_ITEM
         }
     }
-    internal func getHerb() -> SKTexture {
-        return DrangonRoot.IMAGE
+    var _herbs = [Item.Caesalpinia, Item.Curium, Item.DragonRoot, Item.SkyAroma, Item.PanGrass]
+    internal func takeHerb(_ item:UIItem) {
+        Game.instance.curStage.cancelMove = true
+        _role.recovery1f()
+        
+        setTimeout(delay: 2, completion: {
+            let herb = Item(item._key)
+            herb._count = self.seed(min: 1, max: 4)
+            Game.instance.char.addItem(herb)
+            showMsg(text: "你获得了[\(herb._name)]x\(herb._count)")
+            item.removeFromParent()
+            Game.instance.curStage.cancelMove = false
+        })
+        
+        
     }
     internal func createPortals() {
         let fromIndex = seed(max: _visiblePoints.count)
@@ -386,20 +408,20 @@ class Dungeon: MyScene {
         }
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return BoneWitch()
-        case 2:
-            return RedEyeDemon()
-        case 3:
-            return DeadSpirit()
-        case 4:
-            return WasteWalker()
-        default:
-            return WasteWalker()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return BoneWitch()
+//        case 2:
+//            return RedEyeDemon()
+//        case 3:
+//            return DeadSpirit()
+//        case 4:
+//            return WasteWalker()
+//        default:
+//            return WasteWalker()
+//        }
+//    }
     internal var _bossIndex = 0
     internal func getBossByIndex() -> Battle {
         if 1 == _bossIndex {
@@ -472,6 +494,7 @@ class MapWall:UIItem {
         super.init(coder: aDecoder)
     }
     var wallTexture:SKTexture!
+    
 }
 
 protocol InnerMaze {

@@ -11,6 +11,7 @@ class ChaosCore: Passive {
     static let VALUE:CGFloat = 25
     override init() {
         super.init()
+        _id = Spell.ChaosCore
         _name = "浩劫之心"
         _description = "提升25点复仇"
         _quality = Quality.NORMAL

@@ -16,6 +16,7 @@ class MagicConvert: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.MagicConvert
         _cooldown = 2
         _quality = Quality.SACRED
         _name = "法术吸收"

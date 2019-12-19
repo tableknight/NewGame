@@ -11,6 +11,7 @@ class Reborn: Passive {
     
     override init() {
         super.init()
+        _id = Spell.Reborn
         _quality = Quality.SACRED
         _name = "重生"
         _description = "行动结束后恢复10%最大生命"
@@ -20,9 +21,9 @@ class Reborn: Passive {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         _rate = 0.1
-        if c.soulstoneIs(HeartOfTarrasque.EFFECTION) {
-            _rate = 0.2
-        }
+//        if c.soulstoneIs(HeartOfTarrasque.EFFECTION) {
+//            _rate = 0.2
+//        }
 
         let h = c.getHealth() * _rate
         c.showValue(value: h) {

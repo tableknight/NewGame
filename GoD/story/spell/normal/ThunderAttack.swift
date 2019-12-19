@@ -17,6 +17,7 @@ class ThunderAttack: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ThunderAttack
         isThunder = true
         _name = "闪电"
         _description = "对目标造成精神80%的雷电伤害，降低目标10点雷电抗性"
@@ -57,7 +58,7 @@ class ThunderAttack: Magical {
                         t.showText(text: "TR -10") {
                             completion()
                         }
-                        t._elementalResistance.thunder -= 10
+                        t._valueUnit._elementalResistance.thunder -= 10
                     }
                 }
             }

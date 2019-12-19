@@ -9,7 +9,7 @@
 import SpriteKit
 extension BUnit {
     func getSpirit() -> CGFloat {
-        var spirit = _unit._extensions.spirit + _extensions.spirit
+        var spirit = _unit._extensions.spirit + _valueUnit._extensions.spirit
         
         if hasSpell(spell: Energetic()) {
             if spirit > 0 {
@@ -41,21 +41,21 @@ extension BUnit {
             val += 50
         }
         
-        return val + _elementalPower.fire + _elemental.damage
+        return val + _valueUnit._elementalPower.fire + _valueUnit._elemental.damage
     }
     func getWaterPower() -> CGFloat {
         var val = _unit._elementalPower.water
         if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
-        return val + _elementalPower.water + _elemental.damage
+        return val + _valueUnit._elementalPower.water + _valueUnit._elemental.damage
     }
     func getThunderPower() -> CGFloat {
         var val = _unit._elementalPower.thunder
         if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
-        return val + _elementalPower.thunder + _elemental.damage
+        return val + _valueUnit._elementalPower.thunder + _valueUnit._elemental.damage
     }
     func getFireResistance() -> CGFloat {
         var val = _unit._elementalResistance.fire
@@ -70,49 +70,49 @@ extension BUnit {
             val += 50
         }
         
-        return val + _elementalResistance.fire + _elemental.resistance
+        return val + _valueUnit._elementalResistance.fire + _valueUnit._elemental.resistance
     }
     func getWaterResistance() -> CGFloat {
         var val = _unit._elementalResistance.water
         if _unit is Character && _stage.hasTowerStatus(status: WaterEnerge()) {
             val += 50
         }
-        return val + _elementalResistance.water + _elemental.resistance
+        return val + _valueUnit._elementalResistance.water + _valueUnit._elemental.resistance
     }
     func getThunderResistance() -> CGFloat {
         var val = _unit._elementalResistance.thunder
         if _unit is Character && _stage.hasTowerStatus(status: ThunderEnerge()) {
             val += 50
         }
-        return val + _elementalResistance.thunder + _elemental.resistance
+        return val + _valueUnit._elementalResistance.thunder + _valueUnit._elemental.resistance
     }
     
     func getMagicalDamage() -> CGFloat {
         let val = _unit._magical.damage
         
-        return val + _magical.damage
+        return val + _valueUnit._magical.damage
     }
     
     func getMagicalResistance() -> CGFloat {
         let val = _unit._magical.resistance
         
-        return val + _magical.resistance
+        return val + _valueUnit._magical.resistance
     }
     
     func getPhysicalDamage() -> CGFloat {
         let val = _unit._physical.damage
         
-        return val + _physical.damage
+        return val + _valueUnit._physical.damage
     }
     
     func getPhysicalResistance() -> CGFloat {
         let val = _unit._physical.resistance
         
-        return val + _physical.resistance
+        return val + _valueUnit._physical.resistance
     }
     
     func getAccuracy() -> CGFloat {
-        var acc = _unit._extensions.accuracy + _extensions.accuracy
+        var acc = _unit._extensions.accuracy + _valueUnit._extensions.accuracy
         if hasSpell(spell: BargeAbout()) {
             acc -= 100
         }
@@ -128,7 +128,7 @@ extension BUnit {
         return acc
     }
     func getAvoid() -> CGFloat {
-        var avd = _unit._extensions.avoid + _extensions.avoid
+        var avd = _unit._extensions.avoid + _valueUnit._extensions.avoid
         if hasSpell(spell: DancingOnIce()) {
             avd += 100
         }
@@ -139,10 +139,10 @@ extension BUnit {
         return avd
     }
     func getSpeed() -> CGFloat {
-        var speed = _unit._extensions.speed + _extensions.speed
-        if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
-            speed += 50
-        }
+        var speed = _unit._extensions.speed + _valueUnit._extensions.speed
+//        if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
+//            speed += 50
+//        }
         return speed
     }
     func getAttack() -> CGFloat {
@@ -150,7 +150,7 @@ extension BUnit {
         if hasSpell(spell: MagicSword()) {
             return getSpirit()
         }
-        var atk = _unit._extensions.attack + _extensions.attack
+        var atk = _unit._extensions.attack + _valueUnit._extensions.attack
         if hasSpell(spell: OnePunch()) {
             atk += getDefence()
         }
@@ -163,16 +163,16 @@ extension BUnit {
         }
         if _unit is Character {
             let char = _unit as! Character
-            if char._weapon is BloodBlade {
-                let rate = getHp() / getHealth()
-                let plus = char._weapon!.getAttack() * (1 - rate)
-                atk += plus
-            }
+//            if char._weapon is BloodBlade {
+//                let rate = getHp() / getHealth()
+//                let plus = char._weapon!.getAttack() * (1 - rate)
+//                atk += plus
+//            }
         }
         return atk
     }
     func getDefence() -> CGFloat {
-        var def = _unit._extensions.defence + _extensions.defence
+        var def = _unit._extensions.defence + _valueUnit._extensions.defence
         if hasSpell(spell: DancingOnIce()) {
             return 0
         }
@@ -196,7 +196,7 @@ extension BUnit {
         return def
     }
     func getCritical() -> CGFloat {
-        var ctl = _unit._extensions.critical + _extensions.critical
+        var ctl = _unit._extensions.critical + _valueUnit._extensions.critical
         if hasSpell(spell: BloodThirsty()) {
             ctl += _unit._level
         }
@@ -223,24 +223,24 @@ extension BUnit {
         return ctl
     }
     func getStrength() -> CGFloat {
-        let val = _unit._mains.strength + _mains.strength
+        let val = _unit._mains.strength + _valueUnit._mains.strength
         return val
     }
     func getStamina() -> CGFloat {
-        let val = _unit._mains.stamina + _mains.stamina
+        let val = _unit._mains.stamina + _valueUnit._mains.stamina
         return val
     }
     func getAgility() -> CGFloat {
-        let val = _unit._mains.agility + _mains.agility
+        let val = _unit._mains.agility + _valueUnit._mains.agility
         return val
     }
     func getIntellect() -> CGFloat {
-        let val = _unit._mains.intellect + _mains.intellect
+        let val = _unit._mains.intellect + _valueUnit._mains.intellect
         return val
     }
     
     func getMind() -> CGFloat {
-        var mind = _unit._extensions.mind + _extensions.mind
+        var mind = _unit._extensions.mind + _valueUnit._extensions.mind
         if _unit is Character && _stage.hasTowerStatus(status: MindPower()) {
             mind += 25
         }
@@ -252,26 +252,26 @@ extension BUnit {
     }
     
     func getDestroy() -> CGFloat {
-        return _unit._extensions.destroy + _extensions.destroy
+        return _unit._extensions.destroy + _valueUnit._extensions.destroy
     }
     
     func getBreak() -> CGFloat {
         let val = _unit._break
-        return val + _break
+        return val + _valueUnit._break
     }
     
     func getHp() -> CGFloat {
         return _unit._extensions.hp
     }
     func getHealth() -> CGFloat {
-        return _unit._extensions.health + _extensions.health
+        return _unit._extensions.health + _valueUnit._extensions.health
     }
     func getRevenge() -> CGFloat {
-        var val = _unit._revenge + _revenge
-        if hasSpell(spell: ChaosCore()) {
-            val += ChaosCore.VALUE
-        }
-        return val + _revenge
+        var val = _unit._revenge
+//        if hasSpell(spell: ChaosCore()) {
+//            val += ChaosCore.VALUE
+//        }
+        return val + _valueUnit._revenge
     }
     func getLucky() -> CGFloat {
         var val = _unit._lucky
@@ -287,8 +287,8 @@ extension BUnit {
     }
     
     func getRace() -> Int {
-        if _race != -1 {
-            return _race
+        if _valueUnit._race != -1 {
+            return _valueUnit._race
         }
         
         return _unit._race
@@ -299,15 +299,15 @@ extension BUnit {
         if hasSpell(spell: AsShadow()) {
             val += 10
         }
-        return val + _rhythm
+        return val + _valueUnit._rhythm
     }
     func getChaos() -> CGFloat {
         let val = _unit._chaos
-        return val + _chaos
+        return val + _valueUnit._chaos
     }
     func getSensitive() -> Int {
-        let val = _unit._sensitive
-        return val + _sensitive
+        let val = (_unit as! Creature)._sensitive
+        return val
     }
 }
 

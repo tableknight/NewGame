@@ -55,11 +55,11 @@ class IberisBattle: BossBattle {
                     _roleAll.append(unit)
                     all.remove(at: all.firstIndex(of: unit)!)
                 } else {
-                    if nil != unit._unit._weapon {
-                        unit._speed += unit.getSpeed() * unit._unit._weapon!._attackSpeed
-                    } else {
-                        unit._speed += unit.getSpeed()
-                    }
+//                    if nil != unit._unit._weapon {
+//                        unit._speed += unit.getSpeed() * unit._unit._weapon!._attackSpeed
+//                    } else {
+//                        unit._speed += unit.getSpeed()
+//                    }
                 }
             }
         }
@@ -84,50 +84,50 @@ class IberisBattle: BossBattle {
             completion()
         }
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 35 {
-            let i = IberisHand()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 30 {
-            let i = DeepCold()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = TrueLie()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = FireMark()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = MoltenFire()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = LavaCrystal()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Iberis.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 35 {
+//            let i = IberisHand()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 30 {
+//            let i = DeepCold()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = TrueLie()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = FireMark()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = MoltenFire()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = LavaCrystal()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Iberis.LEVEL)
+//        return list + l.getList()
+//    }
 }
 
 class FlameAttack: Physical, CloseSkill {
@@ -173,7 +173,7 @@ class FlameAttack: Physical, CloseSkill {
     }
     
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
     }
 }
 
@@ -238,19 +238,19 @@ class ElementPowerUp:Magical {
             s._timeleft = 5
             s._type = "element_power_up"
             c.addStatus(status: s)
-            c._elementalPower.fire += 50
-            c._elementalPower.thunder += 50
-            c._elementalPower.water += 50
-            c._elementalResistance.fire += 50
-            c._elementalResistance.water += 50
-            c._elementalResistance.thunder += 50
+            c._valueUnit._elementalPower.fire += 50
+            c._valueUnit._elementalPower.thunder += 50
+            c._valueUnit._elementalPower.water += 50
+            c._valueUnit._elementalResistance.fire += 50
+            c._valueUnit._elementalResistance.water += 50
+            c._valueUnit._elementalResistance.thunder += 50
             s.timeupAction = {
-                c._elementalPower.fire -= 50
-                c._elementalPower.thunder -= 50
-                c._elementalPower.water -= 50
-                c._elementalResistance.fire -= 50
-                c._elementalResistance.water -= 50
-                c._elementalResistance.thunder -= 50
+                c._valueUnit._elementalPower.fire -= 50
+                c._valueUnit._elementalPower.thunder -= 50
+                c._valueUnit._elementalPower.water -= 50
+                c._valueUnit._elementalResistance.fire -= 50
+                c._valueUnit._elementalResistance.water -= 50
+                c._valueUnit._elementalResistance.thunder -= 50
             }
             c.cure1f() {
                 completion()

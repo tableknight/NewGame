@@ -14,8 +14,7 @@ class Welcome: SKSpriteNode {
             self.removeFromParent()
             let sd = SelectDocument()
             sd.create()
-            _gameScene.addChild(sd)
-            sd._gameScene = _gameScene
+            Game.instance.gameScene.addChild(sd)
             return
         }
     }

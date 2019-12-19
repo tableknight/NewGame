@@ -21,7 +21,7 @@ class Sumahl:Boss {
         _level = Sumahl.LEVEL
         _img = SKTexture(imageNamed: "Sumahl")
         _imgUrl = "Sumahl"
-        _spellsInuse = [MindIntervene(), HealAll(), SilenceAll()]
+//        _spellsInuse = [MindIntervene(), HealAll(), SilenceAll()]
     }
     override func create(level: CGFloat) {
         
@@ -52,7 +52,7 @@ class SumahlServant1:BossMinion {
         _growth.intellect = 1.6
         levelTo(level: level)
         
-        _spellsInuse = [HolySacrifice()]
+//        _spellsInuse = [HolySacrifice()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -75,7 +75,7 @@ class SumahlServant2:BossMinion {
         _growth.intellect = 2.6
         levelTo(level: level)
         
-        _spellsInuse = [LifeFlow()]
+//        _spellsInuse = [LifeFlow()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

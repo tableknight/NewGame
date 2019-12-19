@@ -16,6 +16,7 @@ class Steal: HandSkill {
     }
     override init() {
         super.init()
+        _id = Spell.Steal
         _name = "行窃"
         _description = "对目标和自己造成敏捷50%的物理伤害，或者偷取目标1防御，1力量，1敏捷，1智力"
         _quality = Quality.SACRED
@@ -50,14 +51,14 @@ class Steal: HandSkill {
                         })
                         
                     })
-                    t.strengthChange(value: -1)
-                    t.staminaChange(value: -1)
-                    t.agilityChange(value: -1)
-                    t.intellectChange(value: -1)
-                    c.strengthChange(value: 1)
-                    c.staminaChange(value: 1)
-                    c.agilityChange(value: 1)
-                    c.intellectChange(value: 1)
+                    t._valueUnit.strengthChange(value: -1)
+                    t._valueUnit.staminaChange(value: -1)
+                    t._valueUnit.agilityChange(value: -1)
+                    t._valueUnit.intellectChange(value: -1)
+                    c._valueUnit.strengthChange(value: 1)
+                    c._valueUnit.staminaChange(value: 1)
+                    c._valueUnit.agilityChange(value: 1)
+                    c._valueUnit.intellectChange(value: 1)
                 }
             }
         }

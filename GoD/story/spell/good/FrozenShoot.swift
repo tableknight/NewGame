@@ -16,6 +16,7 @@ class FrozenShoot: Physical, BowSkill {
     }
     override init() {
         super.init()
+        _id = Spell.FrozenShoot
         _quality = Quality.GOOD
         isWater = true
         isClose = false

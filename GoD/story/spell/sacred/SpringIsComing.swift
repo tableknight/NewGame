@@ -16,6 +16,7 @@ class SpringIsComing:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.SpringIsComing
         _name = "春暖花开"
         _description = "在目标体内种下一颗种子，使目标行动前恢复最大生命的10%，持续3回合开花，开花后的一回合恢复最大生命的25%"
         _quality = Quality.SACRED

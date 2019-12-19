@@ -51,6 +51,7 @@ class BUnit: SKSpriteNode {
     var _avoidActing = false
     var _attackActing = false
     var _attackedActing = false
+    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _stage = Game.instance.curStage
@@ -208,12 +209,12 @@ class BUnit: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    var _unit:Creature = Creature()
+    var _unit:Unit!
     var _levelLabel = Label()
-    func setUnit(unit:Creature) -> Void {
+    func setUnit(unit:Unit) -> Void {
         _unit = unit
 //        _speed = unit._extensions.speed
-        _levelLabel = Label("lv.\(unit._level.toInt())\(unit._name)", 0, -_charSize, QualityColor.getColor(unit._quality))
+        _levelLabel = Label("Lv\(unit._level.toInt())\(unit._name)", 0, -_charSize, QualityColor.getColor(quality))
         _levelLabel.zPosition = 71
         _levelLabel.fontSize = 14
         _levelLabel.isHidden = true
@@ -221,15 +222,22 @@ class BUnit: SKSpriteNode {
         addChild(_levelLabel)
         _charTexture = unit._img
         
-        if _unit._weapon?._effection == ElementalSword.EFFECTION && !hasSpell(spell: ElementMaster()) {
-            _spellsInBattle.append(ElementMaster())
-        }
-        if _unit is Character {
-            let c = _unit as! Character
-            if c._shield?._effection == Faceless.EFFECTION {
-                _spellsInBattle.append(FacelessSpell())
+        for s in unit._spellsInuse + unit._spellsHidden {
+            let spell = Loot.getSpellById(s)
+            if spell._id != -1 {
+                spells.append(spell)
             }
         }
+        
+//        if _unit._weapon?._effection == ElementalSword.EFFECTION && !hasSpell(spell: ElementMaster()) {
+//            _spellsInBattle.append(ElementMaster())
+//        }
+//        if _unit is Character {
+//            let c = _unit as! Character
+//            if c._shield?._effection == Faceless.EFFECTION {
+//                _spellsInBattle.append(FacelessSpell())
+//            }
+//        }
         
 //        if hasSpell(spell: TruePower()) {
 //            strengthChange(value: Game.instance.char._mains.strength * 0.1)
@@ -244,6 +252,27 @@ class BUnit: SKSpriteNode {
 //            agilityChange(value: SharpStone.VALUE)
 //        }
         
+    }
+    var quality:Int
+    {
+        get {
+            if _unit is Creature {
+                return (_unit as! Creature)._quality
+            }
+            return Quality.NORMAL
+        }
+    }
+    var seat:String
+    {
+        get {
+            return _unit._seat
+        }
+        set {
+            _unit._seat = newValue
+        }
+    }
+    func isClose() -> Bool {
+        return true
     }
     func setImg(img:SKTexture) {
         _charNode.texture = img
@@ -427,21 +456,21 @@ class BUnit: SKSpriteNode {
         selectable = true
     }
     func markDeathGod() -> Bool {
-        if _unit is Character {
-            let char = _unit as! Character
-            if char._magicMark is MarkOfDeathGod {
-                return true
-            }
-        }
+//        if _unit is Character {
+//            let char = _unit as! Character
+//            if char._magicMark is MarkOfDeathGod {
+//                return true
+//            }
+//        }
         return false
     }
     func markOfHeaven(value:CGFloat) -> Bool {
         if value < 0 && _battle._curRole._unit._race == EvilType.DEMON {
             if _unit is Character {
                 let char = _unit as! Character
-                if char._magicMark is MarkOfHeaven {
-                    return true
-                }
+//                if char._magicMark is MarkOfHeaven {
+//                    return true
+//                }
             }
         }
         return false
@@ -462,21 +491,21 @@ class BUnit: SKSpriteNode {
     func shieldFrancisFace() -> Bool {
         if _unit is Character {
             let char = _unit as! Character
-            if char._shield is FrancisFace {
-                return true
-            }
+//            if char._shield is FrancisFace {
+//                return true
+//            }
         }
         return false
     }
     func markMightOfOaks() -> Bool {
-        if !(_battle._selectedSpell is Physical) {
+        if !(_battle._selectedAction is Physical) {
             return false
         }
         if _unit is Character {
             let char = _unit as! Character
-            if char._magicMark is MarkOfOaks {
-                return true
-            }
+//            if char._magicMark is MarkOfOaks {
+//                return true
+//            }
             
         }
         return false
@@ -486,9 +515,9 @@ class BUnit: SKSpriteNode {
             if _battle._curRole._unit._race == EvilType.DEMON {
                 if _unit is Character {
                     let char = _unit as! Character
-                    if char._shield is EvilExpel {
-                        return true
-                    }
+//                    if char._shield is EvilExpel {
+//                        return true
+//                    }
                 }
             }
         }
@@ -508,71 +537,71 @@ class BUnit: SKSpriteNode {
         var value = value
         let s = (source == nil ? _battle._curRole : source)!
         if value < 0 && self._unit._race == EvilType.RISEN {
-            if s.weaponIs(TheExorcist.EFFECTION) && seed() < 15 {
-                self.showText(text: "EXORCISED") {
-                    self.actionDead {
-                        self.die()
-                        completion()
-                    }
-                }
-                return
-            }
+//            if s.weaponIs(TheExorcist.EFFECTION) && seed() < 15 {
+//                self.showText(text: "EXORCISED") {
+//                    self.actionDead {
+//                        self.die()
+//                        completion()
+//                    }
+//                }
+//                return
+//            }
         }
-        if value < 0 && shieldIs(EvilExpel.EFFECTION) && seed() < 15 {
-            showText(text: "BLOCK") {
-                completion()
-                return
-            }
-        }
+//        if value < 0 && shieldIs(EvilExpel.EFFECTION) && seed() < 15 {
+//            showText(text: "BLOCK") {
+//                completion()
+//                return
+//            }
+//        }
         if value > 0 && hasStatus(type: Status.SOUL_SLAY) {
             showText(text: "SLAY") {
                 completion()
             }
             return
         }
-        if value < 0 && shieldIs(Accident.EFFECTION) && damageType == 2 {
-            var us = Array<BUnit>()
-            for u in _battle._playerPart {
-                if !(u._unit is Character) {
-                    us.append(u)
-                }
-            }
-            if us.count > 0 {
-                self.showText(text: "SHIFT") {
-                    let one = us.one()
-                    one.showValue(value: value) {
-                        completion()
-                    }
-                }
-                return
-            }
-        }
+//        if value < 0 && shieldIs(Accident.EFFECTION) && damageType == 2 {
+//            var us = Array<BUnit>()
+//            for u in _battle._playerPart {
+//                if !(u._unit is Character) {
+//                    us.append(u)
+//                }
+//            }
+//            if us.count > 0 {
+//                self.showText(text: "SHIFT") {
+//                    let one = us.one()
+//                    one.showValue(value: value) {
+//                        completion()
+//                    }
+//                }
+//                return
+//            }
+//        }
         
-        if value < 0 && _unit._race == EvilType.RISEN && s.weaponIs(HolyPower.EFFECTION) {
-            value *= 2
-        }
-        if value < 0 && hasStatus(type: "_mess_ghost") {
-            value *= 2
-        }
-        if value > 0 {
-            if ringIs(RingOfDeath.EFFECTION) {
-                value *= 1.5
-            }
-            if soulstoneIs(HeartOfTarrasque.EFFECTION) {
-                value *= 2
-            }
-            if hasStatus(type: BansMechanArm.EFFECTION) {
-                value *= 0.25
-            }
-        }
+//        if value < 0 && _unit._race == EvilType.RISEN && s.weaponIs(HolyPower.EFFECTION) {
+//            value *= 2
+//        }
+//        if value < 0 && hasStatus(type: "_mess_ghost") {
+//            value *= 2
+//        }
+//        if value > 0 {
+//            if ringIs(RingOfDeath.EFFECTION) {
+//                value *= 1.5
+//            }
+//            if soulstoneIs(HeartOfTarrasque.EFFECTION) {
+//                value *= 2
+//            }
+//            if hasStatus(type: BansMechanArm.EFFECTION) {
+//                value *= 0.25
+//            }
+//        }
         if hasStatus(type: Status.PETRIFY) && value < 0 {
             value = seed(min: 0, max: 6).toFloat() * 0.01 * value
         }
 
-        var beCritical = _battle._selectedSpell.beCritical
-        if value > 0 || !criticalFromSpell || _battle._selectedSpell is Magical {
-            beCritical = critical
-        }
+//        var beCritical = _battle._selectedSpell.beCritical
+//        if value > 0 || !criticalFromSpell || _battle._selectedAction is Magical {
+//            beCritical = critical
+//        }
         
         if hasStatus(type: Status.PROTECTION_FROM_ICE) {
             if value < 0 {
@@ -608,7 +637,7 @@ class BUnit: SKSpriteNode {
         var move = SKAction.move(by: v, duration: TimeInterval(0.15))
         let wait = SKAction.wait(forDuration: TimeInterval(1))
         var go = SKAction.sequence([move, wait])
-//        beCritical = true
+        var beCritical = false
         if beCritical {
             v = CGVector(dx: 0, dy: _charSize * 0.4)
             move = SKAction.move(by: v, duration: TimeInterval(0.05))
@@ -629,13 +658,13 @@ class BUnit: SKSpriteNode {
                 }
             } else {
                 
-                if self.shieldIs(FrancisFace.EFFECTION) && self.seed() < 10 {
-                    this.showText(text: "CRITICAL +5") {
-                        completion()
-                    }
-                    this._extensions.critical += 5
-                    return
-                }
+//                if self.shieldIs(FrancisFace.EFFECTION) && self.seed() < 10 {
+//                    this.showText(text: "CRITICAL +5") {
+//                        completion()
+//                    }
+//                    this._extensions.critical += 5
+//                    return
+//                }
                 if this.markMightOfOaks() {
                     if this.seed() < 10 {
                         this.showText(text: "MIGHT OF OAKS")
@@ -758,11 +787,11 @@ class BUnit: SKSpriteNode {
     }
     func getActiveSpell() -> Array<Spell> {
         var spells = Array<Spell>()
-        for s in _unit._spellsInuse + _unit._spellsHidden + _spellsInBattle {
-            if s is Active {
-                spells.append(s)
-            }
-        }
+//        for s in _unit._spellsInuse + _unit._spellsHidden + _spellsInBattle {
+//            if s is Active {
+//                spells.append(s)
+//            }
+//        }
         return spells
     }
     var _status = Dictionary<String, Status>()
@@ -806,9 +835,9 @@ class BUnit: SKSpriteNode {
     
     func hasSpell(spell:Spell) -> Bool {
         for s in _unit._spellsInuse {
-            if spell._name == s._name {
-                return true
-            }
+//            if spell._name == s._name {
+//                return true
+//            }
         }
         
         return false
@@ -820,11 +849,11 @@ class BUnit: SKSpriteNode {
         var spells = Array<Spell>()
         if playerPart {
             for u in _battle._playerPart {
-                spells += u._unit._spellsInuse
+//                spells += u._unit._spellsInuse
             }
         } else {
             for u in _battle._enemyPart {
-                spells += u._unit._spellsInuse
+//                spells += u._unit._spellsInuse
             }
         }
         for s in spells {
@@ -868,22 +897,22 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifRingIs(_ ring:Ring) -> Bool {
-        if !(_unit is Character) {
-            return false
-        } else {
-            let c = _unit as! Character
-            if c._leftRing != nil {
-                if c._leftRing?._effection == ring._effection {
-                    return true
-                }
-            }
-            if c._rightRing != nil {
-                if c._rightRing?._effection == ring._effection {
-                    return true
-                }
-            }
-        }
+    func ifRingIs(_ effection:String) -> Bool {
+//        if !(_unit is Character) {
+//            return false
+//        } else {
+//            let c = _unit as! Character
+//            if c._leftRing != nil {
+//                if c._leftRing?._effection == ring._effection {
+//                    return true
+//                }
+//            }
+//            if c._rightRing != nil {
+//                if c._rightRing?._effection == ring._effection {
+//                    return true
+//                }
+//            }
+//        }
         return false
     }
     
@@ -900,17 +929,17 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifSoulIs(_ soul: SoulStone) -> Bool {
-        if !(_unit is Character) {
-            return false
-        } else {
-            let c = _unit as! Character
-            if c._soulStone != nil {
-                if c._soulStone?._effection == soul._effection {
-                    return true
-                }
-            }
-        }
+    func ifSoulIs(_ effection:String) -> Bool {
+//        if !(_unit is Character) {
+//            return false
+//        } else {
+//            let c = _unit as! Character
+//            if c._soulStone != nil {
+//                if c._soulStone?._effection == soul._effection {
+//                    return true
+//                }
+//            }
+//        }
         return false
     }
     
@@ -927,17 +956,17 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifAmuletIs(_ amulet: Amulet) -> Bool {
-        if !(_unit is Character) {
-            return false
-        } else {
-            let c = _unit as! Character
-            if c._amulet != nil {
-                if c._amulet?._effection == amulet._effection {
-                    return true
-                }
-            }
-        }
+    func ifAmuletIs(_ effection: String) -> Bool {
+//        if !(_unit is Character) {
+//            return false
+//        } else {
+//            let c = _unit as! Character
+//            if c._amulet != nil {
+//                if c._amulet?._effection == amulet._effection {
+//                    return true
+//                }
+//            }
+//        }
         return false
     }
     func weaponIs(_ effection:String) -> Bool {
@@ -953,17 +982,17 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifWeaponIs(_ weapon: Weapon) -> Bool {
-        if !(_unit is Character) {
-            return false
-        } else {
-            let c = _unit as! Character
-            if c._weapon != nil {
-                if c._weapon?._effection == weapon._effection {
-                    return true
-                }
-            }
-        }
+    func ifWeaponIs(_ effection: String) -> Bool {
+//        if !(_unit is Character) {
+//            return false
+//        } else {
+//            let c = _unit as! Character
+//            if c._weapon != nil {
+//                if c._weapon?._effection == weapon._effection {
+//                    return true
+//                }
+//            }
+//        }
         return false
     }
     
@@ -980,17 +1009,17 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifShieldIs(_ shield: Shield) -> Bool {
-        if !(_unit is Character) {
-            return false
-        } else {
-            let c = _unit as! Character
-            if c._shield != nil {
-                if c._shield?._effection == shield._effection {
-                    return true
-                }
-            }
-        }
+    func ifShieldIs(_ shield: String) -> Bool {
+//        if !(_unit is Character) {
+//            return false
+//        } else {
+//            let c = _unit as! Character
+//            if c._shield != nil {
+//                if c._shield?._effection == shield._effection {
+//                    return true
+//                }
+//            }
+//        }
         return false
     }
     
@@ -1069,123 +1098,7 @@ class BUnit: SKSpriteNode {
         }
         _speakNode = node
     }
-    var _mains:Mains = Mains(stamina:0, strength: 0, agility: 0, intellect: 0)
-    var _extensions:Extensions = Extensions(
-        attack: 0,
-        defence: 0,
-        speed: 0,
-        accuracy: 0,
-        critical: 0,
-        destroy: 0,
-        avoid: 0,
-        spirit: 0,
-        hp: 0,
-        health: 0,
-        mp: 0,
-        mpMax: 0,
-        mind: 0
-    )
-    var _break:CGFloat = 0
-    var _revenge:CGFloat = 0
-    var _rhythm:CGFloat = 0
-    var _chaos:CGFloat = 0
-    var _race:Int = -1
     
-    var _elementalPower = Elemental(
-        fire : 0,
-        water : 0,
-        thunder : 0
-    )
-    
-    var _elementalResistance = Elemental(
-        fire : 0,
-        water : 0,
-        thunder : 0
-    )
-    var _magical = Magic(damage: 0, resistance: 0)
-    var _elemental = Magic(damage: 0, resistance: 0)
-    var _physical = Magic(damage: 0, resistance: 0)
-    var _sensitive:Int = 0
-    var _spellsInBattle:Array<Spell> = Array<Spell>()
-    
-    func strengthChange(value: CGFloat) {
-        _mains.strength += value
-        _extensions.attack += value * 2
-        _extensions.defence += value * 0
-        _extensions.speed += value * 0.5
-        _extensions.accuracy += value * 0.2
-        _extensions.avoid += value * 0
-        _extensions.critical += value * 0.2
-        _extensions.spirit += value * -0.3
-        _extensions.health += value * 1
-        _extensions.hp += value * 1
-        _extensions.mp += value * 1
-        _extensions.mpMax += value * 1
-        if _extensions.hp < 1 {
-            _extensions.hp = 1
-        }
-        if _extensions.mp < 1 {
-            _extensions.mp = 1
-        }
-    }
-    func staminaChange(value: CGFloat) {
-        _mains.stamina += value
-        _extensions.attack += value * 0.1
-        _extensions.defence += value * 1.1
-        _extensions.speed += value * 0
-        _extensions.accuracy += value * 0
-        _extensions.avoid += value * -0.3
-        _extensions.critical += value * 0
-        _extensions.spirit += value * -0.5
-        _extensions.health += value * 4
-        _extensions.hp += value * 4
-        _extensions.mp += value * 0
-        _extensions.mpMax += value * 0
-        if _extensions.hp < 1 {
-            _extensions.hp = 1
-        }
-        if _extensions.mp < 1 {
-            _extensions.mp = 1
-        }
-    }
-    func agilityChange(value: CGFloat) {
-        _mains.agility += value
-        _extensions.attack += value * 1
-        _extensions.defence += value * 0.2
-        _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.8
-        _extensions.avoid += value * 0.8
-        _extensions.critical += value * 0.3
-        _extensions.spirit += value * 0
-        _extensions.health += value * 2
-        _extensions.hp += value * 2
-        _extensions.mp += value * 1
-        _extensions.mpMax += value * 1
-        if _extensions.hp < 1 {
-            _extensions.hp = 1
-        }
-        if _extensions.mp < 1 {
-            _extensions.mp = 1
-        }
-    }
-    func intellectChange(value: CGFloat) {
-        _mains.intellect += value
-        _extensions.attack += value * -0.5
-        _extensions.defence += value * 0.3
-        _extensions.speed += value * 0.2
-        _extensions.accuracy += value * 0
-        _extensions.avoid += value * 0.2
-        _extensions.critical += value * 0
-        _extensions.spirit += value * 2
-        _extensions.health += value * 1
-        _extensions.hp += value * 1
-        _extensions.mp += value * 3
-        _extensions.mpMax += value * 3
-        if _extensions.hp < 1 {
-            _extensions.hp = 1
-        }
-        if _extensions.mp < 1 {
-            _extensions.mp = 1
-        }
-    }
+    var _valueUnit = Unit()
+    internal var spells = Array<Spell>()
 }

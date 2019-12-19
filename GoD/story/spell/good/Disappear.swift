@@ -16,6 +16,7 @@ class Disappear: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Disappear
         _cooldown = 3
         _name = "影匿"
         _description = "对自己释放法术，使自己融入周围影子之中，提升50点闪避，持续5回合"
@@ -30,9 +31,9 @@ class Disappear: Magical {
         status._type = Status.DISAPPEAR
         status._labelText = "H"
         status._timeleft = 5
-        c._extensions.avoid += 50
+        c._valueUnit._extensions.avoid += 50
         status.timeupAction = {
-            c._extensions.avoid -= 50
+            c._valueUnit._extensions.avoid -= 50
         }
         c.actionCast {
             c.revival1f() {

@@ -30,7 +30,7 @@ class SoulReaping: Magical {
                         t.showValue(value: damage)
                         setTimeout(delay: 0.5, completion: {
                             t.showText(text: "SPT -15")
-                            t._extensions.spirit -= 15
+                            t._valueUnit._extensions.spirit -= 15
                         })
                     }
                 }
@@ -38,7 +38,7 @@ class SoulReaping: Magical {
             setTimeout(delay: 2.1, completion: {
                 let v = i * 15
                 c.showText(text: "SPT +\(v)")
-                c._extensions.spirit += v.toFloat()
+                c._valueUnit._extensions.spirit += v.toFloat()
             })
             setTimeout(delay: 2.6, completion: completion)
         }

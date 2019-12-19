@@ -24,7 +24,7 @@ class JadeSpirit:Boss {
         _extensions.hp = _extensions.health
         _elementalResistance.fire = 80
         _elementalResistance.water = -40
-        _spellsInuse = [FireBreath(), FireAngel(), LavaExplode(), FireRain(), BurnHeart(), FireFist()]
+//        _spellsInuse = [FireBreath(), FireAngel(), LavaExplode(), FireRain(), BurnHeart(), FireFist()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

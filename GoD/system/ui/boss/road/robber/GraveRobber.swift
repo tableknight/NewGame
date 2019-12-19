@@ -22,7 +22,7 @@ class GraveRobber:Boss {
         _race = EvilType.MAN
         _img = SKTexture(imageNamed: "GraveRobber")
         _imgUrl = "GraveRobber"
-        _spellsInuse = [RobberHasMoral(), SummonMummy(), CutThroat(), MakeEverythingRight(), NervousPoison(), HorribleImage(), KickAss(), ReduceLife()]
+//        _spellsInuse = [RobberHasMoral(), SummonMummy(), CutThroat(), MakeEverythingRight(), NervousPoison(), HorribleImage(), KickAss(), ReduceLife()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)
@@ -56,7 +56,7 @@ class RobberMinion:BossMinion {
         _extensions.health *= 2
         _extensions.hp = _extensions.health
         
-        _spellsInuse = [CutThroat(), KickAss(), NervousPoison()]
+//        _spellsInuse = [CutThroat(), KickAss(), NervousPoison()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

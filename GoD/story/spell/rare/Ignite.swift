@@ -16,6 +16,7 @@ class Ignite: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Ignite
         isFire = true
         _name = "引爆"
         _description = "引爆所有点燃目标，每层燃烧效果造成精神50%的火焰伤害"

@@ -17,6 +17,7 @@ class ShootTwo: Physical, BowSkill {
     }
     override init() {
         super.init()
+        _id = Spell.ShootTwo
         _name = "一箭双雕"
         _description = "对随机两个目标造成攻击80%的物理伤害"
         _quality = Quality.RARE
@@ -27,7 +28,7 @@ class ShootTwo: Physical, BowSkill {
     }
     
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let ts = b._selectedTargets
         let t = ts[0]
         let c = b._curRole

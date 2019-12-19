@@ -16,6 +16,7 @@ class SpiritIntervene: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.SpiritIntervene
         _name = "精神干涉"
         _description = "使目标的精神变为随机的数字"
         _quality = Quality.SACRED
@@ -33,7 +34,7 @@ class SpiritIntervene: Magical {
             ro.intellectChange(value: t._unit._level * 3)
             let max = ro._extensions.spirit.toInt()
             let change = this.seed(min: 0, max: max).toFloat()
-            t._extensions.spirit = change - t._unit._extensions.spirit
+            t._valueUnit._extensions.spirit = change - t._unit._extensions.spirit
             t.sonic() {
                 t.showText(text: "\(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
             }

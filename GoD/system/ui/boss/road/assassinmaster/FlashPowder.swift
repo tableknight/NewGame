@@ -34,9 +34,9 @@ class FlashPowder: Magical {
                         status._type = "_flash_powder"
                         status._labelText = "F"
                         status._timeleft = 3
-                        t._extensions.accuracy -= 75
+                        t._valueUnit._extensions.accuracy -= 75
                         status.timeupAction = {
-                            t._extensions.accuracy += 75
+                            t._valueUnit._extensions.accuracy += 75
                         }
                         t.addStatus(status: status)
                     }

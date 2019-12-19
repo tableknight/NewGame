@@ -16,6 +16,7 @@ class FireRain: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.FireRain
         isFire = true
         _name = "耀斑"
         autoCast = true
@@ -44,13 +45,13 @@ class FireRain: Magical {
 //                setTimeout(delay: 0.5, completion: {
                     t.actionAttacked {
                         t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
-                        if c.ringIs(FireCore.EFFECTION) {
-                            t.burning()
-                        } else {
-                            if self.d8() {
-                                t.burning()
-                            }
-                        }
+//                        if c.ringIs(FireCore.EFFECTION) {
+//                            t.burning()
+//                        } else {
+//                            if self.d8() {
+//                                t.burning()
+//                            }
+//                        }
                     }
 //                })
 //                t.flame2(index: 1, line: 1)

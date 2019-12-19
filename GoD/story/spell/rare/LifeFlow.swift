@@ -16,6 +16,7 @@ class LifeFlow: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.LifeFlow
         _name = "生命分涌"
         _description = "牺牲15%当前生命，作为额外精神。对目标造成精神100%的魔法伤害"
         _quality = Quality.RARE

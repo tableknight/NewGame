@@ -11,6 +11,7 @@ class Powerful: Passive {
     static let VALUE:CGFloat = 15
     override init() {
         super.init()
+        _id = Spell.Powerful
         _name = "内生力量"
         _description = "提升15点力量"
         _quality = Quality.NORMAL

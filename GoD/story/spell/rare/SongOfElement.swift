@@ -10,6 +10,7 @@ import SpriteKit
 class SongOfElement:Magical {
     override init() {
         super.init()
+        _id = Spell.SongOfElement
         _name = "冰火吐息"
         _description = "对目标造成精神40%的冰火混合伤害，有小概率点燃或冰冻目标"
         _quality = Quality.RARE

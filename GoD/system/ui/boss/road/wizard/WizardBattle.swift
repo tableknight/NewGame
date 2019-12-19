@@ -53,22 +53,22 @@ class FireMatrix:Magical {
             for u in self._battle._playerPart {
                 let s = Status()
                 s._timeleft = 3
-                u._elementalPower.fire -= 20
-                u._elementalResistance.fire -= 20
+                u._valueUnit._elementalPower.fire -= 20
+                u._valueUnit._elementalResistance.fire -= 20
                 s.timeupAction = {
-                    u._elementalPower.fire += 20
-                    u._elementalResistance.fire += 20
+                    u._valueUnit._elementalPower.fire += 20
+                    u._valueUnit._elementalResistance.fire += 20
                 }
                 u.addStatus(status: s)
             }
             for u in self._battle._enemyPart {
                 let s = Status()
                 s._timeleft = 3
-                u._elementalPower.fire += 20
-                u._elementalResistance.fire += 20
+                u._valueUnit._elementalPower.fire += 20
+                u._valueUnit._elementalResistance.fire += 20
                 s.timeupAction = {
-                    u._elementalPower.fire -= 20
-                    u._elementalResistance.fire -= 20
+                    u._valueUnit._elementalPower.fire -= 20
+                    u._valueUnit._elementalResistance.fire -= 20
                 }
                 u.addStatus(status: s)
             }

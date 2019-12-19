@@ -15,6 +15,7 @@ class LeeAttack:Physical {
     }
     override init() {
         super.init()
+        _id = Spell.LeeAttack
         _name = "吸血攻击"
         _description = "对目标造成攻击100%的物理伤害，并恢复50%的生命值"
         _quality = Quality.RARE
@@ -32,9 +33,9 @@ class LeeAttack:Physical {
                         setTimeout(delay: 1.25, completion: completion)
                         setTimeout(delay: 1, completion: {
                             var rate:CGFloat = 0.5
-                            if c.amuletIs(FangOfVampire.EFFECTION) {
-                                rate = 1
-                            }
+//                            if c.amuletIs(FangOfVampire.EFFECTION) {
+//                                rate = 1
+//                            }
                             c.showValue(value: abs(damage * rate))
                         })
                     }

@@ -37,11 +37,11 @@ class MimicBattle: BossBattle {
     }
     var _level:CGFloat = 1
     
-    override func specialLoot() -> Array<Prop> {
-        let l = Loot()
-        l.loot(level: _level)
-        l.loot(level: _level)
-        return l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        let l = Loot()
+//        l.loot(level: _level)
+//        l.loot(level: _level)
+//        return l.getList()
+//    }
 }
 

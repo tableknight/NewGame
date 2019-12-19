@@ -24,23 +24,23 @@ class UmisaBattle: BossBattle {
             if !p75 && !umisa.isCopy && per <= 0.75 {
                 let spell = SummonCopy()
                 spell._seat = BUnit.TBL
-                _selectedSpell = spell
+                _selectedAction = spell
                 p75 = true
             } else if !p50 && !umisa.isCopy && per <= 0.5 {
                 let spell = SummonCopy()
                 spell._seat = BUnit.TBM
-                _selectedSpell = spell
+                _selectedAction = spell
                 p50 = true
             } else if !p25 && !umisa.isCopy && per <= 0.25 {
                 let spell = SummonCopy()
                 spell._seat = BUnit.TBR
-                _selectedSpell = spell
+                _selectedAction = spell
                 p25 = true
             } else {
-                _selectedSpell = _curRole._unit._spellsInuse.one()
+//                _selectedAction = _curRole._unit._spellsInuse.one()
             }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -58,44 +58,44 @@ class UmisaBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 35 {
-            let i = RingOfDeath()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 10 {
-            let i = Accident()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = CreationMatrix()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = HolyPower()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = Boreas()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Umisa.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Item> {
+//        var list = Array<Item>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+////        if seedFloat() < lucky * 35 {
+////            let i = RingOfDeath()
+////            i.create()
+////            list.append(i)
+////        }
+////
+////        if seedFloat() < lucky * 10 {
+////            let i = Accident()
+////            i.create()
+////            list.append(i)
+////        }
+////
+////        if seedFloat() < lucky * 5 {
+////            let i = CreationMatrix()
+////            i.create()
+////            list.append(i)
+////        }
+////
+////        if seedFloat() < lucky * 5 {
+////            let i = HolyPower()
+////            i.create()
+////            list.append(i)
+////        }
+////
+////        if seedFloat() < lucky * 15 {
+////            let i = Boreas()
+////            i.create()
+////            list.append(i)
+////        }
+////
+////        let l = Loot()
+////        l.loot(level: Umisa.LEVEL)
+//        return list + l.getList()
+//    }
 }
 class SummonCopy:Magical, BossOnly {
     required init(from decoder: Decoder) throws {
@@ -140,7 +140,7 @@ class CriticalBite:Physical, BossOnly {
         _rate = 0.85
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionAttack {

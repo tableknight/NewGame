@@ -11,6 +11,7 @@ class Lighting: Passive {
     
     override init() {
         super.init()
+        _id = Spell.Lighting
         _name = "落雷"
         isMagical = true
         isThunder = true
@@ -22,9 +23,9 @@ class Lighting: Passive {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        if c._unit._weapon is ThorsHammer {
-            _rate = 0.5
-        }
+//        if c._unit._weapon is ThorsHammer {
+//            _rate = 0.5
+//        }
         let t = _battle._selectedTarget!
         let damage = thunderDamage(t)
         c.showText(text: self._name) {

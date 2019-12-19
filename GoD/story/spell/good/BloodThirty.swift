@@ -11,6 +11,7 @@ class BloodThirsty: Passive {
     
     override init() {
         super.init()
+        _id = Spell.BloodThirsty
         _name = "嗜血"
         _description = "附加当前等级数值的必杀"
         _quality = Quality.GOOD

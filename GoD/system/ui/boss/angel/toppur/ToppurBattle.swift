@@ -17,21 +17,21 @@ class ToppurBattle: BossBattle {
     override func createAI() {
         if _curRole._unit is Toppur {
             if _round % 3 == 1 {
-                _selectedSpell = FateDecision()
+                _selectedAction = FateDecision()
             } else {
                 let sd = seed()
                 if sd < 40 {
-                    _selectedSpell = BossAttack()
+                    _selectedAction = BossAttack()
                 } else if sd < 70 {
-                    _selectedSpell = LineAttack()
+                    _selectedAction = LineAttack()
                 } else if sd < 90 {
-                    _selectedSpell = LeeAttack()
+                    _selectedAction = LeeAttack()
                 } else {
-                    _selectedSpell = BossAttack()
+                    _selectedAction = BossAttack()
                 }
             }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -57,38 +57,38 @@ class ToppurBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 15 {
-            let i = LazesPedicureKnife()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = MarkOfOaks()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 45 {
-            let i = BloodBlade()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 35 {
-            let i = EvilExpel()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Toppur.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = LazesPedicureKnife()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = MarkOfOaks()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 45 {
+//            let i = BloodBlade()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 35 {
+//            let i = EvilExpel()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Toppur.LEVEL)
+//        return list + l.getList()
+//    }
 }
 class FateDecision: Magical, BossOnly {
     required init(from decoder: Decoder) throws {

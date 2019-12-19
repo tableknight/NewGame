@@ -35,44 +35,44 @@ class SpellPanel:UIPanel {
         }
 //        let _char = Data.instance._char!
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
-            if nil == _lastSelectedIcon._displayItemType {
+            if nil == _lastSelectedIcon._displayItem {
                 return
             }
-            let spell = _lastSelectedIcon._displayItemType as! Spell
-            if _spellBoxInuse.contains(_lastSelectedIcon) {
-                let index = _role._spellsInuse.firstIndex(of: spell)
-                if nil != index {
-                    loseProperty(spell)
-                    _role._spellsInuse.remove(at: index!)
-                } else {
-                    debug("remove spell in use failed!")
-                }
-                if !_char.hasSpell(spell: spell) {
-//                    debug("add spell unused failed in spellpanel")
-                    _char._spells.append(spell)
-                } else {
-                    debug("spell exist in spellpanel \(spell._name)")
-                }
-//                if spell is Passive {
-//                    (spell as! Passive).off()
+            let spell = _lastSelectedIcon._displayItem as! Spell
+//            if _spellBoxInuse.contains(_lastSelectedIcon) {
+//                let index = _role._spellsInuse.firstIndex(of: spell)
+//                if nil != index {
+//                    loseProperty(spell)
+//                    _role._spellsInuse.remove(at: index!)
+//                } else {
+//                    debug("remove spell in use failed!")
 //                }
-                pageReload()
-            } else {
-                if _role._spellsInuse.count < _role._spellCount {
-                    let index = _char._spells.firstIndex(of: spell)
-                    if nil != index {
-                        _char._spells.remove(at: index!)
-                        _role._spellsInuse.append(spell)
-                        addProperty(spell)
-                    } else {
-                        debug("_char._spells.remove failed! spellpanel")
-                    }
-//                    if spell is Passive {
-//                        (spell as! Passive).on()
+//                if !_char.hasSpell(spell: spell) {
+////                    debug("add spell unused failed in spellpanel")
+//                    _char._spells.append(spell)
+//                } else {
+//                    debug("spell exist in spellpanel \(spell._name)")
+//                }
+////                if spell is Passive {
+////                    (spell as! Passive).off()
+////                }
+//                pageReload()
+//            } else {
+//                if _role._spellsInuse.count < _role._spellCount {
+//                    let index = _char._spells.firstIndex(of: spell)
+//                    if nil != index {
+//                        _char._spells.remove(at: index!)
+//                        _role._spellsInuse.append(spell)
+//                        addProperty(spell)
+//                    } else {
+//                        debug("_char._spells.remove failed! spellpanel")
 //                    }
-                    pageReload()
-                }
-            }
+////                    if spell is Passive {
+////                        (spell as! Passive).on()
+////                    }
+//                    pageReload()
+//                }
+//            }
             _lastSelectedIcon = Icon()
             return
         }
@@ -127,52 +127,52 @@ class SpellPanel:UIPanel {
         spellsUnused.position.x = 0
         addChild(spellsUnused)
     }
-    var _role:Creature!
+    var _role:Unit!
     
     func instrumentMonatNotes() -> Bool {
-        if Game.instance.char._weapon is TheMonatNotes {
-            let mn = Game.instance.char._weapon as! TheMonatNotes
-            if mn._spellAppended {
-                return true
-            }
-        }
+//        if Game.instance.char._weapon is TheMonatNotes {
+//            let mn = Game.instance.char._weapon as! TheMonatNotes
+//            if mn._spellAppended {
+//                return true
+//            }
+//        }
         return false
     }
     func getSpellWhichFromMonatNotes() -> Array<Spell> {
         var spells = Array<Spell>()
         let _char = Game.instance.char!
-        let mn = _char._weapon as! TheMonatNotes
-        for s in Game.instance.char._spells {
-            if s == mn._spell {
-                spells.append(s)
-            }
-        }
-        for s in _char._spellsInuse {
-            if s == mn._spell {
-                spells.append(s)
-            }
-        }
-        
-        for u in _char._minions {
-            for s in u._spellsInuse {
-                if s == mn._spell {
-                    spells.append(s)
-                }
-            }
-        }
-        
-        for u in _char._storedMinions {
-            for s in u._spellsInuse {
-                if s == mn._spell {
-                    spells.append(s)
-                }
-            }
-        }
+//        let mn = _char._weapon as! TheMonatNotes
+//        for s in Game.instance.char._spells {
+//            if s == mn._spell {
+//                spells.append(s)
+//            }
+//        }
+//        for s in _char._spellsInuse {
+//            if s == mn._spell {
+//                spells.append(s)
+//            }
+//        }
+//
+//        for u in _char._minions {
+//            for s in u._spellsInuse {
+//                if s == mn._spell {
+//                    spells.append(s)
+//                }
+//            }
+//        }
+//
+//        for u in _char._storedMinions {
+//            for s in u._spellsInuse {
+//                if s == mn._spell {
+//                    spells.append(s)
+//                }
+//            }
+//        }
         
         return spells
     }
     
-    func create(role:Creature) {
+    func create(role:Unit) {
         _role = role
         _pageSize = 24
         createCloseButton()
@@ -195,13 +195,13 @@ class SpellPanel:UIPanel {
             for i in 0...spells.count - 1 {
                 let x = i % 10
                 let icon = SpellIcon()
-                icon.iconLabel = spells[i]._name
-                icon.spell = spells[i]
-                icon._displayItemType = spells[i]
-                icon.position.y = startY
-                icon.position.x = startX + cellSize * 1.25 * x.toFloat()
-                icon.zPosition = self.zPosition + 3
-                _spellBoxInuse.addChild(icon)
+//                icon.iconLabel = spells[i]._name
+//                icon.spell = spells[i]
+//                icon._displayItem = spells[i]
+//                icon.position.y = startY
+//                icon.position.x = startX + cellSize * 1.25 * x.toFloat()
+//                icon.zPosition = self.zPosition + 3
+//                _spellBoxInuse.addChild(icon)
                 
             }
             
@@ -209,15 +209,15 @@ class SpellPanel:UIPanel {
     }
     private func getSpellUnused() -> Array<Spell> {
         var spells = Array<Spell>()
-        for s in Game.instance.char._spells {
-            if _role is Character {
-                spells.append(s)
-            } else {
-                if !(s is BowSkill) && !(s is HandSkill) {
-                    spells.append(s)
-                }
-            }
-        }
+//        for s in Game.instance.char._spells {
+//            if _role is Character {
+//                spells.append(s)
+//            } else {
+//                if !(s is BowSkill) && !(s is HandSkill) {
+//                    spells.append(s)
+//                }
+//            }
+//        }
         return spells
     }
     private func showSpellsUnused() {
@@ -241,7 +241,7 @@ class SpellPanel:UIPanel {
                 let icon = SpellIcon()
                 icon.iconLabel = spells[i]._name
                 icon.spell = spells[i]
-                icon._displayItemType = spells[i]
+                icon._displayItem = spells[i]
                 icon.position.y = startY - (_standardGap + cellSize) * y.toFloat()
                 icon.position.x = startX + (_standardGap + cellSize) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -297,15 +297,7 @@ class SpellPanel:UIPanel {
 }
 
 
-class SpellInfo:SKSpriteNode, IPanelSize {
-    
-    func getDisplayWidth() -> CGFloat {
-        return _displayWidth
-    }
-    
-    func getDisplayHeight() -> CGFloat {
-        return _displayHeight
-    }
+class SpellInfo:SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)

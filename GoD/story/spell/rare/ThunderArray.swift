@@ -17,6 +17,7 @@ class ThunderArray:Magical {
     private var _times = 0
     override init() {
         super.init()
+        _id = Spell.ThunderArray
         _quality = Quality.RARE
         _name = "雷击阵"
         _cooldown = 2
@@ -43,7 +44,7 @@ class ThunderArray:Magical {
         }
         _step -= 1
         let c = _battle._curRole
-        let b = _battle!
+        let b = _battle
         let ts = c.playerPart ? b._enemyPart : b._playerPart
         if ts.count < 1 {
             setTimeout(delay: 1, completion: completion)

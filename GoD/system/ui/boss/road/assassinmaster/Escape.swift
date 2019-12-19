@@ -24,7 +24,7 @@ class Escape: Magical, BossOnly {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let b = _battle!
+        let b = _battle
         c.actionWait {
             if self.d4() {
                 b.victory = false

@@ -16,6 +16,7 @@ class ElementDestory:Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.ElementDestory
         _name = "元素毁灭"
         _description = "释放可怕的诅咒，降低所有敌方目标30点元素抗性"
         _quality = Quality.GOOD
@@ -45,13 +46,13 @@ class ElementDestory:Magical, Curse {
             s._type = "_element_destory"
             s._labelText = "E"
             s._timeleft = 3
-            t._elementalResistance.fire -= 30
-            t._elementalResistance.water -= 30
-            t._elementalResistance.thunder -= 30
+            t._valueUnit._elementalResistance.fire -= 30
+            t._valueUnit._elementalResistance.water -= 30
+            t._valueUnit._elementalResistance.thunder -= 30
             s.timeupAction = {
-                t._elementalResistance.fire += 30
-                t._elementalResistance.water += 30
-                t._elementalResistance.thunder += 30
+                t._valueUnit._elementalResistance.fire += 30
+                t._valueUnit._elementalResistance.water += 30
+                t._valueUnit._elementalResistance.thunder += 30
             }
             t.addStatus(status: s)
         }

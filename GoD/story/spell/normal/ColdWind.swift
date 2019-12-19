@@ -10,6 +10,7 @@ import SpriteKit
 class ColdWind: Magical {
     override init() {
         super.init()
+        _id = Spell.ColdWind
         isWater = true
         _name = "凛风"
         _description = "对生命值最少的目标造成精神80%的冰冷伤害"

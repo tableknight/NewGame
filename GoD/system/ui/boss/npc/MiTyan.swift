@@ -45,9 +45,9 @@ class MiTyanBattle: NPCBattle {
     }
     override func createAI() {
         if _curRole._unit is Boss {
-            _selectedSpell = BossAttack()
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction = BossAttack()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -63,8 +63,8 @@ class MiTyanBattle: NPCBattle {
         es.append(t)
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        return []
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        return []
+//    }
 }
 

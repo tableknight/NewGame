@@ -12,6 +12,7 @@ class RaceSuperiority: Passive {
     
     override init() {
         super.init()
+        _id = Spell.RaceSuperiority
         _quality = Quality.SACRED
         _name = "种族优势"
         _description = "免疫冻结、静默"

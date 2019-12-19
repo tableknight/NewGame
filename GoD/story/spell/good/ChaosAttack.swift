@@ -16,6 +16,7 @@ class ChaosAttack:Physical {
     }
     override init() {
         super.init()
+        _id = Spell.ChaosAttack
         _name = "混沌攻击"
         _description = "对目标造成攻击75%的物理或元素伤害"
         _quality = Quality.GOOD

@@ -11,6 +11,7 @@ class ProtectFromGod: Passive {
     
     override init() {
         super.init()
+        _id = Spell.ProtectFromGod
         _quality = Quality.RARE
         _name = "神之庇护"
         _description = "免疫燃烧"

@@ -16,6 +16,7 @@ class FireBreath: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.FireBreath
         isFire = true
         _name = "火焰呼吸"
         _description = "对目标造成精神75%的火焰伤害， 有一定几率点燃目标"
@@ -41,13 +42,13 @@ class FireBreath: Magical {
             t.actionAttacked {
                 t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
-                    if t.ringIs(FireCore.EFFECTION) {
-                        t.burning()
-                    } else {
-                        if self.d3() {
-                            t.burning()
-                        }
-                    }
+//                    if t.ringIs(FireCore.EFFECTION) {
+//                        t.burning()
+//                    } else {
+//                        if self.d3() {
+//                            t.burning()
+//                        }
+//                    }
                 }
             }
             t.breath()

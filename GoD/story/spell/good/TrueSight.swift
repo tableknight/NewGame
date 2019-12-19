@@ -16,6 +16,7 @@ class TrueSight:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.TrueSight
         _name = "恶魔炸弹"
         _description = "对恶魔造成精神200%的魔法伤害，对其他种族无效"
         _quality = Quality.GOOD

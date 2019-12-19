@@ -27,7 +27,7 @@ class Iberis:Boss {
         _level = Iberis.LEVEL
         _img = SKTexture(imageNamed: "Iberis")
         _imgUrl = "Iberis"
-        _spellsInuse = [DancingDragon(), FlameAttack(), ElementPowerUp()]
+//        _spellsInuse = [DancingDragon(), FlameAttack(), ElementPowerUp()]
     }
     override func create(level: CGFloat) {
         
@@ -36,7 +36,7 @@ class Iberis:Boss {
         _extensions.hp = _extensions.health
         
         for _ in 0...3 {
-            _spellsInuse.append(BossAttack())
+//            _spellsInuse.append(BossAttack())
         }
     }
 }

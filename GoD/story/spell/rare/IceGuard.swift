@@ -10,6 +10,7 @@ import SpriteKit
 class IceGuard: Magical {
     override init() {
         super.init()
+        _id = Spell.IceGuard
         _quality = Quality.RARE
         _name = "寒冰护盾"
         _description = "对自己释放护盾，提升50%护甲，持续5回合，有一定几率降低攻击者10点速度"

@@ -16,6 +16,7 @@ class SoulLash: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.SoulLash
         _name = "灵魂鞭笞"
         _description = "对目标造成精神80%的魔法伤害，有一定几率静默目标"
         _rate = 0.8
@@ -44,7 +45,7 @@ class SoulLash: Magical {
 //                t.hpChange(value: damage)
                 t.showValue(value: damage) {
                     if this.seed() < 25 && !t.isDead() {
-                        b?.silenceUnit(unit: t)
+                        b.silenceUnit(unit: t)
                         completion()
                     } else {
                         completion()

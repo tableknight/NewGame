@@ -10,11 +10,7 @@ import SpriteKit
 class MorningPalace: BossRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = [1,2,3,4,5,6,7,8,9,10]
-        _monsterEnum = [1]
-        for _ in 0...10 {
-            _itemEnum.append(11)
-        }
+        _monsterEnum = []
         _name = "早·宫"
         _floorSize = 5
         _level = Toppur.LEVEL
@@ -53,14 +49,14 @@ class MorningPalace: BossRoad {
         }
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-            case 1:
-                return ToppurServant()
-            default:
-                return ToppurServant()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//            case 1:
+//                return ToppurServant()
+//            default:
+//                return ToppurServant()
+//        }
+//    }
     override func getSelfScene() -> BossRoad {
         return MorningPalace()
     }
@@ -72,7 +68,7 @@ class MorningPalace: BossRoad {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()

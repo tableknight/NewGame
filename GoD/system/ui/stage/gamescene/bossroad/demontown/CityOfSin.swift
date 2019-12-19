@@ -12,7 +12,7 @@ class CityOfSin: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
         _name = "罪恶之城"
         _floorSize = 5
         _level = 44
@@ -26,22 +26,22 @@ class CityOfSin: DemonTown {
         hSize = 12
         vSize = 12
     }
-    override func getMonsterByIndex(index: Int) -> Creature {
-        if index == 1 {
-            return LostElf()
-        }
-        if index == 2 {
-            return Niro()
-        }
-        if index == 3 {
-            return Gerute()
-        }
-        if index == 4 {
-            return SoulSeaker()
-        }
-        return SoulSeaker()
-    }
-    
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        if index == 1 {
+//            return LostElf()
+//        }
+//        if index == 2 {
+//            return Niro()
+//        }
+//        if index == 3 {
+//            return Gerute()
+//        }
+//        if index == 4 {
+//            return SoulSeaker()
+//        }
+//        return SoulSeaker()
+//    }
+//    
     override func getSelfScene() -> BossRoad {
         return CityOfSin()
     }
@@ -55,7 +55,7 @@ class CityOfSin: DemonTown {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()

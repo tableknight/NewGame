@@ -16,6 +16,7 @@ class QiWave:HandSkill {
     }
     override init() {
         super.init()
+        _id = Spell.QiWave
         _name = "气功破"
         _description = "对随机2-4个目标造成敏捷195%攻击力的物理伤害"
         _quality = Quality.RARE
@@ -43,17 +44,17 @@ class QiWave:HandSkill {
         }
     }
     override func findTarget() {
-        let c = _battle._curRole
-        let max = c.weaponIs(NilSeal.EFFECTION) ? seed(min: 3, max: 6) : seed(min: 2, max: 5)
-        var targets = c.playerPart ? _battle._enemyPart : _battle._playerPart
-        _battle._selectedTargets = []
-        for _ in 0...max - 1 {
-            if targets.count > 0 {
-                let index = seed(to: targets.count)
-                _battle._selectedTargets.append(targets[index])
-                targets.remove(at: index)
-            }
-        }
+//        let c = _battle._curRole
+//        let max = c.weaponIs(NilSeal.EFFECTION) ? seed(min: 3, max: 6) : seed(min: 2, max: 5)
+//        var targets = c.playerPart ? _battle._enemyPart : _battle._playerPart
+//        _battle._selectedTargets = []
+//        for _ in 0...max - 1 {
+//            if targets.count > 0 {
+//                let index = seed(to: targets.count)
+//                _battle._selectedTargets.append(targets[index])
+//                targets.remove(at: index)
+//            }
+//        }
         
     }
     override func selectable() -> Bool {

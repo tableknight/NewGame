@@ -16,7 +16,7 @@ class MessGhost: Magical {
         _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let ts = _battle._selectedTargets
         c.actionCast {

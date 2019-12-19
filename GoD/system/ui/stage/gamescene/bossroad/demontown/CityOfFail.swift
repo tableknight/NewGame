@@ -12,7 +12,7 @@ class CityOfFail: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(12, 12, 2, 2), wall: oa4.getCell(12, 14, 2, 2))
-        _monsterEnum = [1,2,3,4,5]
+        _monsterEnum = []
         _name = "堕落之城"
         _floorSize = 9
         _level = 48
@@ -24,24 +24,24 @@ class CityOfFail: DemonTown {
 //    override func createEnemy() {
 //        
 //    }
-    override func getMonsterByIndex(index: Int) -> Creature {
-        if index == 1 {
-            return UndeadMinion11()
-        }
-        if index == 2 {
-            return UndeadMinion12()
-        }
-        if index == 3 {
-            return UndeadMinion13()
-        }
-        if index == 4 {
-            return UndeadMinion14()
-        }
-        if index == 5 {
-            return UndeadMinion15()
-        }
-        return UndeadMinion1()
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        if index == 1 {
+//            return UndeadMinion11()
+//        }
+//        if index == 2 {
+//            return UndeadMinion12()
+//        }
+//        if index == 3 {
+//            return UndeadMinion13()
+//        }
+//        if index == 4 {
+//            return UndeadMinion14()
+//        }
+//        if index == 5 {
+//            return UndeadMinion15()
+//        }
+//        return UndeadMinion1()
+//    }
     
     override func getSelfScene() -> BossRoad {
         return CityOfFail()
@@ -56,7 +56,7 @@ class CityOfFail: DemonTown {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()
@@ -84,7 +84,7 @@ class UndeadMinion11: Rizen {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_1")
-        _spellsInuse = [DeathAttack()]
+//        _spellsInuse = [DeathAttack()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -103,7 +103,7 @@ class UndeadMinion12: Rizen {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_2")
-        _spellsInuse = [LineAttack()]
+//        _spellsInuse = [LineAttack()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -122,7 +122,7 @@ class UndeadMinion13: Rizen {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_3")
-        _spellsInuse = [AttackPowerUp()]
+//        _spellsInuse = [AttackPowerUp()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -141,7 +141,7 @@ class UndeadMinion14: Rizen {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_4")
-        _spellsInuse = [SoulExtract()]
+//        _spellsInuse = [SoulExtract()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -160,7 +160,7 @@ class UndeadMinion15: Rizen {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
-        _spellsInuse = [Reinforce()]
+//        _spellsInuse = [Reinforce()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

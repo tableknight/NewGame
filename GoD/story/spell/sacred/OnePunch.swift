@@ -11,6 +11,7 @@ class OnePunch: Passive {
     
     override init() {
         super.init()
+        _id = Spell.OnePunch
         _name = "玻璃大炮"
         _description = "将护甲算作物理攻击力"
         _quality = Quality.SACRED

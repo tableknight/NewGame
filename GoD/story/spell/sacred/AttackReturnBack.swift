@@ -10,6 +10,7 @@ import SpriteKit
 class AttackReturnBack: Magical {
     override init() {
         super.init()
+        _id = Spell.AttackReturnBack
         _name = "攻击反弹"
         _description = "对己方单位释放护盾，将下一次近战物理伤害反弹攻击者"
         targetEnemy = false

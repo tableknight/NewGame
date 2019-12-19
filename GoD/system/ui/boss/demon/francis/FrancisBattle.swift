@@ -15,18 +15,18 @@ class FrancisBattle: BossBattle {
         super.init(coder: aDecoder)
     }
     override func createAI() {
-        if _curRole._unit is Francis {
-            if _enemyPart.count < 6 {
-                _selectedSpell = SummonServant()
-            } else {
-                _selectedSpell = Nova()
-            }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
+//        if _curRole._unit is Francis {
+//            if _enemyPart.count < 6 {
+//                _selectedSpell = SummonServant()
+//            } else {
+//                _selectedSpell = Nova()
+//            }
+//            _selectedSpell._battle = self
+//            _selectedSpell.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
@@ -40,56 +40,56 @@ class FrancisBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 10 {
-            let i = FireMark()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = MoltenFire()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 10 {
-            let i = LavaCrystal()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = FrancisFace()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = Accident()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheFear()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheSurpass()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Francis.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 10 {
+//            let i = FireMark()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = MoltenFire()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 10 {
+//            let i = LavaCrystal()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = FrancisFace()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = Accident()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheFear()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheSurpass()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Francis.LEVEL)
+//        return list + l.getList()
+//    }
 }
 
 class SummonServant: Magical, BossOnly {
@@ -105,7 +105,7 @@ class SummonServant: Magical, BossOnly {
         _description = "召唤一个随机的亡灵随从"
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         c.actionCast {
             let seats = [BUnit.TBM, BUnit.TBL, BUnit.TBR, BUnit.TTL, BUnit.TTR]
@@ -232,7 +232,7 @@ class AttackPowerUp: Passive {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         let up = c._unit._extensions.attack * 0.15
-        c._extensions.attack += up
+        c._valueUnit._extensions.attack += up
         c.showText(text: _name)
         c.mixed2(index: 13, completion: completion)
     }
@@ -261,12 +261,12 @@ class Reinforce: Magical {
                 let s = Status()
                 let atk = t._unit._extensions.attack * 0.6
                 let def = t._unit._extensions.defence * 0.6
-                t._extensions.attack += atk
-                t._extensions.defence += def
+                t._valueUnit._extensions.attack += atk
+                t._valueUnit._extensions.defence += def
                 s._timeleft = 2
                 s.timeupAction = {
-                    t._extensions.attack -= atk
-                    t._extensions.defence -= def
+                    t._valueUnit._extensions.attack -= atk
+                    t._valueUnit._extensions.defence -= def
                 }
                 t.addStatus(status: s)
                 completion()
@@ -302,14 +302,14 @@ class SoulExtract: Magical {
                 t.actionAttacked {
                     t.showValue(value: damage) {
                         t.showText(text: "LOST") {
-                            t.strengthChange(value: -1)
-                            t.staminaChange(value: -1)
-                            t.agilityChange(value: -1)
-                            t.intellectChange(value: -1)
-                            c.strengthChange(value: 1)
-                            c.staminaChange(value: 1)
-                            c.agilityChange(value: 1)
-                            t.intellectChange(value: 1)
+                            t._valueUnit.strengthChange(value: -1)
+                            t._valueUnit.staminaChange(value: -1)
+                            t._valueUnit.agilityChange(value: -1)
+                            t._valueUnit.intellectChange(value: -1)
+                            c._valueUnit.strengthChange(value: 1)
+                            c._valueUnit.staminaChange(value: 1)
+                            c._valueUnit.agilityChange(value: 1)
+                            t._valueUnit.intellectChange(value: 1)
                             completion()
                         }
                     }

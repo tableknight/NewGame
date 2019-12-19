@@ -21,7 +21,7 @@ class BattleSpellCard:UIPanel {
         
         //        let _char = Data.instance._char!
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
-            let spell = _lastSelectedIcon._displayItemType as! Spell
+            let spell = _lastSelectedIcon._displayItem as! Spell
             selectedSpell = spell
             _lastSelectedIcon = Icon()
             selectAction()
@@ -37,7 +37,7 @@ class BattleSpellCard:UIPanel {
 //                    _lastSelectedIcon.selected = false
 //                    _lastSelectedIcon = icon as! Icon
 //                    _lastSelectedIcon.selected = true
-                    let spell = bsi._displayItemType as! Spell
+                    let spell = bsi._displayItem as! Spell
                     selectedSpell = spell
                     selectAction()
                     removeFromParent()
@@ -84,7 +84,7 @@ class BattleSpellCard:UIPanel {
                 let icon = BattleSpellIcon()
                 icon.timeleft = spells[i]._timeleft
                 icon.spell = spells[i]
-                icon._displayItemType = spells[i]
+                icon._displayItem = spells[i]
                 icon.position.y = startY
                 icon.position.x = startX + cellSize * 1.25 * x.toFloat()
                 icon.zPosition = self.zPosition + 3

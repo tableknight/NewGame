@@ -62,3 +62,5 @@ class Core:NSObject, Codable{
     }
 //    func getClass(_ name:String)
 }
+
+

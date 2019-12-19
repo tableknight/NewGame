@@ -16,6 +16,7 @@ class ControlWind: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ControlWind
         _name = "驭风者"
         _description = "对随机敌方单位造成精神100%的冰冷伤害"
         _quality = Quality.NORMAL

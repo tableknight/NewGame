@@ -16,6 +16,7 @@ class WindPunish: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.WindPunish
         isWater = true
         _name = "双龙卷风"
         _description = "对目标和身后目标造成精神75%的冰冷伤害"

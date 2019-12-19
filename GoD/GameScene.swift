@@ -14,24 +14,25 @@ class GameScene: SKScene {
     var _b = Button()
     override func didMove(to view: SKView) {
         self.backgroundColor = UIColor.black
-        Game.instance.scene = self
+        Game.instance.gameScene = self
         Game.calcCellSize()
-//                homePage()
+        
+                homePage()
 //        printBoss()
         
 //        Mode.debug = true
 //        Mode.nocd = true
 //        Mode.nodefence = true
-        Mode.showdungeonall = true
-        Mode.showbossall = true
-////
-        realScene()
-        
-        let dr = DrangonRoot()
-        dr._count = 5
-        
-        let e = Game.instance.char!
-        e.addProp(p: dr)
+//        Mode.showdungeonall = true
+//        Mode.showbossall = true
+//////
+//        realScene()
+//
+////        let dr = DrangonRoot()
+////        dr._count = 5
+//
+//        let e = Game.instance.char!
+////        e.addProp(p: dr)
 //        let se = SoulEssence()
 //        se.create(soul: DarkNinja())
 //        e.addProp(p: se)
@@ -55,7 +56,7 @@ class GameScene: SKScene {
 //
 //        let s = IdlirWeddingRing()
 //        s.create()
-        
+//
 //        print(NSStringFromClass(s.classForCoder))
 //        print(NSStringFromClass(IdlirWeddingRing.classForCoder()))
 //        e.addProp(p: s)
@@ -67,7 +68,7 @@ class GameScene: SKScene {
 //        let s1 = FingerBone()
 //        s1.create()
 //        e.addProp(p: s1)
-//
+////
 //        addItem(outfit: PuppetMaster())
 //        addItem(outfit: RingOfDead())
 //        addItem(outfit: AssassinsSword())
@@ -108,8 +109,8 @@ class GameScene: SKScene {
         }
     }
     func addItem(outfit:Outfit) {
-        outfit.create()
-        Game.instance.char.addProp(p: outfit)
+//        outfit.create()
+//        Game.instance.char.addProp(p: outfit)
     }
     var _layer = SKSpriteNode()
     func load() -> Array<RoleDocument>? {
@@ -134,85 +135,85 @@ class GameScene: SKScene {
         
     }
     func addOutfit() {
-        for _ in 0...30 {
-            let sword = Ring()
-            sword.create(level: 20)
-            Game.instance.char.addProp(p: sword)
-        }
+//        for _ in 0...30 {
+//            let sword = Ring()
+//            sword.create(level: 20)
+//            Game.instance.char.addProp(p: sword)
+//        }
     }
     
     func addSacredOutfit() {
         let l = Loot()
         let c = Game.instance.char!
-        for i in l._sacredBows {
-            let b = l.getSacredBow(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        for i in l._sacredMarks {
-            let b = l.getSacredMark(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        for i in l._sacredRings {
-            let b = l.getSacredRing(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredWands {
-            let b = l.getSacredWand(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredBlunts {
-            let b = l.getSacredBlunt(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-
-        for i in l._sacredSwords {
-            let b = l.getSacredSword(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-
-        for i in l._sacredAmulets {
-            let b = l.getSacredAmulet(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredDaggers {
-            let b = l.getSacredDagger(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredShields {
-            let b = l.getSacredShield(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-
-        for i in l._sacredEarrings {
-            let b = l.getSacredEarring(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredSoulstones {
-            let b = l.getSacredSoulstone(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
-        
-        for i in l._sacredInstruments {
-            let b = l.getSacredInstrument(id: i)
-            b.create()
-            c.addProp(p: b)
-        }
+//        for i in l._sacredBows {
+//            let b = l.getSacredBow(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//        for i in l._sacredMarks {
+//            let b = l.getSacredMark(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//        for i in l._sacredRings {
+//            let b = l.getSacredRing(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredWands {
+//            let b = l.getSacredWand(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredBlunts {
+//            let b = l.getSacredBlunt(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredSwords {
+//            let b = l.getSacredSword(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredAmulets {
+//            let b = l.getSacredAmulet(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredDaggers {
+//            let b = l.getSacredDagger(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredShields {
+//            let b = l.getSacredShield(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredEarrings {
+//            let b = l.getSacredEarring(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredSoulstones {
+//            let b = l.getSacredSoulstone(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
+//
+//        for i in l._sacredInstruments {
+//            let b = l.getSacredInstrument(id: i)
+//            b.create()
+//            c.addProp(p: b)
+//        }
 
     }
     
@@ -221,7 +222,7 @@ class GameScene: SKScene {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         
         Game.instance.curStage.addBattle(b)
@@ -238,8 +239,8 @@ class GameScene: SKScene {
         
         
         let e = Emily()
-        e._level = 100
-        e.create(level: e._level)
+        e._level = 1
+        e.create()
         e.addMoney(num: 1000)
         
         for _ in 1...e._level.toInt() {
@@ -257,18 +258,18 @@ class GameScene: SKScene {
         addChild(stage)
         
         
-        
-        let aa = HellNight()
-        aa.create(level: e._level)
-//        aa._seat = BUnit.BTL
-        e._minions.append(aa)
-        for _ in 0...4 {
-            let sn = HellNight()
-            sn.create(level: e._level)
-//            sn._seat = BUnit.BTR
-            e._minions.append(sn)
-        }
-        
+//        
+//        let aa = HellNight()
+//        aa.create(level: e._level)
+////        aa._seat = BUnit.BTL
+//        e._minions.append(aa)
+//        for _ in 0...4 {
+//            let sn = HellNight()
+//            sn.create(level: e._level)
+////            sn._seat = BUnit.BTR
+//            e._minions.append(sn)
+//        }
+//        
         e._dungeonLevel = e._level.toInt()
         e._spellCount = 3
         
@@ -285,16 +286,16 @@ class GameScene: SKScene {
 //        r.create()
 //        e.addProp(p: r)
         
-        let tss = TransportScroll()
-        tss._count = 10
-        e._props.append(tss)
-        
-        for _ in 0...1 {
-            
-            let r2 = Ring()
-            r2.create(level: e._level)
-            e.addProp(p: r2)
-        }
+//        let tss = TransportScroll()
+//        tss._count = 10
+//        e._props.append(tss)
+//
+//        for _ in 0...1 {
+//
+//            let r2 = Ring()
+//            r2.create(level: e._level)
+//            e.addProp(p: r2)
+//        }
         
 //        let a = Amulet()
 //        a.create(level: e._level)
@@ -308,45 +309,45 @@ class GameScene: SKScene {
 //        s.create(level: e._level)
 //        e.addProp(p: s)
         
-        e.addProp(p: WordlessBook())
-        e.addProp(p: ThiefPocket())
-        e.addProp(p: TearCluster())
-        e._spellsInuse = [SixShooter(), DancingDragon(), SuperWater(), FireRain()]
-        let eb = ExpBook()
-        eb._count = 26
-        e.addProp(p: eb)
-        let ggg = TownScroll()
-        ggg._count = 10
-        e.addProp(p: ggg)
-////
-        let po = Potion()
-        po._count = 10
-        e.addProp(p: po)
-        let st = GodTownScroll()
-        st._count = 10
-        e.addProp(p: st)
-        
-//        let bow = Bow()
-//        bow.create(level: e._level)
-//        e.addProp(p: bow)
-        
-        e.addProp(p: LevelUpScroll())
+//        e.addProp(p: WordlessBook())
+//        e.addProp(p: ThiefPocket())
+//        e.addProp(p: TearCluster())
+//        e._spellsInuse = [SixShooter(), DancingDragon(), SuperWater(), FireRain()]
+//        let eb = ExpBook()
+//        eb._count = 26
+//        e.addProp(p: eb)
+//        let ggg = TownScroll()
+//        ggg._count = 10
+//        e.addProp(p: ggg)
+//////
+//        let po = Potion()
+//        po._count = 10
+//        e.addProp(p: po)
+//        let st = GodTownScroll()
+//        st._count = 10
+//        e.addProp(p: st)
+//
+////        let bow = Bow()
+////        bow.create(level: e._level)
+////        e.addProp(p: bow)
+//
+//        e.addProp(p: LevelUpScroll())
     }
     
     private func startNewGame() {
         
     }
     
-    private func welcome() {
-        let flow = CreationFlow()
-        flow.create()
-        flow.gameScene = self
-        flow.actionCreate = {
-            flow.removeFromParent()
-//            self.realScene()
-        }
-        addChild(flow)
-    }
+//    private func welcome() {
+//        let flow = CreationFlow()
+//        flow.create()
+//        flow.gameScene = self
+//        flow.actionCreate = {
+//            flow.removeFromParent()
+////            self.realScene()
+//        }
+//        addChild(flow)
+//    }
     
     func printSpell(spell:Spell) -> String {
         var str = "{name:\"\(spell._name)\","
@@ -386,7 +387,7 @@ class GameScene: SKScene {
         str.append("stars:\"\(boss._growth.strength),\(boss._growth.stamina),\(boss._growth.agility),\(boss._growth.intellect)\",")
         str.append("spells:[")
         for s in boss._spellsInuse {
-            str.append(printBossSpell(spell: s))
+//            str.append(printBossSpell(spell: s))
         }
         str.append("]},")
         debug(str)
@@ -397,28 +398,28 @@ class GameScene: SKScene {
         let ai = ArmorInfo()
         ai.create(armor: item)
         
-        var spd = "攻速 "
-//        var spell = ""
-        if item is Sword {
-            spd += "较快"
-        } else if item is Dagger {
-            spd += "很快"
-        } else if item is Instrument {
-            spd += "一般"
-//            spell = "随机神之技"
-        } else if item is Blunt {
-            spd += "很慢"
-        } else if item is Bow {
-            spd += "较快"
-        } else if item is Wand {
-            spd += "较慢"
-        } else {
-            spd = ""
-        }
-        
-        if item is MagicMark {
-//            spell = "随机神之技"
-        }
+//        var spd = "攻速 "
+////        var spell = ""
+//        if item is Sword {
+//            spd += "较快"
+//        } else if item is Dagger {
+//            spd += "很快"
+//        } else if item is Instrument {
+//            spd += "一般"
+////            spell = "随机神之技"
+//        } else if item is Blunt {
+//            spd += "很慢"
+//        } else if item is Bow {
+//            spd += "较快"
+//        } else if item is Wand {
+//            spd += "较慢"
+//        } else {
+//            spd = ""
+//        }
+//        
+//        if item is MagicMark {
+////            spell = "随机神之技"
+//        }
         
         var str = "{fullName:\"\(ai._nameText)\","
         str.append("name:\"\(item._name)\",")

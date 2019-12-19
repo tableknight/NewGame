@@ -21,7 +21,7 @@ class Idlir:Boss {
         _race = EvilType.DEMON
         _img = SKTexture(imageNamed: "Idlir")
         _imgUrl = "Idlir"
-        _spellsInuse = [MagicReflect(), MagicConvert()]
+//        _spellsInuse = [MagicReflect(), MagicConvert()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

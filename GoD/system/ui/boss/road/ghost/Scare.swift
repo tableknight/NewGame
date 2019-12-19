@@ -23,7 +23,7 @@ class Sacre: Physical {
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let t = b._selectedTarget!
         c.actionCast {
@@ -34,9 +34,9 @@ class Sacre: Physical {
                     s._labelText = "A"
                     s._timeleft = 3
                     let v = t._unit._extensions.defence
-                    t._extensions.defence -= v
+                    t._valueUnit._extensions.defence -= v
                     s.timeupAction = {
-                        t._extensions.defence += v
+                        t._valueUnit._extensions.defence += v
                     }
                     t.addStatus(status: s)
                     completion()

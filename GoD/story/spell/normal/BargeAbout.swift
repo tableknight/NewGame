@@ -11,6 +11,7 @@ class BargeAbout: Passive {
     
     override init() {
         super.init()
+        _id = Spell.BargeAbout
         _name = "勇猛无畏"
         _description = "降低100点命中，提升100点必杀"
         _quality = Quality.NORMAL

@@ -11,6 +11,7 @@ class SharpStone: Passive {
     static let VALUE:CGFloat = 15
     override init() {
         super.init()
+        _id = Spell.SharpStone
         _name = "精石为开"
         _description = "提升15点敏捷"
         _quality = Quality.NORMAL

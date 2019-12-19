@@ -32,15 +32,15 @@ class SelectItems: UIPanel {
         
         for u in _propBox.children {
             if u.contains(touchPoint!) {
-                let pi = u as! PropIcon
+                let pi = u as! ItemIcon
                 if pi.selected {
                     pi.selected = false
-                    let prop = pi._displayItemType as! Prop
+                    let prop = pi._displayItem as! Item
                     let index = _selectedItems.firstIndex(of: prop)
                     _selectedItems.remove(at: index!)
                 } else {
                     if _selectedItems.count < 2 {
-                        let prop = pi._displayItemType as! Prop
+                        let prop = pi._displayItem as! Item
                         _selectedItems.append(prop)
                         pi.selected = true
                     }
@@ -75,10 +75,10 @@ class SelectItems: UIPanel {
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6
-                let icon = PropIcon()
+                let icon = ItemIcon()
                 icon.count = props[i]._count
                 icon.iconLabel = props[i]._name
-                icon._displayItemType = props[i]
+                icon._displayItem = props[i]
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -87,27 +87,27 @@ class SelectItems: UIPanel {
         }
     }
     
-    private func getPropsCountMoreThan1() -> Array<Prop> {
-        var ps = Array<Prop>()
-        let ts = TownScroll()
-        ts._count = 5
-        ps.append(ts)
-        
-        let potion = Potion()
-        potion._count = Mode.debug ? 100 : 5
-        ps.append(potion)
-        
-        let st = SealScroll()
-        st._count = Mode.debug ? 100 : 2
-        ps.append(st)
-        
-        let tear = TheWitchsTear()
-        tear._count = Mode.debug ? 100 : 5
-        ps.append(tear)
-        
-        let ts2 = TransportScroll()
-        ts2._count = Mode.debug ? 100 : 3
-        ps.append(ts2)
+    private func getPropsCountMoreThan1() -> Array<Item> {
+        var ps = Array<Item>()
+//        let ts = TownScroll()
+//        ts._count = 5
+//        ps.append(ts)
+//
+//        let potion = Potion()
+//        potion._count = Mode.debug ? 100 : 5
+//        ps.append(potion)
+//
+//        let st = SealScroll()
+//        st._count = Mode.debug ? 100 : 2
+//        ps.append(st)
+//
+//        let tear = TheWitchsTear()
+//        tear._count = Mode.debug ? 100 : 5
+//        ps.append(tear)
+//
+//        let ts2 = TransportScroll()
+//        ts2._count = Mode.debug ? 100 : 3
+//        ps.append(ts2)
         
         return ps
     }
@@ -125,7 +125,7 @@ class SelectItems: UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    var _selectedItems = Array<Prop>()
+    var _selectedItems = Array<Item>()
     var nextAction = {}
     var prevAction = {}
     var closeAction = {}
@@ -197,6 +197,6 @@ class SelectableItemComponent:SKSpriteNode {
     }
     internal var _selected = false
     
-    private var _item = Item()
+    private var _item:Item!
     private var _bg = SKShapeNode()
 }

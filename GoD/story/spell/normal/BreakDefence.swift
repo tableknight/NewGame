@@ -16,6 +16,7 @@ class BreakDefence:Physical, CloseSkill {
     }
     override init() {
         super.init()
+        _id = Spell.BreakDefence
         _name = "崩击"
         _description = "破防，并对其造成100%-200%攻击力的物理伤害"
         _quality = Quality.NORMAL
@@ -47,7 +48,7 @@ class BreakDefence:Physical, CloseSkill {
     }
     
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
     }
     
     override func findTarget() {

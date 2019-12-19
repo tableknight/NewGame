@@ -17,10 +17,10 @@ class DiusBattle: BossBattle {
     private let spells = [LineAttack(), BallLighting(), SuperWater(), FireExplode()]
     override func createAI() {
         if _curRole._unit is Dius {
-            _selectedSpell = spells.one()
+            _selectedAction = spells.one()
 //            _selectedSpell = BallLighting()
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -38,56 +38,56 @@ class DiusBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 55 {
-            let i = VerdasTear()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 30 {
-            let i = EyeOfDius()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = Hawkeye()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = FollowOn()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheSurvive()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheDeath()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheAbandon()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Dius.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 55 {
+//            let i = VerdasTear()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 30 {
+//            let i = EyeOfDius()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = Hawkeye()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = FollowOn()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheSurvive()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheDeath()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheAbandon()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Dius.LEVEL)
+//        return list + l.getList()
+//    }
 }
 class ExposeWeakness: Passive, BossOnly {
     required init(from decoder: Decoder) throws {
@@ -158,13 +158,13 @@ class FireExplode:Magical {
                     t.showValue(value: damage) {
                         completion()
                     }
-                    if t.ringIs(FireCore.EFFECTION) {
-                        t.burning()
-                    } else {
-                        if self.d7() {
-                            t.burning()
-                        }
-                    }
+//                    if t.ringIs(FireCore.EFFECTION) {
+//                        t.burning()
+//                    } else {
+//                        if self.d7() {
+//                            t.burning()
+//                        }
+//                    }
                 }
                 t.fire3f()
                 

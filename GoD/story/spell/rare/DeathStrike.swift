@@ -16,6 +16,7 @@ class DeathStrike: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.DeathStrike
         _quality = Quality.RARE
         _name = "死亡冲击"
         _cooldown = 1
@@ -36,8 +37,8 @@ class DeathStrike: Magical {
                         t.showText(text:"ST -10", color: Colors.STATUS_CHANGE)
                         c.showText(text:"ST +10", color: Colors.STATUS_CHANGE, completion: completion)
                     }
-                    t._extensions.spirit -= 10
-                    c._extensions.spirit += 10
+                    t._valueUnit._extensions.spirit -= 10
+                    c._valueUnit._extensions.spirit += 10
                     
                 }
 //                t.mixed2(index: 16)

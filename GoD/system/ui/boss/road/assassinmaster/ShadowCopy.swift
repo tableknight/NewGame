@@ -32,7 +32,7 @@ class ShadowCopy:Magical, BossOnly {
         }
     }
     private func copyCast() {
-        let b = _battle!
+        let b = _battle
         let c = _battle._curRole
         let copy = SummonUnit()
         copy._level = c._unit._level
@@ -50,7 +50,7 @@ class ShadowCopy:Magical, BossOnly {
         copy._revenge = 0
         copy._rhythm = 0
         copy._name = "影分身"
-        copy._spellsInuse = [Disappear(), ThrowWeapon(), Observant(), FlashPowder(), BossAttack()]
+//        copy._spellsInuse = [Disappear(), ThrowWeapon(), Observant(), FlashPowder(), BossAttack()]
         copy._sensitive = 25
         //            copy.hasAction = false
         let seats = b.getEmptySeats(top: !b._curRole.playerPart)

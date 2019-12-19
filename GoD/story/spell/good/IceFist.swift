@@ -16,6 +16,7 @@ class IceFist: HandSkill {
     }
     override init() {
         super.init()
+        _id = Spell.IceFist
         isClose = true
         _name = "碎冰拳"
         _description = "对目标造成敏捷160%的物理伤害，附加当前生命15%的寒冰伤害"
@@ -25,7 +26,7 @@ class IceFist: HandSkill {
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let t = b._selectedTarget!
         c.actionAttack {
@@ -38,13 +39,13 @@ class IceFist: HandSkill {
     }
     
     private func attack(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                let attechment = (c.weaponIs(LiosHold.EFFECTION) ? c.getHealth() : c.getHp()) * -0.15
+                let attechment = (c.weaponIs("") ? c.getHealth() : c.getHp()) * -0.15
                 t.actionAttacked(defend: t.isDefend) {
                     t.showValue(value: damage)
                     let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)

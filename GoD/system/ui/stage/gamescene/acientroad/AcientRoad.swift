@@ -196,7 +196,7 @@ class AcientRoad: Dungeon {
         
         let enemyCount = _level <= 10 ? 3 : 5
         for _ in 0...enemyCount {
-            let e = getMonsterByIndex(index: _monsterEnum.one())
+            let e = Creature(_monsterEnum.one())
             e.create(level: _level)
             enimies.append(e)
         }
@@ -416,10 +416,6 @@ class AcientRoad: Dungeon {
         return PortalFinal()
     }
     
-    func getRandomItem() -> UIItem {
-        let ui = getItemByIndex(index: _itemEnum.one())
-        return ui
-    }
     func blastItem() -> Bool {
         let point = getNextPoint()
         if isPointValid(point: point) {

@@ -10,12 +10,7 @@ import SpriteKit
 class FireSource: AcientRoad {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _itemEnum = []
-        for i in 1...5 {
-            _itemEnum.append(i)
-            _itemEnum.append(10)
-        }
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(12, 12, 2, 2), wall: oa4.getCell(12, 14, 2, 2))
         _name = "火源之地"
@@ -57,19 +52,19 @@ class FireSource: AcientRoad {
         return item
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return VirulentToad()
-        case 2:
-            return TreeSpirit()
-        case 3:
-            return Python()
-        case 4:
-            return GiantWasp()
-        default:
-            return TreeSpirit()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return VirulentToad()
+//        case 2:
+//            return TreeSpirit()
+//        case 3:
+//            return Python()
+//        case 4:
+//            return GiantWasp()
+//        default:
+//            return TreeSpirit()
+//        }
+//    }
 }
 

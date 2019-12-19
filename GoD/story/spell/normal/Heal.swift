@@ -10,6 +10,7 @@ import SpriteKit
 class Heal: Magical {
     override init() {
         super.init()
+        _id = Spell.Heal
         _quality = Quality.NORMAL
         targetEnemy = false
         canBeTargetSelf = true

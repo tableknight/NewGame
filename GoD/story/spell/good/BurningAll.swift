@@ -16,6 +16,7 @@ class BurningAll: Magical, Curse {
     }
     override init() {
         super.init()
+        _id = Spell.BurningAll
         isFire = true
         _name = "烈焰焚心"
         _description = "诅咒敌方所有目标，有较大概率将其点燃"

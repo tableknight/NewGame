@@ -63,14 +63,14 @@ class SelectMinion:UIPanel {
         _label.text = "抉择：选择一个随从跟随作战。"
         addChild(_minionLayer)
         
-        var minions = Array<Creature>()
-        let blackCat = BlackCat()
-        blackCat.create(level: 1)
-        let crow = DarkCrow()
-        crow.create(level: 1)
-        minions.append(crow)
-        minions.append(blackCat)
-        showMinions(minions)
+//        var minions = Array<Creature>()
+//        let blackCat = BlackCat()
+//        blackCat.create(level: 1)
+//        let crow = DarkCrow()
+//        crow.create(level: 1)
+//        minions.append(crow)
+//        minions.append(blackCat)
+//        showMinions(minions)
     }
     
     

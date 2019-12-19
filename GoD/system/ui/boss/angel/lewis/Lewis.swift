@@ -19,7 +19,7 @@ class Lewis:Boss {
         _growth.intellect = 3
         _race = EvilType.ANGEL
         _level = Lewis.LEVEL
-        _spellsInuse = [HandOfGod(), PowerUp(), OathBreaker(), SoulWatch()]
+//        _spellsInuse = [HandOfGod(), PowerUp(), OathBreaker(), SoulWatch()]
         _img = SKTexture(imageNamed: "Lewis")
         _imgUrl = "Lewis"
     }
@@ -51,7 +51,7 @@ class LewisMinion:BossMinion, IFace {
         _growth.intellect = 1.6
         levelTo(level: level)
         
-        _spellsInuse = [HandOfGod()]
+//        _spellsInuse = [HandOfGod()]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

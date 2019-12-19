@@ -11,6 +11,7 @@ class SkyAndLand: Passive {
     static let VALUE:CGFloat = 15
     override init() {
         super.init()
+        _id = Spell.SkyAndLand
         _name = "法天象地"
         _description = "提升15点智力"
         _quality = Quality.NORMAL

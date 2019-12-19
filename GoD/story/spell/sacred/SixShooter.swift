@@ -16,6 +16,7 @@ class SixShooter: Physical, BowSkill {
     }
     override init() {
         super.init()
+        _id = Spell.SixShooter
         _name = "炮决"
         _description = "进行六次快速射击，第一支箭造成攻击力100%的物理伤害，后续伤害递减18%"
         _rate = 1

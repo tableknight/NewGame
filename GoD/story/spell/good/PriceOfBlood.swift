@@ -16,6 +16,7 @@ class PriceOfBlood: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.PriceOfBlood
         _name = "以血换血"
         _description = "牺牲25%当前生命，对目标造成等量的物理伤害"
         _quality = Quality.GOOD

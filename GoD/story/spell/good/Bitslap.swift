@@ -16,6 +16,7 @@ class Bitslap: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.Bitslap
         _quality = Quality.GOOD
         _name = "一击必中"
         _description = "造成攻击70%的物理伤害，本次攻击必定命中"
@@ -23,7 +24,7 @@ class Bitslap: Physical {
         _cooldown = 1
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let this = self
         c.actionAttack {
@@ -34,7 +35,7 @@ class Bitslap: Physical {
     }
     
     private func attack(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {

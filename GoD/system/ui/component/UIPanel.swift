@@ -108,51 +108,53 @@ class UIPanel:SKSpriteNode {
 //        calIconPos(node: node, icon: Icon)
 //    }
     func displayInfos(icon:Icon) {
-        let id = icon._displayItemType
+        let id = icon._displayItem
 //        var node:Any!
+        if id is Outfit {
+            let outfit = icon._displayItem as! Outfit
+            let node = ArmorInfo()
+            node.create(armor: outfit)
+            node.position.x = icon.position.x
+            if icon.position.y < 0 {
+                node.position.y = icon.position.y + node._displayHeight + 5
+            } else {
+                node.position.y = icon.position.y - cellSize - 5
+            }
+            if icon.position.x > 0 {
+                node.position.x = icon.position.x - node._displayWidth + cellSize
+            }
+            addChild(node)
+            _infosDisplay = node
+            return
+        }
         if id is Spell {
-            let spell = icon._displayItemType as! Spell
+            let spell = icon._displayItem as! Spell
             let node = SpellInfo()
             node.zPosition = MyStage.UI_TOPEST_Z
             node.create(spell: spell)
             node.position.x = icon.position.x
             if icon.position.y < 0 {
-                node.position.y = icon.position.y + node.getDisplayHeight() + 5
+                node.position.y = icon.position.y + node._displayHeight + 5
             } else {
                 node.position.y = icon.position.y - cellSize - 5
             }
             if icon.position.x > 0 {
-                node.position.x = icon.position.x - node.getDisplayWidth() + cellSize
+                node.position.x = icon.position.x - node._displayWidth + cellSize
             }
             addChild(node)
             _infosDisplay = node
         } else if id is Item {
-            let item = icon._displayItemType as! Item
+            let item = icon._displayItem as! Item
             let node = ItemInfo()
             node.create(item: item)
             node.position.x = icon.position.x
             if icon.position.y < 0 {
-                node.position.y = icon.position.y + node.getDisplayHeight() + 5
+                node.position.y = icon.position.y + node._displayHeight + 5
             } else {
                 node.position.y = icon.position.y - cellSize - 5
             }
             if icon.position.x > 0 {
-                node.position.x = icon.position.x - node.getDisplayWidth() + cellSize
-            }
-            addChild(node)
-            _infosDisplay = node
-        } else if id is Outfit {
-            let outfit = icon._displayItemType as! Outfit
-            let node = ArmorInfo()
-            node.create(armor: outfit)
-            node.position.x = icon.position.x
-            if icon.position.y < 0 {
-                node.position.y = icon.position.y + node.getDisplayHeight() + 5
-            } else {
-                node.position.y = icon.position.y - cellSize - 5
-            }
-            if icon.position.x > 0 {
-                node.position.x = icon.position.x - node.getDisplayWidth() + cellSize
+                node.position.x = icon.position.x - node._displayWidth + cellSize
             }
             addChild(node)
             _infosDisplay = node
@@ -195,6 +197,7 @@ class UIPanel:SKSpriteNode {
     internal var _curPage = 1
     internal var _startX:CGFloat = -Game.CELLSIZE * 4
     internal var _startY:CGFloat = Game.CELLSIZE * 3.5
+    var isChild = false
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

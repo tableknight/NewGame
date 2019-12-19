@@ -11,6 +11,7 @@ class Firelord: Auro {
     
     override init() {
         super.init()
+        _id = Spell.Firelord
         _name = "火焰领主"
         _description = "提升全队20点火焰抗性和20点火焰伤害"
         _quality = Quality.RARE

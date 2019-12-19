@@ -29,19 +29,24 @@ class SelectDocument: UIPanel {
             self.removeFromParent()
             let welcome = Welcome()
             welcome.create()
-            welcome._gameScene = Game.instance.scene
-            Game.instance.scene.addChild(welcome)
+            welcome._gameScene = Game.instance.gameScene
+            Game.instance.gameScene.addChild(welcome)
         }
         
         if _prevButton.contains(touchPoint!) {
             self.removeFromParent()
-            let flow = CreationFlow()
-            flow.create()
-            flow.gameScene = _gameScene
-            flow.actionCreate = {
-                flow.removeFromParent()
+//            let flow = CreationFlow()
+//            flow.create()
+//            flow.gameScene = _gameScene
+//            flow.actionCreate = {
+//                flow.removeFromParent()
+//            }
+            let selectImage = SelectImage()
+            selectImage.create()
+            selectImage.nextAction = {
+                self.createCharactor(selectImage)
             }
-            _gameScene.addChild(flow)
+            Game.instance.gameScene.addChild(selectImage)
             return
         }
         
@@ -78,7 +83,7 @@ class SelectDocument: UIPanel {
         scene.setRole(x: 2, y: 1, role: role)
         stage.loadScene(scene: scene)
         stage.createMenu()
-        _gameScene!.addChild(stage)
+        Game.instance.gameScene.addChild(stage)
     }
     private func reload() {
         _dcLayer.removeAllChildren()
@@ -128,7 +133,7 @@ class SelectDocument: UIPanel {
             return
         }
         let row1x = -cellSize * 2
-        let row2x = cellSize * 1.5
+        let row2x = cellSize * 1.75
         let startY = cellSize * 3
         for i in 0..._roleDocs.count - 1 {
             let rd = _roleDocs[i]
@@ -146,6 +151,58 @@ class SelectDocument: UIPanel {
             _dcLayer.addChild(dc)
         }
     }
+    private func createCharactor(_ selectImage:SelectImage) {
+        let image = selectImage._lastSelectedComponent._image!
+//        let role = ["冒险者", "", 5, true, false, true, 3, 2, []]
+//        let items = selectItems._selectedItems
+//        let minion = selectMinion._lastSelectedComponent._minion
+        let stage = MyStage()
+        let scene = SecretMeadow()
+        scene.create()
+        let e = Character()
+        e.create()
+        Game.instance.char = e
+        e._img = image
+        e._imgUrl = selectImage._lastSelectedComponent._imgUrl
+        let p = Item(Item.Potion)
+        p._count = 5
+        e.addItem(p)
+        let ts = Item(Item.TownScroll)
+        e.addItem(ts)
+        e.hasWeapon = true
+        e.hasShield = true
+        e.hasMark = true
+        e._minionsCount = 2
+        e._spellCount = 3
+        e._levelPoint = 5
+        e._seat = BUnit.BBM
+        e._pro = "冒险者"
+        e._name = selectImage._lastSelectedComponent._name
+        //-------------------------------------
+        if Mode.debug {
+//            e._props.append(LevelUpScroll())
+        }
+        //-------------------------------------
+        scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
+        let kiki = BlackCat()
+        kiki.create(level: 1)
+        kiki._seat = BUnit.BTM
+        e._minions.append(kiki)
+        stage.loadScene(scene: scene)
+        stage.createMenu()
+        selectImage.removeFromParent()
+        
+        let sword = Outfit(Outfit.Sword)
+        sword.create(level: 10)
+        e.addItem(sword)
+        
+        self.removeFromParent()
+        Game.instance.gameScene.addChild(stage)
+        
+        setTimeout(delay: 1, completion: {
+            Game.saving(sync: false)
+        })
+    }
     private func showCreationButton() {
         if _roleDocs.count < 8 {
             _prevButton.isHidden = false
@@ -154,7 +211,6 @@ class SelectDocument: UIPanel {
         }
     }
     internal var _delButton = Button()
-    var _gameScene:GameScene!
     private var _dcLayer = SKSpriteNode()
     private var _selectedDc:DocComponent!
     private var _roleDocs = Array<RoleDocument>()
@@ -167,8 +223,8 @@ class DocComponent:SelectableComponent {
         super.init(coder: aDecoder)
     }
     private func createBg() {
-        let width = cellSize * 3
-        let height = cellSize * 1.25
+        let width = cellSize * 3.5
+        let height = cellSize * 1.375
         _background = createBackground(width: width, height: height)
         _background.position.x = 0
         _background.zPosition = self.zPosition
@@ -185,8 +241,8 @@ class DocComponent:SelectableComponent {
 //        let startX = -cellSize * 3.5
         
         let img = SKSpriteNode(texture: SKTexture(imageNamed: _imgUrl).getCell(1, 0))
-        img.position.x = -cellSize * 1.5
-        img.position.y = 0
+        img.position.x = -cellSize * 1.375
+        img.position.y = -cellSize * 0.125
         img.anchorPoint = CGPoint(x: 0, y: 1)
         img.size = CGSize(width: cellSize, height: cellSize)
         addChild(img)
@@ -220,6 +276,7 @@ class DocComponent:SelectableComponent {
         set {
             if newValue {
                 _background.lineWidth = Game.SELECTED_STROKE_WIDTH
+                _background.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
             } else {
                 _background.lineWidth = 0
             }

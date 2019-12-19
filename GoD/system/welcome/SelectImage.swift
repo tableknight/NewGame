@@ -31,6 +31,10 @@ class SelectImage:UIPanel {
         }
         
         if _closeButton.contains(touchPoint!) {
+            self.removeFromParent()
+            let sd = SelectDocument()
+            sd.create()
+            Game.instance.gameScene.addChild(sd)
             closeAction()
             return
         }
@@ -42,11 +46,11 @@ class SelectImage:UIPanel {
     override func create() {
         createCloseButton()
         createPageButtons()
-        _label.text = "抉择：选择角色形象"
+        _label.text = "抉择：选择角色"
         _closeButton.text = "返回"
-        _prevButton.text = "上一步"
+//        _prevButton.text = "上一步"
         _prevButton.isHidden = true
-        _nextButton.text = "下一步"
+        _nextButton.text = "确定"
         
         addChild(_listBox)
         _images = [
@@ -77,7 +81,7 @@ class SelectImage:UIPanel {
             "role_11",
             "role_12",
         ]
-        _names = ["塞西", "洛斯利", "莫贝尔", "弑羽", "安瑟玛薇", "狄尔菲" , "夜薇", "伊凡", "露薇雅", "云梦", "梅露露", "兰特西亚"]
+        _names = ["塞西", "洛斯利", "莫贝尔", "弑羽", "安瑟玛薇", "狄尔菲" , "夜薇", "伊凡", "露薇雅", "仇云", "梅兹兰", "兰特西亚"]
         showImages()
         
     }

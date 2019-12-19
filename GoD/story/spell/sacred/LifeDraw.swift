@@ -10,6 +10,7 @@ import SpriteKit
 class LifeDraw: Magical {
     override init() {
         super.init()
+        _id = Spell.LifeDraw
         _name = "生命虹吸"
         _description = "对目标造成精神80%的魔法伤害，回复造成伤害的50%"
         _rate = 0.8

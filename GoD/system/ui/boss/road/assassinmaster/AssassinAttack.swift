@@ -12,7 +12,7 @@ class AssassinAttack: Physical {
         super.init()
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         let damage = physicalDamage(t)

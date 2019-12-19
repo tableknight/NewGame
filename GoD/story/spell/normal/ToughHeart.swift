@@ -10,6 +10,7 @@ class ToughHeart: Passive {
     static let VALUE:CGFloat = 25
     override init() {
         super.init()
+        _id = Spell.ToughHeart
         _name = "执念"
         _description = "提升25点幸运"
         _quality = Quality.NORMAL

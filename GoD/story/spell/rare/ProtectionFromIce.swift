@@ -17,6 +17,7 @@ class ProtectionFromIce: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ProtectionFromIce
         _tear = 2
         isWater = true
         _quality = Quality.RARE

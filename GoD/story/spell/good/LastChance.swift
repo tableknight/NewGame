@@ -16,6 +16,7 @@ class LastChance: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.LastChance
         _name = "殊死一搏"
         _description = "对目标造成攻击300%的物理伤害，或者为目标恢复75%最大生命"
         _quality = Quality.GOOD

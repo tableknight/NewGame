@@ -28,10 +28,10 @@ class BeingTired: Magical, BossOnly {
             let s = Status()
             s._type = "_being_tired"
             let v = c.getDefence() * 0.5
-            c._extensions.defence -= v
+            c._valueUnit._extensions.defence -= v
             s._timeleft = 3
             s.timeupAction = {
-                c._extensions.defence += v
+                c._valueUnit._extensions.defence += v
             }
             c.addStatus(status: s)
             completion()

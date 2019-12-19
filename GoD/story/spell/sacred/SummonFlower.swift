@@ -16,6 +16,7 @@ class SummonFlower: Magical, SummonSkill {
     }
     override init() {
         super.init()
+        _id = Spell.SummonFlower
         _name = "生命之花"
         _description = "召唤生命之花，生命之花会在行动结束后治疗相邻单位，恢复其15%最大生命，持续5回合"
         _quality = Quality.SACRED
@@ -23,25 +24,25 @@ class SummonFlower: Magical, SummonSkill {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
-        let c = _battle._curRole
-        _battle._curRole.actionCast {
-            let flower = FlowerOfHeal()
-            if c.weaponIs(TheSurvive.EFFECTION) {
-                flower._mains.stamina *= SummonUnit.POWERUP_RATE
-                flower._mains.strength *= SummonUnit.POWERUP_RATE
-                flower._mains.agility *= SummonUnit.POWERUP_RATE
-                flower._mains.intellect *= SummonUnit.POWERUP_RATE
-            } else if c.weaponIs(TheSurpass.EFFECTION) {
-                flower._spellsInuse.append(Game.instance.char._weapon!._spell)
-            }
-            flower.create(level: c._unit._level)
-            flower._seat = b.getEmptySeats(top: !b._curRole.playerPart).one()
-            let bu = b._curRole.playerPart ? b.addPlayerMinion(unit: flower) : b.addEnemy(unit: flower)
-            bu.actionSummon {
-                completion()
-            }
-        }
+//        let b = _battle!
+//        let c = _battle._curRole
+//        _battle._curRole.actionCast {
+//            let flower = FlowerOfHeal()
+//            if c.weaponIs(TheSurvive.EFFECTION) {
+//                flower._mains.stamina *= SummonUnit.POWERUP_RATE
+//                flower._mains.strength *= SummonUnit.POWERUP_RATE
+//                flower._mains.agility *= SummonUnit.POWERUP_RATE
+//                flower._mains.intellect *= SummonUnit.POWERUP_RATE
+//            } else if c.weaponIs(TheSurpass.EFFECTION) {
+//                flower._spellsInuse.append(Game.instance.char._weapon!._spell)
+//            }
+//            flower.create(level: c._unit._level)
+//            flower._seat = b.getEmptySeats(top: !b._curRole.playerPart).one()
+//            let bu = b._curRole.playerPart ? b.addPlayerMinion(unit: flower) : b.addEnemy(unit: flower)
+//            bu.actionSummon {
+//                completion()
+//            }
+//        }
     }
     override func selectable() -> Bool {
         if _battle._curRole.playerPart {

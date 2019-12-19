@@ -16,6 +16,7 @@ class AttackHard:Physical {
     }
     override init() {
         super.init()
+        _id = Spell.AttackHard
         _name = "奋力一击"
         _description = "牺牲30点命中，对目标造成攻击165%的物理伤害"
         _quality = Quality.NORMAL

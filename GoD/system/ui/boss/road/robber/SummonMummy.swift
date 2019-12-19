@@ -24,7 +24,7 @@ class SummonMummy:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let seats = _battle.getEmptySeats(top: true)
-        let b = _battle!
+        let b = _battle
 //        let c = b._curRole
         _battle._curRole.actionCast {
             let seat = seats.one()

@@ -16,6 +16,7 @@ class LowerSummon:Magical, SummonSkill {
     }
     override init() {
         super.init()
+        _id = Spell.LowerSummon
         _name = "低阶召唤"
         _description = "召唤一个亡灵战士为你而战，最多只能控制一个亡灵战士"
         _quality = Quality.GOOD
@@ -23,27 +24,27 @@ class LowerSummon:Magical, SummonSkill {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
-        let c = b._curRole
-        let seats = _battle.getEmptySeats(top: !b._curRole.playerPart)
-        _battle._curRole.actionCast {
-            let seat = seats.one()
-            let uw = UndeadWarrior()
-            if c.weaponIs(TheDeath.EFFECTION) {
-                uw._mains.stamina *= SummonUnit.POWERUP_RATE
-                uw._mains.strength *= SummonUnit.POWERUP_RATE
-                uw._mains.agility *= SummonUnit.POWERUP_RATE
-                uw._mains.intellect *= SummonUnit.POWERUP_RATE
-            } else if c.weaponIs(TheSurpass.EFFECTION) {
-                uw._spellsInuse.append(Game.instance.char._weapon!._spell)
-            }
-            uw.create(level: b._curRole._unit._level)
-            uw._seat = seat
-            let bu = self._battle._curRole.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
-            bu.actionSummon {
-                completion()
-            }
-        }
+//        let b = _battle!
+//        let c = b._curRole
+//        let seats = _battle.getEmptySeats(top: !b._curRole.playerPart)
+//        _battle._curRole.actionCast {
+//            let seat = seats.one()
+//            let uw = UndeadWarrior()
+//            if c.weaponIs(TheDeath.EFFECTION) {
+//                uw._mains.stamina *= SummonUnit.POWERUP_RATE
+//                uw._mains.strength *= SummonUnit.POWERUP_RATE
+//                uw._mains.agility *= SummonUnit.POWERUP_RATE
+//                uw._mains.intellect *= SummonUnit.POWERUP_RATE
+//            } else if c.weaponIs(TheSurpass.EFFECTION) {
+//                uw._spellsInuse.append(Game.instance.char._weapon!._spell)
+//            }
+//            uw.create(level: b._curRole._unit._level)
+//            uw._seat = seat
+//            let bu = self._battle._curRole.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
+//            bu.actionSummon {
+//                completion()
+//            }
+//        }
     }
     override func selectable() -> Bool {
         if _battle._curRole.playerPart {

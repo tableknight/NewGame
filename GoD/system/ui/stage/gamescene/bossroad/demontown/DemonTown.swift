@@ -12,7 +12,7 @@ class DemonTown: BossRoad, InnerMaze {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(2, 2, 2, 2), wall: oa4.getCell(2, 4, 2, 2))
-        _monsterEnum = [1]
+        _monsterEnum = []
         _name = "黄昏之城"
         _floorSize = 5
         _level = 23
@@ -23,14 +23,14 @@ class DemonTown: BossRoad, InnerMaze {
     }
     
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return ToppurServant()
-        default:
-            return ToppurServant()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return ToppurServant()
+//        default:
+//            return ToppurServant()
+//        }
+//    }
     override func getSelfScene() -> BossRoad {
         return DemonTown()
     }
@@ -42,7 +42,7 @@ class DemonTown: BossRoad, InnerMaze {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()

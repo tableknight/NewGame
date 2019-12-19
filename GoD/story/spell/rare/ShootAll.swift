@@ -10,6 +10,7 @@ import SpriteKit
 class ShootAll: Physical, BowSkill {
     override init() {
         super.init()
+        _id = Spell.ShootAll
         _name = "万箭齐发"
         _description = "对所有敌方单位造成攻击65%的物理伤害"
         isClose = false

@@ -16,6 +16,7 @@ class TurnAttack: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ThunderAttack
         _tear = 1
         _quality = Quality.SACRED
         _name = "攻击吸收"

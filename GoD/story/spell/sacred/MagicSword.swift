@@ -11,6 +11,7 @@ class MagicSword: Passive {
     
     override init() {
         super.init()
+        _id = Spell.MagicSword
         _name = "魔剑术"
         _description = "用精神替代攻击力"
         _quality = Quality.SACRED

@@ -16,6 +16,7 @@ class SuperWater:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.SuperWater
         _name = "分水弹"
         _description = "造成精神160%的冰冷伤害，由素有敌方目标分摊"
         _rate = 1.6

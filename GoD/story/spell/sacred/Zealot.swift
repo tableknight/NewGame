@@ -16,6 +16,7 @@ class Zealot:Physical {
     }
     override init() {
         super.init()
+        _id = Spell.Zealot
         _name = "狂战士"
         _description = "对目标造成攻击100%的物理伤害，对周围单位造成50%的分裂伤害"
         _quality = Quality.SACRED
@@ -59,7 +60,7 @@ class Zealot:Physical {
         
     }
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
     }
 }
 

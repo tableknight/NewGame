@@ -16,6 +16,7 @@ class BallLighting: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.BallLighting
         _name = "球状闪电"
         _description = "对中心单位造成65%雷电伤害，外层单位受到递减的雷电伤害"
         _rate = 0.65
@@ -25,7 +26,7 @@ class BallLighting: Magical {
         autoCast = true
     }
     override func cast(completion: @escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = _battle._curRole
         let p = c.playerPart
         c.actionCast {

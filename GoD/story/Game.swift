@@ -226,13 +226,13 @@ class Documented:NSObject, NSCoding {
 }
 //var c = 0
 class Game {
-    static let SELECTED_HIGHLIGH_COLOR = UIColor.init(red: 0.15, green: 0.87, blue: 1, alpha: 1)
+    static let SELECTED_HIGHLIGH_COLOR = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.8)
     static let SELECTED_STROKE_WIDTH:CGFloat = 2
     static let UNSELECTED_STROKE_WIDTH:CGFloat = 1
     static let BG_ALPHA:CGFloat = 0.8
     static let FONT_SIZE:CGFloat = 24
     static let BG_FILL_COLOR = UIColor.black
-    static let UNSELECTED_STROKE_COLOR = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.35)
+    static let UNSELECTED_STROKE_COLOR = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.35)
     static let HPBAR_COLOR = UIColor.red
     static let MPBAR_COLOR = QualityColor.RARE
     static let EXPBAR_COLOR = UIColor.green
@@ -242,7 +242,7 @@ class Game {
     static let FRAME_SIZE:CGFloat = 0.3
     static let instance = Game()
 //    var stage:UIStage!
-    var scene:GameScene!
+    var gameScene:GameScene!
     var role:BUnit!
     var char:Character!
     var curStage:MyStage!
@@ -578,8 +578,10 @@ func showMsg(text:String) {
 //    node.isUserInteractionEnabled = true
     stage.addChild(node)
     setTimeout(delay: 3, completion: {
-        node.removeFromParent()
-        stage._messageNode = SKSpriteNode()
+        if stage.contains(node) {
+            node.removeFromParent()
+            stage._messageNode = SKSpriteNode()
+        }
     })
 }
 func createBackground(x: CGFloat = 0, y: CGFloat = 0, width: CGFloat, height: CGFloat, cornerRadius: CGFloat = Game.CORNER_RADIUS) -> SKShapeNode {

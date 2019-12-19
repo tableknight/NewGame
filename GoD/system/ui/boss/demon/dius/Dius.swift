@@ -26,7 +26,7 @@ class Dius:Boss {
         _level = Dius.LEVEL
         _img = SKTexture(imageNamed: "Dius")
         _imgUrl = "Dius"
-        _spellsInuse = [ExposeWeakness(),LineAttack(), BallLighting(), SuperWater(), FireExplode()]
+//        _spellsInuse = [ExposeWeakness(),LineAttack(), BallLighting(), SuperWater(), FireExplode()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

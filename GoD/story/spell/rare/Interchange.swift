@@ -16,6 +16,7 @@ class Interchange: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Interchange
         _quality = Quality.RARE
         _name = "移行换位"
         _tear = 1
@@ -34,15 +35,15 @@ class Interchange: Magical {
             if !t.isEmpty {
                 t._unit._seat = c._unit._seat
                 t._unit._seat = c._unit._seat
-                b?.setRolePos(unit: t)
+                b.setRolePos(unit: t)
             } else {
                 t.removeFromBattle()
                 t.removeFromParent()
-                b?._left[c._unit._seat] = nil
+                b._left[c._unit._seat] = nil
             }
             c._unit._seat = seat
             c._unit._seat = seat
-            b?.setRolePos(unit: c)
+            b.setRolePos(unit: c)
             setTimeout(delay: 1, completion: completion)
         }
     }

@@ -16,6 +16,7 @@ class DancingDragon: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.DancingDragon
         _name = "乱舞"
         _description = "对目标造成2-5次攻击，每次造成攻击力35%的物理伤害"
         _rate = 0.35
@@ -26,9 +27,9 @@ class DancingDragon: Physical {
         hasRevenge = false
         let t = _battle._selectedTarget!
         var max = 3
-        if _battle._curRole._unit._weapon is IberisHand {
-            max = 6
-        }
+//        if _battle._curRole._unit._weapon is IberisHand {
+//            max = 6
+//        }
         let times = 1 + seed(to: max)
         _battle._curRole.actionAttack {
             t.clawSpecial1()
@@ -62,6 +63,6 @@ class DancingDragon: Physical {
         }
     }
     override func selectable() -> Bool {
-        return _battle._curRole._unit.isClose()
+        return _battle._curRole.isClose()
     }
 }

@@ -11,6 +11,7 @@ class AsShadow: Passive {
     
     override init() {
         super.init()
+        _id = Spell.AsShadow
         _name = "如影随从"
         _description = "提升10点律动"
         _quality = Quality.GOOD

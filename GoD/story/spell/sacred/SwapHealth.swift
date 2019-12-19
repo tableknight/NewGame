@@ -10,6 +10,7 @@ import SpriteKit
 class SwapHealth: Magical {
     override init() {
         super.init()
+        _id = Spell.SwapHealth
         _name = "换血"
         _description = "和己方单位交换生命值"
         _quality = Quality.SACRED

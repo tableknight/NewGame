@@ -65,7 +65,7 @@ class ChurchHouse: InnerHouse {
                 sp._goodsList = []
                 for i in 0...6 {
                     let w = l.getWeaponById(id: i)
-                    w.create(level:level)
+//                    w.create(level:level)
                     sp._goodsList.append(w)
                 }
                 sp.create()
@@ -94,13 +94,13 @@ class ChurchHouse: InnerHouse {
                 let l = Loot()
                 sp._goodsList = []
                 for i in 0...3 {
-                    let a = RandomArmor()
-                    if i == 3 {
-                        a.price = 50
-                    }
-                    a.armorId = i
-                    a._name = "\(l.getArmorById(id: i)._name)?"
-                    sp._goodsList.append(a)
+//                    let a = RandomArmor()
+//                    if i == 3 {
+//                        a.price = 50
+//                    }
+//                    a.armorId = i
+//                    a._name = "\(l.getArmorById(id: i)._name)?"
+//                    sp._goodsList.append(a)
                 }
                 sp.create()
                 stage.showPanel(sp)

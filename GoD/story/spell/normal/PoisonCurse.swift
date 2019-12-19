@@ -10,6 +10,7 @@ import SpriteKit
 class PoisonCurse: Magical, Curse {
     override init() {
         super.init()
+        _id = Spell.PoisonCurse
         _name = "毒咒"
         _description = "对目标下毒"
         _quality = Quality.NORMAL

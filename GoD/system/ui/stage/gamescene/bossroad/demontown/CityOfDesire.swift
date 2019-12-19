@@ -12,7 +12,7 @@ class CityOfDesire: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(8, 7, 2, 2), wall: oa4.getCell(8, 9, 2, 2))
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
         _name = "欲望之城"
         _floorSize = 6
         _level = 25
@@ -27,21 +27,21 @@ class CityOfDesire: DemonTown {
         vSize = [6,6,6,8,8,8,10,10,10].one()
 //        halfSize = 6
     }
-    override func getMonsterByIndex(index: Int) -> Creature {
-        if index == 1 {
-            return Ayer()
-        }
-        if index == 2 {
-            return Shuran()
-        }
-        if index == 3 {
-            return Lanis()
-        }
-        if index == 4 {
-            return Angela()
-        }
-        return Ayer()
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        if index == 1 {
+//            return Ayer()
+//        }
+//        if index == 2 {
+//            return Shuran()
+//        }
+//        if index == 3 {
+//            return Lanis()
+//        }
+//        if index == 4 {
+//            return Angela()
+//        }
+//        return Ayer()
+//    }
     
     override func getSelfScene() -> BossRoad {
         return CityOfDesire()
@@ -56,7 +56,7 @@ class CityOfDesire: DemonTown {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()
@@ -89,72 +89,72 @@ class RoleIdlir: UIRole {
         super.init(coder: aDecoder)
     }
 }
-
-class Ayer: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 3
-        _stars.stamina = 1
-        _stars.agility = 1
-        _stars.intellect = 1
-        _name = "艾尔"
-        _img = SKTexture(imageNamed: "ayer")
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class Shuran: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 1
-        _stars.stamina = 3
-        _stars.agility = 1
-        _stars.intellect = 1
-        _name = "舒兰"
-        _img = SKTexture(imageNamed: "shuran")
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class Lanis: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 1
-        _stars.stamina = 1
-        _stars.agility = 3
-        _stars.intellect = 1
-        _name = "兰尼斯"
-        _img = SKTexture(imageNamed: "lanis")
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
-class Angela: Demon {
-    override init() {
-        super.init()
-        _stars.strength = 1
-        _stars.stamina = 1
-        _stars.agility = 1
-        _stars.intellect = 3
-        _name = "安吉拉"
-        _img = SKTexture(imageNamed: "angela")
-    }
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-    }
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-    }
-}
+//
+//class Ayer: Demon {
+//    override init() {
+//        super.init()
+//        _stars.strength = 3
+//        _stars.stamina = 1
+//        _stars.agility = 1
+//        _stars.intellect = 1
+//        _name = "艾尔"
+//        _img = SKTexture(imageNamed: "ayer")
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class Shuran: Demon {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1
+//        _stars.stamina = 3
+//        _stars.agility = 1
+//        _stars.intellect = 1
+//        _name = "舒兰"
+//        _img = SKTexture(imageNamed: "shuran")
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class Lanis: Demon {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1
+//        _stars.stamina = 1
+//        _stars.agility = 3
+//        _stars.intellect = 1
+//        _name = "兰尼斯"
+//        _img = SKTexture(imageNamed: "lanis")
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}
+//class Angela: Demon {
+//    override init() {
+//        super.init()
+//        _stars.strength = 1
+//        _stars.stamina = 1
+//        _stars.agility = 1
+//        _stars.intellect = 3
+//        _name = "安吉拉"
+//        _img = SKTexture(imageNamed: "angela")
+//    }
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//    }
+//    override func encode(to encoder: Encoder) throws {
+//        try super.encode(to: encoder)
+//    }
+//}

@@ -11,6 +11,7 @@ class DancingOnIce: Passive {
     
     override init() {
         super.init()
+        _id = Spell.DancingOnIce
         _name = "冰舞"
         _description = "降低100%护甲，提升100点闪避"
         _quality = Quality.SACRED

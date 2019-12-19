@@ -30,11 +30,11 @@ class Observant: Magical {
         status._type = "_observant"
         status._labelText = "O"
         status._timeleft = 5
-        c._extensions.critical += 50
-        c._extensions.destroy += 100
+        c._valueUnit._extensions.critical += 50
+        c._valueUnit._extensions.destroy += 100
         status.timeupAction = {
-            c._extensions.critical -= 50
-            c._extensions.destroy -= 100
+            c._valueUnit._extensions.critical -= 50
+            c._valueUnit._extensions.destroy -= 100
         }
         c.actionCast {
             c.howl() {

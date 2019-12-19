@@ -18,7 +18,7 @@ class Pitheron:Boss {
         _growth.intellect = 1.5
         _race = EvilType.DEMON
         _img = SKTexture(imageNamed: "Pitheron")
-        _spellsInuse = [MagicReflect(), MagicConvert(), BossAttack(), BossAttack(), BossAttack()]
+//        _spellsInuse = [MagicReflect(), MagicConvert(), BossAttack(), BossAttack(), BossAttack()]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

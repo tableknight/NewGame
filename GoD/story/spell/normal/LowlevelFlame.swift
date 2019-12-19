@@ -10,6 +10,7 @@ import SpriteKit
 class LowlevelFlame: Magical {
     override init() {
         super.init()
+        _id = Spell.LowlevelFlame
         isFire = true
         _name = "低阶火焰"
         _description = "对目标造成精神60%的火焰伤害"

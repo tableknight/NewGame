@@ -11,6 +11,7 @@ class Focus: Auro {
     
     override init() {
         super.init()
+        _id = Spell.Focus
         _name = "精神集中"
         _description = "提升全队20点命中"
         _quality = Quality.NORMAL

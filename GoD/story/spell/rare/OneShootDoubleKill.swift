@@ -16,6 +16,7 @@ class OneShootDoubleKill: Physical, BowSkill {
     }
     override init() {
         super.init()
+        _id = Spell.OneShootDoubleKill
         _name = "穿刺射击"
         _description = "对随机目标和身后单位造成攻击90%的物理伤害"
         _quality = Quality.RARE
@@ -26,7 +27,7 @@ class OneShootDoubleKill: Physical, BowSkill {
     }
     
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         //        let role = c._unit

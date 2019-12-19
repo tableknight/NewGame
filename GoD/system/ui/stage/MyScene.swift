@@ -385,7 +385,7 @@ class MyScene: SKSpriteNode {
             this.moveEndAction()
         })
     }
-    internal var _goodsList = Array<Prop>()
+    internal var _goodsList = Array<Item>()
 //    internal var _whichItem = Array<Bool>()
 //    internal var _mixedItemMoney = Array<Bool>()
     internal func deal() {
@@ -701,29 +701,24 @@ class MyScene: SKSpriteNode {
     }
     func getRandomMonterCellItem() -> UIEvil {
         let ue = UIEvil()
-        let index = _monsterEnum.one()
-        let ranMon = getMonsterByIndex(index: index)
-        ue._thisType = index
-        ue.setTexture(ranMon._img)
+        let type = _monsterEnum.one()
+        let md = Minions.data[type]!
+        ue._thisType = type
+        ue.setTexture(SKTexture(imageNamed: md.imgUrl))
         let face = [NORTH,SOUTH,EAST,WEST].one()
         if face == NORTH {
             ue.faceNorth()
-        } else
-            if face == SOUTH {
-                ue.faceSouth()
-            } else
-                if face == WEST {
-                    ue.faceWest()
-                } else
-                    if face == EAST {
-                        ue.faceEast()
+        } else if face == SOUTH {
+            ue.faceSouth()
+        } else if face == WEST {
+            ue.faceWest()
+        } else if face == EAST {
+            ue.faceEast()
         }
         
         return ue
     }
-    func getMonsterByIndex(index:Int) -> Creature {
-        return Creature()
-    }
+    
     func getRandomTower() -> Tower {
         return getTowerByIndex(index: _towerEnum.one())
     }
@@ -791,9 +786,9 @@ class MyScene: SKSpriteNode {
     internal var _shadow = SKTexture(imageNamed: "select.png").getCell(3, 0)
     var _role:BUnit!
     var _mapMatrix:Array<Array<Int>> = []
-    var _itemEnum:Array<Int> = []
+//    var _itemEnum:Array<Int> = []
     var _towerEnum:Array<Int> = []
-    var _monsterEnum:Array<Int> = []
+    var _monsterEnum:Array<String> = []
     var _cellEnum:Array<Int> = []
     var _specialPoints:Array<CGPoint> = []
     var _status = Array<Status>()
@@ -827,7 +822,7 @@ class Chest:UIItem {
             b._level = Game.instance.curStage._curScene._level
             b.setEnemyPart(minions: Array<Creature>())
             let char = Game.instance.char!
-            let cs:Array<Creature> = [char] + char.getReadyMinions()
+            let cs:Array<Unit> = [char] + char.getReadyMinions()
             b.setPlayerPart(roles: cs)
             Game.instance.curStage.addBattle(b)
             b.battleStart()
@@ -853,15 +848,15 @@ class Chest:UIItem {
     }
     private func loot() {
         let l = Loot()
-        l.loot(level: Game.instance.curStage._curScene._level)
-        var list = l.getList()
-        if list.count == 0 {
-            list.append(TheWitchsTear())
-        }
-        let p = LootPanel()
-        p.create(props: list)
-        p.confirmAction = self.confirmAction
-        Game.instance.curStage.showPanel(p)
+//        l.loot(level: Game.instance.curStage._curScene._level)
+//        var list = l.getList()
+//        if list.count == 0 {
+//            list.append(TheWitchsTear())
+//        }
+//        let p = LootPanel()
+//        p.create(props: list)
+//        p.confirmAction = self.confirmAction
+//        Game.instance.curStage.showPanel(p)
         
     }
     private var _x = 0

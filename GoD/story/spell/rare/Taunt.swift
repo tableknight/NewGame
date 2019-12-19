@@ -16,6 +16,7 @@ class Taunt: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Taunt
         _quality = Quality.RARE
         _name = "嘲讽"
         _cooldown = 1

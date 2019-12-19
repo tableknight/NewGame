@@ -19,7 +19,7 @@ class CutThroat: Physical {
         _cooldown = 3
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let c = b._curRole
         let t = _battle._selectedTarget!
         let d = physicalDamage(t)
@@ -32,9 +32,9 @@ class CutThroat: Physical {
 //                        }
                     }
                     for s in t._unit._spellsInuse {
-                        if s is Active {
-                            s._timeleft += 3
-                        }
+//                        if s is Active {
+//                            s._timeleft += 3
+//                        }
                     }
                 }
                 t.darkness1s()

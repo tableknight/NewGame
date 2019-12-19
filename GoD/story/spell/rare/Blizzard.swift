@@ -16,6 +16,7 @@ class Blizzard: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Blizzard
         isWater = true
         _name = "极速冰冻"
         _description = "冻结目标，并且有一定几率冻结目标相邻单位"

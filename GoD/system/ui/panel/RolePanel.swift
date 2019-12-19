@@ -25,6 +25,7 @@ class RolePanel:UIPanel {
                 if _lastSelectedSpellIcon == si {
                     self.hide()
                     let spellPanel = SpellPanel()
+                    spellPanel.isChild = true
                     spellPanel.create(role: _unit)
                     let this = self
                     spellPanel.closeAction = {
@@ -117,9 +118,11 @@ class RolePanel:UIPanel {
         super.init(texture: texture, color: color, size: size)
     }
     
-    func create(unit:Creature) {
+    func create(unit:Unit) {
         createCloseButton()
         _unit = unit
+        var unit = unit
+//        var unit = unit is Character ? unit as! Character : unit as! Creature
         let bUnitRole = BUnit()
         bUnitRole.setUnit(unit: unit)
         _propertyLayer.zPosition = self.zPosition + 2
@@ -249,15 +252,16 @@ class RolePanel:UIPanel {
             _seatNodes.append(_bbm)
             _seatNodes.append(_bbr)
         } else {
+            let u = unit as! Creature
             let gap:CGFloat = 8
-            var b = createStarBar(value: unit._stars.strength, color: QualityColor.NORMAL, y: startY - 8)
-            b = createStarBar(value: unit._growth.strength, color: QualityColor.GOOD, y: b.yAxis - gap)
-            b = createStarBar(value: unit._stars.stamina, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
-            b = createStarBar(value: unit._growth.stamina, color: QualityColor.GOOD, y: b.yAxis - gap)
-            b = createStarBar(value: unit._stars.agility, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
-            b = createStarBar(value: unit._growth.agility, color: QualityColor.GOOD, y: b.yAxis - gap)
-            b = createStarBar(value: unit._stars.intellect, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
-            b = createStarBar(value: unit._growth.intellect, color: QualityColor.GOOD, y: b.yAxis - gap)
+            var b = createStarBar(value: u._stars.strength, color: QualityColor.NORMAL, y: startY - 8)
+            b = createStarBar(value: u._growth.strength, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: u._stars.stamina, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: u._growth.stamina, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: u._stars.agility, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: u._growth.agility, color: QualityColor.GOOD, y: b.yAxis - gap)
+            b = createStarBar(value: u._stars.intellect, color: QualityColor.NORMAL, y: b.yAxis - gap * 2)
+            b = createStarBar(value: u._growth.intellect, color: QualityColor.GOOD, y: b.yAxis - gap)
         }
         
 //        let strength = AttrLabel()
@@ -322,7 +326,7 @@ class RolePanel:UIPanel {
             _attrLucky = addAttrLabel(x: x5, y: y3, text: "幸运", value: bUnitRole.getLucky())
             _attrRevenge = addAttrLabel(x: x5, y: y4, text: "复仇", value: bUnitRole.getRevenge())
         } else {
-            _ = addAttrLabel(x: x5, y: y3, text: "法敏", value: unit._sensitive.toFloat())
+            _ = addAttrLabel(x: x5, y: y3, text: "法敏", value: (unit as! Creature)._sensitive.toFloat())
         }
         _spellY = y6
         loadSpells()
@@ -341,10 +345,10 @@ class RolePanel:UIPanel {
                 //                spellIcon.anchorPoint = CGPoint(x: 0, y: 1)
                 _propertyLayer.addChild(spellIcon)
                 if _unit._spellsInuse.count > i {
-                    spellIcon.iconLabel = _unit._spellsInuse[i]._name
-                    spellIcon.spell = _unit._spellsInuse[i]
-                    spellIcon._displayItemType = _unit._spellsInuse[i]
-                    spellIcon.quality = _unit._spellsInuse[i]._quality
+//                    spellIcon.iconLabel = _unit._spellsInuse[i]._name
+//                    spellIcon.spell = _unit._spellsInuse[i]
+//                    spellIcon._displayItem = _unit._spellsInuse[i]
+//                    spellIcon.quality = _unit._spellsInuse[i]._quality
                 }
                 _listSpells.append(spellIcon)
             }
@@ -496,7 +500,7 @@ class RolePanel:UIPanel {
     private var _attrWaterRes:AttrLabel!
     
     private var _propertyLayer = SKSpriteNode()
-    private var _unit:Creature!
+    private var _unit:Unit!
     private var _listSpells = Array<SpellIcon>()
     private var _lastSelectedSpellIcon = SpellIcon()
     private var _spellInfoPanel:SpellInfo?
@@ -534,16 +538,17 @@ class AttrLabel:SKSpriteNode {
     }
     private var _label = Label()
     private var _text = ""
+    private var _color = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.9)
     var editable:Bool {
         set {
             if newValue {
                 _bg.strokeColor = QualityColor.GOOD
-                _bg.lineWidth = 2
+//                _bg.lineWidth = 2
                 _label.fontColor = QualityColor.GOOD
             } else {
-                _bg.strokeColor = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.75)
-                _bg.lineWidth = 1
-                _label.fontColor = UIColor.init(red: 0.85, green: 0.85, blue: 0.85, alpha: 0.75)
+                _bg.strokeColor = _color
+//                _bg.lineWidth = 1
+                _label.fontColor = _color
             }
         }
         get {
@@ -554,7 +559,9 @@ class AttrLabel:SKSpriteNode {
         set {
             if newValue {
                 _bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -self.size.height), size: self.size), cornerRadius: 3)
-                _bg.strokeColor = UIColor.white
+                _bg.strokeColor = _color
+                _label.fontColor = _color
+                _bg.lineWidth = 1
                 addChild(_bg)
             } else {
                 

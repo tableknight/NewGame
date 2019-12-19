@@ -88,7 +88,7 @@ class LostSpeed:Status {
         _type = Status.LOST_SEPPD
         let this = self
         timeupAction = {
-            this._source._extensions.speed += 10
+            this._source._valueUnit._extensions.speed += 10
             debug("速度恢复")
         }
     }

@@ -20,23 +20,23 @@ class LewisBattle: BossBattle {
             if seat != "" && _playerPart.count > 1 {
                 let spell = SoulControl()
                 spell._seat = seat
-                _selectedSpell = spell
+                _selectedAction = spell
             } else {
                 let sd = seed()
                 if sd < 40 {
-                    _selectedSpell = LewisAttack()
+                    _selectedAction = LewisAttack()
                 } else if sd < 65 {
-                    _selectedSpell = HandOfGod()
+                    _selectedAction = HandOfGod()
                 } else if sd < 80 {
-                    _selectedSpell = PowerUp()
+                    _selectedAction = PowerUp()
                 } else if sd < 90 {
-                    _selectedSpell = OathBreaker()
+                    _selectedAction = OathBreaker()
                 } else {
-                    _selectedSpell = SoulWatch()
+                    _selectedAction = SoulWatch()
                 }
             }
-            _selectedSpell._battle = self
-            _selectedSpell.findTarget()
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
             execOrder()
         } else {
             super.createAI()
@@ -80,44 +80,44 @@ class LewisBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 5 {
-            let i = TrueLie()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = JadeHeart()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 45 {
-            let i = MarkOfHeaven()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = FollowOn()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = TheFear()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: Lewis.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = TrueLie()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = JadeHeart()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 45 {
+//            let i = MarkOfHeaven()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = FollowOn()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = TheFear()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: Lewis.LEVEL)
+//        return list + l.getList()
+//    }
 }
 
 class SoulControl: Magical, BossOnly {
@@ -167,7 +167,7 @@ class LewisAttack: Physical {
         super.init()
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         let damage = physicalDamage(t)
@@ -214,11 +214,11 @@ class HandOfGod: Physical, BossOnly {
                         t.showValue(value: damage) {
                             setTimeout(delay: 2, completion: completion)
                             for s in t._unit._spellsInuse {
-                                if s is Active {
-                                    s._timeleft += 3
-                                    t.showText(text: "DELAYED")
-                                    return
-                                }
+//                                if s is Active {
+//                                    s._timeleft += 3
+//                                    t.showText(text: "DELAYED")
+//                                    return
+//                                }
                             }
                         }
                     }
@@ -249,11 +249,11 @@ class PowerUp: Magical, BossOnly {
         status._labelText = "E"
         let attack = t.getAttack()
         let def = t.getDefence()
-        t._extensions.defence += def
-        t._extensions.attack += attack
+        t._valueUnit._extensions.defence += def
+        t._valueUnit._extensions.attack += attack
         status.timeupAction = {
-            t._extensions.defence -= def
-            t._extensions.attack -= attack
+            t._valueUnit._extensions.defence -= def
+            t._valueUnit._extensions.attack -= attack
         }
         t.addStatus(status: status)
         _battle._curRole.actionCast {
@@ -301,9 +301,9 @@ class OathBreaker:Magical, Curse {
                         s._timeleft = 3
                         s._labelText = "B"
                         let def = t.getDefence() * 0.5
-                        t._extensions.defence -= def
+                        t._valueUnit._extensions.defence -= def
                         s.timeupAction = {
-                            t._extensions.defence += def
+                            t._valueUnit._extensions.defence += def
                         }
                         t.addStatus(status: s)
                     }

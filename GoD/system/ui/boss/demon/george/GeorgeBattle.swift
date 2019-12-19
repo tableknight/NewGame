@@ -49,49 +49,49 @@ class GeorgeBattle: BossBattle {
         return GeorgeAttack()
     }
     
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 95 {
-            let i = FangOfVampire()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 10 {
-            let i = PandoraHeart()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 30 {
-            let i = RingOfReborn()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 5 {
-            let i = TheEye()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = SoundOfWind()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: George.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 95 {
+//            let i = FangOfVampire()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 10 {
+//            let i = PandoraHeart()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 30 {
+//            let i = RingOfReborn()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 5 {
+//            let i = TheEye()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = SoundOfWind()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: George.LEVEL)
+//        return list + l.getList()
+//    }
 }
 
 class GeorgeAttack: BossAttack {
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         let damage = physicalDamage(t)
@@ -140,7 +140,7 @@ class Screaming: Magical, BossOnly {
         _rate = 0.8
     }
     override func cast(completion:@escaping () -> Void) {
-        let b = _battle!
+        let b = _battle
         let t = b._selectedTarget!
         let c = b._curRole
         let damage = magicalDamage(t)

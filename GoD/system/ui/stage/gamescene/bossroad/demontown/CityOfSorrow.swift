@@ -12,7 +12,7 @@ class CityOfSorrow: DemonTown {
         super.init(texture: texture, color: color, size: size)
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
         _name = "悲伤之城"
         _floorSize = 6
         _level = 33
@@ -24,21 +24,21 @@ class CityOfSorrow: DemonTown {
 //    override func createEnemy() {
 //        
 //    }
-    override func getMonsterByIndex(index: Int) -> Creature {
-        if index == 1 {
-            return DreamSucker()
-        }
-        if index == 2 {
-            return TheFallen()
-        }
-        if index == 3 {
-            return DarkWizard()
-        }
-        if index == 4 {
-            return CriticalJoker()
-        }
-        return DreamSucker()
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        if index == 1 {
+//            return DreamSucker()
+//        }
+//        if index == 2 {
+//            return TheFallen()
+//        }
+//        if index == 3 {
+//            return DarkWizard()
+//        }
+//        if index == 4 {
+//            return CriticalJoker()
+//        }
+//        return DreamSucker()
+//    }
     
     override func getSelfScene() -> BossRoad {
         return CityOfSorrow()
@@ -54,7 +54,7 @@ class CityOfSorrow: DemonTown {
         let es = Array<Creature>()
         b.setEnemyPart(minions: es)
         let char = Game.instance.char!
-        let cs:Array<Creature> = [char] + char.getReadyMinions()
+        let cs:Array<Unit> = [char] + char.getReadyMinions()
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()

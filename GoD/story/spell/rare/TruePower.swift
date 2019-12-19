@@ -11,6 +11,7 @@ class TruePower: Passive {
     
     override init() {
         super.init()
+        _id = Spell.TruePower
         _name = "天神下凡"
         _description = "提升10%基础力量"
         _quality = Quality.RARE

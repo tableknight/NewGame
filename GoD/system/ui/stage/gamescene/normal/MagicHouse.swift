@@ -42,17 +42,17 @@ class MagicHouse: InnerHouse {
                                     stage.removeDialog(dlg: dlg)
                                     let sp = SellingPanel()
                                     sp._priceType = 1
-                                    sp._goodsList = [RandomSacredSpell()]
-                                    sp.create()
-                                    sp.hasBuyAction = true
-                                    sp.buyAction = {
-                                        let l = Loot()
-                                        let s = l.getSacredSpell(id: self.seed(max: l.sacredSpellCount))
-                                        let sb = SpellBook()
-                                        sb.spell = s
-                                        Game.instance.char.addProp(p: sb)
-                                    }
-                                    stage.showPanel(sp)
+//                                    sp._goodsList = [RandomSacredSpell()]
+//                                    sp.create()
+//                                    sp.hasBuyAction = true
+//                                    sp.buyAction = {
+//                                        let l = Loot()
+//                                        let s = l.getSacredSpell(id: self.seed(max: l.sacredSpellCount))
+//                                        let sb = SpellBook()
+//                                        sb.spell = s
+//                                        Game.instance.char.addProp(p: sb)
+//                                    }
+//                                    stage.showPanel(sp)
                                 }
             })
             return true
@@ -153,24 +153,24 @@ class MagicHouse: InnerHouse {
         }
         
         let l = Loot()
-        var list = Array<SpellBook>()
+        var list = Array<Item>()
         for _ in 0...9 {
-            let b = SpellBook()
+            let b = Item(Item.SpellBook)
             b._priceType = 1
             let s = self.seed(max: 3)
-            var spell = l.getRandomNormalSpell()
-            if 1 == s {
-                spell = l.getRandomGoodSpell()
-            } else if 2 == s {
-                spell = l.getRandomRareSpell()
-            }
-            b.spell = spell
+//            var spell = l.getRandomNormalSpell()
+//            if 1 == s {
+//                spell = l.getRandomGoodSpell()
+//            } else if 2 == s {
+//                spell = l.getRandomRareSpell()
+//            }
+//            b.spell = spell
             list.append(b)
         }
         _sellingBooks = list
     }
     private let CELL_ROLE = 151
-    private var _sellingBooks = Array<SpellBook>()
+    private var _sellingBooks = Array<Item>()
 }
 
 class Table1:UIItem {

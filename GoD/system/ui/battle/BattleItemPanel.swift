@@ -33,7 +33,7 @@ class BattleItemPanel: UIPanel {
         }
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             close()
-            let item = _lastSelectedIcon._displayItemType as! Item
+            let item = _lastSelectedIcon._displayItem as! Item
             selectedItem = item
             selectAction()
             return
@@ -69,12 +69,12 @@ class BattleItemPanel: UIPanel {
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6
-                let icon = BattlePropIcon()
+                let icon = BattleItemIcon()
                 icon.count = props[i]._count
                 icon.iconLabel = props[i]._name
-                icon._displayItemType = props[i]
+                icon._displayItem = props[i]
                 icon.quality = props[i]._quality
-                icon.timeleft = props[i]._timeleft
+//                icon.timeleft = props[i]._timeleft
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -85,20 +85,20 @@ class BattleItemPanel: UIPanel {
     
     private func getPropsInBattle() -> Array<Item> {
         var ps = Array<Item>()
-        for p in _char._props {
-            if p is SealScroll {
-                if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
-                    
-                } else {
-                    ps.append((p as! Item))
-                }
-            } else if p is Item {
-                let item = p as! Item
-                item._battle = _battle
-                if item._count > 0 && item.usableInBattle && item.selectable() {
-                    ps.append(item)
-                }
-            }
+        for p in _char._items {
+//            if p is SealScroll {
+//                if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
+//                    
+//                } else {
+//                    ps.append((p as! Item))
+//                }
+//            } else if p is Item {
+//                let item = p as! Item
+//                item._battle = _battle
+//                if item._count > 0 && item.usableInBattle && item.selectable() {
+//                    ps.append(item)
+//                }
+//            }
         }
         
         return ps

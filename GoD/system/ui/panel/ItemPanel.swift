@@ -33,7 +33,7 @@ class ItemPanel: UIPanel {
         }
         if _discardButton.contains(touchPoint!) {
             if _lastSelectedIcon != nil {
-                _char.discardProp(p: _lastSelectedIcon._displayItemType as! Item)
+                _char.removeItem(_lastSelectedIcon.displayItem as! Item)
                 pageReload()
                 return
             }
@@ -41,29 +41,20 @@ class ItemPanel: UIPanel {
         for node in _propBox.children {
             if node.contains(touchPoint!) {
                 let icon = node as! Icon
+                let item = icon.displayItem as! Item
                 if icon.selected {
-                    icon.selected = false
-                    if icon._displayItemType is SpellBook {
-                        let spellBook = icon._displayItemType as! SpellBook
-                        if !_char.hasSpell(spell: spellBook.spell) {
-                            _char._spells.append(spellBook.spell)
-                            _char.removeProp(p: spellBook)
-                            pageReload()
-                        } else {
-                            showMsg(text: "\(spellBook.spell._name) 不能重复学习！")
-                        }
-                        return
-                    }
-                    let item = icon._displayItemType as! Item
                     if !item.usable {
                         return
                     }
-                    if item is Potion || item is ExpBook {
+                    icon.selected = false
+                    
+                    if !item.autoCast {
                         let rl = RoleList()
+                        rl.isChild = true
                         let ml = [_char] + _char._minions
                         rl._parentNode = self
                         self.isHidden = true
-                        rl.create(list: ml as! Array<Creature>)
+                        rl.create(list: ml as! Array<Unit>)
                         rl.selectAction = {
                             if item._count > 0 {
                                 let unit = rl._lastSelected!._unit
@@ -79,10 +70,6 @@ class ItemPanel: UIPanel {
                         }
                         Game.instance.curStage.showPanel(rl)
                         return
-                    }
-                    
-                    if item is TownScroll {
-                        Game.instance.curStage.removePanel(self)
                     }
                     item.use()
                     pageReload()
@@ -134,10 +121,10 @@ class ItemPanel: UIPanel {
                 let base = i - (_curPage - 1) * _pageSize
                 let y = base / 6
                 let x = base % 6
-                let icon = PropIcon()
+                let icon = ItemIcon()
                 icon.iconLabel = props[i]._name
                 icon.count = props[i]._count
-                icon._displayItemType = props[i]
+                icon.displayItem = props[i]
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -147,10 +134,10 @@ class ItemPanel: UIPanel {
         }
     }
     
-    private func getPropsCountMoreThan1() -> Array<Prop> {
-        var ps = Array<Prop>()
-        for p in _char._props {
-            if p._count > 0 && !(p is Outfit) {
+    private func getPropsCountMoreThan1() -> Array<Item> {
+        var ps = Array<Item>()
+        for p in _char._items {
+            if p._count > 0 {
                 ps.append(p)
             }
         }
@@ -174,105 +161,105 @@ class ItemPanel: UIPanel {
     }
 }
 
-class PropComponent:SKSpriteNode {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        zPosition = MyScene.UI_LAYER_Z
-        self.size = CGSize(width: cellSize, height: cellSize)
-        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: -cellSize * 0.5, y: -cellSize * 0.5), size: self.size), cornerRadius: 2 )
-        bg.fillColor = UIColor.black
-//        bg.lineWidth = 2
-        _bg = bg
-        addChild(bg)
-        _iconLabel.align = "center"
-        _iconLabel.position.x = cellSize * 0.5
-        _iconLabel.position.y = -cellSize * 0.25
-        _iconLabel.fontSize = cellSize * 0.5
-        addChild(_iconLabel)
-    }
-
-    var armor:Prop {
-        set {
-            _outfit = newValue
-            _armorImg = SKSpriteNode(texture: newValue._img)
-            _bg.strokeColor = QualityColor.getColor(newValue._quality)
-            if newValue.initialized {
-                _bg.lineWidth = 2
-            } else {
-                _bg.lineWidth = 1
-            }
-            addChild(_armorImg)
-            _prop = newValue
-        }
-        get {
-            return _outfit
-        }
-    }
-    private var _prop = Prop()
-    private var _countLabel = Label()
-    var prop:Prop {
-        set {
-            _prop = newValue
-            _armorImg = SKSpriteNode(texture: newValue._img)
-            _bg.strokeColor = QualityColor.getColor(newValue._quality)
-            addChild(_armorImg)
-            
-            var n = ""
-            for s in newValue._name {
-                n.append(s)
-                break
-            }
-            _iconLabel.text = n
-
-            if newValue is Item && !(newValue is SpellBook) {
-                let num = "\((newValue as! Item)._count)"
-                _countLabel.removeFromParent()
-                let count = Label()
-                count.align = "left"
-                count.fontSize = 12
-                count.position.x = -22
-                count.position.y = -cellSize * 0.5 + 2
-                count.text = num
-                //                    count.fontColor = UIColor.black
-                addChild(count)
-                _countLabel = count
-                var width = (4 + 7 * num.count)
-                if num.count < 2 {
-                    width = 14
-                }
-                let shape = SKShapeNode(rect: CGRect(x: Int(-cellSize * 0.5), y: Int(-cellSize * 0.5), width: width, height: 14), cornerRadius: 2)
-                //                    shape.fillColor = UIColor.white
-                addChild(shape)
-            }
-        }
-        get {
-            return _prop
-        }
-    }
-    internal var _iconLabel = Label()
-    private var _selected = false
-    var selected:Bool {
-        set {
-            if newValue {
-                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
-                _bg.lineWidth = 4
-            } else {
-                _bg.strokeColor = QualityColor.getColor(_prop._quality)
-                _bg.lineWidth = 1
-            }
-            _selected = newValue
-        }
-        get {
-            return _selected
-        }
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    var _bg:SKShapeNode!
-    var _outfit = Prop()
-    private var _armorImg = SKSpriteNode()
-
-}
+//class PropComponent:SKSpriteNode {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        zPosition = MyScene.UI_LAYER_Z
+//        self.size = CGSize(width: cellSize, height: cellSize)
+//        let bg = SKShapeNode(rect: CGRect(origin: CGPoint(x: -cellSize * 0.5, y: -cellSize * 0.5), size: self.size), cornerRadius: 2 )
+//        bg.fillColor = UIColor.black
+////        bg.lineWidth = 2
+//        _bg = bg
+//        addChild(bg)
+//        _iconLabel.align = "center"
+//        _iconLabel.position.x = cellSize * 0.5
+//        _iconLabel.position.y = -cellSize * 0.25
+//        _iconLabel.fontSize = cellSize * 0.5
+//        addChild(_iconLabel)
+//    }
+//
+//    var armor:Prop {
+//        set {
+//            _outfit = newValue
+//            _armorImg = SKSpriteNode(texture: newValue._img)
+//            _bg.strokeColor = QualityColor.getColor(newValue._quality)
+//            if newValue.initialized {
+//                _bg.lineWidth = 2
+//            } else {
+//                _bg.lineWidth = 1
+//            }
+//            addChild(_armorImg)
+//            _prop = newValue
+//        }
+//        get {
+//            return _outfit
+//        }
+//    }
+//    private var _prop = Prop()
+//    private var _countLabel = Label()
+//    var prop:Prop {
+//        set {
+//            _prop = newValue
+//            _armorImg = SKSpriteNode(texture: newValue._img)
+//            _bg.strokeColor = QualityColor.getColor(newValue._quality)
+//            addChild(_armorImg)
+//            
+//            var n = ""
+//            for s in newValue._name {
+//                n.append(s)
+//                break
+//            }
+//            _iconLabel.text = n
+//
+//            if newValue is Item && !(newValue is SpellBook) {
+//                let num = "\((newValue as! Item)._count)"
+//                _countLabel.removeFromParent()
+//                let count = Label()
+//                count.align = "left"
+//                count.fontSize = 12
+//                count.position.x = -22
+//                count.position.y = -cellSize * 0.5 + 2
+//                count.text = num
+//                //                    count.fontColor = UIColor.black
+//                addChild(count)
+//                _countLabel = count
+//                var width = (4 + 7 * num.count)
+//                if num.count < 2 {
+//                    width = 14
+//                }
+//                let shape = SKShapeNode(rect: CGRect(x: Int(-cellSize * 0.5), y: Int(-cellSize * 0.5), width: width, height: 14), cornerRadius: 2)
+//                //                    shape.fillColor = UIColor.white
+//                addChild(shape)
+//            }
+//        }
+//        get {
+//            return _prop
+//        }
+//    }
+//    internal var _iconLabel = Label()
+//    private var _selected = false
+//    var selected:Bool {
+//        set {
+//            if newValue {
+//                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+//                _bg.lineWidth = 4
+//            } else {
+//                _bg.strokeColor = QualityColor.getColor(_prop._quality)
+//                _bg.lineWidth = 1
+//            }
+//            _selected = newValue
+//        }
+//        get {
+//            return _selected
+//        }
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//    var _bg:SKShapeNode!
+//    var _outfit = Prop()
+//    private var _armorImg = SKSpriteNode()
+//
+//}
 
 

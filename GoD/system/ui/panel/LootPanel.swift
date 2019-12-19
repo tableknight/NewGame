@@ -16,17 +16,17 @@ class LootPanel:UIPanel {
             Game.instance.curStage.removePanel(self)
             confirmAction()
             for u in _propBox.children {
-                let icon = u as! PropIcon
-                _char.addProp(p: icon._displayItemType as! Prop)
+                let icon = u as! ItemIcon
+//                _char.addProp(p: icon._displayItem as! Prop)
             }
             return
         } else if _discardButton.contains(touchPoint!) {
             for u in _propBox.children {
-                let icon = u as! PropIcon
+                let icon = u as! ItemIcon
                 if icon.selected {
-                    let p = icon._displayItemType as! Prop
-                    let index = _props.firstIndex(of: p)
-                    _props.remove(at: index!)
+//                    let p = icon._displayItem as! Prop
+//                    let index = _props.firstIndex(of: p)
+//                    _props.remove(at: index!)
                 }
             }
             pageReload()
@@ -34,7 +34,7 @@ class LootPanel:UIPanel {
         }
         for u in _propBox.children {
             if u.contains(touchPoint!) {
-                let icon = u as! PropIcon
+                let icon = u as! ItemIcon
                 if icon.selected {
                     icon.selected = false
 //                    let p = icon._displayItemType as! Prop
@@ -68,7 +68,7 @@ class LootPanel:UIPanel {
         
     }
     
-    func create(props:Array<Prop>) {
+    func create(props:Array<Item>) {
         _props = props
         _bgHeight = _standardHeight * 0.5 + cellSize * 1.35
         createCloseButton()
@@ -105,13 +105,13 @@ class LootPanel:UIPanel {
         let gap = cellSize * 1.25
         var i = 0
         for p in _props {
-            let lc = PropIcon()
+            let lc = ItemIcon()
             let y = i / 4
             let mod = i % 4
             lc.iconLabel = p._name
             lc.count = p._count
 //            lc.selected = true
-            lc._displayItemType = p
+            lc._displayItem = p
             lc.iconLabel = p._name
             lc.quality = p._quality
             lc.position.x = startX + mod.toFloat() * gap
@@ -126,7 +126,7 @@ class LootPanel:UIPanel {
         listProps()
     }
     
-    private func removeProp(p:PropComponent) {
+//    private func removeProp(p:ItemIcon) {
 //        let index = _propComponents.index(of: p)
 //        if nil != index {
 //            _propComponents.remove(at: index!)
@@ -134,7 +134,7 @@ class LootPanel:UIPanel {
 //            p.removeFromParent()
 //        }
         
-    }
+//    }
     
     private func addProps() {
 //        let c = Game.instance.char!
@@ -146,7 +146,7 @@ class LootPanel:UIPanel {
     }
     
     private var _propBox = SKSpriteNode()
-    private var _props = Array<Prop>()
+    private var _props = Array<Item>()
     private var _selectButton = Button()
     private var _infoPanel = SKSpriteNode()
     var confirmAction = {}

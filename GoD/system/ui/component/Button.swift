@@ -42,10 +42,10 @@ class Button:SKSpriteNode {
         set {
             _selected = newValue
             if newValue {
-//                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+                _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
                 _bg.lineWidth = Game.SELECTED_STROKE_WIDTH
             } else {
-//                _bg.strokeColor = Game.UNSELECTED_STROKE_COLOR
+                _bg.strokeColor = Game.UNSELECTED_STROKE_COLOR
                 _bg.lineWidth = Game.UNSELECTED_STROKE_WIDTH
             }
         }

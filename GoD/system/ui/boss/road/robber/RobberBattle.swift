@@ -49,36 +49,36 @@ class RobberBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-    override func specialLoot() -> Array<Prop> {
-        var list = Array<Prop>()
-        let lucky = _char._lucky * 0.01 + 1
-        
-        if seedFloat() < lucky * 35 {
-            let mark = ThiefPocket()
-            mark.create()
-            list.append(mark)
-        }
-        
-        if seedFloat() < lucky * 25 {
-            let i = TearCluster()
-            i.create()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 15 {
-            let i = WordlessBook()
-            list.append(i)
-        }
-        
-        if seedFloat() < lucky * 8 {
-            let i = CreationMatrix()
-            i.create()
-            list.append(i)
-        }
-        
-        let l = Loot()
-        l.loot(level: GraveRobber.LEVEL)
-        return list + l.getList()
-    }
+//    override func specialLoot() -> Array<Prop> {
+//        var list = Array<Prop>()
+//        let lucky = _char._lucky * 0.01 + 1
+//        
+//        if seedFloat() < lucky * 35 {
+//            let mark = ThiefPocket()
+//            mark.create()
+//            list.append(mark)
+//        }
+//        
+//        if seedFloat() < lucky * 25 {
+//            let i = TearCluster()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 15 {
+//            let i = WordlessBook()
+//            list.append(i)
+//        }
+//        
+//        if seedFloat() < lucky * 8 {
+//            let i = CreationMatrix()
+//            i.create()
+//            list.append(i)
+//        }
+//        
+//        let l = Loot()
+//        l.loot(level: GraveRobber.LEVEL)
+//        return list + l.getList()
+//    }
 }
 

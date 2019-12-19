@@ -16,6 +16,7 @@ class IceBomb: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.IceBomb
         isFire = true
         _name = "寒冰炸弹"
         _description = "对目标释放寒冰炸弹，使其在下次行动前受到施法者精神80%的寒冰伤害，冰对周围单位造成一半的伤害，有一定几率使其冻结"

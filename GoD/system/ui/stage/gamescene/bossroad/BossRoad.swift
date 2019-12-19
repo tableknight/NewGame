@@ -13,8 +13,7 @@ class BossRoad: AcientRoad {
 //        halfSize = seedFloat(min: 3, max: 7)
         hSize = [8,8,10,10,12,12].one()
         vSize = [8,8,10,10,12,12].one()
-        _itemEnum = [1,1,1,1,2,2,2,2,3]
-        _monsterEnum = [1,2,3,4]
+        _monsterEnum = []
         let oa4 = Game.instance.outside_a4
         _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
         _name = "早宫"
@@ -65,20 +64,20 @@ class BossRoad: AcientRoad {
         }
     }
     
-    override func getMonsterByIndex(index: Int) -> Creature {
-        switch index {
-        case 1:
-            return SnowLady()
-        case 2:
-            return FrozenSlime()
-        case 3:
-            return IceBeast()
-        case 4:
-            return SnowSpirit()
-        default:
-            return SnowLady()
-        }
-    }
+//    override func getMonsterByIndex(index: Int) -> Creature {
+//        switch index {
+//        case 1:
+//            return SnowLady()
+//        case 2:
+//            return FrozenSlime()
+//        case 3:
+//            return IceBeast()
+//        case 4:
+//            return SnowSpirit()
+//        default:
+//            return SnowLady()
+//        }
+//    }
     
     func getSelfScene() -> BossRoad {
         return BossRoad()

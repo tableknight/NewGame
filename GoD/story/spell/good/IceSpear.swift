@@ -10,6 +10,7 @@ import SpriteKit
 class IceSpear: Magical {
     override init() {
         super.init()
+        _id = Spell.IceSpear
         isWater = true
         _name = "冰刺"
         _description = "对目标造成精神30%的冰冷伤害，冻结目标，如果目标已冻结，则造成4倍伤害"
