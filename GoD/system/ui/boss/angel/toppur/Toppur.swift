@@ -43,7 +43,7 @@ class ToppurServant:BossMinion {
     override init() {
         super.init()
         _name = "艾琪"
-        _img = SKTexture(imageNamed: "aiki")
+        _img = SKTexture(imageNamed: "anki")
     }
     override func create(level: CGFloat) {
         _quality = Quality.RARE

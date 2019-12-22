@@ -69,10 +69,10 @@ class SpellRoundButton:RoundButton {
         set {
             _selectable = newValue
             if newValue {
-                _bg.strokeColor = UIColor.lightGray
+//                _bg.strokeColor = UIColor.white
                 self.alpha = 1
             } else {
-                _bg.strokeColor = UIColor.gray
+//                _bg.strokeColor = UIColor.gray
                 self.alpha = 0.5
             }
         }

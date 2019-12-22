@@ -151,6 +151,7 @@ class Spell:Core, Showable, Castable {
     var _quality = Quality.NORMAL
     var _level:CGFloat = 1
     var _tear = 0
+    var _mpCost = 0
     var _speakings = Array<String>()
     var beCritical = false
     private enum CodingKeys: String, CodingKey {

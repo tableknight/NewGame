@@ -103,6 +103,7 @@ class Outfit:Item {
         } else if sd.randomAttrCountMax > sd.randomAttrCountMin {
             _attrCount = seed(min: sd.randomAttrCountMin, max: sd.randomAttrCountMax + 1)
         }
+        createSelfAttrs()
         for attr in sd.attrs {
             let a = Attribute(type: attr.type, level: _level)
             if attr.valueMax > attr.valueMin {
@@ -110,10 +111,20 @@ class Outfit:Item {
             } else if attr.valueMin == attr.valueMax && attr.valueMin != 0 {
                 a._value = attr.valueMin.toFloat()
             }
+            _attrs.append(a)
         }
         
+        createAttrs()
+        createPrice()
     }
-    
+    func isWeapon() -> Bool {
+        let ts = [Outfit.Sword, Outfit.Blunt, Outfit.Dagger, Outfit.Instrument, Outfit.Fist, Outfit.Wand]
+        if ts.firstIndex(of: _type) != nil {
+            return true
+        }
+        
+        return false
+    }
     private func sacredAttrCount() {
         _quality = Quality.SACRED
         _attrCount = seed(min: 3, max: 6)
@@ -343,38 +354,7 @@ class Outfit:Item {
     }
 }
 
-struct Sacred {
-    var effection = ""
-    var type = ""
-    var name = ""
-    var desc = ""
-    var level = 1
-    var price = 0
-    var chance = 0
-    var attrs = Array<SacredAttr>()
-    var randomAttrCountMin = 1
-    var randomAttrCountMax = 1
-    var quality = Quality.SACRED
-    static let data = [
-        Sacred.TrueLie: Sacred(
-            effection: Sacred.TrueLie,
-            type: Outfit.Amulet,
-            name: "真实的谎言",
-            desc: "获得一个额外的技能卡槽",
-            level: 38,
-            price: 889,
-            chance: 5,
-            attrs: [
-                SacredAttr(type: Attribute.AVOID, valueMin: 30, valueMax: 30),
-                SacredAttr(type: Attribute.REVENGE, valueMin: 10, valueMax: 20),
-                SacredAttr(type: Attribute.SPIRIT, valueMin: 30, valueMax: 60)
-            ],
-            randomAttrCountMin: 2,
-            randomAttrCountMax: 2
-        )
-    ]
-    static let TrueLie = "TrueLie"
-}
+
 struct SacredAttr {
     var type = 0
     var valueMin = 0

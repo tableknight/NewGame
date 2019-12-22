@@ -55,6 +55,11 @@ class BUnit: SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _stage = Game.instance.curStage
+        _valueUnit._mains = Mains(stamina: 0, strength: 0, agility: 0, intellect: 0)
+        _valueUnit._extensions = Extensions(attack: 0, defence: 0, speed: 0, accuracy: 0, critical: 0, destroy: 0, avoid: 0, spirit: 0, hp: 0, health: 0, mp: 0, mpMax: 0, mind: 0)
+        _valueUnit._revenge = 0
+        _valueUnit._lucky = 0
+        _valueUnit._rhythm = 0
     }
     var isEmpty = false
     func createEmpty() {
@@ -786,13 +791,13 @@ class BUnit: SKSpriteNode {
         }
     }
     func getActiveSpell() -> Array<Spell> {
-        var spells = Array<Spell>()
-//        for s in _unit._spellsInuse + _unit._spellsHidden + _spellsInBattle {
-//            if s is Active {
-//                spells.append(s)
-//            }
-//        }
-        return spells
+        var ss = Array<Spell>()
+        for s in spells {
+            if s is Active {
+                ss.append(s)
+            }
+        }
+        return ss
     }
     var _status = Dictionary<String, Status>()
     func hasStatus(type:String) -> Bool {
@@ -835,9 +840,18 @@ class BUnit: SKSpriteNode {
     
     func hasSpell(spell:Spell) -> Bool {
         for s in _unit._spellsInuse {
-//            if spell._name == s._name {
-//                return true
-//            }
+            if spell._id == s {
+                return true
+            }
+        }
+        
+        return false
+    }
+    func hasSpell(id:Int) -> Bool {
+        for s in _unit._spellsInuse {
+            if id == s {
+                return true
+            }
         }
         
         return false
@@ -897,24 +911,6 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifRingIs(_ effection:String) -> Bool {
-//        if !(_unit is Character) {
-//            return false
-//        } else {
-//            let c = _unit as! Character
-//            if c._leftRing != nil {
-//                if c._leftRing?._effection == ring._effection {
-//                    return true
-//                }
-//            }
-//            if c._rightRing != nil {
-//                if c._rightRing?._effection == ring._effection {
-//                    return true
-//                }
-//            }
-//        }
-        return false
-    }
     
     func soulstoneIs(_ effection: String) -> Bool {
         if !(_unit is Character) {
@@ -927,19 +923,6 @@ class BUnit: SKSpriteNode {
                 }
             }
         }
-        return false
-    }
-    func ifSoulIs(_ effection:String) -> Bool {
-//        if !(_unit is Character) {
-//            return false
-//        } else {
-//            let c = _unit as! Character
-//            if c._soulStone != nil {
-//                if c._soulStone?._effection == soul._effection {
-//                    return true
-//                }
-//            }
-//        }
         return false
     }
     
@@ -956,19 +939,6 @@ class BUnit: SKSpriteNode {
         }
         return false
     }
-    func ifAmuletIs(_ effection: String) -> Bool {
-//        if !(_unit is Character) {
-//            return false
-//        } else {
-//            let c = _unit as! Character
-//            if c._amulet != nil {
-//                if c._amulet?._effection == amulet._effection {
-//                    return true
-//                }
-//            }
-//        }
-        return false
-    }
     func weaponIs(_ effection:String) -> Bool {
         if !(_unit is Character) {
             return false
@@ -980,19 +950,6 @@ class BUnit: SKSpriteNode {
                 }
             }
         }
-        return false
-    }
-    func ifWeaponIs(_ effection: String) -> Bool {
-//        if !(_unit is Character) {
-//            return false
-//        } else {
-//            let c = _unit as! Character
-//            if c._weapon != nil {
-//                if c._weapon?._effection == weapon._effection {
-//                    return true
-//                }
-//            }
-//        }
         return false
     }
     
@@ -1007,19 +964,6 @@ class BUnit: SKSpriteNode {
                 }
             }
         }
-        return false
-    }
-    func ifShieldIs(_ shield: String) -> Bool {
-//        if !(_unit is Character) {
-//            return false
-//        } else {
-//            let c = _unit as! Character
-//            if c._shield != nil {
-//                if c._shield?._effection == shield._effection {
-//                    return true
-//                }
-//            }
-//        }
         return false
     }
     

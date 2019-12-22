@@ -140,7 +140,6 @@ class ItemIcon: Icon {
                 _label.removeFromParent()
             }
             _count = newValue
-//            quality = newValue!._quality
         }
         get {
             return _count
@@ -169,13 +168,7 @@ class BattleItemIcon: ItemIcon {
     var timeleft:Int {
         set {
             if newValue > 0 {
-//                addChild(_mask)
-//                addChild(_label)
-//                _label.text = "-\(newValue)"
-//                _timeleft = newValue
             } else {
-//                _mask.removeFromParent()
-//                _label.removeFromParent()
             }
         }
         get {

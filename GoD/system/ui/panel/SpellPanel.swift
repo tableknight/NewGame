@@ -33,46 +33,38 @@ class SpellPanel:UIPanel {
             }
             return
         }
-//        let _char = Data.instance._char!
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             if nil == _lastSelectedIcon._displayItem {
                 return
             }
             let spell = _lastSelectedIcon._displayItem as! Spell
-//            if _spellBoxInuse.contains(_lastSelectedIcon) {
-//                let index = _role._spellsInuse.firstIndex(of: spell)
-//                if nil != index {
-//                    loseProperty(spell)
-//                    _role._spellsInuse.remove(at: index!)
-//                } else {
-//                    debug("remove spell in use failed!")
-//                }
-//                if !_char.hasSpell(spell: spell) {
-////                    debug("add spell unused failed in spellpanel")
-//                    _char._spells.append(spell)
-//                } else {
-//                    debug("spell exist in spellpanel \(spell._name)")
-//                }
-////                if spell is Passive {
-////                    (spell as! Passive).off()
-////                }
-//                pageReload()
-//            } else {
-//                if _role._spellsInuse.count < _role._spellCount {
-//                    let index = _char._spells.firstIndex(of: spell)
-//                    if nil != index {
-//                        _char._spells.remove(at: index!)
-//                        _role._spellsInuse.append(spell)
-//                        addProperty(spell)
-//                    } else {
-//                        debug("_char._spells.remove failed! spellpanel")
-//                    }
-////                    if spell is Passive {
-////                        (spell as! Passive).on()
-////                    }
-//                    pageReload()
-//                }
-//            }
+            if _spellBoxInuse.contains(_lastSelectedIcon) {
+                let index = _role._spellsInuse.firstIndex(of: spell._id)
+                if nil != index {
+                    loseProperty(spell)
+                    _role._spellsInuse.remove(at: index!)
+                } else {
+                    debug("remove spell in use failed!")
+                }
+                if !_char.hasSpell(spell: spell) {
+                    _char._spells.append(spell._id)
+                } else {
+                    debug("spell exist in spellpanel \(spell._name)")
+                }
+                pageReload()
+            } else {
+                if _role._spellsInuse.count < _role._spellCount {
+                    let index = _char._spells.firstIndex(of: spell._id)
+                    if nil != index {
+                        _char._spells.remove(at: index!)
+                        _role._spellsInuse.append(spell._id)
+                        addProperty(spell)
+                    } else {
+                        debug("_char._spells.remove failed! spellpanel")
+                    }
+                    pageReload()
+                }
+            }
             _lastSelectedIcon = Icon()
             return
         }
@@ -177,8 +169,6 @@ class SpellPanel:UIPanel {
         _pageSize = 24
         createCloseButton()
         showSpellsInuse()
-//        if Game.instance.char._spells.count > _pageSize {
-//        }
         createPageButtons()
         showSpellsUnused()
         addChild(_spellBoxUnused)
@@ -189,43 +179,42 @@ class SpellPanel:UIPanel {
     private func showSpellsInuse() {
         let spells = _role._spellsInuse
         let startX:CGFloat = getStartX()
-//        let startX = -_standardWidth * 0.5 + _standardGap + cellSize * 0.125
         let startY = _standardHeight * 0.5 - _standardGap
         if spells.count > 0 {
             for i in 0...spells.count - 1 {
                 let x = i % 10
                 let icon = SpellIcon()
-//                icon.iconLabel = spells[i]._name
-//                icon.spell = spells[i]
-//                icon._displayItem = spells[i]
-//                icon.position.y = startY
-//                icon.position.x = startX + cellSize * 1.25 * x.toFloat()
-//                icon.zPosition = self.zPosition + 3
-//                _spellBoxInuse.addChild(icon)
+                let s = Loot.getSpellById(spells[i])
+                icon.iconLabel = s._name
+                icon.spell = s
+                icon._displayItem = s
+                icon.position.y = startY
+                icon.position.x = startX + cellSize * 1.25 * x.toFloat()
+                icon.zPosition = self.zPosition + 3
+                _spellBoxInuse.addChild(icon)
                 
             }
             
         }
     }
-    private func getSpellUnused() -> Array<Spell> {
-        var spells = Array<Spell>()
-//        for s in Game.instance.char._spells {
-//            if _role is Character {
-//                spells.append(s)
-//            } else {
-//                if !(s is BowSkill) && !(s is HandSkill) {
-//                    spells.append(s)
-//                }
-//            }
-//        }
+    private func getSpellUnused() -> Array<Int> {
+        var spells = Array<Int>()
+        for s in Game.instance.char._spells {
+            if _role is Character {
+                spells.append(s)
+            } else {
+                let sp = Loot.getSpellById(s)
+                if !(sp is BowSkill) && !(sp is HandSkill) {
+                    spells.append(s)
+                }
+            }
+        }
         return spells
     }
     private func showSpellsUnused() {
         let spells = getSpellUnused()
-//        let startX:CGFloat = 0
         let startX = -_standardWidth * 0.5 + cellSize * 0.375
         let startY = _standardHeight * 0.5 - _standardGap - cellSize * 1.75
-//        _curPageSpells = Array<SpellComponent>()
         if spells.count > 0 {
             let end = getPageEnd()
             var start = (_curPage - 1) * _pageSize
@@ -239,9 +228,10 @@ class SpellPanel:UIPanel {
                 let y = base / 6
                 let x = base % 6
                 let icon = SpellIcon()
-                icon.iconLabel = spells[i]._name
-                icon.spell = spells[i]
-                icon._displayItem = spells[i]
+                let s = Loot.getSpellById(spells[i])
+                icon.iconLabel = s._name
+                icon.spell = s
+                icon._displayItem = s
                 icon.position.y = startY - (_standardGap + cellSize) * y.toFloat()
                 icon.position.x = startX + (_standardGap + cellSize) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -270,24 +260,6 @@ class SpellPanel:UIPanel {
         Game.instance.curStage.removePanel(self)
         closeAction()
     }
-//    func displayInfos(icon:Icon) {
-//        let spell = icon._displayItemType as! Spell
-////        let id = icon._infosDisplay.getInfosDisplay()
-//        let node = SpellInfo()
-//        node.create(spell: spell)
-//        node.position.x = icon.position.x + cellSize * 0.5 + 5
-//        if icon.position.y < 0 {
-//            node.position.y = icon.position.y + node.getDisplayHeight() - cellSize * 0.5
-//        } else {
-//            node.position.y = icon.position.y + cellSize * 0.5
-//        }
-//        if icon.position.x > cellSize * 4 {
-//            node.position.x = icon.position.x - node.getDisplayWidth()
-//        }
-//        addChild(node)
-//        _infosDisplay = node
-//    }
-//    private var _infosDisplay = SKSpriteNode()
     private var _spellBoxUnused = SKSpriteNode()
     private var _spellBoxInuse = SKSpriteNode()
     var closeAction = {}
@@ -301,19 +273,12 @@ class SpellInfo:SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-//        zPosition = UIStage.PANEL_LAYER + 4
     }
     private var _spell = Spell()
     func create(spell:Spell) {
         _spell = spell
         let startX:CGFloat = cellSize * 0.25
         let startY:CGFloat = -cellSize * 0.25
-        
-//        let i = SKSpriteNode(texture: Data.instance.inside_c.getCell(10, 0))
-//        i.position.x = startX
-//        i.position.y = startY - 12
-//        i.anchorPoint = CGPoint(x: 0, y: 0)
-//        addChild(i)
         
         let name = Label()
         name.text = "[\(_spell._name)]"
@@ -342,9 +307,9 @@ class SpellInfo:SKSpriteNode {
         } else if spell is CloseSkill {
             text += "，需要近战"
         }
-//        if _spell._tear > 0 {
-//            text += "，消耗\(TheWitchsTear.NAME)x\(_spell._tear)"
-//        }
+        if _spell._mpCost > 0 {
+            text += "，消耗法力\(_spell._mpCost)点"
+        }
         des._lineCharNumber = 10
         des._fontSize = cellSize * 0.25
         des.text = text
@@ -362,20 +327,9 @@ class SpellInfo:SKSpriteNode {
         bg.strokeColor = UIColor.lightGray
         addChild(bg)
         
-//        let img = SKShapeNode(rect: CGRect(x: 0, y: 0, width: cellSize, height: cellSize), cornerRadius: 2)
-//        img.position.x = startX
-//        img.position.y = startY - 12
-//        img.strokeColor = QualityColor.getColor(_spell._quality)
-//        addChild(img)
     }
     
     func wandFireMaster() -> Bool {
-//        if _spell.isMagical && _spell.isFire {
-//            let char = Data.instance._char!
-//            if char._spells.index(of: _spell) != nil || char._spellsInuse.index(of: _spell) != nil {
-//                return true
-//            }
-//        }
         
         return false
     }

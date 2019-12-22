@@ -83,6 +83,14 @@ class SelectDocument: UIPanel {
         scene.setRole(x: 2, y: 1, role: role)
         stage.loadScene(scene: scene)
         stage.createMenu()
+//        Game.instance.char._spellsInuse.append(Spell.LowlevelFlame)
+//        Game.instance.char._level = 40
+//        let tr = Outfit(Outfit.Amulet)
+//        tr.create(effection: Sacred.TrueLie)
+//        Game.instance.char.addItem(tr)
+        
+//        let sb = Loot().getSpellBook()
+//        Game.instance.char.addItem(sb)
         Game.instance.gameScene.addChild(stage)
     }
     private func reload() {
@@ -169,9 +177,23 @@ class SelectDocument: UIPanel {
         e.addItem(p)
         let ts = Item(Item.TownScroll)
         e.addItem(ts)
-        e.hasWeapon = true
-        e.hasShield = true
-        e.hasMark = true
+        
+        let ps = Item(Item.SealScroll)
+        e.addItem(ps)
+        
+        for i in 1...8 {
+            e.addItem(Loot.getSacredAmulet(id: i))
+        }
+        for i in 1...6 {
+            e.addItem(Loot.getSacredBow(id: i))
+        }
+        for i in 1...6 {
+            e.addItem(Loot.getSacredBlunt(id: i))
+        }
+        
+//        let b = Battle()
+//        b.showLootItems(e._items)
+        
         e._minionsCount = 2
         e._spellCount = 3
         e._levelPoint = 5
@@ -192,9 +214,9 @@ class SelectDocument: UIPanel {
         stage.createMenu()
         selectImage.removeFromParent()
         
-        let sword = Outfit(Outfit.Sword)
-        sword.create(level: 10)
-        e.addItem(sword)
+//        let sword = Outfit(Outfit.Sword)
+//        sword.create(level: 10)
+//        e.addItem(sword)
         
         self.removeFromParent()
         Game.instance.gameScene.addChild(stage)

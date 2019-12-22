@@ -827,9 +827,7 @@ class Chest:UIItem {
             Game.instance.curStage.addBattle(b)
             b.battleStart()
             b.defeatAction = {
-//                self.loot()
                 let l = Loot()
-//                let char = Game.instance.char!
                 let roles = b._playerPart
                 for c in roles {
                     let exp = l.getExp(selfUnit: c, enemyLevel: Game.instance.curStage._curScene._level) * 10
@@ -848,11 +846,12 @@ class Chest:UIItem {
     }
     private func loot() {
         let l = Loot()
-//        l.loot(level: Game.instance.curStage._curScene._level)
-//        var list = l.getList()
-//        if list.count == 0 {
-//            list.append(TheWitchsTear())
-//        }
+        l.loot(level: Game.instance.curStage._curScene!._level.toInt())
+        var list = l.getList()
+        if list.count == 0 {
+            list.append(Item(Item.Tear))
+        }
+        Loot.showLootItems(list)
 //        let p = LootPanel()
 //        p.create(props: list)
 //        p.confirmAction = self.confirmAction

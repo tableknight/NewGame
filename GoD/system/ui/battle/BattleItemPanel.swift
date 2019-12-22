@@ -74,7 +74,6 @@ class BattleItemPanel: UIPanel {
                 icon.iconLabel = props[i]._name
                 icon._displayItem = props[i]
                 icon.quality = props[i]._quality
-//                icon.timeleft = props[i]._timeleft
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
                 icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
                 icon.zPosition = self.zPosition + 3
@@ -86,19 +85,18 @@ class BattleItemPanel: UIPanel {
     private func getPropsInBattle() -> Array<Item> {
         var ps = Array<Item>()
         for p in _char._items {
-//            if p is SealScroll {
-//                if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
-//                    
-//                } else {
-//                    ps.append((p as! Item))
-//                }
-//            } else if p is Item {
-//                let item = p as! Item
-//                item._battle = _battle
-//                if item._count > 0 && item.usableInBattle && item.selectable() {
-//                    ps.append(item)
-//                }
-//            }
+            if p._type == Item.SealScroll {
+                if Game.instance.curStage._curScene is BossRoad || _battle is BossBattle{
+                    
+                } else {
+                    ps.append(p)
+                }
+            } else {
+                p._battle = _battle
+                if p._count > 0 && p.castable && p.selectable() {
+                    ps.append(p)
+                }
+            }
         }
         
         return ps

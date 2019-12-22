@@ -17,19 +17,8 @@ class LootPanel:UIPanel {
             confirmAction()
             for u in _propBox.children {
                 let icon = u as! ItemIcon
-//                _char.addProp(p: icon._displayItem as! Prop)
+                _char.addItem(icon._displayItem as! Item)
             }
-            return
-        } else if _discardButton.contains(touchPoint!) {
-            for u in _propBox.children {
-                let icon = u as! ItemIcon
-                if icon.selected {
-//                    let p = icon._displayItem as! Prop
-//                    let index = _props.firstIndex(of: p)
-//                    _props.remove(at: index!)
-                }
-            }
-            pageReload()
             return
         }
         for u in _propBox.children {

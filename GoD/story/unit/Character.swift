@@ -24,6 +24,26 @@ class Character: Unit {
     }
     
     func hasSpell(spell:Spell) -> Bool {
+        return hasSpell(id: spell._id)
+    }
+    func hasSpell(id:Int) -> Bool {
+        var spells = _spells + _spellsInuse
+        for m in _minions {
+            spells += m._spellsInuse
+        }
+        for m in _minions {
+            spells += m._spellsInuse
+        }
+        for m in _storedMinions {
+            spells += m._spellsInuse
+        }
+        
+        for s in spells {
+            if s == id {
+                return true
+            }
+        }
+
         return false
     }
     func hasSpellHidden(spell:Spell) -> Bool {
@@ -77,8 +97,21 @@ class Character: Unit {
             _items.insert(item, at: 0)
         }
     }
-    func removeItem(_ item:Item) {
-        
+    func removeItem(_ item:Item, _ count:Int = 1) {
+        if item is Outfit {
+            _armors.remove(at: _armors.firstIndex(of: item as! Outfit)!)
+            return
+        }
+        for idx in 0..._items.count - 1 {
+            let i = _items[idx]
+            if i._type == item._type {
+                i._count -= count
+                if i._count < 1 {
+                    _items.remove(at: idx)
+                }
+                break
+            }
+        }
     }
     func searchItem(type:String) -> Item? {
         return nil

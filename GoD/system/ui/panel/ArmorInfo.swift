@@ -24,7 +24,7 @@ class ArmorInfo:SKSpriteNode {
         let name = Label()
         var nameText = armor._name
         if armor._quality == Quality.SACRED {
-            nameText = armor._outfitName + " · " + armor._name
+            nameText = getOutfitNameText(armor._type) + " · " + armor._name
         }
         name.text = "Lv\(armor._level) [\(nameText)]"
         name.fontSize = 24
@@ -204,6 +204,49 @@ class ArmorInfo:SKSpriteNode {
 //        //        img.lineWidth = 2
 //        addChild(img)
 
+    }
+    
+    func getOutfitNameText(_ type:String) -> String {
+        if type ==  Outfit.Amulet {
+            return "项链"
+        }
+        if type ==  Outfit.Shield {
+            return "盾"
+        }
+        if type ==  Outfit.Ring {
+            return "戒指"
+        }
+        if type ==  Outfit.MagicMark {
+            return "魔印"
+        }
+        if type ==  Outfit.SoulStone {
+            return "灵魂石"
+        }
+        if type ==  Outfit.Sword {
+            return "剑"
+        }
+        if type ==  Outfit.Wand {
+            return "法杖"
+        }
+        if type ==  Outfit.Instrument {
+            return "法器"
+        }
+        if type ==  Outfit.Dagger {
+            return "匕首"
+        }
+        if type ==  Outfit.Fist {
+            return "拳套"
+        }
+        if type ==  Outfit.Blunt {
+            return "钝器"
+        }
+        if type ==  Outfit.Bow {
+            return "弓"
+        }
+        if type ==  Outfit.EarRing {
+            return "耳环"
+        }
+        return ""
     }
     
     required init?(coder aDecoder: NSCoder) {

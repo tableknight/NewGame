@@ -29,9 +29,9 @@ class Refresh: Magical {
             return
         }
         _battle._curRole.mixed2(index: 13) {
-            let ss = self._battle._curRole._unit._spellsInuse
+            let ss = self._battle._curRole.spells
             for s in ss {
-//                s._timeleft = 0
+                s._timeleft = 0
             }
             self._timeleft = 5
             self._battle.hideOrder()

@@ -16,8 +16,8 @@ class NPCBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    override func defeat() {
-        if victory {
+    override func victorys() {
+        if isVictory {
             return
         }
 //        let l = Loot()
@@ -31,7 +31,7 @@ class NPCBattle: BossBattle {
 //                l.loot(level: u._unit._level)
 //            }
 //        }
-        victory = true
+        isVictory = true
         let list = specialLoot()
         
         fadeOutBattle()

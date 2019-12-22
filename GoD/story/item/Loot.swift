@@ -14,7 +14,6 @@ class Loot: Core {
     override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
     }
-    var externalLootAction = {}
     override init() {
         super.init()
         if nil != Game.instance.char {
@@ -169,13 +168,7 @@ class Loot: Core {
             }
         }
         
-        externalLootAction()
-//        return _props
     }
-    
-//    func createList() -> Array<Prop> {
-//
-//    }
     
     func getExp(selfUnit:BUnit, enemyLevel:CGFloat) -> CGFloat {
         let selfLevel = selfUnit._unit._level
@@ -201,17 +194,18 @@ class Loot: Core {
         let sed = seed()
         var s:Spell!
         
-//        if sed < 40 {
-//            s = getRandomNormalSpell()
-//        } else if sed < 70 {
-//            s = getRandomGoodSpell()
-//        } else if sed < 96 {
-//            s = getRandomRareSpell()
-//        } else {
-//            s = getRandomSacredSpell()
-//        }
+        if sed < 40 {
+            s = Loot.getRandomNormalSpell()
+        } else if sed < 70 {
+            s = Loot.getRandomGoodSpell()
+        } else if sed < 96 {
+            s = Loot.getRandomRareSpell()
+        } else {
+            s = Loot.getRandomSacredSpell()
+        }
         let sb = Item(Item.SpellBook)
-//        sb.spell = s
+        sb.spell = s
+        
         return sb
     }
 //    static func getAllSpells() -> Array<Spell> {
@@ -240,20 +234,20 @@ class Loot: Core {
 //        spells.append(BurningOut())
 //        spells.append(BurnHeart())
 //        //--------------
-//        return spells
+//        return spellsgetNormalSpell(id: seed(min: 1001, max: 1024))
 //    }
-//    func getRandomNormalSpell() -> Spell {
-//        return getNormalSpell(id: seed(to: normalSpellCount))
-//    }
-//    func getRandomGoodSpell() -> Spell {
-//        return getGoodSpell(id: seed(to: goodSpellCount))
-//    }
-//    func getRandomRareSpell() -> Spell {
-//        return getRareSpell(id: seed(to: rareSpellCount))
-//    }
-//    func getRandomSacredSpell() -> Spell {
-//        return getSacredSpell(id: seed(to: sacredSpellCount))
-//    }
+    static func getRandomNormalSpell() -> Spell {
+        return Loot.getNormalSpell(id: Core().seed(min: 1001, max: 1024))
+    }
+    static func getRandomGoodSpell() -> Spell {
+        return Loot.getGoodSpell(id: Core().seed(min: 2001, max: 2028))
+    }
+    static func getRandomRareSpell() -> Spell {
+        return Loot.getRareSpell(id: Core().seed(min: 3001, max: 3031))
+    }
+    static func getRandomSacredSpell() -> Spell {
+        return Loot.getSacredSpell(id: Core().seed(min: 4001, max: 4036))
+    }
     let normalSpellCount = 22
     static func getNormalSpell(id:Int) -> Spell {
         switch id {
@@ -301,12 +295,12 @@ class Loot: Core {
             return PoisonCurse()
         case Spell.ColdWind:
             return ColdWind()
+        case Spell.Heal:
+            return Heal()
         default:
             return Attack()
         }
     }
-    var _goodSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11]
-    let goodSpellCount = 26
     static func getGoodSpell(id:Int) -> Spell {
         switch id {
         case Spell.BloodThirsty:
@@ -361,6 +355,8 @@ class Loot: Core {
             return SetTimeBack()
         case Spell.AsShadow:
             return AsShadow()
+        case Spell.Predict:
+            return Predict()
         default:
             return Attack()
         }
@@ -430,6 +426,8 @@ class Loot: Core {
             return Ignite()
         case Spell.Blizzard:
             return Blizzard()
+        case Spell.ShootTwo:
+            return ShootTwo()
         default:
             return Attack()
         }
@@ -616,28 +614,38 @@ class Loot: Core {
 //        }
 //    }
 //    var _sacredAmulets = [1,2,3,4,5,6,7,8]
-//    func getSacredAmulet(id:Int) -> Amulet {
-//        switch id {
-//        case 1:
-//            return TrueLie()
-//        case 2:
-//            return MedalOfCourage()
-//        case 3:
-//            return FangOfVampire()
-//        case 4:
-//            return MoonShadow()
-//        case 5:
-//            return EternityNight()
-//        case 6:
-//            return Sparkling()
-//        case 7:
-//            return MedalOfHero()
-//        case 8:
-//            return JadeHeart()
-//        default:
-//            return TrueLie()
-//        }
-//    }
+    static func getSacredAmulet(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Amulet)
+        switch id {
+            case 1:
+                outfit.create(effection: Sacred.TrueLie)
+                break
+            case 2:
+                outfit.create(effection: Sacred.MedalOfCourage)
+                break
+            case 3:
+                outfit.create(effection: Sacred.FangOfVampire)
+                break
+            case 4:
+                outfit.create(effection: Sacred.MoonShadow)
+                break
+            case 5:
+                outfit.create(effection: Sacred.EternityNight)
+                break
+            case 6:
+                outfit.create(effection: Sacred.Sparkling)
+                break
+            case 7:
+                outfit.create(effection: Sacred.MedalOfHero)
+                break
+            case 8:
+                outfit.create(effection: Sacred.HeartOfJade)
+                break
+            default:
+                break
+        }
+        return outfit
+    }
 //    var _sacredRings = [1,2,3,4,5,6,7,8,9,10]
 //    func getSacredRing(id:Int) -> Ring {
 //        switch id {
@@ -717,24 +725,32 @@ class Loot: Core {
 //        }
 //    }
 //    var _sacredBlunts = [1,2,3,4,5]
-//    func getSacredBlunt(id:Int) -> Blunt {
-//        switch id {
-//        case 1:
-//            return IberisThignbone()
-//        case 2:
-//            return GiantFang()
-//        case 3:
-//            return ThorsHammer()
-//        case 4:
-//            return HolyPower()
-//        case 5:
-//            return IdyllssHand()
-//        case 6:
-//            return BansMechanArm()
-//        default:
-//            return IberisThignbone()
-//        }
-//    }
+    static func getSacredBlunt(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Blunt)
+        switch id {
+            case 1:
+                outfit.create(effection: Sacred.IberisThignbone)
+                break
+            case 2:
+                outfit.create(effection: Sacred.GiantFang)
+                break
+            case 3:
+                outfit.create(effection: Sacred.ThorsHammer)
+                break
+            case 4:
+                outfit.create(effection: Sacred.HolyPower)
+                break
+            case 5:
+                outfit.create(effection: Sacred.IdyllssHand)
+                break
+            case 6:
+                outfit.create(effection: Sacred.BansMechanArm)
+                break
+            default:
+                break
+        }
+        return outfit
+    }
 //    var _sacredMarks = [1,2,3,4,5,6,7]
 //    func getSacredMark(id:Int) -> MagicMark {
 //        switch id {
@@ -757,24 +773,32 @@ class Loot: Core {
 //        }
 //    }
 //    var _sacredBows = [1,2,3,4,5,6]
-//    func getSacredBow(id:Int) -> Bow {
-//        switch id {
-//        case 1:
-//            return Hawkeye()
-//        case 2:
-//            return Boreas()
-//        case 3:
-//            return Skylark()
-//        case 4:
-//            return SoundOfWind()
-//        case 5:
-//            return Aonena()
-//        case 6:
-//            return FollowOn()
-//        default:
-//            return Hawkeye()
-//        }
-//    }
+    static func getSacredBow(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Bow)
+        switch id {
+            case 1:
+                outfit.create(effection: Sacred.Hawkeye)
+                break
+            case 2:
+                outfit.create(effection: Sacred.Boreas)
+                break
+            case 3:
+                outfit.create(effection: Sacred.Skylark)
+                break
+            case 4:
+                outfit.create(effection: Sacred.SoundOfWind)
+                break
+            case 5:
+                outfit.create(effection: Sacred.Aonena)
+                break
+            case 6:
+                outfit.create(effection: Sacred.FollowOn)
+                break
+            default:
+                break
+        }
+        return outfit
+    }
 //    var _sacredFists = [1,2,3,4,5]
 //    func getSacredFist(id:Int) -> Fist {
 //        switch id {
@@ -866,5 +890,70 @@ class Loot: Core {
 //        _sacredMarks = []
 //        _sacredBows = []
 //        _sacredEarrings = []
+    }
+    static func showLootItems(_ list:Array<Item>) {
+        let cellSize = Game.instance.cellSize
+        let node = SKSpriteNode()
+        let fontSize = cellSize * 0.5
+        var newList = Array<Item>()
+        for item in list {
+            if item.stackable {
+                var exist = false
+                for ni in newList {
+                    if item._type == ni._type {
+                        ni._count += item._count
+                        exist = true
+                        break
+                    }
+                }
+                if !exist {
+                    newList.append(item)
+                }
+            } else {
+                newList.append(item)
+            }
+        }
+        let width = (11 * fontSize.toInt() + 100).toFloat()
+        let height = newList.count.toFloat() * fontSize + (cellSize * 2)
+        let startY = newList.count.toFloat() * fontSize * 0.5
+        var y:CGFloat = 0
+        for i in newList {
+            var text = "你获得了[\(i._name)]"
+            if i.stackable {
+                text += "x\(i._count)"
+            }
+            Game.instance.char.addItem(i)
+            let l = Label()
+            l.fontSize = fontSize
+            l.align = "center"
+            l.fontColor = UIColor.white
+            l.text = text
+            l.position.y = startY - y * fontSize
+            l.alpha = 0.9
+            node.addChild(l)
+            y += 1
+        }
+        let rect = CGRect(x: -width * 0.5, y: -height * 0.5, width: width, height: height)
+        let bg = SKShapeNode(rect: rect, cornerRadius: 12)
+        bg.fillColor = UIColor.black
+        bg.alpha = 0.65
+        node.addChild(bg)
+        
+        let border = SKShapeNode(rect: rect, cornerRadius: 4)
+        border.lineWidth = 2
+        node.addChild(border)
+        
+        node.zPosition = 1200
+        let stage = Game.instance.curStage!
+        stage._messageNode.removeFromParent()
+        stage._messageNode = node
+    //    node.isUserInteractionEnabled = true
+        stage.addChild(node)
+        setTimeout(delay: 3, completion: {
+            if stage.contains(node) {
+                node.removeFromParent()
+                stage._messageNode = SKSpriteNode()
+            }
+        })
     }
 }

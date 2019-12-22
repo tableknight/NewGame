@@ -106,14 +106,14 @@ class Unit:Core {
     
     var _mains:Mains = Mains(stamina:0, strength: 0, agility: 0, intellect: 0)
     var _extensions:Extensions = Extensions(
-        attack: 20,
+        attack: 40,
         defence: 20,
         speed: 0,
         accuracy: 100,
         critical: 15,
         destroy: 0,
         avoid: 15,
-        spirit: 20,
+        spirit: 40,
         hp: 100,
         health: 100,
         mp: 100,

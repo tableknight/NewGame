@@ -32,10 +32,23 @@ class ItemPanel: UIPanel {
             return
         }
         if _discardButton.contains(touchPoint!) {
-            if _lastSelectedIcon != nil {
-                _char.removeItem(_lastSelectedIcon.displayItem as! Item)
-                pageReload()
+            if !_discardButton.selected {
+                _discardButton.selected = true
                 return
+            } else {
+                if _lastSelectedIcon != nil {
+                    let i = _lastSelectedIcon.displayItem as! Item
+                    if i._type == Item.GoldCoin {
+                        return
+                    }
+                    let index = _char._items.firstIndex(of: i)
+                    if nil != index {
+                        _char._items.remove(at: index!)
+                        pageReload()
+                        return
+                    }
+                    
+                }
             }
         }
         for node in _propBox.children {
@@ -81,6 +94,7 @@ class ItemPanel: UIPanel {
                 }
             }
         }
+        _discardButton.selected = false
 
     }
     private var _discardButton = Button()
@@ -96,17 +110,17 @@ class ItemPanel: UIPanel {
         addChild(_discardButton)
         addChild(_propBox)
         createPropList()
-        let moneyLabel = Label()
-        moneyLabel.text = "金钱：\(_char._money)G"
-        moneyLabel.position.x = _label.position.x
-        moneyLabel.position.y = -_label.position.y + _label.fontSize
-        moneyLabel.zPosition = _label.zPosition
-        moneyLabel.fontSize = _label.fontSize
-        addChild(moneyLabel)
-        _labelMoney = moneyLabel
+//        let moneyLabel = Label()
+//        moneyLabel.text = "金钱：\(_char._money)G"
+//        moneyLabel.position.x = _label.position.x
+//        moneyLabel.position.y = -_label.position.y + _label.fontSize
+//        moneyLabel.zPosition = _label.zPosition
+//        moneyLabel.fontSize = _label.fontSize
+//        addChild(moneyLabel)
+//        _labelMoney = moneyLabel
     }
     func reshowMoney() {
-        _labelMoney.text = "金钱：\(_char._money)G"
+//        _labelMoney.text = "金钱：\(_char._money)G"
     }
     func createPropList() {
         let props = getPropsCountMoreThan1()
@@ -136,6 +150,10 @@ class ItemPanel: UIPanel {
     
     private func getPropsCountMoreThan1() -> Array<Item> {
         var ps = Array<Item>()
+        let gc = Item(Item.GoldCoin)
+        gc._count = _char._money
+        gc._description = "一共有\(gc._count)枚金币"
+        ps.append(gc)
         for p in _char._items {
             if p._count > 0 {
                 ps.append(p)

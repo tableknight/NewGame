@@ -14,7 +14,7 @@ extension BUnit {
             return
         }
         _attackActing = true
-        if ifWeaponIs(Outfit.Bow) {
+        if weaponIs(Outfit.Bow) {
             actionShoot(completion: {
                 self._attackActing = false
                 completion()

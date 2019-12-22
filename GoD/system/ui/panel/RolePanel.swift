@@ -264,12 +264,6 @@ class RolePanel:UIPanel {
             b = createStarBar(value: u._growth.intellect, color: QualityColor.GOOD, y: b.yAxis - gap)
         }
         
-//        let strength = AttrLabel()
-//        strength.position.x = startX
-//        strength.position.y = startY - cellSize * 1.5 - cellSize * 0.25
-//        strength.text = "力量"
-//        strength.value = bUnitRole.getStrength().toInt()
-//        _propertyLayer.addChild(strength)
         let attrWidth = cellSize * 1.5 + 3
         let attrHeight = cellSize * 0.75
         let x1 = startX
@@ -345,10 +339,11 @@ class RolePanel:UIPanel {
                 //                spellIcon.anchorPoint = CGPoint(x: 0, y: 1)
                 _propertyLayer.addChild(spellIcon)
                 if _unit._spellsInuse.count > i {
-//                    spellIcon.iconLabel = _unit._spellsInuse[i]._name
-//                    spellIcon.spell = _unit._spellsInuse[i]
-//                    spellIcon._displayItem = _unit._spellsInuse[i]
-//                    spellIcon.quality = _unit._spellsInuse[i]._quality
+                    let s = Loot.getSpellById(_unit._spellsInuse[i])
+                    spellIcon.iconLabel = s._name
+                    spellIcon.spell = s
+                    spellIcon._displayItem = s
+                    spellIcon.quality = s._quality
                 }
                 _listSpells.append(spellIcon)
             }

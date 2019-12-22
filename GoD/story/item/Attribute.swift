@@ -21,7 +21,9 @@ class Attribute: Core {
             midAttrValue(level: l)
         } else if t == Attribute.ATTACK_BASE {
             _name = "攻击"
-            upperAttrValue(level: l)
+            var min = (l * 1.6).toInt()
+            var max = (l * 2.4).toInt()
+            _value = seed(min: min, max: max).toFloat()
         } else if t == Attribute.AVOID {
             _name = "躲闪"
             lowerAttrValue(level: l)

@@ -32,184 +32,140 @@ class OutfitPanel: UIPanel {
         if _discardButton.contains(touchPoint!) {
             if _lastSelectedIcon != nil {
 //                _char.removeProp(p: _lastSelectedIcon._displayItem as! Prop)
+                _char.removeItem(_lastSelectedIcon.displayItem as! Outfit)
                 pageReload()
                 return
             }
         }
         
-//        if _char.hasWeapon {
-//            if outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
-//                return
-//            }
-//        }
-//        if outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!) {
-//            return
-//        }
-//        if _char.hasShield {
-//            if outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!) {
-//                return
-//            }
-//        }
-//        if outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!) {
-//            return
-//        }
-//        if outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!) {
-//            return
-//        }
-//        if _char.hasMark {
-//            if outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!) {
-//                return
-//            }
-//        }
-//        if outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!) {
-//            return
-//        }
+        if outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!) {
+            return
+        }
+        if outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!) {
+            return
+        }
 //        _selectedSlot = nil
         
+        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
+            if nil == _lastSelectedIcon._displayItem {
+                return
+            }
+            let outfit = _lastSelectedIcon._displayItem as! Outfit
+            if outfit._level.toFloat() > _char._level + 3 {
+                showMsg(text: "暂时无法使用这件装备。")
+                return
+            }
+            if outfit.isWeapon() {
+                if _char._weapon != nil {
+                    _char._weapon!.off()
+                    _char.addItem(_char._weapon!)
+                }
+                _weapon.outfit = outfit
+                _char._weapon = outfit
+                _weapon.iconLabel = outfit._name
+                _weapon.quality = outfit._quality
+            }
+            if outfit._type == Outfit.Amulet {
+                if _char._amulet != nil {
+                    _char._amulet!.off()
+                    _char.addItem(_char._amulet!)
+                }
+                _amulet.outfit = outfit
+                _char._amulet = outfit
+                _amulet.iconLabel = outfit._name
+                _amulet.quality = outfit._quality
+            }
+            if outfit._type == Outfit.Shield {
+                if _char._shield != nil {
+                    _char._shield!.off()
+                    _char.addItem(_char._shield!)
+                }
+                _shield.outfit = outfit
+                _char._shield = outfit
+                _shield.iconLabel = outfit._name
+                _shield.quality = outfit._quality
+            }
+            if outfit._type == Outfit.SoulStone {
+                if _char._soulStone != nil {
+                    _char._soulStone!.off()
+                    _char.addItem(_char._soulStone!)
+                }
+                _soulStone.outfit = outfit
+                _char._soulStone = outfit
+                _soulStone.iconLabel = outfit._name
+                _soulStone.quality = outfit._quality
+            }
+            if outfit._type == Outfit.MagicMark {
+                if _char._magicMark != nil {
+                    _char._magicMark!.off()
+                    _char.addItem(_char._magicMark!)
+                }
+                _magicMark.outfit = outfit
+                _char._magicMark = outfit
+                _magicMark.iconLabel = outfit._name
+                _magicMark.quality = outfit._quality
+            }
+            
+            if outfit._type == Outfit.Ring {
+                if outfit._unique && outfit._effection == _char._leftRing?._effection {
+                    _char._leftRing?.off()
+                    _char.addItem(_char._leftRing!)
+                    _char._leftRing = outfit
+                    _leftRing.outfit = outfit
+                    _leftRing.iconLabel = outfit._name
+                    _leftRing.quality = outfit._quality
+                } else if outfit._unique && outfit._effection == _char._rightRing?._effection {
+                    _char._rightRing?.off()
+                    _char.addItem(_char._rightRing!)
+                    _char._rightRing = outfit
+                    _rightRing.outfit = outfit
+                    _rightRing.iconLabel = outfit._name
+                    _rightRing.quality = outfit._quality
+                } else  if _char._leftRing != nil && _char._rightRing != nil {
+                   _char._leftRing!.off()
+                   _char.addItem(_char._leftRing!)
+                   _char._leftRing = outfit
+                   _leftRing.outfit = outfit
+                   _leftRing.iconLabel = outfit._name
+                   _leftRing.quality = outfit._quality
+               } else if _char._leftRing == nil {
+                   _char._leftRing = outfit
+                   _leftRing.outfit = outfit
+                   _leftRing.iconLabel = outfit._name
+                   _leftRing.quality = outfit._quality
+               } else if _char._rightRing == nil {
+                   _char._rightRing = outfit
+                   _rightRing.outfit = outfit
+                   _rightRing.iconLabel = outfit._name
+                   _rightRing.quality = outfit._quality
+               } else {
+                   debug("ring on error in itempanel")
+               }
 
+            }
+            outfit.on()
+            _char.removeItem(outfit)
+            pageReload()
+            _lastSelectedIcon.selected = false
+            _lastSelectedIcon = nil
+            return
+        }
         
-        
-//        if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
-//            if nil == _lastSelectedIcon._displayItem {
-//                return
-//            }
-//            let outfit = _lastSelectedIcon._displayItem as! Outfit
-//            if outfit._level > _char._level + 3 {
-//                showMsg(text: "暂时无法使用这件装备。")
-//                return
-//            }
-//            if _char.hasWeapon && _lastSelectedIcon._displayItem is Weapon {
-//                if _char._weapon != nil {
-//                    _char._weapon!.off()
-//                    _char.addProp(p: _char._weapon!)
-//                }
-//                let weapon = _lastSelectedIcon._displayItem as! Weapon
-//                _char.removeProp(p: weapon)
-//                weapon.on()
-//                _weapon.outfit = weapon
-//                _char._weapon = weapon
-//                _weapon.iconLabel = weapon._name
-//                _weapon.quality = weapon._quality
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//            if _lastSelectedIcon._displayItem is Amulet {
-//                if _char._amulet != nil {
-//                    _char._amulet!.off()
-//                    _char.addProp(p: _char._amulet!)
-//                }
-//                let amulet = _lastSelectedIcon._displayItem as! Amulet
-//                _char.removeProp(p: amulet)
-//                amulet.on()
-//                _amulet.outfit = amulet
-//                _amulet.iconLabel = amulet._name
-//                _amulet.quality = amulet._quality
-//                _char._amulet = amulet
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//            if _char.hasShield && _lastSelectedIcon._displayItem is Shield {
-//                if _char._shield != nil {
-//                    _char._shield!.off()
-//                    _char.addProp(p: _char._shield!)
-//                }
-//                let shield = _lastSelectedIcon._displayItem as! Shield
-//                _char.removeProp(p: shield)
-//                shield.on()
-//                _shield.outfit = shield
-//                _char._shield = shield
-//                _shield.iconLabel = shield._name
-//                _shield.quality = shield._quality
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//            if _lastSelectedIcon._displayItem is Ring {
-//                let ring = _lastSelectedIcon._displayItem as! Ring
-//                if ring._unique && ring._effection == _char._leftRing?._effection {
-//                    _char._leftRing?.off()
-//                    _char.addProp(p: _char._leftRing!)
-//                    _char._leftRing = ring
-//                    _leftRing.outfit = ring
-//                    _leftRing.iconLabel = ring._name
-//                    _leftRing.quality = ring._quality
-//                } else if ring._unique && ring._effection == _char._rightRing?._effection {
-//                    _char._rightRing?.off()
-//                    _char.addProp(p: _char._rightRing!)
-//                    _char._rightRing = ring
-//                    _rightRing.outfit = ring
-//                    _rightRing.iconLabel = ring._name
-//                    _rightRing.quality = ring._quality
-//                } else  if _char._leftRing != nil && _char._rightRing != nil {
-//                   _char._leftRing!.off()
-//                   _char.addProp(p: _char._leftRing!)
-//                   _char._leftRing = ring
-//                   _leftRing.outfit = ring
-//                   _leftRing.iconLabel = ring._name
-//                   _leftRing.quality = ring._quality
-//               } else
-//               if _char._leftRing == nil {
-//                   _char._leftRing = ring
-//                   _leftRing.outfit = ring
-//                   _leftRing.iconLabel = ring._name
-//                   _leftRing.quality = ring._quality
-//               } else if _char._rightRing == nil {
-//                   _char._rightRing = ring
-//                   _rightRing.outfit = ring
-//                   _rightRing.iconLabel = ring._name
-//                   _rightRing.quality = ring._quality
-//               } else {
-//                   debug("ring on error in itempanel")
-//               }
-//
-//                _char.removeProp(p: ring)
-//                ring.on()
-//
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//            if _char.hasMark && _lastSelectedIcon._displayItem is MagicMark {
-//                if _char._magicMark != nil {
-//                    _char._magicMark!.off()
-//                    _char.addProp(p: _char._magicMark!)
-//                }
-//                let mark = _lastSelectedIcon._displayItem as! MagicMark
-//                _char.removeProp(p: mark)
-//                mark.on()
-//                _magicMark.outfit = mark
-//                _magicMark.iconLabel = mark._name
-//                _magicMark.quality = mark._quality
-//                _char._magicMark = mark
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//            if _lastSelectedIcon._displayItem is SoulStone {
-//                if _char._soulStone != nil {
-//                    _char._soulStone!.off()
-//                    _char.addProp(p: _char._soulStone!)
-//                }
-//                let soulStone = _lastSelectedIcon._displayItem as! SoulStone
-//                _char.removeProp(p: soulStone)
-//                soulStone.on()
-//                _soulStone.outfit = soulStone
-//                _soulStone.iconLabel = soulStone._name
-//                _soulStone.quality = soulStone._quality
-//                _char._soulStone = soulStone
-//                pageReload()
-//                _lastSelectedIcon.selected = false
-//                _lastSelectedIcon = nil
-//                return
-//            }
-//        }
         let rlt = showInfosAction(node: _propBox, touchPoint: touchPoint!)
         if !rlt {
             _lastSelectedIcon?.selected = false
@@ -241,7 +197,7 @@ class OutfitPanel: UIPanel {
                     return true
                 } else {
                     slot.outfit?.off()
-//                    _char.addProp(p: slot.outfit!)
+                    _char.addItem(slot.outfit!)
                     slot.outfit = nil
                     _selectedSlot = nil
                     callback()
@@ -412,7 +368,7 @@ class OutfitSlot:Icon {
         set {
             if nil == newValue {
                 _background.lineWidth = Game.UNSELECTED_STROKE_WIDTH
-                _background.strokeColor = Game.UNSELECTED_STROKE_COLOR
+                _background.strokeColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.8)
             } else {
                 _background.lineWidth = Game.SELECTED_STROKE_WIDTH
                 _background.strokeColor = QualityColor.getColor((newValue?._quality)!)
