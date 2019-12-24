@@ -40,11 +40,8 @@ class FireOrFired: Magical {
         _damageValue = fireDamage(t)
         var damage = _damageValue
         var chance = 50
-        if c._unit is Character {
-            let char = c._unit as! Character
-//            if char._leftRing is ApprenticeRing || char._rightRing is ApprenticeRing {
-//                chance = 40
-//            }
+        if c.ringIs(Sacred.ApprenticeRing) {
+            chance = 40
         }
         if chance < seed() {
             damage = c.getHp() * 0.25

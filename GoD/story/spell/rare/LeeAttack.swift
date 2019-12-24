@@ -33,9 +33,9 @@ class LeeAttack:Physical {
                         setTimeout(delay: 1.25, completion: completion)
                         setTimeout(delay: 1, completion: {
                             var rate:CGFloat = 0.5
-//                            if c.amuletIs(FangOfVampire.EFFECTION) {
-//                                rate = 1
-//                            }
+                            if c.amuletIs(Sacred.FangOfVampire) {
+                                rate = 1
+                            }
                             c.showValue(value: abs(damage * rate))
                         })
                     }

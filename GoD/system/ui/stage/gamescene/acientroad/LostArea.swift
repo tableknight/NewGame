@@ -26,34 +26,34 @@ class LostArea: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return LostItem1()
-        case 2:
-            return LostItem2()
-        case 3:
-            return getUIItem1(11, 7)
-        case 4:
-            return getUIItem1(14, 6)
-        case 5:
-            return getUIItem1(8, 7)
-        case 6:
-            return getUIItem1(3, 9)
-        case 7:
-            return getUIItem1(6, 12)
-        case 8:
-            return getUIItem1(4, 12)
-        case 9:
-            return getUIItem1(4, 11)
-        case 21:
-            return LostItem21()
-        case 12:
-            return LostItem12()
-        default:
-            return LostItem2()
-        }
-    }
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return LostItem1()
+//        case 2:
+//            return LostItem2()
+//        case 3:
+//            return getUIItem1(11, 7)
+//        case 4:
+//            return getUIItem1(14, 6)
+//        case 5:
+//            return getUIItem1(8, 7)
+//        case 6:
+//            return getUIItem1(3, 9)
+//        case 7:
+//            return getUIItem1(6, 12)
+//        case 8:
+//            return getUIItem1(4, 12)
+//        case 9:
+//            return getUIItem1(4, 11)
+//        case 21:
+//            return LostItem21()
+//        case 12:
+//            return LostItem12()
+//        default:
+//            return LostItem2()
+//        }
+//    }
     
     private func getUIItem1(_ x:CGFloat, _ y:CGFloat) -> UIItem {
         let item = UIItem()

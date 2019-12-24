@@ -213,12 +213,12 @@ class HandOfGod: Physical, BossOnly {
                     t.actionAttacked {
                         t.showValue(value: damage) {
                             setTimeout(delay: 2, completion: completion)
-                            for s in t._unit._spellsInuse {
-//                                if s is Active {
-//                                    s._timeleft += 3
-//                                    t.showText(text: "DELAYED")
-//                                    return
-//                                }
+                            for s in t.spells {
+                                if s is Active {
+                                    s._timeleft += 3
+                                    t.showText(text: "DELAYED")
+                                    return
+                                }
                             }
                         }
                     }

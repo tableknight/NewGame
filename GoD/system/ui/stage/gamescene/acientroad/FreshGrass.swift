@@ -26,34 +26,34 @@ class FreshGrass: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return getUIItem1(6, 12)
-        case 2:
-            return getUIItem1(4, 11)
-        case 3:
-            return getUIItem1(14, 6)
-        case 4:
-            return getUIItem1(7, 10)
-        case 5:
-            return getUIItem1(6, 9)
-        case 6:
-            return getUIItem1(1, 9)
-        case 7:
-            return getUIItem1(4, 10)
-        case 8:
-            return getUIItem1(4, 12)
-        case 9:
-            return getUIItem1(1, 13)
-        case 10:
-            return getUIItem1(0, 13)
-        case 11:
-            return getUIItem2(5, 12)
-        default:
-            return getUIItem2(5, 12)
-        }
-    }
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return getUIItem1(6, 12)
+//        case 2:
+//            return getUIItem1(4, 11)
+//        case 3:
+//            return getUIItem1(14, 6)
+//        case 4:
+//            return getUIItem1(7, 10)
+//        case 5:
+//            return getUIItem1(6, 9)
+//        case 6:
+//            return getUIItem1(1, 9)
+//        case 7:
+//            return getUIItem1(4, 10)
+//        case 8:
+//            return getUIItem1(4, 12)
+//        case 9:
+//            return getUIItem1(1, 13)
+//        case 10:
+//            return getUIItem1(0, 13)
+//        case 11:
+//            return getUIItem2(5, 12)
+//        default:
+//            return getUIItem2(5, 12)
+//        }
+//    }
     
     override func getWallTexture() -> SKTexture {
         return Game.instance.outside_b.getCell(5, 12, 1, 2)

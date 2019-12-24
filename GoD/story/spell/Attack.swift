@@ -20,7 +20,7 @@ class Attack: Physical {
     }
     override func findTarget() {
         super.findTarget()
-        if _battle._playerUnit.weaponIs("FollowOn") && _battle._curRole.playerPart && !_battle._curRole.isBlocked() {
+        if _battle._playerUnit.weaponIs(Sacred.FollowOn) && _battle._curRole.playerPart && !_battle._curRole.isBlocked() {
             _battle._selectedTarget = _battle._lockedTarget
         }
     }
@@ -31,7 +31,7 @@ class Attack: Physical {
         setTimeout(delay: 0.25, completion: {
             c.actionAttack {
                 self.attack {
-                    if !t.isDead() && c.weaponIs("IdyllssHand") && self.d7() {
+                    if !t.isDead() && c.weaponIs(Sacred.IdyllssHand) && self.d7() {
                         self.attack {
                             completion()
                         }
@@ -66,15 +66,15 @@ class Attack: Physical {
                         completion()
                         
                     }
-                    if c.weaponIs("BansMechanArm") {
+                    if c.weaponIs(Sacred.BansMechanArm) {
                         if self.d4() {
                             let s = Status()
                             s._timeleft = 2
                             s._labelText = "R"
-                            s._type = "BansMechanArm"
+                            s._type = Sacred.BansMechanArm
                             t.addStatus(status: s)
                         }
-                    } else if c.weaponIs("DragonSaliva") {
+                    } else if c.weaponIs(Sacred.DragonSaliva) {
                         setTimeout(delay: 0.5, completion: {
                             let rate = self.fireFactor(from: c, to: t)
                             let fireDamage = damage * 0.3 * rate
@@ -82,29 +82,29 @@ class Attack: Physical {
                             t.showValue(value: fireDamage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
                         })
                     } else
-                        if c.weaponIs("LazesPedicureKnife")  {
+                        if c.weaponIs(Sacred.LazesPedicureKnife)  {
                         if self.d7() {
                             setTimeout(delay: 0.5, completion: {
-                                c.showText(text: "AGILITY +1")
+                                c.showText(text: "+1")
                                 c._valueUnit.agilityChange(value: 1)
                             })
                         }
-                    } else if c.weaponIs("DeepCold") {
+                        } else if c.weaponIs(Sacred.DeepCold) {
                         if self.d3() {
                             t.freezing()
                         }
-                    } else if c.weaponIs("FollowOn") {
+                        } else if c.weaponIs(Sacred.FollowOn) {
                         self._battle._lockedTarget = t
                     }
                     
                     var isGiantFang = false
-                    if c.weaponIs("GiantFang") {
+                    if c.weaponIs(Sacred.GiantFang) {
                         isGiantFang = true
                     }
                     
                     if c.hasSpell(id: Spell.VampireBlood) || isGiantFang {
                         var recoveryFactor:CGFloat = isGiantFang ? 0.2 : 0.3
-                        if c.amuletIs("FangOfVampire") {
+                        if c.amuletIs(Sacred.FangOfVampire) {
                             recoveryFactor *= 2
                         }
                         let d = abs(damage * recoveryFactor)

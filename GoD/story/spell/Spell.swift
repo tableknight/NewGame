@@ -352,10 +352,9 @@ class Spell:Core, Showable, Castable {
         damage *= magicFactor(from: from, to: to)
         if !isMultiple && isFire {
             if from._unit is Character {
-                let char = from._unit as! Character
-//                if char._earRing is LavaCrystal {
-//                    damage *= 1.5
-//                }
+                if from.amuletIs(Sacred.LavaCrystal) {
+                    damage *= 1.5
+                }
             }
         }
         
@@ -436,9 +435,9 @@ class Spell:Core, Showable, Castable {
     }
     private func specialDamage(damage:CGFloat, to:BUnit, from:BUnit) -> CGFloat {
         var d = damage
-//        if from._unit._weapon is NightBlade && to._unit._race == EvilType.RISEN {
-//            d *= 1.25
-//        }
+        if from.weaponIs(Sacred.NightBlade) && to._unit._race == EvilType.RISEN {
+            d *= 1.25
+        }
         
         return d
     }
@@ -499,13 +498,13 @@ class Spell:Core, Showable, Castable {
     }
     func findPlayerMinion() {
         var arr = Array<BUnit>()
-//        for u in _battle._playerPart {
-//            if u._unit is Character {
-//
-//            } else {
-//                arr.append(u)
-//            }
-//        }
+        for u in _battle._playerPart {
+            if u._unit is Character {
+
+            } else {
+                arr.append(u)
+            }
+        }
         if arr.count > 0 {
             _battle._selectedTarget = arr.one()
         }
@@ -1107,6 +1106,7 @@ class Spell:Core, Showable, Castable {
     static let SetTimeBack = 2025
     static let AsShadow = 2026
     static let Predict = 2027
+    static let Combustion = 2028
 
     
     static let Lighting = 3001
@@ -1139,6 +1139,7 @@ class Spell:Core, Showable, Castable {
     static let Ignite = 3028
     static let Blizzard = 3029
     static let ShootTwo = 3030
+    static let LavaExplosion = 3031
     
     static let VampireBlood = 4001
     static let RaceSuperiority = 4002
@@ -1175,5 +1176,11 @@ class Spell:Core, Showable, Castable {
     static let SixShooter = 4033
     static let Zealot = 4034
     static let VeryEcperienced = 4035
+    static let BurnHeart = 4036
+    
+    static let ReduceLife = 5001
+    static let HorribleImage = 5002
+    static let HealOfFlower = 5003
+    static let FacelessSpell = 5004
     
 }

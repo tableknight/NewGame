@@ -143,8 +143,8 @@ class GameScene: SKScene {
     }
     
     func addSacredOutfit() {
-        let l = Loot()
-        let c = Game.instance.char!
+//        let l = Loot()
+//        let c = Game.instance.char!
 //        for i in l._sacredBows {
 //            let b = l.getSacredBow(id: i)
 //            b.create()
@@ -387,7 +387,7 @@ class GameScene: SKScene {
         str.append("stars:\"\(boss._growth.strength),\(boss._growth.stamina),\(boss._growth.agility),\(boss._growth.intellect)\",")
         str.append("spells:[")
         for s in boss._spellsInuse {
-//            str.append(printBossSpell(spell: s))
+            str.append(printBossSpell(spell: Loot.getSpellById(s)))
         }
         str.append("]},")
         debug(str)
@@ -434,9 +434,9 @@ class GameScene: SKScene {
     
     func printBoss() {
         let road = [FearGhost(), GraveRobber(), AssassinMaster(), GiantSpirit(), FireSpirit(), IssThePuppet(), Mimic()]
-        let demon = [Idlir(), George(), Umisa(), Iberis(), Pitheron(), Dius(), Francis()]
-        let angel = [Lewis(), Sumahl(), Micalu(), Toppur()]
-        let npc = [Suvya()]
+//        let demon = [Idlir(), George(), Umisa(), Iberis(), Pitheron(), Dius(), Francis()]
+//        let angel = [Lewis(), Sumahl(), Micalu(), Toppur()]
+//        let npc = [Suvya()]
         
 //        for b in npc {
 //            printBoss(boss: b)

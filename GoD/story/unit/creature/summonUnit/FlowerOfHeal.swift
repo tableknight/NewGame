@@ -17,7 +17,7 @@ class FlowerOfHeal: SummonUnit {
         _sensitive = 100
         _name = "治疗之花"
         _img = SKTexture(imageNamed: "heal_flower.png")
-//        _spellsInuse = [HealOfFlower()]
+        _spellsInuse = [Spell.HealOfFlower]
         _race = EvilType.NATURE
         _last = 5
     }
@@ -38,9 +38,9 @@ class HealOfFlower: Magical {
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
         var rate:CGFloat = 0.15
-//        if Game.instance.char._magicMark is MarkOfVitality {
-//            rate = 0.3
-//        }
+        if Game.instance.char._weapon?._effection == Sacred.MarkOfVitality {
+            rate = 0.3
+        }
         c.actionCast {
             let ts = self.getAdajcentUnits(target: c)
             for u in ts {

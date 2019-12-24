@@ -33,7 +33,7 @@ extension BUnit {
         //        if hasStatus(type: Status.FIRE_LORD) {
         //            val += 20
         //        }
-        if hasAuro(auro: Firelord()) {
+        if hasAuro(id: Spell.Firelord) {
             val += 20
         }
         
@@ -62,7 +62,7 @@ extension BUnit {
         //        if hasStatus(type: Status.FIRE_LORD) {
         //            val += 20
         //        }
-        if hasAuro(auro: Firelord()) {
+        if hasAuro(id: Spell.Firelord) {
             val += 20
         }
         
@@ -119,7 +119,7 @@ extension BUnit {
         if hasSpell(spell: Sacrifice()) {
             acc += 50
         }
-        if hasAuro(auro: Focus()) {
+        if hasAuro(id: Spell.Focus) {
             acc += 20
         }
         if _unit is Character && _stage.hasTowerStatus(status: SpeedPower()) {
@@ -140,9 +140,10 @@ extension BUnit {
     }
     func getSpeed() -> CGFloat {
         var speed = _unit._extensions.speed + _valueUnit._extensions.speed
-//        if _unit.isMainChar && _stage.hasTowerStatus(status: SpeedPower()) {
-//            speed += 50
-//        }
+        if _unit is Character && _stage.hasTowerStatus(status: SpeedPower()) {
+            speed += 50
+        }
+        
         return speed
     }
     func getAttack() -> CGFloat {
@@ -161,13 +162,10 @@ extension BUnit {
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             atk += 50
         }
-        if _unit is Character {
-            let char = _unit as! Character
-//            if char._weapon is BloodBlade {
-//                let rate = getHp() / getHealth()
-//                let plus = char._weapon!.getAttack() * (1 - rate)
-//                atk += plus
-//            }
+        if weaponIs(Sacred.NightBlade) {
+            let rate = getHp() / getHealth()
+            let plus = _unit._extensions.attack * (1 - rate)
+            atk += plus
         }
         return atk
     }
@@ -268,9 +266,9 @@ extension BUnit {
     }
     func getRevenge() -> CGFloat {
         var val = _unit._revenge
-//        if hasSpell(spell: ChaosCore()) {
-//            val += ChaosCore.VALUE
-//        }
+        if hasSpell(id: Spell.ChaosCore) {
+            val += ChaosCore.VALUE
+        }
         return val + _valueUnit._revenge
     }
     func getLucky() -> CGFloat {

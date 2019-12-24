@@ -208,47 +208,31 @@ class Loot: Core {
         
         return sb
     }
-//    static func getAllSpells() -> Array<Spell> {
-//        var spells = Array<Spell>()
-//        for i in 0...normalSpellCount - 1 {
-//            spells.append(Loot.getNormalSpell(id: i))
-//        }
-//        for i in 0...goodSpellCount - 1 {
-//            spells.append(Loot.getGoodSpell(id: i))
-//        }
-//        for i in 0...rareSpellCount - 1 {
-//            spells.append(Loot.getRareSpell(id: i))
-//        }
-//        for i in 0...sacredSpellCount - 1 {
-//            spells.append(Loot.getSacredSpell(id: i))
-//        }
-////        spells.append(BreakDefence())
-//        spells.append(Heal())
-//        spells.append(FireFist())
-//        spells.append(Predict())
-//        spells.append(Petrify())
-//        spells.append(LowlevelFlame())
-//        ///未收录 ------
-//        spells.append(LavaExplode())
-//        spells.append(Combustion())
-//        spells.append(BurningOut())
-//        spells.append(BurnHeart())
-//        //--------------
-//        return spellsgetNormalSpell(id: seed(min: 1001, max: 1024))
-//    }
     static func getRandomNormalSpell() -> Spell {
         return Loot.getNormalSpell(id: Core().seed(min: 1001, max: 1024))
     }
     static func getRandomGoodSpell() -> Spell {
-        return Loot.getGoodSpell(id: Core().seed(min: 2001, max: 2028))
+        return Loot.getGoodSpell(id: Loot.getRandomGoodSpellId())
     }
     static func getRandomRareSpell() -> Spell {
-        return Loot.getRareSpell(id: Core().seed(min: 3001, max: 3031))
+        return Loot.getRareSpell(id: Loot.getRandomSacredSpellId())
     }
     static func getRandomSacredSpell() -> Spell {
-        return Loot.getSacredSpell(id: Core().seed(min: 4001, max: 4036))
+        return Loot.getSacredSpell(id: Loot.getRandomSacredSpellId())
     }
-    let normalSpellCount = 22
+    static func getRandomNormalSpellId() -> Int {
+        return Core().seed(min: 1001, max: 1024)
+    }
+    static func getRandomGoodSpellId() -> Int {
+        return Core().seed(min: 2001, max: 2029)
+    }
+    static func getRandomRareSpellId() -> Int {
+        return Core().seed(min: 3001, max: 3032)
+    }
+    static func getRandomSacredSpellId() -> Int {
+        return Core().seed(min: 4001, max: Loot.LastSacredSpellCountId + 1)
+    }
+    static let LastSacredSpellCountId = 4036
     static func getNormalSpell(id:Int) -> Spell {
         switch id {
         case Spell.Cruel:
@@ -357,13 +341,12 @@ class Loot: Core {
             return AsShadow()
         case Spell.Predict:
             return Predict()
+        case Spell.Combustion:
+            return Combustion()
         default:
             return Attack()
         }
     }
-    var _rareSpellArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-    let rareSpellCount = 31
-    
     static func getRareSpell(id:Int) -> Spell {
         switch id {
         case Spell.Lighting:
@@ -428,6 +411,8 @@ class Loot: Core {
             return Blizzard()
         case Spell.ShootTwo:
             return ShootTwo()
+        case Spell.LavaExplosion:
+            return LavaExplosion()
         default:
             return Attack()
         }
@@ -504,9 +489,27 @@ class Loot: Core {
             return Zealot()
         case Spell.VeryEcperienced:
             return VeryEcperienced()
+        case Spell.BurnHeart:
+            return BurnHeart()
         default:
             return Attack()
         }
+    }
+    static func getSpellUnrecorded(id:Int) -> Spell {
+        if id == Spell.ReduceLife {
+            return ReduceLife()
+        }
+        if id == Spell.HorribleImage {
+            return HorribleImage()
+        }
+        if id == Spell.HealOfFlower {
+            return HealOfFlower()
+        }
+        if id == Spell.FacelessSpell {
+            return FacelessSpell()
+        }
+        
+        return Attack()
     }
     
     func getItem() -> Item {
@@ -564,55 +567,77 @@ class Loot: Core {
         return _props
     }
     var _sacredSwords = [1,2,3,4,5,6,7,8]
-    func getSacredSword(id:Int) -> Outfit {
-//        switch id {
-//        case 1:
-//            return NewSword()
-//        case 2:
-//            return NewSwordPlus()
-//        case 3:
-//            return DragonSlayer()
-//        case 4:
-//            return DragonSaliva()
-//        case 5:
-//            return TheExorcist()
-//        case 6:
-//            return BloodBlade()
-//        case 7:
-//            return ElementalSword()
-//        case 8:
-//            return IberisHand()
-//        default:
-//            return NewSword()
-//        }
-        return Outfit()
+    static func getSacredSword(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Sword)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.NewSword)
+            break
+        case 2:
+            outfit.create(effection: Sacred.NewSwordPlus)
+            break
+        case 3:
+            outfit.create(effection: Sacred.DragonSlayer)
+            break
+        case 4:
+            outfit.create(effection: Sacred.DragonSaliva)
+            break
+        case 5:
+            outfit.create(effection: Sacred.TheExorcist)
+            break
+        case 6:
+            outfit.create(effection: Sacred.BloodBlade)
+            break
+        case 7:
+            outfit.create(effection: Sacred.ElementalSword)
+            break
+        case 8:
+            outfit.create(effection: Sacred.IberisHand)
+            break
+        case 9:
+            outfit.create(effection: Sacred.AssassinsSword)
+            break
+        default:
+            break
+        }
+        return outfit
     }
 //    var _sacredDaggers = [1,2]
-//    func getSacredDagger(id:Int) -> Dagger {
-//        switch id {
-//        case 1:
-//            return NightBlade()
-//        case 2:
-//            return LazesPedicureKnife()
-//        default:
-//            return NightBlade()
-//        }
-//    }
+    static func getSacredDagger(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Dagger)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.NightBlade)
+            break
+        case 2:
+            outfit.create(effection: Sacred.LazesPedicureKnife)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredShields = [1,2,3,4]
-//    func getSacredShield(id:Int) -> Shield {
-//        switch id {
-//        case 1:
-//            return Faceless()
-//        case 2:
-//            return Accident()
-//        case 3:
-//            return FrancisFace()
-//        case 4:
-//            return EvilExpel()
-//        default:
-//            return Faceless()
-//        }
-//    }
+    static func getSacredShield(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Shield)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.Faceless)
+            break
+        case 2:
+            outfit.create(effection: Sacred.Accident)
+            break
+        case 3:
+            outfit.create(effection: Sacred.FrancisFace)
+            break
+        case 4:
+            outfit.create(effection: Sacred.EvilExpel)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredAmulets = [1,2,3,4,5,6,7,8]
     static func getSacredAmulet(id:Int) -> Outfit {
         let outfit = Outfit(Outfit.Amulet)
@@ -647,83 +672,126 @@ class Loot: Core {
         return outfit
     }
 //    var _sacredRings = [1,2,3,4,5,6,7,8,9,10]
-//    func getSacredRing(id:Int) -> Ring {
-//        switch id {
-//        case 1:
-//            return RingOfDead()
-//        case 2:
-//            return IdlirWeddingRing()
-//        case 3:
-//            return ApprenticeRing()
-//        case 4:
-//            return CopperRing()
-//        case 5:
-//            return SilverRing()
-//        case 6:
-//            return DellarsGoldenRing()
-//        case 7:
-//            return LuckyRing()
-//        case 8:
-//            return RingFromElder()
-//        case 9:
-//            return RingOfReborn()
-//        case 10:
-//            return FireCore()
-//        default:
-//            return LuckyRing()
-//        }
-//    }
+    static func getSacredRing(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Ring)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.RingOfDead)
+            break
+        case 2:
+            outfit.create(effection: Sacred.IdlirWeddingRing)
+            break
+        case 3:
+            outfit.create(effection: Sacred.ApprenticeRing)
+            break
+        case 4:
+            outfit.create(effection: Sacred.CopperRing)
+            break
+        case 5:
+            outfit.create(effection: Sacred.SilverRing)
+            break
+        case 6:
+            outfit.create(effection: Sacred.DellarsGoldenRing)
+            break
+        case 7:
+            outfit.create(effection: Sacred.LuckyRing)
+            break
+        case 8:
+            outfit.create(effection: Sacred.RingFromElder)
+            break
+        case 9:
+            outfit.create(effection: Sacred.RingOfReborn)
+            break
+        case 10:
+            outfit.create(effection: Sacred.FireCore)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredSoulstones = [1,2,3]
-//    func getSacredSoulstone(id:Int) -> SoulStone {
-//        switch id {
-//        case 1:
-//            return HeartOfSwamp()
-//        case 2:
-//            return PandoraHeart()
-//        case 3:
-//            return HeartOfTarrasque()
-//        default:
-//            return HeartOfSwamp()
-//        }
-//    }
+    static func getSacredSoulstone(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.SoulStone)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.HeartOfSwamp)
+            break
+        case 2:
+            outfit.create(effection: Sacred.PandoraHeart)
+            break
+        case 3:
+            outfit.create(effection: Sacred.HeartOfTarrasque)
+            break
+        case 4:
+            outfit.create(effection: Sacred.SoulPeace)
+            break
+        case 5:
+            outfit.create(effection: Sacred.GiantSoul)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredInstruments = [1,2,3,4,5,6,7,8]
-//    func getSacredInstrument(id:Int) -> Instrument {
-//        switch id {
-//        case 1:
-//            return TheMonatNotes()
-//        case 2:
-//            return NoPants()
-//        case 3:
-//            return CreationMatrix()
-//        case 4:
-//            return TheSurvive()
-//        case 5:
-//            return TheDeath()
-//        case 6:
-//            return TheSurpass()
-//        case 7:
-//            return TheFear()
-//        case 8:
-//            return TheAbandon()
-//        default:
-//            return TheMonatNotes()
-//        }
-//    }
+    static func getSacredInstrument(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Instrument)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.TheMonatNotes)
+            break
+        case 2:
+            outfit.create(effection: Sacred.NoPants)
+            break
+        case 3:
+            outfit.create(effection: Sacred.CreationMatrix)
+            break
+        case 4:
+            outfit.create(effection: Sacred.TheSurvive)
+            break
+        case 5:
+            outfit.create(effection: Sacred.TheDeath)
+            break
+        case 6:
+            outfit.create(effection: Sacred.TheSurpass)
+            break
+        case 7:
+            outfit.create(effection: Sacred.TheFear)
+            break
+        case 8:
+            outfit.create(effection: Sacred.TheAbandon)
+            break
+        case 9:
+            outfit.create(effection: Sacred.IssHead)
+            break
+        default:
+            break
+
+        }
+        return outfit
+    }
 //    var _sacredWands = [1,2,3,4]
-//    func getSacredWand(id:Int) -> Wand {
-//        switch id {
-//        case 1:
-//            return LightingRod()
-//        case 2:
-//            return FireMaster()
-//        case 3:
-//            return WitchWand()
-//        case 4:
-//            return PuppetMaster()
-//        default:
-//            return LightingRod()
-//        }
-//    }
+    static func getSacredWand(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Wand)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.LightingRod)
+            break
+        case 2:
+            outfit.create(effection: Sacred.FireMaster)
+            break
+        case 3:
+            outfit.create(effection: Sacred.WitchWand)
+            break
+        case 4:
+            outfit.create(effection: Sacred.PuppetMaster)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredBlunts = [1,2,3,4,5]
     static func getSacredBlunt(id:Int) -> Outfit {
         let outfit = Outfit(Outfit.Blunt)
@@ -752,26 +820,41 @@ class Loot: Core {
         return outfit
     }
 //    var _sacredMarks = [1,2,3,4,5,6,7]
-//    func getSacredMark(id:Int) -> MagicMark {
-//        switch id {
-//        case 1:
-//            return PuppetMark()
-//        case 2:
-//            return MarkOfOaks()
-//        case 3:
-//            return MarkOfDeathGod()
-//        case 4:
-//            return MarkOfVitality()
-//        case 5:
-//            return MarkOfHeaven()
-//        case 6:
-//            return MoltenFire()
-//        case 7:
-//            return TheEye()
-//        default:
-//            return PuppetMark()
-//        }
-//    }
+    static func getSacredMark(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.MagicMark)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.PuppetMark)
+            break
+        case 2:
+            outfit.create(effection: Sacred.MarkOfOaks)
+            break
+        case 3:
+            outfit.create(effection: Sacred.MarkOfDeathGod)
+            break
+        case 4:
+            outfit.create(effection: Sacred.MarkOfVitality)
+            break
+        case 5:
+            outfit.create(effection: Sacred.MarkOfHeaven)
+            break
+        case 6:
+            outfit.create(effection: Sacred.MoltenFire)
+            break
+        case 7:
+            outfit.create(effection: Sacred.TheEye)
+            break
+        case 8:
+            outfit.create(effection: Sacred.FireMark)
+            break
+        case 9:
+            outfit.create(effection: Sacred.IssMark)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredBows = [1,2,3,4,5,6]
     static func getSacredBow(id:Int) -> Outfit {
         let outfit = Outfit(Outfit.Bow)
@@ -800,37 +883,50 @@ class Loot: Core {
         return outfit
     }
 //    var _sacredFists = [1,2,3,4,5]
-//    func getSacredFist(id:Int) -> Fist {
-//        switch id {
-//        case 1:
-//            return FingerBone()
-//        case 2:
-//            return LiosHold()
-//        case 3:
-//            return DragonClaw()
-//        case 4:
-//            return NilSeal()
-//        case 5:
-//            return DeepCold()
-//        default:
-//            return FingerBone()
-//        }
-//    }
+    static func getSacredFist(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Fist)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.FingerBone)
+            break
+        case 2:
+            outfit.create(effection: Sacred.LiosHold)
+            break
+        case 3:
+            outfit.create(effection: Sacred.DragonClaw)
+            break
+        case 4:
+            outfit.create(effection: Sacred.NilSeal)
+            break
+        case 5:
+            outfit.create(effection: Sacred.DeepCold)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    var _sacredEarrings = [1,2,3,4]
-//    func getSacredEarring(id:Int) -> EarRing {
-//        switch id {
-//        case 1:
-//            return VerdasTear()
-//        case 2:
-//            return DeepSeaPearl()
-//        case 3:
-//            return EyeOfDius()
-//        case 4:
-//            return LavaCrystal()
-//        default:
-//            return VerdasTear()
-//        }
-//    }
+    static func getSacredEarring(id:Int) -> Outfit {
+        let outfit = Outfit(Outfit.Amulet)
+        switch id {
+        case 1:
+            outfit.create(effection: Sacred.VerdasTear)
+            break
+        case 2:
+            outfit.create(effection: Sacred.DeepSeaPearl)
+            break
+        case 3:
+            outfit.create(effection: Sacred.EyeOfDius)
+            break
+        case 4:
+            outfit.create(effection: Sacred.LavaCrystal)
+            break
+        default:
+            break
+        }
+        return outfit
+    }
 //    private func getSacredOutfit(id:Int) -> Outfit {
 //        switch id {
 //        case 1:

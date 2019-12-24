@@ -1110,9 +1110,9 @@ class Battle: SKSpriteNode {
         if spell.isCurse {
             if _curRole._unit is Character {
                 let char = _curRole._unit as! Character
-//                if char._weapon is WitchWand {
-//                    return true
-//                }
+                if char.weaponIs(Sacred.WitchWand) {
+                    return true
+                }
             }
         }
         return false
@@ -1121,9 +1121,9 @@ class Battle: SKSpriteNode {
         if spell.isMagical && spell.isFire {
             if _curRole._unit is Character {
                 let char = _curRole._unit as! Character
-//                if char._weapon is FireMaster {
-//                    return true
-//                }
+                if char.weaponIs(Sacred.FireMaster) {
+                    return true
+                }
             }
         }
         

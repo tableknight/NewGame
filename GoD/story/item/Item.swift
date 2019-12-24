@@ -363,6 +363,8 @@ class Item:Core, Castable, Showable {
     static let PureFireStone = "PureFireStone"
     
     static let GoldCoin = "GoldCoin"
+    static let RandomArmor = "RandomArmor"
+    static let RandomWeapon = "RandomWeapon"
     
     var targetAll: Bool = false
     var canBeTargetSelf: Bool = false
@@ -384,6 +386,9 @@ class Item:Core, Castable, Showable {
     var usable = false
     var castable = false
     var _spell = -1
+    var _reserveStr = ""
+    var _reserveBool = false
+    var _reserveInt = -1
     
     private enum CodingKeys: String, CodingKey {
         case targetAll
@@ -406,6 +411,9 @@ class Item:Core, Castable, Showable {
         case usable
         case castable
         case _spell
+        case _reserveStr
+        case _reserveBool
+        case _reserveInt
     }
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -430,6 +438,10 @@ class Item:Core, Castable, Showable {
         usable = try values.decode(Bool.self, forKey: .usable)
         castable = try values.decode(Bool.self, forKey: .castable)
         _spell = try values.decode(Int.self, forKey: ._spell)
+        _reserveStr = try values.decode(String.self, forKey: ._reserveStr)
+        _reserveBool = try values.decode(Bool.self, forKey: ._reserveBool)
+        _reserveInt = try values.decode(Int.self, forKey: ._reserveInt)
+        
         try super.init(from: decoder)
     }
     override func encode(to encoder: Encoder) throws {
@@ -455,6 +467,9 @@ class Item:Core, Castable, Showable {
         try container.encode(usable, forKey: .usable)
         try container.encode(castable, forKey: .castable)
         try container.encode(_spell, forKey: ._spell)
+        try container.encode(_reserveStr, forKey: ._reserveStr)
+        try container.encode(_reserveBool, forKey: ._reserveBool)
+        try container.encode(_reserveInt, forKey: ._reserveInt)
     }
 }
 //
@@ -522,6 +537,8 @@ struct ItemData:Codable {
         Item.PureWaterStone: ItemData(type: Item.PureWaterStone, name: "", desc: ""),
         
         Item.GoldCoin: ItemData(type: Item.GoldCoin, name: "金币", stackable: true),
+        
+        Item.RandomArmor: ItemData(type: Item.RandomArmor, name: "防具", price: 12),
         
         
         

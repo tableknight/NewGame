@@ -391,9 +391,9 @@ class AcientRoad: Dungeon {
 //        }
 //    }
 //
-    func getItemByIndex(index:Int) -> UIItem {
-        return UIItem()
-    }
+//    func getItemByIndex(index:Int) -> UIItem {
+//        return UIItem()
+//    }
     
     override func addWall(x: CGFloat, y: CGFloat, item: SKSpriteNode) {
         super.addWall(x: x, y: y, item: item)
@@ -416,18 +416,18 @@ class AcientRoad: Dungeon {
         return PortalFinal()
     }
     
-    func blastItem() -> Bool {
-        let point = getNextPoint()
-        if isPointValid(point: point) {
-            let item = _itemLayer.childNode(withName: getItemName(point))
-            if nil != item && removable(point) {
-                item!.removeFromParent()
-                _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_EMPTY
-                return true
-            }
-        }
-        return false
-    }
+//    func blastItem() -> Bool {
+//        let point = getNextPoint()
+//        if isPointValid(point: point) {
+//            let item = _itemLayer.childNode(withName: getItemName(point))
+//            if nil != item && removable(point) {
+//                item!.removeFromParent()
+//                _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_EMPTY
+//                return true
+//            }
+//        }
+//        return false
+//    }
     func transport() -> Bool {
         var point:CGPoint!
         let position = convertPixelToIndex(x: _role.position.x, y: _role.position.y)

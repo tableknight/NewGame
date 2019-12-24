@@ -51,18 +51,18 @@ class BossRoad: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return WinterItem1()
-        case 2:
-            return WinterItem2()
-        case 3:
-            return WinterItem3()
-        default:
-            return WinterItem2()
-        }
-    }
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return WinterItem1()
+//        case 2:
+//            return WinterItem2()
+//        case 3:
+//            return WinterItem3()
+//        default:
+//            return WinterItem2()
+//        }
+//    }
     
 //    override func getMonsterByIndex(index: Int) -> Creature {
 //        switch index {

@@ -49,7 +49,25 @@ class Character: Unit {
     func hasSpellHidden(spell:Spell) -> Bool {
         return false
     }
-    func removeSpell(spell:Spell) {
+    func removeSpell(id:Int) {
+        var index = _spellsInuse.firstIndex(of: id)
+        if nil != index {
+            _spellsInuse.remove(at: index!)
+            return
+        }
+        index = _spells.firstIndex(of: id)
+        if nil != index {
+            _spells.remove(at: index!)
+            return
+        }
+        for m in _minions + _storedMinions {
+            index = m._spellsInuse.firstIndex(of: id)
+            if nil != index {
+                m._spellsInuse.remove(at: index!)
+                return
+            }
+        }
+        
     }
     func removeSpellHidden(spell:Spell) {
     }
@@ -233,6 +251,11 @@ class Character: Unit {
         try super.encode(to: encoder)
     }
     
-    
+    func weaponIs(_ effection:String) -> Bool {
+        if _weapon?._effection == effection {
+            return true
+        }
+        return false
+    }
     
 }

@@ -43,7 +43,7 @@ class MummyMinion: SummonUnit {
         _name = "木乃伊"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "mummy")
-//        _spellsInuse = [ReduceLife(), HorribleImage()]
+        _spellsInuse = [Spell.ReduceLife, Spell.HorribleImage]
     }
 }
 
@@ -57,7 +57,7 @@ class UndeadWitch: SummonUnit {
         _name = "亡灵巫师"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
-//        _spellsInuse = [IceSpear(), FireBreath()]
+        _spellsInuse = [Spell.IceSpear, Spell.FireBreath]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -76,7 +76,7 @@ class UndeadMinion: SummonUnit {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_2")
-//        _spellsInuse = [LineAttack()]
+        _spellsInuse = [Spell.LineAttack]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

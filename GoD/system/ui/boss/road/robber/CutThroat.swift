@@ -31,10 +31,10 @@ class CutThroat: Physical {
 //                            completion()
 //                        }
                     }
-                    for s in t._unit._spellsInuse {
-//                        if s is Active {
-//                            s._timeleft += 3
-//                        }
+                    for s in t.spells {
+                        if s is Active {
+                            s._timeleft += 3
+                        }
                     }
                 }
                 t.darkness1s()

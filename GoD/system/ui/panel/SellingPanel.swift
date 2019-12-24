@@ -17,11 +17,11 @@ class SellingPanel: UIPanel {
         }
         
         if _nextButton.contains(touchPoint!) {
-//            let size = getProps().count / _pageSize
-//            if size > _curPage - 1 {
-//                _curPage += 1
-//                pageReload()
-//            }
+            let size = getProps().count / _pageSize
+            if size > _curPage - 1 {
+                _curPage += 1
+                pageReload()
+            }
             return
         }
         if _prevButton.contains(touchPoint!) {
@@ -32,33 +32,33 @@ class SellingPanel: UIPanel {
             return
         }
         
-//        if _buyButton.contains(touchPoint!) {
-//            if nil != _lastSelectedIcon && _goodsBox.contains(_lastSelectedIcon) {
-//                let goods = _lastSelectedIcon as! SellingItemIcon
-//                let prop = goods._displayItem as! Prop
-//                if prop._priceType == 1 {
-//                    buyByTears(goods)
-//                } else {
-//                    buyByGold(goods)
-//                }
-//                return
-//            }
-//        }
-//
-//        if _sellbutton.contains(touchPoint!) {
-//            for p in _propBox.children {
-//                let i = p as! ItemIcon
-//                if i.selected {
-//                    let item = i._displayItem as! Prop
-//                    _char.addMoney(num: item.price)
-//                    _char.removeProp(p: item)
-//
-//                    pageReload()
-//                    reshowPlayerMoney()
-//                }
-//            }
-//            return
-//        }
+        if _buyButton.contains(touchPoint!) {
+            if nil != _lastSelectedIcon && _goodsBox.contains(_lastSelectedIcon) {
+                let goods = _lastSelectedIcon as! SellingItemIcon
+                let prop = goods._displayItem as! Item
+                if prop._priceType == Item.PRICE_TYPE_TEAR {
+                    buyByTears(goods)
+                } else {
+                    buyByGold(goods)
+                }
+                return
+            }
+        }
+
+        if _sellbutton.contains(touchPoint!) {
+            for p in _propBox.children {
+                let i = p as! ItemIcon
+                if i.selected {
+                    let item = i._displayItem as! Item
+                    _char.addMoney(num: item.price)
+                    _char.removeItem(item)
+
+                    pageReload()
+                    reshowPlayerMoney()
+                }
+            }
+            return
+        }
         
         for node in _propBox.children {
             if node.contains(touchPoint!) {
@@ -98,81 +98,85 @@ class SellingPanel: UIPanel {
         let props = Game.instance.char._items
         var t = Item(Item.Tear)
         t._count = 0
-//        for p in props {
-//            if p is TheWitchsTear {
-//                t = p as! TheWitchsTear
-//                break
-//            }
-//        }
-//        if t._count < goods.price {
-//            showMsg(text: "眼泪数量不足以支付。")
-//            return
-//        }
-//        t._count -= goods.price
-//        if t._count < 1 {
-//            Game.instance.char.removeProp(p: t)
-//        }
-//        
-//        if !prop.countless {
-//            let propCount = prop._count - 1
-//            prop._count = propCount
-//        }
-//        
-//        if prop._count < 1 && goods.removeWhileSellout {
-//            let i = _goodsList.firstIndex(of: prop)!
-//            _goodsList.remove(at: i)
-//        }
-//        
-//        _char.addProp(p: prop)
-//        pageReload()
-//        if !prop.countless {
-//            createPropList()
-//        }
-//        if hasBuyAction {
-//            buyAction()
-//        }
+        for p in props {
+            if p._type == Item.Tear {
+                t = p
+                break
+            }
+        }
+        if t._count < goods.price {
+            showMsg(text: "眼泪数量不足以支付。")
+            return
+        }
+        t._count -= goods.price
+        if t._count < 1 {
+            Game.instance.char.removeItem(t)
+        }
+        
+        if countless(prop) {
+            let propCount = prop._count - 1
+            prop._count = propCount
+        }
+        
+        if prop._count < 1 && goods.removeWhileSellout {
+            let i = _goodsList.firstIndex(of: prop)!
+            _goodsList.remove(at: i)
+        }
+        
+        _char.addItem(prop)
+        pageReload()
+        if countless(prop) {
+            createPropList()
+        }
+        if hasBuyAction {
+            buyAction()
+        }
+    }
+    
+    internal func countless(_ item:Item) -> Bool {
+        return false
     }
     
     private func buyByGold(_ goods:SellingItemIcon) {
-//        let prop = goods._displayItem as! Item
-//        if goods.price > _char._money {
-//            showMsg(text: "金币不足以支付。")
-//            return
-//        }
-//        if prop._count < 1 {
-//            showMsg(text: "物品已售尽。")
-//            return
-//        }
-//        
-//        if !prop.countless {
-//            let propCount = prop._count - 1
-//            prop._count = propCount
-//        }
-//
-//
-//        _char.lostMoney(num: goods.price)
-//
-//        if prop._count < 1 && goods.removeWhileSellout {
-//            let i = _goodsList.firstIndex(of: prop)!
-//            _goodsList.remove(at: i)
-//        }
-//        
-//        if prop is TheWitchsTear {
+        let prop = goods._displayItem as! Item
+        if goods.price > _char._money {
+            showMsg(text: "金币不足以支付。")
+            return
+        }
+        if prop._count < 1 {
+            showMsg(text: "物品已售尽。")
+            return
+        }
+        
+        if !countless(prop) {
+            let propCount = prop._count - 1
+            prop._count = propCount
+        }
+
+
+        _char.lostMoney(num: goods.price)
+
+        if prop._count < 1 && goods.removeWhileSellout {
+            let i = _goodsList.firstIndex(of: prop)!
+            _goodsList.remove(at: i)
+        }
+        
+//        if prop._type == Item.Tear {
 //            let t = Item(Item.Tear)
 //            t._count = 1
-//            _char.addProp(p: t)
+//            _char.addItem(t)
 //        } else {
-//            _char.addProp(p: prop)
 //        }
-//
-//        pageReload()
-//        if !prop.countless {
-//            createGoodsList()
-//        }
-//        reshowPlayerMoney()
-//        if hasBuyAction {
-//            buyAction()
-//        }
+        _char.addItem(prop)
+
+        pageReload()
+        if !countless(prop) {
+            createGoodsList()
+        }
+        reshowPlayerMoney()
+        if hasBuyAction {
+            buyAction()
+        }
     }
     
     override func createPanelbackground() {
@@ -189,58 +193,58 @@ class SellingPanel: UIPanel {
     }
     func createPropList() {
         _propBox.removeAllChildren()
-//        let props = getProps()
-//        //        let startX:CGFloat = 0
-//        let startX = cellSize * 0.25
-//        let startY = _standardHeight * 0.5 - _standardGap
-//        if props.count > 0 {
-//            let end = getPageEnd(props.count)
-//            let start = getPageStart(end)
-//            
-//            for i in start...end - 1 {
-//                let base = i - (_curPage - 1) * _pageSize
-//                let y = base / 3
-//                let x = base % 3
-//                let icon = ItemIcon()
-//                icon.iconLabel = props[i]._name
-//                icon.count = props[i]._count
-//                icon._displayItem = props[i]
-//                icon.quality = props[i]._quality
-//                icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
-//                icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
-//                icon.zPosition = self.zPosition + 3
-//                _propBox.addChild(icon)
-//            }
-//        }
+        let props = getProps()
+        //        let startX:CGFloat = 0
+        let startX = cellSize * 0.25
+        let startY = _standardHeight * 0.5 - _standardGap
+        if props.count > 0 {
+            let end = getPageEnd(props.count)
+            let start = getPageStart(end)
+            
+            for i in start...end - 1 {
+                let base = i - (_curPage - 1) * _pageSize
+                let y = base / 3
+                let x = base % 3
+                let icon = ItemIcon()
+                icon.iconLabel = props[i]._name
+                icon.count = props[i]._count
+                icon._displayItem = props[i]
+                icon.quality = props[i]._quality
+                icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()
+                icon.position.x = startX + (cellSize + _standardGap) * x.toFloat()
+                icon.zPosition = self.zPosition + 3
+                _propBox.addChild(icon)
+            }
+        }
     }
     func createGoodsList() {
         _goodsBox.removeAllChildren()
         let startX = cellSize * 0.25 - _standardWidth * 0.5
         let startY = _standardHeight * 0.5 - _standardGap
         for i in 0..._goodsList.count - 1 {
-//            if _goodsList[i]._count < 1 {
-//                continue
-//            }
-//            let sii = SellingItemIcon()
-//            let y = i / 2
-//            let x = i % 2
-//            sii.iconLabel = _goodsList[i]._name
-//            sii._displayItem = _goodsList[i]
-//            sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
-//            sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()
-//            sii._priceType = _goodsList[i]._priceType
-//            sii.price = _goodsList[i]._storePrice
-//            sii.zPosition = self.zPosition + 3
-//            sii.quality = _goodsList[i]._quality
-//            if _goodsList[i]._count > 1 || !_goodsList[i].countless {
-//                sii.count = _goodsList[i]._count
-//            }
-//            _goodsBox.addChild(sii)
+            if _goodsList[i]._count < 1 {
+                continue
+            }
+            let sii = SellingItemIcon()
+            let y = i / 2
+            let x = i % 2
+            sii.iconLabel = _goodsList[i]._name
+            sii._displayItem = _goodsList[i]
+            sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
+            sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()
+            sii._priceType = _goodsList[i]._priceType
+            sii.price = _goodsList[i]._price * 4
+            sii.zPosition = self.zPosition + 3
+            sii.quality = _goodsList[i]._quality
+            if _goodsList[i]._count > 1 {
+                sii.count = _goodsList[i]._count
+            }
+            _goodsBox.addChild(sii)
         }
     }
-//    private func getProps() -> Array<Prop> {
-//        return _char._props
-//    }
+    private func getProps() -> Array<Item> {
+        return _char._items
+    }
     override func create() {
         _pageSize = 15
         _label.text = "暂不支持7日退货服务"
@@ -273,8 +277,6 @@ class SellingPanel: UIPanel {
     override func pageReload() {
         _propBox.removeAllChildren()
         createPropList()
-//        _lastSelectedIcon?.selected = false
-//        _lastSelectedIcon = nil
     }
     private var _sellingBoxBackground:SKShapeNode!
     private var _selfItemBoxBackground:SKShapeNode!
@@ -288,10 +290,6 @@ class SellingPanel: UIPanel {
     var _priceType = 0
     var hasBuyAction = false
     var buyAction = {}
-//    var showItemCount = false
-//    var _whichItem = Array<Bool>()
-//    var isMixedItems = false
-//    var _mixedItemMoney = Array<Bool>()
 }
 
 class SellingItemIcon: ItemIcon {
@@ -317,19 +315,8 @@ class SellingItemIcon: ItemIcon {
             return _price
         }
     }
-//    var tear:Int {
-//        set {
-//            _tear = newValue
-//            _priceLabel.text = "\(_tear)T"
-//        }
-//        get {
-//            return _tear
-//        }
-//    }
-//    private var _tear = 0
     private var _price = 0
     var _priceType = 0
     var removeWhileSellout = false
-//    var countless = true
     private var _priceLabel = Label()
 }

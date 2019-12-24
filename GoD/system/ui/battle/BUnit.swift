@@ -460,73 +460,18 @@ class BUnit: SKSpriteNode {
         _select.texture = _selectTexture.getCell(2, 0)
         selectable = true
     }
-    func markDeathGod() -> Bool {
-//        if _unit is Character {
-//            let char = _unit as! Character
-//            if char._magicMark is MarkOfDeathGod {
-//                return true
-//            }
-//        }
-        return false
-    }
-    func markOfHeaven(value:CGFloat) -> Bool {
-        if value < 0 && _battle._curRole._unit._race == EvilType.DEMON {
-            if _unit is Character {
-                let char = _unit as! Character
-//                if char._magicMark is MarkOfHeaven {
-//                    return true
-//                }
-            }
-        }
-        return false
-    }
     func silenced(completion:@escaping () -> Void) {
-        if markDeathGod() {
-            showText(text: "IMMUNE") {
-                completion()
-            }
-            return
-        }
+//        if markDeathGod() {
+//            showText(text: "IMMUNE") {
+//                completion()
+//            }
+//            return
+//        }
         let index = _battle._roleAll.firstIndex(of: self)
         if nil != index {
             _battle._roleAll.remove(at: index!)
         }
         showText(text: "SILENCE", completion: completion)
-    }
-    func shieldFrancisFace() -> Bool {
-        if _unit is Character {
-            let char = _unit as! Character
-//            if char._shield is FrancisFace {
-//                return true
-//            }
-        }
-        return false
-    }
-    func markMightOfOaks() -> Bool {
-        if !(_battle._selectedAction is Physical) {
-            return false
-        }
-        if _unit is Character {
-            let char = _unit as! Character
-//            if char._magicMark is MarkOfOaks {
-//                return true
-//            }
-            
-        }
-        return false
-    }
-    func sheildEvilExpel(value:CGFloat) -> Bool {
-        if value < 0 {
-            if _battle._curRole._unit._race == EvilType.DEMON {
-                if _unit is Character {
-                    let char = _unit as! Character
-//                    if char._shield is EvilExpel {
-//                        return true
-//                    }
-                }
-            }
-        }
-        return false
     }
     func showMiss(completion:@escaping () -> Void = {}) {
         showText(text: "MISS") {
@@ -542,71 +487,71 @@ class BUnit: SKSpriteNode {
         var value = value
         let s = (source == nil ? _battle._curRole : source)!
         if value < 0 && self._unit._race == EvilType.RISEN {
-//            if s.weaponIs(TheExorcist.EFFECTION) && seed() < 15 {
-//                self.showText(text: "EXORCISED") {
-//                    self.actionDead {
-//                        self.die()
-//                        completion()
-//                    }
-//                }
-//                return
-//            }
+            if s.weaponIs(Sacred.TheExorcist) && seed() < 15 {
+                self.showText(text: "EXORCISED") {
+                    self.actionDead {
+                        self.die()
+                        completion()
+                    }
+                }
+                return
+            }
         }
-//        if value < 0 && shieldIs(EvilExpel.EFFECTION) && seed() < 15 {
-//            showText(text: "BLOCK") {
-//                completion()
-//                return
-//            }
-//        }
+        if value < 0 && shieldIs(Sacred.EvilExpel) && seed() < 15 {
+            showText(text: "BLOCK") {
+                completion()
+                return
+            }
+        }
         if value > 0 && hasStatus(type: Status.SOUL_SLAY) {
             showText(text: "SLAY") {
                 completion()
             }
             return
         }
-//        if value < 0 && shieldIs(Accident.EFFECTION) && damageType == 2 {
-//            var us = Array<BUnit>()
-//            for u in _battle._playerPart {
-//                if !(u._unit is Character) {
-//                    us.append(u)
-//                }
-//            }
-//            if us.count > 0 {
-//                self.showText(text: "SHIFT") {
-//                    let one = us.one()
-//                    one.showValue(value: value) {
-//                        completion()
-//                    }
-//                }
-//                return
-//            }
-//        }
+        if value < 0 && shieldIs(Sacred.Accident) && damageType == 2 {
+            var us = Array<BUnit>()
+            for u in _battle._playerPart {
+                if !(u._unit is Character) {
+                    us.append(u)
+                }
+            }
+            if us.count > 0 {
+                self.showText(text: "SHIFT") {
+                    let one = us.one()
+                    one.showValue(value: value) {
+                        completion()
+                    }
+                }
+                return
+            }
+        }
         
-//        if value < 0 && _unit._race == EvilType.RISEN && s.weaponIs(HolyPower.EFFECTION) {
-//            value *= 2
-//        }
-//        if value < 0 && hasStatus(type: "_mess_ghost") {
-//            value *= 2
-//        }
-//        if value > 0 {
-//            if ringIs(RingOfDeath.EFFECTION) {
-//                value *= 1.5
-//            }
-//            if soulstoneIs(HeartOfTarrasque.EFFECTION) {
-//                value *= 2
-//            }
-//            if hasStatus(type: BansMechanArm.EFFECTION) {
-//                value *= 0.25
-//            }
-//        }
+        if value < 0 && _unit._race == EvilType.RISEN && s.weaponIs(Sacred.HolyPower) {
+            value *= 2
+        }
+        if value < 0 && hasStatus(type: "_mess_ghost") {
+            value *= 2
+        }
+        if value > 0 {
+            if ringIs(Sacred.RingOfDeath) {
+                value *= 1.5
+            }
+            if soulstoneIs(Sacred.HeartOfTarrasque) {
+                value *= 2
+            }
+            if hasStatus(type: Sacred.BansMechanArm) {
+                value *= 0.25
+            }
+        }
         if hasStatus(type: Status.PETRIFY) && value < 0 {
             value = seed(min: 0, max: 6).toFloat() * 0.01 * value
         }
 
-//        var beCritical = _battle._selectedSpell.beCritical
-//        if value > 0 || !criticalFromSpell || _battle._selectedAction is Magical {
-//            beCritical = critical
-//        }
+        var beCritical = (_battle._selectedAction as! Spell).beCritical
+        if value > 0 || !criticalFromSpell || _battle._selectedAction is Magical {
+            beCritical = critical
+        }
         
         if hasStatus(type: Status.PROTECTION_FROM_ICE) {
             if value < 0 {
@@ -642,7 +587,6 @@ class BUnit: SKSpriteNode {
         var move = SKAction.move(by: v, duration: TimeInterval(0.15))
         let wait = SKAction.wait(forDuration: TimeInterval(1))
         var go = SKAction.sequence([move, wait])
-        var beCritical = false
         if beCritical {
             v = CGVector(dx: 0, dy: _charSize * 0.4)
             move = SKAction.move(by: v, duration: TimeInterval(0.05))
@@ -650,7 +594,6 @@ class BUnit: SKSpriteNode {
             let group = SKAction.group([s, move])
             go = SKAction.sequence([group,  wait])
         }
-        let this = self
         valueText.run(go) {
             valueText.removeFromParent()
         }
@@ -663,22 +606,22 @@ class BUnit: SKSpriteNode {
                 }
             } else {
                 
-//                if self.shieldIs(FrancisFace.EFFECTION) && self.seed() < 10 {
-//                    this.showText(text: "CRITICAL +5") {
-//                        completion()
-//                    }
-//                    this._extensions.critical += 5
-//                    return
-//                }
-                if this.markMightOfOaks() {
-                    if this.seed() < 10 {
-                        this.showText(text: "MIGHT OF OAKS")
-                        let s = Status()
-                        s._type = Status.MIGHT_OF_OAKS
-                        s._timeleft = 5
-                        this.addStatus(status: s)
+                if self.shieldIs(Sacred.FrancisFace) && self.seed() < 10 {
+                    self.showText(text: " +5") {
+                        completion()
                     }
+                    self._valueUnit._extensions.critical += 5
+                    return
                 }
+//                if self.markMightOfOaks() {
+//                    if self.seed() < 10 {
+//                        self.showText(text: "MIGHT OF OAKS")
+//                        let s = Status()
+//                        s._type = Status.MIGHT_OF_OAKS
+//                        s._timeleft = 5
+//                        self.addStatus(status: s)
+//                    }
+//                }
                 completion()
             }
         }
@@ -856,22 +799,22 @@ class BUnit: SKSpriteNode {
         
         return false
     }
-    func hasAuro(auro:Spell) -> Bool {
+    func hasAuro(id:Int) -> Bool {
         if nil == _battle {
             return false
         }
         var spells = Array<Spell>()
         if playerPart {
             for u in _battle._playerPart {
-//                spells += u._unit._spellsInuse
+                spells += u.spells
             }
         } else {
             for u in _battle._enemyPart {
-//                spells += u._unit._spellsInuse
+                spells += u.spells
             }
         }
         for s in spells {
-            if s.classForCoder == auro.classForCoder {
+            if s._id == id {
                 return true
             }
         }
@@ -898,15 +841,8 @@ class BUnit: SKSpriteNode {
             return false
         } else {
             let c = _unit as! Character
-            if c._leftRing != nil {
-                if c._leftRing?._effection == effection {
-                    return true
-                }
-            }
-            if c._rightRing != nil {
-                if c._rightRing?._effection == effection {
-                    return true
-                }
+            if c._leftRing?._effection == effection || c._rightRing?._effection == effection {
+                return true
             }
         }
         return false

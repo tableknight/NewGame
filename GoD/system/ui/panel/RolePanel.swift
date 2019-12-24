@@ -121,7 +121,7 @@ class RolePanel:UIPanel {
     func create(unit:Unit) {
         createCloseButton()
         _unit = unit
-        var unit = unit
+//        var unit = unit
 //        var unit = unit is Character ? unit as! Character : unit as! Creature
         let bUnitRole = BUnit()
         bUnitRole.setUnit(unit: unit)

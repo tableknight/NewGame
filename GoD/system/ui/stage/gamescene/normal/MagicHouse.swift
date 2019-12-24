@@ -152,19 +152,18 @@ class MagicHouse: InnerHouse {
             _mapMatrix[p[1]][p[0]] = CELL_ROLE
         }
         
-        let l = Loot()
         var list = Array<Item>()
         for _ in 0...9 {
             let b = Item(Item.SpellBook)
             b._priceType = 1
             let s = self.seed(max: 3)
-//            var spell = l.getRandomNormalSpell()
-//            if 1 == s {
-//                spell = l.getRandomGoodSpell()
-//            } else if 2 == s {
-//                spell = l.getRandomRareSpell()
-//            }
-//            b.spell = spell
+            var spell = Loot.getRandomNormalSpell()
+            if 1 == s {
+                spell = Loot.getRandomGoodSpell()
+            } else if 2 == s {
+                spell = Loot.getRandomRareSpell()
+            }
+            b.spell = spell
             list.append(b)
         }
         _sellingBooks = list

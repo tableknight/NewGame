@@ -181,16 +181,43 @@ class SelectDocument: UIPanel {
         let ps = Item(Item.SealScroll)
         e.addItem(ps)
         
-        for i in 1...8 {
-            e.addItem(Loot.getSacredAmulet(id: i))
+//        for i in 1...8 {
+//            e.addItem(Loot.getSacredAmulet(id: i))
+//        }
+//        for i in 1...6 {
+//            e.addItem(Loot.getSacredBow(id: i))
+//        }
+//        for i in 1...6 {
+//            e.addItem(Loot.getSacredBlunt(id: i))
+//        }
+//
+        for i in 1...9 {
+            e.addItem(Loot.getSacredSword(id: i))
         }
-        for i in 1...6 {
-            e.addItem(Loot.getSacredBow(id: i))
-        }
-        for i in 1...6 {
-            e.addItem(Loot.getSacredBlunt(id: i))
-        }
-        
+//        for i in 1...2 {
+//            e.addItem(Loot.getSacredDagger(id: i))
+//        }
+//        for i in 1...10 {
+//            e.addItem(Loot.getSacredRing(id: i))
+//        }
+//        for i in 1...5 {
+//            e.addItem(Loot.getSacredSoulstone(id: i))
+//        }
+//        for i in 1...9 {
+//            e.addItem(Loot.getSacredInstrument(id: i))
+//        }
+//        for i in 1...4 {
+//            e.addItem(Loot.getSacredWand(id: i))
+//        }
+//        for i in 1...9 {
+//            e.addItem(Loot.getSacredMark(id: i))
+//        }
+//        for i in 1...5 {
+//            e.addItem(Loot.getSacredFist(id: i))
+//        }
+//        for i in 1...4 {
+//            e.addItem(Loot.getSacredEarring(id: i))
+//        }
 //        let b = Battle()
 //        b.showLootItems(e._items)
         

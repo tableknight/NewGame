@@ -26,22 +26,22 @@ class BloodAbyss: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return BloodItem1()
-        case 2:
-            return BloodItem2()
-        case 12:
-            return BloodItem12()
-        case 13:
-            return BloodItem13()
-        case 22:
-            return BloodItem22()
-        default:
-            return BloodItem2()
-        }
-    }
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return BloodItem1()
+//        case 2:
+//            return BloodItem2()
+//        case 12:
+//            return BloodItem12()
+//        case 13:
+//            return BloodItem13()
+//        case 22:
+//            return BloodItem22()
+//        default:
+//            return BloodItem2()
+//        }
+//    }
     
 //    override func getMonsterByIndex(index: Int) -> Creature {
 //        switch index {
@@ -182,53 +182,53 @@ class BloodAbyss: AcientRoad {
 //    }
 //}
 
-class BloodItem2:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.dungeon_b.getCell(6, 9, 1, 2))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class BloodItem22:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.dungeon_b.getCell(7, 9, 1, 2))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class BloodItem1:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.dungeon_b.getCell(6, 7))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class BloodItem12:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.dungeon_b.getCell(7, 7))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class BloodItem13:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.outside_b.getCell(10, 6))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+//class BloodItem2:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.dungeon_b.getCell(6, 9, 1, 2))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class BloodItem22:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.dungeon_b.getCell(7, 9, 1, 2))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class BloodItem1:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.dungeon_b.getCell(6, 7))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class BloodItem12:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.dungeon_b.getCell(7, 7))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class BloodItem13:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.outside_b.getCell(10, 6))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}

@@ -27,9 +27,9 @@ class DancingDragon: Physical {
         hasRevenge = false
         let t = _battle._selectedTarget!
         var max = 3
-//        if _battle._curRole._unit._weapon is IberisHand {
-//            max = 6
-//        }
+        if _battle._curRole.weaponIs(Sacred.IberisHand) {
+            max = 6
+        }
         let times = 1 + seed(to: max)
         _battle._curRole.actionAttack {
             t.clawSpecial1()

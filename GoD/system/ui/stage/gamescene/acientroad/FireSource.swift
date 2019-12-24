@@ -21,20 +21,20 @@ class FireSource: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return getUIItem1(2, 7)
-        case 2:
-            return getUIItem3(11, 5)
-        case 3:
-            return getUIItem3(10, 6)
-        case 10:
-            return getUIItem2(2, 9)
-        default:
-            return getUIItem2(2, 9)
-        }
-    }
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return getUIItem1(2, 7)
+//        case 2:
+//            return getUIItem3(11, 5)
+//        case 3:
+//            return getUIItem3(10, 6)
+//        case 10:
+//            return getUIItem2(2, 9)
+//        default:
+//            return getUIItem2(2, 9)
+//        }
+//    }
     
     private func getUIItem1(_ x:CGFloat, _ y:CGFloat) -> UIItem {
         let item = UIItem()

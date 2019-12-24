@@ -26,35 +26,35 @@ class SecretValley: AcientRoad {
         super.init(coder: aDecoder)
     }
     
-    override func getItemByIndex(index: Int) -> UIItem {
-        switch index {
-        case 1:
-            return getUIItem1(9, 6)
-        case 2:
-            return getUIItem1(10, 6)
-        case 3:
-            return getUIItem1(8, 7)
-        case 4:
-            return getUIItem1(6, 9)
-        case 5:
-            return getUIItem1(7, 12)
-        case 6:
-            return getUIItem1(7, 11)
-        case 7:
-            return getUIItem1(13, 5)
-        case 8:
-            return getUIItem1(11, 7)
-        case 9:
-            return getUIItem1(14, 5)
-        case 10:
-            return getUIItem2(12, 6)
-        case 11:
-            return getUIItem2(8, 6)
-        default:
-            return getUIItem2(5, 12)
-        }
-    }
-    
+//    override func getItemByIndex(index: Int) -> UIItem {
+//        switch index {
+//        case 1:
+//            return getUIItem1(9, 6)
+//        case 2:
+//            return getUIItem1(10, 6)
+//        case 3:
+//            return getUIItem1(8, 7)
+//        case 4:
+//            return getUIItem1(6, 9)
+//        case 5:
+//            return getUIItem1(7, 12)
+//        case 6:
+//            return getUIItem1(7, 11)
+//        case 7:
+//            return getUIItem1(13, 5)
+//        case 8:
+//            return getUIItem1(11, 7)
+//        case 9:
+//            return getUIItem1(14, 5)
+//        case 10:
+//            return getUIItem2(12, 6)
+//        case 11:
+//            return getUIItem2(8, 6)
+//        default:
+//            return getUIItem2(5, 12)
+//        }
+//    }
+//    
     override func getWallTexture() -> SKTexture {
         return Game.instance.outside_b.getCell(12, 6, 1, 2)
     }

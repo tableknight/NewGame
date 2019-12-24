@@ -23,6 +23,6 @@ class BearWarrior: SummonUnit {
         _name = "熊战士"
         _race = EvilType.NATURE
         _img = SKTexture(imageNamed: "bear_warrior")
-//        _spellsInuse = [Taunt()]
+        _spellsInuse = [Spell.Taunt]
     }
 }

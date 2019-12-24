@@ -86,6 +86,9 @@ class Outfit:Item {
     func create(level:Int) {
         _level = level
         createQuality()
+        if _type == Outfit.Instrument || _type == Outfit.MagicMark {
+            createSpell()
+        }
         createSelfAttrs()
         createAttrs()
         createPrice()
@@ -97,6 +100,29 @@ class Outfit:Item {
         _description = sd.desc
         _level = sd.level
         _quality = Quality.SACRED
+        
+        if _type == Outfit.Instrument || _type == Outfit.MagicMark {
+            createSpell()
+        }
+        
+        if [Sacred.NewSword, Sacred.NewSwordPlus, Sacred.DragonSaliva].firstIndex(of: effection) != nil {
+            _baseAttrs = [Attribute.ATTACK_BASE]
+        } else if effection == Sacred.PandoraHeart {
+            let c = Game.instance.char!
+            var spells = Array<Int>()
+            for i in 4001...Loot.LastSacredSpellCountId {
+                if !c.hasSpell(id: i) {
+                    spells.append(i)
+                }
+            }
+            _spell = spells.one()
+        } else if [Sacred.IssHead, Sacred.IssMark].firstIndex(of: effection) != nil {
+            _spell = [Spell.LowerSummon, Spell.HighLevelSummon, Spell.SummonFlower, Spell.BearFriend].one()
+        } else if effection == Sacred.FireMark {
+            _spell = [Spell.LavaExplosion, Spell.Combustion, Spell.BurnHeart, Spell.FireRain, Spell.FireBreath].one()
+        } else if effection == Sacred.RingOfReborn {
+            _spell = [Spell.Heal, Spell.QuickHeal, Spell.HealAll, Spell.SpringIsComing].one()
+        }
         
         if sd.randomAttrCountMax == sd.randomAttrCountMin {
             _attrCount = sd.randomAttrCountMin
@@ -125,6 +151,17 @@ class Outfit:Item {
         
         return false
     }
+    private func createSpell() {
+        if _quality == Quality.NORMAL {
+            _spell = Loot.getRandomNormalSpellId()
+        } else if _quality == Quality.GOOD {
+            _spell = Loot.getRandomGoodSpellId()
+        } else if _quality == Quality.RARE {
+            _spell = Loot.getRandomRareSpellId()
+        } else {
+            _spell = Loot.getRandomSacredSpellId()
+        }
+    }
     private func sacredAttrCount() {
         _quality = Quality.SACRED
         _attrCount = seed(min: 3, max: 6)
@@ -137,16 +174,20 @@ class Outfit:Item {
     }
     
     private func createQuality() {
-        let _seed = seed()
-        if _seed < 70 {
-            _quality = Quality.NORMAL
-            _attrCount = seed(min: 1, max: 3)
-        } else if _seed < 90 {
-            _quality = Quality.GOOD
-            _attrCount = seed(min: 2, max: 4)
+        if _type == Outfit.SoulStone || _type == Outfit.MagicMark {
+            _attrCount = 0
         } else {
-            _quality = Quality.RARE
-            _attrCount = seed(min: 3, max: 6)
+            let _seed = seed()
+            if _seed < 70 {
+                _quality = Quality.NORMAL
+                _attrCount = seed(min: 1, max: 3)
+            } else if _seed < 90 {
+                _quality = Quality.GOOD
+                _attrCount = seed(min: 2, max: 4)
+            } else {
+                _quality = Quality.RARE
+                _attrCount = seed(min: 3, max: 6)
+            }
         }
     }
     private var _selfAttrs:Array<Int> = []
@@ -177,7 +218,7 @@ class Outfit:Item {
         if _attrCount < 1 {
             return
         }
-        for _ in 0..._attrCount - 1 {
+        for _ in 1..._attrCount {
             let index = seed(max: _all.count)
             let attr = Attribute(type: _all[index], level: _level)
             _attrs.append(attr)
@@ -229,32 +270,37 @@ class Outfit:Item {
             a.on(unit: char)
         }
         
-//        if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == RingOfReborn.EFFECTION || _effection == PandoraHeart.EFFECTION {
-//            if !(char.hasSpell(spell: _spell)) {
-//                char._spells.append(_spell)
-//                _spellAppended = true
-//            }
-//        }
+        if _type == Outfit.MagicMark || _type == Outfit.Instrument ||  _effection == Sacred.PandoraHeart {
+            if !(char.hasSpell(id: _spell)) {
+                char._spells.append(_spell)
+                _reserveBool = true
+            }
+        } else if _effection == Sacred.RingOfReborn {
+            char._spellsHidden.append(_spell)
+            _reserveBool = true
+        } else if _effection == Sacred.Faceless {
+            char._spellsHidden.append(Spell.FacelessSpell)
+        }
 //
-//        if _effection == TrueLie.EFFECTION || _effection == TheEye.EFFECTION {
-//            char._spellCount += 1
-//        } else if _effection == PuppetMark.EFFECTION {
-//            char._spellCount -= 1
-//            if char._spellsInuse.count > char._spellCount {
-//                let spell = char._spellsInuse.popLast()!
-//                char._spells.append(spell)
-//            }
-//            char._minionsCount += 1
-//        } else if _effection == IdlirWeddingRing.EFFECTION {
-//            _originalImage = Game.instance.char._imgUrl
-//            let t = SKTexture(imageNamed: "idlir_bride.png")
-//            char._img = t
-//            Game.instance.curStage._curScene._role._charTexture = t
-//        } else if _effection == RingOfDead.EFFECTION {
-//            char._race = EvilType.RISEN
-//        } else if _effection == PuppetMaster.EFFECTION {
-//            char._minionsCount += 1
-//        }
+        if _effection == Sacred.TrueLie || _effection == Sacred.TheEye {
+            char._spellCount += 1
+        } else if _effection == Sacred.PuppetMark {
+            char._spellCount -= 1
+            if char._spellsInuse.count > char._spellCount {
+                let spell = char._spellsInuse.popLast()!
+                char._spells.append(spell)
+            }
+            char._minionsCount += 1
+        } else if _effection == Sacred.IdlirWeddingRing {
+            _reserveStr = Game.instance.char._imgUrl
+            let t = SKTexture(imageNamed: "idlir_bride.png")
+            char._img = t
+            Game.instance.curStage._curScene._role._charTexture = t
+        } else if _effection == Sacred.RingOfDead {
+            char._race = EvilType.RISEN
+        } else if _effection == Sacred.PuppetMaster {
+            char._minionsCount += 1
+        }
     }
     func off() {
         let c = Game.instance.char!
@@ -262,44 +308,51 @@ class Outfit:Item {
             a.off(unit: c)
         }
         
-//        if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == RingOfReborn.EFFECTION || _effection == PandoraHeart.EFFECTION {
-//            if _spellAppended {
-//                let char = Game.instance.char!
-//                char.removeSpell(spell: _spell)
-//                _spellAppended = false
-//            }
-//        }
+        if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == Sacred.PandoraHeart {
+            if _reserveBool {
+                c.removeSpell(id: _spell)
+                _reserveBool = false
+            }
+        } else if _effection == Sacred.RingOfReborn {
+            _reserveBool = false
+            let index = c._spellsHidden.firstIndex(of: _spell)
+            c._spellsHidden.remove(at: index!)
+        } else if _effection == Sacred.Faceless {
+           _reserveBool = false
+           let index = c._spellsHidden.firstIndex(of: _spell)
+           c._spellsHidden.remove(at: index!)
+        }
 //
-//        if _effection == TrueLie.EFFECTION || _effection == TheEye.EFFECTION {
-//            if c._spellsInuse.count >= c._spellCount {
-//                let last = c._spellsInuse.popLast()
-//                c._spells.append(last!)
-//            }
-//            c._spellCount -= 1
-//        } else if _effection == PuppetMark.EFFECTION {
-//            c._minionsCount -= 1
-//            let minions = c.getReadyMinions()
-//            if minions.count > c._minionsCount {
-//                minions[0]._seat = BUnit.STAND_BY
-//            }
-//            c._spellCount += 1
-//        } else if _effection == IdlirWeddingRing.EFFECTION {
-//            let t = SKTexture(imageNamed: _originalImage)
-//            c._img = t
-//            Game.instance.curStage._curScene._role._charTexture = t
-//        } else if _effection == RingOfDead.EFFECTION {
-//            if nil != c._soulStone {
-//                c._race = c._soulStone!._race
-//            } else {
-//                c._race = EvilType.MAN
-//            }
-//        } else if _effection == PuppetMaster.EFFECTION {
-//            c._minionsCount -= 1
-//            let minions = c.getReadyMinions()
-//            if minions.count > c._minionsCount {
-//                minions[0]._seat = BUnit.STAND_BY
-//            }
-//        }
+        if _effection == Sacred.TrueLie || _effection == Sacred.TheEye {
+            if c._spellsInuse.count >= c._spellCount {
+                let last = c._spellsInuse.popLast()
+                c._spells.append(last!)
+            }
+            c._spellCount -= 1
+        } else if _effection == Sacred.PuppetMark {
+            c._minionsCount -= 1
+            let minions = c.getReadyMinions()
+            if minions.count > c._minionsCount {
+                minions[0]._seat = BUnit.STAND_BY
+            }
+            c._spellCount += 1
+        } else if _effection == Sacred.IdlirWeddingRing {
+            let t = SKTexture(imageNamed: _reserveStr)
+            c._img = t
+            Game.instance.curStage._curScene._role._charTexture = t
+        } else if _effection == Sacred.RingOfDead {
+            if nil != c._soulStone {
+                c._race = c._soulStone!._race
+            } else {
+                c._race = EvilType.MAN
+            }
+        } else if _effection == Sacred.PuppetMaster {
+            c._minionsCount -= 1
+            let minions = c.getReadyMinions()
+            if minions.count > c._minionsCount {
+                minions[0]._seat = BUnit.STAND_BY
+            }
+        }
     }
     
     
@@ -322,7 +375,7 @@ class Outfit:Item {
     var _outfitName = ""
     var _unique = false
     var _effection = ""
-    var _spellAppended = false
+//    var _spellAppended = false
     var _attackSpeed:CGFloat = -1
     var _attackSpeedMax = -1
     var _attackSpeedMin = -1
@@ -335,7 +388,7 @@ class Outfit:Item {
         try container.encode(_outfitName, forKey: ._outfitName)
         try container.encode(_unique, forKey: ._unique)
         try container.encode(_effection, forKey: ._effection)
-        try container.encode(_spellAppended, forKey: ._spellAppended)
+//        try container.encode(_spellAppended, forKey: ._spellAppended)
         try container.encode(_attackSpeed, forKey: ._attackSpeed)
 //        try container.encode(_chance, forKey: ._chance)
         try container.encode(_race, forKey: ._race)
@@ -348,7 +401,7 @@ class Outfit:Item {
         _outfitName = try values.decode(String.self, forKey: ._outfitName)
         _unique = try values.decode(Bool.self, forKey: ._unique)
         _effection = try values.decode(String.self, forKey: ._effection)
-        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
+//        _spellAppended = try values.decode(Bool.self, forKey: ._spellAppended)
         _attackSpeed = try values.decode(CGFloat.self, forKey: ._attackSpeed)
         _race = try values.decode(Int.self, forKey: ._race)
     }
@@ -375,7 +428,7 @@ struct ArmorData {
         Outfit.Instrument: ArmorData(type: Outfit.Instrument, name: "法器", desc: "", attackSpeedMax: 100, attackSpeedMin: 100, baseAttrs: [Attribute.SPIRIT_BASE]),
         Outfit.Fist: ArmorData(type: Outfit.Fist, name: "拳套", desc: "", attackSpeedMax: 130, attackSpeedMin: 100, baseAttrs: [Attribute.ATTACK, Attribute.BREAK]),
         Outfit.Dagger: ArmorData(type: Outfit.Dagger, name: "匕首", desc: "", attackSpeedMax: 150, attackSpeedMin: 120, baseAttrs: [Attribute.ATTACK, Attribute.AVOID]),
-        Outfit.MagicMark: ArmorData(type: Outfit.MagicMark, name: "咒印", desc: "", baseAttrs: []),
+        Outfit.MagicMark: ArmorData(type: Outfit.MagicMark, name: "魔印", desc: "", baseAttrs: []),
         Outfit.SoulStone: ArmorData(type: Outfit.SoulStone, name: "灵魂石", desc: "", baseAttrs: []),
         Outfit.Shield: ArmorData(type: Outfit.Shield, name: "盾", desc: "", baseAttrs: [Attribute.DEFENCE]),
         Outfit.Ring: ArmorData(type: Outfit.Ring, name: "戒指", desc: "", baseAttrs: []),
