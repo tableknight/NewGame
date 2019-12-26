@@ -14,19 +14,19 @@ class DiusBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    private let spells = [LineAttack(), BallLighting(), SuperWater(), FireExplode()]
-    override func createAI() {
-        if _curRole._unit is Dius {
-            _selectedAction = spells.one()
-//            _selectedSpell = BallLighting()
-            _selectedAction._battle = self
-            _selectedAction.findTarget()
-            execOrder()
-        } else {
-            super.createAI()
-        }
-    }
-    
+//    private let spells = [LineAttack(), BallLighting(), SuperWater(), FireExplode()]
+//    override func createAI() {
+//        if _curRole._unit is Dius {
+//            _selectedAction = spells.one()
+////            _selectedSpell = BallLighting()
+//            _selectedAction._battle = self
+//            _selectedAction.findTarget()
+//            execOrder()
+//        } else {
+//            super.createAI()
+//        }
+//    }
+//    
     override func setEnemyPart(minions: Array<Creature>) {
         let level:CGFloat = Dius.LEVEL
         var es = Array<Creature>()
@@ -98,6 +98,7 @@ class ExposeWeakness: Passive, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.ExposeWeakness
         _name = ""
         _description = "每回合行动结束暴露一个自己的弱点"
         _quality = Quality.SACRED

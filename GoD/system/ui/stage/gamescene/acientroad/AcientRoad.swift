@@ -212,9 +212,12 @@ class AcientRoad: Dungeon {
         b.defeatedAction = {
             self.defeatedAction()
         }
-        b.lootPanelConfirmAction = {
-            self.defeatAction()
+        b.victoryAction = {
+            self.victoryAction()
         }
+//        b.lootPanelConfirmAction = {
+//            self.victoryAction()
+//        }
         stage.addBattle(b)
         b.battleStart()
     }
@@ -222,7 +225,7 @@ class AcientRoad: Dungeon {
         let stage = Game.instance.curStage!
         stage.gohome()
     }
-    internal func defeatAction() {
+    internal func victoryAction() {
         let nextLevel = _level.toInt() + 1
         let char = Game.instance.char!
         let stage = Game.instance.curStage!

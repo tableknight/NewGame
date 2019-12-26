@@ -22,7 +22,7 @@ class AssassinMaster:Boss {
         _level = AssassinMaster.LEVEL
         _img = SKTexture(imageNamed: "AssassinMaster")
         _imgUrl = "AssassinMaster"
-//        _spellsInuse = [Disappear(), ThrowWeapon(), ShadowCopy(), Observant(), FlashPowder()]
+        _spellsInuse = [Spell.Disappear, Spell.ThrowWeapon, Spell.ShadowCopy, Spell.Observant, Spell.FlashPowder]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

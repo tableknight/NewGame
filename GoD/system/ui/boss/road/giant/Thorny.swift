@@ -11,6 +11,7 @@ class Thorny: Passive {
     
     override init() {
         super.init()
+        _id = Spell.Thorny
         _name = "荆棘"
         _description = "反弹20%近战物理伤害"
         _quality = Quality.RARE

@@ -22,7 +22,7 @@ class Francis:Boss {
         _race = EvilType.DEMON
         _level = Francis.LEVEL
         _img = SKTexture(imageNamed: "Francis")
-//        _spellsInuse = [SummonServant(), Nova()]
+        _spellsInuse = [Spell.SummonServant, Spell.Nova]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)
@@ -48,7 +48,7 @@ class UndeadMinion1: BossMinion {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_1")
-//        _spellsInuse = [DeathAttack()]
+        _spellsInuse = [Spell.DeathAttack]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -67,7 +67,7 @@ class UndeadMinion2: BossMinion {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_2")
-//        _spellsInuse = [LineAttack()]
+        _spellsInuse = [Spell.LineAttack]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -86,7 +86,7 @@ class UndeadMinion3: BossMinion {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_3")
-//        _spellsInuse = [AttackPowerUp()]
+        _spellsInuse = [Spell.AttackPowerUp]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -105,7 +105,7 @@ class UndeadMinion4: BossMinion {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_4")
-//        _spellsInuse = [SoulExtract()]
+        _spellsInuse = [Spell.SoulExtract]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -124,7 +124,7 @@ class UndeadMinion5: BossMinion {
         _name = "亡灵仆从"
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "undead_minion_5")
-//        _spellsInuse = [Reinforce()]
+        _spellsInuse = [Spell.Reinforce]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

@@ -173,13 +173,19 @@ class SelectDocument: UIPanel {
         e._img = image
         e._imgUrl = selectImage._lastSelectedComponent._imgUrl
         let p = Item(Item.Potion)
-        p._count = 5
+        p._count = 2
         e.addItem(p)
         let ts = Item(Item.TownScroll)
+        ts._count = 2
         e.addItem(ts)
         
         let ps = Item(Item.SealScroll)
+        ps._count = 2
         e.addItem(ps)
+        
+        let w = Outfit(Outfit.Sword)
+        w.create(level: 1)
+        e.addItem(w)
         
 //        for i in 1...8 {
 //            e.addItem(Loot.getSacredAmulet(id: i))

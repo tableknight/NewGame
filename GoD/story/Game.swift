@@ -236,7 +236,7 @@ class Game {
     static let HPBAR_COLOR = UIColor.red
     static let MPBAR_COLOR = QualityColor.RARE
     static let EXPBAR_COLOR = UIColor.green
-    static let CORNER_RADIUS:CGFloat = 12
+    static let CORNER_RADIUS:CGFloat = 14
     static var CELLSIZE:CGFloat = 80
     static let ICON_GAP:CGFloat = 12
     static let FRAME_SIZE:CGFloat = 0.3

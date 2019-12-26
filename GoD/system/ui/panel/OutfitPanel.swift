@@ -12,6 +12,22 @@ class OutfitPanel: UIPanel {
         super.touchesBegan(touches, with: event)
         _infosDisplay.removeFromParent()
         let touchPoint = touches.first?.location(in: self)
+        
+        if _discardButton.contains(touchPoint!) {
+            if !_discardButton.selected {
+                _discardButton.selected = true
+                return
+            }
+            if _lastSelectedIcon != nil && _discardButton.selected {
+                _char.removeItem(_lastSelectedIcon.displayItem as! Outfit)
+                pageReload()
+                _lastSelectedIcon = nil
+                return
+            }
+        }
+        
+        _discardButton.selected = false
+        
         if _nextButton.contains(touchPoint!) {
             let size = ceil(getOutfits().count.toFloat() / _pageSize.toFloat()).toInt()
             if size > _curPage {
@@ -29,14 +45,7 @@ class OutfitPanel: UIPanel {
             _lastSelectedIcon = nil
             return
         }
-        if _discardButton.contains(touchPoint!) {
-            if _lastSelectedIcon != nil {
-//                _char.removeProp(p: _lastSelectedIcon._displayItem as! Prop)
-                _char.removeItem(_lastSelectedIcon.displayItem as! Outfit)
-                pageReload()
-                return
-            }
-        }
+        
         
         if outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
             return
@@ -59,7 +68,7 @@ class OutfitPanel: UIPanel {
         if outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!) {
             return
         }
-//        _selectedSlot = nil
+        _selectedSlot = nil
         
         if nil != _lastSelectedIcon && _lastSelectedIcon.contains(touchPoint!) {
             if nil == _lastSelectedIcon._displayItem {

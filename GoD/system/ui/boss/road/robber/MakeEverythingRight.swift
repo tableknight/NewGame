@@ -16,6 +16,7 @@ class MakeEverythingRight: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.MakeEverythingRight
         _cooldown = 3
         _name = "斗转星移"
         _description = "使己方所有单位立于不败之地"

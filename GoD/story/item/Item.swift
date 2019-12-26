@@ -36,9 +36,6 @@ class Item:Core, Castable, Showable {
         }
         _type = type
         setValue()
-//        if _type == Item.SpellBook {
-//            
-//        }
     }
     
     func setValue() {
@@ -56,6 +53,10 @@ class Item:Core, Castable, Showable {
         usable = data.usable
         castable = data.castable
         self.stackable = data.stackable
+        
+        if _type == Item.SealScroll {
+            targetEnemy = true
+        }
     }
     
     func selectable() -> Bool {

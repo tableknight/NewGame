@@ -16,6 +16,7 @@ class ThrowRock: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.ThrowRock
         _name = "巨石投掷"
         _description = "向目标投掷一块巨大的岩石，造成攻击力180%的物理伤害"
         _quality = Quality.NORMAL

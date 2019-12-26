@@ -10,6 +10,7 @@ import SpriteKit
 class ThrowWeapon: Physical, BossOnly {
     override init() {
         super.init()
+        _id = Spell.ThrowWeapon
         _name = "投掷暗器"
         _description = "对随机目标造成攻击力80%的物理伤害，对其身后目标造成攻击力160%物理伤害"
         _quality = Quality.SACRED

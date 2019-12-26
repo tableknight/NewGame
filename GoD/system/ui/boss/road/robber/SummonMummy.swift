@@ -16,6 +16,7 @@ class SummonMummy:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.SummonMummy
         _name = "召唤木乃伊"
         _description = "召唤一局木乃伊加入战斗"
         _quality = Quality.SACRED

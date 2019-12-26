@@ -90,7 +90,7 @@ class CenterCamping: StandScene {
                 battle.setPlayerPart(roles: [i.char] + i.char.getReadyMinions())
                 stage.addBattle(battle)
                 battle.battleStart()
-                battle.defeatAction = {
+                battle.victoryAction = {
 //                    item.speak(text: "你真厉害！")
                 }
                 battle.defeatedAction = {

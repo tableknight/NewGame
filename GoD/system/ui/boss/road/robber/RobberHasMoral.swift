@@ -16,6 +16,7 @@ class RobberHasMoral: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.RobberHasMoral
         _cooldown = 3
         _name = "盗亦有道"
         _description = "提升自身50点精神和50点念力"

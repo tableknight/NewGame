@@ -10,6 +10,7 @@ import SpriteKit
 class MessGhost: Magical {
     override init() {
         super.init()
+        _id = Spell.MessGhost
         _name = "鬼影重重"
         _description = "被诅咒的目标会双倍的魔法伤害"
         _quality = Quality.RARE

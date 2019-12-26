@@ -16,6 +16,7 @@ class Observant: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Observant
         _cooldown = 3
         _name = "敏锐"
         _description = "提升自身50点暴击和100点毁灭"

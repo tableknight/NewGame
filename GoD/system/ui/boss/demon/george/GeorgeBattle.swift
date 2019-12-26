@@ -133,6 +133,7 @@ class Screaming: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.Screaming
         _name = "尖叫"
         _description = "对目标造成精神80%的法术伤害"
         _quality = Quality.NORMAL
@@ -183,6 +184,7 @@ class Infection:Magical, Curse, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.Infection
         _name = "感染"
         _description = "对敌方所有目标释放诅咒感染，75%几率令目标感染瘟疫"
         _quality = Quality.RARE
@@ -217,6 +219,7 @@ class DrawBlood:Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.DrawBlood
         _name = "群体吸血"
         _description = "对敌方所有目标造成精神40%的法术攻击，并且恢复造成伤害的总量"
         _rate = 0.4

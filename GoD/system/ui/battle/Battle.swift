@@ -540,7 +540,7 @@ class Battle: SKSpriteNode {
         return Attack()
     }
     internal func createAI() {
-        if seed() < 15 && !Mode.nodefence {
+        if seed() < 15 && !Mode.nodefence && !(_curRole._unit is Boss) {
             _curRole.isDefend = true
             _selectedAction = Defend()
             _selectedAction._battle = self
@@ -562,7 +562,7 @@ class Battle: SKSpriteNode {
         }
     }
     var isVictory = false
-    var lootPanelConfirmAction = {}
+//    var lootPanelConfirmAction = {}
     internal var expRate:CGFloat = 1
     internal func victorys() {
         if isVictory {
@@ -585,11 +585,13 @@ class Battle: SKSpriteNode {
         isVictory = true
         let list = l.getList() + specialLoot()
         
-        fadeOutBattle()
-        
-        if list.count > 0 {
-            Loot.showLootItems(list)
+        fadeOutBattle() {
+            if list.count > 0 {
+                Loot.showLootItems(list)
+            }
         }
+        
+        
     }
     
     internal func specialLoot() -> Array<Item> {
@@ -599,20 +601,22 @@ class Battle: SKSpriteNode {
     internal func defeated() {
         isVictory = false
         showMsg(text: "战斗失败！")
+        _char._extensions.hp = 1
         fadeOutBattle()
     }
-    func fadeOutBattle() {
+    func fadeOutBattle(completion: @escaping () -> Void = {}) {
         
         setTimeout(delay: 0.75, completion: {
             if self.isVictory {
-                self.defeatAction()
+                self.victoryAction()
             } else {
                 self.defeatedAction()
             }
             Game.instance.curStage.removeBattle(self)
+            completion()
         })
     }
-    var defeatAction = {}
+    var victoryAction = {}
     var defeatedAction = {}
     func hasFinished() -> Bool {
         if _enemyPart.count < 1 {

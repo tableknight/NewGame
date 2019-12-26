@@ -155,14 +155,15 @@ class ArmorInfo:SKSpriteNode {
             addChild(spellName)
         }
         
-        if armor._type == Outfit.Instrument {
+        if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
             let spellName = Label()
+            let s = Loot.getSpellById(armor._spell)
             spellName.align = "left"
             spellName.position.x = startX
             spellName.position.y = lastY - gap
-//            spellName.fontColor = QualityColor.getColor(armor._spell._quality)
+            spellName.fontColor = QualityColor.getColor(s._quality)
             spellName.fontSize = 18
-//            spellName.text = "[\(armor._spell._name)]"
+            spellName.text = "[\(s._name)]"
             lastY = lastY - gap - 18
             _displayHeight += 30
             addChild(spellName)

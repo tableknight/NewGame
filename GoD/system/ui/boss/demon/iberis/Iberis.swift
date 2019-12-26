@@ -27,7 +27,7 @@ class Iberis:Boss {
         _level = Iberis.LEVEL
         _img = SKTexture(imageNamed: "Iberis")
         _imgUrl = "Iberis"
-//        _spellsInuse = [DancingDragon(), FlameAttack(), ElementPowerUp()]
+        _spellsInuse = [Spell.DancingDragon, Spell.FlameAttack, Spell.ElementPowerUp]
     }
     override func create(level: CGFloat) {
         

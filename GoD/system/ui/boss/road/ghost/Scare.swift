@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Sacre: Physical {
+class Scare: Physical {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -16,6 +16,7 @@ class Sacre: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.Scare
         isClose = true
         _name = "恐吓"
         _description = "降低目标100%护甲"

@@ -16,6 +16,7 @@ class HorribleImage: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.HorribleImage
         _cooldown = 3
         _name = "恐怖怪像"
         _description = "降低所有目标50%护甲和50%精神"

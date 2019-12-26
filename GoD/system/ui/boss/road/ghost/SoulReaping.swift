@@ -10,6 +10,7 @@ import SpriteKit
 class SoulReaping: Magical {
     override init() {
         super.init()
+        _id = Spell.SoulReaping
         _name = "灵魂收割"
         _description = "对所有敌方单位造成精神50%的魔法伤害，偷取每个受伤单位15点精神"
         _rate = 0.5

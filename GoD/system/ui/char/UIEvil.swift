@@ -58,15 +58,15 @@ class UIEvil: UIUnit {
         b.defeatedAction = {
             this.defeatedAction()
         }
-        b.defeatAction = {
-            this.defeatAction()
+        b.victoryAction = {
+            this.victoryAction()
         }
         stage.addBattle(b)
         b.battleStart()
     }
     var _evils = Array<Creature>()
     var _thisType = "-1"
-    var defeatAction = {}
+    var victoryAction = {}
     var defeatedAction = {}
 }
 

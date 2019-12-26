@@ -5,7 +5,6 @@
 //  Created by kai chen on 2019/7/6.
 //  Copyright © 2019 Chen. All rights reserved.
 //
-
 import SpriteKit
 class BeingTired: Magical, BossOnly {
     required init(from decoder: Decoder) throws {
@@ -16,6 +15,7 @@ class BeingTired: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.BeingTired
         _name = "疲倦"
         _description = "进入疲倦状态，降低50%的护甲"
         _quality = Quality.NORMAL

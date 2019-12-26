@@ -16,6 +16,7 @@ class FlashPowder: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.FlashPowder
         _cooldown = 3
         _name = "闪光粉"
         _description = "降低敌方所有单位75点命中"

@@ -43,9 +43,9 @@ class BossRoad: AcientRoad {
         
     }
     
-    override func createTowers() {
-        
-    }
+//    override func createTowers() {
+//        
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

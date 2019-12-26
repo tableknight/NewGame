@@ -84,6 +84,9 @@ class Loot: Core {
         if spell._id == -1 {
             spell = Loot.getSacredSpell(id: id)
         }
+        if spell._id == -1 {
+            spell = Loot.getSpellUnrecorded(id: id)
+        }
         return spell
     }
 //
@@ -203,6 +206,11 @@ class Loot: Core {
         } else {
             s = Loot.getRandomSacredSpell()
         }
+        
+        if s._id == -1 {
+            return getSpellBook()
+        }
+        
         let sb = Item(Item.SpellBook)
         sb.spell = s
         
@@ -242,7 +250,7 @@ class Loot: Core {
         case Spell.BargeAbout:
             return BargeAbout()
         case Spell.FeignAttack:
-            return FeignAttack()
+            return FireBreath()
         case Spell.FireBreath:
             return FireBreath()
         case Spell.ToughHeart:
@@ -507,6 +515,81 @@ class Loot: Core {
         }
         if id == Spell.FacelessSpell {
             return FacelessSpell()
+        }
+        if id == Spell.DarkFall {
+            return DarkFall()
+        }
+        if id == Spell.MessGhost {
+            return MessGhost()
+        }
+        if id == Spell.SoulReaping {
+            return SoulReaping()
+        }
+        if id == Spell.SoulSlay {
+            return SoulSlay()
+        }
+        if id == Spell.Observant {
+            return Observant()
+        }
+        if id == Spell.ThrowWeapon {
+            return ThrowWeapon()
+        }
+        if id == Spell.ShadowCopy {
+            return ShadowCopy()
+        }
+        if id == Spell.FlashPowder {
+            return FlashPowder()
+        }
+        if id == Spell.Escape {
+            return Escape()
+        }
+        if id == Spell.Thorny {
+            return Thorny()
+        }
+        if id == Spell.TreadEarth {
+            return TreadEarth()
+        }
+        if id == Spell.TakeRest {
+            return TakeRest()
+        }
+        if id == Spell.ThrowRock {
+            return ThrowRock()
+        }
+        if id == Spell.BeingTired {
+            return BeingTired()
+        }
+        if id == Spell.Disintegrate {
+            return Disintegrate()
+        }
+        if id == Spell.Infection {
+            return Infection()
+        }
+        if id == Spell.BurningOut {
+            return BurningOut()
+        }
+        if id == Spell.DrawBlood {
+            return DrawBlood()
+        }
+        if id == Spell.Screaming {
+            return Screaming()
+        }
+        if id == Spell.CriticalBite {
+            return CriticalBite()
+        }
+        if id == Spell.SummonCopy {
+            return SummonCopy()
+        }
+        if id == Spell.ExposeWeakness {
+            return ExposeWeakness()
+        }
+        if id == Spell.SummonServant {
+            return SummonServant()
+        }
+        if id == Spell.Nova {
+            return Nova()
+        }
+        if id == Spell.DeathAttack {
+            return DeathAttack()
         }
         
         return Attack()

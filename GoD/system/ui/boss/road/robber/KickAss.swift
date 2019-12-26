@@ -16,6 +16,7 @@ class KickAss:Physical {
     }
     override init() {
         super.init()
+        _id = Spell.KickAss
         _name = "痛击"
         _description = "对目标造成攻击120%的物理伤害"
         _quality = Quality.NORMAL

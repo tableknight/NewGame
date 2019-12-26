@@ -16,6 +16,7 @@ class Escape: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.Escape
         _cooldown = 3
         _name = "逃生"
         _description = "全身而退"

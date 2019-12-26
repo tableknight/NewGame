@@ -210,7 +210,7 @@ class Spell:Core, Showable, Castable {
         }
         let from = _battle._curRole
         _damageValue = physicalDamage(from: from, to: to)
-        if isPhysical && to.hasSpell(spell: Thorny()) {
+        if isPhysical && to.hasSpell(id: Spell.Thorny) {
             if _battle._curRole.isClose() {
                 _battle.spellDecision[0] = true
             }
@@ -1182,5 +1182,37 @@ class Spell:Core, Showable, Castable {
     static let HorribleImage = 5002
     static let HealOfFlower = 5003
     static let FacelessSpell = 5004
-    
+    static let DarkFall = 5005
+    static let MessGhost = 5006
+    static let SoulReaping = 5007
+    static let SoulSlay = 5008
+    static let RobberHasMoral = 5009
+    static let SummonMummy = 5010
+    static let CutThroat = 5011
+    static let MakeEverythingRight = 5012
+    static let NervousPoison = 5013
+    static let KickAss = 5014
+    static let Scare = 5015
+    static let ThrowWeapon = 5016
+    static let ShadowCopy = 5017
+    static let Observant = 5018
+    static let FlashPowder = 5019
+    static let Escape = 5020
+    static let Thorny = 5021
+    static let TreadEarth = 5022
+    static let TakeRest = 5023
+    static let ThrowRock = 5024
+    static let BeingTired = 5025
+    static let Disintegrate = 5026
+    static let FireAngel = 5027
+    static let BurningOut = 5028
+    static let Infection = 5029
+    static let DrawBlood = 5030
+    static let Screaming = 5031
+    static let CriticalBite = 5032
+    static let SummonCopy = 5033
+    static let ExposeWeakness = 5034
+    static let SummonServant = 5035
+    static let Nova = 5036
+    static let DeathAttack = 5037
 }

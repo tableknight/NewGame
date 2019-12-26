@@ -405,17 +405,21 @@ class MyScene: SKSpriteNode {
     }
     
     internal func meetMonster(_ cell:Int, _ nextX:Int, _ nextY:Int, _ touchPoint:CGPoint) {
-        let mon = getNextCellItem(x: nextX, y: nextY) as! UIEvil
-        if mon.contains(touchPoint) {
-            mon.triggerEvent()
-            let this = self
-            mon.defeatedAction = {
-                
+        let item = getNextCellItem(x: nextX, y: nextY)
+        if item is UIEvil {
+            let mon = item as! UIEvil
+            if mon.contains(touchPoint) {
+                mon.triggerEvent()
+                mon.defeatedAction = {
+                    
+                }
+                mon.victoryAction = {
+                    self._mapMatrix[nextY][nextX] = self.CELL_EMPTY
+                    mon.removeFromParent()
+                }
             }
-            mon.defeatAction = {
-                this._mapMatrix[nextY][nextX] = this.CELL_EMPTY
-                mon.removeFromParent()
-            }
+        } else {
+            debug("mon is not uiitem")
         }
     }
     
@@ -801,7 +805,7 @@ class MyScene: SKSpriteNode {
 class Chest:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _x = seed(max: 12)
+//        _x = seed(max: 12)
         let item = Game.instance.pictureChest.getCell(_x.toFloat(), 0)
         setTexture(item)
     }
@@ -826,17 +830,14 @@ class Chest:UIItem {
             b.setPlayerPart(roles: cs)
             Game.instance.curStage.addBattle(b)
             b.battleStart()
-            b.defeatAction = {
+            
+            b.victoryAction = {
                 let l = Loot()
                 let roles = b._playerPart
                 for c in roles {
                     let exp = l.getExp(selfUnit: c, enemyLevel: Game.instance.curStage._curScene._level) * 10
                     c._unit.expUp(up: exp)
                 }
-                self.confirmAction()
-            }
-            b.defeatedAction = {
-                self.confirmAction()
             }
             return
         }
@@ -852,15 +853,9 @@ class Chest:UIItem {
             list.append(Item(Item.Tear))
         }
         Loot.showLootItems(list)
-//        let p = LootPanel()
-//        p.create(props: list)
-//        p.confirmAction = self.confirmAction
-//        Game.instance.curStage.showPanel(p)
-        
     }
     private var _x = 0
     var _triggered = false
-    var confirmAction = {}
     
 }
 class UIRole:UIItem {

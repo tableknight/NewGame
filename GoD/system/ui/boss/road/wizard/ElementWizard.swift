@@ -18,7 +18,7 @@ class ElementWizard:Boss {
         _growth.intellect = 3.5
         _race = EvilType.MAN
         _img = SKTexture(imageNamed: "element_wizard")
-//        _spellsInuse = [FireRain(), FireMatrix(), IceBomb(), FrozenShoot()]
+//        _spellsInuse = [Spell.FireRain, Spell.FireMatrix, IceBomb(), FrozenShoot()]
         _sensitive = 75
     }
     override func create(level: CGFloat) {

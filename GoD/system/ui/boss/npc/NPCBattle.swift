@@ -37,19 +37,7 @@ class NPCBattle: BossBattle {
         fadeOutBattle()
         
         if list.count > 0 {
-            let p = LootPanel()
-            p.create(props: list)
-            setTimeout(delay: 0.5, completion: {
-                for u in self._playerPart {
-                    u.removeFromParent()
-                }
-                Game.instance.curStage.showPanel(p)
-            })
-            p.confirmAction = {
-                self.lootPanelConfirmAction()
-            }
-        } else {
-            self.lootPanelConfirmAction()
+            Loot.showLootItems(list)
         }
     }
 }

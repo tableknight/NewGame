@@ -106,6 +106,7 @@ class SummonCopy:Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.SummonCopy
         _name = "分身之术"
         _description = "召唤一个真实的分身"
     }
@@ -135,6 +136,7 @@ class CriticalBite:Physical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.CriticalBite
         _name = "致命撕咬"
         _description = "对目标造成攻击力85%的物理伤害，并且有一定几率召唤一个分身协助攻击"
         _rate = 0.85

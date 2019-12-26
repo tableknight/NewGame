@@ -16,6 +16,7 @@ class Disintegrate: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.Disintegrate
         _name = "崩塌"
         _description = "无法承受自身的重量，崩塌了"
         _quality = Quality.NORMAL

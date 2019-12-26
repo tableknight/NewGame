@@ -88,7 +88,7 @@ class SelectItems: UIPanel {
     }
     
     private func getPropsCountMoreThan1() -> Array<Item> {
-        var ps = Array<Item>()
+        let ps = Array<Item>()
 //        let ts = TownScroll()
 //        ts._count = 5
 //        ps.append(ts)

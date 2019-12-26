@@ -22,7 +22,7 @@ class GiantSpirit:Boss {
         _level = GiantSpirit.LEVEL
         _img = SKTexture(imageNamed: "GiantSpirit")
         _imgUrl = "GiantSpirit"
-//        _spellsInuse = [Thorny(), TreadEarth(), TakeRest(), ThrowRock(), BeingTired()]
+        _spellsInuse = [Spell.Thorny, Spell.TreadEarth, Spell.TakeRest, Spell.ThrowRock, Spell.BeingTired]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

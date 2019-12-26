@@ -21,7 +21,7 @@ class Umisa:Boss {
         _level = Umisa.LEVEL
         _img = SKTexture(imageNamed: "Umisa")
         _imgUrl = "Umisa"
-//        _spellsInuse = [SummonCopy(), CriticalBite()]
+        _spellsInuse = [Spell.SummonCopy, Spell.CriticalBite]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)

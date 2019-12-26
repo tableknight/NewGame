@@ -10,6 +10,7 @@ import SpriteKit
 class DarkFall: Magical {
     override init() {
         super.init()
+        _id = Spell.DarkFall
         _name = "黑暗降临"
         _description = "降低所有目标的法术伤害，提升己方单位的法术伤害"
         _rate = 0.6

@@ -16,6 +16,7 @@ class SoulSlay: Physical {
     }
     override init() {
         super.init()
+        _id = Spell.SoulSlay
         isClose = true
         _name = "灵魂撕裂"
         _description = "对目标造成60%攻击力的伤害，令其在3回合内 无法恢复生命"

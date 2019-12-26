@@ -16,6 +16,7 @@ class NervousPoison: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.NervousPoison
         _cooldown = 3
         _name = "神经毒素"
         _description = "使目标有一定几率麻痹，持续3回合"

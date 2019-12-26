@@ -16,6 +16,7 @@ class ShadowCopy:Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.ShadowCopy
         _name = "影分身"
         _description = "召唤两个不具有攻击力的影分身，影分身承受200%的额外伤害"
         _quality = Quality.SACRED

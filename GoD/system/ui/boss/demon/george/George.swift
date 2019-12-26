@@ -21,7 +21,7 @@ class George:Boss {
         _level = George.LEVEL
         _img = SKTexture(imageNamed: "George")
         _imgUrl = "George"
-//        _spellsInuse = [Reborn(), Infection(), DrawBlood(), Screaming(), VampireBlood()]
+        _spellsInuse = [Spell.Reborn, Spell.Infection, Spell.DrawBlood, Spell.Screaming, Spell.VampireBlood]
         _sensitive = 25
     }
     override func create(level: CGFloat) {
@@ -53,7 +53,7 @@ class GeorgeServant1:BossMinion {
         levelTo(level: level)
         _extensions.health *= 2
         _extensions.hp = _extensions.health
-//        _spellsInuse = [Reborn()]
+        _spellsInuse = [Spell.Reborn]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -78,7 +78,7 @@ class GeorgeServant2:BossMinion {
         _extensions.health *= 2
         _extensions.hp = _extensions.health
         _sensitive = 60
-//        _spellsInuse = [Reborn(), Screaming()]
+        _spellsInuse = [Spell.Reborn, Spell.Screaming]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

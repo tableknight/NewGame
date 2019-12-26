@@ -33,7 +33,7 @@ class Dungeon: MyScene {
             _bossBattle.battleStart()
             
             let boss = getNextCellItem(x: nextX, y: nextY)
-            _bossBattle.defeatAction = {
+            _bossBattle.victoryAction = {
                 self._mapMatrix[nextY][nextX] = self.CELL_EMPTY
                 boss.removeFromParent()
             }
@@ -53,7 +53,7 @@ class Dungeon: MyScene {
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
-        createTowers()
+//        createTowers()
         if seed() < 10 {
 //            let tear = TheWitchsTear()
 //            tear._count = seed(min: 5, max: 11)
@@ -104,7 +104,7 @@ class Dungeon: MyScene {
             createWallShadow()
         }
         createPortals()
-        createTreasureBoxes()
+//        createTreasureBoxes()
         createEnemy()
     }
     
@@ -153,6 +153,8 @@ class Dungeon: MyScene {
         }
     }
     internal var _herbCount = 0
+    internal var _chestCount = 0
+    internal var _towerCount = 0
     internal func addWallCell(x:CGFloat, y:CGFloat, texture:SKTexture) {
         let sd = seed()
         let item = UIItem()
@@ -165,6 +167,16 @@ class Dungeon: MyScene {
             addWall(x: x, y: y, item: item)
             _mapMatrix[y.toInt()][x.toInt()] = CELL_HERB
             _herbCount += 1
+        } else if sd < 10 && _chestCount < 3 {
+            let chest = Chest()
+            addWall(x: x, y: y, item: chest)
+            _mapMatrix[y.toInt()][x.toInt()] = CELL_BOX
+            _chestCount += 1
+        } else if sd < 15 && _towerCount < 2 {
+            let tower = getRandomTower()
+            addWall(x: x, y: y, item: tower)
+            _mapMatrix[y.toInt()][x.toInt()] = CELL_TOWER
+            _towerCount += 1
         } else {
             item.setTexture(texture)
             addWall(x: x, y: y, item: item)
@@ -261,28 +273,28 @@ class Dungeon: MyScene {
         let next = PortalPrev()
         addGround(x: _portalNext.x, y: _portalNext.y, item: next)
     }
-    internal func createTreasureBoxes() {
-        let list = [1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,2,2,3]
-        let count = list.one()
-        if count == 0 {
-            return
-        }
-        for _ in 1...count {
-            let index = seed(max: _visiblePoints.count)
-            let point = _visiblePoints[index]
-            _visiblePoints.remove(at: index)
-            let chest = Chest()
-            chest.confirmAction = {
-//                let fo = SKAction.fadeOut(withDuration: TimeInterval(1))
-//                chest.run(fo) {
-//                }
-                chest.removeFromParent()
-                self._mapMatrix[point.y.toInt()][point.x.toInt()] = self.CELL_EMPTY
-            }
-            addItem(x: point.x, y: point.y, item: chest)
-            _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_BOX
-        }
-    }
+//    internal func createTreasureBoxes() {
+//        let list = [1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,2,2,3]
+//        let count = list.one()
+//        if count == 0 {
+//            return
+//        }
+//        for _ in 1...count {
+//            let index = seed(max: _visiblePoints.count)
+//            let point = _visiblePoints[index]
+//            _visiblePoints.remove(at: index)
+//            let chest = Chest()
+//            chest.confirmAction = {
+////                let fo = SKAction.fadeOut(withDuration: TimeInterval(1))
+////                chest.run(fo) {
+////                }
+//                chest.removeFromParent()
+//                self._mapMatrix[point.y.toInt()][point.x.toInt()] = self.CELL_EMPTY
+//            }
+//            addItem(x: point.x, y: point.y, item: chest)
+//            _mapMatrix[point.y.toInt()][point.x.toInt()] = CELL_BOX
+//        }
+//    }
     internal var _visiblePoints = Array<CGPoint>()
     internal var _wallPoints = Array<CGPoint>()
     internal func findVisiblePoints() -> Array<CGPoint> {
@@ -333,35 +345,35 @@ class Dungeon: MyScene {
         shadow.xAxis = shadow.xAxis - cellSize / 3 - 1
     }
     
-    internal func createTowers() {
-        var points = Array<CGPoint>()
-        let maxx = hSize.toInt() - 1
-        let maxy = vSize.toInt() - 1
-        for y in 0...maxy {
-            for x in 0...maxx {
-                if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
-                    points.append(CGPoint(x: x, y: y))
-                }
-            }
-        }
-        if points.count == 1 {
-            let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())
-            item.removeFromParent()
-            addItem(x: points[0].x, y: points[0].y, item: getRandomTower())
-            _mapMatrix[points[0].y.toInt()][points[0].x.toInt()] = CELL_TOWER
-        } else if points.count > 1 {
-            let c = seed(max: 2)
-            for _ in 0...c {
-                let index = seed(max: points.count)
-                let p = points[index]
-                points.remove(at: index)
-                let item = getNextCellItem(x: p.x.toInt(), y: p.y.toInt())
-                item.removeFromParent()
-                addItem(x: p.x, y: p.y, item: getRandomTower())
-                _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_TOWER
-            }
-        }
-    }
+//    internal func createTowers() {
+//        var points = Array<CGPoint>()
+//        let maxx = hSize.toInt() - 1
+//        let maxy = vSize.toInt() - 1
+//        for y in 0...maxy {
+//            for x in 0...maxx {
+//                if _mapMatrix[y][x] == CELL_ITEM && _mapMatrix[y + 1][x] == CELL_EMPTY {
+//                    points.append(CGPoint(x: x, y: y))
+//                }
+//            }
+//        }
+//        if points.count == 1 {
+//            let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())
+//            item.removeFromParent()
+//            addItem(x: points[0].x, y: points[0].y, item: getRandomTower())
+//            _mapMatrix[points[0].y.toInt()][points[0].x.toInt()] = CELL_TOWER
+//        } else if points.count > 1 {
+//            let c = seed(max: 2)
+//            for _ in 0...c {
+//                let index = seed(max: points.count)
+//                let p = points[index]
+//                points.remove(at: index)
+//                let item = getNextCellItem(x: p.x.toInt(), y: p.y.toInt())
+//                item.removeFromParent()
+//                addItem(x: p.x, y: p.y, item: getRandomTower())
+//                _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_TOWER
+//            }
+//        }
+//    }
     
     internal func createSeller() {
         var points = Array<CGPoint>()

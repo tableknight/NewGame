@@ -101,6 +101,7 @@ class SummonServant: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.SummonServant
         _name = "亡灵召唤"
         _description = "召唤一个随机的亡灵随从"
     }
@@ -158,6 +159,7 @@ class Nova: Magical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.Nova
         _name = "冲击波"
         _description = "当佛朗西斯集齐了他的军队，那么就轮到他发挥真正实力的时候了，对所有敌方目标造成精神200%的魔法伤害"
         _rate = 2
@@ -190,6 +192,7 @@ class DeathAttack:Physical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.DeathAttack
         _name = "死亡一击"
         _description = "命中时有25%几率直接杀死目标"
         _quality = Quality.SACRED
@@ -224,6 +227,7 @@ class DeathAttack:Physical, BossOnly {
 class AttackPowerUp: Passive {
     override init() {
         super.init()
+        _id = Spell.AttackPowerUp
         _name = "充能"
         _description = "行动结束提升15%基础攻击力"
         _quality = Quality.RARE
@@ -247,6 +251,7 @@ class AttackPowerUp: Passive {
 class Reinforce: Magical {
     override init() {
         super.init()
+        _id = Spell.Reinforce
         _name = "强化"
         _description = "提升目标60%的基础攻击力和基础护甲，持续2回合"
         targetEnemy = false
@@ -287,6 +292,7 @@ class Reinforce: Magical {
 class SoulExtract: Magical {
     override init() {
         super.init()
+        _id = Spell.SoulExtract
         _name = "灵魂抽取"
         _description = "对目标造成60%精神的魔法伤害，并抽取其基础属性各一点"
         _quality = Quality.SACRED

@@ -21,7 +21,7 @@ class IssThePuppet:Boss {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "Iss")
         _imgUrl = "Iss"
-//        _spellsInuse = [ControlUndead(), SetTimeBack(), LowerSummon(), SummonFlower(), WaterCopy(), HighLevelSummon()]
+        _spellsInuse = [Spell.ControlUndead, Spell.LowerSummon, Spell.SummonFlower, Spell.WaterCopy, Spell.HighLevelSummon]
     }
     override func create(level: CGFloat) {
         

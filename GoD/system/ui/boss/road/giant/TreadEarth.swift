@@ -16,6 +16,7 @@ class TreadEarth: Physical, BossOnly {
     }
     override init() {
         super.init()
+        _id = Spell.TreadEarth
         _name = "裂地重踩"
         _description = "对所有敌方单位造成150%攻击力的物理伤害"
         _quality = Quality.SACRED

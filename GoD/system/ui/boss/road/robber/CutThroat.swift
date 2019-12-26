@@ -10,6 +10,7 @@ import SpriteKit
 class CutThroat: Physical {
     override init() {
         super.init()
+        _id = Spell.CutThroat
         isClose = true
         _name = "绞喉"
         _description = "对目标造成攻击60%的物理伤害，封印所有技能3回合"

@@ -16,6 +16,7 @@ class ReduceLife: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.ReduceLife
         _name = "催命"
         _description = "对目标造成精神120%的魔法伤害"
         _rate = 1.2
