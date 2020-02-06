@@ -53,50 +53,43 @@ class Dungeon: MyScene {
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
-//        createTowers()
         if seed() < 10 {
-//            let tear = TheWitchsTear()
-//            tear._count = seed(min: 5, max: 11)
-//            tear.countless = false
-//            _goodsList = [tear]
-////            _whichItem = [true]
-////            _mixedItemMoney = [false]
-//            let count = seed(min: 1, max: 3)
-//            let l = Loot()
-//            for _ in 1...count {
-//                let sb = SpellBook()
-//                sb.spell = l.getRandomSacredSpell()
-//                sb._storePrice = 68
-//                sb._priceType = 1
-////                _whichItem.append(false)
-////                _mixedItemMoney.append(true)
-//                _goodsList.append(sb)
-//            }
-//            if seed() < 50 {
-//                let expBook = ExpBook()
-//                expBook._count = seed(min: 1, max: 4)
-//                _goodsList.append(expBook)
-//            }
-//            if seed() < 75 {
-//                let gp = GiantPotion()
-//                gp._count = seed(min: 1, max: 5)
-//                _goodsList.append(gp)
-//            }
-//            if seed() < 25 {
-//                let ps = PsychicScroll()
-//                ps._count = 1
-//                _goodsList.append(ps)
-//            }
-//            if seed() < 35 {
-//                let ps = GodTownScroll()
-//                ps._count = seed(min: 1, max: 3)
-//                _goodsList.append(ps)
-//            }
-//            if seed() < 35 {
-//                let ps = DeathTownScroll()
-//                ps._count = seed(min: 1, max: 3)
-//                _goodsList.append(ps)
-//            }
+            let tear = Item(Item.Tear)
+            tear._count = seed(min: 5, max: 11)
+            _goodsList = [tear]
+            let spellBookCount = seed(min: 1, max: 3)
+            for _ in 1...spellBookCount {
+                let sb = Item(Item.SpellBook)
+                sb.spell = Loot.getRandomSacredSpell()
+//                sb._price = 48
+                sb._priceType = Item.PRICE_TYPE_TEAR
+                _goodsList.append(sb)
+            }
+            if seed() < 50 {
+                let expBook = Item(Item.ExpBook)
+                expBook._count = seed(min: 1, max: 4)
+                _goodsList.append(expBook)
+            }
+            if seed() < 75 {
+                let gp = Item(Item.GiantPotion)
+                gp._count = seed(min: 1, max: 5)
+                _goodsList.append(gp)
+            }
+            if seed() < 25 {
+                let ps = Item(Item.PsychicScroll)
+                ps._count = 1
+                _goodsList.append(ps)
+            }
+            if seed() < 35 {
+                let ps = Item(Item.GodTownScroll)
+                ps._count = seed(min: 1, max: 3)
+                _goodsList.append(ps)
+            }
+            if seed() < 35 {
+                let ps = Item(Item.DeathTownScroll)
+                ps._count = seed(min: 1, max: 3)
+                _goodsList.append(ps)
+            }
             createSeller()
         }
         createBoss()
@@ -104,7 +97,6 @@ class Dungeon: MyScene {
             createWallShadow()
         }
         createPortals()
-//        createTreasureBoxes()
         createEnemy()
     }
     
@@ -158,7 +150,7 @@ class Dungeon: MyScene {
     internal func addWallCell(x:CGFloat, y:CGFloat, texture:SKTexture) {
         let sd = seed()
         let item = UIItem()
-        if sd < 6 && _herbCount < 5 {
+        if sd < 6 && _herbCount < 5 && !(self is InnerMaze) {
             let herb = _herbs.one()
             item._key = herb
             let data = ItemData.data[_herbs.one()]!
@@ -190,7 +182,8 @@ class Dungeon: MyScene {
         
         setTimeout(delay: 2, completion: {
             let herb = Item(item._key)
-            herb._count = self.seed(min: 1, max: 4)
+            let count = ceil(self._level * 0.1)
+            herb._count = self.seed(min: 1, max: count.toInt())
             Game.instance.char.addItem(herb)
             showMsg(text: "你获得了[\(herb._name)]x\(herb._count)")
             item.removeFromParent()
@@ -322,7 +315,7 @@ class Dungeon: MyScene {
 //        let t = _wall_shadow
         let t2 = Game.instance.inside_a5.getCell(0,0)
         for p in _wallPoints {
-            if CELL_TOWER == _mapMatrix[p.y.toInt()][p.x.toInt()] || CELL_SELLER == _mapMatrix[p.y.toInt()][p.x.toInt()] {
+            if [CELL_TOWER, CELL_SELLER, CELL_BOX, CELL_HERB, CELL_ORE].firstIndex(of: _mapMatrix[p.y.toInt()][p.x.toInt()]) != nil{
                 continue
             }
             if p.x < hSize {

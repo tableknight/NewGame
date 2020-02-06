@@ -78,11 +78,24 @@ class SelectDocument: UIPanel {
         self.removeFromParent()
         let role = Game.load(key: _selectedDc._doc._key)!
         let stage = MyStage()
-        let scene = SelfHome()
+        let scene = ArmorHouse()
         scene.create()
-        scene.setRole(x: 2, y: 1, role: role)
+        scene.setRole(x: 2, y: 4, role: role)
         stage.loadScene(scene: scene)
         stage.createMenu()
+        let c = Game.instance.char!
+        for _ in 0...5 {
+            let p = Item(Item.LittleMPPotion)
+            c.addItem(p)
+//            let p = Item(Item.RedoSeed)
+//            c.addItem(p)
+//
+//            let p1 = Item(Item.MagicSyrup)
+//            c.addItem(p1)
+        }
+        
+        
+        
 //        Game.instance.char._spellsInuse.append(Spell.LowlevelFlame)
 //        Game.instance.char._level = 40
 //        let tr = Outfit(Outfit.Amulet)

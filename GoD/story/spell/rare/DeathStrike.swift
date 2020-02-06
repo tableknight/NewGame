@@ -23,6 +23,7 @@ class DeathStrike: Magical {
         _rate = 0.6
         _description = "对目标造成精神60%的魔法伤害，每次偷取目标10点精神"
         targetEnemy = true
+        cost(value: 18)
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

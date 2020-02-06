@@ -21,6 +21,17 @@ class TallTree:UIItem {
         super.init(coder: aDecoder)
     }
 }
+class TallTop:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        let tree = Game.instance.outside_b.getCell(5, 11)
+        setTexture(tree)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}
 
 class DeadTree:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {

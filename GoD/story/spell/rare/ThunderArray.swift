@@ -25,6 +25,7 @@ class ThunderArray:Magical {
         isThunder = true
         autoCast = true
         _rate = 0.4
+        cost(value: 30)
     }
     private var _step = 0
     override func cast(completion: @escaping () -> Void) {

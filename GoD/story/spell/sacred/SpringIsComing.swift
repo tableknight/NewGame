@@ -23,6 +23,7 @@ class SpringIsComing:Magical {
         _cooldown = 3
         targetEnemy = false
         canBeTargetSelf = true
+        cost(value: 25)
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

@@ -223,7 +223,7 @@ class Loot: Core {
         return Loot.getGoodSpell(id: Loot.getRandomGoodSpellId())
     }
     static func getRandomRareSpell() -> Spell {
-        return Loot.getRareSpell(id: Loot.getRandomSacredSpellId())
+        return Loot.getRareSpell(id: Loot.getRandomRareSpellId())
     }
     static func getRandomSacredSpell() -> Spell {
         return Loot.getSacredSpell(id: Loot.getRandomSacredSpellId())
@@ -242,6 +242,7 @@ class Loot: Core {
     }
     static let LastSacredSpellCountId = 4036
     static func getNormalSpell(id:Int) -> Spell {
+        debug("normal = \(id)")
         switch id {
         case Spell.Cruel:
             return Cruel()
@@ -294,6 +295,7 @@ class Loot: Core {
         }
     }
     static func getGoodSpell(id:Int) -> Spell {
+        debug("good = \(id)")
         switch id {
         case Spell.BloodThirsty:
             return BloodThirsty()
@@ -356,6 +358,7 @@ class Loot: Core {
         }
     }
     static func getRareSpell(id:Int) -> Spell {
+        debug("rare = \(id)")
         switch id {
         case Spell.Lighting:
             return Lighting()
@@ -591,6 +594,9 @@ class Loot: Core {
         if id == Spell.DeathAttack {
             return DeathAttack()
         }
+        if id == Spell.NoAction {
+            return NoAction()
+        }
         
         return Attack()
     }
@@ -603,9 +609,10 @@ class Loot: Core {
         list += [4]
         list += [5]
         list += [6]
+        list += [10]
+        list += [11]
         return getItemByid(id: list.one())
     }
-    var _maxItemNumber = 10
     func getItemByid(id: Int) -> Item {
         if 0 == id {
             return Item(Item.Tear)
@@ -641,6 +648,12 @@ class Loot: Core {
         
         if 9 == id {
             return Item(Item.PsychicScroll)
+        }
+        if 10 == id {
+            return Item(Item.RedoSeed)
+        }
+        if 11 == id {
+            return Item(Item.MagicSyrup)
         }
         
         return Item(Item.Tear)
@@ -1097,15 +1110,17 @@ class Loot: Core {
         let startY = newList.count.toFloat() * fontSize * 0.5
         var y:CGFloat = 0
         for i in newList {
-            var text = "你获得了[\(i._name)]"
+            var text = ""
             if i.stackable {
-                text += "x\(i._count)"
+                text = "你获得了[\(i._name)]x\(i._count)"
+            } else {
+                text = "你获得了[Lv\(i._level) \(i._name)]"
             }
             Game.instance.char.addItem(i)
             let l = Label()
             l.fontSize = fontSize
             l.align = "center"
-            l.fontColor = UIColor.white
+            l.fontColor = QualityColor.getColor(i._quality)
             l.text = text
             l.position.y = startY - y * fontSize
             l.alpha = 0.9

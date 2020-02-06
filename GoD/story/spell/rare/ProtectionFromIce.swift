@@ -26,6 +26,7 @@ class ProtectionFromIce: Magical {
         targetEnemy = false
         canBeTargetSelf = true
         _cooldown = 3
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

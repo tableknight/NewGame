@@ -21,6 +21,7 @@ class SilenceAll: Magical, Curse {
         _quality = Quality.SACRED
         _cooldown = 1
         autoCast = true
+        cost(value: 20)
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

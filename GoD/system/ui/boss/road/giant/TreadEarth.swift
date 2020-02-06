@@ -24,6 +24,7 @@ class TreadEarth: Physical, BossOnly {
         _rate = 1.5
         isClose = false
         autoCast = true
+        cost(value: 30)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

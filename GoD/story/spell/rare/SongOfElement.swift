@@ -16,6 +16,7 @@ class SongOfElement:Magical {
         _quality = Quality.RARE
         _cooldown = 1
         _rate = 0.4
+        cost(value: 18)
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

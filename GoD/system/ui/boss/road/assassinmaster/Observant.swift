@@ -23,6 +23,7 @@ class Observant: Magical {
         targetEnemy = false
         _quality = Quality.GOOD
         autoCast = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

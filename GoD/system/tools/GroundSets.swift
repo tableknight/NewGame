@@ -111,7 +111,7 @@ class GroundSets: Core {
             partPos = 1
         }
 //        let wall = _wall
-        let node = _wall.getNode(partPos, 1)
+        let node = _wall.getNode(partPos, 1, 1, 2)
 //        let nodeTop = _wall.getNode(partPos, -0.5, 1, 0.5)
 //        nodeTop.anchorPoint = CGPoint(x: 0.5, y: 0)
 //        node.addChild(nodeTop)

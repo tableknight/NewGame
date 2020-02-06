@@ -22,6 +22,7 @@ class BearFriend:Magical, SummonSkill {
         _quality = Quality.SACRED
         _cooldown = 5
         autoCast = true
+        cost(value: 60)
     }
     override func cast(completion: @escaping () -> Void) {
         let seats = _battle.getEmptySeats()

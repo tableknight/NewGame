@@ -22,6 +22,7 @@ class LineAttack: Physical {
         _rate = 0.55
         _quality = Quality.GOOD
         _cooldown = 1
+        _mpCost = 12 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

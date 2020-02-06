@@ -22,6 +22,7 @@ class Burn: Magical, Curse {
         _description = "点燃目标，如果目标已被点燃，则增加两层燃烧效果"
         _quality = Quality.NORMAL
         _cooldown = 0
+        _mpCost = 12 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

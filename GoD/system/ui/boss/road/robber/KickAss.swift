@@ -22,6 +22,7 @@ class KickAss:Physical {
         _quality = Quality.NORMAL
         _cooldown = 1
         _rate = 1.2
+        cost(value: 18)
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

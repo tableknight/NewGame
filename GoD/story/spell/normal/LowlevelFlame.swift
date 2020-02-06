@@ -17,6 +17,7 @@ class LowlevelFlame: Magical {
         _rate = 0.6
         _quality = Quality.NORMAL
         _cooldown = 0
+        _mpCost = 5 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

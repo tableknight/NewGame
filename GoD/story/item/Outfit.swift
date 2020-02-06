@@ -36,37 +36,35 @@ class Outfit:Item {
         _count = -1
         stackable = false
         showCount = false
-        _all = [STAMINA,
-                STRENGTH,
-                AGILITY,
-                INTELLECT,
-                DEFENCE,
-                SPEED,
-                SPIRIT,
-                ACCURACY,
-                AVOID,
-                CRITICAL,
-                HEALTH,
-                MIND,
-                FIREPOWER,
-                FIRERESISTANCE,
-                WATERPOWER,
-                WATERRESISTANCE,
-                THUNDERPOWER,
-                THUNDERRESISTANCE,
+        _all = [Attribute.STAMINA,
+                Attribute.STRENGTH,
+                Attribute.AGILITY,
+                Attribute.INTELLECT,
+                Attribute.DEFENCE,
+                Attribute.SPEED,
+                Attribute.SPIRIT,
+                Attribute.ACCURACY,
+                Attribute.AVOID,
+                Attribute.CRITICAL,
+                Attribute.HEALTH,
+                Attribute.MIND,
+                Attribute.FIREPOWER,
+                Attribute.FIRERESISTANCE,
+                Attribute.WATERPOWER,
+                Attribute.WATERRESISTANCE,
+                Attribute.THUNDERPOWER,
+                Attribute.THUNDERRESISTANCE,
 //                ELEMENTALPOWER,
 //                ELEMENTALRESISTANCE,
-                LUCKY,
-                BREAK,
-                REVENGE,
-                RHYTHM
+                Attribute.LUCKY,
+                Attribute.BREAK,
+                Attribute.REVENGE,
+                Attribute.RHYTHM,
+                Attribute.PHYSICAL_REDUCE_PERCENT,
+                Attribute.PHYSICAL_REDUCE_POINT
         ]
     }
-    
-//    required init(from decoder: Decoder) throws {
-//        fatalError("init(from:) has not been implemented")
-//    }
-    
+
     override func setValue() {
         let data = ArmorData.data[_type]!
         _type = data.type
@@ -169,8 +167,9 @@ class Outfit:Item {
     
     private func createPrice() {
         let _min = _level + 1
-        let _max = _level + 3
-        _price = seed(min: _min, max: _max) * _quality
+        let _max = _level + 10
+        _price = seed(min: _min, max: _max) * (_quality + 1)
+        _price = _price / 2
     }
     
     private func createQuality() {
@@ -227,37 +226,37 @@ class Outfit:Item {
     }
     
     private var _all = Array<Int>()
-    var STAMINA = 0
-    var STRENGTH = 1
-    var AGILITY = 2
-    var INTELLECT = 3
-    var ATTACK = 4
-    var DEFENCE = 5
-    var SPEED = 6
-    var SPIRIT = 7
-    var ACCURACY = 8
-    var AVOID = 9
-    var CRITICAL = 10
-    var MIND = 11
-    var HEALTH = 12
-    var FIREPOWER = 13
-    var WATERPOWER = 14
-    var THUNDERPOWER = 15
-    var FIRERESISTANCE = 16
-    var WATERRESISTANCE = 17
-    var THUNDERRESISTANCE = 18
-    var ELEMENTALPOWER = 19
-    var ELEMENTALRESISTANCE = 20
-    var LUCKY = 21
-    var BREAK = 22
-    var REVENGE = 23
-    var RHYTHM = 24
-    var CHAOS = 25
-    var ATTACK_BASE = 26
-    var SPIRIT_BASE = 27
-    var MAGICAL_POWER = 28
-    var DESTROY = 29
-    var HEALTH_BY_RATE = 30
+//    var STAMINA = 0
+//    var STRENGTH = 1
+//    var AGILITY = 2
+//    var INTELLECT = 3
+//    var ATTACK = 4
+//    var DEFENCE = 5
+//    var SPEED = 6
+//    var SPIRIT = 7
+//    var ACCURACY = 8
+//    var AVOID = 9
+//    var CRITICAL = 10
+//    var MIND = 11
+//    var HEALTH = 12
+//    var FIREPOWER = 13
+//    var WATERPOWER = 14
+//    var THUNDERPOWER = 15
+//    var FIRERESISTANCE = 16
+//    var WATERRESISTANCE = 17
+//    var THUNDERRESISTANCE = 18
+//    var ELEMENTALPOWER = 19
+//    var ELEMENTALRESISTANCE = 20
+//    var LUCKY = 21
+//    var BREAK = 22
+//    var REVENGE = 23
+//    var RHYTHM = 24
+//    var CHAOS = 25
+//    var ATTACK_BASE = 26
+//    var SPIRIT_BASE = 27
+//    var MAGICAL_POWER = 28
+//    var DESTROY = 29
+//    var HEALTH_BY_RATE = 30
     private func removeAttrId(id:Int) {
         let index = _all.firstIndex(of: id)
         if nil != index {

@@ -8,6 +8,7 @@
 
 import SpriteKit
 class Attribute: Core {
+    static let STAMINA_TEXT = "防御"
     init(type:Int, level:Int) {
         super.init()
         _type = type
@@ -120,7 +121,16 @@ class Attribute: Core {
         } else if t == Attribute.STRENGTH {
             _name = "力量"
             midAttrValue(level: l)
-        } else {
+        } else if t == Attribute.PHYSICAL_REDUCE_POINT {
+            _name = "物理伤害"
+            midAttrValue(level: l)
+            _value *= -1
+        } else if t == Attribute.PHYSICAL_REDUCE_PERCENT {
+            _name = "物理伤害"
+            percentAttrValue(level: l)
+            _value *= -1
+            _percentValue = true
+        }else {
             debug("attr init error!")
         }
     }
@@ -197,6 +207,10 @@ class Attribute: Core {
             unit._extensions.spirit += value
         } else if t == Attribute.STRENGTH {
             unit.strengthChange(value: value)
+        } else if t == Attribute.PHYSICAL_REDUCE_PERCENT {
+            unit._physical.resistance += value
+        } else if t == Attribute.PHYSICAL_REDUCE_POINT {
+            unit._physical.damage += value
         } else {
             debug("attr on error!")
         }
@@ -244,11 +258,21 @@ class Attribute: Core {
         _value = seed(min: min, max: max).toFloat()
     }
     
-     func elementalAttrValue(level:CGFloat) {
+    func elementalAttrValue(level:CGFloat) {
         if level < 20 {
             _value = seed(min: 5, max: 11).toFloat()
         } else {
             _value = seed(min: 10, max: 21).toFloat()
+        }
+        
+    }
+    func percentAttrValue(level:CGFloat) {
+        if level < 13 {
+            _value = seedFloat(min: 1, max: 6)
+        } else if level < 30 {
+            _value = seedFloat(min: 3, max: 11)
+        } else {
+            _value = seedFloat(min: 8, max: 16)
         }
         
     }
@@ -303,6 +327,8 @@ class Attribute: Core {
     static let MAGICAL_POWER = 28
     static let DESTROY = 29
     static let HEALTH_BY_RATE = 30
+    static let PHYSICAL_REDUCE_PERCENT = 31
+    static let PHYSICAL_REDUCE_POINT = 32
         
     private enum CodingKeys: String, CodingKey {
         case _type

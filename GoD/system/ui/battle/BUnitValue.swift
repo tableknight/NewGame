@@ -105,7 +105,13 @@ extension BUnit {
         return val + _valueUnit._physical.damage
     }
     
-    func getPhysicalResistance() -> CGFloat {
+    func getPhysicalReducePoint() -> CGFloat {
+        let val = _unit._physical.damage
+        
+        return val + _valueUnit._physical.damage
+    }
+    
+    func getPhysicalReducePercent() -> CGFloat {
         let val = _unit._physical.resistance
         
         return val + _valueUnit._physical.resistance
@@ -247,6 +253,9 @@ extension BUnit {
     
     func getMpMax() -> CGFloat {
         return _unit._extensions.mpMax
+    }
+    func getMp() -> CGFloat {
+        return _unit._extensions.mp
     }
     
     func getDestroy() -> CGFloat {

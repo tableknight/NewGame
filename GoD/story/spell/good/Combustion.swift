@@ -21,6 +21,7 @@ class Combustion: Magical {
         _description = "延长目标燃烧效果3回合"
         _quality = Quality.GOOD
         _cooldown = 3
+        _mpCost = 5 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -22,6 +22,7 @@ class ReduceLife: Magical {
         _rate = 1.2
         _quality = Quality.NORMAL
         _cooldown = 1
+        cost(value: 18)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

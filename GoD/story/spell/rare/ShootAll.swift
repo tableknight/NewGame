@@ -18,6 +18,7 @@ class ShootAll: Physical, BowSkill {
         autoCast = true
         _quality = Quality.RARE
         _cooldown = 2
+        cost(value: 25)
     }
     
     override func cast(completion: @escaping () -> Void) {

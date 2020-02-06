@@ -23,6 +23,7 @@ class BurningAll: Magical, Curse {
         _quality = Quality.GOOD
         _cooldown = 0
         autoCast = true
+        _mpCost = 25 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -23,6 +23,7 @@ class SixShooter: Physical, BowSkill {
         _quality = Quality.SACRED
         _cooldown = 2
         autoCast = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

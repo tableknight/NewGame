@@ -257,6 +257,14 @@
 		096D9D3523B1C3B500FB1D34 /* FacelessSpell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3423B1C3B400FB1D34 /* FacelessSpell.swift */; };
 		096D9D3723B2476800FB1D34 /* LavaExplosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3623B2476800FB1D34 /* LavaExplosion.swift */; };
 		096D9D3923B2486D00FB1D34 /* Combustion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3823B2486D00FB1D34 /* Combustion.swift */; };
+		096D9D3B23BA424600FB1D34 /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3A23BA424600FB1D34 /* Hotel.swift */; };
+		096D9D3D23BB82B900FB1D34 /* CenterV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3C23BB82B900FB1D34 /* CenterV.swift */; };
+		096D9D3F23BCD32700FB1D34 /* HotelInner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3E23BCD32700FB1D34 /* HotelInner.swift */; };
+		096D9D4123BCD38500FB1D34 /* ArmorHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D4023BCD38500FB1D34 /* ArmorHouse.swift */; };
+		096D9D4323E421B300FB1D34 /* GroceryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D4223E421B300FB1D34 /* GroceryStore.swift */; };
+		096D9D4523E6BA0C00FB1D34 /* EastV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D4423E6BA0C00FB1D34 /* EastV.swift */; };
+		096D9D4723E6FC0400FB1D34 /* NorthV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D4623E6FC0400FB1D34 /* NorthV.swift */; };
+		096D9D4923E7C3EF00FB1D34 /* PharmicPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D4823E7C3EF00FB1D34 /* PharmicPanel.swift */; };
 		097192D222EF23BA00D241FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090FEA0921BB983F004276BB /* LaunchScreen.storyboard */; };
 		097192D322EF23BB00D241FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 090FEA0921BB983F004276BB /* LaunchScreen.storyboard */; };
 		0972F861230986770017A179 /* PoisonCurse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0972F860230986770017A179 /* PoisonCurse.swift */; };
@@ -687,6 +695,14 @@
 		096D9D3423B1C3B400FB1D34 /* FacelessSpell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacelessSpell.swift; sourceTree = "<group>"; };
 		096D9D3623B2476800FB1D34 /* LavaExplosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LavaExplosion.swift; sourceTree = "<group>"; };
 		096D9D3823B2486D00FB1D34 /* Combustion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combustion.swift; sourceTree = "<group>"; };
+		096D9D3A23BA424600FB1D34 /* Hotel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
+		096D9D3C23BB82B900FB1D34 /* CenterV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterV.swift; sourceTree = "<group>"; };
+		096D9D3E23BCD32700FB1D34 /* HotelInner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelInner.swift; sourceTree = "<group>"; };
+		096D9D4023BCD38500FB1D34 /* ArmorHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmorHouse.swift; sourceTree = "<group>"; };
+		096D9D4223E421B300FB1D34 /* GroceryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryStore.swift; sourceTree = "<group>"; };
+		096D9D4423E6BA0C00FB1D34 /* EastV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EastV.swift; sourceTree = "<group>"; };
+		096D9D4623E6FC0400FB1D34 /* NorthV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthV.swift; sourceTree = "<group>"; };
+		096D9D4823E7C3EF00FB1D34 /* PharmicPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PharmicPanel.swift; sourceTree = "<group>"; };
 		0972F860230986770017A179 /* PoisonCurse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoisonCurse.swift; sourceTree = "<group>"; };
 		0972F862230986890017A179 /* PoisonAttack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoisonAttack.swift; sourceTree = "<group>"; };
 		0972F864230986EA0017A179 /* ColdWind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdWind.swift; sourceTree = "<group>"; };
@@ -1284,6 +1300,7 @@
 				09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */,
 				094E68CF21E203EE00414583 /* SellingPanel.swift */,
 				092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */,
+				096D9D4823E7C3EF00FB1D34 /* PharmicPanel.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1736,6 +1753,13 @@
 				094E68D521EA228E00414583 /* ChurchHouse.swift */,
 				090C0DE521EB260E008C46AA /* NorthCanmping.swift */,
 				097EC6C6226814D000B9407A /* BlackWaterTown.swift */,
+				096D9D3A23BA424600FB1D34 /* Hotel.swift */,
+				096D9D3C23BB82B900FB1D34 /* CenterV.swift */,
+				096D9D4423E6BA0C00FB1D34 /* EastV.swift */,
+				096D9D3E23BCD32700FB1D34 /* HotelInner.swift */,
+				096D9D4023BCD38500FB1D34 /* ArmorHouse.swift */,
+				096D9D4623E6FC0400FB1D34 /* NorthV.swift */,
+				096D9D4223E421B300FB1D34 /* GroceryStore.swift */,
 			);
 			path = normal;
 			sourceTree = "<group>";
@@ -2070,6 +2094,7 @@
 				09C66C9C220B063200E1C153 /* Francis.swift in Sources */,
 				09C66CDC2215BDFE00E1C153 /* TrueSight.swift in Sources */,
 				09C66C8E21FD4EC200E1C153 /* LewisBattle.swift in Sources */,
+				096D9D3F23BCD32700FB1D34 /* HotelInner.swift in Sources */,
 				090FEBE821BB9B2B004276BB /* Status.swift in Sources */,
 				09D17D8422D3030C00B07EFD /* FlashPowder.swift in Sources */,
 				09738A8B228AF909009AF2EE /* SixShooter.swift in Sources */,
@@ -2102,6 +2127,7 @@
 				090FEC1B21BB9B2B004276BB /* SmallHouse.swift in Sources */,
 				090FEBDC21BB9B2B004276BB /* Heal.swift in Sources */,
 				097EC6C7226814D000B9407A /* BlackWaterTown.swift in Sources */,
+				096D9D4923E7C3EF00FB1D34 /* PharmicPanel.swift in Sources */,
 				09D17D9B22D77E7300B07EFD /* KickAss.swift in Sources */,
 				090FEB6021BB9B2B004276BB /* SacredInstrument.swift in Sources */,
 				090FEC3321BB9B2B004276BB /* InnInside.swift in Sources */,
@@ -2121,6 +2147,7 @@
 				0922C95E223CAF16002DC201 /* FireSource.swift in Sources */,
 				0960C4A72386C3D400FF30A1 /* StarPalace.swift in Sources */,
 				090FEBC221BB9B2B004276BB /* Crazy.swift in Sources */,
+				096D9D3D23BB82B900FB1D34 /* CenterV.swift in Sources */,
 				090FEB5D21BB9B2B004276BB /* SacredEarring.swift in Sources */,
 				090FEC1621BB9B2B004276BB /* LastFloor.swift in Sources */,
 				090FEC1121BB9B2B004276BB /* Counter.swift in Sources */,
@@ -2181,6 +2208,7 @@
 				090FEBAA21BB9B2B004276BB /* Immune.swift in Sources */,
 				09C66C9221FD58FA00E1C153 /* BossMinion.swift in Sources */,
 				0950DFF923A9003000F17588 /* Sacred.swift in Sources */,
+				096D9D4323E421B300FB1D34 /* GroceryStore.swift in Sources */,
 				0922C965224691D0002DC201 /* HiddenArea.swift in Sources */,
 				0972F86E23140CC30017A179 /* MiTyan.swift in Sources */,
 				090FEB5F21BB9B2B004276BB /* SacredBlunt.swift in Sources */,
@@ -2228,6 +2256,7 @@
 				09D17D6F22D0440E00B07EFD /* ThrowRock.swift in Sources */,
 				090FEC3F21BB9B2B004276BB /* exts.swift in Sources */,
 				090FEBB021BB9B2B004276BB /* Steal.swift in Sources */,
+				096D9D4523E6BA0C00FB1D34 /* EastV.swift in Sources */,
 				09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */,
 				090FEB9F21BB9B2B004276BB /* SummonUnit.swift in Sources */,
 				09D17D7A22D2F8CB00B07EFD /* AssassinAttack.swift in Sources */,
@@ -2236,6 +2265,7 @@
 				090FEC4221BB9B2B004276BB /* SelectMinion.swift in Sources */,
 				090FEBD621BB9B2B004276BB /* Strong.swift in Sources */,
 				090FEB9C21BB9B2B004276BB /* Slime.swift in Sources */,
+				096D9D3B23BA424600FB1D34 /* Hotel.swift in Sources */,
 				09738A95229A6C35009AF2EE /* Blizzard.swift in Sources */,
 				090FEBC121BB9B2B004276BB /* Dominate.swift in Sources */,
 				096D9D3723B2476800FB1D34 /* LavaExplosion.swift in Sources */,
@@ -2301,6 +2331,7 @@
 				090FEC0421BB9B2B004276BB /* ItemInfo.swift in Sources */,
 				090FEBE921BB9B2B004276BB /* Item.swift in Sources */,
 				0922C96A2248BEF1002DC201 /* CityOfFail.swift in Sources */,
+				096D9D4123BCD38500FB1D34 /* ArmorHouse.swift in Sources */,
 				090FEC0B21BB9B2B004276BB /* MinionsList.swift in Sources */,
 				09C66CAB220D786000E1C153 /* Pitheron.swift in Sources */,
 				092C0CC522CE24080084D15D /* LavaExplode.swift in Sources */,
@@ -2329,6 +2360,7 @@
 				090FEB8F21BB9B2B004276BB /* Character.swift in Sources */,
 				0922C96E22490CD8002DC201 /* CityOfDesire.swift in Sources */,
 				09C66CE422184CDE00E1C153 /* LowerSummon.swift in Sources */,
+				096D9D4723E6FC0400FB1D34 /* NorthV.swift in Sources */,
 				09C66CAE220D799F00E1C153 /* Iberis.swift in Sources */,
 				0953ADF022F0956B00BCEAFC /* SharpStone.swift in Sources */,
 				09D85F512361E4AF0035A14C /* SunBurn.swift in Sources */,

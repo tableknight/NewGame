@@ -16,6 +16,7 @@ class SoulReaping: Magical {
         _rate = 0.5
         _quality = Quality.SACRED
         _cooldown = 3
+        cost(value: 35)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -307,8 +307,8 @@ class SpellInfo:SKSpriteNode {
         } else if spell is CloseSkill {
             text += "，需要近战"
         }
-        if _spell._mpCost > 0 {
-            text += "，消耗法力\(_spell._mpCost)点"
+        if _spell.mpCost > 0 {
+            text += "，消耗法力\(_spell.mpCost)点"
         }
         des._lineCharNumber = 10
         des._fontSize = cellSize * 0.25

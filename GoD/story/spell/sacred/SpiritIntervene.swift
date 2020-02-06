@@ -24,6 +24,7 @@ class SpiritIntervene: Magical {
         targetAll = true
         canBeTargetPlayer = true
         canBeTargetSelf = false
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

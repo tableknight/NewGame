@@ -23,6 +23,7 @@ class MagicReflect: Magical {
         targetEnemy = false
         _quality = Quality.SACRED
         canBeTargetSelf = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

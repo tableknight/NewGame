@@ -21,6 +21,7 @@ class NervousPoison: Magical {
         _name = "神经毒素"
         _description = "使目标有一定几率麻痹，持续3回合"
         _quality = Quality.RARE
+        cost(value: 12)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -24,6 +24,7 @@ class QiWave:HandSkill {
         _cooldown = 2
         isClose = false
         autoCast = true
+        cost(value: 25)
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets

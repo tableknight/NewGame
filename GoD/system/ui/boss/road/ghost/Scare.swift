@@ -22,6 +22,7 @@ class Scare: Physical {
         _description = "降低目标100%护甲"
         _quality = Quality.NORMAL
         _cooldown = 1
+        cost(value: 5)
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

@@ -22,6 +22,7 @@ class ThrowRock: Magical, BossOnly {
         _quality = Quality.NORMAL
         _cooldown = 1
         isClose = false
+        cost(value: 18)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

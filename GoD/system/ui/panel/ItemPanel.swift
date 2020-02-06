@@ -64,7 +64,12 @@ class ItemPanel: UIPanel {
                     if !item.autoCast {
                         let rl = RoleList()
                         rl.isChild = true
-                        let ml = [_char] + _char._minions
+                        rl._item = item
+                        var ml = [_char] + _char._minions
+                        if item._type == Item.MagicSyrup {
+                            ml = _char._minions
+                        }
+                        
                         rl._parentNode = self
                         self.isHidden = true
                         rl.create(list: ml as! Array<Unit>)
@@ -74,6 +79,19 @@ class ItemPanel: UIPanel {
                                 item.use(target: unit!)
                                 rl._lastSelected!.reload()
                                 Game.instance.curStage.setBarValue()
+                                if item._type == Item.MagicSyrup {
+                                    rl.removeFromParent()
+                                    self.pageReload()
+                                    self.isHidden = false
+                                    Game.instance.curStage._curPanel = self
+                                    showMsg(text: "\(unit!._name)魔法属性发生了变化！")
+                                } else if item._type == Item.RedoSeed {
+                                    rl.removeFromParent()
+                                    self.pageReload()
+                                    self.isHidden = false
+                                    Game.instance.curStage._curPanel = self
+                                    showMsg(text: "\(unit!._name)属性已重构！")
+                                }
                             }
                         }
                         rl.closeAction = {

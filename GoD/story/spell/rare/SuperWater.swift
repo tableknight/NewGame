@@ -24,6 +24,7 @@ class SuperWater:Magical {
         isWater = true
         _quality = Quality.RARE
         autoCast = true
+        _mpCost = 30 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets

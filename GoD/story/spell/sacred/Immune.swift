@@ -26,6 +26,7 @@ class Immune: Magical {
         canBeTargetSelf = true
         _quality = Quality.SACRED
         _cooldown = 3
+        cost(value: 30)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

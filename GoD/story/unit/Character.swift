@@ -103,7 +103,8 @@ class Character: Unit {
             var exist = false
             for i in _items {
                 if i._type == item._type {
-                    i._count += item._count
+//                    i._count += item._count
+                    i._count += 1
                     exist = true
                     break
                 }
@@ -132,6 +133,11 @@ class Character: Unit {
         }
     }
     func searchItem(type:String) -> Item? {
+        for i in _items {
+            if i ._type == type && i._count > 0 {
+                return i
+            }
+        }
         return nil
     }
     func addMoney(num:Int) {

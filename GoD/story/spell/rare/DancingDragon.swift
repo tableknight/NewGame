@@ -22,6 +22,7 @@ class DancingDragon: Physical {
         _rate = 0.35
         _cooldown = 2
         _quality = Quality.RARE
+        _mpCost = 10 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         hasRevenge = false

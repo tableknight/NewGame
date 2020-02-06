@@ -23,6 +23,7 @@ class FireOrFired: Magical {
         _rate = 1.25
         _quality = Quality.RARE
         _cooldown = 1
+        cost(value: 5)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

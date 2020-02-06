@@ -20,6 +20,7 @@ class LeeAttack:Physical {
         _description = "对目标造成攻击100%的物理伤害，并恢复50%的生命值"
         _quality = Quality.RARE
         _cooldown = 4
+        _mpCost = 20 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

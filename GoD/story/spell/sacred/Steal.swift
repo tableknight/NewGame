@@ -22,6 +22,7 @@ class Steal: HandSkill {
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 0.5
+        cost(value: 5)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

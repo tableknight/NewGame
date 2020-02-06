@@ -24,6 +24,7 @@ class IceFist: HandSkill {
         _rate = 1.6
         _quality = Quality.GOOD
         _cooldown = 1
+        _mpCost = 10 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

@@ -22,6 +22,7 @@ class HorribleImage: Magical {
         _description = "降低所有目标50%护甲和50%精神"
         _quality = Quality.RARE
         autoCast = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

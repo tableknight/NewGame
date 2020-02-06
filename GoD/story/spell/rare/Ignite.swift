@@ -24,6 +24,7 @@ class Ignite: Magical {
         _cooldown = 0
         autoCast = true
         _rate = 0.5
+        cost(value: 10)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -20,11 +20,11 @@ class GameScene: SKScene {
                 homePage()
 //        printBoss()
         
-//        Mode.debug = true
+        Mode.debug = true
 //        Mode.nocd = true
 //        Mode.nodefence = true
-//        Mode.showdungeonall = true
-//        Mode.showbossall = true
+        Mode.showdungeonall = true
+        Mode.showbossall = true
 //////
 //        realScene()
 //

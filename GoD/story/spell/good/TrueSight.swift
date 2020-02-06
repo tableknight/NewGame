@@ -21,6 +21,7 @@ class TrueSight:Magical {
         _description = "对恶魔造成精神200%的魔法伤害，对其他种族无效"
         _quality = Quality.GOOD
         _cooldown = 1
+        _mpCost = 10 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

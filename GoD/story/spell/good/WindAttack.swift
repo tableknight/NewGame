@@ -17,6 +17,7 @@ class WindAttack: Physical {
         _rate = 0.8
         _quality = Quality.GOOD
         _cooldown = 1
+        _mpCost = 18 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

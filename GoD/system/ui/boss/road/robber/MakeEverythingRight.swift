@@ -23,6 +23,7 @@ class MakeEverythingRight: Magical {
         targetEnemy = false
         _quality = Quality.SACRED
         autoCast = true
+        cost(value: 30)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

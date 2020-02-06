@@ -21,6 +21,7 @@ class BreakDefence:Physical, CloseSkill {
         _description = "破防，并对其造成100%-200%攻击力的物理伤害"
         _quality = Quality.NORMAL
         _cooldown = 0
+        _mpCost = 5 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

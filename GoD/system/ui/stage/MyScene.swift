@@ -306,7 +306,7 @@ class MyScene: SKSpriteNode {
             }
         }
         
-        if hasAction(cell: nextCell, touchPoint: touchPoint) {
+        if nextCell == CELL_BLOCK || hasAction(cell: nextCell, touchPoint: touchPoint) {
             
             _isMoving = false
             return
@@ -545,7 +545,7 @@ class MyScene: SKSpriteNode {
         _mapLayer.addChild(mapEnd)
         let wallStart = _mapSet.getWallPart(part: "start")
         wallStart.position.x = mapStart.position.x
-        wallStart.position.y = -cellSize * (vSize / 2 + 1) + yOffset
+        wallStart.position.y = -cellSize * (vSize / 2 + 0.5)
         _mapLayer.addChild(wallStart)
         
         
@@ -564,14 +564,6 @@ class MyScene: SKSpriteNode {
         wallEnd.position.x = mapEnd.position.x
         wallEnd.position.y = wallStart.position.y
         _mapLayer.addChild(wallEnd)
-        
-//        for i in startX.toInt()...endX.toInt() {
-//            let wallDeep = SKSpriteNode(texture: wallShadow)
-//            wallDeep.position.x = cellSize * i.toFloat()
-//            wallDeep.position.y = wallStart.position.y
-//            wallDeep.size = CGSize(width: cellSize, height: cellSize * 2)
-//            _mapLayer.addChild(wallDeep)
-//        }
     }
     
     

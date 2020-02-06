@@ -22,6 +22,7 @@ class Refresh: Magical {
         _quality = Quality.SACRED
         _cooldown = 5
         autoCast = true
+        cost(value: 35)
     }
     override func cast(completion: @escaping () -> Void) {
         if !(_battle._curRole._unit is Character) {

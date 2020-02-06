@@ -404,7 +404,7 @@ class Battle: SKSpriteNode {
         var sps = Array<Spell>()
         for s in u.getActiveSpell() {
             s._battle = self
-            if s._timeleft == 0 && s.selectable() {
+            if s._timeleft == 0 && s._mpCost <= u.getMp() && s.selectable() {
                 sps.append(s)
             }
         }
@@ -796,7 +796,7 @@ class Battle: SKSpriteNode {
                 srb.timeleft = s._timeleft
                 srb.selectable = false
             } else {
-                srb.selectable = s.selectable()
+                srb.selectable = s.selectable() && s._mpCost <= _curRole.getMp()
             }
             if i >= 8 {
                 i = 5 + (8 - i)
@@ -899,7 +899,7 @@ class Battle: SKSpriteNode {
         if spell == _creationMatrixSpell {
             return
         }
-        if spell is SummonSkill && _curRole.weaponIs("TheFear") {
+        if spell is SummonSkill && _curRole.weaponIs(Sacred.TheFear) {
             return
         }
         if spell._cooldown > 0 {
@@ -908,6 +908,11 @@ class Battle: SKSpriteNode {
             } else {
                 spell._timeleft = spell._cooldown + 1
             }
+        }
+    }
+    internal func calCost(spell:Spell) {
+        if spell._mpCost > 0 {
+            _curRole.mpLost(value: spell._mpCost)
         }
     }
     internal func speak(text:String = "") {
@@ -931,7 +936,6 @@ class Battle: SKSpriteNode {
                 debug("\(t!._unit._name) is dead! in attack cast in battle! 1142")
             } else {
                 self._selectedAction.cast {
-                    self.cdSpell(spell: self._selectedAction as! Spell)
                     self.moveEnd()
                 }
             }
@@ -939,6 +943,7 @@ class Battle: SKSpriteNode {
             self._curRole.showText(text: self._selectedAction._name) {
                 self._selectedAction.cast {
                     self.cdSpell(spell: self._selectedAction as! Spell)
+                    self.calCost(spell: self._selectedAction as! Spell)
                     self.moveEnd()
                 }
             }
@@ -1418,6 +1423,7 @@ class Battle: SKSpriteNode {
     internal func spellSelect(spell:Spell) {
         let this = self
         this._selectedSpell = spell
+        this._selectedAction = spell
         this._selectedSpell._battle = this
         this.hideOrder()
         this.showCancel()

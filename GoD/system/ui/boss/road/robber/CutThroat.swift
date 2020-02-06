@@ -18,6 +18,7 @@ class CutThroat: Physical {
         _rate = 0.6
         _quality = Quality.RARE
         _cooldown = 3
+        cost(value: 20)
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

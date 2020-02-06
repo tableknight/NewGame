@@ -21,6 +21,7 @@ class LifeFlow: Magical {
         _description = "牺牲15%当前生命，作为额外精神。对目标造成精神100%的魔法伤害"
         _quality = Quality.RARE
         _cooldown = 1
+        cost(value: 18)
     }
     override func getSelfSpirit() -> CGFloat {
         return _battle._curRole.getSpirit() + _battle._curRole.getHp() * 0.15

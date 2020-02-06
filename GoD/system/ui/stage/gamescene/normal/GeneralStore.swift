@@ -40,7 +40,10 @@ class GeneralStore: InnerHouse {
                     dlg._confirmAction = {
                         stage.removeDialog(dlg: dlg)
                         let sp = SellingPanel()
-//                        sp._goodsList = [TownScroll(), SealScroll(), Potion(), LittlePotion() ,TransportScroll()]
+                        sp._goodsList = [Item(Item.TownScroll), Item(Item.SealScroll), Item(Item.LittlePotion) ,Item(Item.TransportScroll)]
+                        for i in sp._goodsList {
+                            i._reserveBool = true //没有数量限制
+                        }
                         sp.create()
                         stage.showPanel(sp)
                     }

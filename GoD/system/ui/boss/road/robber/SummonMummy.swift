@@ -22,6 +22,7 @@ class SummonMummy:Magical {
         _quality = Quality.SACRED
         _cooldown = 3
         autoCast = true
+        cost(value: 60)
     }
     override func cast(completion: @escaping () -> Void) {
         let seats = _battle.getEmptySeats(top: true)

@@ -76,10 +76,10 @@ class Dialog: SKSpriteNode {
     }
     
     func addBattleButton() {
-        _battleButton.position.x = _closeButton.xAxis - _closeButton.width - cellSize * 0.25
-        _battleButton.position.y = _closeButton.yAxis
-        _battleButton.text = "战斗"
-        addChild(_battleButton)
+//        _battleButton.position.x = _closeButton.xAxis - _closeButton.width - cellSize * 0.25
+//        _battleButton.position.y = _closeButton.yAxis
+//        _battleButton.text = "战斗"
+//        addChild(_battleButton)
     }
     
     var text:String {

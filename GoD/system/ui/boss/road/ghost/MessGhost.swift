@@ -15,6 +15,7 @@ class MessGhost: Magical {
         _description = "被诅咒的目标会双倍的魔法伤害"
         _quality = Quality.RARE
         _cooldown = 3
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

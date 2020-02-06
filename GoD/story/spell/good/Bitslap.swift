@@ -22,6 +22,7 @@ class Bitslap: Physical {
         _description = "造成攻击70%的物理伤害，本次攻击必定命中"
         _rate = 0.7
         _cooldown = 1
+        _mpCost = 5 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

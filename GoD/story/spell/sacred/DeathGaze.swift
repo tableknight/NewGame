@@ -23,6 +23,7 @@ class DeathGaze: Magical {
         _rate = 0.65
         _quality = Quality.SACRED
         _cooldown = 1
+        cost(value: 18)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

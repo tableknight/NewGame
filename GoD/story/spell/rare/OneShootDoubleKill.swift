@@ -24,6 +24,7 @@ class OneShootDoubleKill: Physical, BowSkill {
         _cooldown = 1
         isClose = false
         autoCast = true
+        cost(value: 18)
     }
     
     override func cast(completion:@escaping () -> Void) {

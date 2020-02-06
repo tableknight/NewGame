@@ -18,6 +18,7 @@ class FireFist:HandSkill {
         _rate = 1.0
         _quality = Quality.GOOD
         _cooldown = 2
+        _mpCost = 10 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

@@ -22,6 +22,7 @@ class BurnHeart: Magical {
         _quality = Quality.SACRED
         _cooldown = 3
         _rate = 0.8
+        cost(value: 20)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -23,6 +23,7 @@ class Taunt: Magical {
 //        _rate = 0.8
         autoCast = true
         _description = "嘲讽所有敌方单位，被嘲讽单位只能对施法者发动普通攻击"
+        cost(value: 15)
     }
     override func cast(completion:@escaping () -> Void) {
         let ts = _battle._selectedTargets

@@ -50,11 +50,14 @@ class SellingPanel: UIPanel {
                 let i = p as! ItemIcon
                 if i.selected {
                     let item = i._displayItem as! Item
+                    if item._type == Item.GoldCoin {
+                        return
+                    }
                     _char.addMoney(num: item.price)
                     _char.removeItem(item)
 
                     pageReload()
-                    reshowPlayerMoney()
+//                    reshowPlayerMoney()
                 }
             }
             return
@@ -109,7 +112,7 @@ class SellingPanel: UIPanel {
             return
         }
         t._count -= goods.price
-        if t._count < 1 {
+        if t._count == 0 {
             Game.instance.char.removeItem(t)
         }
         
@@ -122,19 +125,26 @@ class SellingPanel: UIPanel {
             let i = _goodsList.firstIndex(of: prop)!
             _goodsList.remove(at: i)
         }
-        
-        _char.addItem(prop)
+        if prop._type == Item.RandomSpell {
+            let book = Item(Item.SpellBook)
+            book.spell = Loot.getRandomSacredSpell()
+            _char.addItem(book)
+        } else {
+            _char.addItem(prop)
+        }
         pageReload()
         if countless(prop) {
             createPropList()
         }
-        if hasBuyAction {
-            buyAction()
-        }
+//        if hasBuyAction {
+//            buyAction()
+//        } else {
+//            _char.addItem(prop)
+//        }
     }
     
     internal func countless(_ item:Item) -> Bool {
-        return false
+        return item._reserveBool
     }
     
     private func buyByGold(_ goods:SellingItemIcon) {
@@ -143,7 +153,7 @@ class SellingPanel: UIPanel {
             showMsg(text: "金币不足以支付。")
             return
         }
-        if prop._count < 1 {
+        if prop._count == 0 {
             showMsg(text: "物品已售尽。")
             return
         }
@@ -161,22 +171,20 @@ class SellingPanel: UIPanel {
             _goodsList.remove(at: i)
         }
         
-//        if prop._type == Item.Tear {
-//            let t = Item(Item.Tear)
-//            t._count = 1
-//            _char.addItem(t)
-//        } else {
-//        }
-        _char.addItem(prop)
+        if hasBuyAction {
+            buyAction()
+        } else {
+            _char.addItem(prop)
+        }
 
         pageReload()
         if !countless(prop) {
             createGoodsList()
         }
-        reshowPlayerMoney()
-        if hasBuyAction {
-            buyAction()
-        }
+//        reshowPlayerMoney()
+//        if hasBuyAction {
+//            buyAction()
+//        }
     }
     
     override func createPanelbackground() {
@@ -222,7 +230,7 @@ class SellingPanel: UIPanel {
         let startX = cellSize * 0.25 - _standardWidth * 0.5
         let startY = _standardHeight * 0.5 - _standardGap
         for i in 0..._goodsList.count - 1 {
-            if _goodsList[i]._count < 1 {
+            if _goodsList[i]._count == 0 {
                 continue
             }
             let sii = SellingItemIcon()
@@ -243,7 +251,10 @@ class SellingPanel: UIPanel {
         }
     }
     private func getProps() -> Array<Item> {
-        return _char._items
+        let gc = Item(Item.GoldCoin)
+        gc._count = _char._money
+        gc._description = "一共有\(gc._count)枚金币"
+        return [gc] + _char._items + _char._armors
     }
     override func create() {
         _pageSize = 15
@@ -264,16 +275,16 @@ class SellingPanel: UIPanel {
         addChild(_goodsBox)
         createPropList()
         createGoodsList()
-        _goldlabel.align = "center"
-        _goldlabel.position.y = _nextButton.yAxis - 10
-        _goldlabel.fontSize = 20
-        _goldlabel.zPosition = _nextButton.zPosition
-        addChild(_goldlabel)
-        reshowPlayerMoney()
+//        _goldlabel.align = "center"
+//        _goldlabel.position.y = _nextButton.yAxis - 10
+//        _goldlabel.fontSize = 20
+//        _goldlabel.zPosition = _nextButton.zPosition
+//        addChild(_goldlabel)
+//        reshowPlayerMoney()
     }
-    private func reshowPlayerMoney() {
-        _goldlabel.text = "\(_char._money)G"
-    }
+//    private func reshowPlayerMoney() {
+//        _goldlabel.text = "\(_char._money)G"
+//    }
     override func pageReload() {
         _propBox.removeAllChildren()
         createPropList()
@@ -284,7 +295,7 @@ class SellingPanel: UIPanel {
     private var _goodsBox = SKSpriteNode()
     private var _sellbutton = Button()
     private var _buyButton = Button()
-    private var _goldlabel = Label()
+//    private var _goldlabel = Label()
     var _goodsList = Array<Item>()
     //0 gold 1 tear
     var _priceType = 0
@@ -308,7 +319,7 @@ class SellingItemIcon: ItemIcon {
     var price:Int {
         set {
             _price = newValue
-            let mark = _priceType == 0 ? "G" : "T"
+            let mark = _priceType == Item.PRICE_TYPE_GOLD ? "G" : "T"
             _priceLabel.text = "\(_price)\(mark)"
         }
         get {

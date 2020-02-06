@@ -16,6 +16,7 @@ class LifeDraw: Magical {
         _rate = 0.8
         _quality = Quality.SACRED
         _cooldown = 3
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -24,6 +24,7 @@ class FrozenShoot: Physical, BowSkill {
         _cooldown = 2
         _rate = 0.65
         _description = "对目标造成攻击力65%的冰冷伤害，有一定几率冻结目标"
+        _mpCost = 20 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

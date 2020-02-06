@@ -22,6 +22,7 @@ class AttackHard:Physical {
         _quality = Quality.NORMAL
         _cooldown = 1
         _rate = 1.65
+        _mpCost = 15 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

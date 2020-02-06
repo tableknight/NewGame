@@ -22,6 +22,7 @@ class ScreamLoud:Magical, Curse {
         _quality = Quality.NORMAL
         _cooldown = 2
         autoCast = true
+        _mpCost = 20 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets

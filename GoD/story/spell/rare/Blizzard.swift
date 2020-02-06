@@ -22,6 +22,7 @@ class Blizzard: Magical {
         _description = "冻结目标，并且有一定几率冻结目标相邻单位"
         _quality = Quality.RARE
         _cooldown = 1
+        cost(value: 20)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

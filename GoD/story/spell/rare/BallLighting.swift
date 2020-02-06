@@ -24,6 +24,7 @@ class BallLighting: Magical {
         isThunder = true
         _quality = Quality.RARE
         autoCast = true
+        _mpCost = 28 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle

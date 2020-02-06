@@ -22,6 +22,7 @@ class Escape: Magical, BossOnly {
         _description = "全身而退"
         _quality = Quality.SACRED
         autoCast = true
+        cost(value: 60)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

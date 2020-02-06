@@ -22,6 +22,7 @@ class LowerSummon:Magical, SummonSkill {
         _quality = Quality.GOOD
         _cooldown = 5
         autoCast = true
+        _mpCost = 60 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle

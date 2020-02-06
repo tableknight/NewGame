@@ -24,6 +24,7 @@ class ControlWind: Magical {
         autoCast = true
         isWater = true
         _rate = 1
+        _mpCost = 15 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

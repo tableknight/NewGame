@@ -23,6 +23,7 @@ class ChaosAttack:Physical {
         _cooldown = 1
 //        autoCast = true
         _rate = 0.75
+        _mpCost = 12 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

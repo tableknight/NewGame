@@ -15,6 +15,7 @@ class PoisonCurse: Magical, Curse {
         _description = "对目标下毒"
         _quality = Quality.NORMAL
         _cooldown = 0
+        _mpCost = 5 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

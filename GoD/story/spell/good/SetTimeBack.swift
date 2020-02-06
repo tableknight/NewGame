@@ -22,6 +22,7 @@ class SetTimeBack:Magical, Curse {
         _quality = Quality.GOOD
         _cooldown = 1
         autoCast = true
+        _mpCost = 30 * _costRate
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets

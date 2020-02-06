@@ -22,6 +22,7 @@ class LastChance: Physical {
         _quality = Quality.GOOD
         _cooldown = 3
         _rate = 3
+        _mpCost = 10 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -204,6 +204,15 @@ class BUnit: SKSpriteNode {
         _hpbar.zPosition = _charNode.zPosition
         addChild(_hpbar)
         
+        if playerPart {
+            _mpbar.create(width: width, height: hpbarHeight * 0.6, value: _unit._extensions.mp / _unit._extensions.mpMax, color: Game.MPBAR_COLOR)
+            _mpbar.position.y = -_charSize * 0.75 - hpbarHeight * 1.2
+            _mpbar.position.x = x
+            _mpbar.zPosition = _charNode.zPosition
+            addChild(_mpbar)
+        }
+        
+        
 //        _hpbar = SKShapeNode(rect: CGRect(x: x, y: 0, width: width, height: hpbarHeight))
 //        _hpbar.fillColor = UIColor.red
 //        _hpbar.zPosition = 50
@@ -219,9 +228,9 @@ class BUnit: SKSpriteNode {
     func setUnit(unit:Unit) -> Void {
         _unit = unit
 //        _speed = unit._extensions.speed
-        _levelLabel = Label("Lv\(unit._level.toInt())\(unit._name)", 0, -_charSize, QualityColor.getColor(quality))
+        _levelLabel = Label("Lv\(unit._level.toInt())\(unit._name)", 0, -_charSize * 1.1, QualityColor.getColor(quality))
         _levelLabel.zPosition = 71
-        _levelLabel.fontSize = 14
+        _levelLabel.fontSize = 13
         _levelLabel.isHidden = true
         _levelLabel.align = "center"
         addChild(_levelLabel)
@@ -441,6 +450,7 @@ class BUnit: SKSpriteNode {
     }
     var _charSize:CGFloat = 0
     private var _hpbar = HBar()
+    private var _mpbar = HBar()
     private var circleY:CGFloat = 0
 //    var _seat:String = ""
 //    var unitPos = "left"
@@ -694,6 +704,13 @@ class BUnit: SKSpriteNode {
     }
     func amuletJadeHeart() -> Bool {
         return false
+    }
+    func mpLost(value:CGFloat) {
+        _unit._extensions.mp -= value
+        if _unit is Character {
+            let per = _unit._extensions.mp / _unit._extensions.mpMax
+            _mpbar.setBar(value: per)
+        }
     }
     func hpChange(value:CGFloat) {
         let hp = value

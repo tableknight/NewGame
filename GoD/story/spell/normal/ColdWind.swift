@@ -18,6 +18,7 @@ class ColdWind: Magical {
         _quality = Quality.NORMAL
         _cooldown = 1
         autoCast = true
+        _mpCost = 15 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

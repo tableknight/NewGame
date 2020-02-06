@@ -23,6 +23,7 @@ class FireBreath: Magical {
         _rate = 0.75
         _quality = Quality.NORMAL
         _cooldown = 1
+        _mpCost = 10 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

@@ -22,6 +22,7 @@ class QuickHeal: Magical {
         _name = "快速治疗"
         _description = "恢复己方目标最大生命25%的生命值"
         canBeTargetSelf = true
+        _mpCost = 5 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

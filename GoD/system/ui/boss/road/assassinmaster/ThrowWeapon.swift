@@ -18,6 +18,7 @@ class ThrowWeapon: Physical, BossOnly {
         _rate = 0.8
         isClose = false
         autoCast = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         let b = _battle

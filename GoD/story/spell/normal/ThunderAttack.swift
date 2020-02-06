@@ -24,6 +24,7 @@ class ThunderAttack: Magical {
         _rate = 0.8
         _quality = Quality.NORMAL
         _cooldown = 1
+        _mpCost = 12 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

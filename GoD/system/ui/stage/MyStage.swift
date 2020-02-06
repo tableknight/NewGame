@@ -237,9 +237,16 @@ class MyStage: SKSpriteNode {
         _uiComponentList.append(hpbar)
         _hpbar = hpbar
         
+        _mpbar.create(width: w * 0.35, height: 10, value: 1, color: Game.MPBAR_COLOR)
+        _mpbar.yAxis = h - offsetY + 10
+        _mpbar.xAxis = hpbar.xAxis
+        addChild(_mpbar)
+        _mpbar.zPosition = MyStage.UI_LAYER_Z
+        _uiComponentList.append(_mpbar)
+        
         let expbar = HBar()
         expbar.create(width: w * 0.45, height: 10, value: 1, color: UIColor.green)
-        expbar.position.y = h - offsetY + 10
+        expbar.position.y = h - offsetY - 10
         expbar.position.x = hpbar.position.x
         expbar.zPosition = MyStage.UI_LAYER_Z
 //        expbar.position.x = bounds.width * 0.5 - padding
@@ -250,10 +257,12 @@ class MyStage: SKSpriteNode {
         setBarValue()
     }
     private var _hpbar = HBar()
+    private var _mpbar = HBar()
     private var _expbar = HBar()
     func setBarValue() {
         let role = _curScene._role!
         _hpbar.setBar(value: role.getHp() / role.getHealth())
+        _mpbar.setBar(value: role.getMp() / role.getMpMax())
         _expbar.setBar(value: role._unit._exp / role._unit.expNext())
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {

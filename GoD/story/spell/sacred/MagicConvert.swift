@@ -23,6 +23,7 @@ class MagicConvert: Magical {
         _description = "对己方单位释放护盾，将下一次法术伤害转化为生命回复"
         targetEnemy = false
         canBeTargetSelf = true
+        cost(value: 25)
     }
     override func cast(completion:@escaping () -> Void) {
         //        let r = _battle._curRole

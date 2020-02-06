@@ -143,6 +143,7 @@ class Spell:Core, Showable, Castable {
     var isMultiple = false
     var hasAfterMoveAction = false
     var hasRevenge = false
+    var _costRate:CGFloat = 1
     var _cooldown = 0
     var _timeleft = 0
     var _name:String = ""
@@ -151,9 +152,14 @@ class Spell:Core, Showable, Castable {
     var _quality = Quality.NORMAL
     var _level:CGFloat = 1
     var _tear = 0
-    var _mpCost = 0
+    var _mpCost:CGFloat = 0
     var _speakings = Array<String>()
     var beCritical = false
+    var mpCost:Int {
+        get {
+            return _mpCost.toInt()
+        }
+    }
     private enum CodingKeys: String, CodingKey {
         case _canBeTargetPlayer
         case _canBeTargetSelf
@@ -269,7 +275,7 @@ class Spell:Core, Showable, Castable {
 //        let msg = "p atk:\(atk.toInt()), def:\(to.getDefence(t: from._unit).toInt()) "
 //        debug(msg)
         
-        var  damage = atk * (1 - def) * levelFactor(from, to)
+        var  damage = atk * (1 - def) * levelFactor(from, to) * raceFactor(to: to, from: from)
         if damage < 5 {
             return -seed(min: 1, max: 5).toFloat()
         }
@@ -277,7 +283,7 @@ class Spell:Core, Showable, Castable {
             damage = seed(min: 0, max: (damage * 0.6).toInt()).toFloat()
         }
         
-        damage *= 1 + (from.getPhysicalDamage() - to.getPhysicalResistance()) * 0.01
+//        damage *= 1 + (from.getPhysicalDamage() - to.getPhysicalResistance()) * 0.01
         
         if _battle._curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: PhysicalPower()) {
             damage *= 1.5
@@ -295,6 +301,11 @@ class Spell:Core, Showable, Castable {
         if to.hasStatus(type: "_leading") {
             damage *= 0.5
         }
+        
+        let percentReduce = abs(to.getPhysicalReducePercent())
+        damage *= (100 - percentReduce) * 0.01
+        let pointReduce = abs(to.getPhysicalReducePoint())
+        damage -= pointReduce
         
         _damageValue = damageControl(damage)
         return -_damageValue
@@ -459,27 +470,29 @@ class Spell:Core, Showable, Castable {
 //            return 0.85
 //        }
         
+        let value:CGFloat = 0.25
+        
         if to.getRace() == EvilType.FINAL {
-            factor = 0.85
+            factor = 1 - value
         }
         if from.getRace() == EvilType.FINAL {
-            factor =  1.15
+            factor = 1 + value
         }
         
         if to.getRace() - from.getRace() == 1 {
-            factor =  0.85
+            factor = 1 - value
         }
         
         if to.getRace() - from.getRace() == -1 {
-            factor =  1.15
+            factor = 1 + value
         }
         
         if to.getRace() == EvilType.RISEN && from.getRace() == EvilType.NATURE {
-            factor =  1.15
+            factor = 1 + value
         }
         
         if from.getRace() == EvilType.RISEN && to.getRace() == EvilType.NATURE {
-            factor =  0.85
+            factor = 1 - value
         }
         
 //        if from.weaponIs(HolyPower.EFFECTION) && to.getRace() == EvilType.RISEN {
@@ -1050,7 +1063,9 @@ class Spell:Core, Showable, Castable {
 //            }
 //        }
 //    }
-    
+    internal func cost(value:CGFloat) {
+        _mpCost = value * _costRate
+    }
     func selectable() -> Bool {
         return true
     }
@@ -1215,4 +1230,5 @@ class Spell:Core, Showable, Castable {
     static let SummonServant = 5035
     static let Nova = 5036
     static let DeathAttack = 5037
+    static let NoAction = 5038
 }

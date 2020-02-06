@@ -28,6 +28,9 @@ class RoleList:UIPanel {
                 _lastSelected = cc
                 selectAction()
                 useAction()
+                
+                
+                
                 break
             }
         }
@@ -56,6 +59,7 @@ class RoleList:UIPanel {
         var i = 0
         for unit in _list {
             let rc = RoleComponent()
+            rc._itemType = _item._type
             rc.create(unit: unit)
             rc.xAxis = startX + (i % 2).toFloat() * width
             rc.yAxis = startY - (i / 2).toFloat() * height
@@ -76,6 +80,7 @@ class RoleList:UIPanel {
     private var _list = Array<Unit>()
     private var _listBox = SKSpriteNode()
     private var _curPageList = Array<RoleComponent>()
+    var _item:Item!
     var _lastSelected:RoleComponent?
     var closeAction = {}
     var selectAction = {}
@@ -133,16 +138,30 @@ class RoleComponent: SelectableComponent {
         
         
         let hpbar = HBar()
-        hpbar.create(width: cellSize, height: 10, value: unit._extensions.hp / unit._extensions.health, color: UIColor.red)
+        if _itemType == Item.MPPotion || _itemType == Item.LittleMPPotion || _itemType == Item.SoulMPPotion {
+            hpbar.create(width: cellSize, height: 10, value: unit._extensions.mp / unit._extensions.mpMax, color: Game.MPBAR_COLOR)
+        } else if _itemType == Item.ExpBook {
+            hpbar.create(width: cellSize, height: 10, value: unit._exp / unit.expNext(), color: Game.EXPBAR_COLOR)
+        } else {
+            hpbar.create(width: cellSize, height: 10, value: unit._extensions.hp / unit._extensions.health, color: Game.HPBAR_COLOR)
+        }
         hpbar.position.y = name.position.y - 32
         hpbar.position.x = name.position.x
         _propertyLayer.addChild(hpbar)
         _hpbar = hpbar
     }
     func reload() {
-        _hpbar.setBar(value: _unit._extensions.hp / _unit._extensions.health)
+        if _itemType == Item.MPPotion || _itemType == Item.LittleMPPotion || _itemType == Item.SoulMPPotion {
+            _hpbar.setBar(value: _unit._extensions.mp / _unit._extensions.mpMax)
+        } else if _itemType == Item.ExpBook {
+            _hpbar.setBar(value: _unit._exp / _unit.expNext())
+        } else {
+            _hpbar.setBar(value: _unit._extensions.hp / _unit._extensions.health)
+        }
+        
     }
     var _unit:Unit!
     private var _propertyLayer = SKSpriteNode()
     private var _hpbar:HBar!
+    var _itemType = ""
 }

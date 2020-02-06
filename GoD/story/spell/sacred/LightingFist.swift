@@ -23,6 +23,7 @@ class LightingFist:HandSkill {
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 1.85
+        cost(value: 12)
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!

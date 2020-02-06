@@ -23,6 +23,7 @@ class FlashPowder: Magical {
         targetEnemy = true
         _quality = Quality.GOOD
         autoCast = true
+        cost(value: 12)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

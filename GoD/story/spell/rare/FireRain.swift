@@ -25,6 +25,7 @@ class FireRain: Magical {
         _quality = Quality.RARE
         _rate = 0.35
         _cooldown = 2
+        cost(value: 35)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

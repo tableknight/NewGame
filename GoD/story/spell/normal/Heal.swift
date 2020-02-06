@@ -17,6 +17,7 @@ class Heal: Magical {
         _name = "恢复"
         _cooldown = 2
         _description = "恢复己方目标最大生命55%的生命值"
+        _mpCost = 18 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let t = _battle._selectedTarget!

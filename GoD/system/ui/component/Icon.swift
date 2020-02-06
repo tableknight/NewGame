@@ -130,7 +130,7 @@ class ItemIcon: Icon {
             var showCount = false
             if _displayItem is Item {
                 let item = _displayItem as! Item
-                showCount = item.showCount
+                showCount = item.stackable
             }
             if newValue > 1 || showCount {
                 _label.removeFromParent()

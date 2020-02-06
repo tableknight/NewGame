@@ -56,6 +56,51 @@ class Item:Core, Castable, Showable {
         
         if _type == Item.SealScroll {
             targetEnemy = true
+        } else if _type == Item.MagicSyrup {
+            _reserveBool = seed() < 50
+            _description = "法术敏感\(_reserveBool ? "提升" : "降低")1"
+        } else if _type == Item.RedoSeed {
+            _reserveBool = seed() < 50
+            _reserveInt = seed(min: 1, max: 7)
+            let v = abs(_reserveInt)
+            let b = _reserveInt < 0
+            if 1 == v {
+                if b {
+                    _description = "力量 +1，\(Attribute.STAMINA_TEXT) -1"
+                } else {
+                    _description = "力量 -1，\(Attribute.STAMINA_TEXT) +1"
+                }
+            } else if 2 == v {
+                if b {
+                    _description = "力量 +1，敏捷 -1"
+                } else {
+                    _description = "力量 -1，敏捷 +1"
+                }
+            } else if 3 == v {
+                if b {
+                    _description = "力量 +1，智力 -1"
+                } else {
+                    _description = "力量 -1，智力 +1"
+                }
+            } else if 4 == v {
+                if b {
+                    _description = "\(Attribute.STAMINA_TEXT) +1， 敏捷 -1"
+                } else {
+                    _description = "\(Attribute.STAMINA_TEXT) -1， 敏捷 +1"
+                }
+            } else if 5 == v {
+                if b {
+                    _description = "\(Attribute.STAMINA_TEXT) +1， 智力 -1"
+                } else {
+                    _description = "\(Attribute.STAMINA_TEXT) -1， 智力 +1"
+                }
+            } else if 6 == v {
+                if b {
+                    _description = "敏捷 +1，智力 -1"
+                } else {
+                    _description = "敏捷 -1，智力 +1"
+                }
+            }
         }
     }
     
@@ -158,7 +203,7 @@ class Item:Core, Castable, Showable {
     func use() {
         let _char = Game.instance.char!
         if _type == Item.TownScroll {
-            let c = CenterCamping()
+            let c = CenterV()
             let char = Game.instance.curStage._curScene._role!
             let stage = Game.instance.curStage
             stage?.showUI()
@@ -228,15 +273,72 @@ class Item:Core, Castable, Showable {
             if target._extensions.hp >= target._extensions.health {
                 target._extensions.hp = target._extensions.health
             }
+        } else if _type == Item.LittleMPPotion || _type == Item.MPPotion || _type == Item.SoulMPPotion {
+            target._extensions.mp += target._extensions.mpMax * _value
+            if target._extensions.mp >= target._extensions.mpMax {
+                target._extensions.mp = target._extensions.mpMax
+            }
         } else if _type == Item.ExpBook {
             target.expUp(up: _value)
-        } else if _type == Item.SpellBook {
-//            if !_char.hasSpell(spell: _spell) {
-////                _char._spells.append(_spell)
-//            } else {
-//                debug("spell exist")
-//                return
-//            }
+        } else if _type == Item.RedoSeed {
+            let v = abs(_reserveInt)
+            let b = _reserveInt < 0
+            if 1 == v {
+                if b {
+                    target.strengthChange(value: 1)
+                    target.staminaChange(value: -1)
+                } else {
+                    target.strengthChange(value: -1)
+                    target.staminaChange(value: 1)
+                }
+            } else if 2 == v {
+                if b {
+                    target.strengthChange(value: 1)
+                    target.agilityChange(value: -1)
+                } else {
+                    target.strengthChange(value: -1)
+                    target.agilityChange(value: 1)
+                }
+            } else if 3 == v {
+                if b {
+                    target.strengthChange(value: 1)
+                    target.intellectChange(value: -1)
+                } else {
+                    target.strengthChange(value: -1)
+                    target.intellectChange(value: 1)
+                }
+            } else if 4 == v {
+                if b {
+                    target.staminaChange(value: 1)
+                    target.agilityChange(value: -1)
+                } else {
+                    target.staminaChange(value: -1)
+                    target.agilityChange(value: 1)
+                }
+            } else if 5 == v {
+                if b {
+                    target.staminaChange(value: 1)
+                    target.intellectChange(value: -1)
+                } else {
+                    target.staminaChange(value: -1)
+                    target.intellectChange(value: 1)
+                }
+            } else if 6 == v {
+                if b {
+                    target.agilityChange(value: 1)
+                    target.intellectChange(value: -1)
+                } else {
+                    target.agilityChange(value: -1)
+                    target.intellectChange(value: 1)
+                }
+            }
+        } else if _type == Item.MagicSyrup {
+            let t = target as! Creature
+            if _reserveBool {
+                t._sensitive += 1
+            } else {
+                t._sensitive -= 1
+            }
         }
         removeAfterUse()
     }
@@ -262,6 +364,15 @@ class Item:Core, Castable, Showable {
             _quality = newValue._quality
             _name = newValue._name
             _description = newValue._description
+            if spell._quality == Quality.NORMAL {
+                _price = 2
+            } else if spell._quality == Quality.GOOD {
+                _price = 4
+            } else if spell._quality == Quality.RARE {
+                _price = 8
+            } else {
+                _price = 16
+            }
         }
         get {
             return Loot.getSpellById(_spell)
@@ -339,6 +450,8 @@ class Item:Core, Castable, Showable {
     static let LittlePotion = "LittlePotion"
     static let GiantPotion = "GiantPotion"
     static let MPPotion = "MPPotion"
+    static let LittleMPPotion = "LittleMPPotion"
+    static let SoulMPPotion = "SoulMPPotion"
     static let SummonScroll = "SummonScroll"
     static let PsychicScroll = "PsychicScroll"
     static let ExpBook = "ExpBook"
@@ -353,6 +466,8 @@ class Item:Core, Castable, Showable {
     static let PanGrass = "PanGrass"
     static let Caesalpinia = "Caesalpinia"
     static let Curium = "Curium"
+    static let Angelsfuther = "Angelsfuther"
+    static let DemonsBlood = "DemonsBlood"
 
     static let PureMagicStone = "PureMagicStone"
     static let MagicStone = "MagicStone"
@@ -366,6 +481,7 @@ class Item:Core, Castable, Showable {
     static let GoldCoin = "GoldCoin"
     static let RandomArmor = "RandomArmor"
     static let RandomWeapon = "RandomWeapon"
+    static let RandomSpell = "RandomSpell"
     
     var targetAll: Bool = false
     var canBeTargetSelf: Bool = false
@@ -493,53 +609,60 @@ struct ItemData:Codable {
     
     static let data = [
         Item.Tear: ItemData(type: Item.Tear, name: "天使之泪", desc: "一滴来自天使的眼泪，经过时间的沉淀，变成了一颗晶莹剔透的水晶，似乎拥有某种魔力", price: 6),
-        Item.Skin: ItemData(type:Item.Skin, name: "皮毛"),
-        Item.GoatHoof: ItemData(type:Item.GoatHoof, name: "羊蹄"),
-        Item.Milk: ItemData(type:Item.Milk, name: "牛奶"),
-        Item.LizardEye: ItemData(type:Item.LizardEye, name: "蜥蜴的眼球"),
-        Item.Mushroom: ItemData(type:Item.Mushroom, name: "蘑菇"),
-        Item.Egg: ItemData(type:Item.Egg, name: "鸟蛋"),
+        Item.Skin: ItemData(type:Item.Skin, name: "皮毛", price: 6),
+        Item.GoatHoof: ItemData(type:Item.GoatHoof, name: "羊蹄", price: 6),
+        Item.Milk: ItemData(type:Item.Milk, name: "牛奶", price: 6),
+        Item.LizardEye: ItemData(type:Item.LizardEye, name: "蜥蜴的眼球", price: 6),
+        Item.Mushroom: ItemData(type:Item.Mushroom, name: "蘑菇", price: 6),
+        Item.Egg: ItemData(type:Item.Egg, name: "鸟蛋", price: 6),
+        Item.Angelsfuther: ItemData(type:Item.Angelsfuther, name: "天使之羽", price: 16),
+        Item.DemonsBlood: ItemData(type:Item.DemonsBlood, name: "恶魔之血", price: 16),
         Item.SpellBook: ItemData(type: Item.SpellBook, name: "法术书", price: 48, stackable: false, usable: true),
-        Item.TearEssence: ItemData(type: Item.TearEssence, name: "眼泪精华", desc: "获取若干个天使之泪", usable: true),
+        Item.TearEssence: ItemData(type: Item.TearEssence, name: "眼泪精华", desc: "获取若干个天使之泪", price: 32, usable: true),
         Item.CreatureEssence: ItemData(type: Item.CreatureEssence, name: "灵魂精华", stackable: false, usable: true),
-        Item.TownScroll: ItemData(type: Item.TownScroll, name: "传送卷轴·贝", desc: "传送到贝拉鲁村", usable: true, castable: true),
-        Item.GodTownScroll: ItemData(type: Item.GodTownScroll, name: "传送卷轴·雪", desc: "传送到神域·雪之国", usable: true, castable: true),
-        Item.DeathTownScroll: ItemData(type: Item.DeathTownScroll, name: "传送卷轴·冥", desc: "传送到冥界·黄昏之城", usable: true, castable: true),
-        Item.TransportScroll: ItemData(type: Item.TransportScroll, name: "穿梭卷轴", desc: "越过面前的一块区域，只能在远古之路使用", usable: true),
-        Item.RandomSacredSpell: ItemData(type: Item.RandomSacredSpell, name: "无字天书", desc: "学会一个法术", usable: true),
+        Item.TownScroll: ItemData(type: Item.TownScroll, name: "传送卷轴·贝", desc: "传送到\(Game.VILLAGE_NAME)", price: 8, usable: true, castable: true),
+        Item.GodTownScroll: ItemData(type: Item.GodTownScroll, name: "传送卷轴·雪", desc: "传送到神域·雪之国", price: 24, quality: Quality.RARE, usable: true, castable: true),
+        Item.DeathTownScroll: ItemData(type: Item.DeathTownScroll, name: "传送卷轴·冥", desc: "传送到冥界·黄昏之城", price: 12, quality: Quality.GOOD, usable: true, castable: true),
+        Item.TransportScroll: ItemData(type: Item.TransportScroll, name: "穿梭卷轴", desc: "越过面前的一块区域，只能在远古之路使用", price: 8, usable: true),
+        Item.RandomSacredSpell: ItemData(type: Item.RandomSacredSpell, name: "无字天书", desc: "学会一个法术", price: 18, usable: true),
         
-        Item.GoldPackage: ItemData(type: Item.GoldPackage, name: "一袋金币", desc: "一袋沉甸甸的金币，不知道有多少个", usable: true),
-        Item.RedoSeed: ItemData(type: Item.RedoSeed, name: "重来的种子", desc: "", price: 32, quality: Quality.SACRED,autoCast: false, usable: true),
-        Item.MagicSyrup: ItemData(type: Item.MagicSyrup, name: "魔法糖浆", desc: "", price: 24, quality: Quality.GOOD, autoCast: false, usable: true),
+        Item.GoldPackage: ItemData(type: Item.GoldPackage, name: "一袋金币", desc: "一袋沉甸甸的金币，不知道有多少个", price: 12, usable: true),
+        Item.RedoSeed: ItemData(type: Item.RedoSeed, name: "重来的种子", desc: "", price: 32, quality: Quality.SACRED, stackable: false, autoCast: false, usable: true),
+        Item.MagicSyrup: ItemData(type: Item.MagicSyrup, name: "魔法糖浆", desc: "", price: 24, quality: Quality.GOOD, stackable: false, autoCast: false, usable: true),
         Item.Potion: ItemData(type: Item.Potion, name: "治疗药水", desc: "恢复50%最大生命值", price: 6, quality: Quality.GOOD, value: 0.5, autoCast: false, usable: true, castable: true),
         Item.LittlePotion: ItemData(type: Item.LittlePotion, name: "小型治疗药水", desc: "恢复25%最大生命值", price: 3,value: 0.25, autoCast: false, usable: true, castable: true),
         Item.GiantPotion: ItemData(type: Item.GiantPotion, name: "巨人药水", desc: "恢复100%最大生命值", price: 18, quality: Quality.RARE, autoCast: false, usable: true, castable: true),
-        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", desc: "恢复35%f最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 36, autoCast: false, usable: true),
-        Item.SealScroll: ItemData(type: Item.SealScroll, name: "封印卷轴", desc: "将一个虚弱的灵魂封印在卷轴里", price: 36, autoCast: false, usable: false, castable: true),
-        Item.ExpBook: ItemData(type: Item.ExpBook, name: "传承之书", desc: "获得经验640点", value: 640, autoCast: false, usable: true),
+        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", desc: "恢复35%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 32, quality: Quality.GOOD, value: 0.35, autoCast: false, usable: true),
+        Item.LittleMPPotion: ItemData(type: Item.LittleMPPotion, name: "小型法力药水", desc: "恢复15%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 12, value: 0.15, autoCast: false, usable: true),
+        Item.SoulMPPotion: ItemData(type: Item.SoulMPPotion, name: "灵魂法力药水", desc: "恢复60%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 48, quality: Quality.RARE, value: 0.65, autoCast: false, usable: true),
+        Item.SealScroll: ItemData(type: Item.SealScroll, name: "封印卷轴", desc: "将一个虚弱的灵魂封印在卷轴里", price: 12, autoCast: false, usable: false, castable: true),
+        Item.ExpBook: ItemData(type: Item.ExpBook, name: "传承之书", desc: "获得经验640点", price: 28, value: 640, autoCast: false, usable: true),
         
         Item.SummonScroll: ItemData(type: Item.SummonScroll, name: "", desc: "", usable: true),
         Item.PsychicScroll: ItemData(type: Item.PsychicScroll, name: "通灵卷轴", desc: "召唤一个强大的亡灵战士为你而战", priceType: Item.PRICE_TYPE_TEAR, price: 42, castable: true),
         Item.StarStone: ItemData(type: Item.StarStone, name: "星之石", desc: "高密度能量结晶，可以拆解出大量高纯度天使之泪", price: 128, usable: true),
         
-        Item.DragonRoot: ItemData(type: Item.DragonRoot, name: "龙根", desc: "", imgX: 11, imgY: 7),
-        Item.SkyAroma: ItemData(type: Item.SkyAroma, name: "天麻", desc: "", imgX: 7, imgY: 13),
-        Item.PanGrass: ItemData(type: Item.PanGrass, name: "石菊", desc: "", imgX: 3, imgY: 12),
-        Item.Caesalpinia: ItemData(type: Item.Caesalpinia, name: "苦石莲", desc: "", imgX: 10, imgY: 6),
-        Item.Curium: ItemData(type: Item.Curium, name: "黄姜", desc: "", imgX: 11, imgY: 5),
+        Item.DragonRoot: ItemData(type: Item.DragonRoot, name: "龙根", desc: "", price: 6, imgX: 11, imgY: 7),
+        Item.SkyAroma: ItemData(type: Item.SkyAroma, name: "天麻", desc: "", price: 6, imgX: 7, imgY: 13),
+        Item.PanGrass: ItemData(type: Item.PanGrass, name: "石菊", desc: "", price: 6, imgX: 3, imgY: 12),
+        Item.Caesalpinia: ItemData(type: Item.Caesalpinia, name: "苦石莲", desc: "", price: 6, imgX: 10, imgY: 6),
+        Item.Curium: ItemData(type: Item.Curium, name: "黄姜", desc: "", price: 6, imgX: 11, imgY: 5),
         
-        Item.PureMagicStone: ItemData(type: Item.PureMagicStone, name: "完美火焰原石", desc: ""),
-        Item.MagicStone: ItemData(type: Item.MagicStone, name: "", desc: ""),
-        Item.PureLifeStone: ItemData(type: Item.PureLifeStone, name: "", desc: ""),
-        Item.LifeStone: ItemData(type: Item.LifeStone, name: "", desc: ""),
-        Item.FireStone: ItemData(type: Item.FireStone, name: "", desc: ""),
-        Item.PureFireStone: ItemData(type: Item.PureFireStone, name: "", desc: ""),
-        Item.WaterStone: ItemData(type: Item.WaterStone, name: "", desc: ""),
-        Item.PureWaterStone: ItemData(type: Item.PureWaterStone, name: "", desc: ""),
+        Item.PureMagicStone: ItemData(type: Item.PureMagicStone, name: "完美火焰原石", desc: "", price: 8),
+        Item.MagicStone: ItemData(type: Item.MagicStone, name: "", desc: "", price: 6),
+        Item.PureLifeStone: ItemData(type: Item.PureLifeStone, name: "", desc: "", price: 8),
+        Item.LifeStone: ItemData(type: Item.LifeStone, name: "", desc: "", price: 6),
+        Item.FireStone: ItemData(type: Item.FireStone, name: "", desc: "", price: 6),
+        Item.PureFireStone: ItemData(type: Item.PureFireStone, name: "", desc: "", price: 8),
+        Item.WaterStone: ItemData(type: Item.WaterStone, name: "", desc: "", price: 6),
+        Item.PureWaterStone: ItemData(type: Item.PureWaterStone, name: "", desc: "", price: 8),
         
         Item.GoldCoin: ItemData(type: Item.GoldCoin, name: "金币", stackable: true),
         
         Item.RandomArmor: ItemData(type: Item.RandomArmor, name: "防具", price: 12),
+        Item.RandomWeapon: ItemData(type: Item.RandomWeapon, name: "武器", price: 12),
+        Item.RandomSpell: ItemData(type: Item.RandomSpell, name: "法术书？", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.SACRED),
+        
         
         
         

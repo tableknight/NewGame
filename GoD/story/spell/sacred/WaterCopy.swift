@@ -22,6 +22,7 @@ class WaterCopy:Magical {
         _quality = Quality.SACRED
         _cooldown = 5
         autoCast = true
+        cost(value: 30)
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle
@@ -31,7 +32,7 @@ class WaterCopy:Magical {
             copy._level = c._unit._level
             copy._img = c._unit._img
             
-//            copy._spellsInuse = [NoAction()]
+            copy._spellsInuse = [Spell.NoAction]
             copy._extensions.health = c.getHealth()
             copy._extensions.hp = c.getHp()
             copy._extensions.defence = c._unit._extensions.defence

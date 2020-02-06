@@ -18,6 +18,7 @@ class IceGuard: Magical {
         canBeTargetSelf = true
         _cooldown = 3
         autoCast = true
+        cost(value: 12)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

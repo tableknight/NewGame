@@ -23,6 +23,7 @@ class Disappear: Magical {
         targetEnemy = false
         _quality = Quality.GOOD
         autoCast = true
+        _mpCost = 20 * _costRate
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole

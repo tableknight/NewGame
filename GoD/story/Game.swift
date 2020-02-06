@@ -240,6 +240,7 @@ class Game {
     static var CELLSIZE:CGFloat = 80
     static let ICON_GAP:CGFloat = 12
     static let FRAME_SIZE:CGFloat = 0.3
+    static let VILLAGE_NAME = "贝鲁特村"
     static let instance = Game()
 //    var stage:UIStage!
     var gameScene:GameScene!
