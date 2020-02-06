@@ -10,6 +10,7 @@ import SpriteKit
 class Boss: Creature {
     override init() {
         super.init()
+        _race = EvilType.BOSS
     }
     override func levelTo(level:CGFloat) {
         staminaChange(value: (level + 10) * _growth.stamina)

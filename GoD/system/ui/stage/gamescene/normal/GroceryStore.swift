@@ -84,15 +84,8 @@ class GroceryStore: StandScene {
             let cc = CenterV()
             let char = _role!
             Game.instance.curStage.switchScene(next: cc, completion: {
-                cc.setRole(x: 2, y: 3, char: char)
+                cc.setRole(x: 10, y: 9, char: char)
                 char.faceSouth()
-            })
-        } else if pos.x == 7 && pos.y == 2 {
-            let cc = HotelInner()
-            let char = _role!
-            Game.instance.curStage.switchScene(next: cc, completion: {
-                cc.setRole(x: 6, y: 13, char: char)
-                char.faceNorth()
             })
         }
     }

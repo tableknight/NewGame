@@ -85,8 +85,9 @@ class Creature: Unit {
         return false
     }
     func extraProperty(value: CGFloat) -> CGFloat {
-        let max = (value * 10).toInt()
-        var float = seed(to: max).toFloat() * 0.01
+        let max = (value * 12).toInt()
+        let min = (value * 3).toInt()
+        var float = seed(min: min, max: max).toFloat() * 0.01
         if !beMore() {
             float *= -1
         }
@@ -127,17 +128,20 @@ class Creature: Unit {
         createSensitive()
         let l = _level.toInt()
         if _level > 30 {
-            _elementalResistance.fire = seed(to: l).toFloat()
-            _elementalResistance.water = seed(to: l).toFloat()
-            _elementalResistance.thunder = seed(to: l).toFloat()
+            _elementalResistance.fire = seed(to: l * 2).toFloat()
+            _elementalResistance.water = seed(to: l * 2).toFloat()
+            _elementalResistance.thunder = seed(to: l * 2).toFloat()
         }
         if _level > 1 && _spellCount > _spellsInuse.count && d3() {
-//            let l = Loot()
-//            let spells = [l.getRandomNormalSpell(), l.getRandomGoodSpell(), l.getRandomRareSpell(), l.getRandomSacredSpell()]
-//            let spell = spells.one()
-//            if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
-////                _spellsInuse.append(spell)
-//            }
+            let spells = [
+                Loot.getRandomNormalSpell(),
+                Loot.getRandomGoodSpell(),
+                Loot.getRandomRareSpell(),
+                Loot.getRandomSacredSpell()]
+            let spell = spells.one()
+            if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
+                _spellsInuse.append(spell._id)
+            }
         }
     }
     func createSensitive() {

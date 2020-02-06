@@ -408,6 +408,7 @@ class Dungeon: MyScene {
         for p in _visiblePoints {
             if Core().d7() && _mapMatrix[p.y.toInt()][p.x.toInt()] == CELL_EMPTY {
                 _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_MONSTER
+                debug("monster x = \(p.x), y = \(p.y)")
                 addItem(x: p.x, y: p.y, item: getRandomMonterCellItem())
             }
         }

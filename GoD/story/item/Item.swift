@@ -170,7 +170,7 @@ class Item:Core, Castable, Showable {
             }
         } else if _type == Item.TownScroll {
             Game.instance.curStage.removeBattle(_battle)
-            let c = CenterCamping()
+            let c = CenterV()
             let char = Game.instance.curStage._curScene._role!
             let stage = Game.instance.curStage
             stage?.showUI()

@@ -472,33 +472,24 @@ class Spell:Core, Showable, Castable {
         
         let value:CGFloat = 0.25
         
-        if to.getRace() == EvilType.FINAL {
+        if to._unit is Boss {
             factor = 1 - value
-        }
-        if from.getRace() == EvilType.FINAL {
+        } else if from._unit is Boss {
             factor = 1 + value
-        }
-        
-        if to.getRace() - from.getRace() == 1 {
+        } else if to.getRace() - from.getRace() == 1 {
             factor = 1 - value
-        }
-        
-        if to.getRace() - from.getRace() == -1 {
+        } else if to.getRace() - from.getRace() == -1 {
             factor = 1 + value
-        }
-        
-        if to.getRace() == EvilType.RISEN && from.getRace() == EvilType.NATURE {
+        } else if to.getRace() == EvilType.RISEN && from.getRace() == EvilType.NATURE {
             factor = 1 + value
-        }
-        
-        if from.getRace() == EvilType.RISEN && to.getRace() == EvilType.NATURE {
+        } else if from.getRace() == EvilType.RISEN && to.getRace() == EvilType.NATURE {
             factor = 1 - value
         }
         
 //        if from.weaponIs(HolyPower.EFFECTION) && to.getRace() == EvilType.RISEN {
 //            factor *= 2
 //        }
-        
+        debug("race factor is \(factor)")
         return factor
     }
     internal func elementalDamage(damage:CGFloat, to:BUnit, from:BUnit) -> CGFloat {

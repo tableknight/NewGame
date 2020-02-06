@@ -294,9 +294,9 @@ extension BUnit {
     }
     
     func getRace() -> Int {
-        if _valueUnit._race != -1 {
-            return _valueUnit._race
-        }
+//        if _valueUnit._race != -1 {
+//            return _valueUnit._race
+//        }
         
         return _unit._race
     }

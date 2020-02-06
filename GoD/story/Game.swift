@@ -61,7 +61,7 @@ struct EvilType {
     static let ANGEL = 3
     static let DEMON = 4
     static let NATURE = 5
-    static let FINAL = 6
+    static let BOSS = 6
     static let GIANT = 7
     static func getTypeLabel(type:Int) -> String {
         switch type {

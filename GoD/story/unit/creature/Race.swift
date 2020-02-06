@@ -70,7 +70,7 @@ class Rizen: Creature {
 class TheFinal: Creature {
     override init() {
         super.init()
-        _race = EvilType.FINAL
+        _race = EvilType.BOSS
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

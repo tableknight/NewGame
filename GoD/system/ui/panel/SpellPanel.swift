@@ -46,7 +46,7 @@ class SpellPanel:UIPanel {
                 } else {
                     debug("remove spell in use failed!")
                 }
-                if !_char.hasSpell(spell: spell) {
+                if !_char.hasSpell(id: spell._id) {
                     _char._spells.append(spell._id)
                 } else {
                     debug("spell exist in spellpanel \(spell._name)")

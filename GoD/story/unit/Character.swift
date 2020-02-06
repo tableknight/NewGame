@@ -31,12 +31,9 @@ class Character: Unit {
         for m in _minions {
             spells += m._spellsInuse
         }
-        for m in _minions {
-            spells += m._spellsInuse
-        }
-        for m in _storedMinions {
-            spells += m._spellsInuse
-        }
+//        for m in _storedMinions {
+//            spells += m._spellsInuse
+//        }
         
         for s in spells {
             if s == id {
