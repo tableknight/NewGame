@@ -89,7 +89,6 @@ class GroceryStore: StandScene {
             })
         }
     }
-    private let CELL_ROLE = 151
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if cell == CELL_ROLE && point.equalTo(CGPoint(x: 2, y: 5)) {

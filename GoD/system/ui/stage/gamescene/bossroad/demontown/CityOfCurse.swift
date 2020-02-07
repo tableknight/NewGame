@@ -4,7 +4,7 @@
 //
 //  Created by kai chen on 2019/3/28.
 //  Copyright © 2019年 Chen. All rights reserved.
-//
+//  not used
 
 import SpriteKit
 class CityOfCurse: DemonTown {
@@ -15,7 +15,7 @@ class CityOfCurse: DemonTown {
         _monsterEnum = []
         _name = "遗忘之城"
         _floorSize = 10
-        _level = 61
+        _level = George.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

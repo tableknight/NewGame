@@ -24,7 +24,11 @@ class ItemInfo:SKSpriteNode {
         _displayHeight = cellSize * 0.5
         
         let name = Label()
-        name.text = "[\(_item._name)]"
+        if item._type == Item.SpellBook {
+            name.text = "[法术书·\(_item._name)]"
+        } else {
+            name.text = "[\(_item._name)]"
+        }
         name.fontSize = 24
         name.fontColor = QualityColor.getColor(item._quality)
         name.position.x = startX

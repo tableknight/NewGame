@@ -600,9 +600,16 @@ class Battle: SKSpriteNode {
     }
     internal func defeated() {
         isVictory = false
-        showMsg(text: "战斗失败！")
+        showMsg(text: "战斗失败，你失去了金钱和经验！")
+        lostExp(unit: _char)
+        _char.lostMoney(num: seed(min: _char!._level.toInt(), max: _char!._level.toInt() * 3))
         _char._extensions.hp = 1
         fadeOutBattle()
+    }
+    private func lostExp(unit:Unit) {
+        if unit._extensions.hp < 1 {
+            unit._exp *= 0.9
+        }
     }
     func fadeOutBattle(completion: @escaping () -> Void = {}) {
         

@@ -23,10 +23,6 @@ class EastCamping: StandScene {
         _mapSet = GroundSets(ground: oa4.getCell(2, 12, 2, 2), wall: oa4.getCell(2, 14, 2, 2))
         createMap()
     }
-    private let CELL_DOOR = 150
-    private let CELL_ROLE = 151
-    private let CELL_ROAD = 152
-    private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if point.x == 9 && point.y == 4 && cell == CELL_BLOCK {
@@ -44,7 +40,7 @@ class EastCamping: StandScene {
             }
             return true
         }
-        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].firstIndex(of: cell) != nil{
+        if [CELL_BLOCK].firstIndex(of: cell) != nil{
             return true
         }
         return false

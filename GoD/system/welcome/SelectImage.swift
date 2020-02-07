@@ -68,20 +68,14 @@ class SelectImage:UIPanel {
 //            SKTexture(imageNamed: "role_6"),
 //            SKTexture(imageNamed: "role_7"),
 //            SKTexture(imageNamed: "role_8")
-            "role_1",
-            "role_2",
-            "role_3",
-            "role_4",
-            "role_5",
-            "role_6",
-            "role_7",
-            "role_8",
-            "role_9",
-            "role_10",
-            "role_11",
-            "role_12",
+            "role_01",
+            "role_02",
+            "role_03",
+            "role_04",
+            "role_05",
+            "role_06"
         ]
-        _names = ["塞西", "洛斯利", "莫贝尔", "弑羽", "安瑟玛薇", "狄尔菲" , "夜薇", "伊凡", "露薇雅", "仇云", "梅兹兰", "兰特西亚"]
+        _names = ["马可","艾丽丝", "伊丽莎白", "火云", "京", "梅露露"]
         showImages()
         
     }

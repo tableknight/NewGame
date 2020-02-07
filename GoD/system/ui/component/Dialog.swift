@@ -36,16 +36,16 @@ class Dialog: SKSpriteNode {
     }
     
     func create(img:SKTexture) {
-        let actor = SKSpriteNode(texture: img)
-        actor.size = CGSize(width: -cellSize * 1, height: cellSize * 1)
-        actor.position.x = -cellSize * 5.5
-        actor.position.y = cellSize * 0.5
-        actor.zPosition = _dialog.zPosition + 1
-        addChild(actor)
+//        let actor = SKSpriteNode(texture: img)
+//        actor.size = CGSize(width: -cellSize * 1, height: cellSize * 1)
+//        actor.position.x = -cellSize * 5.5
+//        actor.position.y = cellSize * 0.5
+//        actor.zPosition = _dialog.zPosition + 1
+//        addChild(actor)
         
         let name = Label()
-        name.position.x = actor.position.x + cellSize * 0.5
-        name.position.y = 22
+        name.position.x = -cellSize * 6
+        name.position.y = -cellSize * 0.125
         name.zPosition = _dialog.zPosition + 1
         name.text = _name
         name.fontSize = 20
@@ -61,8 +61,9 @@ class Dialog: SKSpriteNode {
     
     func addConfirmButton() {
         _confirmButton.position.x = _closeButton.xAxis
-        _confirmButton.position.y = _closeButton.yAxis - cellSize * 3.2
+        _confirmButton.position.y = _closeButton.yAxis - cellSize * 3
         _confirmButton.text = "确定"
+        _confirmButton._label.fontSize = cellSize * 0.5
         _confirmButton._bg.removeFromParent()
         addChild(_confirmButton)
     }

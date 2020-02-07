@@ -154,7 +154,11 @@ class ItemPanel: UIPanel {
                 let y = base / 6
                 let x = base % 6
                 let icon = ItemIcon()
-                icon.iconLabel = props[i]._name
+                if !props[i]._showingText.isEmpty {
+                    icon.iconLabel = props[i]._showingText
+                } else {
+                    icon.iconLabel = props[i]._name
+                }
                 icon.count = props[i]._count
                 icon.displayItem = props[i]
                 icon.position.y = startY - (cellSize + _standardGap) * y.toFloat()

@@ -42,6 +42,7 @@ class Item:Core, Castable, Showable {
         let data = ItemData.data[_type]!
         _type = data.type
         _name = data.name
+        _showingText = data.showingText
         _description = data.desc
         _count = data.count
         _quality = data.quality
@@ -491,6 +492,7 @@ class Item:Core, Castable, Showable {
     var canBeTargetSummonUnit: Bool = false
     var _type = ""
     var _name = ""
+    var _showingText = ""
     var _description = ""
     var _count = 1
     var _quality = 1
@@ -516,6 +518,7 @@ class Item:Core, Castable, Showable {
         case canBeTargetSummonUnit
         case _type
         case _name
+        case _showingText
         case _description
         case _count
         case _quality
@@ -543,6 +546,7 @@ class Item:Core, Castable, Showable {
         
         _type = try values.decode(String.self, forKey: ._type)
         _name = try values.decode(String.self, forKey: ._name)
+        _showingText = try values.decode(String.self, forKey: ._showingText)
         _description = try values.decode(String.self, forKey: ._description)
         _count = try values.decode(Int.self, forKey: ._count)
         _quality = try values.decode(Int.self, forKey: ._quality)
@@ -572,6 +576,7 @@ class Item:Core, Castable, Showable {
         try container.encode(canBeTargetSummonUnit, forKey: .canBeTargetSummonUnit)
         try container.encode(_type, forKey: ._type)
         try container.encode(_name, forKey: ._name)
+        try container.encode(_showingText, forKey: ._showingText)
         try container.encode(_description, forKey: ._description)
         try container.encode(_count, forKey: ._count)
         try container.encode(_quality, forKey: ._quality)
@@ -593,6 +598,7 @@ class Item:Core, Castable, Showable {
 struct ItemData:Codable {
     var type = ""
     var name = ""
+    var showingText = ""
     var desc = ""
     var priceType = 1
     var price = 0
@@ -608,17 +614,17 @@ struct ItemData:Codable {
     var castable = false
     
     static let data = [
-        Item.Tear: ItemData(type: Item.Tear, name: "天使之泪", desc: "一滴来自天使的眼泪，经过时间的沉淀，变成了一颗晶莹剔透的水晶，似乎拥有某种魔力", price: 6),
+        Item.Tear: ItemData(type: Item.Tear, name: "天使之泪", showingText: "泪", desc: "一滴来自天使的眼泪，经过时间的沉淀，变成了一颗晶莹剔透的水晶，似乎拥有某种魔力", price: 6),
         Item.Skin: ItemData(type:Item.Skin, name: "皮毛", price: 6),
         Item.GoatHoof: ItemData(type:Item.GoatHoof, name: "羊蹄", price: 6),
         Item.Milk: ItemData(type:Item.Milk, name: "牛奶", price: 6),
         Item.LizardEye: ItemData(type:Item.LizardEye, name: "蜥蜴的眼球", price: 6),
         Item.Mushroom: ItemData(type:Item.Mushroom, name: "蘑菇", price: 6),
         Item.Egg: ItemData(type:Item.Egg, name: "鸟蛋", price: 6),
-        Item.Angelsfuther: ItemData(type:Item.Angelsfuther, name: "天使之羽", price: 16),
-        Item.DemonsBlood: ItemData(type:Item.DemonsBlood, name: "恶魔之血", price: 16),
-        Item.SpellBook: ItemData(type: Item.SpellBook, name: "法术书", price: 48, stackable: false, usable: true),
-        Item.TearEssence: ItemData(type: Item.TearEssence, name: "眼泪精华", desc: "获取若干个天使之泪", price: 32, usable: true),
+        Item.Angelsfuther: ItemData(type:Item.Angelsfuther, name: "天使之羽", showingText: "羽", price: 16),
+        Item.DemonsBlood: ItemData(type:Item.DemonsBlood, name: "恶魔之血", showingText: "血", price: 16),
+        Item.SpellBook: ItemData(type: Item.SpellBook, name: "法术书",  showingText: "书",price: 48, stackable: false, usable: true),
+        Item.TearEssence: ItemData(type: Item.TearEssence, name: "眼泪精华", showingText: "精", desc: "获取若干个天使之泪", price: 32, usable: true),
         Item.CreatureEssence: ItemData(type: Item.CreatureEssence, name: "灵魂精华", stackable: false, usable: true),
         Item.TownScroll: ItemData(type: Item.TownScroll, name: "传送卷轴·贝", desc: "传送到\(Game.VILLAGE_NAME)", price: 8, usable: true, castable: true),
         Item.GodTownScroll: ItemData(type: Item.GodTownScroll, name: "传送卷轴·雪", desc: "传送到神域·雪之国", price: 24, quality: Quality.RARE, usable: true, castable: true),
@@ -626,15 +632,15 @@ struct ItemData:Codable {
         Item.TransportScroll: ItemData(type: Item.TransportScroll, name: "穿梭卷轴", desc: "越过面前的一块区域，只能在远古之路使用", price: 8, usable: true),
         Item.RandomSacredSpell: ItemData(type: Item.RandomSacredSpell, name: "无字天书", desc: "学会一个法术", price: 18, usable: true),
         
-        Item.GoldPackage: ItemData(type: Item.GoldPackage, name: "一袋金币", desc: "一袋沉甸甸的金币，不知道有多少个", price: 12, usable: true),
-        Item.RedoSeed: ItemData(type: Item.RedoSeed, name: "重来的种子", desc: "", price: 32, quality: Quality.SACRED, stackable: false, autoCast: false, usable: true),
-        Item.MagicSyrup: ItemData(type: Item.MagicSyrup, name: "魔法糖浆", desc: "", price: 24, quality: Quality.GOOD, stackable: false, autoCast: false, usable: true),
-        Item.Potion: ItemData(type: Item.Potion, name: "治疗药水", desc: "恢复50%最大生命值", price: 6, quality: Quality.GOOD, value: 0.5, autoCast: false, usable: true, castable: true),
-        Item.LittlePotion: ItemData(type: Item.LittlePotion, name: "小型治疗药水", desc: "恢复25%最大生命值", price: 3,value: 0.25, autoCast: false, usable: true, castable: true),
-        Item.GiantPotion: ItemData(type: Item.GiantPotion, name: "巨人药水", desc: "恢复100%最大生命值", price: 18, quality: Quality.RARE, autoCast: false, usable: true, castable: true),
-        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", desc: "恢复35%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 32, quality: Quality.GOOD, value: 0.35, autoCast: false, usable: true),
-        Item.LittleMPPotion: ItemData(type: Item.LittleMPPotion, name: "小型法力药水", desc: "恢复15%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 12, value: 0.15, autoCast: false, usable: true),
-        Item.SoulMPPotion: ItemData(type: Item.SoulMPPotion, name: "灵魂法力药水", desc: "恢复60%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 48, quality: Quality.RARE, value: 0.65, autoCast: false, usable: true),
+        Item.GoldPackage: ItemData(type: Item.GoldPackage, name: "一袋金币", showingText: "币", desc: "一袋沉甸甸的金币，不知道有多少个", price: 12, usable: true),
+        Item.RedoSeed: ItemData(type: Item.RedoSeed, name: "重来的种子", showingText: "种", desc: "", price: 32, quality: Quality.SACRED, stackable: false, autoCast: false, usable: true),
+        Item.MagicSyrup: ItemData(type: Item.MagicSyrup, name: "魔法糖浆", showingText: "浆", desc: "", price: 24, quality: Quality.GOOD, stackable: false, autoCast: false, usable: true),
+        Item.Potion: ItemData(type: Item.Potion, name: "治疗药水", showingText: "药", desc: "恢复50%最大生命值", price: 6, quality: Quality.GOOD, value: 0.5, autoCast: false, usable: true, castable: true),
+        Item.LittlePotion: ItemData(type: Item.LittlePotion, name: "小型治疗药水", showingText: "药", desc: "恢复25%最大生命值", price: 3,value: 0.25, autoCast: false, usable: true, castable: true),
+        Item.GiantPotion: ItemData(type: Item.GiantPotion, name: "巨人药水", showingText: "药", desc: "恢复100%最大生命值", price: 18, quality: Quality.RARE, autoCast: false, usable: true, castable: true),
+        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", showingText: "法", desc: "恢复35%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 32, quality: Quality.GOOD, value: 0.35, autoCast: false, usable: true),
+        Item.LittleMPPotion: ItemData(type: Item.LittleMPPotion, name: "小型法力药水", showingText: "法", desc: "恢复15%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 12, value: 0.15, autoCast: false, usable: true),
+        Item.SoulMPPotion: ItemData(type: Item.SoulMPPotion, name: "灵魂法力药水", showingText: "法", desc: "恢复60%最大法力值", priceType: Item.PRICE_TYPE_TEAR, price: 48, quality: Quality.RARE, value: 0.65, autoCast: false, usable: true),
         Item.SealScroll: ItemData(type: Item.SealScroll, name: "封印卷轴", desc: "将一个虚弱的灵魂封印在卷轴里", price: 12, autoCast: false, usable: false, castable: true),
         Item.ExpBook: ItemData(type: Item.ExpBook, name: "传承之书", desc: "获得经验640点", price: 28, value: 640, autoCast: false, usable: true),
         
@@ -661,7 +667,7 @@ struct ItemData:Codable {
         
         Item.RandomArmor: ItemData(type: Item.RandomArmor, name: "防具", price: 12),
         Item.RandomWeapon: ItemData(type: Item.RandomWeapon, name: "武器", price: 12),
-        Item.RandomSpell: ItemData(type: Item.RandomSpell, name: "法术书？", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.SACRED),
+        Item.RandomSpell: ItemData(type: Item.RandomSpell, name: "法术书？", showingText: "书？", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.SACRED),
         
         
         

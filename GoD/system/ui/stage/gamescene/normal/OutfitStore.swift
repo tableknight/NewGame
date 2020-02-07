@@ -332,7 +332,6 @@ class OutfitStore: InnerHouse {
             _mapMatrix[p[1]][p[0]] = CELL_ROLE
         }
     }
-    private let CELL_ROLE = 151
 }
 
 class OutfitShow1:UIItem {

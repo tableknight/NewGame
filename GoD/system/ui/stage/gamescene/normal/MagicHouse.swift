@@ -25,7 +25,7 @@ class MagicHouse: InnerHouse {
             let stage = Game.instance.curStage!
             stage.showDialog(img: role._roleNode.texture!,
                              text: "人们对造物主总是充满了好奇，我愿意与你分享这份秘密，不过需要付出一些代价，你是否能够接受？",
-                             name: "大魔法师梅露露", action: {
+                             name: "大魔法师瑞德", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
                                 dlg._confirmAction = {
@@ -33,21 +33,20 @@ class MagicHouse: InnerHouse {
                                     let sp = SellingPanel()
                                     let book = Item(Item.RandomSpell)
                                     book._reserveBool = true
-                                    book.price = 1
+//                                    book.price = 1
                                     sp._goodsList = [book]
                                     sp.create()
                                     stage.showPanel(sp)
                                 }
             })
             return true
-        }
-        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 4, y: 9)) {
+        } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 4, y: 9)) {
             let role = getNextCellItem(x: 4, y: 9) as! UIRole
             let stage = Game.instance.curStage!
             
             stage.showDialog(img: role._roleNode.texture!,
                              text: "知识是力量的源泉，书籍是知识的海洋，魔法是遨游于海洋的方舟，我这么说你明白吗？？",
-                             name: "大魔法师欧德林", action: {
+                             name: "大魔法师波普", action: {
                                 let dlg = stage._curDialog!
                                 dlg.addConfirmButton()
                                 dlg._confirmAction = {
@@ -61,11 +60,34 @@ class MagicHouse: InnerHouse {
                                 }
             })
             return true
-        }
-        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 5)) {
+        } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 8, y: 10)) {
+            let role = getNextCellItem(x: 8, y: 10) as! UIRole
+            let stage = Game.instance.curStage!
+            
+            stage.showDialog(img: role._roleNode.texture!,
+                             text: "一颗天使之泪可以转化为一百点法术能量，你愿意让我帮你恢复你和你的伙伴所有的魔法吗？",
+                             name: "大魔法师格林", action: {
+                                let dlg = stage._curDialog!
+                                let c = Game.instance.char!
+                                dlg.addConfirmButton()
+                                dlg._confirmAction = {
+                                    stage.removeDialog(dlg: dlg)
+                                    if !self.recoveryMana(unit: c) {
+                                        role.speak(text: "你没有那么多眼泪！")
+                                    } else {
+                                        for m in c._minions {
+                                            _ = self.recoveryMana(unit: m)
+                                        }
+                                    }
+                                    stage.setBarValue()
+                                }
+            })
+            return true
+        } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 5)) {
             let pp = PharmicPanel()
             pp.create()
             Game.instance.curStage.showPanel(pp)
+            return true
         }
         
         if cell == CELL_ITEM || cell == CELL_ROLE {
@@ -76,6 +98,27 @@ class MagicHouse: InnerHouse {
     
     private func createRandomWeapon() {
         
+    }
+    
+    private func recoveryMana(unit:Unit) -> Bool {
+        let c = Game.instance.char!
+        let r = unit._extensions.mpMax - unit._extensions.mp
+        let n = ceil(r * 0.01).toInt()
+        
+        if n == 0 {
+            return true
+        }
+        
+        let i = c.searchItem(type: Item.Tear)
+        if i != nil {
+            if i!._count > n {
+                unit._extensions.mp = unit._extensions.mpMax
+                i!._count -= n
+                return true
+            }
+        }
+        
+        return false
     }
     
     override func moveEndAction() {
@@ -109,19 +152,24 @@ class MagicHouse: InnerHouse {
         addItem(x: 0, y: 13, item: roof, width: 12)
         
         let r1 = UIRole()
-        r1.create(roleNode: SKTexture(imageNamed: "Mei_lulu").getNode(1, 0))
-        addItem(x: 3, y: 4, item: r1)
+        r1.create(roleNode: SKTexture(imageNamed: "MRed").getNode(1, 0))
+        addItem(x: 3, y: 4, item: r1, z:bg.zPosition)
         _mapMatrix[4][3] = CELL_ROLE
         
         let r2 = UIRole()
-        r2.create(roleNode: SKTexture(imageNamed: "Oldlin").getNode(1, 0))
-        addItem(x: 4, y: 9, item: r2)
+        r2.create(roleNode: SKTexture(imageNamed: "MGreen").getNode(1, 0))
+        addItem(x: 4, y: 9, item: r2, z:bg.zPosition)
         _mapMatrix[9][4] = CELL_ROLE
         
         let r3 = UIRole()
-        r3.create(roleNode: SKTexture(imageNamed: "Deran").getNode(1, 3))
-        addItem(x: 9, y: 5, item: r3)
+        r3.create(roleNode: SKTexture(imageNamed: "MBlack").getNode(1, 2))
+        addItem(x: 9, y: 5, item: r3, z:bg.zPosition)
         _mapMatrix[5][9] = CELL_ROLE
+        
+        let r4 = UIRole()
+        r4.create(roleNode: SKTexture(imageNamed: "MPurple").getNode(1, 3))
+        addItem(x: 8, y: 10, item: r4, z:bg.zPosition)
+        _mapMatrix[10][8] = CELL_ROLE
         
         var list = Array<Item>()
         for _ in 0...9 {
@@ -163,7 +211,8 @@ class MagicHouse: InnerHouse {
                     [11,5],
                     [2,9],
                     [3,9],
-                    [8,9],
+                    [9,9],
+                    [10,10],
                     [9,10],
                     [10,9],
                     [11,8]
@@ -176,7 +225,7 @@ class MagicHouse: InnerHouse {
 //        pp.create()
 //        Game.instance.curStage.showPanel(pp)
     }
-    private let CELL_ROLE = 151
+    
     private var _sellingBooks = Array<Item>()
 }
 

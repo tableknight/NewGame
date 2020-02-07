@@ -141,6 +141,28 @@ class Loot: Core {
             _props.append(Item(Item.DeathTownScroll))
         }
     }
+    func lootInPalace(level:CGFloat) {
+        var chance = seed().toFloat()
+        let lucky = _char._lucky * 0.01 + 1
+        if chance < 15 * lucky  {
+            _props.append(Item(Item.Angelsfuther))
+        }
+        chance = seed().toFloat()
+        if chance < 2 * lucky  {
+            _props.append(Item(Item.Angelsfuther))
+        }
+    }
+    func lootInDemonTown(level:CGFloat) {
+        var chance = seed().toFloat()
+        let lucky = _char._lucky * 0.01 + 1
+        if chance < 15 * lucky  {
+            _props.append(Item(Item.DemonsBlood))
+        }
+        chance = seed().toFloat()
+        if chance < 2 * lucky  {
+            _props.append(Item(Item.DemonsBlood))
+        }
+    }
     func loot(level:Int) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
@@ -608,7 +630,7 @@ class Loot: Core {
         list += [3,3]
         list += [4]
         list += [5]
-        list += [6]
+//        list += [6]
         list += [10]
         list += [11]
         return getItemByid(id: list.one())

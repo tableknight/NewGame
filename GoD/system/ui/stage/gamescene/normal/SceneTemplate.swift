@@ -22,7 +22,6 @@ class SceneTemplate: StandScene {
         createMap()
     }
     private let CELL_DOOR = 150
-    private let CELL_ROLE = 151
     private let CELL_ROAD = 152
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {

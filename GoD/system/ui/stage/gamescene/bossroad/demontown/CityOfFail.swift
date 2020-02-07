@@ -15,7 +15,7 @@ class CityOfFail: DemonTown {
         _monsterEnum = []
         _name = "堕落之城"
         _floorSize = 9
-        _level = 48
+        _level = Francis.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

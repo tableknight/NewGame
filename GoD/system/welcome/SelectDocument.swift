@@ -196,9 +196,11 @@ class SelectDocument: UIPanel {
         ps._count = 2
         e.addItem(ps)
         
-        let w = Outfit(Outfit.Sword)
-        w.create(level: 1)
-        e.addItem(w)
+        e._spellsInuse = [Spell.LowlevelFlame]
+        
+//        let w = Outfit(Outfit.Sword)
+//        w.create(level: 1)
+//        e.addItem(w)
         
 //        for i in 1...8 {
 //            e.addItem(Loot.getSacredAmulet(id: i))
@@ -210,9 +212,9 @@ class SelectDocument: UIPanel {
 //            e.addItem(Loot.getSacredBlunt(id: i))
 //        }
 //
-        for i in 1...9 {
-            e.addItem(Loot.getSacredSword(id: i))
-        }
+//        for i in 1...9 {
+//            e.addItem(Loot.getSacredSword(id: i))
+//        }
 //        for i in 1...2 {
 //            e.addItem(Loot.getSacredDagger(id: i))
 //        }

@@ -220,5 +220,4 @@ class ChurchHouse: InnerHouse {
         
         
     }
-    private let CELL_ROLE = 151
 }

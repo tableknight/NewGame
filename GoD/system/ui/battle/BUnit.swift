@@ -391,6 +391,12 @@ class BUnit: SKSpriteNode {
             })
             return
         }
+        if _unit is Boss && seed() < 50 {
+            setTimeout(delay: 0.5, completion: {
+                self.showMiss()
+            })
+            return
+        }
         let t = self
         let spell = Burning()
         spell._battle = self._battle

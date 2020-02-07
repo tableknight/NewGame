@@ -146,7 +146,6 @@ class CenterV: StandScene {
          }
     }
     private let CELL_DOOR = 150
-    private let CELL_ROLE = 151
     private let CELL_ROAD = 152
     private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
@@ -170,7 +169,7 @@ class CenterV: StandScene {
         if point.x == 4 && point.y == 7 && cell == CELL_ROLE {
             let stage = Game.instance.curStage!
             stage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
-                                     text: "这里是前往神域的唯一入口，通过100层远古试炼，就可以进去神域，升入神格.........不过，我建议你放弃。",
+                                     text: "这里是前往神域的唯一入口，攀登远古之巅，即可进入神域，升入神格。。。不过，我建议你放弃。",
                                      name: "神官苏维亚")
             stage._curDialog?.addConfirmButton()
             stage._curDialog?._confirmAction = {

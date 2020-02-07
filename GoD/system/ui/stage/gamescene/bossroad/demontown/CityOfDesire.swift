@@ -15,7 +15,7 @@ class CityOfDesire: DemonTown {
         _monsterEnum = []
         _name = "欲望之城"
         _floorSize = 6
-        _level = 25
+        _level = Idlir.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

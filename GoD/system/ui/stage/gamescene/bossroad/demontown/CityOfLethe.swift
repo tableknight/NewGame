@@ -15,7 +15,7 @@ class CityOfLethe: DemonTown {
         _monsterEnum = []
         _name = "遗忘之城"
         _floorSize = 10
-        _level = 61
+        _level = George.LEVEL
     }
     
     required init?(coder aDecoder: NSCoder) {

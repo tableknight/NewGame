@@ -25,7 +25,10 @@ class HotelInner: StandScene {
 //        bg.yAxis = cellSize * 0.5
         addChild(bg)
         
-        addItem(x: 11, y: 9, item: getRoleNode(roleNode: SKTexture(imageNamed: "family").getNode(1, 3)))
+        let r1 = UIRole()
+        r1.create(roleNode: SKTexture(imageNamed: "family").getNode(1, 3))
+        addItem(x: 11, y: 9, item: r1, z: bg.zPosition)
+        _mapMatrix[9][11] = CELL_ROLE
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "hotel_inner_roof"))
         addItem(x: 0, y: 13, item: roof, width: 12)
@@ -104,6 +107,13 @@ class HotelInner: StandScene {
 //                    char._unit._extensions.mp = char.getMpMax()
                     Game.instance.curStage.setBarValue()
                 }
+                return true
+            } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 11, y: 9)) {
+                let role = getNextCellItem(x: 11, y: 9) as! UIRole
+                role.speak(text: "555..")
+                return true
+            }
+            if cell == CELL_ITEM || cell == CELL_ROLE {
                 return true
             }
             return false

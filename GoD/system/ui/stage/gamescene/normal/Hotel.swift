@@ -46,6 +46,16 @@ class Hotel: StandScene {
         let top6 = roof.getNode(0, 5, 5, 3)
         addItem(x: 7, y: 13, item: top6, width: 5)
         
+        let r1 = UIRole()
+        r1.create(roleNode: SKTexture(imageNamed: "chef").getNode(1, 3))
+        addItem(x: 4, y: 3, item: r1)
+        _mapMatrix[3][4] = CELL_ROLE
+        let r2 = UIRole()
+        r2.create(roleNode: SKTexture(imageNamed: "Catherine").getNode(1, 0))
+        addItem(x: 6, y: 6, item: r2)
+        _mapMatrix[6][6] = CELL_ROLE
+        
+        
 //        for x in 0...12 {
 //            _mapMatrix[6][x] = CELL_BLOCK
 //            _mapMatrix[8][x] = CELL_BLOCK
@@ -117,11 +127,22 @@ class Hotel: StandScene {
             })
         }
     }
-//    override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
-//        if cell == CELL_BLOCK {
-//            return true
-//        }
-//        return false
-//    }
+    override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
+        let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
+        if cell == CELL_ROLE && point.equalTo(CGPoint(x: 4, y: 3)) {
+            let role = getNextCellItem(x: 4, y: 3) as! UIRole
+            role.speak(text: "蛋炒饭，嘿！")
+            return true
+        } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 6, y: 6)) {
+            let role = getNextCellItem(x: 6, y: 6) as! UIRole
+            role.speak(text: "你好呀！")
+            return true
+        }
+        
+        if cell == CELL_ITEM || cell == CELL_ROLE {
+            return true
+        }
+        return false
+    }
 }
 
