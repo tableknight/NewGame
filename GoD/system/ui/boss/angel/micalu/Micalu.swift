@@ -69,7 +69,7 @@ class MicaluServant1:BossMinion {
         }
         
         
-//        _spellsInuse = [Bitslap(), LeeAttack()]
+        _spellsInuse = [Spell.Bitslap, Spell.LeeAttack]
     }
 }
 class MicaluServant2:BossMinion {
@@ -97,6 +97,6 @@ class MicaluServant2:BossMinion {
             _extensions.hp = _extensions.health
         }
         
-//        _spellsInuse = [Lighting(), ThunderAttack()]
+        _spellsInuse = [Spell.Lighting, Spell.ThunderAttack]
     }
 }

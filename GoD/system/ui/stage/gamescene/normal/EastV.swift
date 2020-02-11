@@ -26,6 +26,7 @@ class EastV: StandScene {
         addChild(bg)
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "east_village_roof"))
+        roof.size = CGSize(width: cellSize * 5, height: cellSize * 2)
         addItem(x: 1, y: 6, item: roof, width: 5)
         
         for x in 0...12 {
@@ -97,9 +98,6 @@ class EastV: StandScene {
             })
         }
     }
-    private let CELL_DOOR = 150
-    private let CELL_ROAD = 152
-    private let CELL_BOARD = 150
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if point.x == 9 && point.y == 4 && cell == CELL_ROLE {
@@ -117,7 +115,7 @@ class EastV: StandScene {
             }
             return true
         }
-        if [CELL_BLOCK,CELL_ROLE,CELL_ROAD,CELL_DOOR].firstIndex(of: cell) != nil{
+        if cell == CELL_ROLE {
             return true
         }
         return false

@@ -51,7 +51,7 @@ class LewisMinion:BossMinion, IFace {
         _growth.intellect = 1.6
         levelTo(level: level)
         
-//        _spellsInuse = [HandOfGod()]
+        _spellsInuse = [Spell.HandOfGod]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

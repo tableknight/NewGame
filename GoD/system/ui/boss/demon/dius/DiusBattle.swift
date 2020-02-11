@@ -38,56 +38,56 @@ class DiusBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 55 {
-//            let i = VerdasTear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 30 {
-//            let i = EyeOfDius()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = Hawkeye()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = FollowOn()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheSurvive()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheDeath()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheAbandon()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Dius.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 55 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.VerdasTear)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.EyeOfDius)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.Hawkeye)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.FollowOn)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheSurvive)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheDeath)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheAbandon)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Dius.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 class ExposeWeakness: Passive, BossOnly {
     required init(from decoder: Decoder) throws {

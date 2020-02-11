@@ -153,7 +153,7 @@ class Dungeon: MyScene {
         if sd < 6 && _herbCount < 5 && !(self is InnerMaze) {
             let herb = _herbs.one()
             item._key = herb
-            let data = ItemData.data[_herbs.one()]!
+            let data = ItemData.data[herb]!
             let t = Game.instance.outside_b.getCell(data.imgX, data.imgY)
             item.setTexture(t)
             addWall(x: x, y: y, item: item)
@@ -313,7 +313,7 @@ class Dungeon: MyScene {
     internal let _wall_shadow = SKTexture(imageNamed: "wall_shadow_12")
     internal func createWallShadow() {
 //        let t = _wall_shadow
-        let t2 = Game.instance.inside_a5.getCell(0,0)
+        let t2 = SKTexture(imageNamed: "roof_black")
         for p in _wallPoints {
             if [CELL_TOWER, CELL_SELLER, CELL_BOX, CELL_HERB, CELL_ORE].firstIndex(of: _mapMatrix[p.y.toInt()][p.x.toInt()]) != nil{
                 continue
@@ -325,7 +325,9 @@ class Dungeon: MyScene {
             }
             if p.y > 0 {
                 if CELL_ITEM == _mapMatrix[p.y.toInt() - 1][p.x.toInt()] {
-                    addItem(x: p.x, y: p.y - 1, item: SKSpriteNode(texture: t2), z: 120)
+                    let n = SKSpriteNode(texture: t2)
+                    n.size = CGSize(width: cellSize, height: cellSize)
+                    addItem(x: p.x, y: p.y - 1, item: n, z: MyScene.WALL_SHADOW_LAYER_Z)
                 }
             }
         }
@@ -476,7 +478,9 @@ class Dungeon: MyScene {
     }
     
     internal func getRoof() -> SKSpriteNode {
-        return Game.instance.inside_a5.getNode(0,0,1,0.875)
+        let n = SKSpriteNode(imageNamed: "roof_black")
+        n.size = CGSize(width: cellSize, height: cellSize * 0.875)
+        return n
 //        return Game.instance.dungeon_a4.getNode(0, 7, 1, 0.75)
     }
     

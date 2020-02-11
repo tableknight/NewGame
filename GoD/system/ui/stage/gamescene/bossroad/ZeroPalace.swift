@@ -32,16 +32,13 @@ class ZeroPalace: MorningPalace {
         Game.instance.curStage.addBattle(b)
         b.battleStart()
     }
-//    override func getMonsterByIndex(index: Int) -> Creature {
-//        switch index {
-//            case 1:
-//                return MicaluServant1()
-//            case 2:
-//                return MicaluServant2()
-//            default:
-//                return MicaluServant1()
-//        }
-//    }
+    override func getMonsterByIndex(index: Int) -> Creature {
+        if index == 1 || index == 2 {
+            return MicaluServant1()
+        } else {
+            return MicaluServant2()
+        }
+    }
     override func getSelfScene() -> BossRoad {
         return ZeroPalace()
     }

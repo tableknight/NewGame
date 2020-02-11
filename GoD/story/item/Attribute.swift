@@ -122,13 +122,11 @@ class Attribute: Core {
             _name = "力量"
             midAttrValue(level: l)
         } else if t == Attribute.PHYSICAL_REDUCE_POINT {
-            _name = "物理伤害"
+            _name = "物理免伤"
             midAttrValue(level: l)
-            _value *= -1
         } else if t == Attribute.PHYSICAL_REDUCE_PERCENT {
-            _name = "物理伤害"
+            _name = "物理免伤"
             percentAttrValue(level: l)
-            _value *= -1
             _percentValue = true
         }else {
             debug("attr init error!")

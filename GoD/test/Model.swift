@@ -57,3 +57,7 @@ class Model:NSObject {
         Game.instance.gameScene.addChild(stage)
     }
 }
+
+func debugger(){
+    print("debugger")
+}

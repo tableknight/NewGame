@@ -11,6 +11,9 @@ class Boss: Creature {
     override init() {
         super.init()
         _race = EvilType.BOSS
+        _elementalResistance.fire += 35
+        _elementalResistance.water += 35
+        _elementalResistance.thunder += 35
     }
     override func levelTo(level:CGFloat) {
         staminaChange(value: (level + 10) * _growth.stamina)
@@ -18,10 +21,8 @@ class Boss: Creature {
         agilityChange(value: (level + 10) * _growth.agility)
         intellectChange(value: (level + 10) * _growth.intellect)
         _level = level
-        _elementalResistance.fire = 35
-        _elementalResistance.water = 35
-        _elementalResistance.thunder = 35
-        _sensitive = 65
+        
+//        _sensitive = 65
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

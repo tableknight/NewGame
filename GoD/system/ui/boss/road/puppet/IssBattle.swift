@@ -45,37 +45,37 @@ class IssBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        if seedFloat() < lucky * 5 {
-//            let sb = SpellBook()
-//            sb.spell = [WaterCopy(), SummonFlower(), LowerSummon(), HighLevelSummon()].one()
-//            list.append(sb)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let sb = SpellBook()
-//            sb.spell = [ControlWind(),ControlWind(),ControlWind(), ControlUndead(), ElementDestory(), SetTimeBack()].one()
-//            list.append(sb)
-//        }
-//        
-//        if seedFloat() < lucky * 35 {
-//            let mark = IssMark()
-//            mark.create()
-//            list.append(mark)
-//        }
-//        
-//        if seedFloat() < lucky * 10 {
-//            let head = IssHead()
-//            head.create()
-//            list.append(head)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: IssThePuppet.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        if seedFloat() < lucky * 5 {
+            let sb = Item(Item.SpellBook)
+            sb.spell = [WaterCopy(), SummonFlower(), LowerSummon(), HighLevelSummon()].one()
+            list.append(sb)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let sb = Item(Item.SpellBook)
+            sb.spell = [ControlWind(),ControlWind(),ControlWind(), ControlUndead(), ElementDestory(), SetTimeBack()].one()
+            list.append(sb)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let mark = Outfit(Outfit.MagicMark)
+            mark.create(effection: Sacred.IssMark)
+            list.append(mark)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let head = Outfit(Outfit.Instrument)
+            head.create(effection: Sacred.IssHead)
+            list.append(head)
+        }
+        
+        let l = Loot()
+        l.loot(level: IssThePuppet.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 

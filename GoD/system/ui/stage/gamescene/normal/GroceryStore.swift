@@ -29,6 +29,7 @@ class GroceryStore: StandScene {
             }
         }
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "grocery_store_roof"))
+        roof.size = CGSize(width: cellSize * 13, height: cellSize * 14)
         addItem(x: 0, y: 13, item: roof, width: 12)
         
         let blockPoints:Array<Array<CGFloat>> = [

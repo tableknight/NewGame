@@ -99,6 +99,7 @@ class CenterV: StandScene {
                     [12,4],
                     [9,7],
                     [10,7],
+                    [10,8],
                     [11,7],
                     [12,7]
                     
@@ -110,6 +111,7 @@ class CenterV: StandScene {
         }
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "shop_roof"))
+        roof.size = CGSize(width: cellSize * 3, height: cellSize * 2)
         addItem(x: 10, y: 7, item: roof)
         
     }

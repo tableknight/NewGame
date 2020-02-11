@@ -22,7 +22,7 @@ class Toppur:Boss {
         _level = Toppur.LEVEL
         _img = SKTexture(imageNamed: "Toppur")
         _imgUrl = "Toppur"
-//        _spellsInuse = [LineAttack(), LeeAttack(), BreakDefence()]
+        _spellsInuse = [Spell.LineAttack, Spell.LeeAttack, Spell.BreakDefence]
     }
     override func create(level: CGFloat) {
         
@@ -57,7 +57,7 @@ class ToppurServant:BossMinion {
             _extensions.hp = _extensions.health
         }
         
-//        _spellsInuse = [LineAttack(), LeeAttack()]
+        _spellsInuse = [Spell.LineAttack, Spell.LeeAttack]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

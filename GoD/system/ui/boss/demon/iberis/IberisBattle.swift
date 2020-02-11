@@ -55,11 +55,16 @@ class IberisBattle: BossBattle {
                     _roleAll.append(unit)
                     all.remove(at: all.firstIndex(of: unit)!)
                 } else {
-//                    if nil != unit._unit._weapon {
-//                        unit._speed += unit.getSpeed() * unit._unit._weapon!._attackSpeed
-//                    } else {
-//                        unit._speed += unit.getSpeed()
-//                    }
+                    if unit._unit is Character {
+                        let c = unit._unit as! Character
+                        if c._weapon != nil {
+                            unit._speed += unit.getSpeed() * c._weapon!._attackSpeed
+                        } else {
+                            unit._speed += unit.getSpeed()
+                        }
+                    } else {
+                        unit._speed += unit.getSpeed()
+                    }
                 }
             }
         }
@@ -84,50 +89,50 @@ class IberisBattle: BossBattle {
             completion()
         }
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 35 {
-//            let i = IberisHand()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 30 {
-//            let i = DeepCold()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = TrueLie()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = FireMark()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = MoltenFire()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = LavaCrystal()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Iberis.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 35 {
+            let i = Outfit(Outfit.Sword)
+            i.create(effection: Sacred.IberisHand)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = Outfit(Outfit.Fist)
+            i.create(effection: Sacred.DeepCold)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.TrueLie)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.FireMark)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.MoltenFire)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.LavaCrystal)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Iberis.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 class FlameAttack: Physical, CloseSkill {

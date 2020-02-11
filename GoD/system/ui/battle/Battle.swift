@@ -579,6 +579,11 @@ class Battle: SKSpriteNode {
                 if Game.instance.curStage._curScene is BossRoad {
                     l.lootInBossRoad(level: u._unit._level)
                 }
+                if Game.instance.curStage._curScene is DemonTown {
+                    l.lootInDemonTown(level: u._unit._level)
+                } else if Game.instance.curStage._curScene is MorningPalace {
+                    l.lootInPalace(level: u._unit._level)
+                }
                 
             }
         }
@@ -600,9 +605,10 @@ class Battle: SKSpriteNode {
     }
     internal func defeated() {
         isVictory = false
-        showMsg(text: "战斗失败，你失去了金钱和经验！")
         lostExp(unit: _char)
-        _char.lostMoney(num: seed(min: _char!._level.toInt(), max: _char!._level.toInt() * 3))
+        let money = seed(min: _char!._level.toInt(), max: _char!._level.toInt() * 3)
+        showMsg(text: "战斗失败，你失去了金钱和经验！")
+        _char.lostMoney(num: money)
         _char._extensions.hp = 1
         fadeOutBattle()
     }
@@ -619,6 +625,7 @@ class Battle: SKSpriteNode {
             } else {
                 self.defeatedAction()
             }
+            Game.saving(sync: false)
             Game.instance.curStage.removeBattle(self)
             completion()
         })
@@ -783,7 +790,7 @@ class Battle: SKSpriteNode {
     }
     internal var _spellsButton = Array<SpellRoundButton>()
     internal func createRoleSpellsButton() {
-        _spellsButton = []
+        removeRoleSpellsButton()
         var y = -cellSize * 5.25
         let size:CGFloat = cellSize * 0.45
         let x = -cellSize * 3.3
@@ -819,6 +826,7 @@ class Battle: SKSpriteNode {
         for s in _spellsButton {
             s.removeFromParent()
         }
+        _spellsButton = []
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -967,6 +975,7 @@ class Battle: SKSpriteNode {
         waitingForSelectSummonSeat = false
         waitingForSelectItemTarget = false
         waitingForSelectRecallTarget = false
+        cancelTouch = false
         removeSpellCards()
         cleanSummonSeats()
         setUnitDefault()
@@ -1101,6 +1110,7 @@ class Battle: SKSpriteNode {
         let bip = BattleItemPanel()
         bip._battle = self
         bip.create()
+        cancelTouch = true
         bip.closeAction = {
             self.cancelButtonClicked()
         }
@@ -1119,6 +1129,7 @@ class Battle: SKSpriteNode {
                 self.showCancel()
             }
             self._selectedItem = item
+            self.cancelTouch = false
         }
         addChild(bip)
     }
@@ -1412,18 +1423,19 @@ class Battle: SKSpriteNode {
             }
         }
         clp.create(list: summonableMinions)
-        let this = self
         clp.selectAction = {
-            this.waitingForSelectSummonSeat = true
-            this.showSummonableSeats(selectAll: true)
+            self.waitingForSelectSummonSeat = true
+            self.showSummonableSeats(selectAll: true)
             clp.removeFromParent()
-            this._selectedMinion = clp._lastSelected!._unit
+            self._selectedMinion = clp._lastSelected!._unit
+            self.cancelTouch = false
         }
         clp.closeAction = {
             self.showOrder()
             self.hideCancel()
+            self.cancelTouch = false
         }
-        
+        cancelTouch = true
         addChild(clp)
     }
     

@@ -37,7 +37,7 @@ class UmisaBattle: BossBattle {
                 _selectedAction = spell
                 p25 = true
             } else {
-//                _selectedAction = _curRole._unit._spellsInuse.one()
+                _selectedAction = [CriticalBite(), BossAttack(), BossAttack()].one()
             }
             _selectedAction._battle = self
             _selectedAction.findTarget()
@@ -58,44 +58,44 @@ class UmisaBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Item> {
-//        var list = Array<Item>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-////        if seedFloat() < lucky * 35 {
-////            let i = RingOfDeath()
-////            i.create()
-////            list.append(i)
-////        }
-////
-////        if seedFloat() < lucky * 10 {
-////            let i = Accident()
-////            i.create()
-////            list.append(i)
-////        }
-////
-////        if seedFloat() < lucky * 5 {
-////            let i = CreationMatrix()
-////            i.create()
-////            list.append(i)
-////        }
-////
-////        if seedFloat() < lucky * 5 {
-////            let i = HolyPower()
-////            i.create()
-////            list.append(i)
-////        }
-////
-////        if seedFloat() < lucky * 15 {
-////            let i = Boreas()
-////            i.create()
-////            list.append(i)
-////        }
-////
-////        let l = Loot()
-////        l.loot(level: Umisa.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 35 {
+            let i = Outfit(Outfit.Ring)
+            i.create(effection: Sacred.RingOfDeath)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.Accident)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.CreationMatrix)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Blunt)
+            i.create(effection: Sacred.HolyPower)
+            list.append(i)
+        }
+
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.Boreas)
+            list.append(i)
+        }
+
+        let l = Loot()
+        l.loot(level: Umisa.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 class SummonCopy:Magical, BossOnly {
     required init(from decoder: Decoder) throws {

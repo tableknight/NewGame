@@ -125,7 +125,7 @@ class Loot: Core {
     func lootInBossRoad(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 6 * lucky  {
+        if chance < 5 * lucky  {
             _props.append(Item(Item.GiantPotion))
         }
         chance = seed().toFloat()
@@ -133,33 +133,45 @@ class Loot: Core {
             _props.append(Item(Item.PsychicScroll))
         }
         chance = seed().toFloat()
-        if chance < 12 * lucky {
+        if chance < 2 * lucky {
             _props.append(Item(Item.GodTownScroll))
         }
         chance = seed().toFloat()
-        if chance < 12 * lucky {
+        if chance < 2 * lucky {
             _props.append(Item(Item.DeathTownScroll))
+        }
+        chance = seed().toFloat()
+        if chance < 6 * lucky {
+            _props.append(Item(Item.RedoSeed))
+        }
+        chance = seed().toFloat()
+        if chance < 2 * lucky {
+            _props.append(Item(Item.MPPotion))
+        }
+        chance = seed().toFloat()
+        if chance < 5 * lucky {
+            _props.append(Item(Item.LittleMPPotion))
         }
     }
     func lootInPalace(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 15 * lucky  {
+        if chance < 7 * lucky  {
             _props.append(Item(Item.Angelsfuther))
         }
         chance = seed().toFloat()
-        if chance < 2 * lucky  {
+        if chance < 1 * lucky  {
             _props.append(Item(Item.Angelsfuther))
         }
     }
     func lootInDemonTown(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + 1
-        if chance < 15 * lucky  {
+        if chance < 6 * lucky  {
             _props.append(Item(Item.DemonsBlood))
         }
         chance = seed().toFloat()
-        if chance < 2 * lucky  {
+        if chance < 1 * lucky  {
             _props.append(Item(Item.DemonsBlood))
         }
     }
@@ -619,18 +631,23 @@ class Loot: Core {
         if id == Spell.NoAction {
             return NoAction()
         }
-        
+        if id == Spell.HandOfGod {
+            return HandOfGod()
+        }
+        if id == Spell.BlowMana {
+            return BlowMana()
+        }
         return Attack()
     }
     
     func getItem() -> Item {
-        var list = [0,0,0,0,0,0,0,0,0,0]
+        var list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         list += [1,1,1,1,1,1]
         list += [2,2,2]
         list += [3,3]
         list += [4]
         list += [5]
-//        list += [6]
+        list += [6]
         list += [10]
         list += [11]
         return getItemByid(id: list.one())
@@ -1138,7 +1155,8 @@ class Loot: Core {
             } else {
                 text = "你获得了[Lv\(i._level) \(i._name)]"
             }
-            Game.instance.char.addItem(i)
+            
+            Game.instance.char.addItem(i, count: i._count)
             let l = Label()
             l.fontSize = fontSize
             l.align = "center"

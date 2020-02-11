@@ -10,7 +10,7 @@ import SpriteKit
 class BlackWaterTown: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        _name = "龙德岛"
+        _name = "恶魔岛"
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(10, 12, 2, 2), wall: oa4.getCell(10, 14, 2, 2))
     }
@@ -28,10 +28,10 @@ class BlackWaterTown: StandScene {
             let stage = Game.instance.curStage!
             stage.showDialog(img: Game.instance.picturePeople2.getCell(10, 0),
                              text: "需要用船吗？。",
-                             name: "船长杰徳")
+                             name: "船长杰克")
             stage._curDialog?.addConfirmButton()
             stage._curDialog?._confirmAction = {
-                let rp = EastCamping()
+                let rp = EastV()
                 stage.removeDialog(dlg: stage._curDialog!)
                 stage.switchScene(next: rp, completion: {
                     rp.setRole(x: 8, y: 4, char: self._role)

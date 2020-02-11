@@ -77,33 +77,40 @@ class DemonTownPortal: Maze {
         let pos = convertPixelToIndex(x: _role.xAxis, y: _role.yAxis)
         let stage = Game.instance.curStage!
         let char = _role!
-        if pos.x == 1 && pos.y == 1 {
+        stage.clearScene()
+        if pos.x == 1 && pos.y == 1 { //13
             let nextScene = CityOfDesire()
+            stage.saveScene(scene: nextScene)
             stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-        } else if pos.x == 1 && pos.y == 5 {
+        } else if pos.x == 1 && pos.y == 5 { //19
             let nextScene = CityOfSorrow()
+            stage.saveScene(scene: nextScene)
             stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-        } else if pos.x == 1 && pos.y == 10 {
-            let nextScene = CityOfLethe()
-            stage.switchScene(next: nextScene, completion: {
-                nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
-            })
-        } else if pos.x == 11 && pos.y == 1 {
+        } else if pos.x == 1 && pos.y == 10 { //24
             let nextScene = CityOfFail()
+            stage.saveScene(scene: nextScene)
             stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-        } else if pos.x == 11 && pos.y == 5 {
+        } else if pos.x == 11 && pos.y == 1 { //30
             let nextScene = CityOfSin()
+            stage.saveScene(scene: nextScene)
             stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })
-        } else if pos.x == 11 && pos.y == 10 {
+        } else if pos.x == 11 && pos.y == 5 { // 34
             let nextScene = CityOfDeath()
+            stage.saveScene(scene: nextScene)
+            stage.switchScene(next: nextScene, completion: {
+                nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
+            })
+        } else if pos.x == 11 && pos.y == 10 { // 39
+            let nextScene = CityOfLethe()
+            stage.saveScene(scene: nextScene)
             stage.switchScene(next: nextScene, completion: {
                 nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
             })

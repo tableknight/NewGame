@@ -34,10 +34,7 @@ class Iberis:Boss {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        
-        for _ in 0...3 {
-//            _spellsInuse.append(BossAttack())
-        }
+
     }
 }
 

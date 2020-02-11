@@ -31,6 +31,7 @@ class HotelInner: StandScene {
         _mapMatrix[9][11] = CELL_ROLE
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "hotel_inner_roof"))
+        roof.size = CGSize(width: cellSize * 13, height: cellSize * 13)
         addItem(x: 0, y: 13, item: roof, width: 12)
         for x in 0...12 {
             _mapMatrix[0][x] = CELL_BLOCK
@@ -113,7 +114,7 @@ class HotelInner: StandScene {
                 role.speak(text: "555..")
                 return true
             }
-            if cell == CELL_ITEM || cell == CELL_ROLE {
+            if cell == CELL_ITEM || cell == CELL_ROLE || cell == CELL_BED {
                 return true
             }
             return false

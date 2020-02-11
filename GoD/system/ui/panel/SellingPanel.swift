@@ -117,30 +117,31 @@ class SellingPanel: UIPanel {
         }
         
         if countless(prop) {
-            let propCount = prop._count - 1
-            prop._count = propCount
+            prop._count -= 1
         }
         
         if prop._count < 1 && goods.removeWhileSellout {
             let i = _goodsList.firstIndex(of: prop)!
             _goodsList.remove(at: i)
         }
-        if prop._type == Item.RandomSpell {
+        if prop._type == Item.SpellBook {
             let book = Item(Item.SpellBook)
-            book.spell = Loot.getRandomSacredSpell()
+            book.spell = prop.spell
             _char.addItem(book)
         } else {
-            _char.addItem(prop)
+            if hasBuyAction {
+                buyAction()
+            } else {
+                let copy = Item(prop._type)
+                copy._count = 1
+                _char.addItem(copy)
+            }
         }
         pageReload()
-        if countless(prop) {
+        if !countless(prop) {
             createPropList()
         }
-//        if hasBuyAction {
-//            buyAction()
-//        } else {
-//            _char.addItem(prop)
-//        }
+
     }
     
     internal func countless(_ item:Item) -> Bool {
@@ -159,8 +160,7 @@ class SellingPanel: UIPanel {
         }
         
         if !countless(prop) {
-            let propCount = prop._count - 1
-            prop._count = propCount
+            prop._count -= 1
         }
 
 
@@ -174,7 +174,9 @@ class SellingPanel: UIPanel {
         if hasBuyAction {
             buyAction()
         } else {
-            _char.addItem(prop)
+            let copy = Item(prop._type)
+            copy._count = 1
+            _char.addItem(copy)
         }
 
         pageReload()

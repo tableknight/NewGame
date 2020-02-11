@@ -431,7 +431,7 @@ class MyStage: SKSpriteNode {
         clearScene()
         let char = _curScene._role!
         if 0 == floor {
-            let scene = CenterCamping()
+            let scene = CenterV()
             switchScene(next: scene, completion: {
                 scene.setRole(x: 5, y: 7, char: char)
                 char.faceSouth()

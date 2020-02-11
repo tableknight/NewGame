@@ -154,15 +154,15 @@ extension BUnit {
     }
     func getAttack() -> CGFloat {
         //        let atk = sqrt(_unit._extensions.attack) * 12
-        if hasSpell(spell: MagicSword()) {
+        if hasSpell(id: Spell.MagicSword) {
             return getSpirit()
         }
         var atk = _unit._extensions.attack + _valueUnit._extensions.attack
-        if hasSpell(spell: OnePunch()) {
+        if hasSpell(id: Spell.OnePunch) {
             atk += getDefence()
         }
         
-        if hasSpell(spell: Bellicose()) {
+        if hasSpell(id: Spell.Bellicose) {
             atk *= 1.3
         }
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {

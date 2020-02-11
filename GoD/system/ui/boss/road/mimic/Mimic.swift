@@ -13,10 +13,10 @@ class Mimic:Boss {
         _name = "宝箱怪"
         _quality = Quality.SACRED
         _race = EvilType.DEMON
-        _growth.stamina = seedFloat(min: 15, max: 31) * 0.1
-        _growth.strength = seedFloat(min: 15, max: 31) * 0.1
-        _growth.agility = seedFloat(min: 15, max: 31) * 0.1
-        _growth.intellect = seedFloat(min: 15, max: 31) * 0.1
+        _growth.stamina = seedFloat(min: 12, max: 24) * 0.1
+        _growth.strength = seedFloat(min: 12, max: 24) * 0.1
+        _growth.agility = seedFloat(min: 12, max: 24) * 0.1
+        _growth.intellect = seedFloat(min: 12, max: 24) * 0.1
         _img = SKTexture(imageNamed: "Mimic")
         _spellsInuse = [Spell.LineAttack, Spell.FireBreath, Spell.ThunderArray, Spell.LifeDraw, Spell.LeeAttack]
     }

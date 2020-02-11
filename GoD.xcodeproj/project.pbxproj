@@ -443,7 +443,7 @@
 /* Begin PBXFileReference section */
 		090C0DE521EB260E008C46AA /* NorthCanmping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthCanmping.swift; sourceTree = "<group>"; };
 		090C0DE821ECCCF2008C46AA /* SnowLanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding.swift; sourceTree = "<group>"; };
-		090FE9F721BB983E004276BB /* SaveTheLand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveTheLand.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		090FE9F721BB983E004276BB /* MyTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		090FE9FA21BB983E004276BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		090FE9FC21BB983E004276BB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		090FE9FE21BB983E004276BB /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -906,7 +906,7 @@
 		090FE9F821BB983E004276BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				090FE9F721BB983E004276BB /* SaveTheLand.app */,
+				090FE9F721BB983E004276BB /* MyTravel.app */,
 				090FEA1121BB983F004276BB /* GoDTests.xctest */,
 				090FEA1C21BB983F004276BB /* GoDUITests.xctest */,
 			);
@@ -942,9 +942,9 @@
 				090FEA8F21BB9B2A004276BB /* spell */,
 				090FEADB21BB9B2A004276BB /* status */,
 				090FEAE221BB9B2A004276BB /* Core.swift */,
-				0950DFF823A9003000F17588 /* Sacred.swift */,
 				090FEADA21BB9B2A004276BB /* Structure.swift */,
 				090FEAE321BB9B2A004276BB /* Game.swift */,
+				0950DFF823A9003000F17588 /* Sacred.swift */,
 				0950DFF623A7B60D00F17588 /* Protocols.swift */,
 				09954DAD2271F89E0087B009 /* RoleDocument.swift */,
 				0933C0EC2373127E00404348 /* Strings.swift */,
@@ -1883,7 +1883,7 @@
 			);
 			name = GoD;
 			productName = GoD;
-			productReference = 090FE9F721BB983E004276BB /* SaveTheLand.app */;
+			productReference = 090FE9F721BB983E004276BB /* MyTravel.app */;
 			productType = "com.apple.product-type.application";
 		};
 		090FEA1021BB983F004276BB /* GoDTests */ = {
@@ -2591,7 +2591,7 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD.iPhone1;
-				PRODUCT_NAME = SaveTheLand;
+				PRODUCT_NAME = MyTravel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2613,7 +2613,7 @@
 				);
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Cris.GoD.iPhone1;
-				PRODUCT_NAME = SaveTheLand;
+				PRODUCT_NAME = MyTravel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

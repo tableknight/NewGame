@@ -18,7 +18,7 @@ class MightOfOaks: Magical {
         super.init()
         _id = Spell.MightOfOaks
         _name = "橡树之力"
-        _description = "对己方目标释放橡树魔法，减少15%物理伤害，持续5回合"
+        _description = "对己方目标释放橡树魔法，减少15%物理伤害，持续3回合"
         _quality = Quality.GOOD
         targetEnemy = false
         canBeTargetSelf = true
@@ -32,7 +32,7 @@ class MightOfOaks: Magical {
             t.cure1f() {
                 let s = Status()
                 s._type = Status.MIGHT_OF_OAKS
-                s._timeleft = 5
+                s._timeleft = 3
                 s._labelText = "O"
                 t.addStatus(status: s)
                 completion()

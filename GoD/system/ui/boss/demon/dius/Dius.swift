@@ -33,9 +33,9 @@ class Dius:Boss {
         _extensions.health *= 4
         _extensions.hp = _extensions.health
         _extensions.defence = 0
-        _elementalResistance.fire = 0
-        _elementalResistance.water = 0
-        _elementalResistance.thunder = 0
+        _elementalResistance.fire = -50
+        _elementalResistance.water = -50
+        _elementalResistance.thunder = -50
         
         
     }

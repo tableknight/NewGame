@@ -173,7 +173,7 @@ class BUnit: SKSpriteNode {
         label.fontColor = UIColor.red
         label.text = "23"
         label.fontSize = 18
-        label.zPosition = 100
+        _hpbar.zPosition = _charNode.zPosition
 //        label.position.y = _charSize
         addChild(label)
         label.isHidden = true
@@ -286,6 +286,9 @@ class BUnit: SKSpriteNode {
         }
     }
     func isClose() -> Bool {
+        if weaponIs(Outfit.Bow) || weaponIs(Outfit.Wand) {
+            return false
+        }
         return true
     }
     func setImg(img:SKTexture) {
@@ -713,7 +716,10 @@ class BUnit: SKSpriteNode {
     }
     func mpLost(value:CGFloat) {
         _unit._extensions.mp -= value
-        if _unit is Character {
+        if _unit._extensions.mp < 0 {
+            _unit._extensions.mp = 0
+        }
+        if playerPart {
             let per = _unit._extensions.mp / _unit._extensions.mpMax
             _mpbar.setBar(value: per)
         }
@@ -905,6 +911,9 @@ class BUnit: SKSpriteNode {
             let c = _unit as! Character
             if c._weapon != nil {
                 if c._weapon?._effection == effection {
+                    return true
+                }
+                if c._weapon?._type == effection {
                     return true
                 }
             }

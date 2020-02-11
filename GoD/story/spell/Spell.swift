@@ -225,7 +225,7 @@ class Spell:Core, Showable, Castable {
     }
     func getDefRate(from: BUnit, to:BUnit) -> CGFloat {
         let level = to._unit._level
-        let brk = from.getBreak()
+        let brk = abs(from.getBreak())
         let odef = to.getDefence() * (1 - brk * 0.01)
 //        let base =
 //        let r = atan(level * 0.05) + 0.2
@@ -240,9 +240,9 @@ class Spell:Core, Showable, Castable {
         }
 //        debug("\(to._unit._name) odef = \(odef)")
 //        debug("def = \(def)")
-//        if to.hasSpell(spell: OnePunch()) || to.hasSpell(spell: DancingOnIce()) {
-//            def = 0
-//        }
+        if to.hasSpell(id: Spell.OnePunch) || to.hasSpell(id: Spell.DancingOnIce) {
+            def = 0
+        }
         
         return def
     }
@@ -1222,4 +1222,6 @@ class Spell:Core, Showable, Castable {
     static let Nova = 5036
     static let DeathAttack = 5037
     static let NoAction = 5038
+    static let HandOfGod = 5039
+    static let BlowMana = 5040
 }

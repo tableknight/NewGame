@@ -49,14 +49,9 @@ class MorningPalace: BossRoad {
 //        }
 //    }
     
-//    override func getMonsterByIndex(index: Int) -> Creature {
-//        switch index {
-//            case 1:
-//                return ToppurServant()
-//            default:
-//                return ToppurServant()
-//        }
-//    }
+    override func getMonsterByIndex(index: Int) -> Creature {
+        return ToppurServant()
+    }
     override func getSelfScene() -> BossRoad {
         return MorningPalace()
     }

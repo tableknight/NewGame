@@ -142,7 +142,7 @@ class Outfit:Item {
         createPrice()
     }
     func isWeapon() -> Bool {
-        let ts = [Outfit.Sword, Outfit.Blunt, Outfit.Dagger, Outfit.Instrument, Outfit.Fist, Outfit.Wand]
+        let ts = [Outfit.Sword, Outfit.Bow, Outfit.Blunt, Outfit.Dagger, Outfit.Instrument, Outfit.Fist, Outfit.Wand]
         if ts.firstIndex(of: _type) != nil {
             return true
         }
@@ -175,6 +175,16 @@ class Outfit:Item {
     private func createQuality() {
         if _type == Outfit.SoulStone || _type == Outfit.MagicMark {
             _attrCount = 0
+            let _seed = seed()
+            if _seed < 48 {
+                _quality = Quality.NORMAL
+            } else if _seed < 72 {
+                _quality = Quality.GOOD
+            } else if _seed < 94 {
+                _quality = Quality.RARE
+            } else {
+                _quality = Quality.SACRED
+            }
         } else {
             let _seed = seed()
             if _seed < 70 {

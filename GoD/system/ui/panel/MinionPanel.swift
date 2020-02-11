@@ -176,7 +176,7 @@ class MinionPanel:SKSpriteNode {
         addChild(attack)
         
         var def = bChar.getDefence().toInt()
-        if bChar.hasSpell(spell: OnePunch()) || bChar.hasSpell(spell: DancingOnIce()) {
+        if bChar.hasSpell(id: Spell.OnePunch) || bChar.hasSpell(id: Spell.DancingOnIce) {
             def = 0
         }
         

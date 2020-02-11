@@ -15,18 +15,21 @@ class FrancisBattle: BossBattle {
         super.init(coder: aDecoder)
     }
     override func createAI() {
-//        if _curRole._unit is Francis {
-//            if _enemyPart.count < 6 {
+        if _curRole._unit is Francis {
+            if _enemyPart.count < 6 {
 //                _selectedSpell = SummonServant()
-//            } else {
+                _selectedAction = SummonServant()
+//                _selectedAction.ba
+            } else {
 //                _selectedSpell = Nova()
-//            }
-//            _selectedSpell._battle = self
-//            _selectedSpell.findTarget()
-//            execOrder()
-//        } else {
-//            super.createAI()
-//        }
+                _selectedAction = Nova()
+            }
+            _selectedAction._battle = self
+            _selectedAction.findTarget()
+            execOrder()
+        } else {
+            super.createAI()
+        }
     }
     
     override func setEnemyPart(minions: Array<Creature>) {
@@ -40,56 +43,56 @@ class FrancisBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 10 {
-//            let i = FireMark()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = MoltenFire()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 10 {
-//            let i = LavaCrystal()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = FrancisFace()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = Accident()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheFear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheSurpass()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Francis.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.FireMark)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.MoltenFire)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.LavaCrystal)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.FrancisFace)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.Accident)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheFear)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheSurpass)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Francis.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 class SummonServant: Magical, BossOnly {
@@ -203,21 +206,29 @@ class DeathAttack:Physical, BossOnly {
         _battle._curRole.actionAttack {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
-                    t.showValue(value: damage) {
-                        if !t.isDead() {
-                            if self.d4() {
-                                t.showText(text: "DEATH") {
-                                    t.actionDead {
-                                        t.removeFromBattle()
-                                        t.removeFromParent()
-                                        completion()
+                    t.actionAttacked {
+                        t.showValue(value: damage) {
+                            if !t.isDead() {
+                                if self.d4() {
+                                    t.showText(text: "DEATH") {
+                                        t.actionDead {
+                                            t.removeFromBattle()
+                                            t.removeFromParent()
+                                            if t._unit is Character {
+                                                self._battle.defeated()
+                                            } else {
+                                                completion()
+                                            }
+                                        }
                                     }
+                                } else {
+                                    completion()
                                 }
-                            } else {
-                                completion()
                             }
                         }
+                        t.darkness4fifth()
                     }
+                    
                 }
             }
         }
@@ -229,13 +240,13 @@ class AttackPowerUp: Passive {
         super.init()
         _id = Spell.AttackPowerUp
         _name = "充能"
-        _description = "行动结束提升15%基础攻击力"
+        _description = "行动结束提升8%基础攻击力"
         _quality = Quality.RARE
         hasAfterMoveAction = true
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let up = c._unit._extensions.attack * 0.15
+        let up = c._unit._extensions.attack * 0.8
         c._valueUnit._extensions.attack += up
         c.showText(text: _name)
         c.mixed2(index: 13, completion: completion)
@@ -273,6 +284,7 @@ class Reinforce: Magical {
                     t._valueUnit._extensions.attack -= atk
                     t._valueUnit._extensions.defence -= def
                 }
+                s._labelText = "E"
                 t.addStatus(status: s)
                 completion()
             }

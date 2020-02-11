@@ -91,7 +91,7 @@ class Character: Unit {
             }
         }
     }
-    func addItem(_ item: Item) {
+    func addItem(_ item: Item, count:Int = 1) {
         if item is Outfit {
             _armors.insert(item as! Outfit, at: 0)
             return
@@ -101,7 +101,7 @@ class Character: Unit {
             for i in _items {
                 if i._type == item._type {
 //                    i._count += item._count
-                    i._count += 1
+                    i._count += count
                     exist = true
                     break
                 }

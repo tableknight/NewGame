@@ -11,6 +11,8 @@ import SpriteKit
 class MyScene: SKSpriteNode {
     static let MAP_LAYER_Z:CGFloat = 10
     static let UI_LAYER_Z:CGFloat = 108
+    static let BOSS_LAYER_Z:CGFloat = 130
+    static let WALL_SHADOW_LAYER_Z:CGFloat = 120
     static let ROLE_LAYER_Z:CGFloat = 50
     static let ITEM_LAYER_Z:CGFloat = 100
     static let MASK_LAYER_Z:CGFloat = 1150
@@ -307,7 +309,7 @@ class MyScene: SKSpriteNode {
             }
         }
         
-        if nextCell == CELL_BLOCK || hasAction(cell: nextCell, touchPoint: touchPoint) {
+        if nextCell == CELL_BLOCK || hasAction(cell: nextCell, touchPoint: touchPoint) || nextCell == CELL_HERB{
             
             _isMoving = false
             return
@@ -420,7 +422,23 @@ class MyScene: SKSpriteNode {
                 }
             }
         } else {
-            debug("mon is not uiitem")
+            //异常处理，不知道什原因这个模块不是uievil
+            if cell == CELL_MONSTER {
+                let mon = UIEvil()
+                mon._thisType = _monsterEnum.one()
+                if item.contains(touchPoint) {
+                    mon.triggerEvent()
+                    mon.defeatedAction = {
+                        
+                    }
+                    mon.victoryAction = {
+                        self._mapMatrix[nextY][nextX] = self.CELL_EMPTY
+                        item.removeFromParent()
+                    }
+                }
+            } else {
+                debug("----------------异常处理，不知道什原因这个模块不是uievil")
+            }
         }
     }
     

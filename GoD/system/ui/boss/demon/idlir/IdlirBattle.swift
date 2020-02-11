@@ -37,42 +37,42 @@ class IdlirBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 95 {
-//            let i = IdlirWeddingRing()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 35 {
-//            let i = Aonena()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 30 {
-//            let i = VerdasTear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = BansMechanArm()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = EvilExpel()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Idlir.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 95 {
+            let i = Outfit(Outfit.Ring)
+            i.create(effection: Sacred.IdlirWeddingRing)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 35 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.Aonena)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.VerdasTear)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.Blunt)
+            i.create(effection: Sacred.BansMechanArm)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.EvilExpel)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Idlir.LEVEL.toInt())
+        return list + l.getList()
+    }
 }

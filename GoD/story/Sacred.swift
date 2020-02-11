@@ -424,7 +424,7 @@ struct Sacred {
         ),
         Sacred.LavaCrystal: Sacred(
             effection: Sacred.LavaCrystal,
-            type: Outfit.Amulet,
+            type: Outfit.EarRing,
             name: "熔岩结晶",
             desc: "提升50%单体火焰法术伤害",
             level: 30,
@@ -664,9 +664,12 @@ struct Sacred {
             type: Outfit.MagicMark,
             name: "傀儡印记",
             desc: "减少一个技能栏，增加一个随从位",
-            level: 36,
-            price: 1520,
-            chance: 20
+            level: 10,
+            price: 120,
+            chance: 15,
+            attrs: [
+                SacredAttr(type: Attribute.STAMINA, valueMin: -10, valueMax: -10)
+            ]
         ),
         Sacred.MarkOfOaks: Sacred(
             effection: Sacred.MarkOfOaks,

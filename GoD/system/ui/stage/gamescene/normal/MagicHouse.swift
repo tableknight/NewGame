@@ -36,6 +36,13 @@ class MagicHouse: InnerHouse {
 //                                    book.price = 1
                                     sp._goodsList = [book]
                                     sp.create()
+                                    sp.hasBuyAction = true
+                                    sp.buyAction = {
+                                        let s = Loot.getRandomSacredSpell()
+                                        let sb = Item(Item.SpellBook)
+                                        sb.spell = s
+                                        Game.instance.char.addItem(sb)
+                                    }
                                     stage.showPanel(sp)
                                 }
             })
@@ -149,6 +156,7 @@ class MagicHouse: InnerHouse {
         addChild(bg)
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "magic_house_roof"))
+        roof.size = CGSize(width: cellSize * 13, height: cellSize * 13)
         addItem(x: 0, y: 13, item: roof, width: 12)
         
         let r1 = UIRole()

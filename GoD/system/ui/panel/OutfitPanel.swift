@@ -89,7 +89,7 @@ class OutfitPanel: UIPanel {
                 _weapon.iconLabel = outfit._name
                 _weapon.quality = outfit._quality
             }
-            if outfit._type == Outfit.Amulet {
+            if outfit._type == Outfit.Amulet || outfit._type == Outfit.EarRing {
                 if _char._amulet != nil {
                     _char._amulet!.off()
                     _char.addItem(_char._amulet!)

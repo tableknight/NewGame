@@ -83,7 +83,14 @@ class SelectDocument: UIPanel {
         scene.setRole(x: 2, y: 4, role: role)
         stage.loadScene(scene: scene)
         stage.createMenu()
-//        let c = Game.instance.char!
+        let c = Game.instance.char!
+//        c._spellsInuse.append(Spell.HorribleImage)
+//        let t = Item(Item.DeathTownScroll)
+//        t._count = 10
+//        c.addItem(t)
+//        let b = Outfit(Outfit.Bow)
+//        b.create(level: 5)
+//        c.addItem(b)
 //        for _ in 0...5 {
 //            let p = Item(Item.LittleMPPotion)
 //            c.addItem(p)
@@ -197,6 +204,10 @@ class SelectDocument: UIPanel {
         e.addItem(ps)
         
         e._spellsInuse = [Spell.LowlevelFlame]
+        
+        let i = Item("lvScroll")
+        i._count = 40
+        e.addItem(i)
         
 //        let w = Outfit(Outfit.Sword)
 //        w.create(level: 1)
@@ -357,3 +368,4 @@ class DocComponent:SelectableComponent {
         }
     }
 }
+

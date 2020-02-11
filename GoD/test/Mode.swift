@@ -12,4 +12,5 @@ struct Mode {
     static var nodefence = false
     static var showbossall = false
     static var showdungeonall = false
+    static var itemcountless = false
 }

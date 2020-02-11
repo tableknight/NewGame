@@ -26,11 +26,11 @@ class AcientRoad: Dungeon {
         }
     }
     override func create() {
+        let scenes = Game.instance.curStage._scenes
         if _index <= 1 {
             _floorSize = createFloorSize()
             _bossFloor = seed(min: 1, max: _floorSize)
         } else {
-            let scenes = Game.instance.curStage._scenes
             //bossroad用不到
             if scenes.count > 0 {
                 _floorSize = scenes[0]._floorSize
@@ -40,6 +40,7 @@ class AcientRoad: Dungeon {
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
         _initialized = true
+//        debugger()
     }
     func createFloorSize() -> Int {
         let sed = seed(min: 1, max: 7)
@@ -163,31 +164,6 @@ class AcientRoad: Dungeon {
             }
         }
     }
-//    internal func goFloor(floorLevel:Int) {
-//        let stage = Game.instance.curStage!
-//        let char = stage._curScene._role!
-//        stage.clearScene()
-//        if 0 == floorLevel {
-//            let cc = CenterCamping()
-//            stage.switchScene(next: cc, afterCreation: {
-//                cc.setRole(x: 5, y: 7, char: char)
-//            })
-//            return
-//        }
-//        let ar = AcientRoad()
-//        let scene = floorLevel > 6 ? ar.getSceneById(id: ar.sceneList.one()) : ar.getSceneById(id: floorLevel)
-////        if floorLevel > ar.sceneList.count {
-////            scene = ar.getSceneById(id: ar.sceneList.one())
-////        }
-//        
-//        stage.switchScene(next: scene, afterCreation: {
-//            scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, char: char)
-//            char.faceSouth()
-//        })
-//        
-//        scene._level = floorLevel.toFloat()
-//        stage.saveScene(scene: scene)
-//    }
     func triggerEvent() {
         
         let stage = Game.instance.curStage!

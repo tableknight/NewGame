@@ -50,7 +50,7 @@ class DemonTown: BossRoad, InnerMaze {
     
     override func getWallTexture() -> SKTexture {
         let node = SKSpriteNode()
-        let top = Game.instance.inside_a5.getNode(0, 0)
+        let top = getRoof()
         top.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.addChild(top)
         
@@ -77,6 +77,7 @@ class DemonTown: BossRoad, InnerMaze {
         if _index < _floorSize {
             addGround(x: _portalNext.x, y: _portalNext.y, item: PortalDungeon())
         } else {
+            _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_BOSS
             addItem(x: _portalNext.x, y: _portalNext.y, item: getPortalFinal())
         }
         //        addGround(x: _portalPrev.x, y: _portalPrev.y, item: PortalPrev())

@@ -59,7 +59,12 @@ class RoleList:UIPanel {
         var i = 0
         for unit in _list {
             let rc = RoleComponent()
-            rc._itemType = _item._type
+            if nil == _item {
+                // in battle
+                rc._itemType = Item.Potion
+            } else {
+                rc._itemType = _item._type
+            }
             rc.create(unit: unit)
             rc.xAxis = startX + (i % 2).toFloat() * width
             rc.yAxis = startY - (i / 2).toFloat() * height

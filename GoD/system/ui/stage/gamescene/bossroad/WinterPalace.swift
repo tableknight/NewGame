@@ -32,16 +32,16 @@ class WinterPalace: MorningPalace {
         Game.instance.curStage.addBattle(b)
         b.battleStart()
     }
-//    override func getMonsterByIndex(index: Int) -> Creature {
-//        switch index {
-//            case 1:
-//                return LewisMinion()
-//            case 2:
-//                return LewisMinion()
-//            default:
-//                return LewisMinion()
-//        }
-//    }
+    override func getMonsterByIndex(index: Int) -> Creature {
+        switch index {
+            case 1:
+                return LewisMinion()
+            case 2:
+                return LewisMinion()
+            default:
+                return LewisMinion()
+        }
+    }
     override func getSelfScene() -> BossRoad {
         return WinterPalace()
     }

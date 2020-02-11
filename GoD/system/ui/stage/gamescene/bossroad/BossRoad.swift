@@ -39,8 +39,13 @@ class BossRoad: AcientRoad {
             hSize = 12
         }
         super.create()
+        _bossFloor = _floorSize
         _nameLabel.text = "\(_name) \(_index)"
         
+    }
+    
+    override func createFloorSize() -> Int {
+        return _floorSize
     }
     
 //    override func createTowers() {
@@ -83,6 +88,50 @@ class BossRoad: AcientRoad {
         return BossRoad()
     }
     
+    func getMonsterByIndex(index: Int) -> Creature {
+        if index == 1 {
+            return Ayer()
+        }
+        if index == 2 {
+            return Shuran()
+        }
+        if index == 3 {
+            return Lanis()
+        }
+        if index == 4 {
+            return Angela()
+        }
+        return Ayer()
+    }
+    
+    override func createEnemy() {
+        for p in _visiblePoints {
+            if Core().d7() && _mapMatrix[p.y.toInt()][p.x.toInt()] == CELL_EMPTY {
+                _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_MONSTER
+                addItem(x: p.x, y: p.y, item: getRandomMonterCellItem())
+            }
+        }
+    }
+    
+    override func getRandomMonterCellItem() -> UIEvil {
+        let ue = UIEvil()
+        let md = getMonsterByIndex(index: [1,2,3,4,1,2,3,4,1,2,3,4].one())
+        ue._thisType = md._type
+        ue.setTexture(md._img)
+        let face = [NORTH,SOUTH,EAST,WEST].one()
+        if face == NORTH {
+            ue.faceNorth()
+        } else if face == SOUTH {
+            ue.faceSouth()
+        } else if face == WEST {
+            ue.faceWest()
+        } else if face == EAST {
+            ue.faceEast()
+        }
+        
+        return ue
+    }
+    
     override func moveEndAction() {
         let pos = convertPixelToIndex(x: _role.xAxis, y: _role.yAxis)
         let stage = Game.instance.curStage!
@@ -91,6 +140,7 @@ class BossRoad: AcientRoad {
             if _index < _floorSize {
                 let nextScene = getSelfScene()
                 nextScene._index = self._index + 1
+                stage._scenes.append(nextScene)
                 stage.switchScene(next: nextScene, completion: {
                     nextScene.setRole(x: nextScene._portalPrev.x, y: nextScene._portalPrev.y, char: char)
                 })
@@ -104,8 +154,14 @@ class BossRoad: AcientRoad {
         let nextPoint = getNextPoint()
         let nextY = nextPoint.y
         let nextX = nextPoint.x
-        if nextX == _portalNext.x && nextY == _portalNext.y && _index >= _floorSize {
+        
+        if nextX == _portalNext.x && nextY == _portalNext.y && cell == CELL_BOSS && _index >= _floorSize {
             finalBattle()
+            let boss = getNextCellItem(x: nextX.toInt(), y: nextY.toInt())
+            _bossBattle.victoryAction = {
+                self._mapMatrix[nextY.toInt()][nextX.toInt()] = self.CELL_EMPTY
+                boss.removeFromParent()
+            }
             return true
 
         }
@@ -138,6 +194,7 @@ class BossRoad: AcientRoad {
         if _index < _floorSize {
             addGround(x: _portalNext.x, y: _portalNext.y, item: PortalNext())
         } else {
+            _mapMatrix[_portalNext.y.toInt()][_portalNext.x.toInt()] = CELL_BOSS
             addItem(x: _portalNext.x, y: _portalNext.y, item: getPortalFinal())
         }
 //        addGround(x: _portalPrev.x, y: _portalPrev.y, item: PortalPrev())

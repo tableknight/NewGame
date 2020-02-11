@@ -52,7 +52,7 @@ class SumahlServant1:BossMinion {
         _growth.intellect = 1.6
         levelTo(level: level)
         
-//        _spellsInuse = [HolySacrifice()]
+        _spellsInuse = [Spell.HolySacrifice]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
@@ -75,7 +75,7 @@ class SumahlServant2:BossMinion {
         _growth.intellect = 2.6
         levelTo(level: level)
         
-//        _spellsInuse = [LifeFlow()]
+        _spellsInuse = [Spell.LifeFlow]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

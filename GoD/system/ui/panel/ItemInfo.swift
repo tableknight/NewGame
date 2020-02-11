@@ -53,7 +53,11 @@ class ItemInfo:SKSpriteNode {
             price.position.x = startX
             price.position.y = des.position.y - des._height - cellSize * 0.5
             price.fontSize = 16
-            price.text = "出售价格：\(item._price)G"
+//            var p = item._price
+//            if item._priceType == Item.PRICE_TYPE_TEAR {
+//                p = item._price * 4
+//            }
+            price.text = "出售价格：\(item.price)G"
             price.fontColor = UIColor.orange
             addChild(price)
             _displayHeight += price.fontSize + cellSize * 0.5

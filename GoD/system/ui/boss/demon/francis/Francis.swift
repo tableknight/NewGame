@@ -28,6 +28,7 @@ class Francis:Boss {
         levelTo(level: level)
         _extensions.health *= 3
         _extensions.hp = _extensions.health
+        _rhythm = 0
         
     }
     required init(from decoder: Decoder) throws {
