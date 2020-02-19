@@ -22,6 +22,7 @@ class FearGhost:Boss {
         _race = EvilType.RISEN
         _img = SKTexture(imageNamed: "FearGhost")
         _imgUrl = "FearGhost"
+        _sensitive = 75
         _spellsInuse = [Spell.DarkFall, Spell.MessGhost, Spell.SoulReaping, Spell.SoulLash, Spell.LifeDraw, Spell.SoulSlay]
     }
     override func create(level: CGFloat) {
@@ -48,10 +49,10 @@ class Nightmare:BossMinion {
     }
     override func create(level: CGFloat) {
         _quality = Quality.RARE
-        _growth.stamina = 1.8
-        _growth.strength = 2.1
-        _growth.agility = 1.2
-        _growth.intellect = 2.1
+        _growth.stamina = 2.1
+        _growth.strength = 1.5
+        _growth.agility = 1.8
+        _growth.intellect = 2.6
         _sensitive = 50
         levelTo(level: level)
         

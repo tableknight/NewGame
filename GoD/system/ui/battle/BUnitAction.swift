@@ -117,9 +117,9 @@ extension BUnit {
             self._attackedActing = false
             completion()
             let c = self._battle._curRole
-            if self.hasStatus(type: Status.ICE_GUARD) && c.isClose() {
+            if self.hasStatus(type: Status.ICE_GUARD) && c.isClose() && c._battle._selectedAction is Physical {
                 if Core().d5() {
-                    c.showText(text: "SPEED -10")
+                    c.showText(text: "Spd -10")
                 }
             }
         }

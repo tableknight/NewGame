@@ -143,7 +143,7 @@ class Spell:Core, Showable, Castable {
     var isMultiple = false
     var hasAfterMoveAction = false
     var hasRevenge = false
-    var _costRate:CGFloat = 1
+    var _costRate:CGFloat = 1.4
     var _cooldown = 0
     var _timeleft = 0
     var _name:String = ""
@@ -609,12 +609,11 @@ class Spell:Core, Showable, Castable {
         return false
     }
     func isEmptyHand() -> Bool {
-        return false
-//        return _battle._curRole._unit._weapon == nil || _battle._curRole._unit._weapon is Fist
-    }
-    func isWeaponBow() -> Bool {
-        return false
-//        return _battle._curRole._unit._weapon is Bow
+        if !(_battle._curRole._unit is Character) {
+            return false
+        }
+        let c = _battle._curRole._unit as! Character
+        return c._weapon == nil || c.weaponIs(Outfit.Fist)
     }
     func getAccuracy() -> CGFloat {
         return _battle._curRole.getAccuracy()
@@ -873,7 +872,7 @@ class Spell:Core, Showable, Castable {
     
     internal func statusMissed(baseline:CGFloat, target:BUnit, bossImmnue:Bool = false, completion:@escaping () -> Void = {}) -> Bool {
         if (target._unit is Boss && bossImmnue) || target.hasStatus(type: Status.IMMUNE) {
-            target.showText(text: "IMMUNE") {
+            target.showText(text: "Immune") {
                 completion()
             }
             return true
@@ -887,7 +886,7 @@ class Spell:Core, Showable, Castable {
         if sed < bound {
             return false
         }
-        target.showText(text: "MISS") {
+        target.showText(text: "Miss") {
             completion()
         }
         return true
@@ -997,18 +996,31 @@ class Spell:Core, Showable, Castable {
     
     internal func findRandomTargetInLineFirst() {
         var ts:Array<BUnit> = []
+        var tsHasBehand:Array<BUnit> = []
         if _battle._curRole.playerPart {
             let t1 = _battle.getUnitBySeat(seat: BUnit.TBL)
             if nil != t1 {
                 ts.append(t1!)
+                let t11 = _battle.getUnitBySeat(seat: BUnit.TTL)
+                if t11 != nil {
+                    tsHasBehand.append(t1!)
+                }
             }
             let t2 = _battle.getUnitBySeat(seat: BUnit.TBM)
             if nil != t2 {
                 ts.append(t2!)
+                let t112 = _battle.getUnitBySeat(seat: BUnit.TTM)
+                if t112 != nil {
+                    tsHasBehand.append(t2!)
+                }
             }
             let t3 = _battle.getUnitBySeat(seat: BUnit.TBR)
             if nil != t3 {
                 ts.append(t3!)
+                let t113 = _battle.getUnitBySeat(seat: BUnit.TTR)
+                if t113 != nil {
+                    tsHasBehand.append(t3!)
+                }
             }
 
         } else {
@@ -1016,17 +1028,32 @@ class Spell:Core, Showable, Castable {
             let t1 = _battle.getUnitBySeat(seat: BUnit.BTL)
             if nil != t1 {
                 ts.append(t1!)
+                let t11 = _battle.getUnitBySeat(seat: BUnit.BBL)
+                if t11 != nil {
+                    tsHasBehand.append(t1!)
+                }
             }
             let t2 = _battle.getUnitBySeat(seat: BUnit.BTM)
             if nil != t2 {
                 ts.append(t2!)
+                let t112 = _battle.getUnitBySeat(seat: BUnit.BBM)
+                if t112 != nil {
+                    tsHasBehand.append(t2!)
+                }
             }
             let t3 = _battle.getUnitBySeat(seat: BUnit.BTR)
             if nil != t3 {
                 ts.append(t3!)
+                let t113 = _battle.getUnitBySeat(seat: BUnit.TBR)
+                if t113 != nil {
+                    tsHasBehand.append(t3!)
+                }
             }
         }
-        
+        if tsHasBehand.count > 0 {
+            _battle._selectedTarget = tsHasBehand.one()
+            return
+        }
         if ts.count < 1 {
             findSingleTargetNotBlocked()
         } else {

@@ -196,7 +196,7 @@ class Unit:Core {
         _extensions.accuracy += value * 0.2
         _extensions.avoid += value * 0
         _extensions.critical += value * 0.2
-        _extensions.spirit += value * -0.3
+        _extensions.spirit += value * -0.6
         _extensions.health += value * 1
         _extensions.hp += value * 1
         _extensions.mp += value * 1
@@ -230,11 +230,11 @@ class Unit:Core {
     }
     func agilityChange(value: CGFloat) {
         _mains.agility += value
-        _extensions.attack += value * 1
-        _extensions.defence += value * 0.2
+        _extensions.attack += value * 0.6
+        _extensions.defence += value * 0.1
         _extensions.speed += value * 2
-        _extensions.accuracy += value * 0.8
-        _extensions.avoid += value * 0.8
+        _extensions.accuracy += value * 0.6
+        _extensions.avoid += value * 1
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 2
@@ -251,7 +251,7 @@ class Unit:Core {
     func intellectChange(value: CGFloat) {
         _mains.intellect += value
         _extensions.attack += value * -0.5
-        _extensions.defence += value * 0.3
+        _extensions.defence += value * 0.2
         _extensions.speed += value * 0.2
         _extensions.accuracy += value * 0
         _extensions.avoid += value * 0.2

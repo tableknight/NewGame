@@ -19,7 +19,7 @@ class Lewis:Boss {
         _growth.intellect = 3
         _race = EvilType.ANGEL
         _level = Lewis.LEVEL
-//        _spellsInuse = [HandOfGod(), PowerUp(), OathBreaker(), SoulWatch()]
+//        _spellsInuse = [Spell.HandOfGod, Spell.PowerUp, OathBreaker(), SoulWatch()]
         _img = SKTexture(imageNamed: "Lewis")
         _imgUrl = "Lewis"
     }

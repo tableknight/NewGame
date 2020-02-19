@@ -101,9 +101,13 @@ class AcientRoad: Dungeon {
         //        let seller = UIRole()
         //        seller.create(roleNode: SKTexture(imageNamed: "seller").getNode(1, 0))
         
-        let boss = UIItem()
-        boss.setTexture(SKTexture(imageNamed: _bossImg))
-        boss.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        let boss = UIRole()
+//        boss.setTexture(SKTexture(imageNamed: _bossImg))
+//        boss.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+//        let role = UIRole()
+        boss.create(roleNode: SKSpriteNode(imageNamed: _bossImg))
+        boss._roleNode.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        boss.zPosition = MyScene.BOSS_LAYER_Z
         
         
         let item = getNextCellItem(x: points[0].x.toInt(), y: points[0].y.toInt())
@@ -202,6 +206,13 @@ class AcientRoad: Dungeon {
         stage.gohome()
     }
     internal func victoryAction() {
+        if _level == 40 {
+            let c = SnowLandingHome()
+            Game.instance.curStage.switchScene(next: c, completion: {
+                c.setRole(x: 7, y: 7, char: self._role)
+            })
+            return
+        }
         let nextLevel = _level.toInt() + 1
         let char = Game.instance.char!
         let stage = Game.instance.curStage!

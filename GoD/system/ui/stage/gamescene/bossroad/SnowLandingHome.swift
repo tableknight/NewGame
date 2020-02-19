@@ -67,9 +67,40 @@ class SnowLandingHome: SnowLanding {
         addChild(bg)
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "angel_stone"))
+        roof.size = CGSize(width: cellSize * 3, height: cellSize * 2)
         addItem(x: 3, y: 11, item: roof, width: 3)
         
-        let treePoints1:Array<Int> = [
+        for x in 0...12 {
+            _mapMatrix[0][x] = CELL_BLOCK
+            _mapMatrix[1][x] = CELL_BLOCK
+            _mapMatrix[8][x] = CELL_BLOCK
+        }
+        for x in 7...12 {
+            _mapMatrix[2][x] = CELL_BLOCK
+        }
+        for x in 5...12 {
+            _mapMatrix[4][x] = CELL_BLOCK
+        }
+        for x in 3...12 {
+            _mapMatrix[6][x] = CELL_BLOCK
+        }
+        for x in 1...12 {
+            _mapMatrix[8][x] = CELL_BLOCK
+        }
+        for y in 0...7 {
+            _mapMatrix[y][1] = CELL_BLOCK
+            _mapMatrix[y][10] = CELL_EMPTY
+            _mapMatrix[y][11] = CELL_BLOCK
+            _mapMatrix[y][12] = CELL_BLOCK
+        }
+        for y in 0...5 {
+            _mapMatrix[y][3] = CELL_BLOCK
+        }
+        for y in 0...3 {
+            _mapMatrix[y][5] = CELL_BLOCK
+        }
+        
+        let treePoints:Array<Int> = [
             0,0,
             3,0,
             3,5,
@@ -88,20 +119,18 @@ class SnowLandingHome: SnowLanding {
             12,1,
             12,6,
         ]
+        _mapMatrix[5][11] = CELL_EMPTY
+        _mapMatrix[8][10] = CELL_EMPTY
+        _mapMatrix[9][1] = CELL_EMPTY
+        _mapMatrix[9][0] = CELL_BLOCK
+        _mapMatrix[9][6] = CELL_BLOCK
+        _mapMatrix[11][3] = CELL_BLOCK
+        _mapMatrix[11][5] = CELL_BLOCK
         
-
+        _mapMatrix[1][2] = CELL_PORTAL
+        _mapMatrix[1][4] = CELL_PORTAL
+        _mapMatrix[1][6] = CELL_PORTAL
+        _mapMatrix[1][8] = CELL_PORTAL
     }
     
-}
-
-class RoleToppur: UIRole {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        self.texture = SKTexture(imageNamed: "Toppur")
-        self.size = CGSize(width: cellSize * 2, height: cellSize * 2)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 }

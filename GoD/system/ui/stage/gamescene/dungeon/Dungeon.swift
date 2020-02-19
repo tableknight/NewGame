@@ -44,6 +44,9 @@ class Dungeon: MyScene {
             takeHerb(item)
             return true
         }
+        if cell == CELL_BOSS {
+            return true
+        }
         return false
     }
     override func create() {
@@ -183,7 +186,7 @@ class Dungeon: MyScene {
         setTimeout(delay: 2, completion: {
             let herb = Item(item._key)
             let count = ceil(self._level * 0.1)
-            herb._count = self.seed(min: 1, max: count.toInt())
+            herb._count = self.seed(min: 1, max: count.toInt() + 1)
             Game.instance.char.addItem(herb)
             showMsg(text: "你获得了[\(herb._name)]x\(herb._count)")
             item.removeFromParent()

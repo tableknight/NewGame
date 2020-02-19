@@ -31,8 +31,9 @@ class Combustion: Magical {
                 t.stateDown3s() {
                     let s = t.getStatus(type: Status.BURNING) as! BurningStatus
                     s._timeleft += 3
-                    t.showText(text: "COMBUST") {
+                    t.showText(text: "Combust") {
                         completion()
+                        t.showStatusText()
                     }
                 }
             } else {

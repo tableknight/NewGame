@@ -29,8 +29,10 @@ class Escape: Magical, BossOnly {
         let b = _battle
         c.actionWait {
             if self.d4() {
-                b.isVictory = false
-                b.fadeOutBattle()
+                c.showText(text: "全身而退") {
+                    b.isVictory = false
+                    b.fadeOutBattle()
+                }
             } else {
                 c.showText(text: "逃生失败") {
                     completion()

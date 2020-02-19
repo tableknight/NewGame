@@ -24,14 +24,14 @@ class QiWave:HandSkill {
         _cooldown = 2
         isClose = false
         autoCast = true
-        cost(value: 25)
+        cost(value: 20)
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
         _battle._curRole.actionAttack {
             for t in ts {
                 let damage = self.physicalDamage(t)
-                t.gun1f() {}
+                t.gun1f()
                 if !self.hasPhysicalEvent(t: t) {
                     t.actionAttacked {
                         t.showValue(value: damage, criticalFromSpell: false, critical: self.beCritical)
@@ -45,17 +45,17 @@ class QiWave:HandSkill {
         }
     }
     override func findTarget() {
-//        let c = _battle._curRole
-//        let max = c.weaponIs(NilSeal.EFFECTION) ? seed(min: 3, max: 6) : seed(min: 2, max: 5)
-//        var targets = c.playerPart ? _battle._enemyPart : _battle._playerPart
-//        _battle._selectedTargets = []
-//        for _ in 0...max - 1 {
-//            if targets.count > 0 {
-//                let index = seed(to: targets.count)
-//                _battle._selectedTargets.append(targets[index])
-//                targets.remove(at: index)
-//            }
-//        }
+        let c = _battle._curRole
+        let max = c.weaponIs(Sacred.NilSeal) ? [3,4,5,3,4,5,3,4,5,4,4,4].one() : [2,3,4,2,3,4,2,3,4,3,3,3].one()
+        var targets = c.playerPart ? _battle._enemyPart : _battle._playerPart
+        _battle._selectedTargets = []
+        for _ in 0...max - 1 {
+            if targets.count > 0 {
+                let index = seed(to: targets.count)
+                _battle._selectedTargets.append(targets[index])
+                targets.remove(at: index)
+            }
+        }
         
     }
     override func selectable() -> Bool {

@@ -15,7 +15,7 @@ class Toppur:Boss {
         _name = "托普尔"
         _quality = Quality.SACRED
         _growth.stamina = 3
-        _growth.strength = 2.5
+        _growth.strength = 2.8
         _growth.agility = 1.8
         _growth.intellect = 3
         _race = EvilType.ANGEL

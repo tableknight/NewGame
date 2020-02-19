@@ -66,7 +66,7 @@ class ThunderArray:Magical {
             }
             t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER)
         }
-        setTimeout(delay: 0.1) {
+        setTimeout(delay: 0.2) {
             self.attack(completion: completion)
         }
     }

@@ -28,17 +28,12 @@ class Attribute: Core {
         } else if t == Attribute.ATTACK {
             _name = "攻击"
             midAttrValue(level: l)
-        }
-        else if t == Attribute.AVOID {
+        } else if t == Attribute.AVOID {
             _name = "躲闪"
             lowerAttrValue(level: l)
         } else if t == Attribute.BREAK {
             _name = "破甲"
-            if l < 15 {
-                _value = seed(min: 1, max: 6).toFloat()
-            } else {
-                _value = seed(min: 1, max: 11).toFloat()
-            }
+            lowLevelValue(level: 1)
         } else if t == Attribute.CRITICAL {
             _name = "必杀"
             lowerAttrValue(level: l)
@@ -102,10 +97,10 @@ class Attribute: Core {
             lowerAttrValue(level: l)
         } else if t == Attribute.REVENGE {
             _name = "复仇"
-            lowerAttrValue(level: l)
+            lowLevelValue(level: l)
         } else if t == Attribute.RHYTHM {
             _name = "律动"
-            lowerAttrValue(level: l)
+            lowLevelValue(level: l)
         } else if t == Attribute.SPEED {
             _name = "速度"
             upperAttrValue(level: l)
@@ -287,11 +282,11 @@ class Attribute: Core {
     }
     func lowLevelValue(level:CGFloat) {
         if level < 20 {
-            _value = seed(min: 1, max: 4).toFloat()
-        } else if level < 50 {
-            _value = seed(min: 3, max: 8).toFloat()
+            _value = seed(min: 1, max: 6).toFloat()
+        } else if level < 30 {
+            _value = seed(min: 3, max: 9).toFloat()
         } else {
-            _value = seed(min: 6, max: 13).toFloat()
+            _value = seed(min: 5, max: 11).toFloat()
         }
     }
     static let STAMINA = 0

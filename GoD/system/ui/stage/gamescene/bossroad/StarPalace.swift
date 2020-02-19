@@ -13,14 +13,18 @@ class StarPalace: MorningPalace {
         _monsterEnum = []
         _name = "星·宫"
         _floorSize = 5
-        _level = Sumahl.LEVEL
+        _level = Sumahl.LEVEL //40
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     override func getPortalFinal() -> UIItem {
-        return RoleMicalu()
+        let role = UIRole()
+        role.create(roleNode: SKSpriteNode(imageNamed: "Sumahl"))
+        role._roleNode.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        role.zPosition = MyScene.BOSS_LAYER_Z
+        return role
     }
     override func finalBattle() {
         let b = SumahlBattle()

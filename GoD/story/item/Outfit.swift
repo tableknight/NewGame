@@ -82,7 +82,13 @@ class Outfit:Item {
 
     internal var _attrCount:Int = 0
     func create(level:Int) {
-        _level = level
+        if level > 40 {
+            _level = 40
+        } else if level < 1 {
+            _level = 1
+        } else {
+            _level = level
+        }
         createQuality()
         if _type == Outfit.Instrument || _type == Outfit.MagicMark {
             createSpell()
@@ -98,6 +104,7 @@ class Outfit:Item {
         _description = sd.desc
         _level = sd.level
         _quality = Quality.SACRED
+        _effection = effection
         
         if _type == Outfit.Instrument || _type == Outfit.MagicMark {
             createSpell()
@@ -120,12 +127,30 @@ class Outfit:Item {
             _spell = [Spell.LavaExplosion, Spell.Combustion, Spell.BurnHeart, Spell.FireRain, Spell.FireBreath].one()
         } else if effection == Sacred.RingOfReborn {
             _spell = [Spell.Heal, Spell.QuickHeal, Spell.HealAll, Spell.SpringIsComing].one()
+        } else if _effection == Sacred.GiantSoul {
+            _race = EvilType.GIANT
+        } else if _effection == Sacred.RingOfDead {
+            _race = EvilType.RISEN
+        } else if _effection == Sacred.PandoraHeart {
+            _race = EvilType.DEMON
+        } else if _effection == Sacred.HeartOfSwamp {
+            _race = EvilType.NATURE
+        } else if _effection == Sacred.HeartOfTarrasque {
+            _race = EvilType.DEMON
+        } else if _effection == Sacred.SoulPeace {
+            _race = EvilType.ANGEL
         }
         
         if sd.randomAttrCountMax == sd.randomAttrCountMin {
             _attrCount = sd.randomAttrCountMin
         } else if sd.randomAttrCountMax > sd.randomAttrCountMin {
             _attrCount = seed(min: sd.randomAttrCountMin, max: sd.randomAttrCountMax + 1)
+        }
+        for attr in sd.attrs {
+            let index = _baseAttrs.firstIndex(of: attr.type)
+            if index != nil {
+                _baseAttrs.remove(at: index!)
+            }
         }
         createSelfAttrs()
         for attr in sd.attrs {
@@ -279,6 +304,11 @@ class Outfit:Item {
             a.on(unit: char)
         }
         
+        if _type == Outfit.SoulStone {
+            _reserveInt = char._race
+            char._race = _race
+        }
+        
         if _type == Outfit.MagicMark || _type == Outfit.Instrument ||  _effection == Sacred.PandoraHeart {
             if !(char.hasSpell(id: _spell)) {
                 char._spells.append(_spell)
@@ -315,6 +345,10 @@ class Outfit:Item {
         let c = Game.instance.char!
         for a in _attrs {
             a.off(unit: c)
+        }
+        
+        if _type == Outfit.SoulStone {
+            c._race = _reserveInt
         }
         
         if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == Sacred.PandoraHeart {

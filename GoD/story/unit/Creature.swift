@@ -59,7 +59,7 @@ class Creature: Unit {
         _imgUrl = md.imgUrl
         _img = SKTexture(imageNamed: _imgUrl)
         for s in md.spells {
-            _spells.append(s)
+            _spellsInuse.append(s)
         }
         if md.spellCountMax == md.spellCountMin {
             _spellCount = md.spellCountMin
@@ -120,6 +120,11 @@ class Creature: Unit {
     }
     func create(level:CGFloat) {
         _level = level
+        if _level < 1 {
+            _level = 1
+        } else if _level > 40 {
+            _level = 40
+        }
         createQuality()
         createBirthValue()
         createGrowthValue()
@@ -127,20 +132,45 @@ class Creature: Unit {
         _extensions.hp = _extensions.health
         createSensitive()
         let l = _level.toInt()
-        if _level > 30 {
-            _elementalResistance.fire = seed(to: l * 2).toFloat()
-            _elementalResistance.water = seed(to: l * 2).toFloat()
-            _elementalResistance.thunder = seed(to: l * 2).toFloat()
-        }
-        if _level > 1 && _spellCount > _spellsInuse.count && d3() {
-            let spells = [
-                Loot.getRandomNormalSpell(),
-                Loot.getRandomGoodSpell(),
-                Loot.getRandomRareSpell(),
-                Loot.getRandomSacredSpell()]
-            let spell = spells.one()
-            if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
-                _spellsInuse.append(spell._id)
+        if !(self is SummonUnit) {
+            if _level > 20 {
+                var rate = 1
+                if _level > 30 {
+                    rate = 2
+                }
+                let s = seed()
+                if s < 34 {
+                    _elementalResistance.fire = seed(to: l * rate).toFloat()
+                    _elementalResistance.water = seed(to: l * rate / 2).toFloat()
+                } else if s < 67 {
+                    _elementalResistance.water = seed(to: l * rate).toFloat()
+                    _elementalResistance.thunder = seed(to: l * rate / 2).toFloat()
+                } else {
+                    _elementalResistance.fire = seed(to: l * rate / 2).toFloat()
+                    _elementalResistance.thunder = seed(to: l * rate).toFloat()
+                }
+            }
+            if _level > 1 && _spellCount > _spellsInuse.count && d2() {
+                let spells = [
+                    Loot.getRandomNormalSpell(),
+                    Loot.getRandomGoodSpell(),
+                    Loot.getRandomRareSpell(),
+                    Loot.getRandomSacredSpell()]
+                let spell = spells.one()
+                if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
+                    _spellsInuse.append(spell._id)
+                }
+            }
+            if _level > 30 && _spellCount > _spellsInuse.count && d3() {
+                let spells = [
+                    Loot.getRandomNormalSpell(),
+                    Loot.getRandomGoodSpell(),
+                    Loot.getRandomRareSpell(),
+                    Loot.getRandomSacredSpell()]
+                let spell = spells.one()
+                if !(spell is BowSkill) && !(spell is HandSkill) && !(spell is Interchange) && !(spell is SwapHealth) {
+                    _spellsInuse.append(spell._id)
+                }
             }
         }
     }
@@ -168,6 +198,9 @@ class Creature: Unit {
     }
     
     override func levelup() {
+        if _level >= 40 {
+            return
+        }
         staminaChange(value: _growth.stamina)
         strengthChange(value: _growth.strength)
         agilityChange(value: _growth.agility)

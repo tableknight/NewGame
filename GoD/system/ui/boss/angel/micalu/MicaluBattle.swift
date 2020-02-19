@@ -16,7 +16,11 @@ class MicaluBattle: BossBattle {
     }
     override func createAI() {
         if _curRole._unit is Micalu {
-//            _selectedAction = _curRole._unit._spellsInuse.one()
+            if seed() < 33 {
+                _selectedAction = Attack()
+            } else {
+                _selectedAction = _curRole.spells.one()
+            }
             _selectedAction._battle = self
             _selectedAction.findTarget()
             execOrder()
@@ -25,7 +29,7 @@ class MicaluBattle: BossBattle {
         }
     }
     override func setEnemyPart(minions: Array<Creature>) {
-        let level:CGFloat = 36
+        let level:CGFloat = Micalu.LEVEL
         var es = Array<Creature>()
 //        for _ in 0...1 {
 //            let lm = ToppurServant()
@@ -56,37 +60,37 @@ class MicaluBattle: BossBattle {
     override func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 50 {
-//            let i = MarkOfHeaven()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = FangOfVampire()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 45 {
-//            let i = VerdasTear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 12 {
-//            let i = TheExorcist()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Micalu.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 50 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.MarkOfHeaven)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.FangOfVampire)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.VerdasTear)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 12 {
+            let i = Outfit(Outfit.Sword)
+            i.create(effection: Sacred.TheExorcist)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Micalu.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 

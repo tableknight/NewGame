@@ -118,7 +118,7 @@ class MagicHouse: InnerHouse {
         
         let i = c.searchItem(type: Item.Tear)
         if i != nil {
-            if i!._count > n {
+            if i!._count >= n {
                 unit._extensions.mp = unit._extensions.mpMax
                 i!._count -= n
                 return true

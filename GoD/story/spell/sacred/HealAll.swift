@@ -22,7 +22,7 @@ class HealAll: Magical {
         _cooldown = 3
         autoCast = true
         targetEnemy = false
-        cost(value: 35)
+        cost(value: 40)
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole

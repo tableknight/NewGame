@@ -50,7 +50,7 @@ class ShootAll: Physical, BowSkill {
     }
     
     override func selectable() -> Bool {
-        return isWeaponBow()
+        return _battle._curRole.weaponIs(Outfit.Bow)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

@@ -31,7 +31,8 @@ class MagicConvert: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.TURN_MAGIC
-        status._timeleft = 2
+        status._timeleft = 3
+        status._labelText = "C"
         t.addStatus(status: status)
         
         let c = _battle._curRole

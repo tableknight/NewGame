@@ -28,6 +28,7 @@ class GiantSpirit:Boss {
         levelTo(level: level)
         _extensions.health *= 6.5
         _extensions.hp = _extensions.health
+        _sensitive = 55
         
     }
     required init(from decoder: Decoder) throws {

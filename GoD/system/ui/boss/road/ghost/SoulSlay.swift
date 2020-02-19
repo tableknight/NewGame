@@ -19,10 +19,10 @@ class SoulSlay: Physical {
         _id = Spell.SoulSlay
         isClose = true
         _name = "灵魂撕裂"
-        _description = "对目标造成60%攻击力的伤害，令其在3回合内 无法恢复生命"
-        _rate = 0.6
+        _description = "对目标造成120%攻击力的伤害，令其在3回合内无法恢复生命"
+        _rate = 1.2
         _quality = Quality.RARE
-        _cooldown = 3
+        _cooldown = 1
         cost(value: 20)
     }
     override func cast(completion:@escaping () -> Void) {

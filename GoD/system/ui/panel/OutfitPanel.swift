@@ -47,13 +47,13 @@ class OutfitPanel: UIPanel {
         }
         
         
-        if outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
+        if _char.hasWeapon && outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
             return
         }
         if outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!) {
             return
         }
-        if outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!) {
+        if _char.hasShield && outfitOff(slot: _shield, callback: {Game.instance.char._shield = nil}, touchPoint: touchPoint!) {
             return
         }
         if outfitOff(slot: _leftRing, callback: {Game.instance.char._leftRing = nil}, touchPoint: touchPoint!) {
@@ -62,7 +62,7 @@ class OutfitPanel: UIPanel {
         if outfitOff(slot: _rightRing, callback: {Game.instance.char._rightRing = nil}, touchPoint: touchPoint!) {
             return
         }
-        if outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!) {
+        if _char.hasMark && outfitOff(slot: _magicMark, callback: {Game.instance.char._magicMark = nil}, touchPoint: touchPoint!) {
             return
         }
         if outfitOff(slot: _soulStone, callback: {Game.instance.char._soulStone = nil}, touchPoint: touchPoint!) {

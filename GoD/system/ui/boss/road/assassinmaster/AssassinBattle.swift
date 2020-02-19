@@ -43,50 +43,50 @@ class AssassinBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = AssassinsSword()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = ElementalSword()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 35 {
-//            let i = BloodBlade()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 20 {
-//            let i = EternityNight()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 20 {
-//            let i = Hawkeye()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 10 {
-//            let i = Accident()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: AssassinMaster.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Sword)
+            i.create(effection: Sacred.AssassinsSword)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Sword)
+            i.create(effection: Sacred.ElementalSword)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 35 {
+            let i = Outfit(Outfit.Dagger)
+            i.create(effection: Sacred.BloodBlade)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 20 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.EternityNight)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 20 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.Hawkeye)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.Accident)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: AssassinMaster.LEVEL.toInt())
+        return list + l.getList()
+    }
     override func addEnemy(bUnit: BUnit) {
         bUnit._battle = self
         bUnit.playerPart = false

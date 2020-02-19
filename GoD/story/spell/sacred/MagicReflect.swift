@@ -31,7 +31,8 @@ class MagicReflect: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.EYE_TO_EYE
-        status._timeleft = 2
+        status._timeleft = 3
+        status._labelText = "R"
         t.addStatus(status: status)
         c.actionCast {
             t.mixed2(index: 16) {

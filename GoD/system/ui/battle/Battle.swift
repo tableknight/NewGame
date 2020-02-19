@@ -746,13 +746,13 @@ class Battle: SKSpriteNode {
     func placeRoles() {}
     func silenceUnit(unit:BUnit) {
         if unit.hasSpell(spell: RaceSuperiority()) || unit.hasStatus(type: Status.IMMUNE) {
-            unit.showText(text: "IMMUNE")
+            unit.showText(text: "Immune")
             return
         }
         if unit._unit is Boss {
-            unit.showText(text: "IMMUNE")
+            unit.showText(text: "Immune")
         } else {
-            unit.showText(text: "SILENCED")
+            unit.showText(text: "Slience")
             let index = _roleAll.firstIndex(of: unit)
             if nil != index {
                 _roleAll.remove(at: index!)

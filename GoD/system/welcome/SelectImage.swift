@@ -10,19 +10,29 @@ import SpriteKit
 class SelectImage:UIPanel {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
-        
+        _roleInfo?.removeFromParent()
         
         for u in _listBox.children {
             if u.contains(touchPoint!) {
                 let rc = u as! ImageComponent
-                _lastSelectedComponent.selected = false
+                _lastSelectedComponent?.selected = false
                 _lastSelectedComponent = rc
                 _lastSelectedComponent.selected = true
+                _roleInfo = RoleInfo()
+                _roleInfo.create(data: rc._roleData)
+                _roleInfo.position.x = rc.xAxis
+                if rc.xAxis > -cellSize {
+                    _roleInfo.position.x = rc.xAxis - cellSize * 1.5
+                }
+                _roleInfo.yAxis = rc.yAxis - cellSize * 2 - 4
+                addChild(_roleInfo)
+//                selectedRoleData = rc._roleData
                 return
             }
         }
         if _nextButton.contains(touchPoint!) {
-            nextAction()
+//            nextAction()
+            createCharactor()
             return
         }
         if _prevButton.contains(touchPoint!) {
@@ -40,6 +50,11 @@ class SelectImage:UIPanel {
         }
         
     }
+    override func createPanelbackground() {
+        super.createPanelbackground()
+        _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _bg.lineWidth = Game.SELECTED_STROKE_WIDTH
+    }
     var nextAction = {}
     var prevAction = {}
     var closeAction = {}
@@ -48,10 +63,13 @@ class SelectImage:UIPanel {
         createPageButtons()
         _label.text = "抉择：选择角色"
         _closeButton.text = "返回"
+        _closeButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _closeButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
 //        _prevButton.text = "上一步"
         _prevButton.isHidden = true
         _nextButton.text = "确定"
-        
+        _nextButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _nextButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
         addChild(_listBox)
         _images = [
 //            Game.instance.pictureCollabo8_2.getCell(6, 3, 3, 4),
@@ -71,11 +89,20 @@ class SelectImage:UIPanel {
             "role_01",
             "role_02",
             "role_03",
-            "role_04",
-            "role_05",
+//            "role_04",
+//            "role_05",
             "role_06"
         ]
-        _names = ["马可","艾丽丝", "伊丽莎白", "火云", "京", "梅露露"]
+        _names = ["马可","艾丽丝", "伊莎贝拉",
+//                  "火云", "京",
+                  "梅露露"]
+        _roleDatas = [
+            RoleData(growthPoint: 5, spellCount: 3, minionCount: 2, hasWeapon: true, hasShield: true, hasMark: true),
+            RoleData(growthPoint: 5, spellCount: 2, minionCount: 3, hasWeapon: true, hasShield: false, hasMark: true, spell: Spell.Burn),
+            RoleData(growthPoint: 4, spellCount: 3, minionCount: 3, hasWeapon: true, hasShield: true, hasMark: true, spell: Spell.QuickHeal),
+//            RoleData(growthPoint: 5, spellCount: 3, minionCount: 3, hasWeapon: true, hasShield: false, hasMark: false),
+            RoleData(growthPoint: 6, spellCount: 2, minionCount: 2, hasWeapon: true, hasShield: true, hasMark: false, spell: Spell.ToughHeart)
+        ]
         showImages()
         
     }
@@ -93,9 +120,77 @@ class SelectImage:UIPanel {
             ic.xAxis = startX + gap * x.toFloat()
             ic.zPosition = self.zPosition + 3
             ic.create(image: t, name: _names[i])
+            ic._roleData = _roleDatas[i]
             _listBox.addChild(ic)
             i += 1
         }
+    }
+    
+    private func createCharactor() {
+        if nil == _lastSelectedComponent {
+            return
+        }
+        let roleData = _lastSelectedComponent._roleData!
+        let image = _lastSelectedComponent._image!
+        let stage = MyStage()
+        let scene = SecretMeadow()
+        scene.create()
+        let e = Character()
+        e.create()
+        Game.instance.char = e
+        e._img = image
+        e._imgUrl = _lastSelectedComponent._imgUrl
+        let p = Item(Item.Potion)
+        p._count = 2
+        e.addItem(p)
+        let ts = Item(Item.TownScroll)
+        ts._count = 2
+        e.addItem(ts)
+        
+        let ps = Item(Item.SealScroll)
+        ps._count = 2
+        e.addItem(ps)
+        e._minionsCount = roleData.minionCount
+        e._spellCount = roleData.spellCount
+        e.hasMark = roleData.hasMark
+        e.hasShield = roleData.hasShield
+        e.hasWeapon = roleData.hasWeapon
+        e._levelPoint = roleData.growthPoint
+        
+        e._spellsInuse = [roleData.spell]
+        
+        e._spellsInuse.append(Spell.ColdWind)
+        e._spellsInuse.append(Spell.ThunderArray)
+        
+        let i = Item("lvScroll")
+//        i._count = 40
+        e.addItem(i)
+//        e._minionsCount = 2
+//        e._spellCount = 3
+//        e._levelPoint = 5
+        e._seat = BUnit.BBM
+        e._pro = "冒险者"
+        e._name = _lastSelectedComponent._name
+        //-------------------------------------
+        if Mode.debug {
+//            e._props.append(LevelUpScroll())
+        }
+        //-------------------------------------
+        scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
+        let kiki = BlackCat()
+        kiki.create(level: 1)
+        kiki._seat = BUnit.BTM
+        e._minions.append(kiki)
+        stage.loadScene(scene: scene)
+        stage.createMenu()
+        self.removeFromParent()
+        
+        self.removeFromParent()
+        Game.instance.gameScene.addChild(stage)
+        
+        setTimeout(delay: 1, completion: {
+            Game.saving(sync: false)
+        })
     }
     
     
@@ -108,7 +203,9 @@ class SelectImage:UIPanel {
     var _listBox = SKSpriteNode()
     var _images = Array<String>()
     var _names = Array<String>()
-    var _lastSelectedComponent = ImageComponent()
+    var _lastSelectedComponent:ImageComponent!
+    var _roleDatas = Array<RoleData>()
+    private var _roleInfo:RoleInfo!
 }
 
 class ImageComponent:SelectableComponent {
@@ -119,6 +216,7 @@ class ImageComponent:SelectableComponent {
         _background.lineWidth = 2
         _background.strokeColor = QualityColor.RARE
 //        addChild(_background)
+//        print(cellSize)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -148,12 +246,13 @@ class ImageComponent:SelectableComponent {
         nl.align = "center"
         nl.position.x = role.size.width * 0.5 + 6
         nl.position.y = role.yAxis - 12 - role.size.height * 0.5
-        nl.fontSize = 18
+        nl.fontSize = cellSize * 0.25
         addChild(nl)
     }
     var _image:SKTexture!
     var _imgUrl = ""
     var _name = ""
+    var _roleData:RoleData!
     override var selected: Bool {
         set {
             _selected = newValue
@@ -166,4 +265,83 @@ class ImageComponent:SelectableComponent {
             return _selected
         }
     }
+}
+struct RoleData {
+    var growthPoint = 5
+    var spellCount = 2
+    var minionCount = 2
+    var hasWeapon = true
+    var hasShield = true
+    var hasMark = true
+    var spell = Spell.LowlevelFlame
+}
+class RoleInfo: SelectableComponent {
+    func create(data:RoleData) {
+        let yGap = cellSize * 0.5
+        let growthLabel = Label()
+        growthLabel.position.x = cellSize * 0.25
+        growthLabel.position.y = -cellSize * 0.25
+        growthLabel.fontSize = cellSize * 0.25
+        growthLabel.text = "属性成长：\(data.growthPoint)"
+        addChild(growthLabel)
+        
+        let spellCountLabel = Label()
+        spellCountLabel.position.x = growthLabel.position.x
+        spellCountLabel.position.y = growthLabel.position.y - yGap
+        spellCountLabel.fontSize = growthLabel.fontSize
+        spellCountLabel.text = "技能栏：\(data.spellCount)"
+        addChild(spellCountLabel)
+        
+        let minionClountLabel = Label()
+        minionClountLabel.position.x = growthLabel.position.x
+        minionClountLabel.position.y = spellCountLabel.position.y - yGap
+        minionClountLabel.fontSize = growthLabel.fontSize
+        minionClountLabel.text = "随从位：\(data.minionCount)"
+        addChild(minionClountLabel)
+        
+        let weapon = Label()
+        weapon.position.x = growthLabel.position.x
+        weapon.position.y = minionClountLabel.position.y - yGap
+        weapon.fontSize = growthLabel.fontSize
+        weapon.text = "是否可佩戴武器：\(data.hasWeapon ? "是" : "否")"
+        addChild(weapon)
+        
+        let shield = Label()
+        shield.position.x = growthLabel.position.x
+        shield.position.y = weapon.position.y - yGap
+        shield.fontSize = growthLabel.fontSize
+        shield.text = "是否可装备盾牌：\(data.hasShield ? "是" : "否")"
+        addChild(shield)
+        
+        let mark = Label()
+        mark.position.x = growthLabel.position.x
+        mark.position.y = shield.position.y - yGap
+        mark.fontSize = growthLabel.fontSize
+        mark.text = "是否可刻蚀魔印：\(data.hasMark ? "是" : "否")"
+        addChild(mark)
+        
+        let spell = Label()
+        spell.position.x = growthLabel.position.x
+        spell.position.y = mark.position.y - yGap
+        spell.fontSize = growthLabel.fontSize
+        spell.text = "初始技能：\(Loot.getSpellById(data.spell)._name)"
+        addChild(spell)
+        
+
+    }
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        _background = createBackground(width: cellSize * 3, height: cellSize * 4)
+        addChild(_background)
+        self.zPosition = MyStage.UI_PANEL_Z + 3
+        _background.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _background.lineWidth = Game.SELECTED_STROKE_WIDTH
+        print(cellSize)
+        
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+//    internal var _background:SKShapeNode = SKShapeNode()
+//    private var _index = 1
 }

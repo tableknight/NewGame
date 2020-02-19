@@ -74,50 +74,50 @@ class SumahlBattle: BossBattle {
     override func getBossYAxis() -> CGFloat {
         return cellSize * 4.25
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = FireMaster()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = TrueLie()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 10 {
-//            let i = NilSeal()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = PandoraHeart()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = DragonSlayer()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = CreationMatrix()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Sumahl.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Wand)
+            i.create(effection: Sacred.FireMaster)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.TrueLie)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.Fist)
+            i.create(effection: Sacred.NilSeal)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.SoulStone)
+            i.create(effection: Sacred.PandoraHeart)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Sword)
+            i.create(effection: Sacred.DragonSlayer)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.CreationMatrix)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Sumahl.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 class MindIntervene: Physical, Curse {

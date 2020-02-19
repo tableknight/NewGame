@@ -69,6 +69,9 @@ class Character: Unit {
     func removeSpellHidden(spell:Spell) {
     }
     override func levelup() {
+        if _level >= 40 {
+            return
+        }
         _leftPoint += _levelPoint
         _level += 1
         _extensions.hp = _extensions.health
@@ -256,6 +259,9 @@ class Character: Unit {
     
     func weaponIs(_ effection:String) -> Bool {
         if _weapon?._effection == effection {
+            return true
+        }
+        if _weapon?._type == effection {
             return true
         }
         return false

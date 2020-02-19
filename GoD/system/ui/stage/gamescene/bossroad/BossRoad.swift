@@ -165,7 +165,7 @@ class BossRoad: AcientRoad {
             return true
 
         }
-        return false
+        return super.hasAction(cell: cell, touchPoint: touchPoint)
     }
     
     internal func finalBattle() {

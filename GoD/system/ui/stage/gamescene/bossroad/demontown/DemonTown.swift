@@ -35,7 +35,7 @@ class DemonTown: BossRoad, InnerMaze {
         return DemonTown()
     }
     override func getPortalFinal() -> UIItem {
-        return RoleToppur()
+        return UIItem()
     }
     override func finalBattle() {
         let b = ToppurBattle()

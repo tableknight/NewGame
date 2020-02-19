@@ -40,17 +40,17 @@ class ScreamLoud:Magical, Curse {
                             s._type = "_scared"
                             s._labelText = "S"
                             s._timeleft = 3
-                            let atk = t.getAttack() * 0.3
-                            t._valueUnit._extensions.attack -= atk
+                            let def = t.getDefence() * 0.3
+                            t._valueUnit._extensions.defence -= def
                             t._valueUnit._extensions.accuracy -= 30
                             s.timeupAction = {
-                                t._valueUnit._extensions.attack += atk
+                                t._valueUnit._extensions.defence += def
                                 t._valueUnit._extensions.accuracy += 30
                             }
                             t.addStatus(status: s)
                         }
                     }
-                    t.mixed2(index: 13)
+                    t.mixed1(index: 5)
                 }
             }
             setTimeout(delay: 1.5, completion: completion)

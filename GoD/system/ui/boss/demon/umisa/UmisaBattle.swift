@@ -37,7 +37,7 @@ class UmisaBattle: BossBattle {
                 _selectedAction = spell
                 p25 = true
             } else {
-                _selectedAction = [CriticalBite(), BossAttack(), BossAttack()].one()
+                _selectedAction = [CriticalBite(), BossAttack()].one()
             }
             _selectedAction._battle = self
             _selectedAction.findTarget()
@@ -107,7 +107,7 @@ class SummonCopy:Magical, BossOnly {
     override init() {
         super.init()
         _id = Spell.SummonCopy
-        _name = "分身之术"
+        _name = "邪恶之影"
         _description = "召唤一个真实的分身"
     }
     var _seat:String = ""
@@ -138,15 +138,15 @@ class CriticalBite:Physical, BossOnly {
         super.init()
         _id = Spell.CriticalBite
         _name = "致命撕咬"
-        _description = "对目标造成攻击力85%的物理伤害，并且有一定几率召唤一个分身协助攻击"
-        _rate = 0.85
+        _description = "对目标造成攻击力100%的物理伤害，并且有一定几率召唤一个分身协助攻击"
+        _rate = 1
     }
     override func cast(completion: @escaping () -> Void) {
         let b = _battle
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionAttack {
-            let assistant = self.d3()
+            let assistant = self.seed() < 75
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
                     let damage = self.physicalDamage(t)
@@ -168,10 +168,10 @@ class CriticalBite:Physical, BossOnly {
                             }
                             let ast = es.one()
                             setTimeout(delay: 0.5, completion: {
-                                ast.showText(text: "ASSIST")
+                                ast.showText(text: "Assist")
                                 ast.actionAttack {
                                     if !self.hasMissed(target: t, completion: completion) {
-                                        self._rate = 1
+//                                        self._rate = 1
                                         let dmg = self.physicalDamage(t)
                                         t.showValue(value: dmg) {
                                             completion()

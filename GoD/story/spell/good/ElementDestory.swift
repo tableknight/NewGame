@@ -37,7 +37,7 @@ class ElementDestory:Magical, Curse {
     }
     
     private func setDown(t:BUnit) {
-        t.stateDown2() {
+        t.mixed1(index: 15) {
         if t.hasStatus(type: "_element_destory") {
             let s = t.getStatus(type: "_element_destory")
             s?._timeleft = 3

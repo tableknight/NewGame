@@ -80,44 +80,44 @@ class LewisBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = TrueLie()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = JadeHeart()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 45 {
-//            let i = MarkOfHeaven()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = FollowOn()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = TheFear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Lewis.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.TrueLie)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.HeartOfJade)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.MarkOfHeaven)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.FollowOn)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.TheFear)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Lewis.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 class SoulControl: Magical, BossOnly {
@@ -258,9 +258,7 @@ class PowerUp: Magical, BossOnly {
         t.addStatus(status: status)
         _battle._curRole.actionCast {
             t.revival2f() {
-                t.showText(text: "POWER UP") {
-                    completion()
-                }
+                completion()
             }
         }
     }

@@ -46,47 +46,51 @@ class GeorgeBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     override func getSpellAttack() -> Spell {
-        return GeorgeAttack()
+        if _curRole.playerPart {
+            return Attack()
+        } else {
+            return GeorgeAttack()
+        }
     }
     
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 95 {
-//            let i = FangOfVampire()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 10 {
-//            let i = PandoraHeart()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 30 {
-//            let i = RingOfReborn()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 5 {
-//            let i = TheEye()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = SoundOfWind()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: George.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 95 {
+            let i = Outfit(Outfit.Amulet)
+            i.create(effection: Sacred.FangOfVampire)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 10 {
+            let i = Outfit(Outfit.SoulStone)
+            i.create(effection: Sacred.PandoraHeart)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = Outfit(Outfit.Ring)
+            i.create(effection: Sacred.RingOfReborn)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.TheEye)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Bow)
+            i.create(effection: Sacred.SoundOfWind)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: George.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 
 class GeorgeAttack: BossAttack {
@@ -104,20 +108,22 @@ class GeorgeAttack: BossAttack {
                                 let s = Status()
                                 s._type = Status.INFECTED
                                 s._timeleft = 3
+                                s._labelText = "P"
                                 t.addStatus(status: s)
-                                t.showText(text: "INFECTED") {
+                                t.showText(text: Status.INFECTED) {
                                     completion()
                                 }
                             } else {
                                 completion()
                             }
-                        }
-                        if t.hasStatus(type: Status.INFECTED) {
-//                            setTimeout(delay: 0.5, completion: {
-//                            })
-                            c.showValue(value: -damage * 0.5)
+                            if t.hasStatus(type: Status.INFECTED) {
+                                c.showValue(value: -damage * 0.8)
+                            } else {
+                                c.showValue(value: -damage * 0.3)
+                            }
                         }
                     }
+                    t.claw()
                 }
             }
         }
@@ -146,25 +152,25 @@ class Screaming: Magical, BossOnly {
         let c = b._curRole
         let damage = magicalDamage(t)
         c.actionCast {
-            if !self.hadSpecialAction(t: t, completion: completion) {
-                t.actionAttacked {
-                    t.showValue(value: damage) {
-                        if self.d3() {
-                            let s = Status()
-                            s._type = Status.INFECTED
-                            s._timeleft = 3
-                            t.addStatus(status: s)
-                            t.showText(text: "INFECTED") {
+            t.darkness1s() {
+                
+                if !self.hadSpecialAction(t: t, completion: completion) {
+                    t.actionAttacked {
+                        t.showValue(value: damage) {
+                            if self.d3() {
+                                let s = Status()
+                                s._type = Status.INFECTED
+                                s._timeleft = 3
+                                s._labelText = "P"
+                                t.addStatus(status: s)
+                                t.showText(text: Status.INFECTED) {
+                                    completion()
+                                }
+                            } else {
                                 completion()
                             }
-                        } else {
-                            completion()
                         }
-                    }
-                    if t.hasStatus(type: Status.INFECTED) {
-                        c.showValue(value: -damage * 0.5)
-//                        setTimeout(delay: 0.5, completion: {
-//                        })
+                        
                     }
                 }
             }
@@ -194,10 +200,12 @@ class Infection:Magical, Curse, BossOnly {
         _battle._curRole.actionCast {
             for t in self._battle._selectedTargets {
                 if !self.statusMissed(baseline: 75, target: t, completion: {}) {
-                    t.actionDebuff {
-                        t.showText(text: "INFECTED")
+                    t.mixed1(index: 5) {
+//                    t.actionDebuff {
+                        t.showText(text: Status.INFECTED)
                         let s = Status()
                         s._type = Status.INFECTED
+                        s._labelText = "P"
                         s._timeleft = 3
                         t.addStatus(status: s)
                     }
@@ -221,20 +229,22 @@ class DrawBlood:Magical, BossOnly {
         super.init()
         _id = Spell.DrawBlood
         _name = "群体吸血"
-        _description = "对敌方所有目标造成精神40%的法术攻击，并且恢复造成伤害的总量"
-        _rate = 0.4
+        _description = "对敌方所有目标造成精神60%的法术攻击，并且恢复造成伤害的总量"
+        _rate = 0.6
     }
     override func cast(completion: @escaping () -> Void) {
         var recovery:CGFloat = 0
         _battle._curRole.actionCast {
             for t in self._battle._selectedTargets {
-                if !self.hadSpecialAction(t: t) {
+                t.mixed2(index: 3) {
                     let damage = self.magicalDamage(t)
-                    t.showValue(value: damage)
-                    recovery += damage
+                    if !self.hadSpecialAction(t: t) {
+                        t.showValue(value: damage)
+                        recovery += damage
+                    }
                 }
             }
-            setTimeout(delay: 0.5, completion: {
+            setTimeout(delay: 1.8, completion: {
                 self._battle._curRole.showValue(value: -recovery)
             })
             setTimeout(delay: 3, completion: completion)

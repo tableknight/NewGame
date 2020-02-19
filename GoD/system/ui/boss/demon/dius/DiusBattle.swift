@@ -148,6 +148,7 @@ class FireExplode:Magical {
         _description = "对目标造成精神100%的火焰伤害,有小概率点燃目标"
         _cooldown = 3
         isFire = true
+        cost(value: 25)
         _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {

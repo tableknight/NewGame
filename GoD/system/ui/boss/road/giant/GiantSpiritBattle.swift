@@ -44,32 +44,32 @@ class GiantSpiritBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 40 {
-//            let i = GiantSoul()
-//            i.create()
-//            list.append(i)
-//        }
-//        if seedFloat() < lucky * 25 {
-//            let i = VerdasTear()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 30 {
-//            let i = DellarsGoldenRing()
-//            i.create()
-//            list.append(i)
-//        }
-//
-//
-//        
-//        let l = Loot()
-//        l.loot(level: GiantSpirit.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 40 {
+            let i = Outfit(Outfit.SoulStone)
+            i.create(effection: Sacred.GiantSoul)
+            list.append(i)
+        }
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.EarRing)
+            i.create(effection: Sacred.VerdasTear)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 30 {
+            let i = Outfit(Outfit.Ring)
+            i.create(effection: Sacred.DellarsGoldenRing)
+            list.append(i)
+        }
+
+
+        
+        let l = Loot()
+        l.loot(level: GiantSpirit.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 

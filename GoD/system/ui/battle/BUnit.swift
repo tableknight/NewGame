@@ -389,15 +389,11 @@ class BUnit: SKSpriteNode {
     
     func burning() {
         if hasSpell(spell: ProtectFromGod()) {
-            setTimeout(delay: 0.5, completion: {
-                self.showText(text: "IMMUNE")
-            })
+            self.showText(text: "Immune")
             return
         }
-        if _unit is Boss && seed() < 50 {
-            setTimeout(delay: 0.5, completion: {
-                self.showMiss()
-            })
+        if _unit is Boss && seed() < 65 {
+            self.showMiss()
             return
         }
         let t = self
@@ -408,7 +404,9 @@ class BUnit: SKSpriteNode {
             let s = t.getStatus(type: Status.BURNING) as! BurningStatus
             s._level += 1
             s._castSpell = spell
-            s._timeleft = 3
+            if s._timeleft < 3 {
+                s._timeleft = 3
+            }
             t.addStatus(status: s)
         } else {
             let bs = BurningStatus()
@@ -420,7 +418,7 @@ class BUnit: SKSpriteNode {
     func freezing() {
         if hasSpell(spell: RaceSuperiority()) || hasStatus(type: Status.IMMUNE) || _unit is Boss {
             setTimeout(delay: 0.5, completion: {
-                self.showText(text: "IMMUNE")
+                self.showText(text: "Immune")
             })
             return
         }
@@ -436,7 +434,7 @@ class BUnit: SKSpriteNode {
     
     func petrify() {
         if hasSpell(spell: ProtectFromGod()) || _unit is Boss || hasStatus(type: Status.IMMUNE) {
-            showText(text: "IMMUNE")
+            showText(text: "Immune")
             return
         }
         let target = self
@@ -490,10 +488,10 @@ class BUnit: SKSpriteNode {
         if nil != index {
             _battle._roleAll.remove(at: index!)
         }
-        showText(text: "SILENCE", completion: completion)
+        showText(text: "Slience", completion: completion)
     }
     func showMiss(completion:@escaping () -> Void = {}) {
-        showText(text: "MISS") {
+        showText(text: "Miss") {
             completion()
         }
     }
@@ -507,7 +505,7 @@ class BUnit: SKSpriteNode {
         let s = (source == nil ? _battle._curRole : source)!
         if value < 0 && self._unit._race == EvilType.RISEN {
             if s.weaponIs(Sacred.TheExorcist) && seed() < 15 {
-                self.showText(text: "EXORCISED") {
+                self.showText(text: "Exorcised") {
                     self.actionDead {
                         self.die()
                         completion()
@@ -517,13 +515,13 @@ class BUnit: SKSpriteNode {
             }
         }
         if value < 0 && shieldIs(Sacred.EvilExpel) && seed() < 15 {
-            showText(text: "BLOCK") {
+            showText(text: "Block") {
                 completion()
                 return
             }
         }
         if value > 0 && hasStatus(type: Status.SOUL_SLAY) {
-            showText(text: "SLAY") {
+            showText(text: "Slay") {
                 completion()
             }
             return
@@ -536,7 +534,7 @@ class BUnit: SKSpriteNode {
                 }
             }
             if us.count > 0 {
-                self.showText(text: "SHIFT") {
+                self.showText(text: "Shift") {
                     let one = us.one()
                     one.showValue(value: value) {
                         completion()
@@ -575,7 +573,7 @@ class BUnit: SKSpriteNode {
         if hasStatus(type: Status.PROTECTION_FROM_ICE) {
             if value < 0 {
                 if -value > getHp() {
-                    showText(text: "FATAL") {
+                    showText(text: "Fatal") {
                         completion()
                     }
                     removeStatus(type: Status.PROTECTION_FROM_ICE)

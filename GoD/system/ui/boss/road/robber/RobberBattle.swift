@@ -49,36 +49,42 @@ class RobberBattle: BossBattle {
         
         super.setEnemyPart(minions: es)
     }
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
 //        if seedFloat() < lucky * 35 {
-//            let mark = ThiefPocket()
-//            mark.create()
+//            let mark = Outfit(Outfit.MagicMark)
+//            mark.create(effection: Sacred.ThiefPocket)
 //            list.append(mark)
 //        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = TearCluster()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = WordlessBook()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 8 {
-//            let i = CreationMatrix()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: GraveRobber.LEVEL)
-//        return list + l.getList()
-//    }
+        if seedFloat() < lucky * 25 {
+            let i = Item(Item.GoldPackage)
+            list.append(i)
+        }
+        if seedFloat() < lucky * 15 {
+            let i = Item(Item.ExpBook)
+            list.append(i)
+        }
+        if seedFloat() < lucky * 25 {
+            let i = Item(Item.StarStone)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 5 {
+            let i = Item(Item.RandomSpell)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 8 {
+            let i = Outfit(Outfit.Instrument)
+            i.create(effection: Sacred.CreationMatrix)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: GraveRobber.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 

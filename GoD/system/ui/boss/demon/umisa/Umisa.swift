@@ -21,10 +21,12 @@ class Umisa:Boss {
         _level = Umisa.LEVEL
         _img = SKTexture(imageNamed: "Umisa")
         _imgUrl = "Umisa"
+        _sensitive = 50
         _spellsInuse = [Spell.SummonCopy, Spell.CriticalBite]
     }
     override func create(level: CGFloat) {
         levelTo(level: level)
+        _extensions.health *= 4
         _extensions.hp = _extensions.health
     }
     var isCopy = false

@@ -57,38 +57,38 @@ class ToppurBattle: BossBattle {
         super.setEnemyPart(minions: es)
     }
     
-//    override func specialLoot() -> Array<Prop> {
-//        var list = Array<Prop>()
-//        let lucky = _char._lucky * 0.01 + 1
-//        
-//        if seedFloat() < lucky * 15 {
-//            let i = LazesPedicureKnife()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 25 {
-//            let i = MarkOfOaks()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 45 {
-//            let i = BloodBlade()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        if seedFloat() < lucky * 35 {
-//            let i = EvilExpel()
-//            i.create()
-//            list.append(i)
-//        }
-//        
-//        let l = Loot()
-//        l.loot(level: Toppur.LEVEL)
-//        return list + l.getList()
-//    }
+    override func specialLoot() -> Array<Item> {
+        var list = Array<Item>()
+        let lucky = _char._lucky * 0.01 + 1
+        
+        if seedFloat() < lucky * 15 {
+            let i = Outfit(Outfit.Dagger)
+            i.create(effection: Sacred.LazesPedicureKnife)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 25 {
+            let i = Outfit(Outfit.MagicMark)
+            i.create(effection: Sacred.MarkOfOaks)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 45 {
+            let i = Outfit(Outfit.Dagger)
+            i.create(effection: Sacred.BloodBlade)
+            list.append(i)
+        }
+        
+        if seedFloat() < lucky * 35 {
+            let i = Outfit(Outfit.Shield)
+            i.create(effection: Sacred.EvilExpel)
+            list.append(i)
+        }
+        
+        let l = Loot()
+        l.loot(level: Toppur.LEVEL.toInt())
+        return list + l.getList()
+    }
 }
 class FateDecision: Magical, BossOnly {
     required init(from decoder: Decoder) throws {

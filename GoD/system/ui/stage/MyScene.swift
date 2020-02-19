@@ -425,7 +425,9 @@ class MyScene: SKSpriteNode {
             //异常处理，不知道什原因这个模块不是uievil
             if cell == CELL_MONSTER {
                 let mon = UIEvil()
-                mon._thisType = _monsterEnum.one()
+                if _monsterEnum.count > 0 {
+                    mon._thisType = _monsterEnum.one()
+                }
                 if item.contains(touchPoint) {
                     mon.triggerEvent()
                     mon.defeatedAction = {

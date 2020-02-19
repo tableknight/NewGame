@@ -145,6 +145,9 @@ class Item:Core, Castable, Showable {
                                 unit.removeFromBattle()
                                 unit.removeFromParent()
                                 unit._unit._seat = BUnit.STAND_BY
+                                unit._unit._elementalResistance.fire = 0
+                                unit._unit._elementalResistance.water = 0
+                                unit._unit._elementalResistance.thunder = 0
                                 char._minions.append(unit._unit as! Creature)
                                 setTimeout(delay: 0.5) {
                                     if !self._battle.hasFinished() {
@@ -495,6 +498,8 @@ class Item:Core, Castable, Showable {
     static let RandomWeapon = "RandomWeapon"
     static let RandomSpell = "RandomSpell"
     
+    static let TearCluster = "TearCluster"
+    
     var targetAll: Bool = false
     var canBeTargetSelf: Bool = false
     var targetEnemy: Bool = false
@@ -673,6 +678,7 @@ struct ItemData:Codable {
         Item.PureFireStone: ItemData(type: Item.PureFireStone, name: "", desc: "", price: 8),
         Item.WaterStone: ItemData(type: Item.WaterStone, name: "", desc: "", price: 6),
         Item.PureWaterStone: ItemData(type: Item.PureWaterStone, name: "", desc: "", price: 8),
+        Item.TearCluster: ItemData(type: Item.TearCluster, name: "眼泪精华"),
         
         Item.GoldCoin: ItemData(type: Item.GoldCoin, name: "金币", stackable: true),
         

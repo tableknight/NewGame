@@ -51,6 +51,6 @@ class FrozenShoot: Physical, BowSkill {
         findSingleTargetNotBlocked()
     }
     override func selectable() -> Bool {
-        return isWeaponBow()
+        return _battle._curRole.weaponIs(Outfit.Bow)
     }
 }

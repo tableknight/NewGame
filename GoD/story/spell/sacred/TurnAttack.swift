@@ -31,7 +31,8 @@ class TurnAttack: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.TURN_ATTACK
-        status._timeleft = 2
+        status._timeleft = 3
+        status._labelText = "T"
         t.addStatus(status: status)
         
         let c = _battle._curRole

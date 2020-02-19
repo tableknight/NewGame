@@ -60,7 +60,7 @@ class ShootTwo: Physical, BowSkill {
     }
     
     override func selectable() -> Bool {
-        return isWeaponBow()
+        return _battle._curRole.weaponIs(Outfit.Bow)
     }
     override func findTarget() {
         findTargetRandom2()

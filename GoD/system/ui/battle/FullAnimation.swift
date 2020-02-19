@@ -204,7 +204,8 @@ extension BUnit {
     }
     func thunder1f(completion:@escaping () -> Void = {}) {
         let ao = AnimationOption()
-        ao.frameSize = 4
+        ao.frameSize = 1
+        ao.duration = 120
 //        ao.startX = 4
 //        ao.executeTimes = 2
         ao.imgUrl = "Thunder1.png"
@@ -213,9 +214,10 @@ extension BUnit {
     
     func thunder1s(completion:@escaping () -> Void = {}) {
         let ao = AnimationOption()
-        ao.frameSize = 3
+        ao.frameSize = 1
         ao.startX = 2
         ao.startY = 2
+        ao.duration = 120
 //        ao.executeTimes = 2
         ao.imgUrl = "Thunder1.png"
         self.animate(ao: ao, completion: completion)
@@ -230,7 +232,8 @@ extension BUnit {
     }
     func thunder4s(completion:@escaping () -> Void = {}) {
         let ao = AnimationOption()
-        ao.frameSize = 3
+        ao.frameSize = 1
+        ao.duration = 120
         ao.startX = 4
         ao.startY = 1
 //        ao.executeTimes = 2
@@ -584,7 +587,7 @@ extension BUnit {
     func sonic(completion:@escaping () -> Void = {}) {
         let ao = AnimationOption()
         ao.frameSize = 7
-        ao.executeTimes = 2
+        ao.executeTimes = 1
         ao.duration = 100
         ao.imgUrl = "Sonic.png"
         self.animate(ao: ao, completion: completion)

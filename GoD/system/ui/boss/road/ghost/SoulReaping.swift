@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class SoulReaping: Magical {
+class SoulReaping: Magical, BossOnly {
     override init() {
         super.init()
         _id = Spell.SoulReaping
@@ -20,7 +20,7 @@ class SoulReaping: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let ts = _battle._selectedTargets
+        let ts = _battle._playerPart
         c.actionCast {
             var i = 0
             for t in ts {
@@ -31,7 +31,7 @@ class SoulReaping: Magical {
                     t.actionAttacked {
                         t.showValue(value: damage)
                         setTimeout(delay: 0.5, completion: {
-                            t.showText(text: "SPT -15")
+                            t.showText(text: "Spt -15")
                             t._valueUnit._extensions.spirit -= 15
                         })
                     }
@@ -39,7 +39,7 @@ class SoulReaping: Magical {
             }
             setTimeout(delay: 2.1, completion: {
                 let v = i * 15
-                c.showText(text: "SPT +\(v)")
+                c.showText(text: "Spt +\(v)")
                 c._valueUnit._extensions.spirit += v.toFloat()
             })
             setTimeout(delay: 2.6, completion: completion)
@@ -53,6 +53,6 @@ class SoulReaping: Magical {
         try super.encode(to: encoder)
     }
     override func findTarget() {
-        findTargetPartAll()
+//        findTargetPartAll()
     }
 }

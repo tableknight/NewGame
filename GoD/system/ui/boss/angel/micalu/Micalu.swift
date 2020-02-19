@@ -21,7 +21,7 @@ class Micalu:Boss {
         _level = Micalu.LEVEL
         _img = SKTexture(imageNamed: "Micalu")
         _imgUrl = "Micalu"
-//        _spellsInuse = [SixShooter(), ShootTwo(), OneShootDoubleKill(), MagicReflect()]
+        _spellsInuse = [Spell.SixShooter, Spell.ShootTwo, Spell.OneShootDoubleKill, Spell.MagicReflect]
     }
     override func create(level: CGFloat) {
         
@@ -32,10 +32,11 @@ class Micalu:Boss {
 //        _extensions.avoid = 200
 //        _extensions.critical = 100
 //        
-//        let bow = Bow()
-//        bow.create(level: level)
-//        _weapon = bow
+        let bow = Outfit(Outfit.Bow)
+        bow.create(level: level.toInt())
+        _weapon = bow
     }
+    private var _weapon:Outfit?
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }

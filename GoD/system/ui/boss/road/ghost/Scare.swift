@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-class Scare: Physical {
+class Scare: Magical {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
     }
@@ -19,7 +19,7 @@ class Scare: Physical {
         _id = Spell.Scare
         isClose = true
         _name = "恐吓"
-        _description = "降低目标100%护甲"
+        _description = "降低目标100%基础护甲"
         _quality = Quality.NORMAL
         _cooldown = 1
         cost(value: 5)
@@ -33,7 +33,7 @@ class Scare: Physical {
                 t.actionDebuff {
                     let s = Status()
                     s._type = "_scared"
-                    s._labelText = "A"
+                    s._labelText = "F"
                     s._timeleft = 3
                     let v = t._unit._extensions.defence
                     t._valueUnit._extensions.defence -= v

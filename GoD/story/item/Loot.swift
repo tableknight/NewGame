@@ -43,7 +43,7 @@ class Loot: Core {
     }
     var _weaponlist = [0,1,2,3,4,5,6]
     func lootWeapon(level:Int) -> Outfit {
-        let list = [0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6]
+        let list = [0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,66]
         let weapon = getWeaponById(id: list.one())
         weapon.create(level: level)
         return weapon
@@ -124,7 +124,7 @@ class Loot: Core {
 //    }
     func lootInBossRoad(level:CGFloat) {
         var chance = seed().toFloat()
-        let lucky = _char._lucky * 0.01 + 1
+        let lucky = _char._lucky * 0.01 + getLevelDeviation()
         if chance < 5 * lucky  {
             _props.append(Item(Item.GiantPotion))
         }
@@ -141,7 +141,7 @@ class Loot: Core {
             _props.append(Item(Item.DeathTownScroll))
         }
         chance = seed().toFloat()
-        if chance < 6 * lucky {
+        if chance < 5 * lucky {
             _props.append(Item(Item.RedoSeed))
         }
         chance = seed().toFloat()
@@ -155,7 +155,7 @@ class Loot: Core {
     }
     func lootInPalace(level:CGFloat) {
         var chance = seed().toFloat()
-        let lucky = _char._lucky * 0.01 + 1
+        let lucky = _char._lucky * 0.01 + getLevelDeviation()
         if chance < 7 * lucky  {
             _props.append(Item(Item.Angelsfuther))
         }
@@ -166,7 +166,7 @@ class Loot: Core {
     }
     func lootInDemonTown(level:CGFloat) {
         var chance = seed().toFloat()
-        let lucky = _char._lucky * 0.01 + 1
+        let lucky = _char._lucky * 0.01 + getLevelDeviation()
         if chance < 6 * lucky  {
             _props.append(Item(Item.DemonsBlood))
         }
@@ -177,14 +177,16 @@ class Loot: Core {
     }
     func loot(level:Int) {
         var chance = seed().toFloat()
-        let lucky = _char._lucky * 0.01 + 1
+        let lucky = _char._lucky * 0.01 + getLevelDeviation()
         if chance < 15 * lucky  {
-            let a = lootArmor(level: level)
+            let l = [level - 1, level, level + 1, level + 2].one()
+            let a = lootArmor(level: l)
             _props.append(a)
         }
         chance = seed().toFloat()
         if chance < 15 * lucky {
-            let w = lootWeapon(level: level)
+            let l = [level - 1, level, level + 1, level + 2].one()
+            let w = lootWeapon(level: l)
             _props.append(w)
         }
         chance = seed().toFloat()
@@ -205,6 +207,15 @@ class Loot: Core {
             }
         }
         
+    }
+    
+    func getLevelDeviation() -> CGFloat {
+        let charLevel = Game.instance.char._level
+        let sceneLevel = Game.instance.curStage._curScene._level
+        if charLevel > sceneLevel {
+            return 1 - (charLevel - sceneLevel) / 8
+        }
+        return 1
     }
     
     func getExp(selfUnit:BUnit, enemyLevel:CGFloat) -> CGFloat {
@@ -641,9 +652,9 @@ class Loot: Core {
     }
     
     func getItem() -> Item {
-        var list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        list += [1,1,1,1,1,1]
-        list += [2,2,2]
+        var list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        list += [1,1,1,1,1,1,1,1]
+        list += [2,2,2,2,2]
         list += [3,3]
         list += [4]
         list += [5]

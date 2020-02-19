@@ -21,9 +21,9 @@ class FireRain: Magical {
         _name = "耀斑"
         autoCast = true
         targetEnemy = true
-        _description = "对所有敌方目标造成精神35%的火焰伤害，有小概率点燃目标"
+        _description = "对所有敌方目标造成精神45%的火焰伤害，有小概率点燃目标"
         _quality = Quality.RARE
-        _rate = 0.35
+        _rate = 0.45
         _cooldown = 2
         cost(value: 35)
     }

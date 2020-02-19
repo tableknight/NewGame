@@ -246,10 +246,10 @@ class AttackPowerUp: Passive {
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        let up = c._unit._extensions.attack * 0.8
+        let up = c._unit._extensions.attack * 0.08
         c._valueUnit._extensions.attack += up
         c.showText(text: _name)
-        c.mixed2(index: 13, completion: completion)
+        c.mixed2(index: 14, completion: completion)
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

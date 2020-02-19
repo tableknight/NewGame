@@ -55,7 +55,7 @@ class UIItem:SKSpriteNode {
         l.text = text
         node.addChild(l)
         
-        node.zPosition = MyScene.UI_LAYER_Z
+        node.zPosition = MyScene.UI_LAYER_Z + 100
         node.position.y = cellSize * 1.5
         addChild(node)
         if autoRemove {

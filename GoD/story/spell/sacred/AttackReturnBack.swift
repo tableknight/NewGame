@@ -25,7 +25,8 @@ class AttackReturnBack: Magical {
         removeSpecialStatus(t:t)
         let status = Status()
         status._type = Status.ATTACK_RETURN_BACK
-        status._timeleft = 2
+        status._timeleft = 3
+        status._labelText = "R"
         t.addStatus(status: status)
         c.actionCast {
             t.mixed2(index: 16) {

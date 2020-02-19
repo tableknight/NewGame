@@ -28,6 +28,7 @@ class IssThePuppet:Boss {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
+        _sensitive = 45
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

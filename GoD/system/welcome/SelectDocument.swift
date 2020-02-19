@@ -43,9 +43,9 @@ class SelectDocument: UIPanel {
 //            }
             let selectImage = SelectImage()
             selectImage.create()
-            selectImage.nextAction = {
-                self.createCharactor(selectImage)
-            }
+//            selectImage.nextAction = {
+//                self.createCharactor(selectImage)
+//            }
             Game.instance.gameScene.addChild(selectImage)
             return
         }
@@ -74,6 +74,11 @@ class SelectDocument: UIPanel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    override func createPanelbackground() {
+        super.createPanelbackground()
+        _bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _bg.lineWidth = Game.SELECTED_STROKE_WIDTH
+    }
     private func go() {
         self.removeFromParent()
         let role = Game.load(key: _selectedDc._doc._key)!
@@ -84,7 +89,11 @@ class SelectDocument: UIPanel {
         stage.loadScene(scene: scene)
         stage.createMenu()
         let c = Game.instance.char!
-//        c._spellsInuse.append(Spell.HorribleImage)
+//        c._minionsCount = 3
+//        let p = Item(Item.MPPotion)
+//        c.addItem(p)
+//        c._spellsInuse.append(Spell.QiWave)
+//        c._spellsInuse.append(Spell.Heal)
 //        let t = Item(Item.DeathTownScroll)
 //        t._count = 10
 //        c.addItem(t)
@@ -136,6 +145,14 @@ class SelectDocument: UIPanel {
         _delButton.yAxis = _prevButton.yAxis
         _delButton.xAxis = -_nextButton.xAxis - cellSize * 1.5
         _delButton.text = "删除角色"
+        _closeButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _closeButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
+        _delButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _delButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
+        _prevButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _prevButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
+        _nextButton._bg.strokeColor = Game.SELECTED_HIGHLIGH_COLOR
+        _nextButton._bg.lineWidth = Game.SELECTED_STROKE_WIDTH
         addChild(_delButton)
         _dcLayer.zPosition = self.zPosition + 2
         addChild(_dcLayer)
@@ -179,111 +196,7 @@ class SelectDocument: UIPanel {
             _dcLayer.addChild(dc)
         }
     }
-    private func createCharactor(_ selectImage:SelectImage) {
-        let image = selectImage._lastSelectedComponent._image!
-//        let role = ["冒险者", "", 5, true, false, true, 3, 2, []]
-//        let items = selectItems._selectedItems
-//        let minion = selectMinion._lastSelectedComponent._minion
-        let stage = MyStage()
-        let scene = SecretMeadow()
-        scene.create()
-        let e = Character()
-        e.create()
-        Game.instance.char = e
-        e._img = image
-        e._imgUrl = selectImage._lastSelectedComponent._imgUrl
-        let p = Item(Item.Potion)
-        p._count = 2
-        e.addItem(p)
-        let ts = Item(Item.TownScroll)
-        ts._count = 2
-        e.addItem(ts)
-        
-        let ps = Item(Item.SealScroll)
-        ps._count = 2
-        e.addItem(ps)
-        
-        e._spellsInuse = [Spell.LowlevelFlame]
-        
-        let i = Item("lvScroll")
-        i._count = 40
-        e.addItem(i)
-        
-//        let w = Outfit(Outfit.Sword)
-//        w.create(level: 1)
-//        e.addItem(w)
-        
-//        for i in 1...8 {
-//            e.addItem(Loot.getSacredAmulet(id: i))
-//        }
-//        for i in 1...6 {
-//            e.addItem(Loot.getSacredBow(id: i))
-//        }
-//        for i in 1...6 {
-//            e.addItem(Loot.getSacredBlunt(id: i))
-//        }
-//
-//        for i in 1...9 {
-//            e.addItem(Loot.getSacredSword(id: i))
-//        }
-//        for i in 1...2 {
-//            e.addItem(Loot.getSacredDagger(id: i))
-//        }
-//        for i in 1...10 {
-//            e.addItem(Loot.getSacredRing(id: i))
-//        }
-//        for i in 1...5 {
-//            e.addItem(Loot.getSacredSoulstone(id: i))
-//        }
-//        for i in 1...9 {
-//            e.addItem(Loot.getSacredInstrument(id: i))
-//        }
-//        for i in 1...4 {
-//            e.addItem(Loot.getSacredWand(id: i))
-//        }
-//        for i in 1...9 {
-//            e.addItem(Loot.getSacredMark(id: i))
-//        }
-//        for i in 1...5 {
-//            e.addItem(Loot.getSacredFist(id: i))
-//        }
-//        for i in 1...4 {
-//            e.addItem(Loot.getSacredEarring(id: i))
-//        }
-//        let b = Battle()
-//        b.showLootItems(e._items)
-        
-        e._minionsCount = 2
-        e._spellCount = 3
-        e._levelPoint = 5
-        e._seat = BUnit.BBM
-        e._pro = "冒险者"
-        e._name = selectImage._lastSelectedComponent._name
-        //-------------------------------------
-        if Mode.debug {
-//            e._props.append(LevelUpScroll())
-        }
-        //-------------------------------------
-        scene.setRole(x: scene._portalPrev.x, y: scene._portalPrev.y, role: e)
-        let kiki = BlackCat()
-        kiki.create(level: 1)
-        kiki._seat = BUnit.BTM
-        e._minions.append(kiki)
-        stage.loadScene(scene: scene)
-        stage.createMenu()
-        selectImage.removeFromParent()
-        
-//        let sword = Outfit(Outfit.Sword)
-//        sword.create(level: 10)
-//        e.addItem(sword)
-        
-        self.removeFromParent()
-        Game.instance.gameScene.addChild(stage)
-        
-        setTimeout(delay: 1, completion: {
-            Game.saving(sync: false)
-        })
-    }
+    
     private func showCreationButton() {
         if _roleDocs.count < 8 {
             _prevButton.isHidden = false

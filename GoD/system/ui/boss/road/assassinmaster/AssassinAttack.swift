@@ -21,7 +21,7 @@ class AssassinAttack: Physical {
                 if !self.hasMissed(target: t, completion: completion) {
                     t.actionAttacked {
                         if self.d5() && !(t._unit is Character) {
-                            t.showText(text: "KILLED") {
+                            t.showText(text: "Kill") {
                                 t.hpChange(value: -1 - t.getHp())
                                 t.die()
                                 completion()

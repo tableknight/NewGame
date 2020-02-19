@@ -1011,7 +1011,7 @@ struct Sacred {
             effection: Sacred.SoulPeace,
             type: Outfit.SoulStone,
             name: "灵魂碎片",
-            desc: "",
+            desc: "种族转化为天使",
             level: 22,
             price: 322,
             chance: 70,

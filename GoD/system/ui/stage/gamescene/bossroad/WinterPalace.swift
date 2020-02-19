@@ -13,14 +13,18 @@ class WinterPalace: MorningPalace {
         _monsterEnum = []
         _name = "冬·宫"
         _floorSize = 4
-        _level = Lewis.LEVEL
+        _level = Lewis.LEVEL //31
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     override func getPortalFinal() -> UIItem {
-        return RoleMicalu()
+        let role = UIRole()
+        role.create(roleNode: SKSpriteNode(imageNamed: "Lewis"))
+        role._roleNode.size = CGSize(width: cellSize * 2, height: cellSize * 2)
+        role.zPosition = MyScene.BOSS_LAYER_Z
+        return role
     }
     override func finalBattle() {
         let b = LewisBattle()

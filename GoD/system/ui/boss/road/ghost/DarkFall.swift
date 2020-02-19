@@ -21,7 +21,7 @@ class DarkFall: Magical {
     override func cast(completion:@escaping () -> Void) {
         let b = _battle
         let c = b._curRole
-        let ts = _battle._selectedTargets
+        let ts = _battle._playerPart
         c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 55, target: t) {

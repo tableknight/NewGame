@@ -14,7 +14,7 @@ class CityOfDeath: DemonTown {
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
         _monsterEnum = []
         _name = "死亡之城"
-        _floorSize = 1 //12
+        _floorSize = 12 //12
         _level = Umisa.LEVEL // 34
     }
     
@@ -149,7 +149,7 @@ class DeathGod: Rizen {
         _imgUrl = "death_god"
         _name = "死神"
         _img = SKTexture(imageNamed: "death_god")
-        _spellsInuse = [Spell.FireRain, Spell.WindPunish]
+        _spellsInuse = [Spell.FireRain, Spell.WindPunish, Spell.FireExplode]
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
