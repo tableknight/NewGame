@@ -35,13 +35,14 @@ class WaterCopy:Magical {
             copy._spellsInuse = [Spell.NoAction]
             copy._extensions.health = c.getHealth()
             copy._extensions.hp = c.getHp()
-            copy._extensions.defence = c._unit._extensions.defence
+            copy._extensions.defence = c._unit._extensions.defence * 0.5
             copy._extensions.attack = c._unit._extensions.attack
             copy._extensions.spirit = c._unit._extensions.spirit
             copy._extensions.speed = c._unit._extensions.speed
             copy._extensions.avoid = c._unit._extensions.avoid
             copy._extensions.mind = c._unit._extensions.mind
             copy._elementalResistance.water = 50
+            copy._elementalResistance.fire = -20
 //            copy._sensitive = c._unit._sensitive
             copy._rhythm = 0
             copy._name = "水分身"

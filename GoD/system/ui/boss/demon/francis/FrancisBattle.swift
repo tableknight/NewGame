@@ -319,7 +319,7 @@ class SoulExtract: Magical {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage) {
-                        t.showText(text: "LOST") {
+                        t.showText(text: "Lost") {
                             t._valueUnit.strengthChange(value: -1)
                             t._valueUnit.staminaChange(value: -1)
                             t._valueUnit.agilityChange(value: -1)

@@ -25,6 +25,7 @@ class ArmorHouse: StandScene {
         bg.yAxis = cellSize * 0.5
         addChild(bg)
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "armor_house_roof"))
+        roof.size = CGSize(width: cellSize * 13, height: cellSize * 14)
         addItem(x: 0, y: 13, item: roof, width: 12)
         
         for x in 0...12 {
@@ -111,6 +112,7 @@ class ArmorHouse: StandScene {
                                         for i in 0...6 {
                                             let w = l.getWeaponById(id: i)
                                             w.create(level:level.toInt())
+                                            
                                             sp._goodsList.append(w)
                                         }
                                         sp.create()

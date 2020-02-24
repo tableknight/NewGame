@@ -53,7 +53,7 @@ class SellingPanel: UIPanel {
                     if item._type == Item.GoldCoin {
                         return
                     }
-                    _char.addMoney(num: item.price)
+                    _char.addMoney(num: item.price4sale)
                     _char.removeItem(item)
 
                     pageReload()
@@ -174,9 +174,15 @@ class SellingPanel: UIPanel {
         if hasBuyAction {
             buyAction()
         } else {
-            let copy = Item(prop._type)
-            copy._count = 1
-            _char.addItem(copy)
+            if prop is Outfit {
+                _char.addItem(prop)
+                let i = _goodsList.firstIndex(of: prop)!
+                _goodsList.remove(at: i)
+            } else {
+                let copy = Item(prop._type)
+                copy._count = 1
+                _char.addItem(copy)
+            }
         }
 
         pageReload()
@@ -243,12 +249,15 @@ class SellingPanel: UIPanel {
             sii.xAxis = startX + (cellSize * 1.5 + _standardGap) * x.toFloat()
             sii.yAxis = startY - (cellSize + _standardGap) * y.toFloat()
             sii._priceType = _goodsList[i]._priceType
-            sii.price = _goodsList[i]._price * 4
+            sii.price = _goodsList[i].priceInStore
             sii.zPosition = self.zPosition + 3
             sii.quality = _goodsList[i]._quality
             if _goodsList[i]._count > 1 {
                 sii.count = _goodsList[i]._count
             }
+//            if _goodsList[i] is Outfit {
+//                sii.removeWhileSellout = true
+//            }
             _goodsBox.addChild(sii)
         }
     }

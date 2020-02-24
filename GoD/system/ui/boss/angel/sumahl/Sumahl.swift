@@ -51,7 +51,10 @@ class SumahlServant1:BossMinion {
         _growth.agility = 2.8
         _growth.intellect = 1.6
         levelTo(level: level)
-        
+        if _createForBattle {
+            _extensions.health *= 1.5
+            _extensions.hp = _extensions.health
+        }
         _spellsInuse = [Spell.HolySacrifice]
     }
     required init(from decoder: Decoder) throws {
@@ -74,7 +77,10 @@ class SumahlServant2:BossMinion {
         _growth.agility = 2.8
         _growth.intellect = 2.6
         levelTo(level: level)
-        
+        if _createForBattle {
+            _extensions.health *= 1.5
+            _extensions.hp = _extensions.health
+        }
         _spellsInuse = [Spell.LifeFlow]
     }
     required init(from decoder: Decoder) throws {

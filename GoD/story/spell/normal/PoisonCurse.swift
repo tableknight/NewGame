@@ -24,6 +24,7 @@ class PoisonCurse: Magical, Curse {
             if !self.statusMissed(baseline: 85, target: t, bossImmnue: false, completion: completion) {
                 t.statePoison() {
                     t.poisoning()
+                    completion()
                 }
             }
         }

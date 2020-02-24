@@ -27,7 +27,7 @@ class LewisBattle: BossBattle {
                     _selectedAction = LewisAttack()
                 } else if sd < 65 {
                     _selectedAction = HandOfGod()
-                } else if sd < 80 {
+                } else if sd < 78 {
                     _selectedAction = PowerUp()
                 } else if sd < 90 {
                     _selectedAction = OathBreaker()
@@ -138,7 +138,7 @@ class SoulControl: Magical, BossOnly {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            t.showText(text: "CONTROLED") {
+            t.showText(text: "Controled") {
                 t.actionRecall {
                     t.removeFromBattle()
                     t.removeFromParent()
@@ -213,12 +213,16 @@ class HandOfGod: Physical, BossOnly {
                     t.actionAttacked {
                         t.showValue(value: damage) {
                             setTimeout(delay: 2, completion: completion)
+                            var sa = Array<Spell>()
                             for s in t.spells {
                                 if s is Active {
-                                    s._timeleft += 3
-                                    t.showText(text: "DELAYED")
-                                    return
+                                    sa.append(s)
                                 }
+                            }
+                            if sa.count > 0 {
+                                let s = sa.one()
+                                s._timeleft += 3
+                                t.showText(text: "Seal")
                             }
                         }
                     }
@@ -244,33 +248,34 @@ class PowerUp: Magical, BossOnly {
     }
     override func cast(completion: @escaping () -> Void) {
         let t = _battle._selectedTarget!
-        let status = Status()
-        status._timeleft = 2
-        status._labelText = "E"
-        let attack = t.getAttack()
-        let def = t.getDefence()
-        t._valueUnit._extensions.defence += def
-        t._valueUnit._extensions.attack += attack
-        status.timeupAction = {
-            t._valueUnit._extensions.defence -= def
-            t._valueUnit._extensions.attack -= attack
-        }
-        t.addStatus(status: status)
+        
         _battle._curRole.actionCast {
             t.revival2f() {
+                let status = Status()
+                status._timeleft = 2
+                status._labelText = "E"
+                let attack = t.getAttack()
+                let def = t.getDefence()
+                t._valueUnit._extensions.defence += def
+                t._valueUnit._extensions.attack += attack
+                status.timeupAction = {
+                    t._valueUnit._extensions.defence -= def
+                    t._valueUnit._extensions.attack -= attack
+                }
+                t.addStatus(status: status)
                 completion()
             }
         }
     }
     
     override func findTarget() {
-        var ts = Array<BUnit>()
-        for u in _battle._enemyPart {
-            if u != _battle._curRole {
-                ts.append(u)
-            }
-        }
-        _battle._selectedTarget = ts.one()
+//        var ts = Array<BUnit>()
+//        for u in _battle._enemyPart {
+//            if u != _battle._curRole {
+//                ts.append(u)
+//            }
+//        }
+        _battle._selectedTarget = _battle._enemyPart.one()
     }
 }
 
@@ -332,10 +337,13 @@ class SoulWatch: Magical, BossOnly {
         _battle._curRole.actionCast {
             for t in ts {
                 if !self.hadSpecialAction(t: t, completion: completion) {
-                    t.actionAttacked {
-                        let damage = self.magicalDamage(t)
-                        t.showValue(value: damage)
+                    t.darkness5() {
+                        t.actionAttacked {
+                            let damage = self.magicalDamage(t)
+                            t.showValue(value: damage)
+                        }
                     }
+                    
                 }
             }
             setTimeout(delay: 2.5, completion: completion)

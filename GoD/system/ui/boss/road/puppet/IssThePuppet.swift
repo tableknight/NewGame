@@ -11,7 +11,7 @@ class IssThePuppet:Boss {
     static let LEVEL:CGFloat = 10
     override init() {
         super.init()
-        _name = "艾斯斯"
+        _name = "魔界灵媒"
         _quality = Quality.SACRED
         _growth.stamina = 2.5
         _growth.strength = 2.1
@@ -19,16 +19,16 @@ class IssThePuppet:Boss {
         _growth.intellect = 2.6
         _level = IssThePuppet.LEVEL
         _race = EvilType.RISEN
-        _img = SKTexture(imageNamed: "Iss")
-        _imgUrl = "Iss"
-        _spellsInuse = [Spell.ControlUndead, Spell.LowerSummon, Spell.SummonFlower, Spell.WaterCopy, Spell.HighLevelSummon]
+        _img = SKTexture(imageNamed: "Plant")
+        _imgUrl = "Plant"
+        _spellsInuse = [Spell.LowerSummon, Spell.SummonFlower, Spell.WaterCopy, Spell.HighLevelSummon]
     }
     override func create(level: CGFloat) {
         
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        _sensitive = 45
+        _sensitive = 55
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

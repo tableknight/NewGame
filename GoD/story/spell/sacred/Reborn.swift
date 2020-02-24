@@ -14,13 +14,13 @@ class Reborn: Passive {
         _id = Spell.Reborn
         _quality = Quality.SACRED
         _name = "重生"
-        _description = "行动结束后恢复10%最大生命"
+        _description = "行动结束后恢复8%最大生命"
         hasAfterMoveAction = true
         _delay = 1.25
     }
     override func cast(completion: @escaping () -> Void) {
         let c = _battle._curRole
-        _rate = 0.1
+        _rate = 0.08
 //        if c.soulstoneIs(HeartOfTarrasque.EFFECTION) {
 //            _rate = 0.2
 //        }

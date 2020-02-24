@@ -489,7 +489,7 @@ class Spell:Core, Showable, Castable {
 //        if from.weaponIs(HolyPower.EFFECTION) && to.getRace() == EvilType.RISEN {
 //            factor *= 2
 //        }
-        debug("race factor is \(factor)")
+//        debug("race factor is \(factor)")
         return factor
     }
     internal func elementalDamage(damage:CGFloat, to:BUnit, from:BUnit) -> CGFloat {
@@ -631,6 +631,7 @@ class Spell:Core, Showable, Castable {
 //        }
         let acc = getAccuracy()
         let avd = target.getAvoid()
+        debug("acc: \(acc), avd: \(avd)")
         let sed = seed().toFloat()
         let this = self
         var value = acc - avd

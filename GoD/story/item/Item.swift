@@ -362,17 +362,21 @@ class Item:Core, Castable, Showable {
         
     }
 
-    var price:Int {
-        set {
-            _price = newValue
-        }
+    var priceInStore:Int {
         get {
-            if _priceType == Item.PRICE_TYPE_TEAR {
+            if _priceType == Item.PRICE_TYPE_GOLD {
                 return _price * 4
             }
             return _price
         }
     }
+    
+    var price4sale:Int {
+        get {
+            return _price
+        }
+    }
+    
     var spell:Spell {
         set {
             _spell = newValue._id
@@ -654,14 +658,14 @@ struct ItemData:Codable {
         Item.Potion: ItemData(type: Item.Potion, name: "治疗药水", showingText: "药", desc: "恢复50%最大生命值", price: 6, quality: Quality.GOOD, value: 0.5, autoCast: false, usable: true, castable: true),
         Item.LittlePotion: ItemData(type: Item.LittlePotion, name: "小型治疗药水", showingText: "药", desc: "恢复25%最大生命值", price: 3,value: 0.25, autoCast: false, usable: true, castable: true),
         Item.GiantPotion: ItemData(type: Item.GiantPotion, name: "巨人药水", showingText: "药", desc: "恢复100%最大生命值", price: 18, quality: Quality.RARE, value: 1, autoCast: false, usable: true, castable: true),
-        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", showingText: "法", desc: "恢复200点法力", priceType: Item.PRICE_TYPE_TEAR, price: 32, quality: Quality.GOOD, value: 200, autoCast: false, usable: true),
-        Item.LittleMPPotion: ItemData(type: Item.LittleMPPotion, name: "小型法力药水", showingText: "法", desc: "恢复75点法力", priceType: Item.PRICE_TYPE_TEAR, price: 12, value: 75, autoCast: false, usable: true),
-        Item.SoulMPPotion: ItemData(type: Item.SoulMPPotion, name: "灵魂法力药水", showingText: "法", desc: "恢复450点法力", priceType: Item.PRICE_TYPE_TEAR, price: 48, quality: Quality.RARE, value: 450, autoCast: false, usable: true),
+        Item.MPPotion: ItemData(type: Item.MPPotion, name: "法力药水", showingText: "法", desc: "恢复200点法力", priceType: Item.PRICE_TYPE_TEAR, price: 6, quality: Quality.GOOD, value: 200, autoCast: false, usable: true),
+        Item.LittleMPPotion: ItemData(type: Item.LittleMPPotion, name: "小型法力药水", showingText: "法", desc: "恢复75点法力", priceType: Item.PRICE_TYPE_TEAR, price: 2, value: 75, autoCast: false, usable: true),
+        Item.SoulMPPotion: ItemData(type: Item.SoulMPPotion, name: "灵魂法力药水", showingText: "法", desc: "恢复450点法力", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.RARE, value: 450, autoCast: false, usable: true),
         Item.SealScroll: ItemData(type: Item.SealScroll, name: "封印卷轴", desc: "将一个虚弱的灵魂封印在卷轴里", price: 12, autoCast: false, usable: false, castable: true),
         Item.ExpBook: ItemData(type: Item.ExpBook, name: "传承之书", desc: "获得经验640点", price: 28, value: 640, autoCast: false, usable: true),
         
         Item.SummonScroll: ItemData(type: Item.SummonScroll, name: "", desc: "", usable: true),
-        Item.PsychicScroll: ItemData(type: Item.PsychicScroll, name: "通灵卷轴", desc: "召唤一个强大的亡灵战士为你而战", priceType: Item.PRICE_TYPE_TEAR, price: 42, quality: Quality.SACRED, castable: true),
+        Item.PsychicScroll: ItemData(type: Item.PsychicScroll, name: "通灵卷轴", desc: "召唤一个强大的亡灵战士为你而战", priceType: Item.PRICE_TYPE_TEAR, price: 24, quality: Quality.SACRED, castable: true),
         Item.StarStone: ItemData(type: Item.StarStone, name: "星之石", desc: "高密度能量结晶，可以拆解出大量高纯度天使之泪", price: 128, usable: true),
         
         Item.DragonRoot: ItemData(type: Item.DragonRoot, name: "龙根", desc: "", price: 6, imgX: 11, imgY: 7),
@@ -684,7 +688,7 @@ struct ItemData:Codable {
         
         Item.RandomArmor: ItemData(type: Item.RandomArmor, name: "防具", price: 12),
         Item.RandomWeapon: ItemData(type: Item.RandomWeapon, name: "武器", price: 12),
-        Item.RandomSpell: ItemData(type: Item.RandomSpell, name: "法术书？", showingText: "书？", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.SACRED),
+        Item.RandomSpell: ItemData(type: Item.RandomSpell, name: "法术书？", showingText: "书？", priceType: Item.PRICE_TYPE_TEAR, price: 48, quality: Quality.SACRED),
         "lvScroll": ItemData(type: "lvScroll", name: "升级卷轴", showingText: "升", priceType: Item.PRICE_TYPE_TEAR, price: 12, quality: Quality.SACRED, usable: true),
         
         

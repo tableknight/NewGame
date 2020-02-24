@@ -104,11 +104,14 @@ class MyStage: SKSpriteNode {
         showSceneMask()
         _showingLabel.text = scene._name
         _showingLabel.isHidden = false
+        _messageLabel.isHidden = false
+        _messageLabel.text = "& \(Strings.tips.one())"
         cancelMove = true
         setTimeout(delay: 1, completion: {
             let out = SKAction.fadeOut(withDuration: TimeInterval(1))
             self.addChild(scene)
             self._showingLabel.isHidden = true
+            self._messageLabel.isHidden = true
             
             self._sceneChangeMask.run(out) {
                 self._sceneChangeMask.isHidden = true
@@ -263,7 +266,11 @@ class MyStage: SKSpriteNode {
         let role = _curScene._role!
         _hpbar.setBar(value: role.getHp() / role.getHealth())
         _mpbar.setBar(value: role.getMp() / role.getMpMax())
-        _expbar.setBar(value: role._unit._exp / role._unit.expNext())
+        if role._unit._level >= 40 {
+            _expbar.setBar(value: 1)
+        } else {
+            _expbar.setBar(value: role._unit._exp / role._unit.expNext())
+        }
     }
     private func createMenuButtons(x:CGFloat, y:CGFloat, size:CGFloat, text:String) -> RoundButton {
         let s = RoundButton()
@@ -398,13 +405,15 @@ class MyStage: SKSpriteNode {
         _messageNode.removeFromParent()
         _showingLabel.text = next._name
         _showingLabel.isHidden = false
+        _messageLabel.text = "& \(Strings.tips.one())"
+        _messageLabel.isHidden = false
         loaded = false
         _curScene.removeFromParent()
         _curScene._role.removeFromParent()
         cancelMove = true
         Game.saving(sync: false)
         //        return
-        let this = self
+//        let this = self
         setTimeout(delay: 1, completion: {
             
             //            let wait = SKAction.wait(forDuration: TimeInterval(1))
@@ -418,11 +427,12 @@ class MyStage: SKSpriteNode {
             self.addChild(next)
             self._curScene = next
             self._showingLabel.isHidden = true
+            self._messageLabel.isHidden = true
             completion()
             
-            this._sceneChangeMask.run(out) {
+            self._sceneChangeMask.run(out) {
                 self._sceneChangeMask.isHidden = true
-                this.loaded = true
+                self.loaded = true
                 self.cancelMove = false
             }
         })
@@ -457,6 +467,8 @@ class MyStage: SKSpriteNode {
     }
     var _sceneChangeMask = SKSpriteNode()
     private var _showingLabel = Label()
+    private var _messageLabel = Label()
+    
     private func createSceneChangeMask() {
         let screenBounds:CGSize = UIScreen.main.bounds.size
         let cover = createBackground(width: screenBounds.width * 2, height: screenBounds.height * 2)
@@ -476,6 +488,13 @@ class MyStage: SKSpriteNode {
         _showingLabel.zPosition = _sceneChangeMask.zPosition + 1
         _showingLabel.position.y = 18
         addChild(_showingLabel)
+        
+        _messageLabel.isHidden = true
+        _messageLabel.fontSize = 18
+        _messageLabel.align = "center"
+        _messageLabel.zPosition = _sceneChangeMask.zPosition + 1
+        _messageLabel.position.y = cellSize * -8
+        addChild(_messageLabel)
         
 //        let bg = createBackground(width: screenBounds.width * 2, height: screenBounds.height * 2)
 //        bg.fillColor = UIColor.black

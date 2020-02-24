@@ -17,11 +17,11 @@ class SumahlBattle: BossBattle {
     override func createAI() {
         if _curRole._unit is Sumahl {
             let sd = seed()
-            if sd < 50 {
+            if sd < 35 {
                 _selectedAction = MindIntervene()
-            } else if sd < 70 {
+            } else if sd < 50 {
                 _selectedAction = HealAll()
-            } else if sd < 90 {
+            } else if sd < 70 {
                 _selectedAction = SilenceAll()
             } else {
                 _selectedAction = BossAttack()
@@ -38,22 +38,27 @@ class SumahlBattle: BossBattle {
         var es = Array<Creature>()
         
         let mx1 = SumahlServant1()
+        mx1._createForBattle = true
         mx1.create(level: level)
         mx1._seat = BUnit.TBL
         
         let mx2 = SumahlServant1()
+        mx2._createForBattle = true
         mx2.create(level: level)
         mx2._seat = BUnit.TBM
         
         let mx3 = SumahlServant1()
+        mx3._createForBattle = true
         mx3.create(level: level)
         mx3._seat = BUnit.TBR
         
         let lq1 = SumahlServant2()
+        lq1._createForBattle = true
         lq1.create(level: level)
         lq1._seat = BUnit.TTL
         
         let lq2 = SumahlServant2()
+        lq2._createForBattle = true
         lq2.create(level: level)
         lq2._seat = BUnit.TTR
         
@@ -133,14 +138,15 @@ class MindIntervene: Physical, Curse {
         _description = "对目标释放诅咒术，有100%几率使其精神产生混乱，随机攻击目标，不分敌友"
         _quality = Quality.SACRED
         _cooldown = 2
+        cost(value: 20)
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
             if !self.statusMissed(baseline: 100, target: t, completion: completion) {
-                t.actionDebuff {
-                    t.showText(text: "CONFUSED") {
+                t.darkness5() {
+                    t.showText(text: Status.CONFUSED) {
                         completion()
                         let s = Status()
                         s._type = Status.CONFUSED

@@ -512,7 +512,7 @@ class Battle: SKSpriteNode {
             _selectedAction = Attack()
             _selectedAction._battle = self
             _selectedTarget = all.one()
-            _curRole.showText(text: "CONFUSED") {
+            _curRole.showText(text: Status.CONFUSED) {
                 self.execOrder()
             }
             return
@@ -605,10 +605,12 @@ class Battle: SKSpriteNode {
     }
     internal func defeated() {
         isVictory = false
-        lostExp(unit: _char)
-        let money = seed(min: _char!._level.toInt(), max: _char!._level.toInt() * 3)
-        showMsg(text: "战斗失败，你失去了金钱和经验！")
-        _char.lostMoney(num: money)
+        if _char._level >= 10 {
+            lostExp(unit: _char)
+            let money = seed(min: _char!._level.toInt(), max: _char!._level.toInt() * 3)
+            showMsg(text: "战斗失败，你失去了金钱和经验！")
+            _char.lostMoney(num: money)
+        }
         _char._extensions.hp = 1
         fadeOutBattle()
     }

@@ -100,6 +100,9 @@ class OutfitPanel: UIPanel {
                 _amulet.quality = outfit._quality
             }
             if outfit._type == Outfit.Shield {
+                if !_char.hasShield {
+                    return
+                }
                 if _char._shield != nil {
                     _char._shield!.off()
                     _char.addItem(_char._shield!)
@@ -109,6 +112,7 @@ class OutfitPanel: UIPanel {
                 _shield.iconLabel = outfit._name
                 _shield.quality = outfit._quality
             }
+            
             if outfit._type == Outfit.SoulStone {
                 if _char._soulStone != nil {
                     _char._soulStone!.off()
@@ -120,6 +124,9 @@ class OutfitPanel: UIPanel {
                 _soulStone.quality = outfit._quality
             }
             if outfit._type == Outfit.MagicMark {
+                if !_char.hasMark {
+                    return
+                }
                 if _char._magicMark != nil {
                     _char._magicMark!.off()
                     _char.addItem(_char._magicMark!)
@@ -129,6 +136,7 @@ class OutfitPanel: UIPanel {
                 _magicMark.iconLabel = outfit._name
                 _magicMark.quality = outfit._quality
             }
+            
             
             if outfit._type == Outfit.Ring {
                 if outfit._unique && outfit._effection == _char._leftRing?._effection {

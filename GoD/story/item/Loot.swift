@@ -213,7 +213,7 @@ class Loot: Core {
         let charLevel = Game.instance.char._level
         let sceneLevel = Game.instance.curStage._curScene._level
         if charLevel > sceneLevel {
-            return 1 - (charLevel - sceneLevel) / 8
+            return 1 - (charLevel - sceneLevel) / 10
         }
         return 1
     }
@@ -287,7 +287,7 @@ class Loot: Core {
     }
     static let LastSacredSpellCountId = 4036
     static func getNormalSpell(id:Int) -> Spell {
-        debug("normal = \(id)")
+//        debug("normal = \(id)")
         switch id {
         case Spell.Cruel:
             return Cruel()
@@ -340,7 +340,7 @@ class Loot: Core {
         }
     }
     static func getGoodSpell(id:Int) -> Spell {
-        debug("good = \(id)")
+//        debug("good = \(id)")
         switch id {
         case Spell.BloodThirsty:
             return BloodThirsty()
@@ -403,7 +403,7 @@ class Loot: Core {
         }
     }
     static func getRareSpell(id:Int) -> Spell {
-        debug("rare = \(id)")
+//        debug("rare = \(id)")
         switch id {
         case Spell.Lighting:
             return Lighting()

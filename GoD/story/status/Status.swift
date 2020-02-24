@@ -41,7 +41,7 @@ class Status:Core {
     static let BELLICOSE = "bellicose"
     static let CRUEL = "cruel"
     static let REBORN = "reborn"
-    static let CONFUSED = "confused"
+    static let CONFUSED = "Confused"
     static let RACE_SUPERIORITY = "race_superiorty"
     static let PROTECT_FROM_GOD = "protect_from_god"
     static let PROTECTION_FROM_ICE = "protection_from_ice"

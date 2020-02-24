@@ -4,7 +4,7 @@
 //
 //  Created by kai chen on 2019/1/11.
 //  Copyright © 2019年 Chen. All rights reserved.
-//
+// not used
 
 import SpriteKit
 class ChurchHouse: InnerHouse {
@@ -96,7 +96,7 @@ class ChurchHouse: InnerHouse {
                 for i in 0...3 {
                     let a = Item(Item.RandomArmor)
                     if i == 3 {
-                        a.price = 50
+                        a._price = 50
                     }
                     a._reserveInt = i
                     a._name = "\(l.getArmorById(id: i)._name)?"

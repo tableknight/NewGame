@@ -159,12 +159,12 @@ class SelectImage:UIPanel {
         
         e._spellsInuse = [roleData.spell]
         
-        e._spellsInuse.append(Spell.ColdWind)
-        e._spellsInuse.append(Spell.ThunderArray)
+//        e._spellsInuse.append(Spell.ColdWind)
+//        e._spellsInuse.append(Spell.ThunderArray)
         
-        let i = Item("lvScroll")
+//        let i = Item("lvScroll")
 //        i._count = 40
-        e.addItem(i)
+//        e.addItem(i)
 //        e._minionsCount = 2
 //        e._spellCount = 3
 //        e._levelPoint = 5

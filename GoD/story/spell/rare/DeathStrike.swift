@@ -35,8 +35,8 @@ class DeathStrike: Magical {
             if !this.hadSpecialAction(t:t, completion: completion) {
                 t.actionAttacked {
                     t.showValue(value: damage) {
-                        t.showText(text:"ST -10", color: Colors.STATUS_CHANGE)
-                        c.showText(text:"ST +10", color: Colors.STATUS_CHANGE, completion: completion)
+                        t.showText(text:"Spt -10", color: Colors.STATUS_CHANGE)
+                        c.showText(text:"Spt +10", color: Colors.STATUS_CHANGE, completion: completion)
                     }
                     t._valueUnit._extensions.spirit -= 10
                     c._valueUnit._extensions.spirit += 10

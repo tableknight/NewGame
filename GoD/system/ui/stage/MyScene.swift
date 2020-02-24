@@ -834,7 +834,7 @@ class Chest:UIItem {
         let item = Game.instance.pictureChest.getCell(_x.toFloat(), 3)
         setTexture(item)
         
-        if Core().d4() {
+        if Core().d5() {
             let b = MimicBattle()
             b._level = Game.instance.curStage._curScene._level
             b.setEnemyPart(minions: Array<Creature>())

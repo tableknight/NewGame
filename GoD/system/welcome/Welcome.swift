@@ -58,11 +58,33 @@ class Welcome: SKSpriteNode {
         _enterLabel.size = CGSize(width: cellSize * 3, height: cellSize)
         addChild(_enterLabel)
         
-        let title = SKSpriteNode(texture: SKTexture(imageNamed: "title"))
-        title.size = CGSize(width: cellSize * 10, height: cellSize * 4)
-        title.position.y = cellSize * 8
+        let title = SKSpriteNode(texture: SKTexture(imageNamed: "title_travel"))
+        title.size = CGSize(width: cellSize * 10, height: cellSize * 2.5)
+        title.position.y = cellSize * 7
         title.zPosition = 50
+        title.alpha = 0.5
         addChild(title)
+        
+        let title2 = SKSpriteNode(texture: SKTexture(imageNamed: "title_travel"))
+        title2.size = CGSize(width: cellSize * 10, height: cellSize * 2.5)
+        title2.position.y = cellSize * 7.125
+        title2.position.x = cellSize * -0.125
+        title2.zPosition = 51
+        addChild(title2)
+        
+        let subtitle = Label()
+        subtitle.text = "@异世界根本不需要我拯救"
+        subtitle.position.x = cellSize * 2
+        subtitle.position.y = -cellSize * 12
+        subtitle.fontSize = 16
+        addChild(subtitle)
+        
+        let fairy = SKSpriteNode(imageNamed: "Fairy")
+        fairy.yAxis = cellSize * 8
+        fairy.xAxis = cellSize * -5.5
+        fairy.size = CGSize(width: cellSize * 2, height: cellSize * 2.5)
+        fairy.zPosition = 52
+        addChild(fairy)
         
         let imgs = [
                     "role_01",

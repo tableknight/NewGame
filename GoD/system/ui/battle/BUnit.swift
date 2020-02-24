@@ -607,9 +607,10 @@ class BUnit: SKSpriteNode {
         if beCritical {
             v = CGVector(dx: 0, dy: _charSize * 0.4)
             move = SKAction.move(by: v, duration: TimeInterval(0.05))
-            let s = SKAction.scale(by: 1.5, duration: TimeInterval(0.05))
+            let s = SKAction.scale(by: 1.3, duration: TimeInterval(0.05))
             let group = SKAction.group([s, move])
             go = SKAction.sequence([group,  wait])
+            beCritical = false
         }
         valueText.run(go) {
             valueText.removeFromParent()

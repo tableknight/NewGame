@@ -214,7 +214,7 @@ class Unit:Core {
         _extensions.defence += value * 1.1
         _extensions.speed += value * 0
         _extensions.accuracy += value * 0
-        _extensions.avoid += value * -0.3
+        _extensions.avoid += value * -0.2
         _extensions.critical += value * 0
         _extensions.spirit += value * -0.5
         _extensions.health += value * 4
@@ -234,7 +234,7 @@ class Unit:Core {
         _extensions.defence += value * 0.1
         _extensions.speed += value * 2
         _extensions.accuracy += value * 0.6
-        _extensions.avoid += value * 1
+        _extensions.avoid += value * 0.9
         _extensions.critical += value * 0.3
         _extensions.spirit += value * 0
         _extensions.health += value * 2

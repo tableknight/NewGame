@@ -53,6 +53,8 @@ class Dungeon: MyScene {
         createSize()
 //        halfSize = 3
         _nameLabel.text = "黄昏之城"
+        _maxHerbCount = seed(min: 1, max: 6)
+        _maxChestCount = seed(min: 0, max: 3)
         createMap()
         createMapMatrix()
         _visiblePoints = findVisiblePoints()
@@ -148,12 +150,14 @@ class Dungeon: MyScene {
         }
     }
     internal var _herbCount = 0
+    internal var _maxHerbCount = 5
     internal var _chestCount = 0
+    internal var _maxChestCount = 3
     internal var _towerCount = 0
     internal func addWallCell(x:CGFloat, y:CGFloat, texture:SKTexture) {
         let sd = seed()
         let item = UIItem()
-        if sd < 6 && _herbCount < 5 && !(self is InnerMaze) {
+        if sd < 6 && _herbCount < _maxHerbCount && !(self is InnerMaze) {
             let herb = _herbs.one()
             item._key = herb
             let data = ItemData.data[herb]!
@@ -162,7 +166,7 @@ class Dungeon: MyScene {
             addWall(x: x, y: y, item: item)
             _mapMatrix[y.toInt()][x.toInt()] = CELL_HERB
             _herbCount += 1
-        } else if sd < 10 && _chestCount < 3 {
+        } else if sd < 10 && _chestCount < _maxChestCount {
             let chest = Chest()
             addWall(x: x, y: y, item: chest)
             _mapMatrix[y.toInt()][x.toInt()] = CELL_BOX
@@ -413,7 +417,7 @@ class Dungeon: MyScene {
         for p in _visiblePoints {
             if Core().d7() && _mapMatrix[p.y.toInt()][p.x.toInt()] == CELL_EMPTY {
                 _mapMatrix[p.y.toInt()][p.x.toInt()] = CELL_MONSTER
-                debug("monster x = \(p.x), y = \(p.y)")
+//                debug("monster x = \(p.x), y = \(p.y)")
                 addItem(x: p.x, y: p.y, item: getRandomMonterCellItem())
             }
         }

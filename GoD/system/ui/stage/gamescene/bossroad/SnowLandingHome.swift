@@ -74,6 +74,8 @@ class SnowLandingHome: SnowLanding {
             _mapMatrix[0][x] = CELL_BLOCK
             _mapMatrix[1][x] = CELL_BLOCK
             _mapMatrix[8][x] = CELL_BLOCK
+            _mapMatrix[12][x] = CELL_BLOCK
+            _mapMatrix[13][x] = CELL_BLOCK
         }
         for x in 7...12 {
             _mapMatrix[2][x] = CELL_BLOCK
@@ -87,45 +89,51 @@ class SnowLandingHome: SnowLanding {
         for x in 1...12 {
             _mapMatrix[8][x] = CELL_BLOCK
         }
-        for y in 0...7 {
+        for y in 1...8 {
             _mapMatrix[y][1] = CELL_BLOCK
             _mapMatrix[y][10] = CELL_EMPTY
             _mapMatrix[y][11] = CELL_BLOCK
             _mapMatrix[y][12] = CELL_BLOCK
         }
-        for y in 0...5 {
+        for y in 1...6 {
             _mapMatrix[y][3] = CELL_BLOCK
         }
-        for y in 0...3 {
+        for y in 1...4 {
             _mapMatrix[y][5] = CELL_BLOCK
         }
         
-        let treePoints:Array<Int> = [
-            0,0,
-            3,0,
-            3,5,
-            1,2,
-            4,3,
-            0,5,
-            4,10,
-            7,11,
-            4,2,
-            10,3,
-            1,8,
-            0,10,
-            11,9,
-            9,8,
-            12,0,
-            12,1,
-            12,6,
-        ]
+        
+        
+//        let treePoints:Array<Int> = [
+//            0,0,
+//            3,0,
+//            3,5,
+//            1,2,
+//            4,3,
+//            0,5,
+//            4,10,
+//            7,11,
+//            4,2,
+//            10,3,
+//            1,8,
+//            0,10,
+//            11,9,
+//            9,8,
+//            12,0,
+//            12,1,
+//            12,6,
+//        ]
         _mapMatrix[5][11] = CELL_EMPTY
+        _mapMatrix[1][10] = CELL_EMPTY
         _mapMatrix[8][10] = CELL_EMPTY
-        _mapMatrix[9][1] = CELL_EMPTY
+        _mapMatrix[1][9] = CELL_EMPTY
+        _mapMatrix[12][4] = CELL_EMPTY
+        _mapMatrix[13][4] = CELL_EMPTY
         _mapMatrix[9][0] = CELL_BLOCK
         _mapMatrix[9][6] = CELL_BLOCK
         _mapMatrix[11][3] = CELL_BLOCK
         _mapMatrix[11][5] = CELL_BLOCK
+        _mapMatrix[11][12] = CELL_BLOCK
         
         _mapMatrix[1][2] = CELL_PORTAL
         _mapMatrix[1][4] = CELL_PORTAL

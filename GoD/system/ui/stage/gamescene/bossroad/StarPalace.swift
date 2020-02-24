@@ -35,6 +35,7 @@ class StarPalace: MorningPalace {
         b.setPlayerPart(roles: cs)
         Game.instance.curStage.addBattle(b)
         b.battleStart()
+        _bossBattle = b
     }
     override func getMonsterByIndex(index: Int) -> Creature {
         if index == 1 || index == 2 {

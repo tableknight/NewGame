@@ -39,15 +39,15 @@ class MicaluBattle: BossBattle {
 //        es[0]._seat = BUnit.TBL
 //        es[1]._seat = BUnit.TBR
         let ms1 = MicaluServant1()
+        ms1._createForBattle = true
         ms1.create(level: level)
         ms1._seat = BUnit.TBL
-        ms1._createForBattle = true
         es.append(ms1)
         
         let ms2 = MicaluServant2()
+        ms2._createForBattle = true
         ms2.create(level: level)
         ms2._seat = BUnit.TBR
-        ms2._createForBattle = true
         es.append(ms2)
         
         let t = Micalu()

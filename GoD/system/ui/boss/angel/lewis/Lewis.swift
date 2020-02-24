@@ -15,7 +15,7 @@ class Lewis:Boss {
         _quality = Quality.SACRED
         _growth.stamina = 3
         _growth.strength = 2.5
-        _growth.agility = 1.8
+        _growth.agility = 2.2
         _growth.intellect = 3
         _race = EvilType.ANGEL
         _level = Lewis.LEVEL
@@ -35,20 +35,22 @@ class Lewis:Boss {
         try super.encode(to: encoder)
     }
 }
-class LewisMinion:BossMinion, IFace {
+class LewisMinion:BossMinion {
     override init() {
         super.init()
         _name = "诗芬戈"
-        let node = SKTexture(imageNamed: "Faces").getNode(0, 4, 2.5, 2.5)
-        node.size = CGSize(width: 48, height: 48)
-        _img = node.toTexture()
+        _quality = Quality.SACRED
+        _growth.stamina = 1.8
+        _growth.strength = 2.8
+        _growth.agility = 1.9
+        _growth.intellect = 2.8
+        _race = EvilType.ANGEL
+        _level = Lewis.LEVEL
+        _img = SKTexture(imageNamed: "Sphingo")
+        _imgUrl = "Sphingo"
     }
     override func create(level: CGFloat) {
         _quality = Quality.NORMAL
-        _growth.stamina = 1.5
-        _growth.strength = 2.5
-        _growth.agility = 1.8
-        _growth.intellect = 1.6
         levelTo(level: level)
         
         _spellsInuse = [Spell.HandOfGod]

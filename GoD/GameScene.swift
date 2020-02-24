@@ -21,9 +21,9 @@ class GameScene: SKScene {
         we.create()
         addChild(we)
         
-        Mode.showdungeonall = true
-        Mode.showbossall = true
-        Mode.itemcountless = true
+//        Mode.showdungeonall = true
+//        Mode.showbossall = true
+//        Mode.itemcountless = true
 //        // Get label node from scene and store it for use later
 //        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
 //        if let label = self.label {
