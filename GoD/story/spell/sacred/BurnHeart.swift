@@ -16,6 +16,7 @@ class BurnHeart: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.BurnHeart
         isFire = true
         _name = "烈焰焚心"
         _description = "对目标造成精神80%的火焰伤害，每一层燃烧效果为施法者恢复5%的最大生命"

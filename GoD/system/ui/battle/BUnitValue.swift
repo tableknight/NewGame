@@ -120,7 +120,7 @@ extension BUnit {
     func getAccuracy() -> CGFloat {
         var acc = _unit._extensions.accuracy + _valueUnit._extensions.accuracy
         if hasSpell(spell: BargeAbout()) {
-            acc -= 100
+            acc -= 30
         }
         if hasSpell(spell: Sacrifice()) {
             acc += 50
@@ -205,7 +205,7 @@ extension BUnit {
             ctl += _unit._level
         }
         if hasSpell(spell: BargeAbout()) {
-            ctl += 100
+            ctl += 30
         }
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             ctl += 25

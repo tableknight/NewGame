@@ -18,7 +18,7 @@ class Steal: HandSkill {
         super.init()
         _id = Spell.Steal
         _name = "行窃"
-        _description = "对目标和自己造成敏捷50%的物理伤害，或者偷取目标1防御，1力量，1敏捷，1智力"
+        _description = "对目标和自己造成敏捷50%的物理伤害，或者偷取目标1\(Attribute.STAMINA_TEXT)，1力量，1敏捷，1智力"
         _quality = Quality.SACRED
         _cooldown = 1
         _rate = 0.5

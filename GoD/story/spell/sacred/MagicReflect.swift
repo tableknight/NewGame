@@ -28,14 +28,15 @@ class MagicReflect: Magical {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
-        removeSpecialStatus(t:t)
-        let status = Status()
-        status._type = Status.EYE_TO_EYE
-        status._timeleft = 3
-        status._labelText = "R"
-        t.addStatus(status: status)
+        
         c.actionCast {
             t.mixed2(index: 16) {
+                let status = Status()
+                self.removeSpecialStatus(t:t)
+                status._type = Status.EYE_TO_EYE
+                status._timeleft = 3
+                status._labelText = "R"
+                t.addStatus(status: status)
                 completion()
             }
         }

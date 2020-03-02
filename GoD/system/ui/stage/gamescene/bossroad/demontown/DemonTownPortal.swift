@@ -14,6 +14,7 @@ class DemonTownPortal: Maze {
         let o4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: o4.getCell(4, 2, 2, 2), wall: o4.getCell(4, 4, 2, 2))
         _name = "魔王之城"
+        _nameLabel.text = _name
     }
     
     required init?(coder aDecoder: NSCoder) {

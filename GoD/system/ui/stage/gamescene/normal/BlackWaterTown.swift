@@ -11,6 +11,7 @@ class BlackWaterTown: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _name = "恶魔岛"
+        _nameLabel.text = _name
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(10, 12, 2, 2), wall: oa4.getCell(10, 14, 2, 2))
     }
@@ -48,12 +49,15 @@ class BlackWaterTown: StandScene {
     override func moveEndAction() {
         let pos = convertPixelToIndex(x: _role.position.x, y: _role.position.y)
         if pos.x == 10 && pos.y == 9 {
+            let stage = Game.instance.curStage!
+            stage.cancelMove = true
             let fade = SKAction.fadeIn(withDuration: TimeInterval(1.5))
             _mark.removeFromParent()
             _portalMark.run(fade) {
                 let cc = DemonTownPortal()
                 let char = self._role!
-                Game.instance.curStage.switchScene(next: cc, completion: {
+                stage.cancelMove = false
+                stage.switchScene(next: cc, completion: {
                     cc.setRole(x: 6, y: 5, char: char)
                     char.faceSouth()
                 })
@@ -132,10 +136,19 @@ class BlackWaterTown: StandScene {
         addItem(x: 8.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
         addItem(x: 11.5, y: 7.5, item: oc.getNode(1, 1, 1, 2))
         addItem(x: 11.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
-        _mapMatrix[7][8] = CELL_BLOCK
-        _mapMatrix[10][8] = CELL_BLOCK
-        _mapMatrix[7][11] = CELL_BLOCK
-        _mapMatrix[10][11] = CELL_BLOCK
+        _mapMatrix[8][9] = CELL_BLOCK
+        _mapMatrix[8][8] = CELL_BLOCK
+        _mapMatrix[8][11] = CELL_BLOCK
+        _mapMatrix[8][12] = CELL_BLOCK
+//        _mapMatrix[7][9] = CELL_BLOCK
+//        _mapMatrix[7][8] = CELL_BLOCK
+//        _mapMatrix[7][11] = CELL_BLOCK
+//        _mapMatrix[7][12] = CELL_BLOCK
+        
+        _mapMatrix[11][9] = CELL_BLOCK
+        _mapMatrix[11][8] = CELL_BLOCK
+        _mapMatrix[11][11] = CELL_BLOCK
+        _mapMatrix[11][12] = CELL_BLOCK
 
     }
     private var _mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)

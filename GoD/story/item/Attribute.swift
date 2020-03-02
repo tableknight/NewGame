@@ -8,7 +8,7 @@
 
 import SpriteKit
 class Attribute: Core {
-    static let STAMINA_TEXT = "防御"
+    static let STAMINA_TEXT = "体力"
     init(type:Int, level:Int) {
         super.init()
         _type = type
@@ -16,7 +16,7 @@ class Attribute: Core {
         let t = type
         if t == Attribute.ACCURACY {
             _name = "命中"
-            lowerAttrValue(level: l)
+            midAttrValue(level: l)
         } else if t == Attribute.AGILITY {
             _name = "敏捷"
             midAttrValue(level: l)
@@ -105,7 +105,7 @@ class Attribute: Core {
             _name = "速度"
             upperAttrValue(level: l)
         } else if t == Attribute.STAMINA {
-            _name = "防御"
+            _name = Attribute.STAMINA_TEXT
             midAttrValue(level: l)
         } else if t == Attribute.SPIRIT {
             _name = "精神"
@@ -120,7 +120,7 @@ class Attribute: Core {
             _name = "物理免伤"
             midAttrValue(level: l)
         } else if t == Attribute.PHYSICAL_REDUCE_PERCENT {
-            _name = "物理免伤"
+            _name = "物理免除"
             percentAttrValue(level: l)
             _percentValue = true
         }else {

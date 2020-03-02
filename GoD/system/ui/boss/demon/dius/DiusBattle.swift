@@ -144,6 +144,7 @@ class FireExplode:Magical {
     }
     override init() {
         super.init()
+        _id = Spell.FireExplode
         _name = "烈焰爆轰"
         _description = "对目标造成精神100%的火焰伤害,有小概率点燃目标"
         _cooldown = 3

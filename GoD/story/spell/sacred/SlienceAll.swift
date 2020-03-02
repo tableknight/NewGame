@@ -29,13 +29,12 @@ class SilenceAll: Magical, Curse {
         c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 50, target: t, completion: {}) {
-                    t.actionWait {
+                    t.darkness4f() {
                         self._battle.silenceUnit(unit: t)
                     }
-                    t.mixed2(index: 16)
                 }
             }
-            setTimeout(delay: 3.5, completion: completion)
+            setTimeout(delay: 2.5, completion: completion)
         }
     }
     override func findTarget() {

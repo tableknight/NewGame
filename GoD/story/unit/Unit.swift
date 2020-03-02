@@ -112,13 +112,13 @@ class Unit:Core {
         accuracy: 100,
         critical: 15,
         destroy: 0,
-        avoid: 15,
+        avoid: 20,
         spirit: 40,
         hp: 100,
         health: 100,
         mp: 100,
         mpMax: 100,
-        mind: 15
+        mind: 0
     )
     var _level:CGFloat = 1
     var _name:String = ""

@@ -53,10 +53,10 @@ class MyScene: SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _nameLabel.position.x = 0
-        _nameLabel.position.y = UIScreen.main.bounds.size.height - cellSize * 0.75
+        _nameLabel.position.y = cellSize * 12
         _nameLabel.align = "center"
         _nameLabel.fontSize = 24
-        _nameLabel.zPosition = MyScene.MAP_LAYER_Z
+        _nameLabel.zPosition = MyScene.UI_LAYER_Z
         addChild(_nameLabel)
         _mapLayer.zPosition = MyScene.MAP_LAYER_Z
         _roleLayer.zPosition = MyScene.ROLE_LAYER_Z

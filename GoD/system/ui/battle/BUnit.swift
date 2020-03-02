@@ -829,6 +829,17 @@ class BUnit: SKSpriteNode {
     }
     func hasAuro(id:Int) -> Bool {
         if nil == _battle {
+            var spells = Array<Int>()
+            let char = Game.instance.char!
+            let units = [char] + char._minions
+            for u in units {
+                spells += u._spellsInuse
+            }
+            for s in spells {
+                if id == s {
+                    return true
+                }
+            }
             return false
         }
         var spells = Array<Spell>()

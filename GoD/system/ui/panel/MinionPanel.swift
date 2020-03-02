@@ -121,7 +121,7 @@ class MinionPanel:SKSpriteNode {
         let stamina = AttrLabel()
         stamina.position.x = strength.position.x + xWidth
         stamina.position.y = firstLineY
-        stamina.text = "防御"
+        stamina.text = Attribute.STAMINA_TEXT
         stamina.value = bChar.getStamina().toInt()
         stamina.background = more
         addChild(stamina)

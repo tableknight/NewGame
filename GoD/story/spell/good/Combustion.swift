@@ -16,6 +16,7 @@ class Combustion: Magical {
     }
     override init() {
         super.init()
+        _id = Spell.Combustion
         isFire = true
         _name = "助燃"
         _description = "延长目标燃烧效果3回合"

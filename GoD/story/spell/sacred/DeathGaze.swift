@@ -50,7 +50,7 @@ class DeathGaze: Magical {
                         completion()
                     } else {
                         if this.seed() < 7 {
-                            t.showText(text: "SLASHED") {
+                            t.showText(text: "Slash") {
                                 t.actionDead {
                                     completion()
                                     t.removeFromBattle()

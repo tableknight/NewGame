@@ -79,6 +79,13 @@ class Welcome: SKSpriteNode {
         subtitle.fontSize = 16
         addChild(subtitle)
         
+        let version = Label()
+        version.text = "1.0.0"
+        version.position.x = cellSize * -6
+        version.position.y = -cellSize * 12
+        version.fontSize = 16
+        addChild(version)
+        
         let fairy = SKSpriteNode(imageNamed: "Fairy")
         fairy.yAxis = cellSize * 8
         fairy.xAxis = cellSize * -5.5

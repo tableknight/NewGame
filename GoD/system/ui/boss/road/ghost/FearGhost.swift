@@ -29,6 +29,8 @@ class FearGhost:Boss {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
+        _extensions.mpMax *= 4
+        _extensions.mp = _extensions.mpMax
         _extensions.mind = 100
         
     }

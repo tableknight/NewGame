@@ -28,7 +28,8 @@ class Sumahl:Boss {
         levelTo(level: level)
         _extensions.health *= 3
         _extensions.hp = _extensions.health
-        
+        _extensions.mpMax *= 4
+        _extensions.mp = _extensions.mpMax
         
     }
     required init(from decoder: Decoder) throws {

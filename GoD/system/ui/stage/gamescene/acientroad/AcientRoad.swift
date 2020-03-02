@@ -39,6 +39,7 @@ class AcientRoad: Dungeon {
         }
         super.create()
         _nameLabel.text = "远古之路\(_level.toInt())层，\(_name)第\(_index)区"
+//        _name = "远古之路\(_level.toInt())层"
         _initialized = true
 //        debugger()
     }
@@ -51,7 +52,7 @@ class AcientRoad: Dungeon {
     override func createBoss() {
         let c = Core()
         if _level == 10 {
-            _bossImg = "Iss"
+            _bossImg = IssThePuppet.IMG
 //            _bossBattle = IssBattle()
             _bossIndex = 1
             addBoss()

@@ -449,7 +449,7 @@ class Game {
             stage._sceneChangeMask.alpha = 0.65
             stage.cancelMove = true
             setTimeout(delay: 2, completion: {
-                showMsg(text: "保存成功！")
+//                showMsg(text: "保存成功！")
                 stage._sceneChangeMask.isHidden = true
                 stage.cancelMove = false
             })

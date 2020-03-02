@@ -9,18 +9,19 @@
 import SpriteKit
 class IssThePuppet:Boss {
     static let LEVEL:CGFloat = 10
+    static let IMG = "Plant"
     override init() {
         super.init()
         _name = "魔界灵媒"
         _quality = Quality.SACRED
-        _growth.stamina = 2.5
+        _growth.stamina = 2.3
         _growth.strength = 2.1
         _growth.agility = 1.8
         _growth.intellect = 2.6
         _level = IssThePuppet.LEVEL
         _race = EvilType.RISEN
-        _img = SKTexture(imageNamed: "Plant")
-        _imgUrl = "Plant"
+        _imgUrl = IssThePuppet.IMG
+        _img = SKTexture(imageNamed: _imgUrl)
         _spellsInuse = [Spell.LowerSummon, Spell.SummonFlower, Spell.WaterCopy, Spell.HighLevelSummon]
     }
     override func create(level: CGFloat) {
@@ -28,7 +29,9 @@ class IssThePuppet:Boss {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
-        _sensitive = 55
+        _extensions.mpMax *= 3
+        _extensions.mp = _extensions.mpMax
+        _sensitive = 40
     }
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

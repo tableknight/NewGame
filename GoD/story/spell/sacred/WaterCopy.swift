@@ -39,7 +39,7 @@ class WaterCopy:Magical {
             copy._extensions.attack = c._unit._extensions.attack
             copy._extensions.spirit = c._unit._extensions.spirit
             copy._extensions.speed = c._unit._extensions.speed
-            copy._extensions.avoid = c._unit._extensions.avoid
+            copy._extensions.avoid = 0
             copy._extensions.mind = c._unit._extensions.mind
             copy._elementalResistance.water = 50
             copy._elementalResistance.fire = -20

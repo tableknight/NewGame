@@ -278,7 +278,7 @@ class RolePanel:UIPanel {
         let y5 = y4 - attrHeight
         let y6 = y5 - attrHeight
         _attrStrength = addAttrLabel(x: x1, y: y1, text: "力量", value: bUnitRole.getStrength())
-        _attrStamina = addAttrLabel(x: x1, y: y2, text: "防御", value: bUnitRole.getStamina())
+        _attrStamina = addAttrLabel(x: x1, y: y2, text: Attribute.STAMINA_TEXT, value: bUnitRole.getStamina())
         _attrAgility = addAttrLabel(x: x1, y: y3, text: "敏捷", value: bUnitRole.getAgility())
         _attrIntellect = addAttrLabel(x: x1, y: y4, text: "智力", value: bUnitRole.getIntellect())
         

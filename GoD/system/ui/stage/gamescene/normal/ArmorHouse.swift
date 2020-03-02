@@ -12,6 +12,7 @@ class ArmorHouse: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _name = "铁匠铺"
+        _nameLabel.text = _name
         _vSize = 14
     }
     
@@ -19,6 +20,20 @@ class ArmorHouse: StandScene {
         super.init(coder: aDecoder)
     }
     override func create() {
+        let level = Game.instance.char._level
+        let l = Loot()
+        for i in 0...6 {
+            let w = l.getWeaponById(id: i)
+            w.create(level:level.toInt())
+            
+            _sellingWeapons.append(w)
+        }
+        for i in 0...4 {
+            let w = l.getArmorById(id: i)
+            w.create(level:level.toInt())
+            _sellingArmors.append(w)
+        }
+        
         createMapMatrix()
         let bg = SKSpriteNode(texture: SKTexture(imageNamed: "armor_house"))
         bg.size = CGSize(width: cellSize * 13, height: cellSize * 14)
@@ -91,6 +106,8 @@ class ArmorHouse: StandScene {
             })
         }
     }
+    private var _sellingWeapons = Array<Outfit>()
+    private var _sellingArmors = Array<Outfit>()
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
             let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
             if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 4)) {
@@ -105,16 +122,7 @@ class ArmorHouse: StandScene {
                                     dlg._confirmAction = {
                                         stage.removeDialog(dlg: dlg)
                                         let sp = SellingPanel()
-                                        let level = Game.instance.char._level
-                                        let l = Loot()
-                                        
-                                        sp._goodsList = []
-                                        for i in 0...6 {
-                                            let w = l.getWeaponById(id: i)
-                                            w.create(level:level.toInt())
-                                            
-                                            sp._goodsList.append(w)
-                                        }
+                                        sp._goodsList = self._sellingWeapons
                                         sp.create()
                                         stage.showPanel(sp)
                                     }
@@ -138,7 +146,7 @@ class ArmorHouse: StandScene {
                                         sp._goodsList = []
                                         for i in 0...6 {
                                             let w = Item(Item.RandomWeapon)
-                                            w._reserveInt = i
+                                            w._reserveInt = i //index of weapon type
                                             w._reserveBool = true
                                             w._name = "\(l.getWeaponById(id: i)._name)?"
                                             sp._goodsList.append(w)
@@ -170,15 +178,8 @@ class ArmorHouse: StandScene {
                                     dlg._confirmAction = {
                                         stage.removeDialog(dlg: dlg)
                                         let sp = SellingPanel()
-                                        let level = Game.instance.char._level
-                                        let l = Loot()
+                                        sp._goodsList = self._sellingArmors
                                         
-                                        sp._goodsList = []
-                                        for i in 0...4 {
-                                            let w = l.getArmorById(id: i)
-                                            w.create(level:level.toInt())
-                                            sp._goodsList.append(w)
-                                        }
                                         sp.create()
                                         stage.showPanel(sp)
                                     }

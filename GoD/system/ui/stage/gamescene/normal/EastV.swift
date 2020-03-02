@@ -11,6 +11,7 @@ class EastV: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _name = "\(Game.VILLAGE_NAME)·东"
+        _nameLabel.text = _name
         _vSize = 14
     }
     

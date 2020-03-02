@@ -48,6 +48,7 @@ class OutfitPanel: UIPanel {
         
         
         if _char.hasWeapon && outfitOff(slot: _weapon, callback: {Game.instance.char._weapon = nil}, touchPoint: touchPoint!) {
+            
             return
         }
         if outfitOff(slot: _amulet, callback: {Game.instance.char._amulet = nil}, touchPoint: touchPoint!) {
@@ -190,6 +191,12 @@ class OutfitPanel: UIPanel {
         }
         
     }
+    private func cleanSelect() {
+        if nil != _lastSelectedIcon {
+            _lastSelectedIcon.selected = false
+            _lastSelectedIcon = nil
+        }
+    }
     private var _discardButton = Button()
     override func create() {
         _label.text = "卸下/装备：再次点击已选中的物品。"
@@ -208,6 +215,7 @@ class OutfitPanel: UIPanel {
     private func outfitOff(slot:OutfitSlot, callback: @escaping () -> Void, touchPoint:CGPoint) -> Bool {
         if slot.contains(touchPoint) {
             if nil != slot.outfit {
+                cleanSelect()
                 if nil == _selectedSlot || slot != _selectedSlot {
                     displayInfos(icon: slot)
                     _selectedSlot = slot

@@ -26,6 +26,9 @@ class ArmorInfo:SKSpriteNode {
         if armor._quality == Quality.SACRED {
             nameText = getOutfitNameText(armor._type) + " · " + armor._name
         }
+        if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
+            nameText = getOutfitNameText(armor._type) + " · " + Loot.getSpellById(armor._spell)._name
+        }
         name.text = "Lv\(armor._level) [\(nameText)]"
         name.fontSize = 24
         name.fontColor = QualityColor.getColor(armor._quality)
@@ -140,6 +143,36 @@ class ArmorInfo:SKSpriteNode {
             if desWidth > _displayWidth {
                 _displayWidth = desWidth + cellSize * 0.25
             }
+        } else if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
+            let s = Loot.getSpellById(armor._spell)
+            let des = Label()
+            des.text = s._description
+            des.fontSize = 18
+//            if armor is Instrument {
+//                des.fontSize = name.fontSize
+//            }
+            des.fontColor = QualityColor.NORMAL
+            des.position.x = startX
+            des.position.y = lastY - gap
+            lastY = lastY - gap - 18
+            _displayHeight += des.fontSize + gap
+            addChild(des)
+            _desText = des.text!
+            let desWidth = _desText.count.toFloat() * des.fontSize + cellSize * 0.5
+            if desWidth > _displayWidth {
+                _displayWidth = desWidth + cellSize * 0.25
+            }
+//            let spellName = Label()
+//            spellName.align = "left"
+//            spellName.position.x = startX
+//            spellName.position.y = lastY - gap
+//            spellName.fontColor = QualityColor.getColor(s._quality)
+//            spellName.fontSize = 18
+//            spellName.text = "[\(s._description)]"
+//            lastY = lastY - gap - 18
+//            _displayHeight += 30
+//            addChild(spellName)
+//            _insSpellName = spellName.text!
         }
         
         if armor._unique {
@@ -155,20 +188,7 @@ class ArmorInfo:SKSpriteNode {
             addChild(spellName)
         }
         
-        if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
-            let spellName = Label()
-            let s = Loot.getSpellById(armor._spell)
-            spellName.align = "left"
-            spellName.position.x = startX
-            spellName.position.y = lastY - gap
-            spellName.fontColor = QualityColor.getColor(s._quality)
-            spellName.fontSize = 18
-            spellName.text = "[\(s._name)]"
-            lastY = lastY - gap - 18
-            _displayHeight += 30
-            addChild(spellName)
-            _insSpellName = spellName.text!
-        }
+
         
         if armor._price > 0 {
             let price = Label()

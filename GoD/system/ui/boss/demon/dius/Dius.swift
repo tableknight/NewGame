@@ -32,6 +32,8 @@ class Dius:Boss {
         levelTo(level: level)
         _extensions.health *= 4
         _extensions.hp = _extensions.health
+        _extensions.mpMax *= 4
+        _extensions.mp = _extensions.mpMax
         _extensions.defence = 0
         _elementalResistance.fire = -50
         _elementalResistance.water = -50

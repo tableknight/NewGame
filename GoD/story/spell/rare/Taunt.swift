@@ -43,7 +43,7 @@ class Taunt: Magical {
                     }
                 }
             }
-            setTimeout(delay: 2, completion: completion)
+            setTimeout(delay: 1.8, completion: completion)
         }
     }
     override func findTarget() {

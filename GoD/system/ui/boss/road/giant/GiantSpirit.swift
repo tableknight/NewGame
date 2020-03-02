@@ -28,6 +28,8 @@ class GiantSpirit:Boss {
         levelTo(level: level)
         _extensions.health *= 6.5
         _extensions.hp = _extensions.health
+        _extensions.mpMax *= 4
+        _extensions.mp = _extensions.mpMax
         _sensitive = 55
         
     }

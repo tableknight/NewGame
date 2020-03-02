@@ -18,7 +18,7 @@ class FragileCurse: Magical, Curse {
         super.init()
         _id = Spell.FragileCurse
         _name = "虚弱诅咒"
-        _description = "降低目标100%基础护甲"
+        _description = "降低目标50%的护甲和50%的攻击力"
         _quality = Quality.RARE
         cost(value: 5)
     }
@@ -35,9 +35,13 @@ class FragileCurse: Magical, Curse {
                     s._type = Status.FRAGILE
                     s._labelText = "W"
                     t.addStatus(status: s)
-                    t._valueUnit._extensions.defence -= t._unit._extensions.defence
+                    let def = t._unit._extensions.defence * 0.5
+                    t._valueUnit._extensions.defence -= def
+                    let atk = t._unit._extensions.attack * 0.5
+                    t._valueUnit._extensions.attack -= atk
                     s.timeupAction = {
-                        t._valueUnit._extensions.defence += t._unit._extensions.defence
+                        t._valueUnit._extensions.defence += def
+                        t._valueUnit._extensions.attack += atk
                     }
                     completion()
                 }

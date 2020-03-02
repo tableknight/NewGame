@@ -631,9 +631,8 @@ class Spell:Core, Showable, Castable {
 //        }
         let acc = getAccuracy()
         let avd = target.getAvoid()
-        debug("acc: \(acc), avd: \(avd)")
         let sed = seed().toFloat()
-        let this = self
+//        debug("acc: \(acc), avd: \(avd)， sed：\(sed)")
         var value = acc - avd
         if value < 5 {
             value = 5
@@ -641,9 +640,9 @@ class Spell:Core, Showable, Castable {
         if sed > value {
             target.showMiss() {
                 //发动复仇
-                if self.isClose && target.isClose() && c.isClose() && this.seed() < target.getRevenge().toInt() {
+                if self.isClose && target.isClose() && c.isClose() && self.seed() < target.getRevenge().toInt() {
                     self.hasRevenge = true
-                    let damage = this.physicalDamage(from: target, to: c)
+                    let damage = self.physicalDamage(from: target, to: c)
                     target.showText(text: "复仇") {
                         target.actionAttack {
                             c.actionAttacked {

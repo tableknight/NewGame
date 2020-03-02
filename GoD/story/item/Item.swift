@@ -384,13 +384,13 @@ class Item:Core, Castable, Showable {
             _name = newValue._name
             _description = newValue._description
             if spell._quality == Quality.NORMAL {
-                _price = 2
+                _price = 6
             } else if spell._quality == Quality.GOOD {
-                _price = 4
+                _price = 12
             } else if spell._quality == Quality.RARE {
-                _price = 8
+                _price = 24
             } else {
-                _price = 16
+                _price = 64
             }
         }
         get {

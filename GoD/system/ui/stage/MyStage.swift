@@ -88,14 +88,21 @@ class MyStage: SKSpriteNode {
 //            Game.save(c: Game.instance.char!, key: "char")
 //            self.removeFromParent()
             Game.saving()
+            setTimeout(delay: 2, completion: {
+                self.removeFromParent()
+                let welcome = Welcome()
+                welcome.create()
+                welcome._gameScene = Game.instance.gameScene
+                Game.instance.gameScene.addChild(welcome)
+            })
             return
         } else if _quitButton.contains(touchPoint!) && _quitButton.visible {
-            self.removeFromParent()
-            let welcome = Welcome()
-            welcome.create()
-            welcome._gameScene = Game.instance.gameScene
-            Game.instance.gameScene.addChild(welcome)
-            return
+//            self.removeFromParent()
+//            let welcome = Welcome()
+//            welcome.create()
+//            welcome._gameScene = Game.instance.gameScene
+//            Game.instance.gameScene.addChild(welcome)
+//            return
         }
         _curScene.touch(touchPoint: touchPoint)
     }
@@ -211,17 +218,18 @@ class MyStage: SKSpriteNode {
             rate = 1
         }
         let w = bounds.width * rate
-        let h = bounds.height * rate
+//        let h = bounds.height * rate
         
         let padding = cellSize * 0.25
-        _quitButton.text = "退出"
-        _quitButton.yAxis = h - padding
-        _quitButton.xAxis = -w + padding
-        addChild(_quitButton)
-        _uiComponentList.append(_quitButton)
-        _saveButton.text = "保存"
-        _saveButton.yAxis = h - padding
-        _saveButton.xAxis = w - padding - _saveButton.width
+//        _quitButton.text = "退出"
+//        _quitButton.yAxis = h - padding
+//        _quitButton.xAxis = -w + padding
+//        addChild(_quitButton)
+//        _uiComponentList.append(_quitButton)
+        _saveButton.text = "保存退出"
+//        _saveButton.
+        _saveButton.yAxis = cellSize * 8
+        _saveButton.xAxis = cellSize * 2.5
         addChild(_saveButton)
         _uiComponentList.append(_saveButton)
         
@@ -230,26 +238,26 @@ class MyStage: SKSpriteNode {
 //        roleImage.position.y = -bounds.height + padding + 28
 //        addChild(roleImage)
         
-        let offsetY:CGFloat = cellSize * 2
+//        let offsetY:CGFloat = cellSize * 2
         let hpbar = HBar()
-        hpbar.create(width: w * 0.35, height: 10, value: 1, color: UIColor.red)
-        hpbar.position.y = h - offsetY + 30
+        hpbar.create(width: w * 0.35, height: 9, value: 1, color: UIColor.red)
+        hpbar.position.y = cellSize * 8
         hpbar.position.x = -w + padding
         addChild(hpbar)
         hpbar.zPosition = MyStage.UI_LAYER_Z
         _uiComponentList.append(hpbar)
         _hpbar = hpbar
         
-        _mpbar.create(width: w * 0.35, height: 10, value: 1, color: Game.MPBAR_COLOR)
-        _mpbar.yAxis = h - offsetY + 10
+        _mpbar.create(width: w * 0.35, height: 9, value: 1, color: Game.MPBAR_COLOR)
+        _mpbar.yAxis = hpbar.position.y - 15
         _mpbar.xAxis = hpbar.xAxis
         addChild(_mpbar)
         _mpbar.zPosition = MyStage.UI_LAYER_Z
         _uiComponentList.append(_mpbar)
         
         let expbar = HBar()
-        expbar.create(width: w * 0.45, height: 10, value: 1, color: UIColor.green)
-        expbar.position.y = h - offsetY - 10
+        expbar.create(width: w * 0.45, height: 9, value: 1, color: UIColor.green)
+        expbar.position.y =  _mpbar.yAxis - 15
         expbar.position.x = hpbar.position.x
         expbar.zPosition = MyStage.UI_LAYER_Z
 //        expbar.position.x = bounds.width * 0.5 - padding

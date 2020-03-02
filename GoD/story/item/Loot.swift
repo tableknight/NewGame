@@ -202,7 +202,7 @@ class Loot: Core {
         chance = seed().toFloat()
         if chance < 15 * lucky {
             let s = getSacred()
-            if nil != s && s!._level <= level + 5 && s!._level >= level - 30 {
+            if nil != s {
                 _props.append(s!)
             }
         }
@@ -712,409 +712,437 @@ class Loot: Core {
     func getList() -> Array<Item> {
         return _props
     }
-    var _sacredSwords = [1,2,3,4,5,6,7,8]
-    static func getSacredSword(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Sword)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.NewSword)
-            break
-        case 2:
-            outfit.create(effection: Sacred.NewSwordPlus)
-            break
-        case 3:
-            outfit.create(effection: Sacred.DragonSlayer)
-            break
-        case 4:
-            outfit.create(effection: Sacred.DragonSaliva)
-            break
-        case 5:
-            outfit.create(effection: Sacred.TheExorcist)
-            break
-        case 6:
-            outfit.create(effection: Sacred.BloodBlade)
-            break
-        case 7:
-            outfit.create(effection: Sacred.ElementalSword)
-            break
-        case 8:
-            outfit.create(effection: Sacred.IberisHand)
-            break
-        case 9:
-            outfit.create(effection: Sacred.AssassinsSword)
-            break
-        default:
-            break
+    
+    static func getSacredAmuletByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Amulet)
+        if 0 == index {
+            o.create(effection: Sacred.TrueLie)
         }
-        return outfit
-    }
-//    var _sacredDaggers = [1,2]
-    static func getSacredDagger(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Dagger)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.NightBlade)
-            break
-        case 2:
-            outfit.create(effection: Sacred.LazesPedicureKnife)
-            break
-        default:
-            break
+        if 1 == index {
+            o.create(effection: Sacred.MedalOfCourage)
         }
-        return outfit
-    }
-//    var _sacredShields = [1,2,3,4]
-    static func getSacredShield(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Shield)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.Faceless)
-            break
-        case 2:
-            outfit.create(effection: Sacred.Accident)
-            break
-        case 3:
-            outfit.create(effection: Sacred.FrancisFace)
-            break
-        case 4:
-            outfit.create(effection: Sacred.EvilExpel)
-            break
-        default:
-            break
+        if 2 == index {
+            o.create(effection: Sacred.FangOfVampire)
         }
-        return outfit
-    }
-//    var _sacredAmulets = [1,2,3,4,5,6,7,8]
-    static func getSacredAmulet(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Amulet)
-        switch id {
-            case 1:
-                outfit.create(effection: Sacred.TrueLie)
-                break
-            case 2:
-                outfit.create(effection: Sacred.MedalOfCourage)
-                break
-            case 3:
-                outfit.create(effection: Sacred.FangOfVampire)
-                break
-            case 4:
-                outfit.create(effection: Sacred.MoonShadow)
-                break
-            case 5:
-                outfit.create(effection: Sacred.EternityNight)
-                break
-            case 6:
-                outfit.create(effection: Sacred.Sparkling)
-                break
-            case 7:
-                outfit.create(effection: Sacred.MedalOfHero)
-                break
-            case 8:
-                outfit.create(effection: Sacred.HeartOfJade)
-                break
-            default:
-                break
+        if 3 == index {
+            o.create(effection: Sacred.MoonShadow)
         }
-        return outfit
-    }
-//    var _sacredRings = [1,2,3,4,5,6,7,8,9,10]
-    static func getSacredRing(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Ring)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.RingOfDead)
-            break
-        case 2:
-            outfit.create(effection: Sacred.IdlirWeddingRing)
-            break
-        case 3:
-            outfit.create(effection: Sacred.ApprenticeRing)
-            break
-        case 4:
-            outfit.create(effection: Sacred.CopperRing)
-            break
-        case 5:
-            outfit.create(effection: Sacred.SilverRing)
-            break
-        case 6:
-            outfit.create(effection: Sacred.DellarsGoldenRing)
-            break
-        case 7:
-            outfit.create(effection: Sacred.LuckyRing)
-            break
-        case 8:
-            outfit.create(effection: Sacred.RingFromElder)
-            break
-        case 9:
-            outfit.create(effection: Sacred.RingOfReborn)
-            break
-        case 10:
-            outfit.create(effection: Sacred.FireCore)
-            break
-        default:
-            break
+        if 4 == index {
+            o.create(effection: Sacred.EternityNight)
         }
-        return outfit
-    }
-//    var _sacredSoulstones = [1,2,3]
-    static func getSacredSoulstone(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.SoulStone)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.HeartOfSwamp)
-            break
-        case 2:
-            outfit.create(effection: Sacred.PandoraHeart)
-            break
-        case 3:
-            outfit.create(effection: Sacred.HeartOfTarrasque)
-            break
-        case 4:
-            outfit.create(effection: Sacred.SoulPeace)
-            break
-        case 5:
-            outfit.create(effection: Sacred.GiantSoul)
-            break
-        default:
-            break
+        if 5 == index {
+            o.create(effection: Sacred.Sparkling)
         }
-        return outfit
+        if 6 == index {
+            o.create(effection: Sacred.MedalOfHero)
+        }
+        if 7 == index {
+            o.create(effection: Sacred.HeartOfJade)
+        }
+        return o
     }
-//    var _sacredInstruments = [1,2,3,4,5,6,7,8]
-    static func getSacredInstrument(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Instrument)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.TheMonatNotes)
-            break
-        case 2:
-            outfit.create(effection: Sacred.NoPants)
-            break
-        case 3:
-            outfit.create(effection: Sacred.CreationMatrix)
-            break
-        case 4:
-            outfit.create(effection: Sacred.TheSurvive)
-            break
-        case 5:
-            outfit.create(effection: Sacred.TheDeath)
-            break
-        case 6:
-            outfit.create(effection: Sacred.TheSurpass)
-            break
-        case 7:
-            outfit.create(effection: Sacred.TheFear)
-            break
-        case 8:
-            outfit.create(effection: Sacred.TheAbandon)
-            break
-        case 9:
-            outfit.create(effection: Sacred.IssHead)
-            break
-        default:
-            break
+    static func getSacredBluntByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Blunt)
+        if 0 == index {
+            o.create(effection: Sacred.IberisHand)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.GiantFang)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.ThorsHammer)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.HolyPower)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.IdyllssHand)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.BansMechanArm)
+        }
+        return o
+    }
+    static func getSacredBowByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Bow)
+        if 0 == index {
+            o.create(effection: Sacred.Hawkeye)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.Boreas)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.Skylark)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.Aonena)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.SoundOfWind)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.FollowOn)
+        }
+        return o
+    }
+    static func getSacredDaggerByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Dagger)
+        if 0 == index {
+            o.create(effection: Sacred.NightBlade)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.LazesPedicureKnife)
+        }
 
-        }
-        return outfit
+
+        return o
     }
-//    var _sacredWands = [1,2,3,4]
-    static func getSacredWand(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Wand)
-        switch id {
+    static func getSacredEarringByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Amulet)
+        if 0 == index {
+            o.create(effection: Sacred.VerdasTear)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.DeepSeaPearl)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.EyeOfDius)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.LavaCrystal)
+        }
+        return o
+    }
+    static func getSacredFistByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Fist)
+        if 0 == index {
+            o.create(effection: Sacred.FingerBone)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.LiosHold)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.DragonClaw)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.NilSeal)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.DeepCold)
+        }
+        return o
+    }
+    
+    static func getSacredInstrmentByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Instrument)
+        if 0 == index {
+            o.create(effection: Sacred.TheMonatNotes)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.NoPants)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.CreationMatrix)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.IssHead)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.TheSurvive)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.TheDeath)
+        }
+        if 6 == index {
+            o.create(effection: Sacred.TheAbandon)
+        }
+        if 7 == index {
+            o.create(effection: Sacred.TheSurpass)
+        }
+        if 8 == index {
+            o.create(effection: Sacred.TheFear)
+        }
+        return o
+    }
+    
+    static func getSacredMarkByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.MagicMark)
+        if 0 == index {
+            o.create(effection: Sacred.PuppetMark)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.MarkOfOaks)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.MarkOfDeathGod)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.MarkOfVitality)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.MarkOfHeaven)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.MoltenFire)
+        }
+        if 6 == index {
+            o.create(effection: Sacred.TheEye)
+        }
+        if 7 == index {
+            o.create(effection: Sacred.FireMark)
+        }
+        if 8 == index {
+            o.create(effection: Sacred.IssMark)
+        }
+        return o
+    }
+    static func getSacredRingByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Ring)
+        if 0 == index {
+            o.create(effection: Sacred.RingOfDead)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.IdlirWeddingRing)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.CreationMatrix)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.ApprenticeRing)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.CopperRing)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.SilverRing)
+        }
+        if 6 == index {
+            o.create(effection: Sacred.DellarsGoldenRing)
+        }
+        if 7 == index {
+            o.create(effection: Sacred.LuckyRing)
+        }
+        if 8 == index {
+            o.create(effection: Sacred.RingOfDeath)
+        }
+        if 9 == index {
+            o.create(effection: Sacred.RingFromElder)
+        }
+        if 10 == index {
+            o.create(effection: Sacred.RingOfReborn)
+        }
+        if 11 == index {
+            o.create(effection: Sacred.FireCore)
+        }
+        return o
+    }
+    
+    static func getSacredShieldByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Shield)
+        if 0 == index {
+            o.create(effection: Sacred.Faceless)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.Accident)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.FrancisFace)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.EvilExpel)
+        }
+        
+        return o
+    }
+    
+    static func getSacredStoneByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.SoulStone)
+        if 0 == index {
+            o.create(effection: Sacred.HeartOfSwamp)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.PandoraHeart)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.HeartOfTarrasque)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.SoulPeace)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.GiantSoul)
+        }
+        
+        return o
+    }
+    
+    static func getSacredSwordByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Sword)
+        if 0 == index {
+            o.create(effection: Sacred.NewSword)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.NewSwordPlus)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.DragonSlayer)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.DragonSaliva)
+        }
+        if 4 == index {
+            o.create(effection: Sacred.TheExorcist)
+        }
+        if 5 == index {
+            o.create(effection: Sacred.SilverRing)
+        }
+        if 6 == index {
+            o.create(effection: Sacred.BloodBlade)
+        }
+        if 7 == index {
+            o.create(effection: Sacred.LuckyRing)
+        }
+        if 8 == index {
+            o.create(effection: Sacred.ElementalSword)
+        }
+        if 9 == index {
+            o.create(effection: Sacred.IberisHand)
+        }
+        if 10 == index {
+            o.create(effection: Sacred.AssassinsSword)
+        }
+
+        return o
+    }
+    static func getSacredWandByIndex(index:Int) -> Outfit {
+        let o = Outfit(Outfit.Wand)
+        if 0 == index {
+            o.create(effection: Sacred.LightingRod)
+        }
+        if 1 == index {
+            o.create(effection: Sacred.FireMaster)
+        }
+        if 2 == index {
+            o.create(effection: Sacred.WitchWand)
+        }
+        if 3 == index {
+            o.create(effection: Sacred.PuppetMaster)
+        }
+        
+        return o
+    }
+    
+    static func getSacredOutfitByIndex(_ index:Int) -> Outfit {
+        let amulets:Array<Int> = [
+            0,1,2,3,4,5,6,7,
+            0,1,2,3,4,5,6,7,
+            0,1,2,3,4,5,6,7,
+        ]
+        let blunts:Array<Int> = [
+            0,1,2,3,4,5,
+            0,1,2,3,4,5,
+            0,1,2,3,4,5,
+        ]
+        let swords:Array<Int> = [
+            0,1,2,3,4,5,6,7,8,9,10,
+            0,1,2,3,4,5,6,7,8,9,10,
+            0,1,2,3,4,5,6,7,8,9,10,
+        ]
+        let earrings:Array<Int> = [
+            0,1,2,3,
+            0,1,2,3,
+            0,1,2,3,
+        ]
+        let instruments:Array<Int> = [
+            0,1,2,3,4,5,6,7,8,
+            0,1,2,3,4,5,6,7,8,
+            0,1,2,3,4,5,6,7,8,
+        ]
+        let fists:Array<Int> = [
+            0,1,2,3,4,
+            0,1,2,3,4,
+            0,1,2,3,4,
+        ]
+        let daggers:Array<Int> = [
+            0,1,0,1,0,1
+        ]
+        let wands:Array<Int> = [
+            0,1,2,3,
+            0,1,2,3,
+            0,1,2,3,
+        ]
+        let marks:Array<Int> = [
+            0,1,2,3,4,5,6,7,8,
+            0,1,2,3,4,5,6,7,8,
+            0,1,2,3,4,5,6,7,8,
+        ]
+        let stones:Array<Int> = [
+            0,1,2,3,4,
+            0,1,2,3,4,
+            0,1,2,3,4,
+        ]
+        let shields:Array<Int> = [
+            0,1,2,3,
+            0,1,2,3,
+            0,1,2,3,
+        ]
+        let rings:Array<Int> = [
+            0,1,2,3,4,5,6,7,8,9,10,11,
+            0,1,2,3,4,5,6,7,8,9,10,11,
+            0,1,2,3,4,5,6,7,8,9,10,11
+        ]
+        let bows:Array<Int> = [
+            0,1,2,3,4,5,
+            0,1,2,3,4,5,
+            0,1,2,3,4,5,
+        ]
+        switch index {
+        case 0:
+            return Loot.getSacredAmuletByIndex(index: amulets.one())
         case 1:
-            outfit.create(effection: Sacred.LightingRod)
-            break
+            return Loot.getSacredEarringByIndex(index: earrings.one())
         case 2:
-            outfit.create(effection: Sacred.FireMaster)
-            break
+            return Loot.getSacredShieldByIndex(index: shields.one())
         case 3:
-            outfit.create(effection: Sacred.WitchWand)
-            break
+            return Loot.getSacredRingByIndex(index: rings.one())
         case 4:
-            outfit.create(effection: Sacred.PuppetMaster)
-            break
-        default:
-            break
-        }
-        return outfit
-    }
-//    var _sacredBlunts = [1,2,3,4,5]
-    static func getSacredBlunt(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Blunt)
-        switch id {
-            case 1:
-                outfit.create(effection: Sacred.IberisThignbone)
-                break
-            case 2:
-                outfit.create(effection: Sacred.GiantFang)
-                break
-            case 3:
-                outfit.create(effection: Sacred.ThorsHammer)
-                break
-            case 4:
-                outfit.create(effection: Sacred.HolyPower)
-                break
-            case 5:
-                outfit.create(effection: Sacred.IdyllssHand)
-                break
-            case 6:
-                outfit.create(effection: Sacred.BansMechanArm)
-                break
-            default:
-                break
-        }
-        return outfit
-    }
-//    var _sacredMarks = [1,2,3,4,5,6,7]
-    static func getSacredMark(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.MagicMark)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.PuppetMark)
-            break
-        case 2:
-            outfit.create(effection: Sacred.MarkOfOaks)
-            break
-        case 3:
-            outfit.create(effection: Sacred.MarkOfDeathGod)
-            break
-        case 4:
-            outfit.create(effection: Sacred.MarkOfVitality)
-            break
+            return Loot.getSacredMarkByIndex(index: marks.one())
         case 5:
-            outfit.create(effection: Sacred.MarkOfHeaven)
-            break
+            return Loot.getSacredStoneByIndex(index: stones.one())
         case 6:
-            outfit.create(effection: Sacred.MoltenFire)
-            break
+            return Loot.getSacredInstrmentByIndex(index: instruments.one())
         case 7:
-            outfit.create(effection: Sacred.TheEye)
-            break
+            return Loot.getSacredBowByIndex(index: bows.one())
         case 8:
-            outfit.create(effection: Sacred.FireMark)
-            break
+            return Loot.getSacredBluntByIndex(index: blunts.one())
         case 9:
-            outfit.create(effection: Sacred.IssMark)
-            break
+            return Loot.getSacredSwordByIndex(index: swords.one())
+        case 10:
+            return Loot.getSacredWandByIndex(index: wands.one())
+        case 11:
+            return Loot.getSacredFistByIndex(index: fists.one())
+        case 12:
+            return Loot.getSacredDaggerByIndex(index: daggers.one())
+        
         default:
-            break
+            return Loot.getSacredRingByIndex(index: rings.one())
         }
-        return outfit
+
     }
-//    var _sacredBows = [1,2,3,4,5,6]
-    static func getSacredBow(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Bow)
-        switch id {
-            case 1:
-                outfit.create(effection: Sacred.Hawkeye)
-                break
-            case 2:
-                outfit.create(effection: Sacred.Boreas)
-                break
-            case 3:
-                outfit.create(effection: Sacred.Skylark)
-                break
-            case 4:
-                outfit.create(effection: Sacred.SoundOfWind)
-                break
-            case 5:
-                outfit.create(effection: Sacred.Aonena)
-                break
-            case 6:
-                outfit.create(effection: Sacred.FollowOn)
-                break
-            default:
-                break
-        }
-        return outfit
-    }
-//    var _sacredFists = [1,2,3,4,5]
-    static func getSacredFist(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Fist)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.FingerBone)
-            break
-        case 2:
-            outfit.create(effection: Sacred.LiosHold)
-            break
-        case 3:
-            outfit.create(effection: Sacred.DragonClaw)
-            break
-        case 4:
-            outfit.create(effection: Sacred.NilSeal)
-            break
-        case 5:
-            outfit.create(effection: Sacred.DeepCold)
-            break
-        default:
-            break
-        }
-        return outfit
-    }
-//    var _sacredEarrings = [1,2,3,4]
-    static func getSacredEarring(id:Int) -> Outfit {
-        let outfit = Outfit(Outfit.Amulet)
-        switch id {
-        case 1:
-            outfit.create(effection: Sacred.VerdasTear)
-            break
-        case 2:
-            outfit.create(effection: Sacred.DeepSeaPearl)
-            break
-        case 3:
-            outfit.create(effection: Sacred.EyeOfDius)
-            break
-        case 4:
-            outfit.create(effection: Sacred.LavaCrystal)
-            break
-        default:
-            break
-        }
-        return outfit
-    }
-//    private func getSacredOutfit(id:Int) -> Outfit {
-//        switch id {
-//        case 1:
-//            return getSacredSword(id:_sacredSwords.one())
-//        case 2:
-//            return getSacredDagger(id:_sacredDaggers.one())
-//        case 3:
-//            return getSacredShield(id:_sacredShields.one())
-//        case 4:
-//            return getSacredAmulet(id:_sacredAmulets.one())
-//        case 5:
-//            return getSacredRing(id:_sacredRings.one())
-//        case 6:
-//            return getSacredSoulstone(id:_sacredSoulstones.one())
-//        case 7:
-//            return getSacredInstrument(id:_sacredInstruments.one())
-//        case 8:
-//            return getSacredWand(id:_sacredWands.one())
-//        case 9:
-//            return getSacredBlunt(id:_sacredBlunts.one())
-//        case 10:
-//            return getSacredMark(id:_sacredMarks.one())
-//        case 11:
-//            return getSacredBow(id:_sacredBows.one())
-//        case 12:
-//            return getSacredEarring(id:_sacredEarrings.one())
-//        case 13:
-//            return getSacredFist(id: _sacredFists.one())
-//        default:
-//            return getSacredSword(id:_sacredSwords.one())
-//        }
-//
-//    }
     
     func getSacred() -> Outfit? {
-//        let outfit = getSacredOutfit(id: [1,2,3,4,5,6,7,8,9,10,11,12].one())
-//        if outfit._level <= _char._level + 5 {
-//            if seed(max: 150) <= outfit._chance {
-//                outfit.create()
-//                return outfit
-//            }
-//        }
+        let list:Array<Int> = [
+            0,1,2,3,4,5,6,7,8,9,10,11,12,
+            0,1,2,3,4,5,6,7,8,9,10,11,12,
+            0,1,2,3,4,5,6,7,8,9,10,11,12,
+            0,1,2,3,4,5,6,7,8,9,10,11,12,
+        ]
+        let outfit = Loot.getSacredOutfitByIndex(list.one())
+        if outfit._level <= _char._level.toInt() + 5 {
+            if seed(max: 150) <= outfit._chance {
+                return outfit
+            }
+        }
         return nil
     }
     

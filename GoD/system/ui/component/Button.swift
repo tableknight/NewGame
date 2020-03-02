@@ -19,7 +19,7 @@ class Button:SKSpriteNode {
         _label.alpha = 0.85
         _label.position.y = -cellSize * 0.125
         _label.position.x = cellSize * 0.75
-        _label.fontSize = 24
+        _label.fontSize = 22
         _label.align = "center"
         addChild(_label)
     }

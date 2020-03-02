@@ -105,6 +105,7 @@ class Outfit:Item {
         _level = sd.level
         _quality = Quality.SACRED
         _effection = effection
+        _chance = sd.chance
         
         if _type == Outfit.Instrument || _type == Outfit.MagicMark {
             createSpell()

@@ -11,6 +11,7 @@ class MagicHouse: InnerHouse {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _name = "魔法屋"
+        _nameLabel.text = _name
         _vSize = 14
     }
     
@@ -81,12 +82,19 @@ class MagicHouse: InnerHouse {
                                     stage.removeDialog(dlg: dlg)
                                     if !self.recoveryMana(unit: c) {
                                         role.speak(text: "你没有那么多眼泪！")
+                                        return
                                     } else {
                                         for m in c._minions {
                                             _ = self.recoveryMana(unit: m)
                                         }
                                     }
                                     stage.setBarValue()
+                                    var msg = ""
+                                    for u in self._recoveriedUnits {
+                                        msg.append(contentsOf: "[\(u._name)]，")
+                                    }
+                                    msg.append(contentsOf: "恢复了法力，消耗眼泪\(self._costedTears)颗")
+                                    showMsg(text: msg)
                                 }
             })
             return true
@@ -106,7 +114,8 @@ class MagicHouse: InnerHouse {
     private func createRandomWeapon() {
         
     }
-    
+    private var _recoveriedUnits = Array<Unit>()
+    private var _costedTears = 0
     private func recoveryMana(unit:Unit) -> Bool {
         let c = Game.instance.char!
         let r = unit._extensions.mpMax - unit._extensions.mp
@@ -121,6 +130,8 @@ class MagicHouse: InnerHouse {
             if i!._count >= n {
                 unit._extensions.mp = unit._extensions.mpMax
                 i!._count -= n
+                _costedTears += n
+                _recoveriedUnits.append(unit)
                 return true
             }
         }

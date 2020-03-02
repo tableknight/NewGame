@@ -12,6 +12,7 @@ class HotelInner: StandScene {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         _name = "旅馆·客房"
+        _nameLabel.text = _name
         _vSize = 14
     }
     
