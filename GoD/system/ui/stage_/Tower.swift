@@ -46,7 +46,7 @@ class FireEnerge:Status {
 class FireEnergeTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.tiled_dungeons.getCell(15, 11, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(2, 1, 1, 2))
         _status = FireEnerge()
         _text = "东之圣灵的守护：\(_status._name) —— \(_status._description)"
     }
@@ -80,7 +80,7 @@ class WaterEnerge:Status {
 class WaterEnergeTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.tiled_dungeons.getCell(14, 11, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(1, 1, 1, 2))
         _status = WaterEnerge()
         _text = "西之圣灵的守护：\(_status._name) —— \(_status._description)"
     }
@@ -217,7 +217,7 @@ class MagicalPower:Status {
 class MagicalPowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.inside_c.getCell(11, 6, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(9, 1, 1, 2))
         _status = MagicalPower()
         _text = "的力量祝福：\(_status._name) —— \(_status._description)"
     }
@@ -319,7 +319,7 @@ class MindPower:Status {
 class MindPowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.inside_c.getCell(8, 6, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(8, 1, 1, 2))
         _status = MindPower()
         _text = "天使的守护：\(_status._name) —— \(_status._description)"
     }
@@ -354,7 +354,7 @@ class LuckyPower:Status {
 class LuckyPowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.sf_inside_c.getCell(8, 11, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(3, 1, 1, 2))
         _status = LuckyPower()
         _text = "天使的守护：\(_status._name) —— \(_status._description)"
     }
@@ -386,11 +386,11 @@ class SpeedPower:Status {
     }
 }
 
-
+// not used
 class SpeedPowerTower:Tower {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.sf_inside_c.getCell(10, 11, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(4, 1, 1, 2))
         _status = SpeedPower()
         _text = "天使的守护：\(_status._name) —— \(_status._description)"
     }

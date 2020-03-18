@@ -25,6 +25,7 @@ class SongOfElement:Magical {
         _battle._curRole.actionCast {
             t.darkness4fifth()
             if !self.hadSpecialAction(t: t, completion: completion) {
+                t.play("freeze")
                 t.actionAttacked {
                     t.showValue(value: fd + wd, damageType: DamageType.FWMIXED) {
                         completion()

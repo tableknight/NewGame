@@ -87,6 +87,7 @@ class MyScene: SKSpriteNode {
 //
 //    }
     func touch(touchPoint:CGPoint?) {
+        
         if Game.instance.curStage.cancelMove {
             return
         }
@@ -255,6 +256,8 @@ class MyScene: SKSpriteNode {
             let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
             if tower.contains(touchPoint) {
                 if !tower._triggered {
+                    Sound.play(node: Game.instance.curStage, fileName: "tower")
+//                    _role.play("Sound2")
                     tower.triggerEvent()
                     self._role.stateUp2()
                 }
@@ -327,6 +330,7 @@ class MyScene: SKSpriteNode {
             let tower = getNextCellItem(x: nextX, y: nextY) as! Tower
             if tower.contains(touchPoint) {
                 if !tower._triggered {
+                    Sound.play(node: Game.instance.curStage, fileName: "tower")
                     tower.triggerEvent()
                     self._role.stateUp2()
                 }
@@ -812,6 +816,7 @@ class MyScene: SKSpriteNode {
     var _level:CGFloat = 1
     var _name = ""
     var _nameLabel = Label()
+    var _soundUrl = ""
     internal let _wallShadow = SKTexture(imageNamed: "wall_shadow2")
 }
 
@@ -833,8 +838,8 @@ class Chest:UIItem {
         _triggered = true
         let item = Game.instance.pictureChest.getCell(_x.toFloat(), 3)
         setTexture(item)
-        
-        if Core().d5() {
+        Sound.play(node: Game.instance.curStage, fileName: "chest")
+        if Core().d4() {
             let b = MimicBattle()
             b._level = Game.instance.curStage._curScene._level
             b.setEnemyPart(minions: Array<Creature>())

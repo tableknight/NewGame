@@ -175,7 +175,7 @@ class AcientRoad: Dungeon {
         let char = Game.instance.char!
         var enimies = Array<Creature>()
         
-        let enemyCount = _level <= 10 ? 3 : 5
+        let enemyCount = _level < 10 ? 3 : 5
         for _ in 0...enemyCount {
             let e = Creature(_monsterEnum.one())
             e.create(level: _level)

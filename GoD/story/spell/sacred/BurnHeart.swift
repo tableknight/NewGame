@@ -32,6 +32,7 @@ class BurnHeart: Magical {
         c.actionCast {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 t.magic2t()
+                t.play("fire")
                 t.actionAttacked {
                     t.showValue(value: damage, criticalFromSpell: false, critical: false, damageType: DamageType.FIRE, textColor: DamageColor.FIRE, completion: completion)
                     setTimeout(delay: 0.5, completion: {

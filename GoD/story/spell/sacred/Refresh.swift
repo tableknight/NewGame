@@ -39,6 +39,7 @@ class Refresh: Magical {
             self._battle.showOrder()
             self._battle.hideCancel()
             self._battle.cancelTouch = false
+            self._battle._curRole.play("dialog")
         }
         
     }

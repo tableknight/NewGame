@@ -21,9 +21,11 @@ class LowlevelFlame: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let this = self
+        if c.amuletIs(Sacred.LavaCrystal) {
+            _rate = 1.1
+        }
         c.actionCast {
-            this.attack {
+            self.attack {
                 completion()
             }
         }
@@ -40,6 +42,7 @@ class LowlevelFlame: Magical {
                 }
             }
             t.hitFire()
+            t.play("fire")
 //            t.flame1(index: 0)
         }
     }

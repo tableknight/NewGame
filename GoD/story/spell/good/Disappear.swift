@@ -41,6 +41,7 @@ class Disappear: Magical {
                 c.addStatus(status: status)
                 completion()
             }
+            c.play("Darkness3")
         }
     }
     override func findTarget() {

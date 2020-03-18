@@ -37,6 +37,7 @@ class Combustion: Magical {
                         t.showStatusText()
                     }
                 }
+                t.play("down")
             } else {
                 t.showMiss {
                     completion()

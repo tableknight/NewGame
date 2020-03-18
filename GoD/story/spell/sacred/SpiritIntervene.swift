@@ -39,6 +39,7 @@ class SpiritIntervene: Magical {
             t.sonic() {
                 t.showText(text: "\(change.toInt())", color: Colors.STATUS_CHANGE, completion: completion)
             }
+            t.play("down")
             
         }
     }

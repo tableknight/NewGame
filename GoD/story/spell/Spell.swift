@@ -361,16 +361,19 @@ class Spell:Core, Showable, Castable {
         }
         damage *= fireFactor(from: from, to: to) * levelFactor(from, to)
         damage *= magicFactor(from: from, to: to)
-        if !isMultiple && isFire {
-            if from._unit is Character {
-                if from.amuletIs(Sacred.LavaCrystal) {
-                    damage *= 1.5
-                }
-            }
-        }
+//        if !isMultiple && isFire {
+//            if from._unit is Character {
+//                if from.amuletIs(Sacred.LavaCrystal) {
+//                    damage *= 1.5
+//                }
+//            }
+//        }
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
+        if from.markIs(Sacred.MoltenFire) {
+            damage *= 1.2
+        }
         _damageValue = -damageControl(damage)
         return _damageValue
     }
@@ -432,6 +435,9 @@ class Spell:Core, Showable, Castable {
         
         damage = specialDamage(damage: damage, to: to, from: from)
         damage = elementalDamage(damage: damage, to: to, from: from)
+        if to.weaponIs(Sacred.LightingRod) {
+            damage *= 0.25
+        }
         _damageValue = -damageControl(damage)
         return _damageValue
     }
@@ -445,37 +451,33 @@ class Spell:Core, Showable, Castable {
         return damage
     }
     private func specialDamage(damage:CGFloat, to:BUnit, from:BUnit) -> CGFloat {
-        var d = damage
-        if from.weaponIs(Sacred.NightBlade) && to._unit._race == EvilType.RISEN {
-            d *= 1.25
-        }
+//        var d = damage
         
-        return d
+        
+        return damage
     }
     internal func magicFactor(from:BUnit, to:BUnit) -> CGFloat {
 //        var f:CGFloat = 1
         return 1 + from.getMagicalDamage() * 0.01 - to.getMagicalResistance() * 0.01
     }
     internal func raceFactor(to:BUnit, from:BUnit) -> CGFloat {
-//        if from.soulstoneIs(GiantSoul.EFFECTION) || to.soulstoneIs(GiantSoul.EFFECTION) {
-//            return 1
-//        }
         var factor:CGFloat = 1
         
-//        if from.hasSpell(spell: Dominate()) || from.hasTeamStatus(type: Status.MAKE_EVERYTHING_RIGHT) {
-//            return 1.15
-//        }
-//
-//        if to.hasSpell(spell: Dominate()) || to.hasTeamStatus(type: Status.MAKE_EVERYTHING_RIGHT) {
-//            return 0.85
-//        }
-        
         let value:CGFloat = 0.25
+        if (from.hasSpell(id: Spell.Dominate) || from.hasStatus(type: Status.MAKE_EVERYTHING_RIGHT)) && !(to._unit is Boss) {
+            return 1 + value
+        }
+        if !(from._unit is Boss) && (to.hasSpell(id: Spell.Dominate) || to.hasStatus(type: Status.MAKE_EVERYTHING_RIGHT)) {
+            return 1 - value
+        }
         
         if to._unit is Boss {
             factor = 1 - value
         } else if from._unit is Boss {
             factor = 1 + value
+            if to.amuletIs(Sacred.HeartOfJade) {
+                factor = 1 - value
+            }
         } else if to.getRace() - from.getRace() == 1 {
             factor = 1 - value
         } else if to.getRace() - from.getRace() == -1 {
@@ -486,9 +488,12 @@ class Spell:Core, Showable, Castable {
             factor = 1 - value
         }
         
-//        if from.weaponIs(HolyPower.EFFECTION) && to.getRace() == EvilType.RISEN {
-//            factor *= 2
-//        }
+        if from.weaponIs(Sacred.HolyPower) && to.getRace() == EvilType.RISEN {
+            factor *= 2
+        }
+        if from.markIs(Sacred.MarkOfHeaven) && to.getRace() == EvilType.DEMON {
+            factor = 1 - value
+        }
 //        debug("race factor is \(factor)")
         return factor
     }
@@ -645,6 +650,7 @@ class Spell:Core, Showable, Castable {
                     let damage = self.physicalDamage(from: target, to: c)
                     target.showText(text: "复仇") {
                         target.actionAttack {
+                            c.play("Slash10")
                             c.actionAttacked {
                                 c.showValue(value: damage) {
                                     completion()
@@ -681,8 +687,10 @@ class Spell:Core, Showable, Castable {
     
     func hadSpecialAction(t:BUnit, completion:@escaping () -> Void = {}) -> Bool {
         if isAttackReturnBack(t:t, completion: completion) {
+            Sound.play(node: t, fileName: "special")
             return true
         } else if isAttackTurned(t:t, completion: completion) {
+            Sound.play(node: t, fileName: "special")
             return true
         }
         return false

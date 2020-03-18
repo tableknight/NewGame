@@ -20,6 +20,7 @@ class LostArea: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(4, 2, 2, 2), wall: oa4.getCell(4, 4, 2, 2))
         _name = "失落荒地"
         _id = AcientRoad.LOST_AREA
+        _soundUrl = "lost_area"
     }
     
     required init?(coder aDecoder: NSCoder) {

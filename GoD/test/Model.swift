@@ -48,14 +48,14 @@ class Model:NSObject {
         Game.instance.char = e
         return e
     }
-    static func constructStage() {
-        let stage = MyStage()
-        let bs = CenterCamping()
-        bs.create()
-        stage.loadScene(scene: bs)
-        stage.createMenu()
-        Game.instance.gameScene.addChild(stage)
-    }
+//    static func constructStage() {
+//        let stage = MyStage()
+//        let bs = CenterCamping()
+//        bs.create()
+//        stage.loadScene(scene: bs)
+//        stage.createMenu()
+//        Game.instance.gameScene.addChild(stage)
+//    }
 }
 
 func debugger(){

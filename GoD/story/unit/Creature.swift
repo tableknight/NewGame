@@ -118,6 +118,15 @@ class Creature: Unit {
         _growth.agility = extraProperty(value: _stars.agility)
         _growth.intellect = extraProperty(value: _stars.intellect)
     }
+    func create(quality:Int) {
+        _level = 1
+        _quality = quality
+        createBirthValue()
+        createGrowthValue()
+        levelTo(level: 1)
+        _extensions.hp = _extensions.health
+        createSensitive()
+    }
     func create(level:CGFloat) {
         _level = level
         if _level < 1 {

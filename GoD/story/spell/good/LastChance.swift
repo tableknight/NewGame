@@ -40,6 +40,7 @@ class LastChance: Physical {
                             }
                         })
                         t.blow()
+                        t.play("Slash6")
                     } else {
                         let heal = t.getHealth() * 0.75
                         t.showValue(value: heal) {

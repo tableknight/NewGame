@@ -134,6 +134,7 @@ class Item:Core, Castable, Showable {
             let c = _battle._curRole
             let unit = _battle._selectedTarget!
             c.showText(text: "封印") {
+                Sound.play(node: c, fileName: "down")
                 unit.actionSealed {
                     let chance = self.seed(max: unit.getHealth().toInt()) * unit._unit._quality / 2
                     if Mode.debug || chance > unit.getHp().toInt() {
@@ -165,6 +166,7 @@ class Item:Core, Castable, Showable {
         } else if _type == Item.Potion || _type == Item.LittlePotion || _type == Item.GiantPotion {
             let unit = _battle._selectedTarget!
             _battle._curRole.showText(text: _name) {
+                Sound.play(node: unit, fileName: "heal")
                 unit.cure1f() {
                     let change = unit.getHealth() * self._value
                     unit.showValue(value: change) {
@@ -208,6 +210,7 @@ class Item:Core, Castable, Showable {
         let _char = Game.instance.char!
         if _type == Item.TownScroll {
             let c = CenterV()
+            Sound.play(node: Game.instance.curStage, fileName: "scroll")
             let char = Game.instance.curStage._curScene._role!
             let stage = Game.instance.curStage
             stage?.showUI()
@@ -216,6 +219,7 @@ class Item:Core, Castable, Showable {
             })
         } else if _type == Item.DeathTownScroll {
             let c = DemonTownPortal()
+            Sound.play(node: Game.instance.curStage, fileName: "scroll")
             let char = Game.instance.curStage._curScene._role!
             let stage = Game.instance.curStage
             stage?.showUI()
@@ -224,6 +228,7 @@ class Item:Core, Castable, Showable {
             })
         } else if _type == Item.GodTownScroll {
             let c = SnowLandingHome()
+            Sound.play(node: Game.instance.curStage, fileName: "scroll")
             let char = Game.instance.curStage._curScene._role!
             let stage = Game.instance.curStage
             stage?.showUI()
@@ -232,6 +237,7 @@ class Item:Core, Castable, Showable {
             })
         } else if _type == Item.TransportScroll {
             let stage = Game.instance.curStage!
+            
             let scene = Game.instance.curStage._curScene!
             
             if !(scene is AcientRoad) || scene is BossRoad {
@@ -247,6 +253,7 @@ class Item:Core, Castable, Showable {
                 showMsg(text: "穿梭失败！")
                 return
             }
+            Sound.play(node: Game.instance.curStage, fileName: "herb")
         } else if _type == Item.StarStone {
             var count = seed(min: 2, max: 6)
             if _quality == Quality.GOOD {
@@ -260,6 +267,7 @@ class Item:Core, Castable, Showable {
             t._count = count
             _char.addItem(t)
             showMsg(text: "获得[天使之泪]x\(count)")
+            Sound.dialog()
         } else if _type == Item.SpellBook {
             if _char.hasSpell(id: _spell) {
                 showMsg(text: "已经习得该法术")
@@ -268,9 +276,20 @@ class Item:Core, Castable, Showable {
                 _char._spells.append(_spell)
                 showMsg(text: "习得法术[\(_name)]")
             }
+            Sound.dialog()
         } else if _type == "lvScroll" {
             for u in [_char] + _char._minions {
                 u.levelup()
+            }
+        } else if _type == Item.CreatureEssence {
+            if _char._minions.count >= 6 {
+                showMsg(text: "无法支配更多随从！")
+                return
+            } else {
+                let c = Creature(_reserveStr)
+                c.create(quality: _quality)
+                _char._minions.append(c)
+                showMsg(text: "获得了[lv1 \(c._name)]")
             }
         }
         removeAfterUse()
@@ -279,17 +298,21 @@ class Item:Core, Castable, Showable {
     func use(target:Unit) {
         if _type == Item.Potion || _type == Item.LittlePotion || _type == Item.GiantPotion {
             target._extensions.hp += target._extensions.health * _value
+            Sound.play(node: Game.instance.curStage, fileName: "heal")
             if target._extensions.hp >= target._extensions.health {
                 target._extensions.hp = target._extensions.health
             }
         } else if _type == Item.LittleMPPotion || _type == Item.MPPotion || _type == Item.SoulMPPotion {
             target._extensions.mp += _value
+            Sound.play(node: Game.instance.curStage, fileName: "buff")
             if target._extensions.mp >= target._extensions.mpMax {
                 target._extensions.mp = target._extensions.mpMax
             }
         } else if _type == Item.ExpBook {
+            Sound.play(node: Game.instance.curStage, fileName: "buff")
             target.expUp(up: _value)
         } else if _type == Item.RedoSeed {
+            Sound.play(node: Game.instance.curStage, fileName: "heal")
             let v = abs(_reserveInt)
             let b = _reserveInt < 0
             if 1 == v {
@@ -342,6 +365,7 @@ class Item:Core, Castable, Showable {
                 }
             }
         } else if _type == Item.MagicSyrup {
+            Sound.play(node: Game.instance.curStage, fileName: "heal")
             let t = target as! Creature
             if _reserveBool {
                 t._sensitive += 1
@@ -645,7 +669,7 @@ struct ItemData:Codable {
         Item.DemonsBlood: ItemData(type:Item.DemonsBlood, name: "恶魔之血", showingText: "血", price: 16),
         Item.SpellBook: ItemData(type: Item.SpellBook, name: "法术书",  showingText: "书",price: 48, stackable: false, usable: true),
         Item.TearEssence: ItemData(type: Item.TearEssence, name: "眼泪精华", showingText: "精", desc: "获取若干个天使之泪", price: 32, usable: true),
-        Item.CreatureEssence: ItemData(type: Item.CreatureEssence, name: "灵魂精华", stackable: false, usable: true),
+        Item.CreatureEssence: ItemData(type: Item.CreatureEssence, name: "灵魂精华", desc: "灵魂凝聚而形成的结晶", price: 36, stackable: false, usable: true),
         Item.TownScroll: ItemData(type: Item.TownScroll, name: "传送卷轴·贝", desc: "传送到\(Game.VILLAGE_NAME)", price: 8, usable: true, castable: true),
         Item.GodTownScroll: ItemData(type: Item.GodTownScroll, name: "传送卷轴·雪", desc: "传送到神域·雪之国", price: 24, quality: Quality.RARE, usable: true, castable: true),
         Item.DeathTownScroll: ItemData(type: Item.DeathTownScroll, name: "传送卷轴·冥", desc: "传送到冥界·黄昏之城", price: 12, quality: Quality.GOOD, usable: true, castable: true),

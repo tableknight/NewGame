@@ -88,7 +88,7 @@ struct TypeName {
     static let ANGEL = "天使"
     static let MAN = "人类"
     static let NATURE = "生物"
-    static let DEMON = "噩梦"
+    static let DEMON = "恶魔"
     static func getName(_ type: Int) -> String {
         switch type {
         case EvilType.RISEN:
@@ -188,20 +188,20 @@ struct Position {
     static let EAST:Int = 1
     static let SOUTH:Int = 3
 }
-struct Cell {
-    static func pot() -> SKTexture {
-        return Game.instance.inside_b.getCell(9, 9)
-    }
-    static func pot_broken() -> SKTexture {
-        return Game.instance.inside_b.getCell(10, 9)
-    }
-    static func bed() -> SKTexture {
-        return Game.instance.inside_b.getCell(0, 11, 1, 2)
-    }
-    static func bed_broken() -> SKTexture {
-        return Game.instance.inside_b.getCell(6, 11, 1, 2)
-    }
-}
+//struct Cell {
+//    static func pot() -> SKTexture {
+//        return Game.instance.inside_b.getCell(9, 9)
+//    }
+//    static func pot_broken() -> SKTexture {
+//        return Game.instance.inside_b.getCell(10, 9)
+//    }
+//    static func bed() -> SKTexture {
+//        return Game.instance.inside_b.getCell(0, 11, 1, 2)
+//    }
+//    static func bed_broken() -> SKTexture {
+//        return Game.instance.inside_b.getCell(6, 11, 1, 2)
+//    }
+//}
 class Documented:NSObject, NSCoding {
     override init() {
         super.init()
@@ -243,6 +243,10 @@ class Game {
     static let VILLAGE_NAME = "贝鲁特村"
     static let instance = Game()
 //    var stage:UIStage!
+    var sound_volumn = 1
+    var effect_volumn = 1
+    var playSound = true
+    var playEffect = true
     var gameScene:GameScene!
     var role:BUnit!
     var char:Character!
@@ -255,53 +259,54 @@ class Game {
     var frameSize:CGFloat = 0.3
     var screenWidth = UIScreen.main.bounds.size.width
     var screenHeight = UIScreen.main.bounds.size.height
-    var village:SKTexture = SKTexture(imageNamed: "village.tiff")
-    var inside_a5:SKTexture = SKTexture(imageNamed: "Inside_A5.png")
+//    var village:SKTexture = SKTexture(imageNamed: "village.tiff")
+//    var inside_a5:SKTexture = SKTexture(imageNamed: "Inside_A5.png")
     var inside_a4:SKTexture = SKTexture(imageNamed: "Inside_A4.png")
-    var inside_a2:SKTexture = SKTexture(imageNamed: "Inside_A2.png")
-    var inside_b:SKTexture = SKTexture(imageNamed: "Inside_B.png")
-    var inside_c:SKTexture = SKTexture(imageNamed: "Inside_C.png")
+//    var inside_a2:SKTexture = SKTexture(imageNamed: "Inside_A2.png")
+//    var inside_b:SKTexture = SKTexture(imageNamed: "Inside_B.png")
+//    var inside_c:SKTexture = SKTexture(imageNamed: "Inside_C.png")
     var outside_b:SKTexture = SKTexture(imageNamed: "Outside_B.png")
-    var outside_c:SKTexture = SKTexture(imageNamed: "Outside_C.png")
-    var outside_a5:SKTexture = SKTexture(imageNamed: "Outside_A5.png")
-    var outside_a2:SKTexture = SKTexture(imageNamed: "Outside_A2.png")
-    var outside_a1:SKTexture = SKTexture(imageNamed: "Outside_A1.png")
-    var outside_a3:SKTexture = SKTexture(imageNamed: "Outside_A3.png")
-    var outside_a4:SKTexture = SKTexture(imageNamed: "Outside_A4.png")
-    var dungeon_a4:SKTexture = SKTexture(imageNamed: "Dungeon_A4.png")
-    var dungeon_a2:SKTexture = SKTexture(imageNamed: "Dungeon_A2.png")
-    var dungeon_a1:SKTexture = SKTexture(imageNamed: "Dungeon_A1.png")
-    var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
+//    var outside_c:SKTexture = SKTexture(imageNamed: "Outside_C.png")
+//    var outside_a5:SKTexture = SKTexture(imageNamed: "Outside_A5.png")
+//    var outside_a2:SKTexture = SKTexture(imageNamed: "Outside_A2.png")
+//    var outside_a1:SKTexture = SKTexture(imageNamed: "Outside_A1.png")
+//    var outside_a3:SKTexture = SKTexture(imageNamed: "Outside_A3.png")
+    var outside_a4:SKTexture = SKTexture(imageNamed: "Outside_A4.png") //true
+    var dungeon_a4:SKTexture = SKTexture(imageNamed: "Dungeon_A4.png") //true
+//    var dungeon_a2:SKTexture = SKTexture(imageNamed: "Dungeon_A2.png")
+//    var dungeon_a1:SKTexture = SKTexture(imageNamed: "Dungeon_A1.png")
+//    var world_b:SKTexture = SKTexture(imageNamed: "World_B.png")
     var dungeon_b = SKTexture(imageNamed: "Dungeon_B.png")
-    var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png")
-    var door2 = SKTexture(imageNamed: "Door2.png")
-    var crystal = SKTexture(imageNamed: "Crystal.png")
-    var sf_outside_c:SKTexture = SKTexture(imageNamed: "SF_Outside_C.png")
-    var sf_outside_b:SKTexture = SKTexture(imageNamed: "SF_Outside_B.png")
-    var sf_outside_a4:SKTexture = SKTexture(imageNamed: "SF_Outside_A4.png")
-    var sf_outside_a5:SKTexture = SKTexture(imageNamed: "SF_Outside_A5.png")
-    var sf_outside_a3:SKTexture = SKTexture(imageNamed: "SF_Outside_A3.png")
-    var sf_inside_a4 = SKTexture(imageNamed: "SF_Inside_A4.png")
-    var sf_inside_c = SKTexture(imageNamed: "SF_Inside_C.png")
-    var tiled_dungeons:SKTexture = SKTexture(imageNamed: "TileD-Dungeons.png")
-    var tilee_outsidetown:SKTexture = SKTexture(imageNamed: "TileE-OutsideTown.png")
-    let sha = SKTexture(imageNamed: "sha3.png")
-    var tile_innerTown = SKTexture(imageNamed: "TileE-InnerTown.png")
-    var pictureMonster = SKTexture(imageNamed: "Monster.png")
-    var pictureNature = SKTexture(imageNamed: "Nature.png")
-    var pictureEvil = SKTexture(imageNamed: "Evil.png")
-    var pictureBaldo = SKTexture(imageNamed: "BALDO.png")
-    var pictureCollabo8_2 = SKTexture(imageNamed: "Collabo8_2.png")
-    var pictureCollabo8_1 = SKTexture(imageNamed: "Collabo8_1.png")
-    var pictureAll = SKTexture(imageNamed: "ALL.png")
-    var pictureAll2 = SKTexture(imageNamed: "ALL2.png")
-    var picturePeople2 = SKTexture(imageNamed: "People2.png")
-    var picturePeople4 = SKTexture(imageNamed: "People4.png")
-    var pictureVehicle = SKTexture(imageNamed: "Vehicle.png")
-    var pictureActor1 = SKTexture(imageNamed: "Actor1.png")
-    var pictureActor2 = SKTexture(imageNamed: "Actor2.png")
-    var pictureActor3 = SKTexture(imageNamed: "Actor3.png")
-    var picturePeople1 = SKTexture(imageNamed: "People1.png")
+//    var dungeon_c = SKTexture(imageNamed: "Dungeon_C.png") 
+//    var door2 = SKTexture(imageNamed: "Door2.png")
+//    var crystal = SKTexture(imageNamed: "Crystal.png")
+//    var sf_outside_c:SKTexture = SKTexture(imageNamed: "SF_Outside_C.png")
+//    var sf_outside_b:SKTexture = SKTexture(imageNamed: "SF_Outside_B.png")
+//    var sf_outside_a4:SKTexture = SKTexture(imageNamed: "SF_Outside_A4.png")
+//    var sf_outside_a5:SKTexture = SKTexture(imageNamed: "SF_Outside_A5.png")
+//    var sf_outside_a3:SKTexture = SKTexture(imageNamed: "SF_Outside_A3.png")
+//    var sf_inside_a4 = SKTexture(imageNamed: "SF_Inside_A4.png")
+//    var sf_inside_c = SKTexture(imageNamed: "SF_Inside_C.png")
+//    var tiled_dungeons:SKTexture = SKTexture(imageNamed: "TileD-Dungeons.png")
+//    var tilee_outsidetown:SKTexture = SKTexture(imageNamed: "TileE-OutsideTown.png")
+//    let sha = SKTexture(imageNamed: "sha3.png")
+//    var tile_innerTown = SKTexture(imageNamed: "TileE-InnerTown.png")
+//    var pictureMonster = SKTexture(imageNamed: "Monster.png")
+//    var pictureNature = SKTexture(imageNamed: "Nature.png")
+//    var pictureEvil = SKTexture(imageNamed: "Evil.png")
+//    var pictureBaldo = SKTexture(imageNamed: "BALDO.png")
+//    var pictureCollabo8_2 = SKTexture(imageNamed: "Collabo8_2.png")
+//    var pictureCollabo8_1 = SKTexture(imageNamed: "Collabo8_1.png")
+//    var pictureAll = SKTexture(imageNamed: "ALL.png")
+//    var pictureAll2 = SKTexture(imageNamed: "ALL2.png")
+//    var picturePeople2 = SKTexture(imageNamed: "People2.png")
+//    var picturePeople4 = SKTexture(imageNamed: "People4.png")
+//    var pictureVehicle = SKTexture(imageNamed: "Vehicle.png")
+//    var pictureActor1 = SKTexture(imageNamed: "Actor1.png")
+//    var pictureActor2 = SKTexture(imageNamed: "Actor2.png")
+//    var pictureActor3 = SKTexture(imageNamed: "Actor3.png")
+//    var picturePeople1 = SKTexture(imageNamed: "People1.png")
+    var tilesets = SKTexture(imageNamed: "tilesets.png")
     var pictureChest = SKTexture(imageNamed: "Chest.png")
     var pictureThunder1 = SKTexture(imageNamed: "Thunder1")
     var pictureFlame1 = SKTexture(imageNamed: "flame1")
@@ -317,50 +322,51 @@ class Game {
         _fontSize = _size * 0.25
         cellSize = 61
     }
-    func sayHello() {
-        print("hello!")
-    }
-    func loadTexture(completion:@escaping () -> Void) {
-        let list = [village,
-                    inside_b,
-                    inside_a5,
-                    inside_a4,
-                    outside_b,
-                    outside_c,
-                    inside_c,
-                    outside_a5,
-                    outside_a2,
-                    outside_a3,
-                    outside_a4,
-                    dungeon_a4,
-                    dungeon_b,
-                    dungeon_c,
-                    sf_outside_c,
-                    sf_outside_a4,
-                    sf_outside_a3,
-                    sf_inside_c,
-                    tilee_outsidetown,
-                    tiled_dungeons,
-                    tile_innerTown,
-                    picturePeople1,
-                    pictureEvil,
-                    pictureBaldo,
-                    pictureNature,
-                    pictureMonster,
-                    pictureCollabo8_1,
-                    pictureCollabo8_2,
-                    pictureAll,
-                    pictureAll2,
-                    picturePeople2,
-                    pictureActor1,
-                    pictureActor2,
-                    pictureActor3,
-        ]
-        SKTexture.preload(list) {
-            completion()
-        }
-
-    }
+//    func sayHello() {
+//        print("hello!")
+//    }
+//    func loadTexture(completion:@escaping () -> Void) {
+//        let list = [
+//            //village,
+////                    inside_b,
+////                    inside_a5,
+////                    inside_a4,
+////                    outside_b,
+////                    outside_c,
+////                    inside_c,
+////                    outside_a5,
+////                    outside_a2,
+////                    outside_a3,
+//                    outside_a4,
+//                    dungeon_a4,
+////                    dungeon_b,
+//                    dungeon_c,
+////                    sf_outside_c,
+////                    sf_outside_a4,
+////                    sf_outside_a3,
+////                    sf_inside_c,
+////                    tilee_outsidetown,
+////                    tiled_dungeons,
+////                    tile_innerTown,
+////                    picturePeople1,
+////                    pictureEvil,
+////                    pictureBaldo,
+////                    pictureNature,
+////                    pictureMonster,
+////                    pictureCollabo8_1,
+////                    pictureCollabo8_2,
+////                    pictureAll,
+////                    pictureAll2,
+////                    picturePeople2,
+////                    pictureActor1,
+////                    pictureActor2,
+////                    pictureActor3,
+//        ]
+//        SKTexture.preload(list) {
+//            completion()
+//        }
+//
+//    }
 //    var _char:Character!
     static func createCloseButton() -> Button {
         let btn = Button()

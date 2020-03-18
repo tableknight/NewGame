@@ -29,6 +29,7 @@ class LeeAttack:Physical {
         c.actionAttack {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
+                    Sound.play(node: t, fileName: "Slash5")
                     t.actionAttacked {
                         t.showValue(value: damage)
                         setTimeout(delay: 1.25, completion: completion)
@@ -42,6 +43,7 @@ class LeeAttack:Physical {
                     }
 //                    t.attacked1()
                     t.clawSpecial2()
+                    t.play("Slash2")
                 }
             }
         }

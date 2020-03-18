@@ -20,6 +20,7 @@ class SecretValley: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(8, 12, 2, 2), wall: oa4.getCell(8, 14, 2, 2))
         _name = "神秘小径"
         _id = AcientRoad.SECRET_VALLEY
+        _soundUrl = "secret_valley"
     }
     
     required init?(coder aDecoder: NSCoder) {

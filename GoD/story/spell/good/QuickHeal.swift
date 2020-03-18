@@ -29,6 +29,7 @@ class QuickHeal: Magical {
         let h = t.getHealth() * 0.25
         let c = _battle._curRole
         c.actionCast {
+            Sound.play(node: c, fileName: "heal")
             t.recovery2f {
                 t.showValue(value: h) {
                     completion()

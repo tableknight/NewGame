@@ -26,8 +26,10 @@ class ArmorInfo:SKSpriteNode {
         if armor._quality == Quality.SACRED {
             nameText = getOutfitNameText(armor._type) + " · " + armor._name
         }
-        if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
+        if armor._type == Outfit.MagicMark {
             nameText = getOutfitNameText(armor._type) + " · " + Loot.getSpellById(armor._spell)._name
+        } else if armor._type == Outfit.Instrument {
+            nameText = getOutfitNameText(armor._type)
         }
         name.text = "Lv\(armor._level) [\(nameText)]"
         name.fontSize = 24
@@ -125,14 +127,17 @@ class ArmorInfo:SKSpriteNode {
 //            _markSpellName = spellName.text!
         }
         
-        if !armor._description.isEmpty {
+        if !armor._description.isEmpty || armor._type == Outfit.Instrument {
             let des = Label()
             des.text = armor._description
             des.fontSize = 18
-//            if armor is Instrument {
-//                des.fontSize = name.fontSize
-//            }
+            
             des.fontColor = QualityColor.GOOD
+            if armor._type == Outfit.Instrument {
+                let s = Loot.getSpellById(armor._spell)
+                des.text = "[\(s._name)]"
+                des.fontColor = QualityColor.getColor(s._quality)
+            }
             des.position.x = startX
             des.position.y = lastY - gap
             lastY = lastY - gap - 18
@@ -143,7 +148,7 @@ class ArmorInfo:SKSpriteNode {
             if desWidth > _displayWidth {
                 _displayWidth = desWidth + cellSize * 0.25
             }
-        } else if armor._type == Outfit.Instrument || armor._type == Outfit.MagicMark {
+        } else if armor._type == Outfit.MagicMark {
             let s = Loot.getSpellById(armor._spell)
             let des = Label()
             des.text = s._description

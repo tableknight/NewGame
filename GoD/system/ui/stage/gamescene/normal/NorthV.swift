@@ -13,6 +13,7 @@ class NorthV: StandScene {
         _name = "\(Game.VILLAGE_NAME)·北"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "village"
     }
     
     required init?(coder aDecoder: NSCoder) {

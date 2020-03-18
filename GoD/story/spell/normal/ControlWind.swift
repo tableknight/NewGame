@@ -47,6 +47,7 @@ class ControlWind: Magical {
             }
 //            t.water2()
             t.wind4()
+            t.play("wind")
         }
     }
     

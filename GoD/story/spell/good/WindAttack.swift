@@ -41,6 +41,7 @@ class WindAttack: Physical {
                     }
                 }
                 t.blow()
+                Sound.play(node: t, fileName: "Slash3")
                 let seat = self.getUnitBehindTarget(seat: t._unit._seat)
                 let tb = self._battle.getUnitBySeat(seat: seat)
                 if nil != tb {
@@ -51,6 +52,7 @@ class WindAttack: Physical {
                                 tb!.showValue(value: d2)
                             }
                             tb!.blow()
+                            Sound.play(node: tb!, fileName: "Slash3")
                         }
                     })
                 }

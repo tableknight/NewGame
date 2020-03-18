@@ -31,6 +31,7 @@ class BallLighting: Magical {
         let c = _battle._curRole
         let p = c.playerPart
         c.actionCast {
+            
             c.preSpecial3f()
             var u = b.getUnitBySeat(seat: (p ? BUnit.TBM : BUnit.BTM))
             if u != nil {
@@ -43,6 +44,7 @@ class BallLighting: Magical {
             self._rate = 0.35
             
             setTimeout(delay: 0.5, completion: {
+                c.play("Thunder4")
                 u = b.getUnitBySeat(seat: (p ? BUnit.TBL : BUnit.BTL))
                 if u != nil {
                     self.attack(u!)

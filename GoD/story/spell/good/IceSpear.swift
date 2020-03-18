@@ -37,6 +37,7 @@ class IceSpear: Magical {
                         completion()
                     }
                 }
+                Sound.play(node: t, fileName: "freeze")
                 t.water3()
             }
         }

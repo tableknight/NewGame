@@ -125,6 +125,9 @@ class Loot: Core {
     func lootInBossRoad(level:CGFloat) {
         var chance = seed().toFloat()
         let lucky = _char._lucky * 0.01 + getLevelDeviation()
+        if chance < 45 * lucky  {
+            _props.append(Item(Item.Tear))
+        }
         if chance < 5 * lucky  {
             _props.append(Item(Item.GiantPotion))
         }
@@ -200,7 +203,7 @@ class Loot: Core {
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 15 * lucky {
+        if chance < 25 * lucky {
             let s = getSacred()
             if nil != s {
                 _props.append(s!)
@@ -652,7 +655,7 @@ class Loot: Core {
     }
     
     func getItem() -> Item {
-        var list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         list += [1,1,1,1,1,1,1,1]
         list += [2,2,2,2,2]
         list += [3,3]
@@ -711,6 +714,9 @@ class Loot: Core {
     private var _props = Array<Item>()
     func getList() -> Array<Item> {
         return _props
+    }
+    func add(item:Item) {
+        _props.append(item)
     }
     
     static func getSacredAmuletByIndex(index:Int) -> Outfit {

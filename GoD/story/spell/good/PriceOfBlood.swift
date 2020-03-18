@@ -40,6 +40,7 @@ class PriceOfBlood: Physical {
                                 }
                             })
                             t.claw()
+                            t.play("SLash7")
                         }
                     }
                     

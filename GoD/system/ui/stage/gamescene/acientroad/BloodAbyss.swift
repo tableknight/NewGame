@@ -20,6 +20,7 @@ class BloodAbyss: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(12, 2, 2, 2), wall: oa4.getCell(12, 4, 2, 2))
         _name = "鲜血深渊"
         _id = AcientRoad.BLOOD_ABYSS
+        _soundUrl = "blood_abyss"
     }
     
     required init?(coder aDecoder: NSCoder) {

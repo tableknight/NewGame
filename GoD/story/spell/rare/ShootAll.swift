@@ -22,13 +22,13 @@ class ShootAll: Physical, BowSkill {
     }
     
     override func cast(completion: @escaping () -> Void) {
-        let this = self
         _battle._curRole.actionShoot {
-            for t in this._battle._selectedTargets {
-                this.attack(t: t)
+            self._battle._curRole.play("bow")
+            for t in self._battle._selectedTargets {
+                self.attack(t: t)
             }
-            setTimeout(delay: 2.2, completion: completion)
         }
+        setTimeout(delay: 2.2, completion: completion)
     }
     
     private func attack(t:BUnit) {

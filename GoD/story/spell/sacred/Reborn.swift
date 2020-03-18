@@ -24,6 +24,9 @@ class Reborn: Passive {
 //        if c.soulstoneIs(HeartOfTarrasque.EFFECTION) {
 //            _rate = 0.2
 //        }
+        if c.soulstoneIs(Sacred.HeartOfTarrasque) {
+            _rate *= 2
+        }
 
         let h = c.getHealth() * _rate
         c.showValue(value: h) {

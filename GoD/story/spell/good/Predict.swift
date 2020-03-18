@@ -113,6 +113,7 @@ class Predict: Magical {
                 c.addStatus(status: status)
                 completion()
             }
+            c.play("Raise3")
         }
     }
     override func findTarget() {

@@ -20,6 +20,7 @@ class WinterLand: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(6, 12, 2, 2), wall: oa4.getCell(6, 14, 2, 2))
         _name = "寒冰大陆"
         _id = AcientRoad.WINTER_LAND
+        _soundUrl = "snow_landing"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,53 +74,54 @@ class WinterLand: AcientRoad {
         return Game.instance.outside_b.getCell(13, 4, 1, 2)
     }
 }
-class WinterItem2:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-//        let itemPoints:Array<Array<CGFloat>> = [
-//            [14, 3],
-//            [8, 5],
-//            [9, 5],
-//            [10, 5],
-//            [10, 7],
-//            [11, 7]
-//        ]
-//        let it = itemPoints.one()
-//        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1], 1, 2))
-        setTexture(Game.instance.dungeon_b.getCell(3, 9, 1, 2))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class WinterItem3:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.dungeon_b.getCell(4, 11, 1, 2))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-class WinterItem1:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-//        let itemPoints:Array<Array<CGFloat>> = [
-//            [14, 0],
-//            [14, 1],
-//            [15, 3],
-//            ]
-//        let it = itemPoints.one()
-//        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1]))
-        setTexture(Game.instance.dungeon_b.getCell(3, 7))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+//
+//class WinterItem2:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+////        let itemPoints:Array<Array<CGFloat>> = [
+////            [14, 3],
+////            [8, 5],
+////            [9, 5],
+////            [10, 5],
+////            [10, 7],
+////            [11, 7]
+////        ]
+////        let it = itemPoints.one()
+////        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1], 1, 2))
+//        setTexture(Game.instance.dungeon_b.getCell(3, 9, 1, 2))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class WinterItem3:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.dungeon_b.getCell(4, 11, 1, 2))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
+//class WinterItem1:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+////        let itemPoints:Array<Array<CGFloat>> = [
+////            [14, 0],
+////            [14, 1],
+////            [15, 3],
+////            ]
+////        let it = itemPoints.one()
+////        setTexture(Game.instance.tiled_dungeons.getCell(it[0], it[1]))
+//        setTexture(Game.instance.dungeon_b.getCell(3, 7))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
 //
 //class SnowLady: Man {
 //    override init() {

@@ -34,6 +34,7 @@ class HealAll: Magical {
                     t.showValue(value: value)
                 }
             }
+            Sound.play(node: c, fileName: "heal")
             setTimeout(delay: 2.5, completion: completion)
         }
     }

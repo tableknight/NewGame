@@ -26,7 +26,7 @@ class Welcome: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     func create() {
-        
+        Sound.play("welcome")
         _layer1.size = CGSize(width: cellSize * 3, height: cellSize * 3)
         _layer1.position.y = cellSize * 2
         _layer1.zPosition = 20
@@ -76,14 +76,14 @@ class Welcome: SKSpriteNode {
         subtitle.text = "@异世界根本不需要我拯救"
         subtitle.position.x = cellSize * 2
         subtitle.position.y = -cellSize * 12
-        subtitle.fontSize = 16
+        subtitle.fontSize = 18
         addChild(subtitle)
         
         let version = Label()
         version.text = "1.0.0"
         version.position.x = cellSize * -6
         version.position.y = -cellSize * 12
-        version.fontSize = 16
+        version.fontSize = 18
         addChild(version)
         
         let fairy = SKSpriteNode(imageNamed: "Fairy")

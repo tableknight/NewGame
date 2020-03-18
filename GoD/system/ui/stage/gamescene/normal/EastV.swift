@@ -13,6 +13,7 @@ class EastV: StandScene {
         _name = "\(Game.VILLAGE_NAME)·东"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "village"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -103,7 +104,7 @@ class EastV: StandScene {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if point.x == 9 && point.y == 4 && cell == CELL_ROLE {
             let stage = Game.instance.curStage!
-            stage.showDialog(img: Game.instance.picturePeople2.getCell(10, 0),
+            stage.showDialog(img: SKTexture(imageNamed: "Jade").getCell(1, 0),
                              text: "需要用船吗？。",
                              name: "船长杰克")
             stage._curDialog?.addConfirmButton()

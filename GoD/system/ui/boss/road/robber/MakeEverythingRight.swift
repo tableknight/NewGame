@@ -19,7 +19,7 @@ class MakeEverythingRight: Magical {
         _id = Spell.MakeEverythingRight
         _cooldown = 3
         _name = "斗转星移"
-        _description = "使己方所有单位立于不败之地"
+        _description = "使己方所有单位立于不败之地，持续2回合"
         targetEnemy = false
         _quality = Quality.SACRED
         autoCast = true
@@ -33,8 +33,9 @@ class MakeEverythingRight: Magical {
                 let status = Status()
                 status._type = Status.MAKE_EVERYTHING_RIGHT
                 status._labelText = "E"
-                status._timeleft = 4
+                status._timeleft = 2
             
+                t.play("Darkness3")
                 t.magic1f() {
                     t.addStatus(status: status)
                     

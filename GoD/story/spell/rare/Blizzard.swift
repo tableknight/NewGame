@@ -30,11 +30,13 @@ class Blizzard: Magical {
         c.actionCast {
             t.cure3t() {
                 t.freezing()
+                Sound.play(node: t, fileName: "freeze")
                 completion()
             }
             let ts = self.getAdajcentUnits(target: t)
             if ts.count < 1 {
             } else {
+                Sound.play(node: ts[0], fileName: "freeze")
                 setTimeout(delay: 0.25, completion: {
                     for u in ts {
                         if !self.statusMissed(baseline: 50, target: u) {

@@ -46,6 +46,7 @@ class LineAttack: Physical {
                     }
                 }
             }
+            Sound.play(node: c, fileName: "Slash4")
             setTimeout(delay: 2.5, completion: completion)
         }
     }

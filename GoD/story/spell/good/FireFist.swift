@@ -23,11 +23,11 @@ class FireFist:HandSkill {
     override func cast(completion:@escaping () -> Void) {
         let b = _battle
         let c = b._curRole
-//        if c.weaponIs(DragonClaw.EFFECTION) {
-//            _cooldown = 0
-//        } else {
-//            _cooldown = 2
-//        }
+        if c.weaponIs(Sacred.DragonClaw) {
+            _cooldown = 0
+        } else {
+            _cooldown = 2
+        }
         c.actionAttack {
             self.attack {
                 completion()
@@ -48,6 +48,7 @@ class FireFist:HandSkill {
                 }
             }
             t.hitSpecial2()
+            t.play("fire")
         }
     }
     

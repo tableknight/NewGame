@@ -28,8 +28,9 @@ class SuperWater:Magical {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
+        let c = _battle._curRole
         _rate = 1.6 / ts.count.toFloat()
-        _battle._curRole.actionCast {
+        c.actionCast {
             for t in self._battle._selectedTargets {
                 let damage = self.waterDamage(t)
                 if !self.hadSpecialAction(t: t) {
@@ -39,6 +40,7 @@ class SuperWater:Magical {
                     t.water1f()
                 }
             }
+            c.play("freeze")
             setTimeout(delay: 2.5, completion: completion)
         }
     }

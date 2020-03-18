@@ -16,6 +16,7 @@ class CityOfDesire: DemonTown {
         _name = "欲望之城"
         _floorSize = 6
         _level = Idlir.LEVEL //13
+        _soundUrl = "city_of_desire"
     }
     
     required init?(coder aDecoder: NSCoder) {

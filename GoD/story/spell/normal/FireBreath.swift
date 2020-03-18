@@ -27,9 +27,11 @@ class FireBreath: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let this = self
+        if c.amuletIs(Sacred.LavaCrystal) {
+            _rate = 1.25
+        }
         c.actionCast {
-            this.attack {
+            self.attack {
                 completion()
             }
         }
@@ -43,16 +45,19 @@ class FireBreath: Magical {
             t.actionAttacked {
                 t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE) {
                     completion()
-//                    if t.ringIs(FireCore.EFFECTION) {
-//                        t.burning()
-//                    } else {
-//                        if self.d3() {
-//                            t.burning()
-//                        }
-//                    }
+                    if t.ringIs(Sacred.FireCore) {
+                        if self.d2() {
+                            t.burning()
+                        }
+                    } else {
+                        if self.d3() {
+                            t.burning()
+                        }
+                    }
                 }
             }
             t.breath()
+            t.play("fire")
         }
     }
 }

@@ -44,8 +44,8 @@ class Dialog: SKSpriteNode {
 //        addChild(actor)
         
         let name = Label()
-        name.position.x = -cellSize * 6
-        name.position.y = -cellSize * 0.125
+        name.position.x = -cellSize * 6.25
+        name.position.y = -cellSize * 0.25
         name.zPosition = _dialog.zPosition + 1
         name.text = _name
         name.fontSize = 20
@@ -89,9 +89,9 @@ class Dialog: SKSpriteNode {
             
             _textlabel = MultipleLabel()
             _textlabel._fontSize = 20
-            _textlabel._lineCharNumber = 26
+            _textlabel._lineCharNumber = 24
             _textlabel._lineHeight = 30
-            _textlabel.position.x = -cellSize * 5.5
+            _textlabel.position.x = -cellSize * 5.25
             _textlabel.position.y = -cellSize
             _textlabel.text = newValue
             addChild(_textlabel)

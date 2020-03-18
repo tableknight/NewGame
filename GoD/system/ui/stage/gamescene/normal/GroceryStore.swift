@@ -13,6 +13,7 @@ class GroceryStore: StandScene {
         _name = "杂货店"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "inner_house"
     }
     
     required init?(coder aDecoder: NSCoder) {

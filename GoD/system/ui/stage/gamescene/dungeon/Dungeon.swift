@@ -186,8 +186,9 @@ class Dungeon: MyScene {
     internal func takeHerb(_ item:UIItem) {
         Game.instance.curStage.cancelMove = true
         _role.recovery1f()
-        
+        Sound.play(node: Game.instance.curStage, fileName: "herb")
         setTimeout(delay: 2, completion: {
+            Sound.play(node: Game.instance.curStage, fileName: "Save")
             let herb = Item(item._key)
             let count = ceil(self._level * 0.1)
             herb._count = self.seed(min: 1, max: count.toInt() + 1)

@@ -29,6 +29,7 @@ class QiWave:HandSkill {
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
         _battle._curRole.actionAttack {
+            self._battle._curRole.play("Slash4")
             for t in ts {
                 let damage = self.physicalDamage(t)
                 t.gun1f()

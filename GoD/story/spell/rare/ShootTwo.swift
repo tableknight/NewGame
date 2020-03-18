@@ -41,6 +41,7 @@ class ShootTwo: Physical, BowSkill {
             if ts.count > 1 {
                 this.attack(t: ts[1])
             }
+            Sound.play(node: c, fileName: "bow")
         }
     }
     

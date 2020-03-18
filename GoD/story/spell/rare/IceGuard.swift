@@ -24,6 +24,7 @@ class IceGuard: Magical {
         let c = _battle._curRole
         
         c.actionCast {
+            Sound.play(node: c, fileName: "buff")
             c.cure2() {
                 completion()
                 let status = Status()

@@ -42,6 +42,7 @@ class Steal: HandSkill {
                         })
                     })
                     t.howl()
+                    t.play("Slash3")
                 } else {
                     setTimeout(delay: 1, completion: {
                         t.showText(text: "STOLEN") {

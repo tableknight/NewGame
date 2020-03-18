@@ -42,9 +42,10 @@ class UIEvil: UIUnit {
             thisOne.create(level: Core().d20() ? 1 : sc._level)
             enemies.append(thisOne)
             
-            
-            if sc._level < 10 {
-                nums = [1,1,1,2,2,2,2,2,3]
+            if sc._level <= 3 {
+                nums = [1,1,1,0,0,0]
+            } else if sc._level < 10 {
+                nums = [0,1,1,1,2,2,2,2,2,3,3]
             }
             let enemyCount = nums.one()
             if enemyCount > 0 {

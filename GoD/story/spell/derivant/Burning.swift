@@ -21,6 +21,7 @@ class Burning:Derivant {
                 completion()
             }
             self._target.flame1(index: 0, line: 0)
+            self._target.play("burn")
 //            self._target.actionAttacked {
 //            }
         }

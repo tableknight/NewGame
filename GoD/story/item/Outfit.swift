@@ -92,6 +92,8 @@ class Outfit:Item {
         createQuality()
         if _type == Outfit.Instrument || _type == Outfit.MagicMark {
             createSpell()
+        } else if _type == Outfit.Wand {
+            _showingText = "杖"
         }
         createSelfAttrs()
         createAttrs()
@@ -106,9 +108,17 @@ class Outfit:Item {
         _quality = Quality.SACRED
         _effection = effection
         _chance = sd.chance
+//        _unique = sd.unique
+        
+        if _type == Outfit.Ring {
+            _unique = true
+        }
         
         if _type == Outfit.Instrument || _type == Outfit.MagicMark {
             createSpell()
+            if _effection == Sacred.MarkOfOaks {
+                _spell = Spell.MightOfOaks
+            }
         }
         
         if [Sacred.NewSword, Sacred.NewSwordPlus, Sacred.DragonSaliva].firstIndex(of: effection) != nil {
@@ -340,7 +350,20 @@ class Outfit:Item {
             char._race = EvilType.RISEN
         } else if _effection == Sacred.PuppetMaster {
             char._minionsCount += 1
+        } else if _effection == Sacred.ElementalSword {
+            var hasSpell = false
+            let sps = char._spellsInuse + char._spellsHidden
+            for s in sps {
+                if s == Spell.ElementMaster {
+                    hasSpell = true
+                }
+            }
+            if !hasSpell {
+                char._spellsHidden.append(Spell.ElementMaster)
+                _reserveBool = true
+            }
         }
+        Sound.play(node:Game.instance.curStage, fileName: "off")
     }
     func off() {
         let c = Game.instance.char!
@@ -365,6 +388,12 @@ class Outfit:Item {
            _reserveBool = false
            let index = c._spellsHidden.firstIndex(of: _spell)
            c._spellsHidden.remove(at: index!)
+        } else if _effection == Sacred.ElementalSword {
+            if _reserveBool {
+                _reserveBool = false
+                let index = c._spellsHidden.firstIndex(of: Spell.ElementMaster)
+                c._spellsHidden.remove(at: index!)
+            }
         }
 //
         if _effection == Sacred.TrueLie || _effection == Sacred.TheEye {
@@ -397,6 +426,7 @@ class Outfit:Item {
                 minions[0]._seat = BUnit.STAND_BY
             }
         }
+        
     }
     
     

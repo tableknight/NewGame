@@ -46,7 +46,8 @@ class IceFist: HandSkill {
         let damage = physicalDamage(t)
         if !hadSpecialAction(t:t, completion: completion) {
             if !hasMissed(target: t, completion: completion) {
-                let attechment = (c.weaponIs("") ? c.getHealth() : c.getHp()) * -0.15
+                let attechment = (c.weaponIs(Sacred.LiosHold) ? c.getHealth() : c.getHp()) * -0.15
+                Sound.play(node: t, fileName: "Slash2")
                 t.actionAttacked(defend: t.isDefend) {
                     t.showValue(value: damage)
                     let waterDamage:CGFloat = attechment * self.waterFactor(from: c, to: t)
@@ -55,6 +56,7 @@ class IceFist: HandSkill {
                         completion()
                     })
                 }
+                t.play("freeze")
 //                t.attacked1()
             }
         }

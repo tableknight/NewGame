@@ -26,7 +26,8 @@ class ScreamLoud:Magical, Curse {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
-        _battle._curRole.actionCast {
+        let c = _battle._curRole
+        c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
                     t.actionWait {
@@ -51,8 +52,10 @@ class ScreamLoud:Magical, Curse {
                         }
                     }
                     t.mixed1(index: 5)
+                    
                 }
             }
+            c.play("Darkness1")
             setTimeout(delay: 1.5, completion: completion)
         }
     }

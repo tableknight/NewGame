@@ -55,6 +55,7 @@ class SoulLash: Magical {
                 
             }
             t.stateDarkf()
+            t.play("Darkness4")
         }
     }
     override func findTarget() {

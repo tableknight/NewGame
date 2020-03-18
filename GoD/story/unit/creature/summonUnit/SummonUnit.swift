@@ -13,6 +13,10 @@ class SummonUnit: Creature {
         super.init()
 //        _spellsInuse = [BossAttack()]
     }
+    override func create(level: CGFloat) {
+        super.create(level: level)
+        
+    }
     var _last = 0
     var canBeControl = false
     internal func createPropValue() -> CGFloat {

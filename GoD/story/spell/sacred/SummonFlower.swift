@@ -34,8 +34,8 @@ class SummonFlower: Magical, SummonSkill {
                 flower._mains.strength *= SummonUnit.POWERUP_RATE
                 flower._mains.agility *= SummonUnit.POWERUP_RATE
                 flower._mains.intellect *= SummonUnit.POWERUP_RATE
-            } else if c.weaponIs(Sacred.TheSurpass) {
-                flower._spellsInuse.append(Game.instance.char._weapon!._spell)
+//            } else if c.weaponIs(Sacred.TheSurpass) {
+//                flower._spellsInuse.append(Game.instance.char._weapon!._spell)
             }
             flower.create(level: c._unit._level)
             flower._seat = b.getEmptySeats(top: !b._curRole.playerPart).one()

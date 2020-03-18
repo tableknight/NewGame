@@ -55,7 +55,8 @@ class Forest: RandomScene {
     }
     
     override func getGroundCell() -> SKSpriteNode {
-        return SKSpriteNode(texture: Game.instance.outside_a2.getCell(0, 0))
+        return SKSpriteNode()
+//        return SKSpriteNode(texture: Game.instance.outside_a2.getCell(0, 0))
 //        let which = seed()
 //        if which < 10 {
 //            return SKSpriteNode(texture: Data.instance.outside_a2.getCell(2, 0))
@@ -94,20 +95,20 @@ class Tree2:UICell {
         super.init(coder: aDecoder)
     }
 }
-class Sand:UICell {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        let tree = Game.instance.outside_a2.getCell(2, 1)
-        setTexture(tree)
-        xSize = 1
-        ySize = 1
-        _matrix = [[Block.PASSABLE]]
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+//class Sand:UICell {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        let tree = Game.instance.outside_a2.getCell(2, 1)
+//        setTexture(tree)
+//        xSize = 1
+//        ySize = 1
+//        _matrix = [[Block.PASSABLE]]
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}
 //class ForestHouse:Portal {
 //    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
 //        super.init(texture: texture, color: color, size: size)

@@ -48,6 +48,7 @@ class LightingFist:HandSkill {
                     })
                 }
                 t.hitThunder()
+                t.play("Thunder4")
             }
         }
     }

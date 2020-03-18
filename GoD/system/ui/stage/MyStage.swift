@@ -88,6 +88,7 @@ class MyStage: SKSpriteNode {
 //            Game.save(c: Game.instance.char!, key: "char")
 //            self.removeFromParent()
             Game.saving()
+            Sound.stop()
             setTimeout(delay: 2, completion: {
                 self.removeFromParent()
                 let welcome = Welcome()
@@ -109,10 +110,11 @@ class MyStage: SKSpriteNode {
     func loadScene(scene:MyScene) {
         _curScene = scene
         showSceneMask()
+        Sound.stop()
         _showingLabel.text = scene._name
         _showingLabel.isHidden = false
         _messageLabel.isHidden = false
-        _messageLabel.text = "& \(Strings.tips.one())"
+        _messageLabel.text = "* \(Strings.tips.one())"
         cancelMove = true
         setTimeout(delay: 1, completion: {
             let out = SKAction.fadeOut(withDuration: TimeInterval(1))
@@ -123,6 +125,7 @@ class MyStage: SKSpriteNode {
             self._sceneChangeMask.run(out) {
                 self._sceneChangeMask.isHidden = true
                 self.cancelMove = false
+                Sound.play(scene._soundUrl)
             }
         })
     }
@@ -307,6 +310,7 @@ class MyStage: SKSpriteNode {
         if cancelMove && !panel.isChild {
             return
         }
+        Sound.dialog()
         panel.zPosition = MyStage.UI_PANEL_Z
         _curPanel = panel
         addChild(panel)
@@ -316,6 +320,7 @@ class MyStage: SKSpriteNode {
         _curPanel = nil
         panel.removeFromParent()
         cancelMove = false
+        Sound.close()
     }
     func hasTowerStatus(status:Status) -> Bool {
         for scn in _scenes {
@@ -344,6 +349,7 @@ class MyStage: SKSpriteNode {
             debug("battle exist! error")
             return
         }
+        Sound.play(node: self, fileName: "enemy")
         cancelMove = true
         hideUI()
         hideScene()
@@ -355,6 +361,7 @@ class MyStage: SKSpriteNode {
             self._sceneChangeMask.isHidden = true
             self.addChild(b)
             b.zPosition = MyScene.MASK_LAYER_Z + 2
+            Sound.play("battle")
         })
     }
     func removeBattle(_ b:Battle) {
@@ -363,6 +370,7 @@ class MyStage: SKSpriteNode {
         showUI()
         showScene()
         setBarValue()
+        Sound.play(_curScene._soundUrl)
     }
     func hideScene() {
 //        _curScene.isHidden = true
@@ -378,6 +386,7 @@ class MyStage: SKSpriteNode {
         if nil != _curDialog {
             return
         }
+        Sound.dialog()
         hideUI()
 //        _char.removeSpeak()
         let dlg = Dialog()
@@ -396,6 +405,7 @@ class MyStage: SKSpriteNode {
         showUI()
         _curDialog = nil
         cancelMove = false
+        Sound.close()
     }
     func showSceneMask() {
         _sceneChangeMask.isHidden = false
@@ -409,11 +419,12 @@ class MyStage: SKSpriteNode {
         if _curPanel != nil {
             removePanel(_curPanel!)
         }
+        Sound.stop()
         showSceneMask()
         _messageNode.removeFromParent()
         _showingLabel.text = next._name
         _showingLabel.isHidden = false
-        _messageLabel.text = "& \(Strings.tips.one())"
+        _messageLabel.text = "* \(Strings.tips.one())"
         _messageLabel.isHidden = false
         loaded = false
         _curScene.removeFromParent()
@@ -442,6 +453,7 @@ class MyStage: SKSpriteNode {
                 self._sceneChangeMask.isHidden = true
                 self.loaded = true
                 self.cancelMove = false
+                Sound.play(next._soundUrl)
             }
         })
     }
@@ -467,9 +479,9 @@ class MyStage: SKSpriteNode {
     }
     func gohome() {
         let char = _curScene._role!
-        let scene = SelfHome()
+        let scene = HotelInner()
         switchScene(next: scene, completion: {
-            scene.setRole(x: 2, y: 1, char: char)
+            scene.setRole(x: 2, y: 4, char: char)
             char.faceSouth()
         })
     }

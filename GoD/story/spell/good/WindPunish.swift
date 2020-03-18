@@ -37,6 +37,7 @@ class WindPunish: Magical {
                     }
                 }
                 t.wind4()
+                t.play("wind")
             }
             let seat = self.getUnitBehindTarget(seat: t._unit._seat)
             let tb = self._battle.getUnitBySeat(seat: seat)
@@ -47,6 +48,7 @@ class WindPunish: Magical {
                         tb!.showValue(value: damage, damageType: DamageType.WATER, textColor: ElementColor.WATER)
                     }
                     tb!.wind4()
+                    tb!.play("wind")
                 }
             }
         }

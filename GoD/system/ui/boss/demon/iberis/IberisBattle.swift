@@ -144,7 +144,8 @@ class FlameAttack: Physical, CloseSkill {
     }
     override init() {
         super.init()
-        _name = "炙炎暴击"
+        _id = Spell.FlameAttack
+        _name = "炙炎一击"
         isFire = true
         _description = "对目标造成攻击60%的火焰伤害，点燃目标，如果目标已被点燃，则造成双倍攻击"
         _rate = 0.6
@@ -164,6 +165,7 @@ class FlameAttack: Physical, CloseSkill {
         c.actionAttack {
             if !self.hadSpecialAction(t: t, completion: completion) {
                 if !self.hasMissed(target: t, completion: completion) {
+                    t.play("fire")
                     t.actionAttacked {
                         t.showValue(value: damage) {
                             completion()

@@ -14,6 +14,7 @@ class ArmorHouse: StandScene {
         _name = "铁匠铺"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "inner_house"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -110,8 +111,8 @@ class ArmorHouse: StandScene {
     private var _sellingArmors = Array<Outfit>()
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
             let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
-            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 4)) {
-                let role = getNextCellItem(x: 9, y: 4) as! UIRole
+            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 3, y: 4)) {
+                let role = getNextCellItem(x: 3, y: 4) as! UIRole
                 let stage = Game.instance.curStage!
                 stage.showDialog(img: role._roleNode.texture!,
                                  text: "王国第一铁匠岂是浪得虚名？要不要看看我的货呀？",
@@ -129,8 +130,8 @@ class ArmorHouse: StandScene {
                 })
                 return true
             }
-            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 10, y: 6)) {
-                let role = getNextCellItem(x: 10, y: 6) as! UIRole
+            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 2, y: 6)) {
+                let role = getNextCellItem(x: 2, y: 6) as! UIRole
                 let stage = Game.instance.curStage!
                 stage.showDialog(img: role._roleNode.texture!,
                                  text: "你想的，你要的，你追求的，我全都有，看看吗？",
@@ -166,8 +167,8 @@ class ArmorHouse: StandScene {
                 })
                 return true
             }
-            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 3, y: 4)) {
-                let role = getNextCellItem(x: 3, y: 4) as! UIRole
+            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 4)) {
+                let role = getNextCellItem(x: 9, y: 4) as! UIRole
                 let stage = Game.instance.curStage!
                 stage.showDialog(img: role._roleNode.texture!,
                                  text: "哼，不买不要碰！",
@@ -186,8 +187,8 @@ class ArmorHouse: StandScene {
                 })
                 return true
             }
-            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 2, y: 6)) {
-                let role = getNextCellItem(x: 2, y: 6) as! UIRole
+            if cell == CELL_ROLE && point.equalTo(CGPoint(x: 10, y: 6)) {
+                let role = getNextCellItem(x: 10, y: 6) as! UIRole
                 let stage = Game.instance.curStage!
                 stage.showDialog(img: role._roleNode.texture!,
                                  text: "我喜欢在夜晚交易，你呢？",

@@ -31,6 +31,7 @@ class FireRain: Magical {
         let c = _battle._curRole
         let this = self
         c.actionCast {
+            c.play("fire")
             this.attack {
                 completion()
             }
@@ -46,13 +47,15 @@ class FireRain: Magical {
 //                setTimeout(delay: 0.5, completion: {
                     t.actionAttacked {
                         t.showValue(value: damage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
-//                        if c.ringIs(FireCore.EFFECTION) {
-//                            t.burning()
-//                        } else {
-//                            if self.d8() {
-//                                t.burning()
-//                            }
-//                        }
+                        if c.ringIs(Sacred.FireCore) {
+                            if self.d4() {
+                                t.burning()
+                            }
+                        } else {
+                            if self.d8() {
+                                t.burning()
+                            }
+                        }
                     }
 //                })
 //                t.flame2(index: 1, line: 1)

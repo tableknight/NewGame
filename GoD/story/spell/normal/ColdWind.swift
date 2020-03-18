@@ -30,6 +30,7 @@ class ColdWind: Magical {
                     t.showValue(value: d, source: c, criticalFromSpell: false, critical: false, damageType: DamageType.WATER, textColor: DamageColor.WATER, completion: completion)
                 }
                 t.cure4()
+                t.play("wind")
             }
         }
     }

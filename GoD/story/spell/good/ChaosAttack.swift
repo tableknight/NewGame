@@ -50,10 +50,12 @@ class ChaosAttack:Physical {
         }
         _battle._curRole.actionAttack {
             if !self.hasPhysicalEvent(t: t, completion: completion) {
+                Sound.play(node: t, fileName: "Slash1")
                 t.actionAttacked {
                     t.showValue(value: damage, criticalFromSpell: cfs, damageType: type, textColor: color, completion: completion)
                 }
                 t.darkness4fifth()
+                t.play("Slash3")
             }
         }
     }

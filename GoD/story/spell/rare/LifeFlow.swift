@@ -40,6 +40,7 @@ class LifeFlow: Magical {
                         }
                     }
                     t.mixed2(index: 16)
+                    t.play("Sound1")
                 }
             }
             

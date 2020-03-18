@@ -16,6 +16,7 @@ class CityOfSin: DemonTown {
         _name = "罪恶之城"
         _floorSize = 5
         _level = Iberis.LEVEL //30
+        _soundUrl = "city_of_sin"
     }
     
     required init?(coder aDecoder: NSCoder) {

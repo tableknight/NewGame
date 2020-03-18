@@ -20,6 +20,7 @@ class FreshGrass: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(12, 2, 2, 2), wall: oa4.getCell(12, 4, 2, 2))
         _name = "青色苔地"
         _id = AcientRoad.FRESH_GRASS
+        _soundUrl = "fresh_grass"
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -13,6 +13,7 @@ class Hotel: StandScene {
         _name = "旅馆·餐厅"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "inner_house"
     }
     
     required init?(coder aDecoder: NSCoder) {

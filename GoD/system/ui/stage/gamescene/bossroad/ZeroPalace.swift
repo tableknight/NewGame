@@ -14,6 +14,7 @@ class ZeroPalace: MorningPalace {
         _name = "零·宫"
         _floorSize = 8
         _level = Micalu.LEVEL //26
+        _soundUrl = "zero_palace"
     }
     
     required init?(coder aDecoder: NSCoder) {

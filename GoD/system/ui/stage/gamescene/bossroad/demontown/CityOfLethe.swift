@@ -16,6 +16,7 @@ class CityOfLethe: DemonTown {
         _name = "遗忘之城"
         _floorSize = 10
         _level = George.LEVEL //39
+        _soundUrl = "city_of_lethe"
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -51,6 +51,7 @@ class BUnit: SKSpriteNode {
     var _avoidActing = false
     var _attackActing = false
     var _attackedActing = false
+    private var _reserveBool = false
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
@@ -404,8 +405,12 @@ class BUnit: SKSpriteNode {
             let s = t.getStatus(type: Status.BURNING) as! BurningStatus
             s._level += 1
             s._castSpell = spell
-            if s._timeleft < 3 {
-                s._timeleft = 3
+            var last = 3
+            if markIs(Sacred.FireMark) {
+                last = 4
+            }
+            if s._timeleft < last {
+                s._timeleft = last
             }
             t.addStatus(status: s)
         } else {
@@ -503,6 +508,9 @@ class BUnit: SKSpriteNode {
     func showValue(value:CGFloat, source:BUnit? = nil, criticalFromSpell:Bool = true, critical:Bool = false, damageType:Int = 1, textColor:UIColor = DamageColor.DAMAGE, completion:@escaping () -> Void = {}) {
         var value = value
         let s = (source == nil ? _battle._curRole : source)!
+        if value < 0 && damageType == DamageType.FIRE && hasSpell(id: Spell.DragonBlood) && seed() < 33 {
+            value = 0
+        }
         if value < 0 && self._unit._race == EvilType.RISEN {
             if s.weaponIs(Sacred.TheExorcist) && seed() < 15 {
                 self.showText(text: "Exorcised") {
@@ -512,6 +520,8 @@ class BUnit: SKSpriteNode {
                     }
                 }
                 return
+            } else if s.weaponIs(Sacred.NightBlade) {
+                value *= 1.25
             }
         }
         if value < 0 && shieldIs(Sacred.EvilExpel) && seed() < 15 {
@@ -526,7 +536,7 @@ class BUnit: SKSpriteNode {
             }
             return
         }
-        if value < 0 && shieldIs(Sacred.Accident) && damageType == 2 {
+        if value < 0 && shieldIs(Sacred.Accident) && damageType == DamageType.MAGICAL {
             var us = Array<BUnit>()
             for u in _battle._playerPart {
                 if !(u._unit is Character) {
@@ -558,11 +568,14 @@ class BUnit: SKSpriteNode {
                 value *= 2
             }
             if hasStatus(type: Sacred.BansMechanArm) {
-                value *= 0.25
+                value *= 0.75
             }
-        }
-        if hasStatus(type: Status.PETRIFY) && value < 0 {
-            value = seed(min: 0, max: 6).toFloat() * 0.01 * value
+            if hasStatus(type: Status.PETRIFY) {
+                value = seed(min: 0, max: 6).toFloat() * 0.01 * value
+            }
+            if hasSpell(id: Spell.DragonBlood) && seed() < 33 {
+                value = 0
+            }
         }
 
         var beCritical = (_battle._selectedAction as! Spell).beCritical
@@ -617,6 +630,7 @@ class BUnit: SKSpriteNode {
         }
         
         setTimeout(delay: 0.5) {
+            
             if self.isDead() {
                 self.actionDead {
                     self.die()
@@ -642,6 +656,17 @@ class BUnit: SKSpriteNode {
 //                }
                 completion()
             }
+        }
+        
+        if markIs(Sacred.MarkOfOaks) && damageType == DamageType.PHYSICAL && seed() < 15 {
+            cure1f() {
+                let s = Status()
+                s._type = Status.MIGHT_OF_OAKS
+                s._timeleft = 3
+                s._labelText = "O"
+                self.addStatus(status: s)
+            }
+            self.play("Raise3")
         }
         
         hpChange(value: value)
@@ -725,6 +750,11 @@ class BUnit: SKSpriteNode {
     }
     func hpChange(value:CGFloat) {
         let hp = value
+        if _unit._extensions.hp + hp < 0 && amuletIs(Sacred.MedalOfHero) && !_reserveBool {
+            showText(text: "Block")
+            _reserveBool = true
+            return
+        }
         _unit._extensions.hp += hp
         if _unit._extensions.hp > _unit._extensions.health {
             _unit._extensions.hp = _unit._extensions.health
@@ -887,6 +917,18 @@ class BUnit: SKSpriteNode {
         return false
     }
     
+    func markIs(_ effection: String) -> Bool {
+        if !(_unit is Character) {
+            return false
+        } else {
+            let c = _unit as! Character
+            if c._magicMark?._effection == effection {
+                return true
+            }
+        }
+        return false
+    }
+    
     func soulstoneIs(_ effection: String) -> Bool {
         if !(_unit is Character) {
             return false
@@ -949,29 +991,30 @@ class BUnit: SKSpriteNode {
     func speak(text:String, autoRemove:Bool = true, duration:CGFloat = 3) {
         let node = SKSpriteNode()
         _speakNode.removeFromParent()
-        var width = cellSize * 2.25
+        var width = cellSize * 1.5
         if text.count >= 6 {
-            width = width + ((text.count - 6) * 12).toFloat()
+            width = width + ((text.count - 6) * 18).toFloat()
         }
-        let rect = CGRect(x: -width * 0.5, y: -cellSize * 0.375, width: width, height: cellSize * 0.75)
+        let rect = CGRect(x: -width * 0.5, y: -cellSize * 0.25, width: width, height: cellSize * 0.5)
         let bg = SKShapeNode(rect: rect, cornerRadius: 4)
         bg.fillColor = UIColor.black
         bg.alpha = 0.65
         node.addChild(bg)
         
         let border = SKShapeNode(rect: rect, cornerRadius: 4)
-        border.lineWidth = 2
+        border.lineWidth = 1
         node.addChild(border)
         
         let l = Label()
-        l.fontSize = 14
+        l.fontSize = 18
         l.fontColor = UIColor.white
-        l.position.y = -7
+        l.align = "center"
+        l.position.y = 9
         l.text = text
         node.addChild(l)
         
-        node.zPosition = 113
-        node.position.y = cellSize
+        node.zPosition = MyScene.UI_LAYER_Z + 100
+        node.position.y = _charSize
         addChild(node)
         if autoRemove {
             setTimeout(delay: duration, completion: {

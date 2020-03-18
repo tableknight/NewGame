@@ -31,6 +31,7 @@ class Interchange: Magical {
 //        let this = self
 //        c.showText(text: _name)
         c.actionCast {
+            c.play("down")
             let seat = t._unit._seat
             if !t.isEmpty {
                 t._unit._seat = c._unit._seat

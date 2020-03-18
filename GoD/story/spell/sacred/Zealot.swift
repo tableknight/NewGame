@@ -31,6 +31,7 @@ class Zealot:Physical {
             let damage = self.physicalDamage(t)
             if !self.hasPhysicalEvent(t: t, completion: completion) {
                 t.attacked1()
+                t.play("Slash10")
                 t.actionAttacked {
                     t.showValue(value: damage)
                 }

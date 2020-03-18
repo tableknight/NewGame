@@ -14,6 +14,7 @@ class HotelInner: StandScene {
         _name = "旅馆·客房"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "inner_house"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,9 +28,14 @@ class HotelInner: StandScene {
         addChild(bg)
         
         let r1 = UIRole()
-        r1.create(roleNode: SKTexture(imageNamed: "family").getNode(1, 3))
-        addItem(x: 11, y: 9, item: r1, z: bg.zPosition)
-        _mapMatrix[9][11] = CELL_ROLE
+        r1.create(roleNode: SKTexture(imageNamed: "family").getNode(1, 1))
+        addItem(x: 9, y: 9, item: r1, z: bg.zPosition)
+        _mapMatrix[9][9] = CELL_ROLE
+        
+        let r2 = UIRole()
+        r2.create(roleNode: SKTexture(imageNamed: "priest").getNode(1, 0))
+        addItem(x: 6, y: 4, item: r2, z: bg.zPosition)
+        _mapMatrix[4][6] = CELL_ROLE
         
         let roof = SKSpriteNode(texture: SKTexture(imageNamed: "hotel_inner_roof"))
         roof.size = CGSize(width: cellSize * 13, height: cellSize * 13)
@@ -98,21 +104,35 @@ class HotelInner: StandScene {
     override func hasAction(cell: Int, touchPoint: CGPoint) -> Bool {
             let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
             
-            if point.y == 4 && point.x == 3 && cell == CELL_BED {
-                let char = Game.instance.curStage._curScene._role!
-                for m in Game.instance.char._minions {
-                    m._extensions.hp = m._extensions.health
-//                    m._extensions.mp = m._extensions.mpMax
-                }
-                char.recovery1f() {
-                    char._unit._extensions.hp = char.getHealth()
-//                    char._unit._extensions.mp = char.getMpMax()
-                    Game.instance.curStage.setBarValue()
-                }
+            if point.y == 4 && point.x == 6 && cell == CELL_ROLE {
+                let p = MinionTradingPanel()
+                p.create()
+                Game.instance.curStage.showPanel(p)
                 return true
-            } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 11, y: 9)) {
-                let role = getNextCellItem(x: 11, y: 9) as! UIRole
-                role.speak(text: "555..")
+            } else if cell == CELL_ROLE && point.equalTo(CGPoint(x: 9, y: 9)) {
+//                let role = getNextCellItem(x: 9, y: 9) as! UIRole
+//                role.speak(text: "555..")
+                let stage = Game.instance.curStage!
+                stage.showDialog(img: SKTexture(imageNamed: "Suvya").getCell(1, 0),
+                                         text: "受伤好重呀，要我帮你治疗吗？",
+                                         name: "护士小埋")
+                stage._curDialog?.addConfirmButton()
+                stage._curDialog?._confirmAction = {
+                    setTimeout(delay: 0.5, completion: {
+                        let char = Game.instance.curStage._curScene._role!
+                        for m in Game.instance.char._minions {
+                            m._extensions.hp = m._extensions.health
+                        }
+                        
+                        Sound.play(node: char, fileName: "heal")
+                        char.recovery1f() {
+                            char._unit._extensions.hp = char.getHealth()
+                            Game.instance.curStage.setBarValue()
+                        }
+                    })
+                    stage.removeDialog(dlg: stage._curDialog!)
+                }
+                
                 return true
             }
             if cell == CELL_ITEM || cell == CELL_ROLE || cell == CELL_BED {

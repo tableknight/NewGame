@@ -20,6 +20,7 @@ class SecretMeadow: AcientRoad {
         _mapSet = GroundSets(ground: oa4.getCell(8, 2, 2, 2), wall: oa4.getCell(8, 4, 2, 2))
         _name = "秘境沼泽"
         _id = AcientRoad.SECRET_MEADOW
+        _soundUrl = "secret_meadow"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,7 +78,7 @@ class SecretMeadow: AcientRoad {
 //    }
     
     override func getWallTexture() -> SKTexture {
-        return Game.instance.sf_outside_b.getCell(13, 2, 1, 2)
+        return Game.instance.tilesets.getCell(6, 1, 1, 2)
     }
     
 }

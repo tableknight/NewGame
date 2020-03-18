@@ -211,13 +211,13 @@ class BossRoad: AcientRoad {
     
 }
 
-class Portal1:UIItem {
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.outside_a5.getCell(7, 5))
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
+//class Portal1:UIItem {
+//    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+//        super.init(texture: texture, color: color, size: size)
+//        setTexture(Game.instance.outside_a5.getCell(7, 5))
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//    }
+//}

@@ -16,6 +16,7 @@ class CityOfDeath: DemonTown {
         _name = "死亡之城"
         _floorSize = 12 //12
         _level = Umisa.LEVEL // 34
+        _soundUrl = "city_of_death"
     }
     
     required init?(coder aDecoder: NSCoder) {

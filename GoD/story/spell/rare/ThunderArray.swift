@@ -64,6 +64,7 @@ class ThunderArray:Magical {
             } else {
                 t.thunder1s()
             }
+            t.play("Thunder4")
             t.showValue(value: damage, damageType: DamageType.THUNDER, textColor: ElementColor.THUNDER)
         }
         setTimeout(delay: 0.2) {

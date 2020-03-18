@@ -58,7 +58,7 @@ class RandomScene: Scenery {
     }
     
     internal func getGroundCell() -> SKSpriteNode {
-        return SKSpriteNode(texture: Game.instance.inside_a5.getCell(2, 2))
+        return SKSpriteNode()
     }
     
     internal func addItems(_ getItem:() -> UICell, _ max:Int) {

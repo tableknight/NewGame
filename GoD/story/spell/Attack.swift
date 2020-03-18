@@ -58,19 +58,25 @@ class Attack: Physical {
             if !hasMissed(target: t, completion: completion) {
                 if c.isClose() {
                     t.attacked1()
+                    t.play("attacked")
                 } else {
                     t.hit2()
+                    if t.weaponIs(Outfit.Bow) {
+                        t.play("bow")
+                    } else {
+                        t.play("attacked")
+                    }
                 }
                 t.actionAttacked {
-                    t.showValue(value: damage) {
+                    t.showValue(value: damage, source: c, damageType: DamageType.PHYSICAL) {
                         completion()
                         
                     }
                     if c.weaponIs(Sacred.BansMechanArm) {
                         if self.d4() {
                             let s = Status()
-                            s._timeleft = 2
-                            s._labelText = "R"
+                            s._timeleft = 3
+                            s._labelText = "B"
                             s._type = Sacred.BansMechanArm
                             t.addStatus(status: s)
                         }
@@ -79,21 +85,20 @@ class Attack: Physical {
                             let rate = self.fireFactor(from: c, to: t)
                             let fireDamage = damage * 0.3 * rate
                             
-                            t.showValue(value: fireDamage, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
+                            t.showValue(value: fireDamage, source: c, damageType: DamageType.FIRE, textColor: ElementColor.FIRE)
                         })
-                    } else
-                        if c.weaponIs(Sacred.LazesPedicureKnife)  {
+                    } else if c.weaponIs(Sacred.LazesPedicureKnife)  {
                         if self.d7() {
                             setTimeout(delay: 0.5, completion: {
                                 c.showText(text: "+1")
                                 c._valueUnit.agilityChange(value: 1)
                             })
                         }
-                        } else if c.weaponIs(Sacred.DeepCold) {
+                    } else if c.weaponIs(Sacred.DeepCold) {
                         if self.d3() {
                             t.freezing()
                         }
-                        } else if c.weaponIs(Sacred.FollowOn) {
+                    } else if c.weaponIs(Sacred.FollowOn) {
                         self._battle._lockedTarget = t
                     }
                     

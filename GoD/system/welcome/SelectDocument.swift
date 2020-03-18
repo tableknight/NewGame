@@ -88,7 +88,14 @@ class SelectDocument: UIPanel {
         scene.setRole(x: 2, y: 4, role: role)
         stage.loadScene(scene: scene)
         stage.createMenu()
-        let c = Game.instance.char!
+//        let c = Game.instance.char!
+//        let e = Item(Item.CreatureEssence)
+//        e._reserveStr = Creature.DarkNinja
+//        e._quality = Quality.RARE
+//        c.addItem(e)
+//        let m = Outfit(Outfit.Instrument)
+//        m.create(effection: Sacred.TheMonatNotes)
+//        c.addItem(m)
 //        c._minionsCount = 3
 //        let p = Item(Item.MPPotion)
 //        c.addItem(p)

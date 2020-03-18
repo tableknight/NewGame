@@ -111,27 +111,30 @@ class SummonServant: Magical, BossOnly {
     override func cast(completion: @escaping () -> Void) {
         let b = _battle
         let c = b._curRole
-        c.actionCast {
-            let seats = [BUnit.TBM, BUnit.TBL, BUnit.TBR, BUnit.TTL, BUnit.TTR]
-            for s in seats {
-                var hasRole = false
-                for u in b._enemyPart {
-                    if u._unit._seat == s {
-                        hasRole = true
+        c.speak(text: "来自地狱的召唤！")
+        setTimeout(delay: 1, completion: {
+            c.actionCast {
+                let seats = [BUnit.TBM, BUnit.TBL, BUnit.TBR, BUnit.TTL, BUnit.TTR]
+                for s in seats {
+                    var hasRole = false
+                    for u in b._enemyPart {
+                        if u._unit._seat == s {
+                            hasRole = true
+                        }
                     }
-                }
-                if !hasRole {
-                    let m = self.getUndeadMinionById(id: self.seed(max: 5))
-                    m.create(level: c._unit._level)
-                    m._seat = s
-                    let unit = b.addEnemy(unit: m)
-                    unit.actionSummon {
-                        completion()
+                    if !hasRole {
+                        let m = self.getUndeadMinionById(id: self.seed(max: 5))
+                        m.create(level: c._unit._level)
+                        m._seat = s
+                        let unit = b.addEnemy(unit: m)
+                        unit.actionSummon {
+                            completion()
+                        }
+                        break
                     }
-                    break
                 }
             }
-        }
+        })
     }
     private func getUndeadMinionById(id:Int) -> BossMinion {
         if id == 0 {
@@ -170,19 +173,22 @@ class Nova: Magical, BossOnly {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._playerPart
-        _battle._curRole.actionCast {
-            for t in ts {
-                let damage = self.magicalDamage(t)
-                if !self.hadSpecialAction(t: t, completion: completion) {
-//                    let damage:CGFloat = 1
-                    t.actionAttacked {
-                        t.showValue(value: damage)
+        _battle._curRole.speak(text: "感受力量的绝望吧！")
+        setTimeout(delay: 1, completion: {
+            self._battle._curRole.actionCast {
+                for t in ts {
+                    let damage = self.magicalDamage(t)
+                    if !self.hadSpecialAction(t: t) {
+                        //                    let damage:CGFloat = 1
+                        t.actionAttacked {
+                            t.showValue(value: damage, source: self._battle._curRole, damageType: DamageType.MAGICAL)
+                        }
+                        t.hit1()
                     }
-                    t.hit1()
                 }
+                setTimeout(delay: 2.5, completion: completion)
             }
-            setTimeout(delay: 3.5, completion: completion)
-        }
+        })
     }
 }
 

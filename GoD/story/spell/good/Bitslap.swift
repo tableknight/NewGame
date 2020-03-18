@@ -46,6 +46,7 @@ class Bitslap: Physical {
                 }
             })
             t.blow()
+            t.play("Slash8")
         }
     }
     

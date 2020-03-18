@@ -30,10 +30,11 @@ class ThunderAttack: Magical {
         let c = _battle._curRole
         let t = _battle._selectedTarget!
         c.actionCast {
-            setTimeout(delay: 0.5, completion: {
+            setTimeout(delay: 0.25, completion: {
                 self.attack {
                     completion()
                 }
+                t.play("Thunder5")
             })
             let sd = Core().seed()
             if sd < 33 {

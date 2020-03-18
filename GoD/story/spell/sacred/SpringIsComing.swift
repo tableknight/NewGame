@@ -40,6 +40,7 @@ class SpringIsComing:Magical {
                 s._castSpell = spell
                 s._timeleft = 4
                 t.addStatus(status: s)
+                t.play("Raise3")
             }
         }
     }

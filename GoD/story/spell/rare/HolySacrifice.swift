@@ -41,6 +41,7 @@ class HolySacrifice: Physical {
                             }
                         }
                         t.attacked1()
+                        t.play("Slash8")
                     }
                 }
             }

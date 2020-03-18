@@ -36,6 +36,7 @@ class BurningAll: Magical, Curse {
                     }
                 }
             }
+            c.play("Darkness6")
             setTimeout(delay: 1.5, completion: completion)
         }
     }

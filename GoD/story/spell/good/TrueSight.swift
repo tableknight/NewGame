@@ -34,7 +34,7 @@ class TrueSight:Magical {
                         completion()
                     }
                 }
-                
+                t.play("Slash5")
             }
         }
     }

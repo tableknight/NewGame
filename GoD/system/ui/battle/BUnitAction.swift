@@ -62,6 +62,7 @@ extension BUnit {
     }
     func actionDebuff(completion:@escaping () -> Void) {
         auroDown()
+        Sound.play(node: self, fileName: "down")
         let this = self
         setTimeout(delay: 0.2, completion: {
             this.auroDown()
@@ -86,6 +87,7 @@ extension BUnit {
             //            return
             return
         }
+        
         _attackedActing = true
         if (isDefend || defend) && _battle._selectedAction is Physical {
             actionDefead {
@@ -153,6 +155,9 @@ extension BUnit {
         let fadeout = SKAction.fadeOut(withDuration: TimeInterval(0.15))
         let fadein = SKAction.fadeIn(withDuration: TimeInterval(0.15))
         let go = SKAction.sequence([wait,fadeout,fadein,fadeout,fadein,fadeout,fadein, SKAction.wait(forDuration: TimeInterval(0.15))])
+        setTimeout(delay: 0.5, completion: {
+            Sound.play(node: self, fileName: "cast")
+        })
         _charNode.run(go) {
             completion()
         }
@@ -179,6 +184,7 @@ extension BUnit {
         if _avoidActing {
             return
         }
+        Sound.play(node: self, fileName: "avoid")
         _avoidActing = true
         let d = cellSize * 0.3
         var v = CGVector(dx: 0, dy: -d)
@@ -205,16 +211,21 @@ extension BUnit {
                 self.actionDead(completion: completion)
             })
         } else {
+            setTimeout(delay: 0.5, completion: {
+                Sound.play(node: self, fileName: "dead")
+            })
             let wait = SKAction.fadeAlpha(to: 0, duration: TimeInterval(0.75))
             _charNode.run(wait, completion: completion)
         }
     }
     func actionSummon(completion:@escaping () -> Void) {
+        Sound.play(node: self, fileName: "Raise3")
         _charNode.alpha = 0
         let wait = SKAction.fadeAlpha(to: 1, duration: TimeInterval(0.75))
         _charNode.run(wait, completion: completion)
     }
     func actionRecall(completion:@escaping () -> Void) {
+        Sound.play(node: self, fileName: "Raise3")
         let wait = SKAction.fadeAlpha(to: 0, duration: TimeInterval(0.75))
         _charNode.run(wait, completion: completion)
     }
@@ -304,5 +315,8 @@ extension BUnit {
         let go = SKAction.sequence([move1, wait, move2])
         _charNode.run(go, completion: completion)
         _select.run(go)
+    }
+    func play(_ fileName:String) {
+        Sound.play(node: self, fileName: fileName)
     }
 }

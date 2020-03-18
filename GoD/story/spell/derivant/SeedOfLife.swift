@@ -32,5 +32,6 @@ class SeedOfLife:Derivant {
                 completion()
             }
         }
+        t.play("heal")
     }
 }

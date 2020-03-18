@@ -27,17 +27,20 @@ class Disintegrate: Magical, BossOnly {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let b = _battle
-        c.actionWait {
-            for t in b._playerPart {
-                t.actionHealed {
-                    t.showValue(value: t.getHealth() - t.getHp())
+        c.speak(text: "终于..可以..安.息.了")
+        setTimeout(delay: 1, completion: {
+            c.actionWait {
+                for t in b._playerPart {
+                    t.actionHealed {
+                        t.showValue(value: t.getHealth() - t.getHp())
+                    }
                 }
+                c.hpChange(value: -1 - c.getHp())
+                setTimeout(delay: 2.2, completion: {
+                    self._battle.victorys()
+                })
             }
-            c.hpChange(value: -1 - c.getHp())
-            setTimeout(delay: 2.2, completion: {
-                self._battle.victorys()
-            })
-        }
+        })
     }
     
     override func findTarget() {

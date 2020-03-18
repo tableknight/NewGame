@@ -26,12 +26,14 @@ class ElementDestory:Magical, Curse {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
-        _battle._curRole.actionCast {
+        let c = _battle._curRole
+        c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
                     self.setDown(t: t)
                 }
             }
+            c.play("Darkness8")
             setTimeout(delay: 2.1, completion: completion)
         }
     }

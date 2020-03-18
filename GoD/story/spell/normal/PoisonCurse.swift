@@ -26,6 +26,7 @@ class PoisonCurse: Magical, Curse {
                     t.poisoning()
                     completion()
                 }
+                t.play("Darkness2")
             }
         }
     }

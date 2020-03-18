@@ -27,6 +27,7 @@ class SilenceAll: Magical, Curse {
         let c = _battle._curRole
         let ts = _battle._selectedTargets
         c.actionCast {
+            c.play("down")
             for t in ts {
                 if !self.statusMissed(baseline: 50, target: t, completion: {}) {
                     t.darkness4f() {

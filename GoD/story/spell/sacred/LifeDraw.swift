@@ -43,6 +43,7 @@ class LifeDraw: Magical {
                 })
             }
             t.darkness3()
+            t.play("Darkness3")
 //            t.absorbt()
         }
     }

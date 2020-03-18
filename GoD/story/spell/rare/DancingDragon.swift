@@ -34,6 +34,7 @@ class DancingDragon: Physical {
         let times = 1 + seed(to: max)
         _battle._curRole.actionAttack {
             t.clawSpecial1()
+            t.play("freeze")
             for i in 0...times {
                 if i == 0 {
                     let damage = self.physicalDamage(t)

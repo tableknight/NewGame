@@ -36,8 +36,8 @@ class LowerSummon:Magical, SummonSkill {
                 uw._mains.strength *= SummonUnit.POWERUP_RATE
                 uw._mains.agility *= SummonUnit.POWERUP_RATE
                 uw._mains.intellect *= SummonUnit.POWERUP_RATE
-            } else if c.weaponIs(Sacred.TheDeath) {
-                uw._spellsInuse.append(Game.instance.char._weapon!._spell)
+//            } else if c.weaponIs(Sacred.TheDeath) {
+//                uw._spellsInuse.append(Game.instance.char._weapon!._spell)
             }
             uw.create(level: b._curRole._unit._level)
             uw._seat = seat

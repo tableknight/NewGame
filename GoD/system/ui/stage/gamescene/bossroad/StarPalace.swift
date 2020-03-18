@@ -14,6 +14,7 @@ class StarPalace: MorningPalace {
         _name = "星·宫"
         _floorSize = 5
         _level = Sumahl.LEVEL //40
+        _soundUrl = "star_palace"
     }
     
     required init?(coder aDecoder: NSCoder) {

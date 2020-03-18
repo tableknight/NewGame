@@ -9,7 +9,7 @@
 import SpriteKit
 class Battle: SKSpriteNode {
     internal func touchAction(s:CGPoint) {
-        
+//        _playerUnit.speak(text: "哇哈哈哈！")
         if cancelTouch {
             return
         }
@@ -295,18 +295,6 @@ class Battle: SKSpriteNode {
     internal var _isCharDead = false
     internal var _isAllEvilDead = false
     func battleStart() {
-//        if _char._weapon is CreationMatrix {
-//            var ss:Array<Spell> = []
-//            for s in _char._spellsInuse {
-//                if s is Active {
-//                    ss.append(s)
-//                }
-//            }
-//            if ss.count > 0 {
-//                _creationMatrixSpell = ss.one()
-//            }
-//        }
-        
         setTimeout(delay: 1, completion: roundStart)
     }
     internal var _roundLabel = Label()
@@ -472,7 +460,7 @@ class Battle: SKSpriteNode {
         
         if this._curRole.hasStatus(type: Status.NERVOUS_POISON) {
             if seed() < 33 {
-                self._curRole.showText(text: "POISON") {
+                self._curRole.showText(text: "毒发") {
                     this.moveEnd()
                 }
                 return
@@ -568,16 +556,28 @@ class Battle: SKSpriteNode {
         if isVictory {
             return
         }
+        Sound.stop()
         let l = Loot()
         for u in _evilsOrg {
             for r in _playerPart {
-                let exp = l.getExp(selfUnit: r, enemyLevel: u._unit._level) * expRate
+                var exp = l.getExp(selfUnit: r, enemyLevel: u._unit._level) * expRate
+                if r.ringIs(Sacred.RingFromElder) {
+                    exp *= 1.25
+                }
                 r._unit.expUp(up: exp)
             }
             if _char._level - u._unit._level <= 5 {
                 l.loot(level: u._unit._level.toInt())
                 if Game.instance.curStage._curScene is BossRoad {
                     l.lootInBossRoad(level: u._unit._level)
+                } else if Game.instance.curStage._curScene is AcientRoad {
+                    if seed() < 3 {
+                        let e = Item(Item.CreatureEssence)
+                        e._reserveStr = (u._unit as! Creature)._type
+                        e._quality = u._unit._quality
+                        e._description = u._unit._name
+                        l.add(item: e)
+                    }
                 }
                 if Game.instance.curStage._curScene is DemonTown {
                     l.lootInDemonTown(level: u._unit._level)
@@ -621,13 +621,13 @@ class Battle: SKSpriteNode {
     }
     func fadeOutBattle(completion: @escaping () -> Void = {}) {
         
+        Game.saving(sync: false)
         setTimeout(delay: 0.75, completion: {
             if self.isVictory {
                 self.victoryAction()
             } else {
                 self.defeatedAction()
             }
-            Game.saving(sync: false)
             Game.instance.curStage.removeBattle(self)
             completion()
         })
@@ -747,7 +747,7 @@ class Battle: SKSpriteNode {
     func placeEvils() {}
     func placeRoles() {}
     func silenceUnit(unit:BUnit) {
-        if unit.hasSpell(spell: RaceSuperiority()) || unit.hasStatus(type: Status.IMMUNE) {
+        if unit.hasSpell(spell: RaceSuperiority()) || unit.hasStatus(type: Status.IMMUNE) || unit.markIs(Sacred.MarkOfDeathGod) {
             unit.showText(text: "Immune")
             return
         }
@@ -921,6 +921,8 @@ class Battle: SKSpriteNode {
         }
         if spell._cooldown > 0 {
             if _curRole._unit is Character && Game.instance.curStage.hasTowerStatus(status: TimeReduce()) {
+                spell._timeleft = spell._cooldown
+            } else if wandFireMaster(spell: spell) {
                 spell._timeleft = spell._cooldown
             } else {
                 spell._timeleft = spell._cooldown + 1
@@ -1147,13 +1149,8 @@ class Battle: SKSpriteNode {
         return false
     }
     internal func wandFireMaster(spell:Spell) -> Bool {
-        if spell.isMagical && spell.isFire {
-            if _curRole._unit is Character {
-                let char = _curRole._unit as! Character
-                if char.weaponIs(Sacred.FireMaster) {
-                    return true
-                }
-            }
+        if spell.isMagical && spell.isFire && _curRole.weaponIs(Sacred.FireMark) {
+            return true
         }
         
         return false
@@ -1233,6 +1230,9 @@ class Battle: SKSpriteNode {
     }
     
     func addPlayerMinion(unit:Unit) -> BUnit {
+        if unit is SummonUnit && _playerUnit.weaponIs(Sacred.TheSurpass) {
+            unit._spellsInuse.append(Game.instance.char._weapon!._spell)
+        }
         let bUnit = BUnit()
         bUnit.playerPart = true
         bUnit.setUnit(unit: unit)
@@ -1263,6 +1263,13 @@ class Battle: SKSpriteNode {
             addChild(bUnit)
             if r is Character {
                 _playerUnit = bUnit
+                if _playerUnit.weaponIs(Sacred.CreationMatrix) {
+                    let ss = _playerUnit.getActiveSpell()
+                    if ss.count > 0 {
+                        let s = ss.one()
+                        s._cooldown = 0
+                    }
+                }
             }
         }
     }

@@ -35,7 +35,7 @@ class UIItem:SKSpriteNode {
         _speakNode.removeFromParent()
         var width = cellSize * 2.25
         if text.count >= 6 {
-            width = width + ((text.count - 6) * 11).toFloat()
+            width = width + ((text.count - 6) * 18).toFloat()
         }
         let rect = CGRect(x: -width * 0.5, y: -cellSize * 0.375, width: width, height: cellSize * 0.75)
         let bg = SKShapeNode(rect: rect, cornerRadius: 4)
@@ -74,7 +74,7 @@ class UIItem:SKSpriteNode {
 class PortalNext:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.inside_b.getCell(4, 0))
+        setTexture(Game.instance.tilesets.getCell(5, 2))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,7 +106,7 @@ class PortalNext:UIItem {
 class PortalFinal:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        setTexture(Game.instance.crystal.getCell(9, 1, 1, 2))
+        setTexture(Game.instance.tilesets.getCell(0, 1, 1, 2))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -116,8 +116,8 @@ class PortalFinal:UIItem {
 class PortalPrev:UIItem {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        let s = Game.instance.inside_b
-        let t = s.getCell(4, 1)
+        let s = Game.instance.tilesets
+        let t = s.getCell(6, 2)
         setTexture(t)
     }
     

@@ -27,18 +27,21 @@ class Escape: Magical, BossOnly {
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
         let b = _battle
-        c.actionWait {
-            if self.d4() {
-                c.showText(text: "全身而退") {
-                    b.isVictory = false
-                    b.fadeOutBattle()
-                }
-            } else {
-                c.showText(text: "逃生失败") {
-                    completion()
+        c.speak(text: "情况不妙，我闪!")
+        setTimeout(delay: 1.5, completion: {
+            c.actionWait {
+                if self.d4() {
+                    c.showText(text: "全身而退") {
+                        b.isVictory = false
+                        b.fadeOutBattle()
+                    }
+                } else {
+                    c.showText(text: "逃生失败") {
+                        completion()
+                    }
                 }
             }
-        }
+        })
     }
     override func findTarget() {
     }

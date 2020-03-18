@@ -27,6 +27,7 @@ class SwapHealth: Magical {
             c._unit._extensions.hp = 0
             c.hpChange(value: thp)
             completion()
+            t.play("Raise3")
         }
     }
     

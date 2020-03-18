@@ -37,6 +37,7 @@ class HiddenArea: AcientRoad, InnerMaze {
             Creature.BloodQueen,
             Creature.ManWizard
         ]
+        _soundUrl = "hidden_area"
     }
     
     required init?(coder aDecoder: NSCoder) {

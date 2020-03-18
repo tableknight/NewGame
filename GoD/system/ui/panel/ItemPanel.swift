@@ -43,6 +43,7 @@ class ItemPanel: UIPanel {
                     }
                     let index = _char._items.firstIndex(of: i)
                     if nil != index {
+                        Sound.play(node: Game.instance.curStage, fileName: "close")
                         _char._items.remove(at: index!)
                         pageReload()
                         return

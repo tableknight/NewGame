@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090C0DE521EB260E008C46AA /* NorthCanmping.swift */; };
-		090C0DE921ECCCF2008C46AA /* SnowLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090C0DE821ECCCF2008C46AA /* SnowLanding.swift */; };
 		090FE9FB21BB983E004276BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090FE9FA21BB983E004276BB /* AppDelegate.swift */; };
 		090FE9FD21BB983E004276BB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 090FE9FC21BB983E004276BB /* GameScene.sks */; };
 		090FE9FF21BB983E004276BB /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 090FE9FE21BB983E004276BB /* Actions.sks */; };
@@ -194,7 +192,7 @@
 		0922C94B22225BEC002DC201 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94A22225BEC002DC201 /* Types.swift */; };
 		0922C94F22243834002DC201 /* DancingDragon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C94E22243834002DC201 /* DancingDragon.swift */; };
 		0922C9542233FA0E002DC201 /* BossRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9532233FA0E002DC201 /* BossRoad.swift */; };
-		0922C9562234D992002DC201 /* MoringPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9552234D992002DC201 /* MoringPalace.swift */; };
+		0922C9562234D992002DC201 /* MorningPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C9552234D992002DC201 /* MorningPalace.swift */; };
 		0922C95822394EA4002DC201 /* ZeroPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95722394EA4002DC201 /* ZeroPalace.swift */; };
 		0922C95A223BFB0B002DC201 /* FreshGrass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C959223BFB0B002DC201 /* FreshGrass.swift */; };
 		0922C95C223C879D002DC201 /* SecretValley.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0922C95B223C879D002DC201 /* SecretValley.swift */; };
@@ -220,7 +218,6 @@
 		092C0CB822A6AB840084D15D /* ControlWind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB722A6AB840084D15D /* ControlWind.swift */; };
 		092C0CBA22AFD7070084D15D /* Predict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CB922AFD7070084D15D /* Predict.swift */; };
 		092C0CBC22BE6FAA0084D15D /* MinionTradingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */; };
-		092C0CBE22CA2A330084D15D /* MinionHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CBD22CA2A330084D15D /* MinionHouse.swift */; };
 		092C0CC122CE1EA90084D15D /* FireSpirit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC022CE1EA90084D15D /* FireSpirit.swift */; };
 		092C0CC322CE1EBB0084D15D /* FireSpiritBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC222CE1EBB0084D15D /* FireSpiritBattle.swift */; };
 		092C0CC522CE24080084D15D /* LavaExplode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092C0CC422CE24080084D15D /* LavaExplode.swift */; };
@@ -236,14 +233,11 @@
 		0933C0ED2373127E00404348 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933C0EC2373127E00404348 /* Strings.swift */; };
 		0933C0F323780DE200404348 /* VeryExperienced.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933C0F223780DE200404348 /* VeryExperienced.swift */; };
 		0933C0F523780F1500404348 /* SacredFist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0933C0F423780F1500404348 /* SacredFist.swift */; };
-		0933C0FA237EEF7600404348 /* Dungeon1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0933C0F9237EEF7500404348 /* Dungeon1.mp3 */; };
+		0933C0FA237EEF7600404348 /* welcome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0933C0F9237EEF7500404348 /* welcome.mp3 */; };
 		094E68CA21DE238C00414583 /* ISelectTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68C921DE238C00414583 /* ISelectTarget.swift */; };
 		094E68CC21E064C500414583 /* ShootTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CB21E064C500414583 /* ShootTwo.swift */; };
-		094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CD21E1C8CD00414583 /* GeneralStore.swift */; };
 		094E68D021E203EE00414583 /* SellingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68CF21E203EE00414583 /* SellingPanel.swift */; };
-		094E68D221E37E6700414583 /* OutfitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D121E37E6700414583 /* OutfitStore.swift */; };
 		094E68D421E8E1AA00414583 /* MagicHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D321E8E1A900414583 /* MagicHouse.swift */; };
-		094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094E68D521EA228E00414583 /* ChurchHouse.swift */; };
 		0950DFF723A7B60D00F17588 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950DFF623A7B60D00F17588 /* Protocols.swift */; };
 		0950DFF923A9003000F17588 /* Sacred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950DFF823A9003000F17588 /* Sacred.swift */; };
 		0953ADEA22F094B500BCEAFC /* Powerful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADE922F094B500BCEAFC /* Powerful.swift */; };
@@ -252,6 +246,79 @@
 		0953ADF022F0956B00BCEAFC /* SharpStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADEF22F0956B00BCEAFC /* SharpStone.swift */; };
 		0953ADF222F0965700BCEAFC /* ToughHeart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADF122F0965700BCEAFC /* ToughHeart.swift */; };
 		0953ADF422F096ED00BCEAFC /* Zealot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0953ADF322F096ED00BCEAFC /* Zealot.swift */; };
+		095DF41124168BBA00EA9648 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095DF41024168BBA00EA9648 /* Sound.swift */; };
+		095DF4132417CB0600EA9648 /* village.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4122417CB0600EA9648 /* village.mp3 */; };
+		095DF4152417CB5600EA9648 /* inner_house.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4142417CB5600EA9648 /* inner_house.mp3 */; };
+		095DF4172417CBDE00EA9648 /* snow_landing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4162417CBDE00EA9648 /* snow_landing.mp3 */; };
+		095DF4192417CC5C00EA9648 /* fresh_grass.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4182417CC5C00EA9648 /* fresh_grass.mp3 */; };
+		095DF41B2417CC7700EA9648 /* secret_meadow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF41A2417CC7700EA9648 /* secret_meadow.mp3 */; };
+		095DF41D2417CCDE00EA9648 /* lost_area.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF41C2417CCDE00EA9648 /* lost_area.mp3 */; };
+		095DF41F2417CD1D00EA9648 /* blood_abyss.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF41E2417CD1D00EA9648 /* blood_abyss.mp3 */; };
+		095DF4212417CD7D00EA9648 /* hidden_area.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4202417CD7D00EA9648 /* hidden_area.mp3 */; };
+		095DF4242417D02500EA9648 /* dialog.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4232417D02500EA9648 /* dialog.mp3 */; };
+		095DF4262417D3F500EA9648 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4252417D3F500EA9648 /* close.mp3 */; };
+		095DF4282417D77400EA9648 /* battle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4272417D77400EA9648 /* battle.mp3 */; };
+		095DF42F2417D8ED00EA9648 /* chest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4292417D8EA00EA9648 /* chest.mp3 */; };
+		095DF4302417D8ED00EA9648 /* heal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF42A2417D8EB00EA9648 /* heal.mp3 */; };
+		095DF4312417D8ED00EA9648 /* attacked.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF42B2417D8EB00EA9648 /* attacked.mp3 */; };
+		095DF4322417D8ED00EA9648 /* herb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF42C2417D8EB00EA9648 /* herb.mp3 */; };
+		095DF4332417D8ED00EA9648 /* avoid.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF42D2417D8EB00EA9648 /* avoid.mp3 */; };
+		095DF4342417D8ED00EA9648 /* buff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF42E2417D8EC00EA9648 /* buff.mp3 */; };
+		095DF4472417DD8E00EA9648 /* Slash6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4352417DD8700EA9648 /* Slash6.mp3 */; };
+		095DF4482417DD8E00EA9648 /* Slash8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4362417DD8700EA9648 /* Slash8.mp3 */; };
+		095DF4492417DD8E00EA9648 /* Slash10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4372417DD8800EA9648 /* Slash10.mp3 */; };
+		095DF44A2417DD8E00EA9648 /* Sound2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4382417DD8800EA9648 /* Sound2.mp3 */; };
+		095DF44B2417DD8E00EA9648 /* Slash11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4392417DD8900EA9648 /* Slash11.mp3 */; };
+		095DF44C2417DD8E00EA9648 /* Slash7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43A2417DD8900EA9648 /* Slash7.mp3 */; };
+		095DF44D2417DD8E00EA9648 /* Slash9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43B2417DD8A00EA9648 /* Slash9.mp3 */; };
+		095DF44E2417DD8E00EA9648 /* Slash2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43C2417DD8A00EA9648 /* Slash2.mp3 */; };
+		095DF44F2417DD8E00EA9648 /* special.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43D2417DD8A00EA9648 /* special.mp3 */; };
+		095DF4502417DD8E00EA9648 /* Raise3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43E2417DD8A00EA9648 /* Raise3.mp3 */; };
+		095DF4512417DD8E00EA9648 /* Slash1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF43F2417DD8B00EA9648 /* Slash1.mp3 */; };
+		095DF4522417DD8E00EA9648 /* Slash5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4402417DD8B00EA9648 /* Slash5.mp3 */; };
+		095DF4532417DD8E00EA9648 /* Slash4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4412417DD8C00EA9648 /* Slash4.mp3 */; };
+		095DF4542417DD8E00EA9648 /* Slash3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4422417DD8C00EA9648 /* Slash3.mp3 */; };
+		095DF4552417DD8E00EA9648 /* Skill2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4432417DD8C00EA9648 /* Skill2.mp3 */; };
+		095DF4562417DD8E00EA9648 /* fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4442417DD8D00EA9648 /* fire.mp3 */; };
+		095DF4572417DD8E00EA9648 /* Skill1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4452417DD8D00EA9648 /* Skill1.mp3 */; };
+		095DF4582417DD8E00EA9648 /* tower.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4462417DD8D00EA9648 /* tower.mp3 */; };
+		095DF45A2417E00E00EA9648 /* down.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4592417E00D00EA9648 /* down.mp3 */; };
+		095DF45C2417E0E800EA9648 /* dead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF45B2417E0E800EA9648 /* dead.mp3 */; };
+		095DF45E2419151A00EA9648 /* scroll.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF45D2419151900EA9648 /* scroll.mp3 */; };
+		095DF46624191A7600EA9648 /* freeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46524191A7600EA9648 /* freeze.mp3 */; };
+		095DF46824191BD000EA9648 /* cast.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46724191BD000EA9648 /* cast.mp3 */; };
+		095DF46A24191DDD00EA9648 /* off.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46924191DDD00EA9648 /* off.mp3 */; };
+		095DF46C241920BF00EA9648 /* Save.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46B241920BE00EA9648 /* Save.mp3 */; };
+		095DF46E2419246500EA9648 /* burn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46D2419246400EA9648 /* burn.mp3 */; };
+		095DF47124192DCC00EA9648 /* Thunder5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF46F24192DCB00EA9648 /* Thunder5.mp3 */; };
+		095DF47224192DCC00EA9648 /* Thunder4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47024192DCC00EA9648 /* Thunder4.mp3 */; };
+		095DF47B24192EED00EA9648 /* Darkness2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47324192EEA00EA9648 /* Darkness2.mp3 */; };
+		095DF47C24192EED00EA9648 /* Darkness3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47424192EEB00EA9648 /* Darkness3.mp3 */; };
+		095DF47D24192EED00EA9648 /* Darkness5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47524192EEB00EA9648 /* Darkness5.mp3 */; };
+		095DF47E24192EED00EA9648 /* Darkness7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47624192EEB00EA9648 /* Darkness7.mp3 */; };
+		095DF47F24192EED00EA9648 /* Darkness4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47724192EEC00EA9648 /* Darkness4.mp3 */; };
+		095DF48024192EED00EA9648 /* Darkness6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47824192EEC00EA9648 /* Darkness6.mp3 */; };
+		095DF48124192EED00EA9648 /* Darkness1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47924192EEC00EA9648 /* Darkness1.mp3 */; };
+		095DF48224192EED00EA9648 /* Darkness8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF47A24192EEC00EA9648 /* Darkness8.mp3 */; };
+		095DF48624192F6F00EA9648 /* Wind4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48324192F6E00EA9648 /* Wind4.mp3 */; };
+		095DF48724192F6F00EA9648 /* wind.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48424192F6E00EA9648 /* wind.mp3 */; };
+		095DF48824192F6F00EA9648 /* Wind7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48524192F6F00EA9648 /* Wind7.mp3 */; };
+		095DF48A2419306300EA9648 /* bow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4892419306300EA9648 /* bow.mp3 */; };
+		095DF48C241A62B400EA9648 /* OptionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095DF48B241A62B400EA9648 /* OptionPanel.swift */; };
+		095DF498241BC5E300EA9648 /* city_of_lethe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48D241BC5D600EA9648 /* city_of_lethe.mp3 */; };
+		095DF499241BC5E300EA9648 /* secret_valley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48E241BC5D700EA9648 /* secret_valley.mp3 */; };
+		095DF49A241BC5E300EA9648 /* winter_palace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF48F241BC5D900EA9648 /* winter_palace.mp3 */; };
+		095DF49B241BC5E300EA9648 /* city_of_sorrow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF490241BC5DA00EA9648 /* city_of_sorrow.mp3 */; };
+		095DF49C241BC5E300EA9648 /* city_of_sin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF491241BC5DB00EA9648 /* city_of_sin.mp3 */; };
+		095DF49D241BC5E300EA9648 /* city_of_desire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF492241BC5DD00EA9648 /* city_of_desire.mp3 */; };
+		095DF49E241BC5E300EA9648 /* star_palace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF493241BC5DE00EA9648 /* star_palace.mp3 */; };
+		095DF49F241BC5E300EA9648 /* zero_palace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF494241BC5DF00EA9648 /* zero_palace.mp3 */; };
+		095DF4A0241BC5E300EA9648 /* city_of_fail.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF495241BC5E100EA9648 /* city_of_fail.mp3 */; };
+		095DF4A1241BC5E300EA9648 /* city_of_death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF496241BC5E200EA9648 /* city_of_death.mp3 */; };
+		095DF4A2241BC5E300EA9648 /* morning_palace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF497241BC5E300EA9648 /* morning_palace.mp3 */; };
+		095DF4A4241E376600EA9648 /* SnowLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095DF4A3241E376500EA9648 /* SnowLanding.swift */; };
+		095DF4A724210AA200EA9648 /* enemy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4A524210AA000EA9648 /* enemy.mp3 */; };
+		095DF4A824210AA200EA9648 /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 095DF4A624210AA100EA9648 /* levelup.mp3 */; };
 		0960C4A52386BF2B00FF30A1 /* WinterPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0960C4A42386BF2B00FF30A1 /* WinterPalace.swift */; };
 		0960C4A72386C3D400FF30A1 /* StarPalace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0960C4A62386C3D400FF30A1 /* StarPalace.swift */; };
 		096D9D3523B1C3B500FB1D34 /* FacelessSpell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096D9D3423B1C3B400FB1D34 /* FacelessSpell.swift */; };
@@ -297,12 +364,9 @@
 		09C66C7321F0B83A00E1C153 /* Boss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7221F0B83A00E1C153 /* Boss.swift */; };
 		09C66C7521F0B88300E1C153 /* Toppur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7421F0B88300E1C153 /* Toppur.swift */; };
 		09C66C7721F0CBCB00E1C153 /* ToppurBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7621F0CBCB00E1C153 /* ToppurBattle.swift */; };
-		09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7821F7586800E1C153 /* SnowLanding2.swift */; };
 		09C66C7D21F7637300E1C153 /* Micalu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7C21F7637300E1C153 /* Micalu.swift */; };
 		09C66C7F21F764C900E1C153 /* MicaluBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C7E21F764C900E1C153 /* MicaluBattle.swift */; };
-		09C66C8121F8B4C000E1C153 /* SnowLanding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */; };
 		09C66C8421F8C30100E1C153 /* Sumahl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8321F8C30100E1C153 /* Sumahl.swift */; };
-		09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */; };
 		09C66C8821FA08F100E1C153 /* Lewis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8721FA08F100E1C153 /* Lewis.swift */; };
 		09C66C8C21FD4A2500E1C153 /* LowlevelFlame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */; };
 		09C66C8E21FD4EC200E1C153 /* LewisBattle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C66C8D21FD4EC200E1C153 /* LewisBattle.swift */; };
@@ -358,12 +422,9 @@
 		09C6BF8421CB59550003C7F1 /* BattleMinionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */; };
 		09C6BF8621CBE06F0003C7F1 /* SelectProfession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */; };
 		09C6BF8C21CF34A40003C7F1 /* StandScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8B21CF34A40003C7F1 /* StandScene.swift */; };
-		09C6BF8E21CFD02E0003C7F1 /* CenterCamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8D21CFD02E0003C7F1 /* CenterCamping.swift */; };
 		09C6BF9021D1EACE0003C7F1 /* MapSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF8F21D1EACE0003C7F1 /* MapSets.swift */; };
 		09C6BF9221D5F0510003C7F1 /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9121D5F0500003C7F1 /* Border.swift */; };
 		09C6BF9421D5F1FD0003C7F1 /* AcientRoadSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */; };
-		09C6BF9621D7867D0003C7F1 /* EastCamping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9521D7867D0003C7F1 /* EastCamping.swift */; };
-		09C6BF9A21DA5CCC0003C7F1 /* SelfHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */; };
 		09C6BF9C21DBA49B0003C7F1 /* RoofSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9B21DBA49B0003C7F1 /* RoofSets.swift */; };
 		09C6BF9E21DBB1F20003C7F1 /* InnerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */; };
 		09C6BFA021DC65F70003C7F1 /* AcientRoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C6BF9F21DC65F60003C7F1 /* AcientRoad.swift */; };
@@ -441,8 +502,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		090C0DE521EB260E008C46AA /* NorthCanmping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthCanmping.swift; sourceTree = "<group>"; };
-		090C0DE821ECCCF2008C46AA /* SnowLanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding.swift; sourceTree = "<group>"; };
 		090FE9F721BB983E004276BB /* MyTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		090FE9FA21BB983E004276BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		090FE9FC21BB983E004276BB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -632,7 +691,7 @@
 		0922C94A22225BEC002DC201 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		0922C94E22243834002DC201 /* DancingDragon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DancingDragon.swift; sourceTree = "<group>"; };
 		0922C9532233FA0E002DC201 /* BossRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossRoad.swift; sourceTree = "<group>"; };
-		0922C9552234D992002DC201 /* MoringPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoringPalace.swift; sourceTree = "<group>"; };
+		0922C9552234D992002DC201 /* MorningPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningPalace.swift; sourceTree = "<group>"; };
 		0922C95722394EA4002DC201 /* ZeroPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPalace.swift; sourceTree = "<group>"; };
 		0922C959223BFB0B002DC201 /* FreshGrass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreshGrass.swift; sourceTree = "<group>"; };
 		0922C95B223C879D002DC201 /* SecretValley.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretValley.swift; sourceTree = "<group>"; };
@@ -658,7 +717,6 @@
 		092C0CB722A6AB840084D15D /* ControlWind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlWind.swift; sourceTree = "<group>"; };
 		092C0CB922AFD7070084D15D /* Predict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predict.swift; sourceTree = "<group>"; };
 		092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionTradingPanel.swift; sourceTree = "<group>"; };
-		092C0CBD22CA2A330084D15D /* MinionHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionHouse.swift; sourceTree = "<group>"; };
 		092C0CC022CE1EA90084D15D /* FireSpirit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSpirit.swift; sourceTree = "<group>"; };
 		092C0CC222CE1EBB0084D15D /* FireSpiritBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireSpiritBattle.swift; sourceTree = "<group>"; };
 		092C0CC422CE24080084D15D /* LavaExplode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LavaExplode.swift; sourceTree = "<group>"; };
@@ -674,14 +732,11 @@
 		0933C0EC2373127E00404348 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		0933C0F223780DE200404348 /* VeryExperienced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryExperienced.swift; sourceTree = "<group>"; };
 		0933C0F423780F1500404348 /* SacredFist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SacredFist.swift; sourceTree = "<group>"; };
-		0933C0F9237EEF7500404348 /* Dungeon1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dungeon1.mp3; sourceTree = "<group>"; };
+		0933C0F9237EEF7500404348 /* welcome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = welcome.mp3; sourceTree = "<group>"; };
 		094E68C921DE238C00414583 /* ISelectTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISelectTarget.swift; sourceTree = "<group>"; };
 		094E68CB21E064C500414583 /* ShootTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootTwo.swift; sourceTree = "<group>"; };
-		094E68CD21E1C8CD00414583 /* GeneralStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStore.swift; sourceTree = "<group>"; };
 		094E68CF21E203EE00414583 /* SellingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellingPanel.swift; sourceTree = "<group>"; };
-		094E68D121E37E6700414583 /* OutfitStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitStore.swift; sourceTree = "<group>"; };
 		094E68D321E8E1A900414583 /* MagicHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicHouse.swift; sourceTree = "<group>"; };
-		094E68D521EA228E00414583 /* ChurchHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchHouse.swift; sourceTree = "<group>"; };
 		0950DFF623A7B60D00F17588 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		0950DFF823A9003000F17588 /* Sacred.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sacred.swift; sourceTree = "<group>"; };
 		0953ADE922F094B500BCEAFC /* Powerful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Powerful.swift; sourceTree = "<group>"; };
@@ -690,6 +745,79 @@
 		0953ADEF22F0956B00BCEAFC /* SharpStone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharpStone.swift; sourceTree = "<group>"; };
 		0953ADF122F0965700BCEAFC /* ToughHeart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToughHeart.swift; sourceTree = "<group>"; };
 		0953ADF322F096ED00BCEAFC /* Zealot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zealot.swift; sourceTree = "<group>"; };
+		095DF41024168BBA00EA9648 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		095DF4122417CB0600EA9648 /* village.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = village.mp3; sourceTree = "<group>"; };
+		095DF4142417CB5600EA9648 /* inner_house.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = inner_house.mp3; sourceTree = "<group>"; };
+		095DF4162417CBDE00EA9648 /* snow_landing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = snow_landing.mp3; sourceTree = "<group>"; };
+		095DF4182417CC5C00EA9648 /* fresh_grass.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fresh_grass.mp3; sourceTree = "<group>"; };
+		095DF41A2417CC7700EA9648 /* secret_meadow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = secret_meadow.mp3; sourceTree = "<group>"; };
+		095DF41C2417CCDE00EA9648 /* lost_area.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lost_area.mp3; sourceTree = "<group>"; };
+		095DF41E2417CD1D00EA9648 /* blood_abyss.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blood_abyss.mp3; sourceTree = "<group>"; };
+		095DF4202417CD7D00EA9648 /* hidden_area.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hidden_area.mp3; sourceTree = "<group>"; };
+		095DF4232417D02500EA9648 /* dialog.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dialog.mp3; sourceTree = "<group>"; };
+		095DF4252417D3F500EA9648 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
+		095DF4272417D77400EA9648 /* battle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = battle.mp3; sourceTree = "<group>"; };
+		095DF4292417D8EA00EA9648 /* chest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chest.mp3; sourceTree = "<group>"; };
+		095DF42A2417D8EB00EA9648 /* heal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heal.mp3; sourceTree = "<group>"; };
+		095DF42B2417D8EB00EA9648 /* attacked.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = attacked.mp3; sourceTree = "<group>"; };
+		095DF42C2417D8EB00EA9648 /* herb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = herb.mp3; sourceTree = "<group>"; };
+		095DF42D2417D8EB00EA9648 /* avoid.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = avoid.mp3; sourceTree = "<group>"; };
+		095DF42E2417D8EC00EA9648 /* buff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buff.mp3; sourceTree = "<group>"; };
+		095DF4352417DD8700EA9648 /* Slash6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash6.mp3; sourceTree = "<group>"; };
+		095DF4362417DD8700EA9648 /* Slash8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash8.mp3; sourceTree = "<group>"; };
+		095DF4372417DD8800EA9648 /* Slash10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash10.mp3; sourceTree = "<group>"; };
+		095DF4382417DD8800EA9648 /* Sound2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sound2.mp3; sourceTree = "<group>"; };
+		095DF4392417DD8900EA9648 /* Slash11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash11.mp3; sourceTree = "<group>"; };
+		095DF43A2417DD8900EA9648 /* Slash7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash7.mp3; sourceTree = "<group>"; };
+		095DF43B2417DD8A00EA9648 /* Slash9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash9.mp3; sourceTree = "<group>"; };
+		095DF43C2417DD8A00EA9648 /* Slash2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash2.mp3; sourceTree = "<group>"; };
+		095DF43D2417DD8A00EA9648 /* special.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = special.mp3; sourceTree = "<group>"; };
+		095DF43E2417DD8A00EA9648 /* Raise3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Raise3.mp3; sourceTree = "<group>"; };
+		095DF43F2417DD8B00EA9648 /* Slash1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash1.mp3; sourceTree = "<group>"; };
+		095DF4402417DD8B00EA9648 /* Slash5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash5.mp3; sourceTree = "<group>"; };
+		095DF4412417DD8C00EA9648 /* Slash4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash4.mp3; sourceTree = "<group>"; };
+		095DF4422417DD8C00EA9648 /* Slash3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Slash3.mp3; sourceTree = "<group>"; };
+		095DF4432417DD8C00EA9648 /* Skill2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Skill2.mp3; sourceTree = "<group>"; };
+		095DF4442417DD8D00EA9648 /* fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fire.mp3; sourceTree = "<group>"; };
+		095DF4452417DD8D00EA9648 /* Skill1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Skill1.mp3; sourceTree = "<group>"; };
+		095DF4462417DD8D00EA9648 /* tower.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tower.mp3; sourceTree = "<group>"; };
+		095DF4592417E00D00EA9648 /* down.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = down.mp3; sourceTree = "<group>"; };
+		095DF45B2417E0E800EA9648 /* dead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dead.mp3; sourceTree = "<group>"; };
+		095DF45D2419151900EA9648 /* scroll.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scroll.mp3; sourceTree = "<group>"; };
+		095DF46524191A7600EA9648 /* freeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = freeze.mp3; sourceTree = "<group>"; };
+		095DF46724191BD000EA9648 /* cast.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cast.mp3; sourceTree = "<group>"; };
+		095DF46924191DDD00EA9648 /* off.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = off.mp3; sourceTree = "<group>"; };
+		095DF46B241920BE00EA9648 /* Save.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Save.mp3; sourceTree = "<group>"; };
+		095DF46D2419246400EA9648 /* burn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = burn.mp3; sourceTree = "<group>"; };
+		095DF46F24192DCB00EA9648 /* Thunder5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Thunder5.mp3; sourceTree = "<group>"; };
+		095DF47024192DCC00EA9648 /* Thunder4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Thunder4.mp3; sourceTree = "<group>"; };
+		095DF47324192EEA00EA9648 /* Darkness2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness2.mp3; sourceTree = "<group>"; };
+		095DF47424192EEB00EA9648 /* Darkness3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness3.mp3; sourceTree = "<group>"; };
+		095DF47524192EEB00EA9648 /* Darkness5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness5.mp3; sourceTree = "<group>"; };
+		095DF47624192EEB00EA9648 /* Darkness7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness7.mp3; sourceTree = "<group>"; };
+		095DF47724192EEC00EA9648 /* Darkness4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness4.mp3; sourceTree = "<group>"; };
+		095DF47824192EEC00EA9648 /* Darkness6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness6.mp3; sourceTree = "<group>"; };
+		095DF47924192EEC00EA9648 /* Darkness1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness1.mp3; sourceTree = "<group>"; };
+		095DF47A24192EEC00EA9648 /* Darkness8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Darkness8.mp3; sourceTree = "<group>"; };
+		095DF48324192F6E00EA9648 /* Wind4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wind4.mp3; sourceTree = "<group>"; };
+		095DF48424192F6E00EA9648 /* wind.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wind.mp3; sourceTree = "<group>"; };
+		095DF48524192F6F00EA9648 /* Wind7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wind7.mp3; sourceTree = "<group>"; };
+		095DF4892419306300EA9648 /* bow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bow.mp3; sourceTree = "<group>"; };
+		095DF48B241A62B400EA9648 /* OptionPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionPanel.swift; sourceTree = "<group>"; };
+		095DF48D241BC5D600EA9648 /* city_of_lethe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_lethe.mp3; sourceTree = "<group>"; };
+		095DF48E241BC5D700EA9648 /* secret_valley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = secret_valley.mp3; sourceTree = "<group>"; };
+		095DF48F241BC5D900EA9648 /* winter_palace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winter_palace.mp3; sourceTree = "<group>"; };
+		095DF490241BC5DA00EA9648 /* city_of_sorrow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_sorrow.mp3; sourceTree = "<group>"; };
+		095DF491241BC5DB00EA9648 /* city_of_sin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_sin.mp3; sourceTree = "<group>"; };
+		095DF492241BC5DD00EA9648 /* city_of_desire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_desire.mp3; sourceTree = "<group>"; };
+		095DF493241BC5DE00EA9648 /* star_palace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star_palace.mp3; sourceTree = "<group>"; };
+		095DF494241BC5DF00EA9648 /* zero_palace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zero_palace.mp3; sourceTree = "<group>"; };
+		095DF495241BC5E100EA9648 /* city_of_fail.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_fail.mp3; sourceTree = "<group>"; };
+		095DF496241BC5E200EA9648 /* city_of_death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = city_of_death.mp3; sourceTree = "<group>"; };
+		095DF497241BC5E300EA9648 /* morning_palace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = morning_palace.mp3; sourceTree = "<group>"; };
+		095DF4A3241E376500EA9648 /* SnowLanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnowLanding.swift; path = GoD/system/ui/stage/gamescene/normal/snowlanding/SnowLanding.swift; sourceTree = SOURCE_ROOT; };
+		095DF4A524210AA000EA9648 /* enemy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = enemy.mp3; sourceTree = "<group>"; };
+		095DF4A624210AA100EA9648 /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
 		0960C4A42386BF2B00FF30A1 /* WinterPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinterPalace.swift; sourceTree = "<group>"; };
 		0960C4A62386C3D400FF30A1 /* StarPalace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarPalace.swift; sourceTree = "<group>"; };
 		096D9D3423B1C3B400FB1D34 /* FacelessSpell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacelessSpell.swift; sourceTree = "<group>"; };
@@ -733,12 +861,9 @@
 		09C66C7221F0B83A00E1C153 /* Boss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boss.swift; sourceTree = "<group>"; };
 		09C66C7421F0B88300E1C153 /* Toppur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toppur.swift; sourceTree = "<group>"; };
 		09C66C7621F0CBCB00E1C153 /* ToppurBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToppurBattle.swift; sourceTree = "<group>"; };
-		09C66C7821F7586800E1C153 /* SnowLanding2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding2.swift; sourceTree = "<group>"; };
 		09C66C7C21F7637300E1C153 /* Micalu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Micalu.swift; sourceTree = "<group>"; };
 		09C66C7E21F764C900E1C153 /* MicaluBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicaluBattle.swift; sourceTree = "<group>"; };
-		09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding3.swift; sourceTree = "<group>"; };
 		09C66C8321F8C30100E1C153 /* Sumahl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sumahl.swift; sourceTree = "<group>"; };
-		09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowLanding4.swift; sourceTree = "<group>"; };
 		09C66C8721FA08F100E1C153 /* Lewis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lewis.swift; sourceTree = "<group>"; };
 		09C66C8B21FD4A2500E1C153 /* LowlevelFlame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowlevelFlame.swift; sourceTree = "<group>"; };
 		09C66C8D21FD4EC200E1C153 /* LewisBattle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LewisBattle.swift; sourceTree = "<group>"; };
@@ -794,12 +919,9 @@
 		09C6BF8321CB59550003C7F1 /* BattleMinionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMinionList.swift; sourceTree = "<group>"; };
 		09C6BF8521CBE06F0003C7F1 /* SelectProfession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfession.swift; sourceTree = "<group>"; };
 		09C6BF8B21CF34A40003C7F1 /* StandScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandScene.swift; sourceTree = "<group>"; };
-		09C6BF8D21CFD02E0003C7F1 /* CenterCamping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCamping.swift; sourceTree = "<group>"; };
 		09C6BF8F21D1EACE0003C7F1 /* MapSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSets.swift; sourceTree = "<group>"; };
 		09C6BF9121D5F0500003C7F1 /* Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
 		09C6BF9321D5F1FD0003C7F1 /* AcientRoadSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcientRoadSelection.swift; sourceTree = "<group>"; };
-		09C6BF9521D7867D0003C7F1 /* EastCamping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EastCamping.swift; sourceTree = "<group>"; };
-		09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfHome.swift; sourceTree = "<group>"; };
 		09C6BF9B21DBA49B0003C7F1 /* RoofSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoofSets.swift; sourceTree = "<group>"; };
 		09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerHouse.swift; sourceTree = "<group>"; };
 		09C6BF9F21DC65F60003C7F1 /* AcientRoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcientRoad.swift; sourceTree = "<group>"; };
@@ -884,17 +1006,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		090C0DE721ECCCC3008C46AA /* snowlanding */ = {
-			isa = PBXGroup;
-			children = (
-				090C0DE821ECCCF2008C46AA /* SnowLanding.swift */,
-				09C66C7821F7586800E1C153 /* SnowLanding2.swift */,
-				09C66C8021F8B4C000E1C153 /* SnowLanding3.swift */,
-				09C66C8521F9FFD500E1C153 /* SnowLanding4.swift */,
-			);
-			path = snowlanding;
-			sourceTree = "<group>";
-		};
 		090FE9EE21BB983E004276BB = {
 			isa = PBXGroup;
 			children = (
@@ -916,13 +1027,14 @@
 		090FE9F921BB983E004276BB /* GoD */ = {
 			isa = PBXGroup;
 			children = (
+				095DF4222417CFEE00EA9648 /* effect */,
+				095DF40F2416895F00EA9648 /* sound */,
 				090FEA0C21BB983F004276BB /* Info.plist */,
 				090FE9FE21BB983E004276BB /* Actions.sks */,
 				090FE9FC21BB983E004276BB /* GameScene.sks */,
 				090FE9FA21BB983E004276BB /* AppDelegate.swift */,
 				097EC6CA226B695C00B9407A /* Tryer.swift */,
 				090FEA0021BB983E004276BB /* GameScene.swift */,
-				0933C0F9237EEF7500404348 /* Dungeon1.mp3 */,
 				090FEA0221BB983E004276BB /* GameViewController.swift */,
 				090FEA0721BB983F004276BB /* Assets.xcassets */,
 				090FEA0921BB983F004276BB /* LaunchScreen.storyboard */,
@@ -1301,6 +1413,7 @@
 				094E68CF21E203EE00414583 /* SellingPanel.swift */,
 				092C0CBB22BE6FAA0084D15D /* MinionTradingPanel.swift */,
 				096D9D4823E7C3EF00FB1D34 /* PharmicPanel.swift */,
+				095DF48B241A62B400EA9648 /* OptionPanel.swift */,
 			);
 			path = panel;
 			sourceTree = "<group>";
@@ -1423,6 +1536,7 @@
 				090FEB4621BB9B2B004276BB /* GroundSets.swift */,
 				09C6BF8F21D1EACE0003C7F1 /* MapSets.swift */,
 				09C6BF9B21DBA49B0003C7F1 /* RoofSets.swift */,
+				095DF41024168BBA00EA9648 /* Sound.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -1478,8 +1592,9 @@
 			children = (
 				0922C9682247C9B1002DC201 /* demontown */,
 				0922C9532233FA0E002DC201 /* BossRoad.swift */,
-				0922C9552234D992002DC201 /* MoringPalace.swift */,
+				0922C9552234D992002DC201 /* MorningPalace.swift */,
 				0922C95722394EA4002DC201 /* ZeroPalace.swift */,
+				095DF4A3241E376500EA9648 /* SnowLanding.swift */,
 				0960C4A42386BF2B00FF30A1 /* WinterPalace.swift */,
 				0960C4A62386C3D400FF30A1 /* StarPalace.swift */,
 				09C66C6C21ECD61200E1C153 /* SnowLandingHome.swift */,
@@ -1541,6 +1656,91 @@
 				092C0CCE22CE32700084D15D /* FireMark.swift */,
 			);
 			path = firespirit;
+			sourceTree = "<group>";
+		};
+		095DF40F2416895F00EA9648 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				095DF4122417CB0600EA9648 /* village.mp3 */,
+				095DF4272417D77400EA9648 /* battle.mp3 */,
+				095DF41A2417CC7700EA9648 /* secret_meadow.mp3 */,
+				095DF4182417CC5C00EA9648 /* fresh_grass.mp3 */,
+				095DF41E2417CD1D00EA9648 /* blood_abyss.mp3 */,
+				095DF496241BC5E200EA9648 /* city_of_death.mp3 */,
+				095DF492241BC5DD00EA9648 /* city_of_desire.mp3 */,
+				095DF495241BC5E100EA9648 /* city_of_fail.mp3 */,
+				095DF48D241BC5D600EA9648 /* city_of_lethe.mp3 */,
+				095DF491241BC5DB00EA9648 /* city_of_sin.mp3 */,
+				095DF490241BC5DA00EA9648 /* city_of_sorrow.mp3 */,
+				095DF497241BC5E300EA9648 /* morning_palace.mp3 */,
+				095DF48E241BC5D700EA9648 /* secret_valley.mp3 */,
+				095DF493241BC5DE00EA9648 /* star_palace.mp3 */,
+				095DF48F241BC5D900EA9648 /* winter_palace.mp3 */,
+				095DF494241BC5DF00EA9648 /* zero_palace.mp3 */,
+				095DF4202417CD7D00EA9648 /* hidden_area.mp3 */,
+				095DF41C2417CCDE00EA9648 /* lost_area.mp3 */,
+				095DF4162417CBDE00EA9648 /* snow_landing.mp3 */,
+				095DF4142417CB5600EA9648 /* inner_house.mp3 */,
+				0933C0F9237EEF7500404348 /* welcome.mp3 */,
+			);
+			path = sound;
+			sourceTree = "<group>";
+		};
+		095DF4222417CFEE00EA9648 /* effect */ = {
+			isa = PBXGroup;
+			children = (
+				095DF4252417D3F500EA9648 /* close.mp3 */,
+				095DF42B2417D8EB00EA9648 /* attacked.mp3 */,
+				095DF42E2417D8EC00EA9648 /* buff.mp3 */,
+				095DF42C2417D8EB00EA9648 /* herb.mp3 */,
+				095DF42D2417D8EB00EA9648 /* avoid.mp3 */,
+				095DF45D2419151900EA9648 /* scroll.mp3 */,
+				095DF46924191DDD00EA9648 /* off.mp3 */,
+				095DF4A524210AA000EA9648 /* enemy.mp3 */,
+				095DF4A624210AA100EA9648 /* levelup.mp3 */,
+				095DF47024192DCC00EA9648 /* Thunder4.mp3 */,
+				095DF46F24192DCB00EA9648 /* Thunder5.mp3 */,
+				095DF48324192F6E00EA9648 /* Wind4.mp3 */,
+				095DF48524192F6F00EA9648 /* Wind7.mp3 */,
+				095DF48424192F6E00EA9648 /* wind.mp3 */,
+				095DF4292417D8EA00EA9648 /* chest.mp3 */,
+				095DF4442417DD8D00EA9648 /* fire.mp3 */,
+				095DF47924192EEC00EA9648 /* Darkness1.mp3 */,
+				095DF47324192EEA00EA9648 /* Darkness2.mp3 */,
+				095DF47424192EEB00EA9648 /* Darkness3.mp3 */,
+				095DF47724192EEC00EA9648 /* Darkness4.mp3 */,
+				095DF47524192EEB00EA9648 /* Darkness5.mp3 */,
+				095DF47824192EEC00EA9648 /* Darkness6.mp3 */,
+				095DF47624192EEB00EA9648 /* Darkness7.mp3 */,
+				095DF47A24192EEC00EA9648 /* Darkness8.mp3 */,
+				095DF46724191BD000EA9648 /* cast.mp3 */,
+				095DF46524191A7600EA9648 /* freeze.mp3 */,
+				095DF43E2417DD8A00EA9648 /* Raise3.mp3 */,
+				095DF4892419306300EA9648 /* bow.mp3 */,
+				095DF4452417DD8D00EA9648 /* Skill1.mp3 */,
+				095DF4432417DD8C00EA9648 /* Skill2.mp3 */,
+				095DF46B241920BE00EA9648 /* Save.mp3 */,
+				095DF4462417DD8D00EA9648 /* tower.mp3 */,
+				095DF43F2417DD8B00EA9648 /* Slash1.mp3 */,
+				095DF45B2417E0E800EA9648 /* dead.mp3 */,
+				095DF4592417E00D00EA9648 /* down.mp3 */,
+				095DF43C2417DD8A00EA9648 /* Slash2.mp3 */,
+				095DF4422417DD8C00EA9648 /* Slash3.mp3 */,
+				095DF46D2419246400EA9648 /* burn.mp3 */,
+				095DF4412417DD8C00EA9648 /* Slash4.mp3 */,
+				095DF4402417DD8B00EA9648 /* Slash5.mp3 */,
+				095DF4352417DD8700EA9648 /* Slash6.mp3 */,
+				095DF43A2417DD8900EA9648 /* Slash7.mp3 */,
+				095DF4362417DD8700EA9648 /* Slash8.mp3 */,
+				095DF43B2417DD8A00EA9648 /* Slash9.mp3 */,
+				095DF4372417DD8800EA9648 /* Slash10.mp3 */,
+				095DF4392417DD8900EA9648 /* Slash11.mp3 */,
+				095DF43D2417DD8A00EA9648 /* special.mp3 */,
+				095DF4382417DD8800EA9648 /* Sound2.mp3 */,
+				095DF42A2417D8EB00EA9648 /* heal.mp3 */,
+				095DF4232417D02500EA9648 /* dialog.mp3 */,
+			);
+			path = effect;
 			sourceTree = "<group>";
 		};
 		0972F8682313FBCE0017A179 /* npc */ = {
@@ -1739,19 +1939,10 @@
 		09C6BF8921CF32180003C7F1 /* normal */ = {
 			isa = PBXGroup;
 			children = (
-				090C0DE721ECCCC3008C46AA /* snowlanding */,
 				09C6BF8B21CF34A40003C7F1 /* StandScene.swift */,
-				09C6BF8D21CFD02E0003C7F1 /* CenterCamping.swift */,
-				09C6BF9521D7867D0003C7F1 /* EastCamping.swift */,
-				09C6BF9921DA5CCC0003C7F1 /* SelfHome.swift */,
 				09C6BF9D21DBB1F20003C7F1 /* InnerHouse.swift */,
-				092C0CBD22CA2A330084D15D /* MinionHouse.swift */,
 				0913B8BC21DCD47500FB0940 /* SceneTemplate.swift */,
-				094E68CD21E1C8CD00414583 /* GeneralStore.swift */,
-				094E68D121E37E6700414583 /* OutfitStore.swift */,
 				094E68D321E8E1A900414583 /* MagicHouse.swift */,
-				094E68D521EA228E00414583 /* ChurchHouse.swift */,
-				090C0DE521EB260E008C46AA /* NorthCanmping.swift */,
 				097EC6C6226814D000B9407A /* BlackWaterTown.swift */,
 				096D9D3A23BA424600FB1D34 /* Hotel.swift */,
 				096D9D3C23BB82B900FB1D34 /* CenterV.swift */,
@@ -1970,11 +2161,81 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095DF42F2417D8ED00EA9648 /* chest.mp3 in Resources */,
+				095DF4542417DD8E00EA9648 /* Slash3.mp3 in Resources */,
+				095DF4A724210AA200EA9648 /* enemy.mp3 in Resources */,
+				095DF4322417D8ED00EA9648 /* herb.mp3 in Resources */,
+				095DF44F2417DD8E00EA9648 /* special.mp3 in Resources */,
+				095DF44B2417DD8E00EA9648 /* Slash11.mp3 in Resources */,
+				095DF47124192DCC00EA9648 /* Thunder5.mp3 in Resources */,
+				095DF45A2417E00E00EA9648 /* down.mp3 in Resources */,
+				095DF49B241BC5E300EA9648 /* city_of_sorrow.mp3 in Resources */,
+				095DF499241BC5E300EA9648 /* secret_valley.mp3 in Resources */,
 				090FEA0621BB983E004276BB /* Main.storyboard in Resources */,
-				0933C0FA237EEF7600404348 /* Dungeon1.mp3 in Resources */,
+				095DF41F2417CD1D00EA9648 /* blood_abyss.mp3 in Resources */,
+				095DF44C2417DD8E00EA9648 /* Slash7.mp3 in Resources */,
+				095DF47F24192EED00EA9648 /* Darkness4.mp3 in Resources */,
+				095DF46E2419246500EA9648 /* burn.mp3 in Resources */,
+				095DF4302417D8ED00EA9648 /* heal.mp3 in Resources */,
+				095DF47E24192EED00EA9648 /* Darkness7.mp3 in Resources */,
+				095DF4192417CC5C00EA9648 /* fresh_grass.mp3 in Resources */,
+				095DF4522417DD8E00EA9648 /* Slash5.mp3 in Resources */,
+				095DF4172417CBDE00EA9648 /* snow_landing.mp3 in Resources */,
+				095DF47C24192EED00EA9648 /* Darkness3.mp3 in Resources */,
+				095DF4212417CD7D00EA9648 /* hidden_area.mp3 in Resources */,
+				095DF4312417D8ED00EA9648 /* attacked.mp3 in Resources */,
+				0933C0FA237EEF7600404348 /* welcome.mp3 in Resources */,
+				095DF45E2419151A00EA9648 /* scroll.mp3 in Resources */,
+				095DF41B2417CC7700EA9648 /* secret_meadow.mp3 in Resources */,
+				095DF4242417D02500EA9648 /* dialog.mp3 in Resources */,
+				095DF44D2417DD8E00EA9648 /* Slash9.mp3 in Resources */,
+				095DF4512417DD8E00EA9648 /* Slash1.mp3 in Resources */,
+				095DF46C241920BF00EA9648 /* Save.mp3 in Resources */,
+				095DF4262417D3F500EA9648 /* close.mp3 in Resources */,
 				090FE9FD21BB983E004276BB /* GameScene.sks in Resources */,
+				095DF49C241BC5E300EA9648 /* city_of_sin.mp3 in Resources */,
+				095DF49E241BC5E300EA9648 /* star_palace.mp3 in Resources */,
+				095DF4582417DD8E00EA9648 /* tower.mp3 in Resources */,
+				095DF48824192F6F00EA9648 /* Wind7.mp3 in Resources */,
+				095DF44A2417DD8E00EA9648 /* Sound2.mp3 in Resources */,
+				095DF48124192EED00EA9648 /* Darkness1.mp3 in Resources */,
+				095DF41D2417CCDE00EA9648 /* lost_area.mp3 in Resources */,
+				095DF4A1241BC5E300EA9648 /* city_of_death.mp3 in Resources */,
+				095DF49A241BC5E300EA9648 /* winter_palace.mp3 in Resources */,
+				095DF45C2417E0E800EA9648 /* dead.mp3 in Resources */,
+				095DF4A2241BC5E300EA9648 /* morning_palace.mp3 in Resources */,
+				095DF49D241BC5E300EA9648 /* city_of_desire.mp3 in Resources */,
+				095DF4282417D77400EA9648 /* battle.mp3 in Resources */,
+				095DF4572417DD8E00EA9648 /* Skill1.mp3 in Resources */,
+				095DF4A824210AA200EA9648 /* levelup.mp3 in Resources */,
+				095DF46824191BD000EA9648 /* cast.mp3 in Resources */,
 				090FEA0821BB983F004276BB /* Assets.xcassets in Resources */,
+				095DF4472417DD8E00EA9648 /* Slash6.mp3 in Resources */,
+				095DF48724192F6F00EA9648 /* wind.mp3 in Resources */,
 				090FEA0B21BB983F004276BB /* LaunchScreen.storyboard in Resources */,
+				095DF47B24192EED00EA9648 /* Darkness2.mp3 in Resources */,
+				095DF4482417DD8E00EA9648 /* Slash8.mp3 in Resources */,
+				095DF47224192DCC00EA9648 /* Thunder4.mp3 in Resources */,
+				095DF498241BC5E300EA9648 /* city_of_lethe.mp3 in Resources */,
+				095DF4332417D8ED00EA9648 /* avoid.mp3 in Resources */,
+				095DF49F241BC5E300EA9648 /* zero_palace.mp3 in Resources */,
+				095DF48024192EED00EA9648 /* Darkness6.mp3 in Resources */,
+				095DF48624192F6F00EA9648 /* Wind4.mp3 in Resources */,
+				095DF46624191A7600EA9648 /* freeze.mp3 in Resources */,
+				095DF46A24191DDD00EA9648 /* off.mp3 in Resources */,
+				095DF4132417CB0600EA9648 /* village.mp3 in Resources */,
+				095DF4342417D8ED00EA9648 /* buff.mp3 in Resources */,
+				095DF4492417DD8E00EA9648 /* Slash10.mp3 in Resources */,
+				095DF4532417DD8E00EA9648 /* Slash4.mp3 in Resources */,
+				095DF48A2419306300EA9648 /* bow.mp3 in Resources */,
+				095DF44E2417DD8E00EA9648 /* Slash2.mp3 in Resources */,
+				095DF4502417DD8E00EA9648 /* Raise3.mp3 in Resources */,
+				095DF48224192EED00EA9648 /* Darkness8.mp3 in Resources */,
+				095DF47D24192EED00EA9648 /* Darkness5.mp3 in Resources */,
+				095DF4552417DD8E00EA9648 /* Skill2.mp3 in Resources */,
+				095DF4152417CB5600EA9648 /* inner_house.mp3 in Resources */,
+				095DF4562417DD8E00EA9648 /* fire.mp3 in Resources */,
+				095DF4A0241BC5E300EA9648 /* city_of_fail.mp3 in Resources */,
 				090FE9FF21BB983E004276BB /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2018,7 +2279,6 @@
 				090FEB9A21BB9B2B004276BB /* DarkCrow.swift in Sources */,
 				090FEC4621BB9B2B004276BB /* SelectSpell.swift in Sources */,
 				09C66CC222106F5A00E1C153 /* IceBomb.swift in Sources */,
-				09C66C7921F7586800E1C153 /* SnowLanding2.swift in Sources */,
 				092C0CBA22AFD7070084D15D /* Predict.swift in Sources */,
 				090FEBBF21BB9B2B004276BB /* FragileCurse.swift in Sources */,
 				0922C97D2253AA92002DC201 /* Maze.swift in Sources */,
@@ -2033,7 +2293,6 @@
 				0972F86C2313FBF20017A179 /* NPCBattle.swift in Sources */,
 				090FEB6421BB9B2B004276BB /* SacredSoulStone.swift in Sources */,
 				094E68CC21E064C500414583 /* ShootTwo.swift in Sources */,
-				094E68D621EA228E00414583 /* ChurchHouse.swift in Sources */,
 				090FEBE021BB9B2B004276BB /* Magical.swift in Sources */,
 				090FEBCB21BB9B2B004276BB /* PriceOfBlood.swift in Sources */,
 				09D17D7122D0454900B07EFD /* Disintegrate.swift in Sources */,
@@ -2069,7 +2328,7 @@
 				090FEBDB21BB9B2B004276BB /* Energetic.swift in Sources */,
 				090FEBE421BB9B2B004276BB /* Spell.swift in Sources */,
 				092C0CCD22CE2E2E0084D15D /* FireCore.swift in Sources */,
-				0922C9562234D992002DC201 /* MoringPalace.swift in Sources */,
+				0922C9562234D992002DC201 /* MorningPalace.swift in Sources */,
 				09C66C7521F0B88300E1C153 /* Toppur.swift in Sources */,
 				090FEBD521BB9B2B004276BB /* QuickHeal.swift in Sources */,
 				09D17D7C22D2FA1900B07EFD /* ThrowWeapon.swift in Sources */,
@@ -2110,7 +2369,6 @@
 				090FEB8821BB9B2B004276BB /* Outfit.swift in Sources */,
 				09738A8F229910C8009AF2EE /* Burn.swift in Sources */,
 				09C6BF7C21C4D63D0003C7F1 /* RoleList.swift in Sources */,
-				09C6BF9A21DA5CCC0003C7F1 /* SelfHome.swift in Sources */,
 				09954DB22271FC380087B009 /* SelectDocument.swift in Sources */,
 				090FEC0321BB9B2B004276BB /* LootPanel.swift in Sources */,
 				092C0CB422A6A9F60084D15D /* IssThePuppet.swift in Sources */,
@@ -2146,6 +2404,7 @@
 				09738A8D22990DA6009AF2EE /* BurningAll.swift in Sources */,
 				0922C95E223CAF16002DC201 /* FireSource.swift in Sources */,
 				0960C4A72386C3D400FF30A1 /* StarPalace.swift in Sources */,
+				095DF41124168BBA00EA9648 /* Sound.swift in Sources */,
 				090FEBC221BB9B2B004276BB /* Crazy.swift in Sources */,
 				096D9D3D23BB82B900FB1D34 /* CenterV.swift in Sources */,
 				090FEB5D21BB9B2B004276BB /* SacredEarring.swift in Sources */,
@@ -2164,7 +2423,6 @@
 				09C66CE8221EEBAD00E1C153 /* WaterCopy.swift in Sources */,
 				09D85F4B235F2A220035A14C /* FullAnimation.swift in Sources */,
 				090FEC2121BB9B2B004276BB /* Forest.swift in Sources */,
-				094E68CE21E1C8CD00414583 /* GeneralStore.swift in Sources */,
 				0922C95C223C879D002DC201 /* SecretValley.swift in Sources */,
 				090FEBDE21BB9B2B004276BB /* Focus.swift in Sources */,
 				090FEBDD21BB9B2B004276BB /* Cruel.swift in Sources */,
@@ -2173,7 +2431,7 @@
 				090FEC1C21BB9B2B004276BB /* SceneSets.swift in Sources */,
 				09C66C6D21ECD61200E1C153 /* SnowLandingHome.swift in Sources */,
 				090FEC1221BB9B2B004276BB /* Actor.swift in Sources */,
-				09C66C8621F9FFD500E1C153 /* SnowLanding4.swift in Sources */,
+				095DF48C241A62B400EA9648 /* OptionPanel.swift in Sources */,
 				09C6BFA421DC8B2D0003C7F1 /* BloodAbyss.swift in Sources */,
 				09D17DA422DA03CB00B07EFD /* TearCluster.swift in Sources */,
 				0922C94B22225BEC002DC201 /* Types.swift in Sources */,
@@ -2185,14 +2443,12 @@
 				090FEB6221BB9B2B004276BB /* SacredSword.swift in Sources */,
 				090FEB9521BB9B2B004276BB /* Race.swift in Sources */,
 				090FEBC021BB9B2B004276BB /* ProtectionFromIce.swift in Sources */,
-				092C0CBE22CA2A330084D15D /* MinionHouse.swift in Sources */,
 				09738A91229A5DFA009AF2EE /* WoodenDummy.swift in Sources */,
 				090FEC1521BB9B2B004276BB /* UICell.swift in Sources */,
 				090FEC0F21BB9B2B004276BB /* UIPanel.swift in Sources */,
 				090FEC3921BB9B2B004276BB /* MinionsHouseInside.swift in Sources */,
 				090FEBB221BB9B2B004276BB /* MagicConvert.swift in Sources */,
 				090FEBC621BB9B2B004276BB /* ProtectFromGod.swift in Sources */,
-				094E68D221E37E6700414583 /* OutfitStore.swift in Sources */,
 				090FEBF121BB9B2B004276BB /* Loot.swift in Sources */,
 				090FEBCD21BB9B2B004276BB /* LastChance.swift in Sources */,
 				090FEC3121BB9B2B004276BB /* NorthOfVillage.swift in Sources */,
@@ -2277,11 +2533,9 @@
 				09D17DB522DC38AF00B07EFD /* Scare.swift in Sources */,
 				090FEC2B21BB9B2B004276BB /* FrozenLand.swift in Sources */,
 				090FEC4021BB9B2B004276BB /* HouseSets.swift in Sources */,
-				090C0DE921ECCCF2008C46AA /* SnowLanding.swift in Sources */,
 				09D17D8F22D76FA600B07EFD /* RobberHasMoral.swift in Sources */,
-				09C6BF8E21CFD02E0003C7F1 /* CenterCamping.swift in Sources */,
-				090C0DE621EB260E008C46AA /* NorthCanmping.swift in Sources */,
 				09C66CC52210780C00E1C153 /* Burning.swift in Sources */,
+				095DF4A4241E376600EA9648 /* SnowLanding.swift in Sources */,
 				09D17D9522D7772A00B07EFD /* MakeEverythingRight.swift in Sources */,
 				090FEBA221BB9B2B004276BB /* Creature.swift in Sources */,
 				09C66CB3220F21C700E1C153 /* Umisa.swift in Sources */,
@@ -2375,7 +2629,6 @@
 				090FEB9221BB9B2B004276BB /* Unit.swift in Sources */,
 				090FEBAD21BB9B2B004276BB /* LifeDraw.swift in Sources */,
 				09C66CC92212F48800E1C153 /* QiWave.swift in Sources */,
-				09C6BF9621D7867D0003C7F1 /* EastCamping.swift in Sources */,
 				090FEBBD21BB9B2B004276BB /* ThunderArray.swift in Sources */,
 				090FEC1921BB9B2B004276BB /* TreasureBox.swift in Sources */,
 				09C6BF9221D5F0510003C7F1 /* Border.swift in Sources */,
@@ -2398,7 +2651,6 @@
 				09C66CDA2215BC5800E1C153 /* Vanguard.swift in Sources */,
 				09D17DA622DA059A00B07EFD /* CreationMatrix.swift in Sources */,
 				09D17D6722CFA94000B07EFD /* BUnitValue.swift in Sources */,
-				09C66C8121F8B4C000E1C153 /* SnowLanding3.swift in Sources */,
 				090FEC0E21BB9B2B004276BB /* MenuButton.swift in Sources */,
 				090FEBDF21BB9B2B004276BB /* Bellicose.swift in Sources */,
 				09C66CB8220FCA1900E1C153 /* George.swift in Sources */,

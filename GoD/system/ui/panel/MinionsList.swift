@@ -63,6 +63,7 @@ class MinionsList:UIPanel {
                     char._minions.remove(at: index!)
                 }
                 _lastSelectedComponent = MinionComponent()
+                Sound.play(node: Game.instance.curStage, fileName: "close")
                 pageReload()
             } else {
                 _discardButton.selected = true
@@ -96,8 +97,8 @@ class MinionsList:UIPanel {
         rp.create(unit: minion)
         rp.isChild = true
         rp._parentPanel = self
-        Game.instance.curStage.showPanel(rp)
         Game.instance.curStage.removePanel(self)
+        Game.instance.curStage.showPanel(rp)
     }
     
     override func pageReload() {

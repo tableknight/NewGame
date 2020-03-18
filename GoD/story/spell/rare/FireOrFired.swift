@@ -27,9 +27,11 @@ class FireOrFired: Magical {
     }
     override func cast(completion:@escaping () -> Void) {
         let c = _battle._curRole
-        let this = self
+        if c.amuletIs(Sacred.LavaCrystal) {
+            _rate = 1.75
+        }
         c.actionCast {
-            this.attack {
+            self.attack {
                 completion()
             }
         }
@@ -44,6 +46,7 @@ class FireOrFired: Magical {
         if c.ringIs(Sacred.ApprenticeRing) {
             chance = 40
         }
+        c.play("fire")
         if chance < seed() {
             damage = c.getHp() * 0.25
             if damage < 1 {
@@ -56,6 +59,7 @@ class FireOrFired: Magical {
                 }
             }
             c.magic2t()
+            
 //            c.flame1(index: 4, line: 1)
         } else {
             if !hadSpecialAction(t:t, completion: completion) {

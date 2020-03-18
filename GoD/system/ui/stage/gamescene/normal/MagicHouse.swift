@@ -13,6 +13,7 @@ class MagicHouse: InnerHouse {
         _name = "魔法屋"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "inner_house"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,28 +74,29 @@ class MagicHouse: InnerHouse {
             let stage = Game.instance.curStage!
             
             stage.showDialog(img: role._roleNode.texture!,
-                             text: "一颗天使之泪可以转化为一百点法术能量，你愿意让我帮你恢复你和你的伙伴所有的魔法吗？",
+                             text: "一颗天使之泪可以转化为一百点法术能量，你愿意让我帮你恢复魔法吗？",
                              name: "大魔法师格林", action: {
                                 let dlg = stage._curDialog!
-                                let c = Game.instance.char!
+//                                let c = Game.instance.char!
                                 dlg.addConfirmButton()
                                 dlg._confirmAction = {
                                     stage.removeDialog(dlg: dlg)
-                                    if !self.recoveryMana(unit: c) {
-                                        role.speak(text: "你没有那么多眼泪！")
-                                        return
-                                    } else {
-                                        for m in c._minions {
-                                            _ = self.recoveryMana(unit: m)
-                                        }
-                                    }
-                                    stage.setBarValue()
-                                    var msg = ""
-                                    for u in self._recoveriedUnits {
-                                        msg.append(contentsOf: "[\(u._name)]，")
-                                    }
-                                    msg.append(contentsOf: "恢复了法力，消耗眼泪\(self._costedTears)颗")
-                                    showMsg(text: msg)
+                                    self.showRolePanel(role)
+//                                    if !self.recoveryMana(unit: c) {
+//                                        role.speak(text: "你没有那么多眼泪！")
+//                                        return
+//                                    } else {
+//                                        for m in c._minions {
+//                                            _ = self.recoveryMana(unit: m)
+//                                        }
+//                                    }
+//                                    stage.setBarValue()
+//                                    var msg = ""
+//                                    for u in self._recoveriedUnits {
+//                                        msg.append(contentsOf: "[\(u._name)]，")
+//                                    }
+//                                    msg.append(contentsOf: "恢复了法力，消耗眼泪\(self._costedTears)颗")
+//                                    showMsg(text: msg)
                                 }
             })
             return true
@@ -114,8 +116,8 @@ class MagicHouse: InnerHouse {
     private func createRandomWeapon() {
         
     }
-    private var _recoveriedUnits = Array<Unit>()
-    private var _costedTears = 0
+//    private var _recoveriedUnits = Array<Unit>()
+//    private var _costedTears = 0
     private func recoveryMana(unit:Unit) -> Bool {
         let c = Game.instance.char!
         let r = unit._extensions.mpMax - unit._extensions.mp
@@ -130,13 +132,43 @@ class MagicHouse: InnerHouse {
             if i!._count >= n {
                 unit._extensions.mp = unit._extensions.mpMax
                 i!._count -= n
-                _costedTears += n
-                _recoveriedUnits.append(unit)
+//                _costedTears += n
+//                _recoveriedUnits.append(unit)
+                showMsg(text: "[\(unit._name)]恢复了法力，消耗眼泪\(n)颗")
+                if unit is Character {
+                    Game.instance.curStage.setBarValue()
+                }
                 return true
             }
         }
         
         return false
+    }
+    
+    private func showRolePanel(_ role:UIRole) {
+        let rl = RoleList()
+        rl.isChild = false
+        let c = Game.instance.char!
+        rl._item = Item(Item.MPPotion)
+        let ml = [c] + c._minions
+//        if item._type == Item.MagicSyrup {
+//            ml = _char._minions
+//        }
+        
+//        rl._parentNode = self
+//        self.isHidden = true
+        rl.create(list: ml)
+        rl.selectAction = {
+            Game.instance.curStage.removePanel(rl)
+            let unit = rl._lastSelected!._unit
+            if !self.recoveryMana(unit: unit!) {
+                role.speak(text: "眼泪数量不足！")
+            }
+        }
+        rl.closeAction = {
+            Game.instance.curStage.removePanel(rl)
+        }
+        Game.instance.curStage.showPanel(rl)
     }
     
     override func moveEndAction() {

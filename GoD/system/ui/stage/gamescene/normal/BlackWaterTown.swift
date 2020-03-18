@@ -14,6 +14,7 @@ class BlackWaterTown: StandScene {
         _nameLabel.text = _name
         let oa4 = Game.instance.dungeon_a4
         _mapSet = GroundSets(ground: oa4.getCell(10, 12, 2, 2), wall: oa4.getCell(10, 14, 2, 2))
+        _soundUrl = "hidden_area"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +28,7 @@ class BlackWaterTown: StandScene {
         let point = convertPixelToIndex(x: touchPoint.x, y: touchPoint.y)
         if point.x == 3 && point.y == 4 {
             let stage = Game.instance.curStage!
-            stage.showDialog(img: Game.instance.picturePeople2.getCell(10, 0),
+            stage.showDialog(img: SKTexture(imageNamed: "Jade").getCell(1, 0),
                              text: "需要用船吗？。",
                              name: "船长杰克")
             stage._curDialog?.addConfirmButton()
@@ -66,8 +67,8 @@ class BlackWaterTown: StandScene {
     }
     override func create() {
         super.create()
-        let oa1 = Game.instance.dungeon_a1
-        let river = MapSets(coverGround: oa1.getCell(0, 11, 2, 2), thinConnection: oa1.getNode(1, 9))
+        let oa1 = Game.instance.tilesets
+        let river = MapSets(coverGround: oa1.getCell(2, 3, 2, 2), thinConnection: oa1.getNode(4, 2))
         let thinLefts:Array<Array<CGFloat>> = [
             [2,4],
             [2,5],
@@ -129,13 +130,13 @@ class BlackWaterTown: StandScene {
         addGround(x: 10, y: 11, item: _portalMark)
         _portalMark.alpha = 0
         
-        let oc = Game.instance.outside_c
+        let oc = Game.instance.tilesets
 //        let paller = oc.getCell(1, 1, 1, 2)
         
-        addItem(x: 8.5, y: 7.5, item: oc.getNode(1, 1, 1, 2))
-        addItem(x: 8.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
-        addItem(x: 11.5, y: 7.5, item: oc.getNode(1, 1, 1, 2))
-        addItem(x: 11.5, y: 10.5, item: oc.getNode(1, 1, 1, 2))
+        addItem(x: 8.5, y: 7.5, item: oc.getNode(7, 1, 1, 2))
+        addItem(x: 8.5, y: 10.5, item: oc.getNode(7, 1, 1, 2))
+        addItem(x: 11.5, y: 7.5, item: oc.getNode(7, 1, 1, 2))
+        addItem(x: 11.5, y: 10.5, item: oc.getNode(7, 1, 1, 2))
         _mapMatrix[8][9] = CELL_BLOCK
         _mapMatrix[8][8] = CELL_BLOCK
         _mapMatrix[8][11] = CELL_BLOCK
@@ -151,7 +152,19 @@ class BlackWaterTown: StandScene {
         _mapMatrix[11][12] = CELL_BLOCK
 
     }
-    private var _mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)
-    private var _portalMark = Game.instance.dungeon_c.getNode(3, 12, 3, 3)
+    private var _mark = Game.instance.tilesets.getNode(0, 7, 3, 3)
+    private var _portalMark = Game.instance.tilesets.getNode(3, 7, 3, 3)
 }
 
+class Boat:UIItem {
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        let t = SKTexture(imageNamed: "boat")
+        setTexture(t.getCell(1, 0))
+        self.size = CGSize(width: cellSize * 2, height: cellSize * 2.5)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}

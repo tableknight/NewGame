@@ -26,7 +26,8 @@ class SetTimeBack:Magical, Curse {
     }
     override func cast(completion: @escaping () -> Void) {
         let ts = _battle._selectedTargets
-        _battle._curRole.actionCast {
+        let c = _battle._curRole
+        c.actionCast {
             for t in ts {
                 if !self.statusMissed(baseline: 65, target: t, completion: {}) {
                     setTimeout(delay: self.seed(to: 5).toFloat() / 10, completion: {
@@ -42,6 +43,7 @@ class SetTimeBack:Magical, Curse {
                     
                 }
             }
+            c.play("down")
             setTimeout(delay: 1.8, completion: completion)
         }
     }

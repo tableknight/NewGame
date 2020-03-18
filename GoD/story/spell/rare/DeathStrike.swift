@@ -44,6 +44,7 @@ class DeathStrike: Magical {
                 }
 //                t.mixed2(index: 16)
                 t.darkness1f()
+                t.play("Darkness1")
             }
         }
     }

@@ -14,6 +14,14 @@ class GeorgeBattle: BossBattle {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    override func battleStart() {
+        if nil != george {
+            george.speak(text: "臣服于我！")
+        }
+        setTimeout(delay: 1, completion: {
+            super.battleStart()
+        })
+    }
 //    override func createAI() {
 //        if _curRole._unit is Boss {
 //            _selectedSpell._battle = self
@@ -23,7 +31,7 @@ class GeorgeBattle: BossBattle {
 //            super.createAI()
 //        }
 //    }
-    
+    private var george:BUnit!
     override func setEnemyPart(minions: Array<Creature>) {
         let level:CGFloat = George.LEVEL
         var es = Array<Creature>()
@@ -42,8 +50,15 @@ class GeorgeBattle: BossBattle {
         t.create(level: level)
         t._seat = BUnit.TTM
         es.append(t)
+//        george =
         
         super.setEnemyPart(minions: es)
+        for p in _enemyPart {
+            if p._unit == t {
+                george = p
+                break
+            }
+        }
     }
     override func getSpellAttack() -> Spell {
         if _curRole.playerPart {

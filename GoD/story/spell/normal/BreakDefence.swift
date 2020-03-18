@@ -39,6 +39,7 @@ class BreakDefence:Physical, CloseSkill {
                     }
 //                    t.attacked1()
                     t.hit2()
+                    t.play("Slash11")
                 }
             } else {
                 t.showMiss {

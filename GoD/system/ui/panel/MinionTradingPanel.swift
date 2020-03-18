@@ -90,7 +90,7 @@ class MinionTradingPanel: UIPanel {
             if c.contains(touchPoint!) {
                 let u = c as! StoredMinionComponent
                 if u.selected {
-                    if _char._storedMinions.count >= 12 {
+                    if _char._storedMinions.count >= 6 {
                         showMsg(text: "储藏室已满！")
                         return
                     }
@@ -126,15 +126,17 @@ class MinionTradingPanel: UIPanel {
         _rightBack = createBackground(width: width - gap, height: _standardHeight)
         _rightBack.position = CGPoint(x: (width + gap) * 0.5, y: 0)
         _rightBack.zPosition = self.zPosition + 1
+        _rightBack.alpha = Game.BG_ALPHA
         addChild(_rightBack)
         _leftBack = createBackground(width: width - gap, height: _standardHeight)
         _leftBack.position = CGPoint(x: -(width + gap) * 0.5, y: 0)
         _leftBack.zPosition = self.zPosition + 1
+        _leftBack.alpha = Game.BG_ALPHA
         addChild(_leftBack)
     }
     override func create() {
         _pageSize = 4
-        _label.text = "存储/取出：再次点击已选择的随从"
+        _label.text = "寄存/取出：再次点击已选择的随从"
         createCloseButton()
         createPanelbackground()
         let x = _closeButton.xAxis
@@ -142,16 +144,17 @@ class MinionTradingPanel: UIPanel {
         let z = _closeButton.zPosition
         let w = _closeButton.width
         let gap = cellSize * 0.125
-        let yGap = cellSize * 0.7
-        initButton(b: _rightNext, x: x, y: -y + yGap, z: z, text: "下一页")
-        initButton(b: _rightPrev, x: x - w - gap, y: -y + yGap, z: z, text: "上一页")
+//        let yGap = cellSize * 0.7
+        let yb = -_closeButton.position.y + cellSize * 0.6
+        initButton(b: _rightNext, x: x, y: yb, z: z, text: "下一页")
+        initButton(b: _rightPrev, x: x - w - gap, y: yb, z: z, text: "上一页")
         
-        initButton(b: _leftPrev, x: -x - w, y: -y + yGap, z: z, text: "上一页")
-        initButton(b: _leftNext, x: -x + gap, y: -y + yGap, z: z, text: "下一页")
+        initButton(b: _leftPrev, x: -x - w, y: yb, z: z, text: "上一页")
+        initButton(b: _leftNext, x: -x + gap, y: yb, z: z, text: "下一页")
         
         _leftText.position.x = -cellSize * 0.75
         _leftText.position.y = -y + cellSize * 0.5
-        _leftText.text = "3/12"
+        _leftText.text = "3/6"
         _leftText.zPosition = _leftNext.zPosition
         _leftText.fontSize = cellSize / 4
         addChild(_leftText)
@@ -252,7 +255,7 @@ class MinionTradingPanel: UIPanel {
     
     private func reloadCount() {
         _rightText.text = "\(_char._minions.count)/6"
-        _leftText.text = "\(_char._storedMinions.count)/12"
+        _leftText.text = "\(_char._storedMinions.count)/6"
     }
     
     private func initButton(b:Button, x:CGFloat, y:CGFloat, z:CGFloat, text:String) {
@@ -280,6 +283,7 @@ class StoredMinionComponent: SelectableComponent {
         super.init(texture: texture, color: color, size: size)
         _background = createBackground(width: cellSize * 3.25, height: cellSize * 1.25)
         _background.strokeColor = Game.UNSELECTED_STROKE_COLOR
+//        _background.lineWidth = 2
         addChild(_background)
         addChild(_propertyLayer)
     }
@@ -310,32 +314,39 @@ class StoredMinionComponent: SelectableComponent {
         let gap = cellSize * 0.125
         
         let lv = Label()
-        lv.text = "Lv.\(unit._level.toInt()) \(TypeName.getName(unit._race))"
+        lv.text = "Lv.\(unit._level.toInt()) \(unit._name)"
+        lv.fontColor = QualityColor.getColor(unit._quality)
         lv.fontSize = cellSize / 4
         lv.position.x = startX + cellSize + gap
         lv.position.y = startY - gap
         _propertyLayer.addChild(lv)
         
-        let name = Label()
-        name.text = unit._name
-        name.fontSize = cellSize / 4
-        name.position.x = startX + cellSize + gap
-        name.position.y = startY - cellSize * 0.125 - cellSize / 4
-        _propertyLayer.addChild(name)
+//        let name = Label()
+//        name.text = unit._name
+//        name.fontSize = cellSize / 4
+//        name.position.x = startX + cellSize + gap
+//        name.position.y = startY - cellSize * 0.125 - cellSize / 4
+//        _propertyLayer.addChild(name)
         
         
         
         let hpbar = HBar()
-        hpbar.create(width: cellSize * 1.75, height: cellSize / 8, value: unit._extensions.hp / unit._extensions.health, color: UIColor.red)
-        hpbar.position.y = name.position.y - cellSize * 0.375
-        hpbar.position.x = name.position.x
+        hpbar.create(width: cellSize * 1.75, height: cellSize / 8, value: unit._extensions.hp / unit._extensions.health, color: Game.HPBAR_COLOR)
+        hpbar.position.y = lv.position.y - cellSize * 0.375
+        hpbar.position.x = lv.position.x
         _propertyLayer.addChild(hpbar)
         _hpbar = hpbar
         
+        let mpbar = HBar()
+        mpbar.create(width: cellSize * 1.75, height: cellSize / 8, value: unit._extensions.mp / unit._extensions.mpMax, color: Game.MPBAR_COLOR)
+        mpbar.position.y = hpbar.position.y - cellSize / 6
+        mpbar.position.x = lv.position.x
+        _propertyLayer.addChild(mpbar)
+        
         let expbar = HBar()
-        expbar.create(width: cellSize * 1.75, height: cellSize / 8, value: unit._exp / unit.expNext(), color: QualityColor.GOOD)
-        expbar.position.y = hpbar.position.y - cellSize / 6
-        expbar.position.x = name.position.x
+        expbar.create(width: cellSize * 1.75, height: cellSize / 8, value: unit._exp / unit.expNext(), color: Game.EXPBAR_COLOR)
+        expbar.position.y = mpbar.position.y - cellSize / 6
+        expbar.position.x = lv.position.x
         _propertyLayer.addChild(expbar)
     }
     func reload() {

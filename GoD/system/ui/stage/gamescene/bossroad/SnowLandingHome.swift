@@ -12,6 +12,7 @@ class SnowLandingHome: SnowLanding {
         super.init(texture: texture, color: color, size: size)
         _name = "神域·雪之国"
         _vSize = 14
+        _soundUrl = "snow_landing"
     }
     
     required init?(coder aDecoder: NSCoder) {

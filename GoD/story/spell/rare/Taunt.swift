@@ -43,6 +43,7 @@ class Taunt: Magical {
                     }
                 }
             }
+            c.play("down")
             setTimeout(delay: 1.8, completion: completion)
         }
     }

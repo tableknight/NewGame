@@ -16,6 +16,7 @@ class CityOfSorrow: DemonTown {
         _name = "悲伤之城"
         _floorSize = 6
         _level = Dius.LEVEL //19
+        _soundUrl = "city_of_sorrow"
     }
     
     required init?(coder aDecoder: NSCoder) {

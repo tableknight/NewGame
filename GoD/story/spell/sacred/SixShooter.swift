@@ -47,6 +47,7 @@ class SixShooter: Physical, BowSkill {
                             t.actionAttacked {
                             }
                             t.hit2()
+                            t.play("bow")
                             t.showValue(value: damage, criticalFromSpell: false, critical: crtl)
                         }
                     }

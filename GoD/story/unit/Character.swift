@@ -76,6 +76,10 @@ class Character: Unit {
         _level += 1
         _extensions.hp = _extensions.health
         Game.instance.curStage.setBarValue()
+        setTimeout(delay: 2, completion: {
+            Game.instance.curStage._curScene._role.speak(text: "等级提升！")
+            Sound.play(node: Game.instance.curStage, fileName: "levelup")
+        })
     }
     
     func levelTo(level: CGFloat) {
@@ -212,7 +216,7 @@ class Character: Unit {
         _items = try values.decode(Array.self, forKey: ._items)
         _armors = try values.decode(Array.self, forKey: ._armors)
         _minions = try values.decode(Array.self, forKey: ._minions)
-        _storedMinions = try values.decode(Array.self, forKey: ._minions)
+        _storedMinions = try values.decode(Array.self, forKey: ._storedMinions)
         hasShield = try values.decode(Bool.self, forKey: .hasShield)
         hasEarring = try values.decode(Bool.self, forKey: .hasEarring)
         hasWeapon = try values.decode(Bool.self, forKey: .hasWeapon)

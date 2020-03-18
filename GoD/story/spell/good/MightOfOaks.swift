@@ -37,6 +37,7 @@ class MightOfOaks: Magical {
                 t.addStatus(status: s)
                 completion()
             }
+            t.play("Raise3")
         }
     }
     override func findTarget() {

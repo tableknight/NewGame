@@ -132,6 +132,7 @@ class RoleComponent: SelectableComponent {
         lv.position.x = startX + cellSize + gap
         lv.position.y = startY - gap
         _propertyLayer.addChild(lv)
+        _lvLabel = lv
         
         let name = Label()
         name.text = unit._name
@@ -160,6 +161,7 @@ class RoleComponent: SelectableComponent {
             _hpbar.setBar(value: _unit._extensions.mp / _unit._extensions.mpMax)
         } else if _itemType == Item.ExpBook {
             _hpbar.setBar(value: _unit._exp / _unit.expNext())
+            _lvLabel.text = "lv.\(_unit._level.toInt())"
         } else {
             _hpbar.setBar(value: _unit._extensions.hp / _unit._extensions.health)
         }
@@ -168,5 +170,6 @@ class RoleComponent: SelectableComponent {
     var _unit:Unit!
     private var _propertyLayer = SKSpriteNode()
     private var _hpbar:HBar!
+    private var _lvLabel:Label!
     var _itemType = ""
 }

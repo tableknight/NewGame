@@ -4,7 +4,7 @@
 //
 //  Created by kai chen on 2019/1/6.
 //  Copyright © 2019年 Chen. All rights reserved.
-//
+// outdated
 
 import SpriteKit
 class GeneralStore: InnerHouse {

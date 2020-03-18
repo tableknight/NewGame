@@ -44,6 +44,7 @@ class OneShootDoubleKill: Physical, BowSkill {
                     this.attack(t: ts[0])
                 })
             }
+            c.play("bow")
         }
     }
     

@@ -168,7 +168,7 @@ extension BUnit {
         if _unit is Character && _stage.hasTowerStatus(status: AttackPower()) {
             atk += 50
         }
-        if weaponIs(Sacred.NightBlade) {
+        if weaponIs(Sacred.BloodBlade) {
             let rate = getHp() / getHealth()
             let plus = _unit._extensions.attack * (1 - rate)
             atk += plus

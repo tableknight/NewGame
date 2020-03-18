@@ -43,6 +43,7 @@ class FrozenShoot: Physical, BowSkill {
                         }
                     }
                     t.hitIce()
+                    t.play("bow")
                 }
             }
         }

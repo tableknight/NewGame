@@ -14,6 +14,7 @@ class CenterV: StandScene {
         _name = "\(Game.VILLAGE_NAME)·南"
         _nameLabel.text = _name
         _vSize = 14
+        _soundUrl = "village"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,9 +31,9 @@ class CenterV: StandScene {
             _mapMatrix[0][x] = CELL_BLOCK
         }
         addItem(x: 4, y: 7, item: getRoleNode(roleNode: SKTexture(imageNamed: "Suvya").getNode(1, 0)))
-        let wb = Game.instance.world_b
-        addItem(x: 4, y: 6.25, item: wb.getNode(10, 15, 2, 1), width: 0)
-        let land = wb.getNode(12, 14, 2, 2)
+        let wb = Game.instance.tilesets
+        addItem(x: 4, y: 6.25, item: wb.getNode(0, 2, 2, 1), width: 0)
+        let land = wb.getNode(0, 4, 2, 2)
         addItem(x: 4, y: 5.25, item: land, width: 0)
         _mapMatrix[7][4] = CELL_ROLE
         _mapMatrix[6][4] = CELL_ROAD
@@ -73,6 +74,8 @@ class CenterV: StandScene {
             addItem(x: a[0], y: a[1], item: TallTree())
         }
         let blockPoints:Array<Array<CGFloat>> = [
+            [1,4],
+            [0,5],
                     [3, 8],
                     [4,8],
                     [4,9],
@@ -171,7 +174,7 @@ class CenterV: StandScene {
         }
         if point.x == 4 && point.y == 7 && cell == CELL_ROLE {
             let stage = Game.instance.curStage!
-            stage.showDialog(img: Game.instance.pictureActor3.getCell(7, 4),
+            stage.showDialog(img: SKTexture(imageNamed: "Suvya").getCell(1, 0),
                                      text: "这里是前往神域的唯一入口，攀登远古之巅，即可进入神域，升入神格。。。不过，我建议你放弃。",
                                      name: "神官苏维亚")
             stage._curDialog?.addConfirmButton()

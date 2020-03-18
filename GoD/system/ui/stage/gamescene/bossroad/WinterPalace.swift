@@ -14,6 +14,7 @@ class WinterPalace: MorningPalace {
         _name = "冬·宫"
         _floorSize = 4
         _level = Lewis.LEVEL //31
+        _soundUrl = "winter_palace"
     }
     
     required init?(coder aDecoder: NSCoder) {

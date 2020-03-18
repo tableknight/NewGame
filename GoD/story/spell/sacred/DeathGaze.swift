@@ -65,6 +65,7 @@ class DeathGaze: Magical {
                 
             }
             t.stateDeathf()
+            t.play("Darkness6")
         }
     }
     

@@ -153,6 +153,9 @@ class FireExplode:Magical {
         _quality = Quality.RARE
     }
     override func cast(completion: @escaping () -> Void) {
+        if _battle._curRole.amuletIs(Sacred.LavaCrystal) {
+            _rate = 1.5
+        }
         let t = _battle._selectedTarget!
         let damage = self.fireDamage(t)
         _battle._curRole.actionCast {
@@ -161,13 +164,15 @@ class FireExplode:Magical {
                     t.showValue(value: damage) {
                         completion()
                     }
-//                    if t.ringIs(FireCore.EFFECTION) {
-//                        t.burning()
-//                    } else {
-//                        if self.d7() {
-//                            t.burning()
-//                        }
-//                    }
+                    if t.ringIs(Sacred.FireCore) {
+                        if self.d3() {
+                            t.burning()
+                        }
+                    } else {
+                        if self.d7() {
+                            t.burning()
+                        }
+                    }
                 }
                 t.fire3f()
                 

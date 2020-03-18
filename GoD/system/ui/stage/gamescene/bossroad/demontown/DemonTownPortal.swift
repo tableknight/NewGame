@@ -15,6 +15,7 @@ class DemonTownPortal: Maze {
         _mapSet = GroundSets(ground: o4.getCell(4, 2, 2, 2), wall: o4.getCell(4, 4, 2, 2))
         _name = "魔王之城"
         _nameLabel.text = _name
+        _soundUrl = "hidden_area"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,7 +51,7 @@ class DemonTownPortal: Maze {
         _fragment.append([])
         
         super.create()
-        let mark = Game.instance.dungeon_c.getNode(0, 12, 3, 3)
+        let mark = Game.instance.tilesets.getNode(0, 7, 3, 3)
         mark.alpha = 0.5
         mark.size = CGSize(width: cellSize * 5, height: cellSize * 5)
         addGround(x: 6, y: 7.5, item: mark)

@@ -56,7 +56,15 @@ class SpellPanel:UIPanel {
                 if _role._spellsInuse.count < _role._spellCount {
                     let index = _char._spells.firstIndex(of: spell._id)
                     if nil != index {
-                        _char._spells.remove(at: index!)
+                        if _char.weaponIs(Sacred.TheMonatNotes) {
+                            if getSpellWhichFromMonatNotes().count < 2 {
+                                
+                            } else {
+                                _char._spells.remove(at: index!)
+                            }
+                        } else {
+                            _char._spells.remove(at: index!)
+                        }
                         _role._spellsInuse.append(spell._id)
                         addProperty(spell)
                     } else {
@@ -120,46 +128,36 @@ class SpellPanel:UIPanel {
         addChild(spellsUnused)
     }
     var _role:Unit!
-    
-    func instrumentMonatNotes() -> Bool {
-//        if Game.instance.char._weapon is TheMonatNotes {
-//            let mn = Game.instance.char._weapon as! TheMonatNotes
-//            if mn._spellAppended {
-//                return true
-//            }
-//        }
-        return false
-    }
-    func getSpellWhichFromMonatNotes() -> Array<Spell> {
-        var spells = Array<Spell>()
+    func getSpellWhichFromMonatNotes() -> Array<Int> {
+        var spells = Array<Int>()
         let _char = Game.instance.char!
-//        let mn = _char._weapon as! TheMonatNotes
-//        for s in Game.instance.char._spells {
-//            if s == mn._spell {
-//                spells.append(s)
-//            }
-//        }
-//        for s in _char._spellsInuse {
-//            if s == mn._spell {
-//                spells.append(s)
-//            }
-//        }
-//
-//        for u in _char._minions {
-//            for s in u._spellsInuse {
-//                if s == mn._spell {
-//                    spells.append(s)
-//                }
-//            }
-//        }
-//
-//        for u in _char._storedMinions {
-//            for s in u._spellsInuse {
-//                if s == mn._spell {
-//                    spells.append(s)
-//                }
-//            }
-//        }
+        let mn = _char._weapon!
+        for s in Game.instance.char._spells {
+            if s == mn._spell {
+                spells.append(s)
+            }
+        }
+        for s in _char._spellsInuse {
+            if s == mn._spell {
+                spells.append(s)
+            }
+        }
+
+        for u in _char._minions {
+            for s in u._spellsInuse {
+                if s == mn._spell {
+                    spells.append(s)
+                }
+            }
+        }
+
+        for u in _char._storedMinions {
+            for s in u._spellsInuse {
+                if s == mn._spell {
+                    spells.append(s)
+                }
+            }
+        }
         
         return spells
     }

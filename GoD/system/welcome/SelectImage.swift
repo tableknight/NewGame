@@ -88,20 +88,21 @@ class SelectImage:UIPanel {
 //            SKTexture(imageNamed: "role_8")
             "role_01",
             "role_02",
+            "role_06",
             "role_03",
 //            "role_04",
 //            "role_05",
-            "role_06"
+            
         ]
-        _names = ["马可","艾丽丝", "伊莎贝拉",
+        _names = ["马可","艾丽丝",
 //                  "火云", "京",
-                  "梅露露"]
+                  "梅露露","伊莎贝拉"]
         _roleDatas = [
-            RoleData(growthPoint: 5, spellCount: 3, minionCount: 2, hasWeapon: true, hasShield: true, hasMark: true),
-            RoleData(growthPoint: 5, spellCount: 2, minionCount: 3, hasWeapon: true, hasShield: false, hasMark: true, spell: Spell.Burn),
-            RoleData(growthPoint: 4, spellCount: 3, minionCount: 3, hasWeapon: true, hasShield: true, hasMark: true, spell: Spell.QuickHeal),
+            RoleData(growthPoint: 5, spellCount: 3, minionCount: 2, hasWeapon: true, hasShield: true, hasMark: true, spell: Spell.LowlevelFlame),
+            RoleData(growthPoint: 5, spellCount: 2, minionCount: 3, hasWeapon: true, hasShield: false, hasMark: true, spell: Spell.ToughHeart),
+            RoleData(growthPoint: 4, spellCount: 3, minionCount: 3, hasWeapon: true, hasShield: true, hasMark: false, spell: Spell.QuickHeal),
 //            RoleData(growthPoint: 5, spellCount: 3, minionCount: 3, hasWeapon: true, hasShield: false, hasMark: false),
-            RoleData(growthPoint: 6, spellCount: 2, minionCount: 2, hasWeapon: true, hasShield: true, hasMark: false, spell: Spell.ToughHeart)
+            RoleData(growthPoint: 6, spellCount: 2, minionCount: 2, hasWeapon: true, hasShield: false, hasMark: true, spell: Spell.BreakDefence)
         ]
         showImages()
         

@@ -19,6 +19,7 @@ class OutfitPanel: UIPanel {
                 return
             }
             if _lastSelectedIcon != nil && _discardButton.selected {
+                Sound.play(node: Game.instance.curStage, fileName: "close")
                 _char.removeItem(_lastSelectedIcon.displayItem as! Outfit)
                 pageReload()
                 _lastSelectedIcon = nil
@@ -255,7 +256,11 @@ class OutfitPanel: UIPanel {
                 let y = base / 4
                 let x = base % 4
                 let icon = Icon()
-                icon.iconLabel = props[i]._name
+                if props[i]._showingText.isEmpty {
+                    icon.iconLabel = props[i]._name
+                } else {
+                    icon.iconLabel = props[i]._showingText
+                }
                 icon._displayItem = props[i]
                 icon.quality = props[i]._quality
                 icon.position.y = startY - gap * y.toFloat()

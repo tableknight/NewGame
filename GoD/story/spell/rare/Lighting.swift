@@ -26,6 +26,9 @@ class Lighting: Passive {
 //        if c._unit._weapon is ThorsHammer {
 //            _rate = 0.5
 //        }
+        if c.weaponIs(Sacred.ThorsHammer) {
+            _rate = 0.5
+        }
         let t = _battle._selectedTarget!
         let damage = thunderDamage(t)
         c.showText(text: self._name) {
@@ -46,6 +49,7 @@ class Lighting: Passive {
             } else {
                 t.thunder1s()
             }
+            t.play("Thunder4")
         })
     }
     

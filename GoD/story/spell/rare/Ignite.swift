@@ -40,6 +40,7 @@ class Ignite: Magical {
                     t.removeStatus(type: Status.BURNING)
 //                    t.flame1(index: 0, line: 2)
                     t.fire2f()
+                    t.play("down")
                 }
             }
             setTimeout(delay: 1.5, completion: completion)

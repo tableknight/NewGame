@@ -25,6 +25,9 @@ class Attribute: Core {
             let min = (l * 1.6).toInt()
             let max = (l * 2.4).toInt()
             _value = seed(min: min, max: max).toFloat()
+            if Game.instance.char.weaponIs(Sacred.Boreas) {
+                _value *= 2
+            }
         } else if t == Attribute.ATTACK {
             _name = "攻击"
             midAttrValue(level: l)
@@ -146,7 +149,7 @@ class Attribute: Core {
         } else if t == Attribute.AVOID {
             unit._extensions.avoid += value
         } else if t == Attribute.BREAK {
-            unit._break -= value
+            unit._break += value
         } else if t == Attribute.CRITICAL {
             unit._extensions.critical += value
         } else if t == Attribute.DEFENCE {

@@ -47,6 +47,10 @@ class FragileCurse: Magical, Curse {
                 }
 //                t.mixed2(index: 13)
             }
+            t.play("Darkness6")
+            setTimeout(delay: 0.5, completion: {
+                t.play("freeze")
+            })
         }
     }
     
