@@ -528,7 +528,7 @@ struct Sacred {
             chance: 10,
             attrs: [
                 SacredAttr(type: Attribute.INTELLECT, valueMin: 28, valueMax: 28),
-                SacredAttr(type: Attribute.SPIRIT, valueMin: 28, valueMax: 28),
+                SacredAttr(type: Attribute.AGILITY, valueMin: 28, valueMax: 28),
                 SacredAttr(type: Attribute.FIREPOWER, valueMin: 40, valueMax: 40),
                 SacredAttr(type: Attribute.RHYTHM, valueMin: 8, valueMax: 15)
             ],
@@ -845,10 +845,10 @@ struct Sacred {
             price: 88,
             chance: 100,
             attrs: [
-                SacredAttr(type: Attribute.CRITICAL, valueMin: 10, valueMax: 15),
-                SacredAttr(type: Attribute.AVOID, valueMin: 10, valueMax: 15),
-                SacredAttr(type: Attribute.RHYTHM, valueMin: 10, valueMax: 15),
-                SacredAttr(type: Attribute.REVENGE, valueMin: 10, valueMax: 15),
+                SacredAttr(type: Attribute.CRITICAL, valueMin: 5, valueMax: 10),
+                SacredAttr(type: Attribute.AVOID, valueMin: 5, valueMax: 10),
+                SacredAttr(type: Attribute.RHYTHM, valueMin: 5, valueMax: 10),
+                SacredAttr(type: Attribute.REVENGE, valueMin: 5, valueMax: 10),
                 SacredAttr(type: Attribute.LUCKY, valueMin: 20, valueMax: 30)
             ],
             randomAttrCountMin: 0,

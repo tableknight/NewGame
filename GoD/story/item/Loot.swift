@@ -198,7 +198,7 @@ class Loot: Core {
             _props.append(item)
         }
         chance = seed().toFloat()
-        if chance < 4 * lucky {
+        if chance < 2 * lucky {
             let item = getSpellBook()
             _props.append(item)
         }
@@ -1006,15 +1006,12 @@ class Loot: Core {
             o.create(effection: Sacred.BloodBlade)
         }
         if 7 == index {
-            o.create(effection: Sacred.LuckyRing)
-        }
-        if 8 == index {
             o.create(effection: Sacred.ElementalSword)
         }
-        if 9 == index {
+        if 8 == index {
             o.create(effection: Sacred.IberisHand)
         }
-        if 10 == index {
+        if 9 == index {
             o.create(effection: Sacred.AssassinsSword)
         }
 
@@ -1050,9 +1047,9 @@ class Loot: Core {
             0,1,2,3,4,5,
         ]
         let swords:Array<Int> = [
-            0,1,2,3,4,5,6,7,8,9,10,
-            0,1,2,3,4,5,6,7,8,9,10,
-            0,1,2,3,4,5,6,7,8,9,10,
+            0,1,2,3,4,5,6,7,8,9,
+            0,1,2,3,4,5,6,7,8,9,
+            0,1,2,3,4,5,6,7,8,9
         ]
         let earrings:Array<Int> = [
             0,1,2,3,

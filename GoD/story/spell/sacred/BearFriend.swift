@@ -39,9 +39,11 @@ class BearFriend:Magical, SummonSkill {
 //            } else if c.weaponIs(Sacred.TheSurpass) {
 //               uw._spellsInuse.append(Game.instance.char._weapon!._spell)
             }
+            
             uw.create(level: b._curRole._unit._level)
             uw._seat = seat
-            let bu = b.addPlayerMinion(unit: uw)
+            let bu = c.playerPart ? b.addPlayerMinion(unit: uw) : b.addEnemy(unit: uw)
+//            let bu = b.addPlayerMinion(unit: uw)
             bu.actionSummon {
                 completion()
             }

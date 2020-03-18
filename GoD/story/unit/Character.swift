@@ -76,7 +76,7 @@ class Character: Unit {
         _level += 1
         _extensions.hp = _extensions.health
         Game.instance.curStage.setBarValue()
-        setTimeout(delay: 2, completion: {
+        setTimeout(delay: 1.5, completion: {
             Game.instance.curStage._curScene._role.speak(text: "等级提升！")
             Sound.play(node: Game.instance.curStage, fileName: "levelup")
         })

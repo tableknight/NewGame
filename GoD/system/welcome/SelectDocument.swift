@@ -95,6 +95,7 @@ class SelectDocument: UIPanel {
 //        c.addItem(e)
 //        let m = Outfit(Outfit.Instrument)
 //        m.create(effection: Sacred.TheMonatNotes)
+//        m._spell = Spell.ToughHeart
 //        c.addItem(m)
 //        c._minionsCount = 3
 //        let p = Item(Item.MPPotion)

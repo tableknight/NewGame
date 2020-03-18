@@ -108,6 +108,7 @@ class Outfit:Item {
         _quality = Quality.SACRED
         _effection = effection
         _chance = sd.chance
+        _price = sd.price
 //        _unique = sd.unique
         
         if _type == Outfit.Ring {
@@ -175,7 +176,7 @@ class Outfit:Item {
         }
         
         createAttrs()
-        createPrice()
+//        createPrice()
     }
     func isWeapon() -> Bool {
         let ts = [Outfit.Sword, Outfit.Bow, Outfit.Blunt, Outfit.Dagger, Outfit.Instrument, Outfit.Fist, Outfit.Wand]
@@ -321,11 +322,23 @@ class Outfit:Item {
         }
         
         if _type == Outfit.MagicMark || _type == Outfit.Instrument ||  _effection == Sacred.PandoraHeart {
-            if !(char.hasSpell(id: _spell)) {
-                char._spells.append(_spell)
-                _reserveBool = true
+            if _effection == Sacred.TheMonatNotes {
+                if char.hasSpell(id: _spell) {
+                    char._spells.append(_spell)
+                    _reserveInt = 1
+                } else {
+                    char._spells.append(_spell)
+                    char._spells.append(_spell)
+                    _reserveInt = 2
+                }
+            } else {
+                if !(char.hasSpell(id: _spell)) {
+                    char._spells.append(_spell)
+                    _reserveBool = true
+                }
             }
-        } else if _effection == Sacred.RingOfReborn {
+        }
+        if _effection == Sacred.RingOfReborn {
             char._spellsHidden.append(_spell)
             _reserveBool = true
         } else if _effection == Sacred.Faceless {
@@ -373,14 +386,25 @@ class Outfit:Item {
         
         if _type == Outfit.SoulStone {
             c._race = _reserveInt
-        }
-        
-        if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == Sacred.PandoraHeart {
-            if _reserveBool {
-                c.removeSpell(id: _spell)
-                _reserveBool = false
+        } else if _type == Outfit.MagicMark || _type == Outfit.Instrument || _effection == Sacred.PandoraHeart {
+            
+            if _effection == Sacred.TheMonatNotes {
+                if _reserveInt == 1 {
+                    c.removeSpell(id: _spell)
+                    _reserveInt = 0
+                } else if _reserveInt == 2 {
+                    c.removeSpell(id: _spell)
+                    c.removeSpell(id: _spell)
+                    _reserveInt = 0
+                }
+            } else {
+                if _reserveBool {
+                    c.removeSpell(id: _spell)
+                    _reserveBool = false
+                }
             }
-        } else if _effection == Sacred.RingOfReborn {
+        }
+        if _effection == Sacred.RingOfReborn {
             _reserveBool = false
             let index = c._spellsHidden.firstIndex(of: _spell)
             c._spellsHidden.remove(at: index!)
@@ -394,9 +418,7 @@ class Outfit:Item {
                 let index = c._spellsHidden.firstIndex(of: Spell.ElementMaster)
                 c._spellsHidden.remove(at: index!)
             }
-        }
-//
-        if _effection == Sacred.TrueLie || _effection == Sacred.TheEye {
+        } else if _effection == Sacred.TrueLie || _effection == Sacred.TheEye {
             if c._spellsInuse.count >= c._spellCount {
                 let last = c._spellsInuse.popLast()
                 c._spells.append(last!)
@@ -425,11 +447,49 @@ class Outfit:Item {
             if minions.count > c._minionsCount {
                 minions[0]._seat = BUnit.STAND_BY
             }
+        } else if _effection == Sacred.TheMonatNotes {
+            if _reserveBool && getSpellFromMonatNotes().count > 1 {
+                c.removeSpell(id: _spell)
+                _reserveBool = false
+            }
         }
         
     }
     
     
+    private func getSpellFromMonatNotes() -> Array<Int> {
+        var spells = Array<Int>()
+        let _char = Game.instance.char!
+        let mn = self
+        for s in Game.instance.char._spells {
+            if s == mn._spell {
+                spells.append(s)
+            }
+        }
+        for s in _char._spellsInuse {
+            if s == mn._spell {
+                spells.append(s)
+            }
+        }
+
+        for u in _char._minions {
+            for s in u._spellsInuse {
+                if s == mn._spell {
+                    spells.append(s)
+                }
+            }
+        }
+
+        for u in _char._storedMinions {
+            for s in u._spellsInuse {
+                if s == mn._spell {
+                    spells.append(s)
+                }
+            }
+        }
+        
+        return spells
+    }
         
         
     private enum CodingKeys: String, CodingKey {

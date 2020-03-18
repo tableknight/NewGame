@@ -50,21 +50,27 @@ class SpellPanel:UIPanel {
                     _char._spells.append(spell._id)
                 } else {
                     debug("spell exist in spellpanel \(spell._name)")
+                    if _char.weaponIs(Sacred.TheMonatNotes) {
+                        let w = _char._weapon!
+                        if spell._id == w._spell {
+                            _char._spells.append(spell._id)
+                        }
+                    }
                 }
                 pageReload()
             } else {
                 if _role._spellsInuse.count < _role._spellCount {
                     let index = _char._spells.firstIndex(of: spell._id)
                     if nil != index {
-                        if _char.weaponIs(Sacred.TheMonatNotes) {
-                            if getSpellWhichFromMonatNotes().count < 2 {
-                                
-                            } else {
-                                _char._spells.remove(at: index!)
-                            }
-                        } else {
-                            _char._spells.remove(at: index!)
-                        }
+//                        if _char.weaponIs(Sacred.TheMonatNotes) {
+//                            if getSpellWhichFromMonatNotes().count < 2 {
+//
+//                            } else {
+//                                _char._spells.remove(at: index!)
+//                            }
+//                        } else {
+//                        }
+                        _char._spells.remove(at: index!)
                         _role._spellsInuse.append(spell._id)
                         addProperty(spell)
                     } else {
@@ -128,7 +134,7 @@ class SpellPanel:UIPanel {
         addChild(spellsUnused)
     }
     var _role:Unit!
-    func getSpellWhichFromMonatNotes() -> Array<Int> {
+    private func getSpellWhichFromMonatNotes() -> Array<Int> {
         var spells = Array<Int>()
         let _char = Game.instance.char!
         let mn = _char._weapon!

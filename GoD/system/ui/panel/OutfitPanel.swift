@@ -178,6 +178,7 @@ class OutfitPanel: UIPanel {
 
             }
             outfit.on()
+            Game.instance.curStage.setBarValue()
             _char.removeItem(outfit)
             pageReload()
             _lastSelectedIcon.selected = false

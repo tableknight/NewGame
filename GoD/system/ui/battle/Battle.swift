@@ -571,7 +571,7 @@ class Battle: SKSpriteNode {
                 if Game.instance.curStage._curScene is BossRoad {
                     l.lootInBossRoad(level: u._unit._level)
                 } else if Game.instance.curStage._curScene is AcientRoad {
-                    if seed() < 3 {
+                    if seed() < 2 {
                         let e = Item(Item.CreatureEssence)
                         e._reserveStr = (u._unit as! Creature)._type
                         e._quality = u._unit._quality
